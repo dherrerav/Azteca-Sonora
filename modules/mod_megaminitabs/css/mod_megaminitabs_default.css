@@ -1,0 +1,74 @@
+<?php
+/**===========================================================================================
+# mod_megaminitabs		Mega Mini Tabs module for Joomla 1.6.0
+#=============================================================================================
+# author				OmegaTheme.com
+# copyright				Copyright (C) 2011 OmegaTheme.com. All rights reserved.
+# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+# Website				http://omegatheme.com
+# Technical support		Forum - http://omegatheme.com/forum/
+#=============================================================================================*/
+
+
+/**------------------------------------------------------------------------
+* file: css/mod_megaminitabs_default.css 1.6.0 00001, Mar 2011 12:00:00Z OmegaTheme:Linh $
+* package:	Mega Mini Tabs module free version
+* description: stylesheet  file	for default layout
+*------------------------------------------------------------------------*/
+
+/* =========== default layout =============*/
+.mmt-wrapper{
+}
+.tab_selector_wrapper{
+}
+
+/* tab selector */
+.tab_selector{
+	background: #F5F5F5 url(../images/default/tab.png) repeat-x 0 0;
+	border-color: #DDDDDD #DDDDDD;
+	border-style: solid solid none;
+	border-width: 1px 1px 0;
+}
+.tab_selector li{
+	background: #F5F5F5 url(../images/default/tab.png) repeat-x 0 0;
+	border-right: 1px solid #DDDDDD;
+}
+.tab_selector li span{
+	color: #025A8D;
+}
+.tab_selector li.open_tab span{
+	background: #FFFFFF;
+}
+/* tab panel */
+.tab_panel_wrapper{
+	border: 1px solid #DDDDDD;
+	border-top: 0 none;
+	background: #FFFFFF;
+}
+
+/* content type tab */
+.mmt-items-wrapper{
+}
+.mmt-item-wrapper{
+	border-bottom: 1px dashed #CCCCCC;
+}
+.mmt-thumb-wrapper{
+}
+.mmt-thumbnail{
+}
+.mmt-title{
+}
+.mmt-title-link{
+}
+.created_date{
+}
+.mmt-article-introtext{
+}
+.mmt-readmore-link{
+}
+.view-all{
+}
+
+
+
+

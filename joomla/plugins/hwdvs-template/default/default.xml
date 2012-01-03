@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="hwdvs-template" method="upgrade">
+    <name>Default Template</name>
+    <creationDate>2011-07-01</creationDate>
+    <author>Highwood Design</author>
+    <copyright>(C) 2007 - 2009 Highwood Design</copyright>
+    <authorEmail>info@highwooddesign.co.uk</authorEmail>
+    <authorUrl>http://hwdmediashare.co.uk</authorUrl>
+    <version>[ Kronig ]</version>
+    <description>This is the Default template for hwdVideoShare.</description>
+    <files>
+	<folder>default/</folder>
+	<filename plugin="default">default.php</filename>
+    </files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="thumbWidth1" type="text"
+					description="The thumbnail image width for the recent thumbnails."
+					label="Recent Thumb Width"
+					size="20"
+					default="120"
+				/>
+
+				<field name="thumbWidth2" type="text"
+					description="The thumbnail image width for the most viewed thumbnails."
+					label="Viewed Thumb Width"
+					size="20"
+					default="60"
+				/>
+
+				<field name="thumbWidth3" type="text"
+					description="The thumbnail image width for the most favoured thumbnails."
+					label="Favoured Thumb Width"
+					size="20"
+					default="60"
+				/>
+
+				<field name="thumbWidth4" type="text"
+					description="The thumbnail image width for the most popular thumbnails."
+					label="Popular Thumb Width"
+					size="20"
+					default="60"
+				/>
+
+				<field name="thumbWidth5" type="text"
+					description="The thumbnail image width for the now being watched thumbnails."
+					label="Watched Thumb Width"
+					size="20"
+					default="120"
+				/>
+
+				<field name="thumbWidth6" type="text"
+					description="The thumbnail image width for the featured thumbnails."
+					label="Featured Thumb Width"
+					size="20"
+					default="120"
+				/>
+
+				<field name="thumbWidth7" type="text"
+					description="The thumbnail image width for the more by this user thumbnails."
+					label="User Thumb Width"
+					size="20"
+					default="50"
+				/>
+
+				<field name="thumbWidth8" type="text"
+					description="The thumbnail image width for the related thumbnails."
+					label="Related Thumb Width"
+					size="20"
+					default="50"
+				/>
+
+				<field name="thumbWidth9" type="text"
+					description="The thumbnail image width for the more in this category thumbnails."
+					label="Category Thumb Width"
+					size="20"
+					default="50"
+				/>
+
+                                <field name="beingWatchNow" type="list"
+					description="The number of videos to show in the Now Being Watched section."
+					label="Being Watch Now"
+                                        default="2"
+				>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+				</field>
+
+                                <field name="vpr" type="list"
+					description="The number of videos per row."
+					label="Videos Per Row"
+                                        default="3"
+				>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+				</field>
+
+                                <field name="cpr" type="list"
+					description="The number of categories per row."
+					label="Categories Per Row"
+                                        default="2"
+				>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+				</field>
+
+                                <field name="gpr" type="list"
+					description="The number of groups per row."
+					label="Groups Per Row"
+                                        default="1"
+				>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+				</field>
+
+                                <field name="hideSubcats" type="list"
+					description="Hide subcateories on the main category page."
+					label="Hide Subcategories?"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="playerAlign" type="list"
+					description="Align the player on the video player page."
+					label="Player Alignment"
+                                        default="L"
+				>
+                                        <option value="L">Left</option>
+                                        <option value="C">Center</option>
+                                        <option value="R">Right</option>
+				</field>
+
+                                <field name="wrapText" type="list"
+					description="Wrap text around thumbnails in listings?"
+					label="Wrap Text"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field type="spacer" />
+
+                                <field name="show_thumbnail" type="list"
+					description=""
+					label="Show Thumbnail"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_title" type="list"
+					description=""
+					label="Show Title"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_views" type="list"
+					description=""
+					label="Show Views"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_category" type="list"
+					description=""
+					label="Show Category"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_rating" type="list"
+					description=""
+					label="Show Rating"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_uploader" type="list"
+					description=""
+					label="Show Uploader"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_description" type="list"
+					description=""
+					label="Show Description"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_duration" type="list"
+					description=""
+					label="Show Duration"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_upload_date" type="list"
+					description=""
+					label="Show Upload Date"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_avatar" type="list"
+					description=""
+					label="Show Avatar"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_comments" type="list"
+					description=""
+					label="Show No. of Comments"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_tags" type="list"
+					description=""
+					label="Show Tags"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="show_timesince" type="list"
+					description=""
+					label="Show Time Since Upload"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+				</field>   
+			</fieldset>
+		</fields>
+	</config>
+    <params>
+	<param name="thumbWidth1" type="text" size="6" default="120" label="Recent Thumb Width" description="The thumbnail image width for the recent thumbnails." />
+	<param name="thumbWidth2" type="text" size="6" default="60" label="Viewed Thumb Width" description="The thumbnail image width for the most viewed thumbnails." />
+	<param name="thumbWidth3" type="text" size="6" default="60" label="Favoured Thumb Width" description="The thumbnail image width for the most favoured thumbnails." />
+	<param name="thumbWidth4" type="text" size="6" default="60" label="Popular Thumb Width" description="The thumbnail image width for the most popular thumbnails." />
+	<param name="thumbWidth5" type="text" size="6" default="120" label="Watched Thumb Width" description="The thumbnail image width for the now being watched thumbnails." />
+	<param name="thumbWidth6" type="text" size="6" default="90" label="Featured Thumb Width" description="The thumbnail image width for the featured thumbnails." />
+	<param name="thumbWidth7" type="text" size="6" default="50" label="User Thumb Width" description="The thumbnail image width for the more by this user thumbnails." />
+	<param name="thumbWidth8" type="text" size="6" default="50" label="Related Thumb Width" description="The thumbnail image width for the related thumbnails." />
+	<param name="thumbWidth9" type="text" size="6" default="50" label="Category Thumb Width" description="The thumbnail image width for the more in this category thumbnails." />
+	<param name="beingWatchNow" type="list" default="2" label="Being Watch Now" description="The number of videos to show in the Now Being Watched section.">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</param>
+	<param name="vpr" type="list" default="3" label="Videos Per Row" description="The number of videos per row.">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</param>
+	<param name="cpr" type="list" default="2" label="Categories Per Row" description="The number of categories per row.">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</param>
+	<param name="gpr" type="list" default="1" label="Groups Per Row" description="The number of groups per row.">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</param>	
+	<param name="hideSubcats" type="list" default="0" label="Hide Subcategories?" description="Hide subcateories on the main category page.">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>
+	<param name="playerAlign" type="list" default="L" label="Player Alignment" description="Align the player on the video player page.">
+		<option value="L">Left</option>
+		<option value="C">Center</option>
+		<option value="R">Right</option>
+	</param>
+	<param name="wrapText" type="list" default="0" label="Wrap Text" description="Wrap text around thumbnails in listings?">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>
+	
+	<param name="" type="spacer" />
+
+	<param name="show_thumbnail" type="list" default="1" label="Show Thumbnail" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>
+	<param name="show_title" type="list" default="1" label="Show Title" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>
+	<param name="show_views" type="list" default="1" label="Show Views" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_category" type="list" default="1" label="Show Category" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_rating" type="list" default="1" label="Show Rating" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_uploader" type="list" default="1" label="Show Uploader" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_description" type="list" default="0" label="Show Description" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_duration" type="list" default="0" label="Show Duration" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_upload_date" type="list" default="0" label="Show Upload Date" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_avatar" type="list" default="1" label="Show Avatar" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_comments" type="list" default="0" label="Show No. of Comments" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_tags" type="list" default="0" label="Show Tags" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>	
+	<param name="show_timesince" type="list" default="0" label="Show Time Since Upload" description="">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</param>
+    </params>
+</install>

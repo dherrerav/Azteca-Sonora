@@ -1,0 +1,214 @@
+/*
+# ------------------------------------------------------------------------
+# JA Typo plugin For Joomla 1.6
+# ------------------------------------------------------------------------
+# Copyright (C) 2004-2010 JoomlArt.com. All Rights Reserved.
+# @license - PHP files are GNU/GPL V2. CSS / JS are Copyrighted Commercial,
+# bound by Proprietary License of JoomlArt. For details on licensing, 
+# Please Read Terms of Use at http://www.joomlart.com/terms_of_use.html.
+# Author: JoomlArt.com
+# Websites:  http://www.joomlart.com -  http://www.joomlancers.com
+# Redistribution, Modification or Re-licensing of this file in part of full, 
+# is bound by the License applied. 
+# ------------------------------------------------------------------------
+*/
+
+/*==========
+typo.css
+============*/
+/* SPECIAL CONTENT
+-----------------------------------------------------------------*/
+/* Pre, Code ---*/
+pre, .code { border-left-width: 1px; border-right-width: 5px; }
+
+/* Dropcap ---*/
+.dropcap { float: right; padding: 7px 0 0 8px; }
+
+.blockdropcap {
+	padding-left: 0 !important;
+	padding-right: 55px !important;
+}
+
+.dropcap-1, .dropcap-2, .dropcap-3 { left: auto; right: 0; }
+
+/* Blockquote ---*/
+blockquote span.open {
+	background-position: right top !important;
+	padding: 0 20px 0 0;
+}
+
+blockquote span.close {
+	background-position: bottom left !important;
+	padding: 0 0 0 20px;
+}
+
+/* Special list style ---*/
+ul.checklist li, ul.starlist li, ul.arrowlist li,
+ul.bulletlist li, ul.crosslist li, ul.addlist li {
+	background-position: right top !important;
+	margin-left: 0;
+	margin-right: 8px;
+}
+
+ul.arrowlist li {
+	background-image: url(images/rtl/list-arrow.png) !important;
+}
+
+ul.bookmark-links li {
+	background: url(images/rtl/arrow.png) no-repeat right 10px !important;
+	padding: 5px 10px 5px 0 !important;
+}
+
+/* Icon ---*/
+.icon {
+	background-position: right top !important;
+	padding-left: 0 !important;
+	padding-right: 25px !important;
+}
+
+.icon-demo, .icon-download, .icon-discussion, .icon-info,.icon-readmore,
+.icon-doc, .icon-signup, .icon-login, .icon-submit, .icon-extension { background-position: right 5px !important; }
+
+/* Button ---*/
+.button-img { padding: 0 42px 0 0; float: right; }
+
+.button-img span { padding-left: 15px; padding-right: 0; }
+
+.button-img .icon { left: auto; right: 5px; width: 35px; }
+
+.but-white span, .but-white:hover span,
+.but-silver span, .but-silver:hover span,
+.but-gray span, .but-gray:hover span,
+.but-black span, .but-black:hover span,
+.but-blue span, .but-blue:hover span,
+.but-green span, .but-green:hover span,
+.but-red span, .but-red:hover span,
+.but-pink span, .but-pink:hover span,
+.but-orange span, .but-orange:hover span,
+.but-violet span, .but-violet:hover span { background-position: left center; }
+
+.but-white {
+	background: url(images/rtl/but-white-r.png) no-repeat right center;
+}
+
+.but-white:hover {
+	background: url(images/rtl/but-white2-r.png) no-repeat right center;
+}
+
+.but-silver {
+	background: url(images/rtl/but-silver-r.png) no-repeat right center;
+}
+
+.but-silver:hover {
+	background: url(images/rtl/but-silver2-r.png) no-repeat right center;
+}
+
+.but-gray {
+	background: url(images/rtl/but-gray-r.png) no-repeat right center;
+}
+
+.but-gray:hover {
+	background: url(images/rtl/but-gray2-r.png) no-repeat right center;
+}
+
+.but-black {
+	background: url(images/rtl/but-black-r.png) no-repeat right center;
+}
+
+.but-black:hover {
+	background: url(images/rtl/but-black2-r.png) no-repeat right center;
+}
+
+.but-blue {
+	background: url(images/rtl/but-blue-r.png) no-repeat right center;
+}
+
+.but-blue:hover {
+	background: url(images/rtl/but-blue2-r.png) no-repeat right center;
+}
+
+.but-green {
+	background: url(images/rtl/but-green-r.png) no-repeat right center;
+}
+
+.but-green:hover {
+	background: url(images/rtl/but-green2-r.png) no-repeat right center;
+}
+
+.but-red {
+	background: url(images/rtl/but-red-r.png) no-repeat right center;
+}
+
+.but-red:hover {
+	background: url(images/rtl/but-red2-r.png) no-repeat right center;
+}
+
+.but-pink {
+	background: url(images/rtl/but-pink-r.png) no-repeat right center;
+}
+
+.but-pink:hover {
+	background: url(images/rtl/but-pink2-r.png) no-repeat right center;
+}
+
+.but-orange {
+	background: url(images/rtl/but-orange-r.png) no-repeat right center;
+}
+
+.but-orange:hover {
+	background: url(images/rtl/but-orange2-r.png) no-repeat right center;
+}
+
+.but-violet {
+	background: url(images/rtl/but-violet-r.png) no-repeat right center;
+}
+
+.but-violet:hover {
+	background: url(images/rtl/but-violet2-r.png) no-repeat right center;
+}
+
+/* Talking box. Thinking box. ---*/
+div.bubble span.arrow { margin-left: 0; margin-right: 20px; }
+
+div.bubble span.author {
+	background-position: 99% 3px;
+	padding-left: 0;
+	padding-right: 25px;
+}
+
+/* Box style ---*/
+.box-notice, .box-success, .box-error {
+	background-position: 99% center;
+	padding-left: 0 !important;
+	padding-right: 40px !important;
+}
+
+.box-sticky, .box-download {
+	background-position: 99% center;
+	padding-left: 0 !important;
+	padding-right: 50px !important;
+}
+
+/* Legend ---*/
+.legend-title { float: right; left: auto; right: 7px; }
+
+
+/* Badge Module ---*/
+.badge {	background-image: url(images/rtl/icon-badge.png); right: auto; left: 0; }
+
+
+/* OTHERS
+--------------------------------------------------*/
+div.ja-adv span.sponsor { text-align: left; }
+
+.icon-big-title {
+	background-position: right center !important;
+	padding-left: 0 !important;
+	padding-right: 70px !important;
+}
+
+.icon-small-title {
+	background-position: right center !important;
+	padding-left: 0 !important;
+	padding-right: 30px !important;
+}

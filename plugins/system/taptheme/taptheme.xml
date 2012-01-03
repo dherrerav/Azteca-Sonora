@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="system" method="upgrade">
+	<name>System - TapTheme</name>
+	<author>TapTheme</author>
+	<creationDate>01/26/2011</creationDate>
+	<copyright>Copyright (c) 2010 - 2011 Pixel Praise LLC. All rights reserved.</copyright>
+	<authorEmail>support@taptheme.com</authorEmail>
+	<authorUrl>www.taptheme.com</authorUrl>
+	<version>1.6.1</version>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<description></description>
+	<files>
+		<filename plugin="taptheme">taptheme.php</filename>
+		<folder>taptheme</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_system_taptheme.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="/plugins/system/taptheme/taptheme/fields">
+			<fieldset name="SITE">
+				<field name="template_site_firefox" type="template" default="" label="FIREFOX" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_safari" type="template" default="" label="SAFARI" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_iphone" type="template" default="" label="IPHONE" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_ipad" type="template" default="" label="IPAD" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_blackberry" type="template" default="" label="BLACKBERRY" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_palm" type="template" default="" label="PALM" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_android" type="template" default="" label="ANDROID" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_chrome" type="template" default="" label="CHROME" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_opera" type="template" default="" label="OPERA" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_ie6" type="template" default="" label="IE6" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_ie7" type="template" default="" label="IE7" description="TEMPLATE_SITE_DESC" />
+				
+				<field name="template_site_ie8" type="template" default="" label="IE8" description="TEMPLATE_SITE_DESC" />
+			</fieldset>
+			<fieldset name="ADMIN">
+				<field name="template_admin_firefox" type="admintemplate" default="" label="FIREFOX" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_safari" type="admintemplate" default="" label="SAFARI" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_iphone" type="admintemplate" default="" label="IPHONE" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_ipad" type="admintemplate" default="" label="IPAD" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_blackberry" type="admintemplate" default="" label="BLACKBERRY" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_palm" type="admintemplate" default="" label="PALM" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_android" type="admintemplate" default="" label="ANDROID" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_chrome" type="admintemplate" default="" label="CHROME" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_opera" type="admintemplate" default="" label="OPERA" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_ie6" type="admintemplate" default="" label="IE6" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_ie7" type="admintemplate" default="" label="IE7" description="TEMPLATE_ADMIN_DESC" />
+				
+				<field name="template_admin_ie8" type="admintemplate" default="" label="IE8" description="TEMPLATE_ADMIN_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

@@ -1,0 +1,12 @@
+/**
+* @package JCE Media Manager Flowplayer
+* @copyright Copyright (C) 2005 - 2010 Ryan Demmer. All rights reserved.
+* @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see licence.txt
+* This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+*/
+li.file.flv, li.file.mp4, li.file.mp3, li.file.xml {
+	background: url(../../../../../../../libraries/img/ext.gif) no-repeat 0 -380px;
+}

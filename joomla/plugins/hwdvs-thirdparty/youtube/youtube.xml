@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="hwdvs-thirdparty" method="upgrade">
+    <name>Youtube</name>
+    <creationDate>2011-07-01</creationDate>
+    <author>Highwood Design</author>
+    <copyright>(C) 2007 - 2009 Highwood Design</copyright>
+    <authorEmail>info@highwooddesign.co.uk</authorEmail>
+    <authorUrl>http://hwdmediashare.co.uk</authorUrl>
+    <version>[ Kronig ]</version>
+    <description>Adds YouTube support to hwdVideoShare</description>
+    <files>
+        <filename plugin="youtube">youtube.php</filename>
+        <filename plugin="youtube">youtube.view.php</filename>
+    </files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+                                <field name="playLocal" type="list"
+					description="Try to play the video in the local video player."
+					label="Play in local player"
+                                        default="2"
+				>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                        <option value="2">Global</option>
+				</field>
+                                <field name="playerVersion" type="list"
+					description="The Youtube player version which should be used."
+					label="Video player version"
+                                        default="1"
+				>
+                                        <option value="0">Standard</option>
+                                        <option value="1">New</option>
+				</field>
+                        </fieldset>
+		</fields>
+	</config>
+    <params>
+	<param name="playLocal" type="list" default="2" label="Play in local player" description="Try to play the video in the local video player.">
+		<option value="0">No</option>
+		<option value="1">Yes</option>
+		<option value="2">Global</option>
+	</param>
+	<param name="playerVersion" type="list" default="1" label="Video player version" description="The Youtube player version which should be used.">
+		<option value="0">Standard</option>
+		<option value="1">New</option>
+	</param>
+    </params>
+</install>
+
+
+

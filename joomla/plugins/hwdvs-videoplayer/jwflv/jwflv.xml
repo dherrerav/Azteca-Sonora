@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="hwdvs-videoplayer" method="upgrade">
+    <name>JW FLV (Version 4) Player</name>
+    <creationDate>2011-07-01</creationDate>
+    <author>Highwood Design</author>
+    <copyright>(C) 2007 - 2009 Highwood Design</copyright>
+    <authorEmail>info@highwooddesign.co.uk</authorEmail>
+    <authorUrl>http://hwdmediashare.co.uk</authorUrl>
+    <version>[ Kronig ]</version>
+    <description>Adds JW FLV (Version 4) support to hwdVideoShare</description>
+    <files>
+        <filename plugin="jwflv">jwflv/yt.swf</filename>
+        <filename plugin="jwflv">jwflv/mediaplayer.swf</filename>
+        <filename plugin="jwflv">jwflv.view.php</filename>
+    </files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="bgcolor" type="text"
+					description="The background color of the controlbar and playlist. This is white with the default skin."
+					label="Background Color"
+					size="20"
+                                        default="333333" 
+				/>
+
+				<field name="fgcolor" type="text"
+					description="The color of all icons and texts in the controlbar and playlist."
+					label="Foreground Color"
+					size="20"
+                                        default="cccccc" 
+				/>
+
+				<field name="lightcolor" type="text"
+					description="The color of an icon or text when you rollover it with the mouse. If you set this, also set the frontcolor, so the rollovers also have a rollout."
+					label="Light Color"
+					size="20"
+                                        default="ffffff" 
+				/>                                
+
+				<field name="screencolor" type="text"
+					description="The background color of the display."
+					label="Screen Color"
+					size="20"
+                                        default="000000" 
+				/> 
+
+                                <field name="controlbar" type="list"
+					description="Position of the controlbar."
+					label="Control bar"
+                                        default="0" 
+				>
+                                        <option value="0">Bottom (default)</option>
+                                        <option value="1">Over</option>
+                                        <option value="2">None</option>
+				</field>
+
+				<field name="logo" type="text"
+					description="Location of a logo image."
+					label="Logo"
+					size="20"
+                                        default="" 
+				/> 
+
+				<field name="skin" type="text"
+					description="The location of a skin SWF file."
+					label="Skin"
+					size="20"
+                                        default="" 
+				/> 
+                                
+                                <field name="autostart" type="list"
+					description="Automatically start playing."
+					label="Autostart"
+                                        default="0" 
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No (default)</option>
+				</field>
+
+				<field name="link" type="text"
+					description="Link to an external site."
+					label="Link URL"
+					size="20"
+                                        default="" 
+				/> 
+                                
+                                <field name="linktarget" type="list"
+					description="The browser frame where link from the display are opened in."
+					label="Link Target"
+                                        default="0" 
+				>
+                                        <option value="0">New Window (default)</option>
+                                        <option value="1">Current Frame</option>
+                                        <option value="2">Parent Frame</option>
+                                        <option value="3">Top Frame</option>
+				</field>
+
+				<field name="bufferlength" type="text"
+					description="Number of seconds to buffer before starting."
+					label="Buffer length"
+					size="20"
+                                        default="5" 
+				/> 
+                                
+                                <field name="displayclick" type="list"
+					description="Action to perform when clicking the display."
+					label="Display Click"
+                                        default="0" 
+				>
+                                        <option value="0">Play (default)</option>
+                                        <option value="1">Link</option>
+                                        <option value="2">Fullscreen</option>
+                                        <option value="3">Mute</option>
+                                        <option value="4">Next</option>
+                                        <option value="5">None</option>
+				</field>
+                                
+                                <field name="fullscreen" type="list"
+					description="Enable the fullscreen functionality."
+					label="Allow Fullscreen"
+                                        default="1" 
+				>
+                                        <option value="1">Yes (default)</option>
+                                        <option value="0">No</option>
+				</field>                                
+                                
+                                <field name="mute" type="list"
+					description="Mute the player on startup."
+					label="Mute"
+                                        default="0" 
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No (default)</option>
+				</field>  		
+                                
+                                <field name="quality" type="list"
+					description="Toggle high-quality playback."
+					label="High Quality"
+                                        default="1" 
+				>
+                                        <option value="1">Yes (default)</option>
+                                        <option value="0">No</option>
+				</field> 
+                                
+                                <field name="repeat" type="list"
+					description="Continously repeat playback."
+					label="Repeat"
+                                        default="0" 
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No (default)</option>
+				</field>
+                                
+                                <field name="stretching" type="list"
+					description="Resize mode of display content."
+					label="Stretching"
+                                        default="0" 
+				>
+                                        <option value="0">Uniform (default)</option>
+                                        <option value="1">Fill</option>
+                                        <option value="2">Exactfit</option>
+                                        <option value="3">None</option>
+				</field>
+                                
+                                <field name="volume" type="list"
+					description="Startup volume."
+					label="Volume"
+                                        default="60" 
+				>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                        <option value="60">60 (default)</option>
+                                        <option value="70">70</option>
+                                        <option value="80">80</option>
+                                        <option value="90">90</option>
+                                        <option value="100">100</option>
+				</field>
+                                
+                                <field name="pseudostreaming" type="list"
+					description="The biggest advantage of using pseudostreaming or any other streaming solution is the ability to seek in the timeline to positions that have not been downloaded yet to the player. This is most desirable for full-length movies because the visitor can seek to the last scene of a 2-hour movie if she wants to."
+					label="Allow Pseudostreaming"
+                                        default="60" 
+				>
+                                        <option value="0">No (default)</option>
+                                        <option value="1">Yes</option>
+				</field>
+
+				<field name="start" type="text"
+					description="Position in seconds where the playback should start. Only used when streaming."
+					label="Start Time"
+					size="20"
+                                        default="" 
+				/> 
+
+				<field type="spacer" />
+                                
+                                <field name="captions" type="list"
+					description="Display captions in the video player"
+					label="Enable Captions"
+                                        default="0" 
+				>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+				</field>
+        
+				<field type="spacer" />
+                                
+                                <field name="pl_show" type="list"
+					description="Show the internal playlist fetaures."
+					label="Show Playlist Features"
+                                        default="1" 
+				>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+				</field>
+                                
+                                <field name="pl_position" type="list"
+					description="Location of the internal playlist fetaures."
+					label="Playlist Position"
+                                        default="right" 
+				>
+                                        <option value="top">Top</option>
+                                        <option value="right">Right</option>
+                                        <option value="bottom">Bottom</option>
+                                        <option value="left">Left</option>
+				</field>                                
+
+				<field type="spacer" />
+                                
+                                <field name="googleanalytics" type="list"
+					description="The Google Analytics plugin for the JW Player is designed to help you understand how well your video content is performing online. It takes advantage of Google's new Flash API for Analytics so you can track events within the JW Player itself."
+					label="Enable Google Analytics"
+                                        default="0" 
+				>
+                                        <option value="0">No (default)</option>
+                                        <option value="1">Google Analytics Plugin</option>
+                                        <option value="2">Google Analytics Pro Plugin</option>
+				</field>        
+
+				<field name="accountid" type="text"
+					description=""
+					label="Google Account ID"
+					size="20"
+                                        default="" 
+				/> 
+                                
+                                <field name="trackstarts" type="list"
+					description=""
+					label="Track Starts"
+                                        default="0" 
+				>
+                                        <option value="0">No (default)</option>
+                                        <option value="1">Yes</option>
+				</field> 
+                                
+                                <field name="trackpercentage" type="list"
+					description=""
+					label="Track Percentage"
+                                        default="0" 
+				>
+                                        <option value="0">No (default)</option>
+                                        <option value="1">Yes</option>
+				</field> 
+                                 
+                                <field name="tracktime" type="list"
+					description=""
+					label="Track Time"
+                                        default="0" 
+				>
+                                        <option value="0">No (default)</option>
+                                        <option value="1">Yes</option>
+				</field>                                
+      
+				<field type="spacer" />
+
+				<field name="abouttext" type="text"
+					description="Custom text for the Right Click on the video player. (Only users who have a licensed version of the JW FLV Player will be able to use this option.)"
+					label="About Text"
+					size="20"
+                                        default="" 
+				/>       
+
+				<field name="aboutlink" type="text"
+					description="Custom link for the Right Click on the video player. (Only users who have a licensed version of the JW FLV Player will be able to use this option.)"
+					label="About Link"
+					size="20"
+                                        default="" 
+				/>         
+			</fieldset>
+		</fields>
+	</config>
+    <params>
+	<param name="bgcolor" type="text" size="10" default="333333" label="Background Color" description="The background color of the controlbar and playlist. This is white with the default skin. ." />
+	<param name="fgcolor" type="text" size="10" default="cccccc" label="Foreground Color" description="The color of all icons and texts in the controlbar and playlist." />
+	<param name="lightcolor" type="text" size="10" default="ffffff" label="Light Color" description="The color of an icon or text when you rollover it with the mouse. If you set this, also set the frontcolor, so the rollovers also have a rollout." />
+	<param name="screencolor" type="text" size="10" default="000000" label="Screen Color" description="The background color of the display." />
+
+	<param name="controlbar" type="list" default="0" label="Control bar" description="Position of the controlbar.">
+		<option value="0">Bottom (default)</option>
+		<option value="1">Over</option>
+		<option value="2">None</option>
+	</param>
+	<param name="logo" type="text" size="50" default="" label="Logo" description="Location of a logo image." />
+	<param name="skin" type="text" size="50" default="" label="Skin" description="The location of a skin SWF file." />
+
+	<param name="autostart" type="list" default="0" label="Autostart" description="Automatically start playing.">
+		<option value="1">Yes</option>
+		<option value="0">No (default)</option>
+	</param>
+	<param name="link" type="text" size="50" default="" label="Link URL" description="Link to an external site." />
+	<param name="linktarget" type="list" default="0" label="Link Target" description="The browser frame where link from the display are opened in.">
+		<option value="0">New Window (default)</option>
+		<option value="1">Current Frame</option>
+		<option value="2">Parent Frame</option>
+		<option value="3">Top Frame</option>
+	</param>
+	<param name="bufferlength" type="text" size="10" default="5" label="Buffer length" description="Number of seconds to buffer before starting." />
+	<param name="displayclick" type="list" default="0" label="Display Click" description="Action to perform when clicking the display.">
+		<option value="0">Play (default)</option>
+		<option value="1">Link</option>
+		<option value="2">Fullscreen</option>
+		<option value="3">Mute</option>
+		<option value="4">Next</option>
+		<option value="5">None</option>
+	</param>		
+	<param name="fullscreen" type="list" default="1" label="Allow Fullscreen" description="Enable the fullscreen functionality.">
+		<option value="1">Yes (default)</option>
+		<option value="0">No</option>
+	</param>
+	<param name="mute" type="list" default="0" label="Mute" description="Mute the player on startup.">
+		<option value="1">Yes</option>
+		<option value="0">No (default)</option>
+	</param>
+	<param name="quality" type="list" default="1" label="High Quality" description="Toggle high-quality playback.">
+		<option value="1">Yes (default)</option>
+		<option value="0">No</option>
+	</param>
+	<param name="repeat" type="list" default="0" label="Repeat" description="Continously repeat playback.">
+		<option value="1">Yes</option>
+		<option value="0">No (default)</option>
+	</param>
+	<param name="stretching" type="list" default="0" label="Stretching" description="Resize mode of display content.">
+		<option value="0">Uniform (default)</option>
+		<option value="1">Fill</option>
+		<option value="2">Exactfit</option>
+		<option value="3">None</option>
+	</param>
+	<param name="volume" type="list" default="60" label="Volume" description="Startup volume.">
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+		<option value="40">40</option>
+		<option value="50">50</option>
+		<option value="60">60 (default)</option>
+		<option value="70">70</option>
+		<option value="80">80</option>
+		<option value="90">90</option>
+		<option value="100">100</option>
+	</param>
+
+        <param name="pseudostreaming" type="list" default="0" label="Allow Pseudostreaming" description="The biggest advantage of using pseudostreaming or any other streaming solution is the ability to seek in the timeline to positions that have not been downloaded yet to the player. This is most desirable for full-length movies because the visitor can seek to the last scene of a 2-hour movie if she wants to.">
+            <option value="0">No (default)</option>
+            <option value="1">Yes</option>
+        </param> 
+	<param name="start" type="text" size="10" default="" label="Start Time" description="Position in seconds where the playback should start. Only used when streaming." />
+ 
+ 	<param name="" type="spacer" />
+ 
+        <param name="captions" type="list" default="0" label="Enable Captions" description="Display captions in the video player">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </param> 
+        
+        <param name="" type="spacer" />
+
+        <param name="pl_show" type="list" default="1" label="Show Playlist Features" description="Show the internal playlist fetaures.">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </param> 
+        <param name="pl_position" type="list" default="right" label="Playlist Position" description="Location of the internal playlist fetaures.">
+            <option value="top">Top</option>
+            <option value="right">Right</option>
+            <option value="bottom">Bottom</option>
+            <option value="left">Left</option>
+        </param> 
+        
+	<param name="" type="spacer" />
+
+        <param name="googleanalytics" type="list" default="0" label="Enable Google Analytics" description="The Google Analytics plugin for the JW Player is designed to help you understand how well your video content is performing online. It takes advantage of Google's new Flash API for Analytics so you can track events within the JW Player itself.">
+            <option value="0">No (default)</option>
+            <option value="1">Google Analytics Plugin</option>
+            <option value="2">Google Analytics Pro Plugin</option>
+        </param>  
+	<param name="accountid" type="text" size="12" default="" label="Google Account ID" description="Position in seconds where the playback should start. Only used when streaming." />
+        <param name="trackstarts" type="list" default="0" label="Track Starts" description="The Google Analytics plugin for the JW Player is designed to help you understand how well your video content is performing online. It takes advantage of Google's new Flash API for Analytics so you can track events within the JW Player itself.">
+            <option value="0">No (default)</option>
+            <option value="1">Yes</option>
+        </param> 
+        <param name="trackpercentage" type="list" default="0" label="Track Percentage" description="The Google Analytics plugin for the JW Player is designed to help you understand how well your video content is performing online. It takes advantage of Google's new Flash API for Analytics so you can track events within the JW Player itself.">
+            <option value="0">No (default)</option>
+            <option value="1">Yes</option>
+        </param>         
+        <param name="tracktime" type="list" default="0" label="Track Time" description="The Google Analytics plugin for the JW Player is designed to help you understand how well your video content is performing online. It takes advantage of Google's new Flash API for Analytics so you can track events within the JW Player itself.">
+            <option value="0">No (default)</option>
+            <option value="1">Yes</option>
+        </param>          
+        
+	<param name="" type="spacer" />
+
+	<param name="abouttext" type="text" size="50" default="" label="About Text" description="Custom text for the Right Click on the video player. (Only users who have a licensed version of the JW FLV Player will be able to use this option.)" />
+	<param name="aboutlink" type="text" size="50" default="" label="About Link" description="Custom link for the Right Click on the video player. (Only users who have a licensed version of the JW FLV Player will be able to use this option.)" />
+    </params>  
+</install>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<highlighter>    
+    <item>
+        <title>Title 1</title>
+        <desc>Item description 1</desc>
+        <link>http://item1.title.com</link>
+    </item>
+
+    <item>
+        <title>Title 2</title>
+        <desc>Item description 2</desc>
+        <link>http://item2.title.com</link>
+    </item>
+    
+    <item>
+        <title>Title 3</title>
+        <desc>Item description 3</desc>
+        <link>http://item3.title.com</link>
+    </item>
+    
+    <item>
+        <title>Title 4</title>
+        <desc>Item description 4</desc>
+        <link>http://item4.title.com</link>
+    </item>
+
+    <item>
+        <title>Title 5</title>
+        <desc>Item description 5</desc>
+        <link>http://item5.title.com</link>
+    </item>                        
+</highlighter>

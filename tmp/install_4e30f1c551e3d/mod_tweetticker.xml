@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.6" client="site" method="upgrade">
+	<name>mod_tweetticker</name>
+	<author>Saul Martínez</author>
+	<creationDate>July 2011</creationDate>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://twitter.com/samacs</authorUrl>
+	<version>1.0.1</version>
+	<description>Shows twitter timeline</description>
+	<files>
+		<filename module="mod_tweetticker">mod_tweetticker.php</filename>
+		<folder>tmpl</folder>
+		<folder>javascripts></folder>
+		<filename>index.html</filename>
+		<filename>mod_tweetticker.xml</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="account"
+					type="text"
+					default=""
+					size="10"
+					label="Twitter account"
+					description="The twitter account where the tweets are going to be fetched from" />
+				<field
+					name="count"
+					type="text"
+					default="5"
+					label="MOD_ARTICLES_NEWS_FIELD_ITEMS_LABEL"
+					description="MOD_ARTICLES_NEWS_FIELD_ITEMS_DESC" />
+
+			</fieldset>
+		</fields>
+	</config>
+</extension>

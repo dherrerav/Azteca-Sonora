@@ -1,0 +1,90 @@
+/**
+* Main CSS file
+* @package News Show Pro GK4
+* @Copyright (C) 2009-2011 Gavick.com
+* @ All rights reserved
+* @ Joomla! is Free Software
+* @ Released under GNU/GPL License : http://www.gnu.org/copyleft/gpl.html
+* @version $Revision: GK4 1.0 $
+**/
+
+.nspMain { overflow:hidden; }
+.nspBotInterface,
+.nspTopInterface { overflow:hidden; margin:5px 0; }
+.nspBotInterface div,
+.nspTopInterface div { float:right; }
+/* Interface - for different looking Top and Bottom interface use the following classes:  .nspTopInterface and .nspBotInterface (e.g.: .nspTopInterface .nspPagination li ...) */
+
+.nspPagination { list-style-type:none !important; margin:3px 0 0 !important; padding:0 !important; float:left; }
+.nspPagination li { float:left; width: 8px; height: 8px; margin: 0 4px 0 0 !important; background: url('../images/interface.png') no-repeat 50% 0; text-indent:-999em; cursor:pointer; }
+.nspPagination li:hover,
+.nspPagination li.active { background-position: 50% -8px; }
+.nspNext,
+.nspPrev { float:left; width: 14px; height: 14px; margin:0 0 0 4px; background: url('../images/interface.png') no-repeat 0 -16px; text-indent:-999em; cursor:pointer; }
+.nspPrev { background-position: 0 -44px }
+.nspNext:hover,
+.nspPrev:hover { background-position: 0 -30px }
+.nspPrev:hover { background-position: 0 -58px }
+.nspCounter {  float:left; margin:0 0 0 8px; padding:1px 4px; border: 1px solid #ddd; border-radius:2px 2px; -moz-border-radius:2px 2px; -webkit-border-radius:2px 2px; color: #878787; font-size:9px;cursor:pointer; }
+.nspCounter span { }
+.nspBotInterface .nspCounter strong,
+ .nspTopInterface .nspCounter strong { }
+.nspArts { overflow:hidden; }
+.nspArt { float:left; }
+.nspArt div { overflow: hidden; }
+.nspArt h4.nspHeader { }
+.nspArt h4.nspHeader a { text-decoration: none }
+.nspArt h4.nspHeader a:hover { }
+.nspArt img.nspImage { border: none }
+.nspArt p.nspText { float:none; }
+.nspArt p.nspText a { }
+.nspArt p.nspText a:hover { }
+.nspArt p.nspInfo { font-size:90% }
+.nspArt p.nspInfo a { }
+.nspArt p.nspInfo a:hover { }
+.nspArt .tleft { text-align:left; }
+.nspArt .tright { text-align:right; }
+.nspArt .tcenter { text-align:center; }
+.nspArt .tjustify { text-align:justify; }
+.nspArt .fleft { float:left; }
+.nspArt .fright { float:right; }
+.nspArt .fnone { clear:both; width:100%; float:none; }
+.readon.left,
+ .readon.right,
+ .readon.center { clear:both; }
+.readon.left { float:left; }
+.readon.right { float:right; }
+.readon.center { display:inline; float:none; }
+.nspAvatar { }
+.nspLinks { }
+.nspLinks ul { padding:0 !important; list-style-type:none !important; }
+.nspLinks ul li { margin: 0 30px 0 0 !important }
+.nspLinks ul li:hover { }
+.nspLinks ul li h4 { }
+.nspLinks ul li h4 a { text-decoration: none }
+.nspLinks ul li h4 a:hover { }
+.nspLinks ul li p { }
+/* positioning */
+
+.nspArts.left { float:right; }
+.nspLinksWrap.left { float:left; }
+.nspArts.right { float:left; }
+.nspLinksWrap.right { float:right; }
+/* make element unvisible */
+
+.nspMain .unvisible { height:1px; left:-10000px; overflow:hidden; position:absolute; top:auto; width:1px; }
+/* font-size classes */
+
+.nspFs80 { font-size:80%; }
+.nspFs90 { font-size:90%; }
+.nspFs100 { font-size:100%; }
+.nspFs110 { font-size:110%; }
+.nspFs120 { font-size:120%; }
+.nspFs130 { font-size:130%; }
+.nspFs140 { font-size:140%; }
+.nspFs150 { font-size:150%; }
+.nspFs160 { font-size:160%; }
+.nspFs170 { font-size:170%; }
+.nspFs180 { font-size:180%; }
+.nspFs190 { font-size:190%; }
+.nspFs200 { font-size:200%; }

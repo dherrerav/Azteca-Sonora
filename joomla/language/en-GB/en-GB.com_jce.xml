@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="language">
+	<name>English(United Kingdom)</name>
+	<tag>en-GB</tag>
+	<version>2.0.0beta7</version>
+	<creationDate>12 May 2011</creationDate>
+	<author>Ryan Demmer</author>
+	<authorEmail>info@joomlacontenteditor.net</authorEmail>
+	<authorUrl>www.joomlacontenteditor.net</authorUrl>
+	<copyright>(C) 2008-2009 Ryan Demmer. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<description></description>
+</install>

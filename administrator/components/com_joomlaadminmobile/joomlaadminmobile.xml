@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5" method="upgrade">
+        <name>Joomla Admin Mobile</name>
+        <creationDate>November 2011</creationDate>
+        <author>CovertApps.com</author>
+        <authorEmail>support@covertapps.com</authorEmail>
+        <authorUrl>http://www.covertapps.com</authorUrl>
+        <copyright>Copyright (C) 2009-2011 Covert Apps. All rights reserved.</copyright>
+        <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+        <version>2.2.1</version>
+        <description>This component is used by the Joomla! Admin Mobile mobile application to allow users to control their website using xmlrpc calls.  &lt;br /&gt;For more information about the app, visit: &lt;a target="_blank" href="http://www.covertapps.com/jam"&gt;http://www.covertapps.com/jam&lt;/a&gt;.</description>
+        <installfile>joomlaadminmobile.install.php</installfile>
+        <files folder="site">
+                <filename>index.html</filename>
+                <filename>joomlaadminmobile.php</filename>
+                <filename>joomlaadminmobilexmlrpc.php</filename>
+		<filename>phpxmlrpc/compat/var_export.php</filename>
+		<filename>phpxmlrpc/compat/is_callable.php</filename>
+		<filename>phpxmlrpc/compat/is_a.php</filename>
+		<filename>phpxmlrpc/compat/version_compare.php</filename>
+		<filename>phpxmlrpc/compat/is_scalar.php</filename>
+		<filename>phpxmlrpc/compat/index.html</filename>
+		<filename>phpxmlrpc/compat/array_key_exists.php</filename>
+		<filename>phpxmlrpc/Changelog</filename>
+		<filename>phpxmlrpc/index.html</filename>
+		<filename>phpxmlrpc/xmlrpc.php</filename>
+		<filename>phpxmlrpc/NEWS</filename>
+		<filename>phpxmlrpc/README</filename>
+		<filename>phpxmlrpc/xmlrpc_wrappers.php</filename>
+		<filename>phpxmlrpc/xmlrpcs.php</filename>
+        </files>
+        <administration>
+		<menu img="components/com_joomlaadminmobile/images/icon-16-joomlaadminmobile.png">Joomla Admin Mobile</menu>
+                <files folder="admin">
+                        <filename>index.html</filename>
+                        <filename>joomlaadminmobile.php</filename>
+                        <filename>config.xml</filename>
+                        <filename>access.xml</filename>
+                        <filename>joomlaadminmobile.css</filename>
+			<filename>images/icon-16-joomlaadminmobile.png</filename>
+			<filename>images/icon-48-joomlaadminmobile.png</filename>
+			<filename>assets/index.html</filename>
+			<filename>assets/cmsmarketconnect/cmsmarketconnect.php</filename>
+			<filename>assets/cmsmarketconnect/cmsmconnect_logo.png</filename>
+			<filename>assets/cmsmarketconnect/index.html</filename>
+			<filename>assets/cmsmarketconnect/template.php</filename>
+
+			<folder>packages</folder>
+                </files>
+        </administration>
+        <params>
+                <param name="minusergroup" type="usergroup" label="Minimum User Group" description="Only users in the given user group and above will be able to access data using the component." default="25" />
+                <param name="debug" type="radio" label="Debug" description="Turn this on to provide more debug information in the case of an invalid response." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </param>
+                <param name="replace_escaped_chars" type="radio" label="Replace Escaped Characters" description="Turn this on if you are experiencing issues saving items from JAM.  This will replace any escaped characters using the name convention with the number convention." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </param>
+                <param name="exit_after_executing" type="radio" label="Exit After Executing" description="Turn this on if you are receiving an HTML response in the JAM application.  This will exit before returning to Joomla! after executing to avoid any system plugins from injecting HTML into the response." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </param>
+                <param name="detach_nonjoomla_user_plugins" type="radio" label="Detach non-Joomla User Plugins" description="Turning this setting on will disable any non-Joomla user plugins.  This has been required with a 3rd party user plugin is installed that redirects the user on logout." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </param>
+                <param name="spacer" type="spacer" label="" description="" default="0" />
+                <param name="create_users_gid" type="usergroup" label="Create New Users" description="Sets the minimum level to be able to create new users. Please Note: A user is never allowed to upgrade a user beyond their own user level." default="25" />
+                <param name="global_configuration_gid" type="usergroup" label="Access Global Configuration" description="Sets the minimum level to be able to access and update the global configuration." default="25" />
+        </params>
+</install>

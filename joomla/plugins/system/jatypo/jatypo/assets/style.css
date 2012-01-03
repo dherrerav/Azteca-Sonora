@@ -1,0 +1,87 @@
+.jatypo-btn span {
+	padding: 0px 24px 0px 6px !important;
+	color: #333 ;
+	cursor: pointer !important;
+}
+
+.jatypo-btn span:hover {
+	color: #0B55C4;
+}
+
+#jatypo-wrap {
+	display: block;
+	position: absolute;
+	top: -999em;
+	left: -999em;
+	width: 700px;
+	height: 600px;	
+	border: solid 1px #ccc;
+	background: #fff;
+	z-index: 1000;
+	padding: 5px;
+	overflow: scroll;
+}
+
+#jatypo-wrap .typo {
+	position: relative;
+	padding: 5px 0px 5px 5px;
+	cursor: pointer;
+	border-bottom: solid 1px #ddd;
+	margin: 0px 5px 0px 15px;
+	text-align: top;
+}
+
+#jatypo-wrap td:hover .typo {
+	background: #feffe8;
+}
+
+#jatypo-wrap .sample {
+	display: none;
+	position: absolute;
+	border: solid 1px #bab598;
+	background: #f8f8f8;
+	padding: 10px;
+	width: 250px;
+}
+
+#jatypo-wrap .typo-over .sample {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 50px;
+	z-index: 1000;
+}
+
+#jatypo-overlay {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+
+#jatypo-wrap ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+#jatypo-wrap ul li {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}  
+
+#jatypo-wrap ul.uordered {
+	padding-left: 22px;
+}  
+
+.typo span.titlte {
+	font-weight: bold !important;
+	padding: 2px 0px;
+}
+
+#jatypo-wrap span:hover.title {
+	color: navy;
+}
+.button2-right{
+	margin: 0 !important;
+}

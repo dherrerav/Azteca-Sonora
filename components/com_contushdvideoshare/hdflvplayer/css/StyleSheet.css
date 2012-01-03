@@ -1,0 +1,132 @@
+@charset "utf-8";
+
+
+/**
+ * @version     1.3, Creation Date : March-24-2011
+ * @name        stylesheet.css
+ * @location    /components/com_contushdvideosahre/hdflvplayer/css/stylesheet.css
+ * @package	Joomla 1.6
+ * @subpackage	contushdvideoshare
+ * @author      Contus Support - http://www.contussupport.com
+ * @copyright   Copyright (C) 2011 Contus Support
+ * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * @link        http://www.hdvideoshare.net
+ */
+
+/**
+ * Description :  common css code
+ */
+
+
+
+
+
+/* CSS Document */
+
+
+/* -------------------------------------- */
+/* GENERAL/RESET CSS */
+/* -------------------------------------- */
+html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline;  }
+
+
+ ol, ul{ list-style:none;}
+.floatleft { float:left;}
+.floatright { float:right;}
+
+
+/* -------------------------------------- */
+/* CLEARFIX CSS */
+/* -------------------------------------- */
+.clear { clear:both; height:0px; font-size:0px;}
+.clearfix:after {
+    clear: both;
+    display: block;
+    content: " ";
+    height: 0px;
+    visibility: hidden;
+}
+.clearfix {
+    display: inline-block;
+}
+/* Hide these rules from IE-mac \*/
+* html .clearfix {
+    height: 1%;
+}
+.clearfix {
+    display: block;
+
+
+}
+li.clearfix {
+    display: list-item;
+}
+
+/* End hide from IE-mac */
+
+/* -------------------------------------- */
+/* Main  CSS */
+/* -------------------------------------- */
+
+#maincontainer
+{
+    width:100%;margin:0 auto;
+}
+
+#maincontainer .content_left{width:10px; height:134px;}
+#maincontainer .content_middle{height:134px;background:url(../../images/middle.jpg) repeat-x;padding:10px 0 10px 6px;}
+#maincontainer .content_middle .content{}
+#maincontainer .content_right{ width:10px; height:134px;}
+
+#box {
+      width:300px;
+      font: 80%/1.6 Arial, Helvetica, sans-serif;
+      color: #2D486C;
+      background-color: transparent;
+      margin: 0 10px 10px 0;
+}
+.roundborder {
+      height: 1px;
+      overflow: hidden;
+      background-color: #ffffff;
+      border-right: 1px solid #33527B;
+      border-left: 1px solid #33527B;
+}
+.c1 {
+      margin: 0 12px 0 12px;
+      border: none;
+      background-color: #33527B;
+}
+.c2 {
+      margin: 0 9px;
+      border-width: 0 3px;
+}
+.c3 {
+      margin: 0 7px;
+      border-width: 0 2px;
+}
+.c4 {
+      margin: 0 6px;
+}
+.c5 {
+      margin: 0 5px;
+}
+.c6 {
+      margin: 0 4px;
+}
+.c7 {
+      margin: 0 3px;
+}
+.c8 {
+      margin: 0 2px;
+      height: 2px;
+}
+.c9 {
+      margin: 0 1px;
+      height: 3px;
+}
+.content {
+      height: auto;
+      padding: 0 15px;
+}
+

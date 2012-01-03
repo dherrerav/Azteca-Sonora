@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.6" method="upgrade" client="site">
+	<name>mod_most_read_content</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://twitter.com/samacs</authorUrl>
+	<creationDate>August 2011</creationDate>
+	<version>1.0.0</version>
+	<description> 
+		<![CDATA[ 
+		<p><h2>mod_most_read_content</h2></p> 
+		<p>Is a all in one module that can display the latest articles, oldest articles, most read articles, most read articles within the fixed time. It is a wonderful module that can easily fit into any type of layout wherther it is a fixed or fluid.</p> 
+		]]></description> 
+
+	<files>
+		<filename module="mod_most_read_content">mod_most_read_content.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<folder>elements</folder>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/modules/mod_articletoolspro/elements">
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="Adds an individual styling"/>
+				<field name="showheader" type="list" default="" label="Show Header" description="Show or hide header">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="showleaderboard" type="list" default="0" label="Show Leaderboard" description="Show or hide leaderboard">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="@spacer" type="spacer" default="" label="" description="" />
+				<field name="incl_excl" type="list" default="1" label="Include or Exclude" description="Select type is inclusion or exclusion">
+					<option value="1">Inclusion</option>
+					<option value="0">Exclusion</option>
+				</field>        
+				<field name="sec_cat_ids" type="lacategories" label="Sections/Categories" description="Select sections/categories to include/exclude" />
+				<field name="spacer" type="spacer" default="" label="@spacer" description=""/>
+				<field name="count" type="text" default="5" label="List Length" description="Number of items to be displayed in the result"/>
+				<field name="adminarticles" type="radio" default="" label="Admin Articles" description="Show or hide administrator articles">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="frontpagearticles" type="radio" default="" label="Frontpage Articles" description="Show or hide frontpage articles">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="section" type="radio" default="" label="Show Section" description="Show or hide section">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="category" type="radio" default="" label="Show Category" description="Show or hide category">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="author" type="radio" default="" label="Show Author" description="Show or hide author name">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="hits" type="radio" default="" label="Show hits" description="Show or hide hits">
+						<option value="1">Show</option>
+						<option value="0">Hide</option>
+				</field>
+				<field name="@spacer" type="spacer" default="" label="@spacer" description=""/>
+				<field name="listtype" type="list" default="" label="List type" description="Select which items to be shown">
+						<option value="1">Latest Articles</option>
+						<option value="2">Oldest Articles</option>
+						<option value="3">Most Read Articles Ever</option>
+						<option value="4">Most Read Withing Time Set</option>
+						<option value="5">Recently Modified Articles</option>
+				</field>
+				<field name="mostreadtime" type="text" default="90" label="Most Read Time Set" description="Number of days during which most read articles shall be selected."/>
+				<field name="username" type="radio" default="" label="User Name" description="Show Name or Username">
+						<option value="name">Name</option>
+						<option value="username">username</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+	<params addpath="/modules/mod_articletoolspro/elements" />
+</extension>

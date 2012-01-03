@@ -1,0 +1,99 @@
+/**
+ * SEF module for Joomla!
+ *
+ * @author      $Author: shumisha $
+ * @copyright   Yannick Gaultier - 2007-2011
+ * @package     sh404SEF-16
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @version     $Id: list.css 2050 2011-06-30 13:52:38Z silianacom-svn $
+ */
+#sbox-btn-close {
+	display: none;
+}
+
+#sbox-window.sh404sef-popup {
+	background-color: grey;
+}
+
+#sbox-overlay.sh404sef-popup {
+	background-color: grey;
+}
+
+.sh404sef-popup #content-box {
+	border-left: none;
+	border-right: none;
+}
+
+.icon-32-main {
+	background-image: url(../images/icon-32-default.png);
+}
+
+.icon-48-sh404sef {
+	background-image: url(../images/icon-48-sh404sef-logo.png);
+}
+
+.icon-48-warning {
+	background-image: url(../images/icon-48-warning.png);
+}
+
+.icon-32-purge {
+	background-image: url(../images/icon-32-purge.png);
+}
+
+.icon-32-purgeselected {
+	background-image: url(../images/icon-32-purgeselected.png);
+}
+
+.icon-32-home {
+	background-image: url(../images/icon-32-frontpage.png);
+}
+
+.icon-32-cpanel {
+	background-image: url(../images/icon-32-cpanel.png);
+}
+
+.icon-32-import {
+	background-image: url(../images/icon-32-import.png);
+}
+
+.icon-32-export {
+	background-image: url(../images/icon-32-export.png);
+}
+
+.icon-32-selectnfredirect {
+	background-image: url(../images/icon-32-default.png);
+}
+
+div.sh404sef-toolbar-title {
+	font-size: 22px;
+	font-weight: bold;
+	color: #0B55C4;
+	line-height: 48px;
+	padding-left: 135px;
+	background-repeat: no-repeat;
+	margin-left: 10px;
+}
+
+.sh-ajax-loading {
+	background-image: url(../images/sh-ajax-loader-wide.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+div.mainurl {
+	font-size: 22px;
+	font-weight: bold;
+	color: #0B55C4;
+	line-height: 48px;
+	background-repeat: no-repeat;
+	text-align: center;
+}
+
+div.sh404sef-red {
+	color: red;
+}
+
+div.sh404sef-red-center {
+  color: red;
+  text-align: center;
+}

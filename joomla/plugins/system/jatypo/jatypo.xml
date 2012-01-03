@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.6" type="plugin" group="system" method="upgrade">
+	<name>Button - JA Typography</name>
+	<author>JoomlArt</author>
+	<creationDate>Sep 2010</creationDate>
+	<copyright>Copyright (C), J.O.O.M Solutions Co., Ltd. All Rights Reserved.</copyright>
+	<license>license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<authorEmail>webmaster@joomlart.com</authorEmail>
+	<authorUrl>http://www.joomlart.com</authorUrl>
+	<version>1.0.0</version>
+	<updateservers>
+	    <server type="collection">http://update.joomlart.com/service/tracking/list.xml</server>
+	</updateservers>
+	<description>JA_TYPO_GRAPHY_PLUGIN</description>
+	<languages>
+		<language 
+			tag="en-GB">en-GB.plg_system_jatypo.ini</language>
+	</languages>
+	<files>
+		<filename plugin="jatypo">jatypo.php</filename>
+		<folder plugin="jatypo">jatypo</folder>
+	</files>
+	<params />
+</install>

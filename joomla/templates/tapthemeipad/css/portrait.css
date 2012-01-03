@@ -1,0 +1,38 @@
+/**
+* @copyright Copyright (C) 2010 Pixel Praise LLC. All rights reserved.
+*/
+
+/**
+ * Joomla! 1.5 AdminPad iPad template css file
+ *
+ * @author		Kyle Ledbetter <support@pixelpraise.com>
+ * @package		AdminPad
+ * @version  	1.0
+ */
+
+/* Portrait CSS */
+#minwidth-body{min-width: 768px;max-width: 768px;}
+#padpanel{
+min-height:740px;
+}
+#ap-sidebar{
+display:none;
+}
+#ap-mainbody .ml20{
+margin-left:0;
+}
+
+/* SCE */
+#text_toolbar .toolbar{
+float:none;
+}
+textarea#text{
+font-size:200%;
+line-height:1.2;
+padding-top:80px;
+width:96% !important;
+}
+
+#ap-sidemenu{
+display:block;
+}

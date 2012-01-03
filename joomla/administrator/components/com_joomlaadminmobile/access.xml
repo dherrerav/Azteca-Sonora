@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_joomlaadminmobile">
+	<section name="component">
+		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
+		<action name="createuser" title="Create User" description="Allow a user in this group to create new users through the component." />
+		<action name="globalconfiguration" title="Access/Edit Global Configuration" description="Allow a user in this group to access and edit the site global configuration through the component." />
+	</section>
+</access>

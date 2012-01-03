@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension
+	version="1.7"
+	type="plugin"
+	method="upgrade"
+	group="content">
+	<name>plg_content_articlenavigation</name>
+	<author>Saul Martinez</author>
+	<creationDate>Octobre 2011</creationDate>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://twitter.com/samacs</authorUrl>
+	<version>0.0.1</version>
+	<description>Shows article navigation in articles</description>
+	<files>
+		<file plugin="articlenavigation">articlenavigation.php</file>
+		<file>index.html</file>
+	</files>
+	<languages>
+		<language tag="en-US">en-US.plg_content_articlenavigation.ini</language>
+		<language tag="en-US">en-US.plg_content_articlenavigation.sys.ini</language>
+		<language tag="es-ES">es-ES.plg_content_articlenavigation.ini</language>
+		<language tag="es-ES">es-ES.plg_content_articlenavigation.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="position"
+					type="radio"
+					default="1"
+					description="Show article navigation above or below content"
+					label="Article navigation position">
+					<option value="1">Abajo</option>
+					<option value="0">Arriba</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

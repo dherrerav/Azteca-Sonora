@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout name="desktop">
+	<!--Extra css load for this layout-->
+	<stylesheets>
+	</stylesheets>
+	<blocks name="top" style="xhtml">
+		<block name="topbanner" type="topbanner" main-inner="1">topbanner</block>
+		<block name="topnavigation" type="topnavigation" main-inner="1">top-navigation</block>
+		<block name="header" type="header" main-inner="1"></block>
+		<block name="mainnav" type="mainnav" main-inner="1"></block>
+		<block name="newshighlight" type="newshighlight" main-inner="1">news-highlighter,news-slideshow</block>
+		<block name="topsl" type="spotlight" main-inner="1">user1,user2,user3,user4,user5</block>
+		<block name="mainnews" type="mainnews" main-inner="1">news-left,news-center,news-right</block>
+		<block name="middle-news" type="middle-news" main-inner="1">tweets-ticker</block>
+		<block name="videos" type="videos" main-inner="1">video</block>
+		<block name="sections" type="sections" main-inner="1">sections-list</block>
+	</blocks>
+	<blocks name="middle" colwidth="33">
+		<block name="left1">position-7</block>
+		<block name="right1">position-5</block>
+	</blocks>
+	<blocks name="bottom" style="xhtml">
+		<block name="botsl" type="spotlight" main-inner="1">user6,user7,user8,user9,user10</block>
+		<block name="navhelper" type="navhelper" main-inner="1"></block>
+		<block name="footnav" type="footnav" main-inner="1"></block>
+		<block name="footer" type="footer"></block>
+		<block name="footer-bottom" type="footer-bottom" main-inner="1">bottom-left,bottom-right</block>
+	</blocks>
+</layout>

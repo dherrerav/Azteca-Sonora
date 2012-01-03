@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<params>
+		<param name="minusergroup" type="usergroup" label="Minimum User Group" description="Only users in the given user group and above will be able to access data using the component." default="25" />
+		<param name="debug" type="radio" label="Debug" description="Turn this on to provide more debug information in the case of an invalid response." default="0">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+                <param name="replace_escaped_chars" type="radio" label="Replace Escaped Characters" description="Turn this on if you are experiencing issues saving items from JAM.  This will replace any escaped characters using the name convention with the number convention." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </param>
+                <param name="exit_after_executing" type="radio" label="Exit After Executing" description="Turn this on if you are receiving an HTML response in the JAM application.  This will exit before returning to Joomla! after executing to avoid any system plugins from injecting HTML into the response." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </param>
+                <param name="detach_nonjoomla_user_plugins" type="radio" label="Detach non-Joomla User Plugins" description="Turning this setting on will disable any non-Joomla user plugins.  This has been required with a 3rd party user plugin is installed that redirects the user on logout." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </param>
+		<param name="spacer" type="spacer" label="" description="" default="0" />
+		<param name="create_users_gid" type="usergroup" label="Create New Users" description="Sets the minimum level to be able to create new users. Please Note: A user is never allowed to upgrade a user beyond their own user level." default="25" />
+		<param name="global_configuration_gid" type="usergroup" label="Access Global Configuration" description="Sets the minimum level to be able to access and update the global configuration." default="25" />
+	</params>
+	<fieldset name="basic" label="Basic" description="Basic Configuration">
+		<field name="debug" type="radio" label="Debug" description="Turn this on to provide more debug information in the case of an invalid response." default="0">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</field>
+                <field name="replace_escaped_chars" type="radio" label="Replace Escaped Characters" description="Turn this on if you are experiencing issues saving items from JAM.  This will replace any escaped characters using the name convention with the number convention." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+                <field name="exit_after_executing" type="radio" label="Exit After Executing" description="Turn this on if you are receiving an HTML response in the JAM application.  This will exit before returning to Joomla! after executing to avoid any system plugins from injecting HTML into the response." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+                <field name="detach_nonjoomla_user_plugins" type="radio" label="Detach non-Joomla User Plugins" description="Turning this setting on will disable any non-Joomla user plugins.  This has been required with a 3rd party user plugin is installed that redirects the user on logout." default="0">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+	</fieldset>
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
+		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" class="inputbox" validate="rules" filter="rules" component="com_joomlaadminmobile" section="component" />
+	</fieldset>
+</config>

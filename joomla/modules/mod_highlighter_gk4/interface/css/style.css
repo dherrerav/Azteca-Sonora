@@ -1,0 +1,19 @@
+/* General */
+
+a:active, a:focus { outline:0; }
+.gkHighlighterGK4 { overflow:hidden; position:relative; height:21px; line-height:21px; width: 100%; }
+/* Interface */
+
+.gkHighlighterInterface { float:left; width:auto; height:21px; margin:0 21px 0 0; padding: 0 7px; }
+.gkHighlighterInterface span.text { display:block; float:left; margin:0 6px 0 7px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+.gkHighlighterInterface div { float:left; width:auto; }
+.gkHighlighterInterface div a { display:block; float:left; height:13px; width:13px; margin: 4px 0 0 2px; background:transparent url('../images/interface.png') no-repeat 0 0; cursor:pointer; }
+.gkHighlighterInterface div a.prev { }
+.gkHighlighterInterface div a.next { background-position: right 0; }
+.gkHighlighterInterface div a.prev:hover { background-position: 0 bottom; }
+.gkHighlighterInterface div a.next:hover { background-position: right bottom; }
+/* Items */
+
+.gkHighlighterWrapper { float:left; height:21px; position:relative; overflow: hidden; }
+.gkHighlighterWrapper .nowrap { width: 100000px; position: absolute; left: -99999em; }
+.gkHighlighterWrapper .gkHighlighterItem { position: absolute; top:0; width:100%; left:0; }

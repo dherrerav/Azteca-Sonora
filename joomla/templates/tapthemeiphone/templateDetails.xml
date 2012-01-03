@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="1.6" type="template" client="site">
+  <name>tapthemeiphone</name>
+  <version>1.6.2</version>
+  <creationDate>06/08/2011</creationDate>
+  <author>TapTheme</author>
+  <authorEmail>support@taptheme.com</authorEmail>
+  <authorUrl>http://taptheme.com</authorUrl>
+  <copyright>Copyright 2010 - 2011 Pixel Praise LLC. All rights reserved.</copyright>
+  <description>TPL_TAPTHEMEIPHONE_XML_DESCRIPTION</description>
+  <files>
+    <filename>component.php</filename>
+    <filename>favicon.ico</filename>
+    <filename>helper.php</filename>
+    <filename>index.php</filename>
+    <filename>templateDetails.xml</filename>
+    <filename>template_preview.png</filename>
+    <filename>template_thumbnail.png</filename>
+	
+	<folder>css</folder>
+	<folder>html</folder>
+	<folder>images</folder>
+	<folder>language</folder>
+
+  </files>
+  
+  <languages folder="language">
+  	<language tag="en-GB">en-GB/en-GB.tpl_tapthemeiphone.ini</language>
+  	<language tag="en-GB">en-GB/en-GB.tpl_tapthemeiphone.sys.ini</language>
+  </languages>
+  
+  <positions>
+    <position>mobile-1</position>
+    <position>mobile-2</position>
+    <position>mobile-3</position>
+    <position>mobile-4</position>
+    <position>mobile-5</position>
+    <position>mobile-6</position>
+    <position>mobile-7</position>
+    <position>mobile-8</position>
+    <position>mobile-9</position>
+    <position>mobile-10</position>
+    <position>mobile-dropdown</position>
+    <position>debug</position>
+  </positions>
+  
+  <config>
+  	<fields name="params">
+  		<fieldset name="advanced">
+		   <field name="templateTheme" type="list" default="theme1" label="TPL_TEMPLATE_THEME" description="TPL_THEME_DESC">
+		      <option value="theme1">TPL_Default_iPhone_Theme</option>
+		      <option value="theme2">TPL_Notepad</option>
+		      <option value="theme3">TPL_Book</option>
+		      <option value="theme4">TPL_Chalkboard</option>
+		      <option value="theme5">TPL_Dark_App</option>
+		      <option value="theme6">TPL_Teal</option>
+		      <option value="theme7">TPL_Blue</option>
+		      <option value="theme8">TPL_Purple</option>
+		      <option value="theme9">TPL_Pink</option>
+		      <option value="theme10">TPL_Red</option>
+		      <option value="theme11">TPL_Maroon</option>
+		      <option value="theme12">TPL_Orange</option>
+		      <option value="theme13">TPL_Yellow</option>
+		      <option value="theme14">TPL_Olive</option>
+		      <option value="theme15">TPL_Green</option>
+		      <option value="theme16">TPL_Brown</option>
+		      <option value="theme17">TPL_Black</option>
+		    </field>
+		    <field name="themeColor" type="text" default="" label="TPL_THEME_COLOR" description="TPL_HEX_DESC" />
+		    <field name="controlPanel" type="radio" default="0" label="TPL_HOMEPAGE_CONTROL_PANEL" description="TPL_CPANEL_DESC">
+		    	<option value="1">On</option>			
+		    	<option value="0">Off</option>
+		    </field>
+		    <field name="defaultButton" type="radio" default="1" label="TPL_DEFAULT_TEMPLATE_OPTION" description="TPL_DEFAULT_DESC">
+		    	<option value="1">On</option>			
+		    	<option value="0">Off</option>
+		    </field>
+			<field name="fontColor" type="text" default="" label="TPL_FONT_COLOR" description="TPL_HEX_DESC" />
+			<field name="linkColor" type="text" default="" label="TPL_LINK_COLOR" description="TPL_HEX_DESC" />
+		    <field name="headingColor" type="text" default="" label="TPL_HEADING_COLOR" description="TPL_HEX_DESC" />
+  		</fieldset>
+  	</fields>
+  </config>
+  
+</extension>

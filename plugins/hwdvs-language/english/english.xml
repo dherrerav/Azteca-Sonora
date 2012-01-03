@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="hwdvs-language" method="upgrade">
+    <name>English Language</name>
+    <creationDate>2011-07-01</creationDate>
+    <author>Highwood Design</author>
+    <copyright>(C) 2007 - 2009 Highwood Design</copyright>
+    <authorEmail>info@highwooddesign.co.uk</authorEmail>
+    <authorUrl>http://hwdmediashare.co.uk</authorUrl>
+    <version>[ Kronig ]</version>
+    <description>Adds British-English language support to hwdVideoShare</description>
+    
+    <!-- Plugin Language File Copy Section -->
+    <files>
+        <filename plugin="english">english.be.php</filename>
+        <filename plugin="english">english.fe.php</filename>
+        <filename plugin="english">english.plugs.php</filename>
+        <filename plugin="english">english.settings.php</filename>
+    </files>
+    
+    <!-- Administration Language File Copy Section -->
+    <languages>
+        <language tag="en-GB">en-GB.com_hwdvideoshare.ini</language>
+        <language tag="en-GB">en-GB.com_hwdvideoshare.menu.ini</language>
+    </languages>
+
+</install>
+

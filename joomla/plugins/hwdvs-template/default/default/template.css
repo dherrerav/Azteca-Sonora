@@ -1,0 +1,442 @@
+/*****************************/
+
+#hwdvids {
+	width: 100%!important;
+	max-width: 100%!important;
+	text-align: left;
+	overflow: hidden!important;
+	font-size: 100%;
+	padding-top: 5px;
+}
+
+#hwdvids form {
+	margin: 0!important;
+	padding: 0!important;
+}
+
+#hwdvids img {
+	border: 0px;
+}
+
+#hwdvids a:hover,#hwdvids a:active,#hwdvids a:focus {
+        background-color: transparent!important;
+}
+
+/*****************************/
+
+.rounded_input  {
+	float:right;
+	padding-right: 10px;
+	height: 28px;
+}
+
+.rounded_input div.contain {
+	background-position:0 -181px;
+	float:left;
+	height:28px;
+	width:173px;
+}
+
+.rounded_input div.contain input.field {
+	background:transparent none repeat scroll 0 0;
+	color:#969696;
+	font-family:arial,sans-serif;
+	font-size:12px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;
+	margin:3px 0 0 7px;
+	padding:3px 0 0 3px;
+	width:135px;
+}
+
+.rounded_input div.contain input {
+	background:#FFFFFF none repeat scroll 0 0;
+	border:0 none;
+	float:left;
+	height:18px;
+}
+
+input, textarea, select {
+	outline-style:none;
+	outline-width:0;
+}
+
+.rounded_input div.contain input.button {
+	background:transparent none repeat scroll 0 0!important;
+	cursor:pointer;
+	height:28px;
+	margin-top:0;
+	padding:0;
+	width:24px;
+}		
+
+/*****************************/
+
+#hwdvs_navcontainer
+{
+	margin: 0;
+	padding: 0;
+	height: 35px!important;
+	overflow:hidden;
+	vertical-align:top;
+	float: left;
+}
+
+#hwdvs_navcontainer ul
+{
+	margin: 0!important;
+	padding: 0!important;
+	height: 35px!important;
+}
+
+#hwdvs_navcontainer ul li 
+{
+	list-style-type: none;
+}	
+
+
+#hwdvs_navcontainer ul li
+{
+	float: left;
+	text-align: center;
+	font-size: 14px;
+	line-height: 28px!important;
+	margin: 0!important;
+	padding: 0 2px 0 0px!important;
+	width: 100px;
+	height: 35px!important;
+}
+
+#hwdvs_navcontainer ul li a
+{
+	width: 100px;
+	margin: 0!important;
+	padding: 0!important;
+}
+
+#hwdvs_navcontainer ul li a:link    { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0; background-color:transparent;}
+#hwdvs_navcontainer ul li a:active  { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0; background-color:transparent;}
+#hwdvs_navcontainer ul li a:visited { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0; background-color:transparent;}
+#hwdvs_navcontainer ul li a:hover   { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0; background-color:transparent;}
+
+#hwdvs_navcontainer li#active
+{
+}
+
+#hwdvs_navcontainer li#active a:link    { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0;}
+#hwdvs_navcontainer li#active a:active  { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0;}
+#hwdvs_navcontainer li#active a:visited { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0;}
+#hwdvs_navcontainer li#active a:hover   { color: #171d25; font-weight: bold; text-decoration: none; padding: 0; margin: 0;}
+
+/*****************************/
+
+#hwdvs_searchbar {
+	float:right;
+}
+
+#hwdvs_searchbar form {
+	margin: 0!important;
+	padding: 0!important;
+}
+
+#hwdvs_searchbar div {
+	margin: 0;
+	padding: 0;
+}
+
+/*****************************/
+
+#hwdvids .sic-container {
+	width:100%;
+	margin:0!important;
+	padding:0!important;
+}
+
+#hwdvids .sic-right {
+	width:34%;
+	float:right;
+	padding-left:0px;
+}
+
+#hwdvids .sic-left {
+	width:34%;
+	float:left;
+	padding-right:5px;
+}
+
+#hwdvids .sic-center {
+	width:65%;
+	float:left;
+}
+
+#hwdvids .box {
+	padding: 5px;
+        width: auto!important;
+}
+
+#hwdvids .scoller {
+	max-height:220px;
+	overflow-y:auto;
+	/*ie fix*/
+	position:relative;
+}
+
+/*****************************/
+
+#hwdvids .usernav {
+	margin: 0pt auto;
+	padding: 5px;
+	background-color: #eaeaea;
+	margin-bottom: 5px;
+	border:1px solid #e7e7e7;
+	text-align: center;
+	font-weight: bold;
+}
+#hwdvids .usernav a:link    { color: #000000; }
+#hwdvids .usernav a:active  { color: #000000; }
+#hwdvids .usernav a:visited { color: #000000; }
+#hwdvids .usernav a:hover   { color: #000000; }
+
+/*****************************/
+
+#hwdvids .footer {
+	margin: 0pt auto;
+	padding: 5px;
+	background-color: #eaeaea;
+	margin-bottom: 5px;
+	border:1px solid #adadad;
+	text-align: center;
+	font-size: 85%;
+	font-weight: bold;
+}
+
+#hwdvids .footer a:link    { font-weight: bold; text-decoration: none; font-size: 100%; }
+#hwdvids .footer a:active  { font-weight: bold; text-decoration: none; font-size: 100%; }
+#hwdvids .footer a:visited { font-weight: bold; text-decoration: none; font-size: 100%; }
+#hwdvids .footer a:hover   { font-weight: bold; text-decoration: none; font-size: 100%; }
+
+/*****************************/
+
+#hwdvids .thumb0, #hwdvids .thumb1, #hwdvids .featuredthumbs {
+	border: 1px solid #ccc;
+	padding: 1px!important;
+	margin: 0!important;
+	display: inline!important;
+}
+
+#hwdvids .listThumbnail
+{
+	padding: 0 3px 3px 0;
+}
+
+/*****************************/
+
+#hwdvids .standard {
+	border:1px solid #ccc;
+	margin-bottom:10px;
+}
+
+#hwdvids .standard .padding {
+	padding: 5px!important;
+	margin: 0;
+}
+
+#hwdvids .standard td{
+	padding: 5px!important;
+	margin: 0;
+}
+
+/*****************************/
+
+#hwdvids .required {
+	color: #ff0000;
+}
+
+/*****************************/
+
+#hwdvids h2 {
+	background: #d5d5d5;
+	text-align: left;
+	font-size: 150%;
+	margin: 1px;
+	padding: 5px;
+	line-height: 100%;
+	width: auto;
+}
+
+#hwdvids h3 {
+	background: #d5d5d5;
+	text-align: left;
+	font-size: 150%;
+	margin: 1px;
+	padding: 5px;
+	line-height: 100%;
+	width: auto;
+}
+
+/*****************************/
+
+#hwdvids .sblinks {
+	padding: 1px;
+	margin: 1px;
+	border: 1px solid #d3d3d3;
+}
+
+#hwdvids .addremfav {
+}
+
+#hwdvids .add2gselect {
+	width: 120px;
+}
+
+/*****************************/
+
+#hwdadverts-nopadding {
+	width:100%;
+	overflow:hidden;
+	text-align:center;
+}
+
+#hwdadverts-padding {
+	width:100%;
+	overflow:hidden;
+	text-align:center;
+	padding: 10px 0;
+}
+
+/*****************************/
+
+/* The class for the thumbnail image on the video edit page */
+#hwdvids .edit-videopreview {
+	padding: 5px;
+	margin: 5px;
+	text-align: center;
+	border: 1px dashed #ffffff;
+}
+
+/* The class for the ajax conformation after successful flash upload */
+#hwdvids .flashconfirm {
+	color:#00CC00
+}
+
+/* The class (generally) used for any ajax response */
+#hwdvids .ajaxresponse {
+	visibility: hidden
+}
+
+/* The class used for the 'add to group' ajax response */
+#hwdvids .add2groupresponse {
+}
+
+/* The class used for the avatar display (in lists) */
+#hwdvids .avatar
+{
+	float: right;
+	padding: 0 5px 5px 5px;
+}
+
+/*****************************/
+
+#hwdvids .tabberlive .tabbertabhide { display:none; }
+
+#hwdvids .tabberlive { margin-top:1em; }
+
+#hwdvids ul.tabbernav
+{
+	padding: 0!important;
+	margin: 0!important;	
+	right: 0;
+	font-size: 125%;
+}
+
+#hwdvids ul.tabbernav li
+{
+	margin: 0!important;
+	padding: 0!important;
+	display: inline;
+}
+
+#hwdvids ul.tabbernav li a
+{
+	padding: 3px 5px;
+	margin-left: 3px;
+	text-decoration: none;
+}
+
+#hwdvids ul.tabbernav li a:link { /* color: #000; */ }
+
+#hwdvids ul.tabbernav li a:visited { /* color: #000; */ }
+
+#hwdvids ul.tabbernav li a:hover { /* color: #000; */ }
+
+#hwdvids ul.tabbernav li.tabberactive a { font-weight: bold; }
+
+#hwdvids ul.tabbernav li.tabberactive a:hover { font-weight: bold; }
+
+#hwdvids .tabberlive .tabbertab {
+	padding:5px 0 0 0;
+}
+
+#hwdvids .tabberlive .tabbertab h2 {
+	display:none;
+}
+
+#hwdvids .tabberlive .tabbertab h3 {
+	display:none;
+}
+
+/*****************************/
+
+#hwdvids .watermark_box {
+	position:relative;
+	display:block;
+	width:auto;
+	float:left
+}
+
+#hwdvids .watermark_box img.watermark {
+	position:absolute;
+	top:4px;
+	left:4px;
+} 
+
+#hwdvids .watermark_box span.timestamp {
+	position:absolute;
+	bottom:2px;
+	right:2px;
+	padding:0 2px;
+	line-height:11px;
+	font-size:10px;
+	font-weight:bold;
+	color:#FFF;
+	background-color:#333;
+  	border:1px solid #000;
+  	/* for IE */
+  	filter:alpha(opacity=60);
+  	/* CSS3 standard */
+  	opacity:0.6;
+} 
+
+/*****************************/
+
+#thumbnails_container {
+    padding:4px;
+    overflow-x:auto;
+    white-space: nowrap;
+    width: 1px;
+}
+.thumbnail {
+    margin-right:4px;
+    display: inline-block;
+}
+
+
+#mainmodules .module div div div div {
+	padding: 2px!important;
+}
+		
+#hwdvids td { vertical-align: top!important; }
+
+#button_more, #button_add, #button_embed, #button_save, #button_share, #button_as {cursor:pointer}

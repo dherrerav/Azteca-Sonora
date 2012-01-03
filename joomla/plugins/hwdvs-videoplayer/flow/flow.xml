@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="hwdvs-videoplayer" method="upgrade">
+    <name>Flow Player</name>
+    <creationDate>2011-07-01</creationDate>
+    <author>Highwood Design</author>
+    <copyright>(C) 2007 - 2009 Highwood Design</copyright>
+    <authorEmail>info@highwooddesign.co.uk</authorEmail>
+    <authorUrl>http://hwdmediashare.co.uk</authorUrl>
+    <version>[ Kronig ]</version>
+    <description>Adds Flow Player support to hwdVideoShare</description>
+    <files>
+	<folder>flow/</folder>
+        <filename plugin="flow">flow.view.php</filename>
+    </files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+                                <field name="version" type="list"
+					description=""
+					label="Version"
+                                        default="0"
+				>
+                                        <option value="0">Latest</option>
+				</field>
+
+                                <field type="spacer" />
+
+                                <field name="accelerated" type="list"
+					description="Flag indicating whether Flash 9 (and above) hardware-accelerated full screen mode should be used."
+					label="Accelerated"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No (default)</option>
+				</field>
+
+                                <field name="autoBuffering" type="list"
+					description="Flag indicating whether loading of clip into player's memory should begin straight away. When this is true and autoPlay is false then the clip will automatically stop at first frame of the video."
+					label="Auto Buffering"
+                                        default="1"
+				>
+                                        <option value="1">Yes (default)</option>
+                                        <option value="0">No</option>
+				</field>
+
+                                <field name="autoPlay" type="list"
+					description="Flag indicating whether the player should start playback immediately upon loading."
+					label="Auto Play"
+                                        default="1"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No (default)</option>
+				</field>
+
+                                <field name="repeat" type="list"
+					description="Repeat the video playback."
+					label="Repeat Playback"
+                                        default="0"
+				>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No (default)</option>
+				</field>
+
+                                <field name="bufferLength" type="list"
+					description="The amount of video data (in seconds) which should be loaded into Flowplayer's memory in advance of playback commencing."
+					label="Buffer Length"
+                                        default="3"
+				>
+                                        <option value="1">1 Sec</option>
+                                        <option value="2">2 Sec</option>
+                                        <option value="3">3 Sec (default)</option>
+                                        <option value="4">4 Sec</option>
+                                        <option value="5">5 Sec</option>
+                                        <option value="6">6 Sec</option>
+                                        <option value="7">7 Sec</option>
+                                        <option value="8">8 Sec</option>
+                                        <option value="9">9 Sec</option>
+                                        <option value="10">10 Sec</option>
+                                        <option value="11">11 Sec</option>
+                                        <option value="12">12 Sec</option>
+                                        <option value="13">13 Sec</option>
+                                        <option value="14">14 Sec</option>
+                                        <option value="15">15 Sec</option>
+                                        <option value="16">16 Sec</option>
+                                        <option value="17">17 Sec</option>
+                                        <option value="18">18 Sec</option>
+                                        <option value="19">19 Sec</option>
+                                        <option value="20">20 Sec</option>
+				</field>
+
+				<field name="linkUrl" type="text"
+					description="Link to an external site."
+					label="External Link"
+					size="20"
+				/>
+
+                                <field name="scaling" type="list"
+					description="Setting which defines how video is scaled on the video screen."
+					label="Scaling"
+                                        default="0"
+				>
+                                        <option value="0">Scale (default)</option>
+                                        <option value="1">Fit</option>
+                                        <option value="2">Half</option>
+                                        <option value="3">Original</option>
+				</field>
+
+                                <field name="pseudostreaming" type="list"
+					description="The biggest advantage of using pseudostreaming or any other streaming solution is the ability to seek in the timeline to positions that have not been downloaded yet to the player. This is most desirable for full-length movies because the visitor can seek to the last scene of a 2-hour movie if she wants to."
+					label="Allow Pseudostreaming"
+                                        default="0"
+				>
+                                        <option value="0">No (default)</option>
+                                        <option value="1">Yes</option>
+				</field>
+
+				<field name="start" type="text"
+					description="Position in seconds where the playback should start. Only used when streaming."
+					label="Start Time"
+					size="20"
+				/>
+
+                                <field type="spacer" />
+
+                                <field name="captions" type="list"
+					description="Display captions in the video player"
+					label="Enable Captions"
+                                        default="0"
+				>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+				</field>
+
+                                <field type="spacer" />
+
+				<field name="commercialVersion" type="text"
+					description="Enter the version of the commercial version you are using, so that the software can load the correct file (example: 3.2.2)."
+					label="Commercial Version"
+					size="20"
+				/>
+
+				<field name="key" type="text"
+					description="Commercial features require a product key."
+					label="Commercial Key"
+					size="20"
+				/>
+
+				<field name="logo" type="text"
+					description="Location of a logo image."
+					label="Logo"
+					size="20"
+				/>
+
+				<field name="logo_top" type="text"
+					description="Location of a logo image."
+					label="Top Padding (Logo)"
+					size="20"
+				/>
+
+				<field name="logo_right" type="text"
+					description="Location of a logo image."
+					label="Right Padding (Logo)"
+					size="20"
+				/>
+
+                                <field name="logo_opacity" type="list"
+					description=""
+					label="Opacity (Logo)"
+                                        default="0.4"
+				>
+                                        <option value="0.1">0.1</option>
+                                        <option value="0.2">0.2</option>
+                                        <option value="0.3">0.3</option>
+                                        <option value="0.4">0.4</option>
+                                        <option value="0.5">0.5</option>
+                                        <option value="0.6">0.6</option>
+                                        <option value="0.7">0.7</option>
+                                        <option value="0.8">0.8</option>
+                                        <option value="0.9">0.9</option>
+                                        <option value="1.0">1.0</option>
+				</field>
+
+                                <field name="logo_fullScreenOnly" type="list"
+					description="If set to false, then the logo is also shown in non-fullscreen mode."
+					label="Fullscreen Only (Logo)"
+                                        default="false"
+				>
+                                        <option value="true">true</option>
+                                        <option value="false">false</option>
+				</field>
+
+				<field name="logo_displayTime" type="text"
+					description="Time to display logo (in seconds). (0 = show forever)"
+					label="Display Time (Logo)"
+					size="20"
+                                        default="0"
+				/>
+
+				<field name="logo_fadeSpeed" type="text"
+					description="Specifies the time (milliseconds) it will take for the logo to fade out."
+					label="Fade Speed (Logo)"
+					size="20"
+                                        default="0"
+				/>
+
+                                <field type="spacer" />
+
+				<field name="backgroundColor" type="text"
+					description=""
+					label="backgroundColor"
+					size="20"
+                                        default="#222222"
+				/>
+
+				<field name="durationColor" type="text"
+					description=""
+					label="durationColor"
+					size="20"
+                                        default="#ffffff"
+				/>
+
+				<field name="volumeSliderColor" type="text"
+					description=""
+					label="volumeSliderColor"
+					size="20"
+                                        default="#000000"
+				/>
+
+				<field name="bufferColor" type="text"
+					description=""
+					label="bufferColor"
+					size="20"
+                                        default="#445566"
+				/>
+
+				<field name="buttonOverColor" type="text"
+					description=""
+					label="buttonOverColor"
+					size="20"
+                                        default="#728B94"
+				/>
+
+				<field name="sliderColor" type="text"
+					description=""
+					label="sliderColor"
+					size="20"
+                                        default="#000000"
+				/>
+
+				<field name="progressColor" type="text"
+					description=""
+					label="progressColor"
+					size="20"
+                                        default="#112233"
+				/>
+
+				<field name="volumeSliderGradient" type="text"
+					description=""
+					label="volumeSliderGradient"
+					size="20"
+                                        default="none"
+				/>
+
+				<field name="backgroundGradient" type="text"
+					description=""
+					label="backgroundGradient"
+					size="20"
+                                        default="[0.6,0.3,0,0,0]"
+				/>
+
+				<field name="borderRadius" type="text"
+					description=""
+					label="borderRadius"
+					size="20"
+                                        default="0px"
+				/>
+
+				<field name="buttonColor" type="text"
+					description=""
+					label="buttonColor"
+					size="20"
+                                        default="#5F747C"
+				/>
+
+				<field name="tooltipTextColor" type="text"
+					description=""
+					label="tooltipTextColor"
+					size="20"
+                                        default="#ffffff"
+				/>
+
+				<field name="sliderGradient" type="text"
+					description=""
+					label="sliderGradient"
+					size="20"
+                                        default="none"
+				/>
+
+				<field name="timeColor" type="text"
+					description=""
+					label="timeColor"
+					size="20"
+                                        default="#01DAFF"
+				/>
+
+				<field name="progressGradient" type="text"
+					description=""
+					label="progressGradient"
+					size="20"
+                                        default="medium"
+				/>
+
+				<field name="timeBgColor" type="text"
+					description=""
+					label="timeBgColor"
+					size="20"
+                                        default="#555555"
+				/>
+
+				<field name="tooltipColor" type="text"
+					description=""
+					label="tooltipColor"
+					size="20"
+                                        default="#5F747C"
+				/>
+
+				<field name="bufferGradient" type="text"
+					description=""
+					label="bufferGradient"
+					size="20"
+                                        default="none"
+				/>
+
+				<field name="cbheight" type="text"
+					description=""
+					label="height"
+					size="20"
+                                        default="24"
+				/>
+
+				<field name="opacity" type="text"
+					description=""
+					label="opacity"
+					size="20"
+                                        default="1.0"
+				/>   
+			</fieldset>
+		</fields>
+	</config>
+    <params>
+        <param name="version" type="list" default="3" label="Version" description="">
+            <option value="0">Latest</option>
+        </param>
+
+ 	<param name="" type="spacer" />
+
+        <param name="accelerated" type="list" default="0" label="Accelerated" description="Flag indicating whether Flash 9 (and above) hardware-accelerated full screen mode should be used.">
+            <option value="1">Yes</option>
+            <option value="0">No (default)</option>
+        </param>
+        <param name="autoBuffering" type="list" default="1" label="Auto Buffering" description="Flag indicating whether loading of clip into player's memory should begin straight away. When this is true and autoPlay is false then the clip will automatically stop at first frame of the video.">
+            <option value="1">Yes (default)</option>
+            <option value="0">No</option>
+        </param>        
+        <param name="autoPlay" type="list" default="0" label="Auto Play" description="Flag indicating whether the player should start playback immediately upon loading.">
+            <option value="1">Yes</option>
+            <option value="0">No (default)</option>
+        </param>  
+        <param name="repeat" type="list" default="0" label="Repeat Playback" description="Repeat the video playback.">
+            <option value="1">Yes</option>
+            <option value="0">No (default)</option>
+        </param>  
+        <param name="bufferLength" type="list" default="3" label="Buffer Length" description="The amount of video data (in seconds) which should be loaded into Flowplayer's memory in advance of playback commencing.">
+            <option value="1">1 Sec</option>
+            <option value="2">2 Sec</option>
+            <option value="3">3 Sec (default)</option>
+            <option value="4">4 Sec</option>
+            <option value="5">5 Sec</option>
+            <option value="6">6 Sec</option>
+            <option value="7">7 Sec</option>
+            <option value="8">8 Sec</option>
+            <option value="9">9 Sec</option>
+            <option value="10">10 Sec</option>
+            <option value="11">11 Sec</option>
+            <option value="12">12 Sec</option>
+            <option value="13">13 Sec</option>
+            <option value="14">14 Sec</option>
+            <option value="15">15 Sec</option>
+            <option value="16">16 Sec</option>
+            <option value="17">17 Sec</option>
+            <option value="18">18 Sec</option>
+            <option value="19">19 Sec</option>
+            <option value="20">20 Sec</option>
+        </param>         
+        <param name="linkUrl" type="text" default="" size="10" label="External Link" description="Link to an external site." />    
+        <param name="scaling" type="list" default="0" label="Scaling" description="Setting which defines how video is scaled on the video screen.">
+            <option value="0">Scale (default)</option>
+            <option value="1">Fit</option>
+            <option value="2">Half</option>
+            <option value="3">Original</option>
+        </param>   
+        <param name="pseudostreaming" type="list" default="0" label="Allow Pseudostreaming" description="The biggest advantage of using pseudostreaming or any other streaming solution is the ability to seek in the timeline to positions that have not been downloaded yet to the player. This is most desirable for full-length movies because the visitor can seek to the last scene of a 2-hour movie if she wants to.">
+            <option value="0">No (default)</option>
+            <option value="1">Yes</option>
+        </param> 
+	<param name="start" type="text" size="10" default="" label="Start Time" description="Position in seconds where the playback should start. Only used when streaming." />
+
+ 	<param name="" type="spacer" />
+ 
+        <param name="captions" type="list" default="0" label="Enable Captions" description="Display captions in the video player">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </param> 
+        
+        <param name="" type="spacer" />
+
+	<param name="commercialVersion" type="text" size="10" default="" label="Commercial Version" description="Enter the version of the commercial version you are using, so that the software can load the correct file (example: 3.2.2)." />
+	<param name="key" type="text" size="10" default="" label="Commercial Key" description="Commercial features require a product key." />
+	<param name="logo" type="text" size="50" default="" label="Logo" description="Location of a logo image." />
+	<param name="logo_top" type="text" size="50" default="20" label="Top Padding (Logo)" description="" />
+	<param name="logo_right" type="text" size="50" default="20" label="Right Padding (Logo)" description="" />
+        <param name="logo_opacity" type="list" default="0.4" label="Opacity (Logo)" description="">
+            <option value="0.1">0.1</option>
+            <option value="0.2">0.2</option>
+            <option value="0.3">0.3</option>
+            <option value="0.4">0.4</option>
+            <option value="0.5">0.5</option>
+            <option value="0.6">0.6</option>
+            <option value="0.7">0.7</option>
+            <option value="0.8">0.8</option>
+            <option value="0.9">0.9</option>
+            <option value="1.0">1.0</option>
+        </param> 	
+        <param name="logo_fullScreenOnly" type="list" default="false" label="Fullscreen Only (Logo)" description="If set to false, then the logo is also shown in non-fullscreen mode.">
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </param>
+	<param name="logo_displayTime" type="text" size="50" default="0" label="Display Time (Logo)" description="Time to display logo (in seconds). (0 = show forever)" />
+	<param name="logo_fadeSpeed" type="text" size="50" default="0" label="Fade Speed (Logo)" description="Specifies the time (milliseconds) it will take for the logo to fade out." />
+
+	<param name="" type="spacer" />
+
+	<param name="backgroundColor"      type="text" size="10" default="#222222"         label="backgroundColor" description="" />
+	<param name="durationColor"        type="text" size="10" default="#ffffff"         label="durationColor" description="" />
+	<param name="volumeSliderColor"    type="text" size="10" default="#000000"         label="volumeSliderColor" description="" />
+	<param name="bufferColor"          type="text" size="10" default="#445566"         label="bufferColor" description="" />
+	<param name="buttonOverColor"      type="text" size="10" default="#728B94"         label="buttonOverColor" description="" />
+	<param name="sliderColor"          type="text" size="10" default="#000000"         label="sliderColor" description="" />
+	<param name="progressColor"        type="text" size="10" default="#112233"         label="progressColor" description="" />
+	<param name="volumeSliderGradient" type="text" size="10" default="none"            label="volumeSliderGradient" description="" />
+	<param name="backgroundGradient"   type="text" size="10" default="[0.6,0.3,0,0,0]" label="backgroundGradient" description="" />
+	<param name="borderRadius"         type="text" size="10" default="0px"             label="borderRadius" description="" />
+	<param name="buttonColor"          type="text" size="10" default="#5F747C"         label="buttonColor" description="" />
+	<param name="tooltipTextColor"     type="text" size="10" default="#ffffff"         label="tooltipTextColor" description="" />
+	<param name="sliderGradient"       type="text" size="10" default="none"            label="sliderGradient" description="" />
+	<param name="timeColor"            type="text" size="10" default="#01DAFF"         label="timeColor" description="" />
+	<param name="progressGradient"     type="text" size="10" default="medium"          label="progressGradient" description="" />
+	<param name="timeBgColor"          type="text" size="10" default="#555555"         label="timeBgColor" description="" />
+	<param name="tooltipColor"         type="text" size="10" default="#5F747C"         label="tooltipColor" description="" />
+	<param name="bufferGradient"       type="text" size="10" default="none"            label="bufferGradient" description="" />
+	<param name="cbheight"             type="text" size="10" default="24"              label="height" description="" />
+	<param name="opacity"              type="text" size="10" default="1.0"             label="opacity" description="" />
+
+    </params>
+</install>

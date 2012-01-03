@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.6.0" client="site" method="upgrade">
+    <name>Udja Comments</name>
+    <creationDate>July 2011</creationDate>
+    <author>Andy Sharman</author>
+    <authorEmail>andy@udjamaflip.com</authorEmail>
+    <authorUrl>http://www.udjamaflip.com</authorUrl>
+    <copyright>Copyright (C) 2011+ Udjamaflip.com</copyright>
+    <license>GNU/GPL2+</license>
+    <version>1.0rc1</version>
+    <description>MOD_UDJACOMMENTS_DESCRIPTION</description>
+
+    <files>
+        <filename module="mod_udjacomments">mod_udjacomments.php</filename>
+        <folder>tmpl</folder>
+        <folder>media</folder>
+        <folder>language</folder>
+        <filename>helper.php</filename>
+        <filename>recaptchalib.php</filename>
+        <filename>index.html</filename>
+        <filename>mod_udjacomments.xml</filename>
+    </files>
+
+    <media destination="mod_udjacomments" folder="media">
+        <filename>index.html</filename>
+        <folder>images</folder>
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field type="spacer" text="true" class="text" label="MOD_UDJACOMMENTS_FIELD_TITLE_COMPONENT_PARAMS" />
+                <field name="use_css" type="radio" default="0" label="MOD_UDJACOMMENTS_FIELD_USECSS_LABEL" description="MOD_UDJACOMMENTS_FIELD_USECSS_DESC">
+                    <option value="1">JYes</option>
+                    <option value="0">JNo</option>
+                </field>
+                <field name="display_backlink" type="radio" default="0" label="MOD_UDJACOMMENTS_FIELD_DISPLAYBACKLINK_LABEL" description="MOD_UDJACOMMENTS_FIELD_DISPLAYBACKLINK_DESC">
+                    <option value="1">JYes</option>
+                    <option value="0">JNo</option>
+                </field>
+            </fieldset>
+            <fieldset name="advanced">
+                <field name="moduleclass_sfx" type="text" default="" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="1.6.0"
+	client="site"
+	method="upgrade">
+	<name>Mega News</name>
+	<author>OmegaTheme.com</author>
+	<creationDate>April 2011</creationDate>
+	<copyright>Copyright (C) 2008 - 2011 OmegaTheme. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>services@omegatheme.com</authorEmail>
+	<authorUrl>http://omegatheme.com</authorUrl>
+	<version>1.6.0</version>
+	<description>MEGA_NEWS_DESC</description>
+	<files>
+		<filename
+			module="mod_meganews">mod_meganews.php</filename>
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>language</folder>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_meganews.xml</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					size="20"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+					
+				<field
+					name="catid"
+					type="category"
+					extension="com_content"
+					multiple="true"
+					size="10"
+					default=""
+					label="JCATEGORY"
+					description="MEGA_NEWS_FIELD_CATEGORY_DESC" >
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+				
+				<field
+					name="column"
+					type="text"
+					size="20"
+					default="2"
+					label="Number of column"
+					description="MEGA_NEWS_NUMBER_OF_COLUMN_DESC" />
+					
+				<field
+					name="count"
+					type="text"
+					size="20"
+					default="5"
+					label="Number of item"
+					description="MEGA_NEWS_NUMBER_OF_ITEM_DESC" />
+					
+				<field name="introtext_limit" 
+					type="text" 
+					size="20"
+					default="250" 
+					label="Introtext Limit " 
+					description="MEGA_NEWS_INTROTEXT_LIMIT_DESC" />
+				
+				<field
+					name="ordering"
+					type="list"
+					default="added"
+					label="Order"
+					description="MEGA_NEWS_FIELD_ORDERING_DESC">
+					<option
+						value="c_dsc">MEGA_NEWS_VALUE_RECENT_ADDED</option>
+					<option
+						value="m_dsc">MEGA_NEWS_VALUE_RECENT_MODIFIED</option>
+					<option
+						value="p_dsc">MEGA_NEWS_VALUE_RECENT_PUBLISHED</option>
+					<option
+						value="h_dsc">MEGA_NEWS_VALUE_RECENT_HITS</option>
+					<option
+						value="mc_dsc">MEGA_NEWS_VALUE_RECENT_TOUCHED</option>
+				</field>
+
+				<field
+					name="user_id"
+					type="list"
+					default="0"
+					label="Authors"
+					description="MEGA_NEWS_FIELD_USER_DESC">
+					<option
+						value="0">MEGA_NEWS_VALUE_ANYONE</option>
+					<option
+						value="by_me">MEGA_NEWS_VALUE_ADDED_BY_ME</option>
+					<option
+						value="not_me">MEGA_NEWS_VALUE_NOTADDED_BY_ME</option>
+				</field>
+
+				<field
+					name="show_featured"
+					type="list"
+					default=""
+					label="Show Featured"
+					description="MEGA_NEWS_FIELD_FEATURED_DESC">
+					<option
+						value="">JSHOW</option>
+					<option
+						value="0">JHIDE</option>
+					<option
+						value="1">MEGA_NEWS_VALUE_ONLY_SHOW_FEATURED</option>
+				</field>
+				
+				<field name="show_category_title" 
+					type="radio" 
+					default="1" 
+					label="Show category title" 
+					description="MEGA_NEWS_SHOW_CATEGORY_TITLE_DESC">
+			    	<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				
+				<field name="enable_category_link" 
+					type="radio" 
+					default="1" 
+					label="Show category link" 
+					description="MEGA_NEWS_SHOW_CATEGORY_LINK_DESC">
+			    	<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				
+				<field name="readmore_head_item" 
+					type="radio" 
+					default="1" 
+					label="Show Readmore" 
+					description="MEGA_NEWS_SHOWS_READMORE_DESC">	
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				
+				<field name="showthumbnails_head_item" 
+					type="radio" 
+					default="1" 
+					label="Show Thumbnails" 
+					description="MEGA_NEWS_SHOW_THUMBNAILS_DESC">	
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				
+				<field name="directory_thumbdefault" 
+					type="text"
+					size="60"
+					default="modules/mod_meganews/images/default.jpg" 
+					label="Path of default thumbnails" 
+					description="MEGA_NEWS_DIRECTORY_THUMBNAILS_DEFAULT_DESC">
+				</field>
+				
+				<field name="enablelinkthumb" 
+					type="radio" 
+					default="1" 
+					label="Enable Link of Thumbnails" 
+					description="MEGA_NEWS_ENABLE_LINK_THUMBNAILS_DESC">	
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				
+				<field name="thumbwidth" 
+					type="text" 
+					size="20"
+					default="130" 
+					label="Thumbnails Widht" 
+					description="MEGA_NEWS_THUMBNAIL_WIDTH_DESC" />
+					
+				<field name="thumbheight" 
+					type ="text"
+					size="20"
+					default="87" 
+					label="Thumbnails Height" 
+					description="MEGA_NEWS_THUMBNAIL_HEIGHT_DESC" />
+					
+			</fieldset>
+		</fields>
+	</config>
+</extension>

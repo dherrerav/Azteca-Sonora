@@ -1,0 +1,281 @@
+/**
+ * SEF module for Joomla!
+ *
+ * @author      $Author: shumisha $
+ * @copyright   Yannick Gaultier - 2007-2011
+ * @package     sh404SEF-16
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @version     $Id: cp.css 2050 2011-06-30 13:52:38Z silianacom-svn $
+ */
+#sbox-btn-close {
+	display: none;
+}
+
+#sbox-window.sh404sef-popup {
+	background-color: grey;
+}
+
+#sbox-overlay.sh404sef-popup {
+	background-color: grey;
+}
+
+.icon-48-sh404sef {
+	background-image: url(../images/icon-48-sh404sef-logo.png);
+}
+
+.icon-48-save {
+	background-image: url(../images/icon-48-save.png);
+}
+
+dt#config span {
+	color: #0B55C4;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+dt#management span {
+	color: #0B55C4;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+dt#analytics span {
+	color: #0B55C4;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+dt#qcontrol span {
+	color: #0B55C4;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+dt#security span {
+	color: #0B55C4;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+dt#infos span {
+	color: #0B55C4;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+dt#stats span {
+	color: #0B55C4;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+div.largertext {
+	display: inline;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.shlargerkey {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+table.qcontrol {
+	border-collapse: collapse;
+	padding: 0;
+	margin: 0;
+}
+
+table.qcontrol td {
+	padding: 1px 1px 1px 1px;
+	color: #666;
+}
+
+table.qcontrol table.adminlist tbody tr td {
+	background: #f4f4f4;
+	border: none;
+}
+
+table.qcontrol thead td {
+	background: #ffffff;
+	border: none;
+}
+
+table.qcontrol td.spacer {
+	width: 10px;
+}
+
+table.qcontrol td.divider {
+	border-right: 1px solid #e0e0e0;
+	width: 5px;
+}
+
+table.qcontrol span {
+	float: none;
+	width: 80px;
+	height: 32px;
+	margin: 0 auto;
+	display: block;
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+table.qcontrol td.qbutton {
+	text-align: center;
+	margin: auto;
+}
+
+table.qcontrol td.qbutton span {
+	height: 48px;
+}
+
+table.qcontrol a {
+	display: block;
+	white-space: nowrap;
+	border: 1px solid #fbfbfb;
+	padding: 1px 5px;
+	cursor: pointer;
+}
+
+table.qcontrol a:hover {
+	border-left: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	text-decoration: none;
+	color: #0B55C4;
+}
+
+table.qcontrol input.inputbox,table.qcontrol textarea.inputbox,table.qcontrol select.inputbox,table.qcontrol img.inputbox,table.qcontrol button.inputbox
+	{
+	float: left;
+	clear: none;
+	min-width: 0px;
+	margin: 5px 5px 5px 0px;
+}
+
+table.qcontrol table.adminlist label {
+	float: left;
+	clear: none;
+	min-width: 0px;
+	margin: 5px 10px 5px 0px;
+}
+
+div.sh404sef-toolbar-title {
+	font-size: 22px;
+	font-weight: bold;
+	color: #0B55C4;
+	line-height: 48px;
+	padding-left: 135px;
+	background-repeat: no-repeat;
+	margin-left: 10px;
+}
+
+.sh-ajax-loading {
+	background-image: url(../images/sh-ajax-loader-wide.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 160px;
+}
+
+.cp-block {
+	float: left;
+}
+
+#left.cp-block {
+	width: 55%;
+}
+
+#right.cp-block {
+	float: right;
+	width: 44%;
+}
+
+#right-top {
+	width: 60%;
+}
+
+div.cp-icons-config {
+	float: left;
+	width: 50%;
+}
+
+div.cp-icons-others {
+	float: left;
+	width: 50%;
+}
+
+#cpanel div.iconconfig {
+	text-align: center;
+	margin-right: 5px;
+	float: left;
+	margin-bottom: 5px;
+}
+
+#cpanel div.iconconfig a {
+	display: block;
+	float: left;
+	border: 1px solid #e0e0e0;
+	height: 97px;
+	width: 108px;
+	color: green;
+	vertical-align: middle;
+	text-decoration: none;
+}
+
+#cpanel div.iconconfig a:hover {
+	border-left: 1px solid #eee;
+	border-top: 1px solid #eee;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background: #f9f9f9;
+	color: #0B55C4;
+}
+
+#cpanel div.iconothers {
+	text-align: center;
+	margin-right: 5px;
+	float: left;
+	margin-bottom: 5px;
+}
+
+#cpanel div.iconothers img,#cpanel div.iconconfig img {
+	float: none;
+}
+
+#cpanel div.iconothers a {
+	display: block;
+	float: left;
+	border: 1px solid #e0e0e0;
+	height: 97px;
+	width: 108px;
+	/*color: #666; */
+	color: blue;
+	vertical-align: middle;
+	text-decoration: none;
+}
+
+#cpanel div.iconothers a:hover {
+	border-left: 1px solid #eee;
+	border-top: 1px solid #eee;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background: #f9f9f9;
+	color: #0B55C4;
+}
+
+#sh404sef-analytics-wrapper {
+	min-width: 300px;
+}
+
+.analytics-report-image img {
+	display: block;
+	margin: 0 auto;
+}
+
+div.hasAnalyticsTip {
+	display: inline;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: auto;
+}

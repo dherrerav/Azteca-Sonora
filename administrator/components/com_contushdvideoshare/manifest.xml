@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.6" method="upgrade">
+    <name>Contus HDVideoShare</name>
+    <version>1.3</version>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <copyright>Contus Support 2011</copyright>
+    <creationDate>March 24 2011</creationDate>
+    <author>Contus Support Interactive</author>
+    <authorEmail>support@hdvideoshare.net</authorEmail>
+    <authorUrl>http://www.contussupport.com</authorUrl>
+     <!-- Frontend files -->
+    <files folder="site">
+        <filename>contushdvideoshare.php</filename>
+        <filename>controller.php</filename>
+        <filename>router.php</filename>
+        <filename>index.html</filename>
+        <folder>css/</folder>
+        <folder>hdflvplayer/</folder>
+        <folder>images/</folder>
+        <folder>js/</folder>
+        <folder>models/</folder>
+        <folder>views/</folder>
+        <folder>language/</folder>
+    </files>
+    <!-- Backend files -->
+    <administration>
+        <menu img="components/com_contushdvideoshare/assets/hdvideoshare.png" link="option=com_contushdvideoshare&amp;layout=adminvideos&amp;actype=adminvideos">ContusHDVideoShare</menu>
+        <submenu>
+            <menu img="components/com_contushdvideoshare/assets/membervideos.png" link="option=com_contushdvideoshare&amp;layout=adminvideos">Member Videos</menu>
+            <menu img="components/com_contushdvideoshare/assets/memberdetails.png" link="option=com_contushdvideoshare&amp;layout=memberdetails">Member details</menu>
+            <menu img="components/com_contushdvideoshare/assets/adminvideos.png" link="option=com_contushdvideoshare&amp;layout=adminvideos&amp;actype=adminvideos">Admin Videos</menu>
+            <menu img="components/com_contushdvideoshare/assets/categories.png" link="option=com_contushdvideoshare&amp;layout=category">Category</menu>
+            <menu img="components/com_contushdvideoshare/assets/playersetting.png" link="option=com_contushdvideoshare&amp;layout=settings">Player settings</menu>
+            <menu img="components/com_contushdvideoshare/assets/generalsettings.png" link="option=com_contushdvideoshare&amp;layout=sitesettings">Site settings</menu>
+            <menu img="components/com_contushdvideoshare/assets/googlebookmark.png" link="option=com_contushdvideoshare&amp;layout=googlead">Google AdSense</menu>
+            <menu img="components/com_contushdvideoshare/assets/converter.png" link="option=com_contushdvideoshare&amp;layout=ads">Ads</menu>
+        </submenu>
+        <files folder="admin">
+            <filename>admin.contushdvideoshare.php</filename>
+            <filename>upload.php</filename>
+            <filename>upload_script.js</filename>
+            <filename>index.html</filename>
+            <folder>controllers/</folder>
+            <folder>css/</folder>
+            <folder>models/</folder>
+            <folder>views/</folder>
+            <folder>tables/</folder>
+            <folder>images/</folder>
+            <folder>assets/</folder>
+            <folder>js/</folder>
+        </files>
+        <files folder="i18n">
+            <filename>assets/en-GB.welcome.html</filename>
+        </files>
+    </administration>
+    <installfile>hdvideoshareinstall.php</installfile>
+    <uninstallfile>hdvideoshareuninstall.php</uninstallfile>
+</extension>

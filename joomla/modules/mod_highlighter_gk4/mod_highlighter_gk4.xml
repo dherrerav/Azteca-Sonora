@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension type="module" version="1.6.0">
+
+        <name>mod_highlighter_gk4</name>
+
+        <creationDate>06/06/2011</creationDate>
+
+        <author>Gavick.com</author>
+
+        <copyright>(C) 2008-2011 Gavick.com</copyright>
+
+        <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+
+        <authorEmail>info@gavick.com</authorEmail>
+
+        <authorUrl>www.gavick.com</authorUrl>
+
+        <version>GK4 1.5</version>
+
+        <description><![CDATA[
+
+        	<style type="text/css">
+
+        	span.readonly { padding: 10px; font-family: Arial; font-size:13px !important; font-weight: normal !important; text-align: justify; color: #4d4d4d; line-height: 24px; }
+
+        	span.readonly h1 { clear:both; font-family: Georgia, sans-serif; font-size:38px; margin:30px 20px 23px; padding:0px 0px 24px 10px; color:#333; border-bottom: 1px solid #eee; font-weight: normal; }
+
+        	span.readonly p { margin: 0 26px 10px }
+
+        	#gk_about_us a,
+
+        	span.readonly p a { color: #6c7d0a }
+
+        	span.readonly p.homepage { margin-top: 30px }
+
+        	span.readonly p.license { border-top: 1px solid #eee; font-size: 11px; margin: 30px 26px 0; padding: 6px 0; }
+
+        	</style>
+
+        	<span class="readonly"><h1>Highlighter GK4<small>ver. 1.5</small></h1><p>GK4 is new generation of our extensions dedicated to Joomla! 1.6.</p><p>Highlighter GK4 is news rotator which allows to present chosen articles headers in an attractive way. Thanks to multiple options, users may adjust it to their needs. Additionally, Highlighter GK4 can be integrated with any source of information.</p> <p class='homepage'><a href='http://tools.gavick.com/highlighter.html' target='_blank'>Learn more at the Highlighter GK4 project website.</a></p><p class='license'>Weather GK4 is released under the <a target="_blank" href="http://www.gnu.org/licenses/gpl-2.0.html">GNU/GPL v2 license.</a></p></span>
+
+        ]]></description>
+
+		
+
+		<languages>
+
+   			<language tag="en-GB">language/en-GB.mod_highlighter_gk4.ini</language>
+
+		</languages>  
+
+		
+
+        <files>
+
+            <filename module="mod_highlighter_gk4">mod_highlighter_gk4.php</filename>
+
+            <filename module="mod_highlighter_gk4">helper.php</filename>
+
+            <filename module="mod_highlighter_gk4">index.html</filename>
+
+      		<folder>admin/</folder>
+
+			<folder>xml/</folder>	
+
+			<folder>gk_classes/</folder>           
+
+			<folder>tmpl/</folder>
+
+			<folder>interface/</folder>
+
+        </files>
+
+        <config>
+
+			<fields name="params">
+
+			
+
+			<fieldset name="MOD_HIGHLIGHT_GK4_BASIC_SETTINGS" addfieldpath="/modules/mod_highlighter_gk4/admin/elements">
+
+		  		<field type="asset" path="modules/mod_highlighter_gk4/admin/" />
+
+		  		
+
+		        <field name="moduleclass_sfx" type="text" default="" label="MOD_HIGHLIGHTER_GK4_MODCLASSSUFFIX" description="MOD_HIGHLIGHTER_GK4_MODCLASSSUFFIX_DESC" />
+
+	         	<field name="automatic_module_id" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_AUTOMATIC_MODULE_ID" description="MOD_HIGHLIGHTER_GK4_AUTOMATIC_MODULE_ID_DESC">
+
+	                    <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+	                    <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+	            </field>
+
+		        
+
+		        <field name="module_unique_id" type="text" default="newshighlighter1" label="MOD_HIGHLIGHTER_GK4_MODID" description="MOD_HIGHLIGHTER_GK4_MODID_DESC" />
+
+	     		<field name="data_source" type="list" default="com_sections" label="MOD_HIGHLIGHTER_GK4_DATA_SOURCE" description="MOD_HIGHLIGHTER_GK4_DATA_SOURCE_DESC">
+
+		            <option value="com_categories">MOD_HIGHLIGHTER_GK4_COM_CONTENT_CATEGORIES</option>
+
+		            <option value="com_articles">MOD_HIGHLIGHTER_GK4_COM_CONTENT_ARTICLES</option>
+
+		            <option value="xmlfile">MOD_HIGHLIGHTER_GK4_XML_FILE</option>
+
+	            </field>
+
+		         
+
+	        	<field name="com_categories" type="category" extension="com_content" default="" multiple="multiple" label="MOD_HIGHLIGHTER_GK4_COM_CATEGORIES" description="MOD_HIGHLIGHTER_GK4_COM_CATEGORIES_DESC" />
+
+	        	
+
+	        	<field name="com_articles" type="text" default="" label="MOD_HIGHLIGHTER_GK4_COM_ARTICLES" size="25" description="MOD_HIGHLIGHTER_GK4_COM_ARTICLES_DESC" />
+
+	        	
+
+	        	<field name="xmlfile" type="text" default="" size="25" label="MOD_HIGHLIGHTER_GK4_XMLFILE" description="MOD_HIGHLIGHTER_GK4_XMLFILE_DESC" />
+
+	        	
+
+	        	<field name="news_amount" type="text" default="10" size="3" label="MOD_HIGHLIGHTER_GK4_NEWS_AMOUNT" description="MOD_HIGHLIGHTER_GK4_NEWS_AMOUNT_DESC" />
+
+	        		        	
+
+	        	<field name="news_sort_value" type="list" default="created" label="MOD_HIGHLIGHTER_GK4_NEWS_SORT_VALUE" description="MOD_HIGHLIGHTER_GK4_NEWS_SORT_VALUE_DESC">
+
+	                        <option value="created">MOD_HIGHLIGHTER_GK4_DATE</option>
+
+	                        <option value="title">MOD_HIGHLIGHTER_GK4_TITLE</option>
+
+							<option value="ordering">MOD_HIGHLIGHTER_GK4_ORDER</option>
+
+	                        <option value="fordering">MOD_HIGHLIGHTER_GK4_FRONTPAGE_ORDER</option>
+
+	                        <option value="random">MOD_HIGHLIGHTER_GK4_RANDOM</option>
+
+	                        <option value="hits">MOD_HIGHLIGHTER_GK4_HITS</option>
+
+	      		</field>
+
+	                
+
+	            <field name="news_sort_order" type="list" default="DESC" label="MOD_HIGHLIGHTER_GK4_NEWS_SORT_ORDER" description="MOD_HIGHLIGHTER_GK4_NEWS_SORT_ORDER_DESC">
+
+	                    <option value="ASC">MOD_HIGHLIGHTER_GK4_ASC</option>
+
+	                    <option value="DESC">MOD_HIGHLIGHTER_GK4_DESC</option>
+
+	            </field>
+
+	                
+
+	            <field name="news_since" type="calendar" default="" label="MOD_HIGHLIGHTER_GK4_NEWS_SINCE" description="MOD_HIGHLIGHTER_GK4_NEWS_SINCE_DESC" format="%Y-%m-%d 00:00:00" />        
+
+	                
+
+	            <field name="news_frontpage" type="list" default="1" class="gk_switch" label="MOD_HIGHLIGHTER_GK4_FRONTPAGE_FEATURED" description="MOD_HIGHLIGHTER_GK4_FRONTPAGE_FEATURED_DESC">
+
+	                    <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+	                    <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+	            </field>
+
+	              
+
+			  	<field name="unauthorized" type="list" default="0" class="gk_switch" label="MOD_HIGHLIGHTER_GK4_UNAUTH" description="MOD_HIGHLIGHTER_GK4_UNAUTH_DESC">
+
+	            		<option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+	                    <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+	            </field>
+
+	                
+
+	            <field name="only_frontpage" type="list" default="0" class="gk_switch" label="MOD_HIGHLIGHTER_GK4_ONLYFRONTPAGE_ONLYFEATURED" description="MOD_HIGHLIGHTER_GK4_ONLYFRONTPAGE_ONLYFEATURED_DESC">
+
+	            		<option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+	                    <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+	            </field>
+
+	                
+
+	            <field name="startposition" type="text" default="0" size="5" label="MOD_HIGHLIGHTER_GK4_FIRST_NEWS" description="MOD_HIGHLIGHTER_GK4_FIRST_NEWS_DESC"/>
+
+
+
+            	<field name="time_offset" type="list" default="0" label="MOD_HIGHLIGHTER_GK4_TIME_OFFSET" description="MOD_HIGHLIGHTER_GK4_TIME_OFFSET_DESC">
+
+                		<option value="-12">-12</option>
+
+                		<option value="-11">-11</option>
+
+                		<option value="-10">-10</option>
+
+                		<option value="-9">-9</option>
+
+                		<option value="-8">-8</option>
+
+                		<option value="-7">-7</option>
+
+                		<option value="-6">-6</option>
+
+                		<option value="-5">-5</option>
+
+                		<option value="-4">-4</option>
+
+                		<option value="-3">-3</option>
+
+                		<option value="-2">-2</option>
+
+                		<option value="-1">-1</option>
+
+                        <option value="0">0</option>
+
+                		<option value="1">+1</option>
+
+                		<option value="2">+2</option>
+
+                		<option value="3">+3</option>
+
+                		<option value="4">+4</option>
+
+                		<option value="5">+5</option>
+
+                		<option value="6">+6</option>
+
+                		<option value="7">+7</option>
+
+                		<option value="8">+8</option>
+
+                		<option value="9">+9</option>
+
+                		<option value="10">+10</option>
+
+                		<option value="11">+11</option>
+
+                		<option value="12">+12</option>
+
+                </field>
+
+	        
+
+			</fieldset>	
+
+			<fieldset name="MOD_HIGHLIGHT_GK4_LAYOUT_SETTINGS" addfieldpath="/modules/mod_highlighter_gk4/admin/elements"> 
+
+                
+
+                <field name="news_as_links" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_NEWS_AS_LINKS" description="MOD_HIGHLIGHTER_GK4_NEWS_AS_LINKS_DESC">
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                        <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                </field> 
+
+                
+
+                <field name="show_title" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_SHOW_TITLE" description="MOD_HIGHLIGHTER_GK4_SHOW_TITLE_DESC">
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                        <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                </field> 
+
+                
+
+                <field name="show_desc" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_SHOW_DESC" description="MOD_HIGHLIGHTER_GK4_SHOW_DESC_DESC">
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                        <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                </field> 
+
+                
+
+                <field name="use_title_alias" type="list" class="gk_switch" default="0" label="MOD_HIGHLIGHTER_GK4_TITLE_ALIAS" description="">
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                        <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                </field>
+
+                
+
+                <field name="title_limit_type" type="list" default="chars" label="MOD_HIGHLIGHTER_GK4_TITLE_LIMIT_TYPE" description="">
+
+                        <option value="words">MOD_HIGHLIGHTER_GK4_WORDS</option>
+
+                        <option value="chars">MOD_HIGHLIGHTER_GK4_CHARS</option>
+
+                </field>
+
+                
+
+                <field name="title_limit" class="short text-limit" type="text" default="20" size="5" label="MOD_HIGHLIGHTER_GK4_TITLE_MAX_AMOUNT" description=""/>
+
+                
+
+               	<field name="desc_limit_type" type="list" default="chars" label="MOD_HIGHLIGHTER_GK4_DESC_LIMIT_TYPE" description="">
+
+                        <option value="words">MOD_HIGHLIGHTER_GK4_WORDS</option>
+
+                        <option value="chars">MOD_HIGHLIGHTER_GK4_CHARS</option>
+
+                </field>
+
+                
+
+                <field name="desc_limit" class="short text-limit" type="text" default="40" size="5" label="MOD_HIGHLIGHTER_GK4_DESC_MAX_AMOUNT" description=""/>
+
+                
+
+                <field name="gk_line_1" type="line" text="MOD_HIGHLIGHTER_GK4_INTERFACE" />
+
+                
+
+                
+
+                <field name="interface" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_INTERFACE" description="MOD_HIGHLIGHTER_GK4_INTERFACE_DESC">
+
+                         <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                         <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                 </field> 
+
+                 
+
+                 <field name="interface_bg" type="text" default="#819510" class="color-field" size="8" label="MOD_HIGHLIGHTER_GK4_INTERFACE_BG" description="MOD_HIGHLIGHTER_GK4_INTERFACE_BG_DESC"/>
+
+                
+
+                	<field name="interface_radius" type="text" default="26" class="input-pixels" size="3" label="MOD_HIGHLIGHTER_GK4_INTERFACE_RADIUS" description="MOD_HIGHLIGHTER_GK4_INTERFACE_RADIUS_DESC"/>
+
+                 
+
+                 <field name="gk_line_2" type="line" text="MOD_HIGHLIGHTER_GK4_INTROTEXT" />
+
+                 
+
+                 <field name="introtext" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_INTROTEXT" description="MOD_HIGHLIGHTER_GK4_INTROTEXT_DESC">
+
+                         <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                         <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                 </field> 
+
+                 
+
+                 <field name="introtext_color" type="text" default="#ffffff" class="color-field" size="8" label="MOD_HIGHLIGHTER_GK4_INTROTEXT_COLOR" description="MOD_HIGHLIGHTER_GK4_INTROTEXT_COLOR_DESC"/>  
+
+                 
+
+                 <field name="introtext_value" type="text" default="HOT NEWS" size="15" label="MOD_HIGHLIGHTER_GK4_INTROTEXT_VALUE" description="MOD_HIGHLIGHTER_GK4_INTROTEXT_VALUE_DESC"/> 
+
+                
+
+            </fieldset>	
+
+			<fieldset name="MOD_HIGHLIGHT_GK4_ANIM_SETTINGS" addfieldpath="/modules/mod_highlighter_gk4/admin/elements">
+
+				
+
+                <field name="animation_type" type="list" default="1" label="MOD_HIGHLIGHTER_GK4_ANIM_TYPE" description="MOD_HIGHLIGHTER_GK4_ANIM_TYPE_DESC">
+
+                        <option value="slides">MOD_HIGHLIGHTER_GK4_SLIDES</option>
+
+                        <option value="linear">MOD_HIGHLIGHTER_GK4_LINEAR</option>
+
+                </field>              
+
+                
+
+                <field name="hover_anim" type="list" class="gk_switch" default="0" label="MOD_HIGHLIGHTER_GK4_HOVERANIM" description="MOD_HIGHLIGHTER_GK4_HOVERANIM_DESC">
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                        <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                </field>  
+
+                
+
+                <field name="animation_speed" class="input-ms text_area medium" type="text" default="350" size="5" label="MOD_HIGHLIGHTER_GK4_ANIMSPEED" description="MOD_HIGHLIGHTER_GK4_ANIMSPEED_DESC"/>        
+
+                
+
+                <field name="animation_interval" class="input-ms text_area medium last-in-group" type="text" default="5000" size="5" label="MOD_HIGHLIGHTER_GK4_ANIMINTERVAL" description="MOD_HIGHLIGHTER_GK4_ANIMINTERVAL_DESC"/> 
+
+                
+
+				<field name="animation_fun" type="list" default="Fx.Transitions.linear" label="MOD_HIGHLIGHTER_GK4_ANIMFUN" description="MOD_HIGHLIGHTER_GK4_ANIMFUN_DESC">
+
+                        <option value="Fx.Transitions.linear">linear</option>
+
+                        <option value="Fx.Transitions.Quad.easeIn">Quad.easeIn</option>
+
+                        <option value="Fx.Transitions.Quad.easeOut">Quad.easeOut</option>
+
+                        <option value="Fx.Transitions.Quad.easeInOut">Quad.easeInOut</option>
+
+                        <option value="Fx.Transitions.Cubic.easeIn">Cubic.easeIn</option>
+
+                        <option value="Fx.Transitions.Cubic.easeOut">Cubic.easeOut</option>
+
+                        <option value="Fx.Transitions.Cubic.easeInOut">Cubic.easeInOut</option>
+
+                        <option value="Fx.Transitions.Quart.easeIn">Quart.easeIn</option>
+
+                        <option value="Fx.Transitions.Quart.easeOut">Quart.easeOut</option>
+
+                        <option value="Fx.Transitions.Quart.easeInOut">Quart.easeInOut</option>
+
+                        <option value="Fx.Transitions.Quint.easeIn">Quint.easeIn</option>
+
+                        <option value="Fx.Transitions.Quint.easeOut">Quint.easeOut</option>
+
+                        <option value="Fx.Transitions.Quint.easeInOut">Quint.easeInOut</option>
+
+                        <option value="Fx.Transitions.Pow.easeIn">Pow.easeIn</option>
+
+                        <option value="Fx.Transitions.Pow.easeOut">Pow.easeOut</option>
+
+                        <option value="Fx.Transitions.Pow.easeInOut">Pow.easeInOut</option>
+
+                        <option value="Fx.Transitions.Expo.easeIn">Expo.easeIn</option>
+
+                        <option value="Fx.Transitions.Expo.easeOut">Expo.easeOut</option>
+
+                        <option value="Fx.Transitions.Expo.easeInOut">Expo.easeInOut</option>
+
+                        <option value="Fx.Transitions.Circ.easeIn">Circ.easeIn</option>
+
+                        <option value="Fx.Transitions.Circ.easeOut">Circ.easeOut</option>
+
+                        <option value="Fx.Transitions.Circ.easeInOut">Circ.easeInOut</option>
+
+                        <option value="Fx.Transitions.Sine.easeIn">Sine.easeIn</option>
+
+                        <option value="Fx.Transitions.Sine.easeOut">Sine.easeOut</option>
+
+                        <option value="Fx.Transitions.Sine.easeInOut">Sine.easeInOut</option>
+
+                        <option value="Fx.Transitions.Back.easeIn">Back.easeIn</option>
+
+                        <option value="Fx.Transitions.Back.easeOut">Back.easeOut</option>
+
+                        <option value="Fx.Transitions.Back.easeInOut">Back.easeInOut</option>
+
+                        <option value="Fx.Transitions.Bounce.easeIn">Bounce.easeIn</option>
+
+                        <option value="Fx.Transitions.Bounce.easeOut">Bounce.easeOut</option>
+
+                        <option value="Fx.Transitions.Bounce.easeInOut">Bounce.easeInOut</option>
+
+                        <option value="Fx.Transitions.Elastic.easeIn">Elastic.easeIn</option>
+
+                        <option value="Fx.Transitions.Elastic.easeOut">Elastic.easeOut</option>
+
+                        <option value="Fx.Transitions.Elastic.easeInOut">Elastic.easeInOut</option>
+
+                </field>
+
+ 		 	
+
+			  
+
+			  </fieldset>	
+
+				<fieldset name="MOD_HIGHLIGHT_GK4_ADDITIONAL_SETTINGS" addfieldpath="/modules/mod_highlighter_gk4/admin/elements">
+
+                
+
+                <field name="clean_xhtml" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_CLEANXHTML" description="MOD_HIGHLIGHTER_GK4_CLEANXHTML_DESC">
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                        <option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                </field>
+
+                
+
+               	<field name="parse_plugins" type="list" class="gk_switch" default="0" label="MOD_HIGHLIGHTER_GK4_PARSE" description="MOD_HIGHLIGHTER_GK4_PARSE_DESC">
+
+						<option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                </field>    	
+
+            
+
+   				<field name="clean_plugins" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_CLEANPLUGINS" description="MOD_HIGHLIGHTER_GK4_CLEANPLUGINS_DESC">
+
+						<option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                </field>
+
+
+
+   				<field name="useCSS" type="list" class="gk_switch" default="1" label="MOD_HIGHLIGHTER_GK4_USECSS" description="MOD_HIGHLIGHTER_GK4_USECSS_DESC">
+
+						<option value="1">MOD_HIGHLIGHTER_GK4_ENABLED</option>
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_DISABLED</option>
+
+                </field> 
+
+                
+
+                <field name="useScript" type="list" default="2" label="MOD_HIGHLIGHTER_GK4_USEJS" description="MOD_HIGHLIGHTER_GK4_USEJS_DESC">
+
+                        <option value="2">MOD_HIGHLIGHTER_GK4_AUTOMATIC</option>
+
+						<option value="1">MOD_HIGHLIGHTER_GK4_FORCEENABLED</option>
+
+                        <option value="0">MOD_HIGHLIGHTER_GK4_FORCEDISABLED</option>
+
+                </field> 
+
+			</fieldset>
+
+			
+
+			<fieldset name="HIGHLIGHT_GK4_UPDATES" addfieldpath="/modules/mod_highlighter_gk4/admin/elements">
+
+			    <field type="update" name="module_updates" /> 
+
+			</fieldset>
+
+			
+
+			<fieldset name="HIGHLIGHT_ABOUT_US" addfieldpath="/modules/mod_highlighter_gk4/admin/elements">
+
+			    <field type="about" name="about_us" /> 
+
+			</fieldset>
+
+        </fields>
+
+		</config>
+
+</extension>

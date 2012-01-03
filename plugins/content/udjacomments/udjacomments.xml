@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="content" client="site" method="upgrade">
+    <name>Content - Udja Comments</name>
+    <author>Andy Sharman</author>
+    <creationDate>January 2011</creationDate>
+    <copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>andy@udjamaflip.com</authorEmail>
+    <authorUrl>www.udjamalfip.com</authorUrl>
+    <version>1.0rc1</version>
+    <description>PLG_UDJACOMMENTS_DESC</description>
+    
+    <files>
+        <folder>language</folder>
+        <filename plugin="udjacomments">udjacomments.php</filename>
+        <filename plugin="udjacomments">index.html</filename>
+    </files>
+
+    <config>
+    </config>
+
+</extension>

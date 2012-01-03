@@ -1,0 +1,41 @@
+/**
+ * @version		$Id: editor.css 36 2011-01-20 12:59:29Z happy_noodle_boy $
+ * @package		JCE
+ * @copyright	Copyright (C) 2009 Ryan Demmer. All rights reserved.
+ * @license		GNU/GPL
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+div.mceEditor table.mceLayout td.mceIframeContainer textarea.wfSourceTextarea {
+    background: #FFFFFF none;
+    font-family: monospace;
+    font-size: 1.1em;
+    color: #444;
+    line-height: 16px;
+	outline: none;
+	resize: none;
+	overflow: auto;
+	border: 0 none;
+	padding:5px;
+	width: 100%;
+	white-space: nowrap;
+}
+
+div.mceEditor table.mceLayout td.mceIframeContainer textarea.wfSourceTextarea:focus {
+	background: #FFFFFF none;
+}
+
+div.mceEditor table.mceLayout td.mceIframeContainer textarea.wfSourceTextarea.wrap {
+ 	white-space: pre-wrap !important;
+}
+
+div.mceEditor table.mceLayout td.mceIframeContainer textarea.wfSourceTextarea.ie_wrap {
+	white-space : pre !important;
+}
+
+div.mceEditor table.mceLayout td.mceIframeContainer div.wfSourceTextareaContainer {
+	overflow: hidden;
+	overflow-x: auto;
+}

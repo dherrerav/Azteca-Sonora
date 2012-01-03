@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="1.6" type="template" client="site">
+	<name>tapthemeipad</name>
+	<creationDate>01/26/2011</creationDate>
+	<author>TapTheme</author>
+	<authorEmail>support@taptheme.com</authorEmail>
+	<authorUrl>http://taptheme.com</authorUrl>
+	<copyright>Copyright 2010 - 2011 Pixel Praise LLC. All rights reserved.</copyright>
+	<version>1.6</version>
+	<description>TPL_TAPTHEMEIPAD_XML_DESCRIPTION</description>
+	<files>
+		<filename>component.php</filename>
+		<filename>favicon.ico</filename>
+		<filename>helper.php</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		
+		<folder>assets</folder>
+		<folder>css</folder>
+		<folder>html</folder>
+		<folder>images</folder>
+		<folder>language</folder>
+		
+	</files>
+	
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_tapthemeipad.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_tapthemeipad.sys.ini</language>
+	</languages>
+	
+	<positions>
+		<position>pad-before</position>
+		<position>pad-after</position>
+		<position>pad-footer</position>
+		<position>pad-menu</position>
+		<position>pad-panel</position>
+		<position>pad-top</position>
+		<position>pad-bottom</position>
+		<position>pad-side</position>
+		<position>pad-status</position>
+		<position>debug</position>
+	</positions>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field name="themeSpacer" type="spacer" label="" description="" default="Themes" />
+				<field name="templateTheme" type="list" default="1" label="TPL_TEMPLATE_THEME" description="TPL_THEME_DESC">
+					<option value="theme1">iPad_App</option>
+					<option value="theme2">Notepad</option>
+					<option value="theme3">Book</option>
+					<option value="theme4">Chalkboard</option>
+					<option value="theme5">Dark_App</option>
+					<option value="theme6">Teal</option>
+					<option value="theme7">Blue</option>
+					<option value="theme8">Purple</option>
+					<option value="theme9">Pink</option>
+					<option value="theme10">Red</option>
+					<option value="theme11">Maroon</option>
+					<option value="theme12">Orange</option>
+					<option value="theme13">Yellow</option>
+					<option value="theme14">Olive</option>
+					<option value="theme15">Green</option>
+					<option value="theme16">Brown</option>
+					<option value="theme17">Black</option>
+				</field>
+				<field name="controlPanel" type="radio" default="1" label="TPL_HOMEPAGE_CONTROL_PANEL" description="TPL_CPANEL_DESC">
+					<option value="1">On</option>			
+					<option value="0">Off</option>
+				</field>
+				<field name="iconShine" type="radio" default="0" label="TPL_ICON_SHINE" description="TPL_ICON_SHINE_DESC">
+					<option value="1">On</option>			
+					<option value="0">Off</option>
+				</field>
+				<field name="decorativeBackground" type="radio" default="1" label="TPL_DECORATIVE_BACKGROUND" description="TPL_DECORATIVE_BG_DESC">
+					<option value="1">On</option>			
+					<option value="0">Off</option>
+				</field>
+				<field name="showStatus" type="radio" default="1" label="TPL_SHOW_STATUS_BAR" description="TPL_SHOW_STATUS_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="themeSelect" type="radio" default="0" label="TPL_SHOW_THEME_SELECTOR" description="TPL_SHOW_THEME_SELECTOR_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="showBreadCrumbs" type="radio" default="1" label="TPL_SHOW_BREADCRUMBS" description="TPL_SHOW_BREADCRUMBS_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="showQuickAdd" type="radio" default="1" label="TPL_SHOW_QUICK_ADD" description="TPL_SHOW_QUICK_ADD_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="showCopyright" type="radio" default="1" label="TPL_SHOW_COPYRIGHT" description="TPL_SHOW_COPYRIGHT_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="defaultButton" type="radio" default="1" label="TPL_DEFAULT_TEMPLATE_OPTION" description="TPL_DEFAULT_DESC">
+					<option value="1">On</option>			
+					<option value="0">Off</option>
+				</field>
+				<field name="expSpacer" type="spacer" label="" description="TPL_EXPERIMENTAL" default="TPL_EXPERIMENTAL_DESC" />
+				<field name="showConfig" type="radio" default="0" label="TPL_SHOW_CONFIG" description="TPL_SHOW_CONFIG_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="showBack" type="radio" default="0" label="TPL_SHOW_BACK_BUTTON" description="TPL_SHOW_BACK_BUTTON_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+	
+</extension>

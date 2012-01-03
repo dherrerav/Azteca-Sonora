@@ -1,0 +1,109 @@
+/**
+ # mod_meganews - Mega News Module for Joomla! 1.6
+ # author 		OmegaTheme.com
+ # copyright 	Copyright(C) 2011 - OmegaTheme.com. All Rights Reserved.
+ # @license 	http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ # Website: 	http://omegatheme.com
+ # Technical support: Forum - http://omegatheme.com/forum/
+**/
+/**------------------------------------------------------------------------
+ * file: layout.css 1.6.0 00001, March 2011 12:00:00Z OmegaTheme $
+ * package:	Mega  News Module
+ *------------------------------------------------------------------------*/
+ img{
+	border: none;
+}
+.
+.mega_news,
+.mega_news_i{
+	width: 100%;
+	float: left;
+}
+.mega_news_i{
+	overflow: hidden;
+}
+.blog-news{
+	float: left;
+	padding-bottom: 20px;
+	overflow: hidden;
+}
+.blog-news-i{
+	overflow: hidden;
+}
+.mega_news .blog-news li{
+	width: 98%;
+	float: left;
+	font-size: 14px;
+    line-height: normal;
+    margin: 8px 0 2px;
+    padding: 2px 0;
+    border-bottom: 1px dotted #CCCCCC;
+}
+h1.cat_title{
+	border-bottom: 1px solid #DDDDDD;
+    color: #1F1F1F;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    padding-bottom: 2px;
+}
+h1.cat_title a{
+	color: #1F1F1F;
+}
+.col-1-1{
+	
+}
+.col-1-1 li a{
+	font-size: 14px;
+}
+div.col-2-1,
+div.col-3-1,
+div.col-3-2{
+	float: left;
+}
+div.col-2-1 .blog-news-i,
+div.col-3-1 .blog-news-i{
+	padding-right: 10px;
+}
+div.col-3-2 .blog-news-i{
+	padding-left: 10px;
+}
+div.col-2-2,
+div.col-3-3{
+	float: right;
+}
+div.col-2-2 .blog-news-i,
+div.col-3-3 .blog-news-i{
+	padding-left: 10px;
+}
+div.mega_head_title{
+	width: 100%;
+	float: left;
+	padding-bottom: 15px;
+}
+.meganews_thumbs{
+	float: left;
+	padding: 2px;
+	border: 1px #e7e7e7 solid;
+    margin-right: 12px;
+    overflow: hidden;
+}
+.meganews_thumbs_i{
+	overflow: hidden;
+}
+.mega_head_title a.head_title{
+	font-weight: bold;
+	font-size: 14px;
+}
+p.createddate{
+	padding: 2px 0;
+	margin: 0;
+}
+span.mega_date{
+	color: #999;
+	font-size: 12px;
+}
+.meganews_readmore{
+	margin-top: 10px;
+	text-align: right;
+}

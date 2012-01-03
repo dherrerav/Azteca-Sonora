@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="1.6" method="upgrade">
+<name>Apptha Mobile Packages</name>
+<packagename>Apptha Mobile</packagename>
+<author>Apptha</author>
+<creationDate>09 June 2011</creationDate>
+<version>1.0</version>
+<url>http://www.apptha.com</url>
+<packager>Apptha</packager>
+<packagerurl>http://www.apptha.com</packagerurl>
+<description><![CDATA[
+<style>
+table.adminform th{padding:0px;}
+</style>
+<div style="/* Opera 11.10+ */
+background: -o-linear-gradient(top, rgba(255,255,255,1), rgba(232,232,232,1));
+
+/* Firefox 3.6+ */
+background: -moz-linear-gradient(top, rgba(255,255,255,1), rgba(232,232,232,1));
+
+/* Chrome 7+ & Safari 5.03+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255,255,255,1)), color-stop(1, rgba(232,232,232,1)));
+
+/* IE5.5 - IE7 */
+filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFFFF,EndColorStr=#FFE8E8E8);
+
+/* IE8 */
+-ms-filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFFFF,EndColorStr=#FFE8E8E8);">
+<div style="float: left; margin:10px 0 0 10px;">
+        <a href="http://www.apptha.com/">
+            <img src="components/com_appthamobile/icons/logo.png" alt="Joomla! AppthaMobile" align="left" />
+        </a>
+    </div>
+    <div style="clear:both;"></div>
+<p style="font-style:normal;font-size:13px;font-weight:normal; margin-top:10px;">Apptha Mobile is a mobile theme supporting component. </p>
+<p style="font-style:normal;font-size:13px;font-weight:normal;">This extension helps you to view your joomla website in your mobile in a fraction of second with attractive templates. With a rich selection of mobile themes, your joomla site stands out and looks attractive on every mobile.</p>
+    <div style="margin-left:10px;padding-bottom:10px;">
+        <a href="http://www.apptha.com/download.php?name=appthamobile.pdf&link=images/Extensions/Joomla/AppthaMobile/appthamobile_v_1.0.pdf">Click here to download the documentation</a><br/>
+    </div>
+    </div>
+     ]]>
+ </description>
+<update>http://www.apptha.com</update>
+<files folder="packages">
+<file type="plugin" id="appthamobileimage" group="content">appthamobileimage.zip</file>
+<file type="template" id="appthamobile-defaulttemplate" client="site">appthamobile-defaulttemplate.zip</file>
+<file type="component" id="com_appthamobile" >com_appthamobile.zip</file>
+<file type="plugin" id="apptharedirect" group="system">apptharedirect.zip</file>
+</files>
+</extension>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="1.6" type="template" client="site">
+  <name>tapthemeandroid</name>
+  <version>1.6</version>
+  <creationDate>01/26/2011</creationDate>
+  <author>TapTheme</author>
+  <authorEmail>support@taptheme.com</authorEmail>
+  <authorUrl>http://taptheme.com</authorUrl>
+  <copyright>Copyright 2010 - 2011 Pixel Praise LLC. All rights reserved.</copyright>
+  <description>TPL_TAPTHEMEANDROID_XML_DESCRIPTION</description>
+  <files>
+    <filename>component.php</filename>
+    <filename>favicon.ico</filename>
+    <filename>helper.php</filename>
+    <filename>index.php</filename>
+    <filename>templateDetails.xml</filename>
+    <filename>template_preview.png</filename>
+    <filename>template_thumbnail.png</filename>
+	
+	<folder>css</folder>
+	<folder>html</folder>
+	<folder>images</folder>
+	<folder>language</folder>
+
+  </files>
+  
+  <languages folder="language">
+  	<language tag="en-GB">en-GB/en-GB.tpl_tapthemeandroid.ini</language>
+  	<language tag="en-GB">en-GB/en-GB.tpl_tapthemeandroid.sys.ini</language>
+  </languages>
+  
+  <positions>
+    <position>droid-1</position>
+    <position>droid-2</position>
+    <position>droid-3</position>
+    <position>droid-4</position>
+    <position>droid-5</position>
+    <position>droid-6</position>
+    <position>droid-7</position>
+    <position>droid-8</position>
+    <position>droid-9</position>
+    <position>droid-home</position>
+    <position>droid-menu</position>
+    <position>droid-toolbar</position>
+    <position>droid-dropdown</position>
+    <position>debug</position>
+  </positions>
+  
+  <config>
+  	<fields name="params">
+  		<fieldset name="advanced">
+		   <field name="templateTheme" type="list" default="theme1" label="TPL_Template_Theme" description="TPL_THEME_DESC">
+		      <option value="theme1">TPL_Default_Droid_Theme</option>
+		      <option value="theme2">TPL_Notepad</option>
+		      <option value="theme3">TPL_Book</option>
+		      <option value="theme4">TPL_Chalkboard</option>
+		      <option value="theme5">TPL_Dark_App</option>
+		      <option value="theme6">TPL_Teal</option>
+		      <option value="theme7">TPL_Blue</option>
+		      <option value="theme8">TPL_Purple</option>
+		      <option value="theme9">TPL_Pink</option>
+		      <option value="theme10">TPL_Red</option>
+		      <option value="theme11">TPL_Maroon</option>
+		      <option value="theme12">TPL_Orange</option>
+		      <option value="theme13">TPL_Yellow</option>
+		      <option value="theme14">TPL_Olive</option>
+		      <option value="theme15">TPL_Green</option>
+		      <option value="theme16">TPL_Brown</option>
+		      <option value="theme17">TPL_Black</option>
+		    </field>
+		    <field name="controlPanel" type="radio" default="1" label="TPL_Homepage_Control_Panel" description="TPL_CPANEL_DESC">
+		    	<option value="1">On</option>			
+		    	<option value="0">Off</option>
+		    </field>
+		    <field name="defaultButton" type="radio" default="1" label="TPL_Default_Template_Option" description="TPL_DEFAULT_DESC">
+		    	<option value="1">On</option>			
+		    	<option value="0">Off</option>
+		    </field>
+		    <field name="homeSearch" type="radio" default="1" label="TPL_Homepage_Search" description="TPL_SEARCH_DESC">
+		    	<option value="1">On</option>			
+		    	<option value="0">Off</option>
+		    </field>
+		    <field name="backgroundColor" type="text" default="" label="TPL_Background_Color" description="TPL_HEX_DESC" />
+			<field name="fontColor" type="text" default="" label="TPL_Font_Color" description="TPL_HEX_DESC" />
+			<field name="linkColor" type="text" default="" label="TPL_Link_Color" description="TPL_HEX_DESC" />
+		    <field name="headingColor" type="text" default="" label="TPL_Heading_Color" description="TPL_HEX_DESC" />
+  		</fieldset>
+  	</fields>
+  </config>
+  
+</extension>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="plugin" version="1.5" group="joomlaadminmobile" method="upgrade">
+	<name>Joomla Admin Mobile - Banners</name>
+        <creationDate>November 2011</creationDate>
+        <author>CovertApps.com</author>
+        <authorEmail>support@covertapps.com</authorEmail>
+        <authorUrl>http://www.covertapps.com</authorUrl>
+        <copyright>Copyright (C) 2009-2011 Covert Apps. All rights reserved.</copyright>
+        <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+        <version>1.0.1</version>
+        <description>This plugin displays Banners component data.</description>
+	<files>
+		<filename plugin="banners">banners.php</filename>
+		<filename>index.html</filename>
+	</files>
+</install>

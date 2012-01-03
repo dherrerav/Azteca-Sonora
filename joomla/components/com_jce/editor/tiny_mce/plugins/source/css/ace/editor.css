@@ -1,0 +1,163 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Ajax.org Code Editor (ACE).
+ *
+ * The Initial Developer of the Original Code is
+ * Ajax.org B.V.
+ * Portions created by the Initial Developer are Copyright (C) 2010
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *      Fabian Jakobs <fabian AT ajax DOT org>
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+div.WFSourceEditor.ace_editor {
+    position: absolute;
+    overflow: hidden;
+    font-family: Menlo, Monaco, Courier New, monospace;
+    font-size: 12px;
+	background: #fefefe none;
+}
+div.WFSourceEditor .ace_scroller {
+    position: absolute;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+div.WFSourceEditor .ace_content {
+    position: absolute;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+div.WFSourceEditor .ace_composition {
+    position: absolute;
+    background: #555;
+    color: #DDD;
+    z-index: 4;
+}
+div.WFSourceEditor .ace_gutter {
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+}
+div.WFSourceEditor.ace_editor .ace_gutter .ace_gutter-layer .ace_gutter-cell {
+	text-align: right !important;
+}
+div.WFSourceEditor .ace_gutter-cell.ace_error {
+	background-image: url();
+	background-repeat: no-repeat; 
+    background-position: 4px center; 
+} 
+div.WFSourceEditor .ace_gutter-cell.ace_warning { 
+  background-image: url();
+  background-repeat: no-repeat; 
+  background-position: 4px center; 
+} 
+div.WFSourceEditor.ace_editor .ace_sb { 
+  position: absolute; 
+  overflow-x: hidden; 
+  overflow-y: scroll; 
+  right: 0; 
+} 
+div.WFSourceEditor.ace_editor .ace_sb div { 
+  position: absolute; 
+  width: 1px; 
+  left: 0; 
+} 
+div.WFSourceEditor.ace_editor .ace_print_margin_layer { 
+  z-index: 0; 
+  position: absolute; 
+  overflow: hidden; 
+  margin: 0; 
+  left: 0; 
+  height: 100%; 
+  width: 100%; 
+} 
+div.WFSourceEditor.ace_editor .ace_print_margin { 
+  position: absolute; 
+  height: 100%; 
+} 
+div.WFSourceEditor.ace_editor textarea { 
+  position: fixed; 
+  z-index: -1; 
+  width: 10px; 
+  height: 30px; 
+  opacity: 0; 
+  background: transparent; 
+  appearance: none; 
+  border: none; 
+  resize: none; 
+  outline: none; 
+  overflow: hidden; 
+} 
+div.WFSourceEditor .ace_layer { 
+  z-index: 1; 
+  position: absolute; 
+  overflow: hidden;   
+  white-space: nowrap; 
+  height: 100%; 
+  width: 100%; 
+} 
+div.WFSourceEditor .ace_text-layer { 
+  font-family: Monaco, Courier New, monospace; 
+  color: black; 
+} 
+div.WFSourceEditor .ace_cjk { 
+  display: inline-block; 
+  text-align: center; 
+} 
+
+div.WFSourceEditor .ace_content .ace_scroller .ace_content .ace_cursor-layer { 
+  z-index: 4; 
+  cursor: text; 
+  pointer-events: none; 
+} 
+div.WFSourceEditor .ace_cursor { 
+  z-index: 4; 
+  position: absolute; 
+} 
+div.WFSourceEditor .ace_line { 
+  white-space: nowrap; 
+} 
+div.WFSourceEditor .ace_marker-layer { 
+} 
+div.WFSourceEditor .ace_marker-layer .ace_step { 
+  position: absolute; 
+  z-index: 3; 
+} 
+div.WFSourceEditor .ace_marker-layer .ace_selection { 
+  position: absolute; 
+  z-index: 4; 
+} 
+div.WFSourceEditor .ace_marker-layer .ace_bracket { 
+  position: absolute; 
+  z-index: 5; 
+} 
+div.WFSourceEditor .ace_marker-layer .ace_active_line { 
+  position: absolute; 
+  z-index: 2; 
+} 
