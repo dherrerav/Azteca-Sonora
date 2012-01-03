@@ -186,3 +186,8 @@
 #ja-cssmenu li ul a { margin:0;padding:0; }
 #ja-cssmenu li ul a span { margin:0;padding:0 0 0 26px; }
 #ja-cssmenu li ul a:hover span { background:#003366;color:#ffff00; }
+
+#ja-cssmenu .haschild span,
+#ja-cssmenu li ul a span {
+	padding: 0 5px 0 5px !important;
+}
