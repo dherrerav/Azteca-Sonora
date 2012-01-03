@@ -1,8 +1,8 @@
-\/configuration.php
-\/.htaccess
-\/dumps/
-\/images/
-\/cache/
-\/administrator/cache/
-\/tmp/
-/t3-assets/
+/configuration.php
+/.htaccess
+/dumps/*
+/images/*
+/cache/*
+/administrator/cache/*
+/tmp/*
+/t3-assets/*
