@@ -1,0 +1,61 @@
+/*
+# ------------------------------------------------------------------------
+# JA Thumbnail plugin for Joomla 1.6.x
+# ------------------------------------------------------------------------
+# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+# @license - Copyrighted Commercial Software
+# Author: J.O.O.M Solutions Co., Ltd
+# Websites:  http://www.joomlart.com -  http://www.joomlancers.com
+# This file may not be redistributed in whole or significant part.
+# ------------------------------------------------------------------------
+*/
+
+.ja-thumbnailwrap { margin-bottom: 10px; }
+
+.thumb-left { float: left; margin-right: 15px; }
+.thumb-right { float: right; margin-left: 15px; }
+
+.ja-thumbnail { position: relative; }
+
+.thumbnail {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.thumbnail * { float: none !important; margin: 0 !important; }
+
+/* img navigation ---*/
+.ja-thumbnailwrap ul.nav {
+	font-size: 92%;
+	text-transform: uppercase;
+	margin: 1px 0 0;
+	padding: 0 0 7px;
+	background: #f7f7f7;
+	color: #999;
+	position: relative;
+	text-align: center;
+}
+
+.ja-thumbnailwrap ul.nav li 		{ margin: 0; padding: 0 5px; background: none; cursor: pointer; display: inline; }
+.ja-thumbnailwrap ul.nav li.next { position: absolute; right:0; top: 0; text-align: right; }
+.ja-thumbnailwrap ul.nav li.prev	{ position: absolute; left:0; top: 0;}
+
+.ja-thumbnailwrap ul.nav li.counter {
+	margin: 0 !important;
+	float: none;	
+	text-align: center;
+	text-transform: lowercase;
+	display: inline;
+}
+
+.ja-thumbnailwrap ul.nav li.counter span {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #666;
+	float: none;
+}
+
+.ja-thumbnailwrap ul.nav li.next:hover, .ja-thumbnailwrap ul.nav li.prev:hover { color: #000; } 

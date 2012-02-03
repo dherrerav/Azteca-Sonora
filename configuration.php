@@ -49,8 +49,8 @@ class JConfig {
 	public $sef_suffix = '1';
 	public $unicodeslugs = '1';
 	public $feed_limit = '10';
-	public $log_path = '/home/tvnotici/public_html/logs';
-	public $tmp_path = '/home/tvnotici/public_html/tmp';
+	public $log_path = '/home/samacs/applications/aztecasonora/logs';
+	public $tmp_path = '/home/samacs/applications/aztecasonora/tmp';
 	public $lifetime = '15';
 	public $session_handler = 'database';
 	public $MetaRights = '';

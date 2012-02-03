@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install 
+	version="1.6.0" 
+	type="plugin" 
+	group="content"
+	method="upgrade">
+	
+	<name>Content - JA Thumbnail</name>
+	<author>JoomlArt.com</author>
+	<creationDate>Oct 2010</creationDate>
+	<copyright>J.O.O.M Solutions Co., Ltd.</copyright>
+	<license>GNU/GPL V2 for PHP files. Read Terms of Service for details.</license>
+	<authorEmail>webmaster@joomlart.com</authorEmail>
+	<authorUrl>www.joomlart.com</authorUrl>
+	<version>1.0.0</version>
+	<description>
+	<![CDATA[
+	<p>This plugin is used to generate Auto Thumbnail  in Joomla Articles. This must be <font color="red"><strong>properly configured</strong></font> to make the best use out of it. Below are important note.</p> <p>In the <strong>"Integration Mode"</strong>  on the parameter list on the right: </p> <ul>   <li>"<strong>Auto</strong>" mode: All joomla article will have this feature enable. To turn off plugin for specific article, use the <font color="red"><strong><em>{jathumbnail off}</em></strong></font> in that article.</li>   <li>"<strong>Manual</strong>" mode: You must you [jathumbnail] somewhere in the joomla content to enable this plugin for that article. </li>   <li> "<strong>Disable</strong>" mode: Disable the Thumbnail generation (DO NOT use the Disable feature of Joomla if you have used the tag <em><strong>{jathumbnail}</strong></em> or <em><strong>{jathumbnail off}</strong></em> already. It will be parsed as normal text.</li> </ul> <p>The Manual mode is recommended for site with less images, the Auto mode is for site with massive volumn of images</p>
+	<p>Note: Allow off some specified images for an article</p>
+	<p>we use tag: </p><p><font color="red"><strong><em>{jathumbnail off images="images/stories/demo/world/rs-3.jpg,images/stories/demo/world/rs-2.jpg"}</em></strong></font> </p>
+	]]>
+	</description>
+	<files>
+		<filename 
+			plugin="plg_jathumbnail">plg_jathumbnail.php</filename>
+		<filename 
+			plugin="plg_jathumbnail">parser.php</filename>
+		<filename 
+			plugin="plg_jathumbnail">style.css</filename>	
+		<folder>elements</folder>
+		<folder>tmpl</folder>
+	</files>
+	<languages>
+		<language 
+			tag="en-GB">en-GB.plg_content_plg_jathumbnail.ini</language>
+	</languages>
+	<config>
+		<fields 
+			name="params" 
+			addfieldpath="/plugins/content/plg_jathumbnail/elements">
+			<fieldset 
+				name="basic">
+				<field 
+					name="contentmodegroup" 
+					type="japaramhelper" 
+					function="@group">
+						<option for="content_mode" value="auto" hideRow="true">content_mode-auto-manual-content_align,content_mode-auto-manual-content_width,content_mode-auto-manual-content_height,content_mode-auto-manual-crop_image,content_mode-auto-content_position</option>
+						
+						<option for="content_mode" value="manual" hideRow="true">content_mode-auto-manual-content_width,content_mode-auto-manual-content_height,content_mode-auto-manual-crop_image,content_mode-auto-manual-content_align</option>				
+				</field>
+				<field 
+					name="basicconfig" 
+					type="japaramhelper" 
+					default=""
+					class="first" 
+					function="@title"
+					label="THUMBNAIL_FOR_CONTENT"
+					description="THUMBNAIL_FOR_CONTENT_DESC"/>
+				<field 
+					name="content_mode" 
+					type="radio" 
+					default="0" 
+					label="Content_Mode"
+					description="Content_Mode_Desc">
+						<option value="auto">Auto</option>
+						<option value="manual">Manual</option>
+						<option value="0">Disable</option>
+				</field>
+				<field 
+					name="content_mode-auto-content_position" 
+					type="radio"
+					default="0" 
+					label="Position"
+					description="POSITION_DESC">
+						<option value="0">Top</option>
+						<option value="1">First image</option>
+				</field>
+				<field 
+					name="content_mode-auto-manual-content_width" 
+					type="text"
+					default="200" 
+					label="Content_Thumbnail_Width"
+					description="CONTENT_THUMBNAIL_WIDTH_DESC" />
+				<field 
+					name="content_mode-auto-manual-content_height" 
+					type="text"
+					default="200" label="Content Thumbnail Height"
+					description="CONTENT_THUMBNAIL_HEIGHT_DESC" />
+				<field 
+					name="content_mode-auto-manual-crop_image" 
+					type="radio"
+					default="1" 
+					label="Crop_image" 
+					description="Crop_image_Desc">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field 
+					name="content_mode-auto-manual-content_align" 
+					type="radio"
+					default="left" 
+					label="Image_align"
+					description="IMAGE_ALIGN_DESC">
+					<option value="left">Left</option>
+					<option value="right">Right</option>
+					<option value="auto">Auto</option>
+				</field>
+				 <field 
+					name="group2" 
+					type="japaramhelper"
+					function="@group">
+						<option for="view_on_page" value="blog" hideRow="true">blog_mode-1-apply_catetories,
+						blog_mode-1-blog_leading_width,
+						blog_mode-1-blog_leading_height,
+						blog_mode-1-blog_intro_width,
+						blog_mode-1-blog_intro_height,
+						blog_mode-1-crop_image</option>
+						<option for="view_on_page" value="all" hideRow="true">blog_mode-1-apply_catetories,
+						blog_mode-1-blog_leading_width,
+						blog_mode-1-blog_leading_height,
+						blog_mode-1-blog_intro_width,
+						blog_mode-1-blog_intro_height,
+						blog_mode-1-crop_image</option>
+						<option for="view_on_page" value="featured" hideRow="true">blog_mode-1-blog_leading_width,
+						blog_mode-1-blog_leading_height,
+						blog_mode-1-blog_intro_width,
+						blog_mode-1-blog_intro_height,
+						blog_mode-1-crop_image</option>
+				</field>
+				<field 
+					name="thumbnail_blog" 
+					type="japaramhelper" 
+					default="" 
+					function="@title"
+					label="THUMBNAIL_FOR_BLOG_VIEW"
+					description="THUMBNAIL_FOR_BLOG_VIEW_DESC"/>
+				<field
+					name="view_on_page"
+					default="article"
+					type="list"
+					label="Thumbnail_for_page"
+					description="Thumbnail_for_page_desc">
+					<option value="all">All_Blog_featured</option>
+					<option value="blog">Category_Blog</option>
+					<option value="featured">Featured_Articles</option>
+					<option value="none">Disable_for_all_page</option>
+				</field>
+				<field 
+					name="blog_mode-1-apply_catetories" 
+					type="category"
+					extension="com_content"
+					multiple="true"
+					size="10"
+					default="" 
+					label="Apply_for_Categories" 
+					description="Apply_for_Categories_Desc">
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>			
+				
+				<field 
+					name="blog_mode-1-blog_leading_width" 
+					type="text"
+					default="300" 
+					label="Leading_Images_Width"
+					description="LEADING_IMAGES_WIDTH_DESC" />
+				<field 
+					name="blog_mode-1-blog_leading_height" 
+					type="text"
+					default="300" 
+					label="Leading_Images_Height" 
+					description="Leading_Images_Height_Desc" />
+				<field 
+					name="blog_mode-1-blog_intro_width" 
+					type="text"
+					default="100" 
+					label="Intro_Images_Width" 
+					description="Intro_Images_Width_Desc" />
+				<field 
+					name="blog_mode-1-blog_intro_height" 
+					type="text"
+					default="100" 
+					label="Intro_Images_Height" 
+					description="Intro_Images_Height_Desc" />
+				<field 
+					name="blog_mode-1-crop_image" 
+					type="radio" 
+					default="1"
+					label="Crop_image" 
+					description="Crop_image_Desc">
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</install>
