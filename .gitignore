@@ -8,3 +8,5 @@ configuration.php
 /tmp/*
 /t3-assets/*
 /t3assets/*
+/t3assets
+
