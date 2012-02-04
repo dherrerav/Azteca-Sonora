@@ -1,34 +1,27 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        editvideo.php
- * @location    /components/com_contushdvideosahre/models/editvideo.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-/**
- * Description :uploading videos, editing videos
- */
-// No Direct access
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.model');
 
 class Modelhdvideoshareeditvideo extends JModel {
     /* Following function is to save a particular video which is being edited */
 
-    function geteditdetails() {
+    function geteditdetails()
+    {
         $user = & JFactory::getUser();
         $session = & JFactory::getSession();
         $success = "";
-        if (isset($_POST['editbtn'])) {
+        if (isset($_POST['editbtn']))
+         {
             if ($user->get('id')) {
-
                 $memberid = $user->get('id'); // Getting the memberid
             }
             if (JRequest::getVar('id', '', 'get', 'int')) {
@@ -42,11 +35,10 @@ class Modelhdvideoshareeditvideo extends JModel {
             $db->setQuery($query);
             $db->query();
             $success = "Your video Details Updated Successfully";
-            $url = JRoute::_("index.php?option=com_hdvideoshare&view=myvideos");
+            $url = $baseurl . "index.php?option=com_hdvideoshare&view=myvideos";
             header("Location: $url");
         }
-
-        // Following code is to get a particulat video for edit
+// Following code is to get a particulat video for edit
         if (JRequest::getVar('id', '', 'get', 'int')) {
             $videoid = JRequest::getVar('id', '', 'get', 'int'); // Getting the video id of a particular video
         }
@@ -66,7 +58,8 @@ class Modelhdvideoshareeditvideo extends JModel {
         $db = $this->getDBO();
         $db->setQuery($myvideorowcolquery);
         $row = $db->LoadObjectList();
-        if (count($row) == 0) {
+        if (count($row) == 0)
+         {
             $myvideorowcolquery = "select allowupload  from #__hdflv_site_settings";
             $db = $this->getDBO();
             $db->setQuery($myvideorowcolquery);
@@ -78,7 +71,5 @@ class Modelhdvideoshareeditvideo extends JModel {
         $rows = array_merge($rows, $row);
         return array($rows, $success);
     }
-
 }
-
 ?>

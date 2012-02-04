@@ -1,74 +1,70 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        subcategory.php
- * @location    /components/com_contushdvideosahre/controller/subcategory.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
-*/
-
-/**
- * Description :  Channel front end Subcategory Component Administrator Controller
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-//NO direct access
+// no direct access
 defined('_JEXEC') or die('Restricted access');
-
 jimport('joomla.application.component.controller');
 
+/**
+ * Channel front end Subcategory Component Administrator Controller
+ */
 class contushdvideoshareControllersubcategory extends JController {
 
-    //Function to display the subcategory list
-    function display() {
-
+    function display()
+    { //Function to display the subcategory list
         $viewName = JRequest::getVar('view', 'subcategory');
         $viewLayout = JRequest::getVar('layout', 'subcategory');
-        //$viewLayout='listLayout';
         $view = & $this->getView($viewName);
-        if ($model = & $this->getModel('subcategory')) {
+        if ($model = & $this->getModel('subcategory'))
+        {
             $view->setModel($model, true);
         }
         $view->setLayout($viewLayout);
         $view->display();
     }
 
-     // Function to edit a particular subcategory
-    function edit() {
+    function edit()
+    { // Function to edit a particular subcategory
         $view = & $this->getView('subcategory');
-        if ($model = & $this->getModel('subcategory')) {
+        if ($model = & $this->getModel('subcategory'))
+        {
             $view->setModel($model, true);
         }
         $view->setLayout('subcategoryform');
         $view->display();
     }
 
-    // Function to save a subcategory
-    function save() {
+    function save()
+    { // Function to save a subcategory
         $detail = JRequest::get('POST');
         $model = & $this->getModel('subcategory');
         $model->savesubcategory($detail);
         $this->setRedirect('index.php?layout=subcategory&option=' . JRequest::getVar('option'), 'Subcategory Saved!');
     }
 
-    // Function to add a subcategory
-    function add() {
+    function add()
+    { // Function to add a subcategory
         $view = & $this->getView('subcategory');
-        if ($model = & $this->getModel('subcategory')) {
+        if ($model = & $this->getModel('subcategory'))
+        {
             $view->setModel($model, true);
         }
         $view->setLayout('subcategoryform');
         $view->display();
     }
 
-     // Function to delete a subcategory
-    function remove() {
+    function remove()
+    { // Function to delete a subcategory
         $arrayIDs = JRequest::getVar('cid', null, 'default', 'array'); //Reads cid as an array
-        if ($arrayIDs === null) { //Make sure the cid parameter was in the request
+        if ($arrayIDs === null)
+        { //Make sure the cid parameter was in the request
             JError::raiseError(500, 'cid parameter missing from the request');
         }
         $model = & $this->getModel('subcategory');
@@ -76,36 +72,34 @@ class contushdvideoshareControllersubcategory extends JController {
         $this->setRedirect('index.php?layout=subcategory&option=' . JRequest::getVar('option'), 'Deleted...');
     }
 
-    // Function to cancel some operation
-    function cancel() {
+    function cancel()
+    { // Function to cancel some operation
         $this->setRedirect('index.php?layout=subcategory&option=' . JRequest::getVar('option'), 'Cancelled...');
     }
 
-    // Function to publish a subcategory
-    function publish() {
+    function publish()
+    { // Function to publish a subcategory
         $detail = JRequest::get('POST');
         $model = & $this->getModel('subcategory');
         $model->pubsubcategory($detail);
         $this->setRedirect('index.php?option=' . JRequest::getVar('option') . '&layout=subcategory');
     }
 
-    // Function to unpublish a subcategory
-    function unpublish() {
+    function unpublish()
+    { // Function to unpublish a subcategory
         $detail = JRequest::get('POST');
         $model = & $this->getModel('subcategory');
         $model->pubsubcategory($detail);
         $this->setRedirect('index.php?option=' . JRequest::getVar('option') . '&layout=subcategory');
     }
 
-    // Function to store and stay on the same page till we click on save button[Apply]
-    function apply() {
+    function apply()
+    { // Function to store and stay on the same page till we click on save button[Apply]
         $detail = JRequest::get('POST');
         $model = & $this->getModel('subcategory');
         $model->savesubcategory($detail);
         $link = 'index.php?option=com_contushdvideoshare&layout=subcategory&task=edit&cid[]=' . $detail['subcategory_id'];
         $this->setRedirect($link, 'Subcategory Saved!');
     }
-
 }
-
 ?>

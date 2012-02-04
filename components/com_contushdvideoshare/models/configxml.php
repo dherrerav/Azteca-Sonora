@@ -1,21 +1,46 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        configxml.php
- * @location    /components/com_contushdvideosahre/models/configxml.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-/**
- * Description :Generating configxml
- */
-// No Direct access
+
+//define( '_JEXEC', 1 );
+//
+//
+//
+//$str= dirname(__FILE__);
+//
+//define( 'DS', DIRECTORY_SEPARATOR );
+//
+//
+//$str = str_replace(DS.'components'.DS.'com_contushdvideoshare'.DS.'models','',$str);
+//
+//
+//
+//
+//define('JPATH_BASE',$str);
+//
+//
+//
+//
+//
+//require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
+//
+//require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php' );
+//
+//
+//$mainframe =& JFactory::getApplication('site');
+
+
 defined('_JEXEC') or die();
+
+
+
 jimport('joomla.application.component.model');
 
 class Modelcontushdvideoshareconfigxml extends JModel {
@@ -24,6 +49,7 @@ class Modelcontushdvideoshareconfigxml extends JModel {
     var $base;
 
     function configgetrecords() {
+
         $base = JURI::base();
         $this->$base = str_replace('components/com_contushdvideoshare/models/', '', $base);
         global $mainframe;
@@ -39,10 +65,6 @@ class Modelcontushdvideoshareconfigxml extends JModel {
             $playid = JRequest::getVar('id', '', 'get', 'int');
         }
         $itemid = 0;
-        if (JRequest::getVar('Itemid', '', 'get', 'int')) {
-            $itemid = JRequest::getVar('Itemid', '', 'get', 'int');
-        }
-        
         $rs_modulesettings = "";
         $query1 = "select * from #__hdflv_videos where published='1'";
         $db->setQuery($query1);
@@ -73,6 +95,7 @@ class Modelcontushdvideoshareconfigxml extends JModel {
         $hd_bol = "false";
         if (count($rows) > 0) {
             if ($rows[0]->filepath == "File" || $rows[0]->filepath == "FFmpeg") {
+
                 $video = $this->$base . $current_path . $rows[0]->videourl;
                 ($rows[0]->hdpath != "") ? $hdvideo = $this->$base . $current_path . $rows[0]->hdpath : $hdvideo = "";
                 $previewimage = $this->$base . $current_path . $rows[0]->previewurl;
@@ -90,7 +113,6 @@ class Modelcontushdvideoshareconfigxml extends JModel {
                     $hd_bol="false";
                 $hdvideo = $rows[0]->hdpath;
             }
-
             elseif ($rows[0]->filepath == "Youtube") {
                 $video = $rows[0]->videourl;
                 $previewimage = $rows[0]->previewurl;
@@ -166,7 +188,6 @@ class Modelcontushdvideoshareconfigxml extends JModel {
         $playlist_open = "false";
         $postrollads = "false";
         $prerollads = "false";
-        $midrollads = "false";
         $ads = "false";
         $vast = "false";
         $vast_pid = 0;
@@ -177,10 +198,6 @@ class Modelcontushdvideoshareconfigxml extends JModel {
         ($settingsrows[0]->ads == 0) ? $ads = "false" : $ads = "true";
         ($settingsrows[0]->vast == 0) ? $vast = "false" : $vast = "true";
         $vast_pid = $settingsrows[0]->vast_pid;
-         $language = JRequest::getVar('lang');
-        if( $language != ''){
-        $language = '&lang='.$language;
-        }
         $playlistxml = $base . "components/com_contushdvideoshare/models/playxml.php";
         if ($playid) {
             if ($playid == -1) {
@@ -196,67 +213,59 @@ class Modelcontushdvideoshareconfigxml extends JModel {
             $previewimage = "";
         }
         if (JRequest::getVar('catid', '', 'get', 'int')) {
-            $playlistxml = "index.php?option=com_contushdvideoshare&amp;view=playxml&amp;id=" . JRequest::getVar('id', '', 'get', 'int') . "&amp;catid=" . JRequest::getVar('catid', '', 'get', 'int');
-            $location = $base . "index.php?option=com_contushdvideoshare&amp;view=player&amp;id=" . JRequest::getVar('id', '', 'get', 'int') . "&amp;catid=" . JRequest::getVar('catid', '', 'get', 'int');
+            $playlistxml = $base . "index.php?option=com_contushdvideoshare&view=playxml&id=" . JRequest::getVar('id', '', 'get', 'int') . "&catid=" . JRequest::getVar('catid', '', 'get', 'int');
+            $locaiton = $base . "index.php?option=com_contushdvideoshare&view=player&id=" . JRequest::getVar('id', '', 'get', 'int') . "&catid=" . JRequest::getVar('catid', '', 'get', 'int');
         } elseif (JRequest::getVar('id', '', 'get', 'int')) {
-            $playlistxml = "index.php?option=com_contushdvideoshare&amp;view=playxml&amp;id=" . JRequest::getVar('id', '', 'get', 'int');
-            $location = $base . "index.php?option=com_contushdvideoshare&amp;view=player&amp;id=" . JRequest::getVar('id', '', 'get', 'int');
+            $playlistxml = $base . "index.php?option=com_contushdvideoshare&view=playxml&id=" . JRequest::getVar('id', '', 'get', 'int');
+            $locaiton = $base . "index.php?option=com_contushdvideoshare&view=player&id=" . JRequest::getVar('id', '', 'get', 'int');
         } else {
-            $playlistxml = "index.php?option=com_contushdvideoshare&amp;view=playxml&amp;featured=true";
-            $location = $base . "index.php?option=com_contushdvideoshare&amp;view=player&amp;featured=true";
+            $playlistxml = $base . "index.php?option=com_contushdvideoshare&view=playxml&featured=true";
+            $locaiton = $base . "index.php?option=com_contushdvideoshare&view=player&featured=true";
         }
-        //$emailpath=JURI::base()."/index.php?option=com_contushdvideoshare&view=email";
-        $adsxml = JRoute::_("index.php?option=com_contushdvideoshare&amp;view=adsxml");
-        $midrollxml = JRoute::_("index.php?option=com_contushdvideoshare&amp;view=midrollxml");
-        $emailpath = $base .  "components/com_contushdvideoshare/hdflvplayer/email.php" ;
+//$emailpath=JURI::base()."/index.php?option=com_contushdvideoshare&view=email";
+        $adsxml = JURI::base() . "index.php?option=com_contushdvideoshare&view=adsxml";
+        $emailpath = $base . "components/com_contushdvideoshare/hdflvplayer/email.php";
         $logopath = $base . "components/com_contushdvideoshare/videos/" . $settingsrows[0]->logopath;
-        $languagexml = JRoute::_("index.php?option=com_contushdvideoshare&amp;view=languagexml");
-        $videoshareurl = JRoute::_("index.php?option=com_contushdvideoshare&amp;view=videourl");
-        $cssurl = $base . "components/com_contushdvideoshare/hdflvplayer/css/midrollformat.css";
-      $playlistxml= JRoute::_($playlistxml);
-              //ob_start();
+        $languagexml = $base . "index.php?option=com_contushdvideoshare&view=languagexml";
+        $midrollxml = $base . "index.php?option=com_contushdvideoshare&view=midrollxml";
+        $videoshareurl = $base . "index.php?option=com_contushdvideoshare&view=videourl";
         ob_clean();
-        session_start();
-        header("cache-control: private");
-        header("Pragma: public");
-        header("Content-type: application/xml");
         header("content-type:text/xml;charset=utf-8");
         echo '<?xml version="1.0" encoding="utf-8"?>';
         echo '<config
-              license="' . $license . '"
-              autoplay="' . $autoplay . '"
-              playlist_open="' . $playlist_open . '"
-              buffer="' . $buffer . '"
-              normalscale="' . $normalscale . '"
-              fullscreenscale="' . $fullscreenscale . '"
-              logopath="' . $logopath . '"
-              logo_target="' . $settingsrows[0]->logourl . '"
-              logoalign="' . $settingsrows[0]->logoalign . '"
-              Volume="' . $settingsrows[0]->volume . '"
-              preroll_ads="' . $prerollads . '"
-              midroll_ads="' . $midrollads . '"
-              postroll_ads="' . $postrollads . '"
-              HD_default="' . $hddefault . '"
-              Download="false"
-              logoalpha="' . $settingsrows[0]->logoalpha . '"
-              skin_autohide="' . $skin_autohide . '"
-              stagecolor="' . $stagecolor . '"
-              skin="' . $skin . '"
-              embed_visible="true"
-              playlistXML="' .$playlistxml.  '"
-              adXML="' . $adsxml . '"
-              midrollXML="' . $midrollxml . '"
-              languageXML="' . $languagexml . '"
-              cssURL="' . $cssurl . '"
-              debug="false"
-              shareURL="' . $emailpath . '"
-              videoshareURL="' . $videoshareurl . '"
-              showPlaylist="' . $playlist . '"
-              vast_partnerid="' . $vast_pid . '"
-              vast="' . $vast . '"
-              UseYouTubeApi="' . $Youtubeapi . '"
-              scaleToHideLogo="' . $scaletologo . '"
-              location="' . $location . '">';
+        license="' . $license . '"
+        autoplay="' . $autoplay . '"
+        playlist_open="' . $playlist_open . '"
+        buffer="' . $buffer . '"
+        normalscale="' . $normalscale . '"
+        fullscreenscale="' . $fullscreenscale . '"
+        logopath="' . $logopath . '"
+        logo_target="' . $settingsrows[0]->logourl . '"
+        logoalign="' . $settingsrows[0]->logoalign . '"
+        Volume="' . $settingsrows[0]->volume . '"
+        preroll_ads="' . $prerollads . '"
+        midroll_ads="' . $midrollads . '"
+        postroll_ads="' . $postrollads . '"
+        HD_default="' . $hddefault . '"
+        Download="false"
+        logoalpha="' . $settingsrows[0]->logoalpha . '"
+        skin_autohide="' . $skin_autohide . '"
+        stagecolor="' . $stagecolor . '"
+        skin="' . $skin . '"
+        embed_visible="true"
+        playlistXML="' . $playlistxml . '"
+        adXML="' . $adsxml . '"
+        midrollXML="' . $midrollxml . '"
+        languageXML="' . $languagexml . '"
+        debug="false"
+        shareURL="' . $emailpath . '"
+        videoshareURL="' . $videoshareurl . '"
+        showPlaylist="' . $playlist . '"
+        vast_partnerid="' . $vast_pid . '"
+        vast="' . $vast . '"
+        UseYouTubeApi="' . $Youtubeapi . '"
+        scaleToHideLogo="' . $scaletologo . '"
+        location="' . $locaiton . '">';
         echo '<timer>' . $timer . '</timer>';
         echo '<zoom>' . $zoom . '</zoom>';
         echo '<email>' . $share . '</email>';
@@ -266,4 +275,3 @@ class Modelcontushdvideoshareconfigxml extends JModel {
     }
 
 }
-

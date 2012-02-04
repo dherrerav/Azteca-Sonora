@@ -1,28 +1,18 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        contushdvideoshareads.php
- * @location    /components/com_contushdvideosahre/table/contushdvideoshareads.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-/**
- * Description :    Ads Administrator Table
- */
-
-//No direct acesss
+// no direct access
 defined('_JEXEC') or die('Restricted access');
 
 class Tablecontushdvideoshareads extends JTable {
-    function __construct(&$db) {
-        parent::__construct('#__hdflv_ads', 'id', $db);
-    }
+
     var $id = null;
     var $published = null;
     var $adsname = null;
@@ -32,10 +22,15 @@ class Tablecontushdvideoshareads extends JTable {
     var $targeturl = null;
     var $clickurl = null;
     var $impressionurl = null;
-    var $impressioncounts = null;
     var $clickcounts = null;
-    var $adsdesc = null;
-    var $typeofadd = null;
+    var $impressioncounts=null;
+    var $adsdesc=null;
+    var $typeofadd=null;
+
+    function __construct(&$db) {
+        parent::__construct('#__hdflv_ads', 'id', $db);
+    }
+
 }
 
 ?>

@@ -1,21 +1,12 @@
 <?php
-
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        controller.php
- * @location    /components/com_contushdvideosahre/controller.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
 /*
- * Description : Front page conroller
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-// No direct Access
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.controller');
 
@@ -29,10 +20,11 @@ class contushdvideoshareController extends JController {
         define('USER_LOGIN', $rows[0]->user_login);
         require_once("components/com_contushdvideoshare/language/" . $rows[0]->language_settings);
         $viewName = JRequest::getVar('view');
-        if ($viewName != "languagexml" && $viewName != "configxml" && $viewName != "playxml") {
-?>
-            <script src="<?php echo JURI::base(); ?>components/com_contushdvideoshare/js/tool_tip.js"></script>
-<?php JHTML::_('stylesheet', $thumbpath1 . JURI::base() . 'components/com_contushdvideoshare/css/tool_tip.css', array(), true); ?>
+        if ($viewName != "languagexml" && $viewName != "configxml" && $viewName != "playxml") 
+         {
+   ?>
+<!--            <script src="<?php //echo JURI::base(); ?>components/com_contushdvideoshare/js/tool_tip.js"></script>-->
+            <link rel="stylesheet" href="<?php echo JURI::base(); ?>components/com_contushdvideoshare/css/tool_tip.css" type="text/css" />
 <?php
         }
         $this->getdisplay($viewName);
@@ -44,74 +36,87 @@ class contushdvideoshareController extends JController {
         $document = & JFactory::getDocument();
         $viewType = $document->getType();
         $view = & $this->getmodView($viewName, $viewType);
+//        echo $viewName;
         $model = & $this->getModel($viewName, 'Modelcontushdvideoshare');
+//
+
         if (!JError::isError($model)) {
 
             $view->setModel($model, true);
         }
+     
         $view->display();
+        
     }
 
     function &getmodView($name = '', $type = '', $prefix = '', $config = array()) {
         static $views;
-        if (empty($prefix)) {
+        if (empty($prefix))
+        {
             $prefix = $this->getName() . 'View';
         }
-        if (empty($views[$name])) {
-            if ($view = & $this->createView($name, $prefix, $type, $config)) {
+        if (empty($views[$name]))
+         {
+            if(version_compare(JVERSION,'1.6.0','ge'))
+        {
+            if ($view = & $this->createView($name, $prefix, $type, $config))
+            {
                 $views[$name] = & $view;
-            } else {
-                $Headervalue = JRoute::_("Location:index.php?option=com_contushdvideoshare&view=player");
-                header($Headervalue);
             }
+            else
+            {
+                header("Location:index.php?option=com_contushdvideoshare&view=player&itemid=0");
+            }
+        }
+         else
+          {
+                if ($view = & $this->_createView($name, $prefix, $type, $config))
+            {
+                $views[$name] = & $view;
+            }
+            else
+            {
+                header("Location:index.php?option=com_contushdvideoshare&view=player&itemid=0");
+            }
+           }
         }
 
         return $views[$name];
     }
 
-    function adsxml() {
-
+    function adsxml()
+    {
         $view = & $this->getView('adsxml');
-        if ($model = & $this->getModel('adsxml')) {
+        if ($model = & $this->getModel('adsxml'))
+        {
             //Push the model into the view (as default)
             //Second parameter indicates that it is the default model for the view
             $view->setModel($model, true);
         }
         $view->display();
     }
-
-    function midrollxml() {
-
-        $view = & $this->getView('midrollxml');
-        if ($model = & $this->getModel('midrollxml')) {
-            $view->setModel($model, true);
-        }
-        $view->display();
-    }
-
-
-   
-    // viewed Ad's for player
-    function impressionclicks() {
-
+// viewed Ad's for player
+    function impressionclicks()
+    {
         $view = & $this->getView('impressionclicks');
-        if ($model = & $this->getModel('impressionclicks')) {
+        if ($model = & $this->getModel('impressionclicks'))
+        {
             $view->setModel($model, true);
         }
         $view->display();
     }
 
-    function videourl() {
-
+    function videourl()
+    {
         $view = & $this->getView('videourl');
-        if ($model = & $this->getModel('videourl')) {
+        if ($model = & $this->getModel('videourl'))
+         {
             //Push the model into the view (as default)
             //Second parameter indicates that it is the default model for the view
             $view->setModel($model, true);
         }
         $view->getvideourl();
     }
-
 }
 ?>
 

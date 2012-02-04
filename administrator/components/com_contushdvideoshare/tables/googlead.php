@@ -1,41 +1,33 @@
 <?php
-
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        googlead.php
- * @location    /components/com_contushdvideosahre/table/googlead.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :    Google Ad Administrator Table
- */
-
-//No direct acesss
+/*
+* "ContusHDVideoShare Component" - Version 2.3
+* Author: Contus Support - http://www.contussupport.com
+* Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+* License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+* Project page and Demo at http://www.hdvideoshare.net
+* Creation Date: March 30 2011
+*/
 defined('_JEXEC') or die('Restricted Access');
 
 class Tablegooglead extends JTable {
-
-    var $id = null;
-    var $code = null;
+	var $id = null;
+	var $code = null;
     var $showoption = null;
     var $closeadd = null;
-    var $reopenadd = null;
+	var $reopenadd = null;
     var $publish = null;
     var $ropen = null;
-    var $showaddc = null;
+	var $showaddc  = null;
     var $showaddm = null;
     var $showaddp = null;
 
-    function Tablegooglead(&$db) {
-        parent::__construct('#__hdflv_googlead', 'id', $db);
-    }
+   
 
+	function Tablegooglead(&$db){
+        
+		parent::__construct('#__hdflv_googlead', 'id', $db);
+     
+	}
 }
 
 ?>

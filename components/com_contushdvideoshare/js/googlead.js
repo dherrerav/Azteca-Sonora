@@ -1,18 +1,3 @@
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        googlead.js
- * @location    /components/com_contushdvideosahre/js/googlead.js
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :   googlead displaying position 
- */
 
 var pagearray=new Array();
 var timerout1 ;
@@ -52,7 +37,10 @@ function googleclose()
 function onplayerloaded()
 {
     pageno=1;
+   
     timerout1 =window.setTimeout('bindpage(0)', 1000);
+    //setTimeout(closediv(), 10000);
+   // getFlashMovie('player').playmovie();
 
 }
 
@@ -91,15 +79,15 @@ function findPosY(obj)
 function closediv()
 {
 
-    document.getElementById('lightm').style.display="none";
-    clearTimeout();
-    if( ropen!=''){
-        setTimeout('bindpage(0)', ropen);
-    }
+ document.getElementById('lightm').style.display="none";
+ clearTimeout();
+ if( ropen!=''){setTimeout('bindpage(0)', ropen); }
 }
 
 function bindpage(pageno)
 {
+    //document.getElementById('lightm').style.display="none";
+
     if(document.all)
     {
         document.all.IFrameName.src=pagearray[0];
@@ -112,4 +100,12 @@ function bindpage(pageno)
     document.getElementById('closeimgm').style.display="block";
     document.getElementById('lightm').style.display="block";
     if(closeadd !='') setTimeout('closediv()', closeadd);
+    //setInterval('closediv()', 10000);
 }
+
+
+
+//function onEndVideo()
+//{
+//    postadd();
+//}

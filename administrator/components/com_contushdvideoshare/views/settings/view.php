@@ -1,35 +1,44 @@
 <?php
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        view.php
- * @location    /components/com_contushdvideosahre/views/settings/view.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
 
-/**
- * Description :    Player settings view page
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-// no direct access
 defined('_JEXEC') or die('Restricted access');
+
 jimport('joomla.application.component.view');
 
 class contushdvideoshareViewsettings extends JView {
 
     function display() {
-        if (JRequest::getVar('task') == 'edit' || JRequest::getVar('task') == '') {
+
+//    echo JRequest::getVar('task');
+        if (JRequest::getVar('task') == 'edit') {
+
             JToolBarHelper::title('Player Settings' . ': [<small>Edit</small>]');
-            JToolBarHelper::save('save', 'save');
+            JToolBarHelper::save();
+            JToolBarHelper::apply();
+            JToolBarHelper::cancel();
             $model = $this->getModel();
             $playersettings = $model->playersettingsmodel();
             $this->assignRef('playersettings', $playersettings);
             parent::display();
         }
+
+        if (JRequest::getVar('task') == '') {
+            JToolBarHelper::title('Player Settings', 'generic.png');
+            JToolBarHelper::editListX();
+            $model = $this->getModel();
+            $playersettings = $model->getsetting();
+            $this->assignRef('playersettings', $playersettings);
+            parent::display();
+        }
     }
+
 }
+
 ?>

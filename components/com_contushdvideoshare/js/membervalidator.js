@@ -1,36 +1,18 @@
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        membervalidator.js
- * @location    /components/com_contushdvideosahre/js/membervalidator.js
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :   validating new user registration and user login page
- */
-
-
-
 function profilevalidate()
 {
-    if(document.getElementById("username").value=="")
+     if(document.getElementById("username").value=="")
     {
         alert("Please Enter Your User Name");
         document.getElementById("username").focus();
         return false;
     }
-    if(document.getElementById("email").value=="")
+     if(document.getElementById("email").value=="")
     {
         alert("Please Enter Your Email");
         document.getElementById("email").focus();
         return false;
     }
-    if(document.getElementById("email").value!="")
+     if(document.getElementById("email").value!="")
     {
         if(checkemail(document.getElementById("email").value)==false)
         {
@@ -98,7 +80,7 @@ function profilevalidate()
             return false;
         }
     }
-    if(document.getElementById("txtcaptcha").value=="")
+     if(document.getElementById("txtcaptcha").value=="")
     {
         alert("Please Enter The Security Code");
         document.getElementById("txtcaptcha").focus();
@@ -127,6 +109,18 @@ function memberlogin()
         document.getElementById("username1").focus();
         return false;
     }
+//    if(document.getElementById("username1").value!="")
+//    {
+//        if(checklogin(document.getElementById("username1").value)==false)
+//        {
+//            document.getElementById("username1").value="";
+//            document.getElementById("username1").focus();
+//            document.getElementById("password1").value="";
+//            return false
+//        }
+//
+//
+//    }
     if(document.getElementById("password1").value=="")
     {
         alert("Please Enter Your Password");
@@ -162,14 +156,43 @@ function checklogin(str)
 function videoupload()
 {
 
-    if(document.getElementById("filetype2").checked==true)
+if(document.getElementById("filetype2").checked==true)
     {
+        if(document.getElementById("title").value=="")
+    {
+        alert("Please Enter Your Video Title");
+        document.getElementById("title").focus();
+        return false;
+    }
+    if(document.getElementById("tagname").value=="")
+    {
+        alert("Please Select the category");
+        document.getElementById("title").focus();
+        return false;
+    }
         if(document.getElementById("Youtubeurl").value=="" || document.getElementById("Youtubeurl").value==" ")
-        {
-            alert("Please Enter valid Video URL");
-            document.getElementById("Youtubeurl").focus();
-            return false;
-        }
+    {
+        alert("Please Enter the Video URL");
+        document.getElementById("Youtubeurl").focus();
+        return false;
+    }
+     else
+     {
+     
+        var theurl=document.getElementById("Youtubeurl").value;
+        var tomatch= /http:\/\/[A-Za-z0-9\.-]{3,}\.[A-Za-z]{3}/
+         if (tomatch.test(theurl))
+         {
+                     return;
+         }
+         else
+         {
+             alert("URL invalid. Try again.");
+             document.getElementById("Youtubeurl").focus();
+             return false;
+         }
+    }
+ 
     }
 
     if(document.getElementById("ffmpeg").value=="" && document.getElementById("seltype").value==2)
@@ -187,7 +210,7 @@ function videoupload()
         return false;
     }
 
-    if(document.getElementById("thumbimageformval").value=="" && document.getElementById("seltype").value==1)
+     if(document.getElementById("thumbimageformval").value=="" && document.getElementById("seltype").value==1)
     {
         alert("Please Select Thumb Image");
         document.getElementById("thumbimageformval").focus();
@@ -200,12 +223,23 @@ function videoupload()
         return false;
     }
  
-    if(document.getElementById("tagname").value=="")
+     if(document.getElementById("tagname").value=="")
     {
         alert("Please Enter Video Category");
         document.getElementById("tagname").focus();
         return false;
     }
+
+   
+    
+
+
+//     if(document.getElementById("sub_id").value=='0')
+//    {
+//        alert("Please Select Video Subcategory");
+//        document.getElementById("sub_id").focus();
+//        return false;
+//    }
     return true;
 }
 
@@ -218,7 +252,7 @@ function videoupload1()
         document.getElementById("url").focus();
         return false;
     }
-    if(document.getElementById("url").value!="")
+     if(document.getElementById("url").value!="")
     {
         if(validate_youtube_url(document.getElementById("url").value)==false)
         {
@@ -239,6 +273,7 @@ function validate_youtube_url(str,protocol)
     }
     protocol = protocol.replace(/\//g, '\/', protocol).replace(/\./g, '\.');
     protocol = (protocol != '') ? '^(' + protocol + ')' : protocol;
+    
     match_exp1 = new RegExp(protocol + 'youtube\.com\/(.+)(v=.+)', 'gi');
     match_exp2 = new RegExp(protocol + '(.*?)blip\.tv\/file\/[0-9]+/');
     match_exp3 = new RegExp(protocol + 'metacafe\.com\/watch\/(.*?)\/(.*?)\//');
@@ -254,25 +289,37 @@ function validate_youtube_url(str,protocol)
     }else{
         if(matches1!=null)
         {
-            matchesf=matches1;
+                matchesf=matches1;
         }
         else if(matches2!=null)
         {
-            matchesf=matches2;
+                matchesf=matches2;
         }
         else if(matches3!=null)
         {
-            matchesf=matches3;
+                matchesf=matches3;
         }
         else if(matches4!=null)
         {
-            matchesf=matches4;
+                matchesf=matches4;
         }
         else if(matches5!=null)
         {
-            matchesf=matches5;
+                matchesf=matches5;
         }
-        testvalue=true;
+//        var qs = matchesf[matchesf.length-1].split('&');
+//        var vid = false;
+//        for(i=0; i<qs.length; i++){
+//            var x = qs[i].split('=');
+//            if(x[0] == 'v' && x[1]){
+//                vid = x[1];
+                testvalue=true;
+//            }else{
+//                alert("Missing ID");
+//                testvalue=false;
+//            }
+//        }
+//        return (testvalue);
     }
     return (testvalue);
 }

@@ -1,21 +1,7 @@
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        hidevideo.js
- * @location    /components/com_contushdvideosahre/js/hidevideo.js
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :   Front page Uploading script
- */
-
 var uploadqueue = [];
 var uploadmessage = '';
+
+
 function addQueue(whichForm,myfile)
 {
     var  extn = extension(myfile);
@@ -38,10 +24,12 @@ function addQueue(whichForm,myfile)
     uploadqueue.push(whichForm);
     if (uploadqueue.length == 1)
     {
+
         processQueue();
     }
     else
     {
+
         holdQueue();
     }
 
@@ -63,11 +51,14 @@ function holdQueue()
 }
 function updateQueue(statuscode,statusmessage,outfile)
 {
-   
+    
     uploadmessage = statusmessage;
     form_handler = uploadqueue[0];
+
+
     if(form_handler=='normalvideoform' || form_handler=='hdvideoform' || form_handler=='thumbimageform' || form_handler=='previewimageform' )
     {
+
         form_handlers=form_handler+"val";
         document.getElementById(form_handlers).value = outfile;
     }
@@ -85,7 +76,7 @@ function submitUploadForm(form_handle)
 {
     document.forms[form_handle].target = "uploadvideo_target";
     document.forms[form_handle].action = document.getElementById("videouploadformurl").value+"administrator/components/com_contushdvideoshare/upload.php?processing=1&clientupload=true";
-    document.forms[form_handle].submit();
+document.forms[form_handle].submit();
 }
 function setStatus(form_handle,status)
 {
@@ -110,6 +101,7 @@ function setStatus(form_handle,status)
     var uploadformurl=document.getElementById("videouploadformurl").value;
     switch(status)
     {
+            
         case "Queued":
             document.getElementById(divprefix + "-upload-form").style.display = "none";
             document.getElementById(divprefix + "-upload-progress").style.display = "block";
@@ -155,6 +147,9 @@ function setStatus(form_handle,status)
             document.getElementById(divprefix + "-upload-cancel").innerHTML = '';
             break;
     }
+
+
+
 }
 
 function enableUpload(whichForm,myfile)
@@ -186,12 +181,15 @@ function cancelUpload(whichForm)
     {
         uploadqueue.splice(pos,1);
     }
+
 }
    
 function extension(fname)
 {
     var pos = fname.lastIndexOf(".");
+
     var strlen = fname.length;
+
     if(pos != -1 && strlen != pos+1)
     {
         var ext = fname.split(".");
@@ -200,7 +198,11 @@ function extension(fname)
     }
     else
     {
+
         extension = "No extension found";
+
     }
+
     return extension;
+
 }

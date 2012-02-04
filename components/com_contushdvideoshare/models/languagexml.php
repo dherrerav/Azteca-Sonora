@@ -1,27 +1,31 @@
 <?php
-
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        languagexml.php
- * @location    /components/com_contushdvideosahre/models/languagexml.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-/**
- * Description :  lanugage xml model pages
- */
-// No Direct access
+/*
+* "ContusHDVideoShare Component" - Version 2.3
+* Author: Contus Support - http://www.contussupport.com
+* Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+* License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+* Project page and Demo at http://www.hdvideoshare.net
+* Creation Date: March 30 2011
+*/
 defined('_JEXEC') or die();
-jimport('joomla.application.component.model');
 
-class Modelcontushdvideosharelanguagexml extends JModel {
+jimport( 'joomla.application.component.model' );
 
-    function getlanguage() {
-        
-    }
 
+class Modelcontushdvideosharelanguagexml extends JModel
+{
+	/**
+	 * Gets the greeting
+	 * 
+	 * @return string The greeting to be displayed to the user
+	 */
+        function getlanguage()
+        {
+
+//          $db =& JFactory::getDBO();
+//          $query = "select * from #__hdflv_language where published='1' and home=1";//and id=2";
+//            $db->setQuery( $query );
+//            $rows = $db->loadObjectList();
+//            return $rows;
+        }
 }

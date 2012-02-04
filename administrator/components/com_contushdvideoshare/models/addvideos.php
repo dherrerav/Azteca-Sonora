@@ -1,33 +1,30 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        addvideos.php
- * @location    /components/com_contushdvideosahre/models/addvideos.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-/**
- * Description :    category Administrator Models
- */
-
 //No direct acesss
 defined('_JEXEC') or die();
+
 jimport('joomla.application.component.model');
 
 class contushdvideoshareModeladdvideos extends JModel {
 
-    function addvideosmodel() {
+    function addvideosmodel()
+    {
         $db = & JFactory::getDBO();
-        $query = "select ffmpeg, uploadmaxsize from #__hdflv_player_settings"; // query to get ffmpegpath & file max upload size from #__hdflv_player_settings
+        // query to get ffmpegpath & file max upload size from #__hdflv_player_settings
+        $query = "select ffmpeg, uploadmaxsize from #__hdflv_player_settings";
         $db->setQuery($query);
         $rs_playersettings = $db->loadObjectList();
-        if (count($rs_playersettings) > 0) { //to get total no.of records
+        //to get total no.of records
+        if (count($rs_playersettings) > 0)
+         {
             // To set max file size in php.ini
             ini_set('upload_max_filesize', $rs_playersettings[0]->uploadmaxsize . "M"); // to assign value to the php.ini file
             // To set max execution_time in php.ini
@@ -56,13 +53,30 @@ class contushdvideoshareModeladdvideos extends JModel {
         $uploadpathw = FVPATH . "/images/uploads/";
         if (is_writable("$videopathw"))
             $per_video = 1;
-
         if (is_writable("$uploadpathw"))
             $per_upload = 1;
-        $query = "SELECT id,adsname FROM #__hdflv_ads where published=1 order by adsname asc";
+        $query = "SELECT id,adsname FROM #__hdflv_ads where published=1 and typeofadd!='mid' order by adsname asc";
         $db->setQuery($query);
         $rs_ads = $db->loadObjectList();
-        $add = array('upload_maxsize' => $upload_maxsize, 'rs_play' => $rs_play, 'per_upload' => $per_upload, 'per_upload' => $per_upload, 'allow_status' => $allow_status, 'rs_editupload' => $rs_editupload, 'rs_ads' => $rs_ads);
+        $query = "SELECT id,adsname FROM #__hdflv_ads where published=1 and typeofadd ='mid' order by adsname asc";
+        $db->setQuery($query);
+        $rs_midads = $db->loadObjectList();
+         if(version_compare(JVERSION,'1.6.0','ge'))
+        {
+       $query = "SELECT id as id ,title as title FROM #__viewlevels order by id asc";
+//          $query->select('g.id AS group_id')
+//                ->from('#__usergroups AS g')
+//                ->leftJoin('#__user_usergroup_map AS map ON map.group_id = g.id');
+        }
+        else
+        {
+     $query = "SELECT id as id ,name as title FROM #__groups order by id asc";
+  //echo    $query = "select g.id AS group_id from #__usergroups AS g leftjoin #__user_usergroup_map AS map ON map.group_id = g.id ";
+        }
+       $db->setQuery($query);
+        $usergroups = $db->loadObjectList();
+        
+        $add = array('upload_maxsize' => $upload_maxsize, 'rs_play' => $rs_play, 'per_upload' => $per_upload, 'per_upload' => $per_upload, 'allow_status' => $allow_status, 'rs_editupload' => $rs_editupload, 'rs_ads' => $rs_ads, 'rs_midads' => $rs_midads,'user_groups' => $usergroups);
         return $add;
     }
 

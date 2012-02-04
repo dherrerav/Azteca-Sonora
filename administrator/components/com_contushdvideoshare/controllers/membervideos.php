@@ -1,42 +1,41 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        membervideos.php
- * @location    /components/com_contushdvideosahre/controller/membervideos.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-/**
- * Description :  Member videos Component Administrator Controller
- */
-
 defined('_JEXEC') or die('Restricted access');
+
 jimport('joomla.application.component.controller');
 
+/**
+ * videos Component Administrator Controller
+ */
 class contushdvideoshareControllermembervideos extends JController {
 
-    function display() {
+    function display()
+    {
+
         $viewName = JRequest::getVar('view', 'membervideos');
         $viewLayout = JRequest::getVar('layout', 'membervideos');
         $view = & $this->getView($viewName);
-        if ($model = & $this->getModel('membervideos')) {
+        if ($model = & $this->getModel('membervideos'))
+        {
             $view->setModel($model, true);
         }
         $view->setLayout($viewLayout);
         $view->display();
     }
 
-    function remove() {
-
+    function remove()
+    {
         $arrayIDs = JRequest::getVar('cid', null, 'default', 'array'); //Reads cid as an array
-
-        if ($arrayIDs === null) { //Make sure the cid parameter was in the request
+        if ($arrayIDs === null)
+        { //Make sure the cid parameter was in the request
             JError::raiseError(500, 'cid parameter missing from the request');
         }
         $model = & $this->getModel('membervideos');
@@ -44,36 +43,42 @@ class contushdvideoshareControllermembervideos extends JController {
         $this->setRedirect('index.php?layout=membervideos&option=' . JRequest::getVar('option'), 'Deleted...');
     }
 
-    function publish() {
+    function publish()
+    {
         $detail = JRequest::get('POST');
         $model = & $this->getModel('membervideos');
         $model->pubvideo($detail);
         $this->setRedirect('index.php?layout=membervideos&option=' . JRequest::getVar('option'));
     }
 
-    function unpublish() {
+    function unpublish()
+    {
         $detail = JRequest::get('POST');
         $model = & $this->getModel('membervideos');
         $model->pubvideo($detail);
         $this->setRedirect('index.php?layout=membervideos&option=' . JRequest::getVar('option'));
     }
 
-    function featured() {
+    function featured()
+    {
         $detail = JRequest::get('POST');
         $model = & $this->getModel('membervideos');
         $model->featuredvideo($detail);
         $this->setRedirect('index.php?layout=membervideos&option=' . JRequest::getVar('option'));
     }
 
-    function unfeatured() {
+    function unfeatured()
+    {
         $this->featured();
     }
 
-    function cancel() {
+    function cancel()
+    {
         $this->setRedirect('index.php?layout=membervideos&option=' . JRequest::getVar('option'));
     }
 
-    function comment() {
+    function comment()
+    {
         $this->display();
     }
 

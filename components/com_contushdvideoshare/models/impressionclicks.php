@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version     1.3, Creation Date : March-24-2011
+ * @version     2.3, Creation Date : March-24-2011
  * @name        impressionclicks.php
  * @location    /components/com_contushdvideosahre/models/impressionclicks.php
  * @package	Joomla 1.6
@@ -17,7 +17,6 @@
 // No Direct access
 defined('_JEXEC') or die();
 jimport('joomla.application.component.model');
-
 class Modelcontushdvideoshareimpressionclicks extends JModel {
 
     function impressionclicks() {
@@ -33,7 +32,5 @@ class Modelcontushdvideoshareimpressionclicks extends JModel {
         $db->query();
         exit();
     }
-
 }
-
 ?>

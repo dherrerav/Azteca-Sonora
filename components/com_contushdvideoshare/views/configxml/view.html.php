@@ -1,34 +1,28 @@
 <?php
+/*
+* "ContusHDVideoShare Component" - Version 2.3
+* Author: Contus Support - http://www.contussupport.com
+* Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+* License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+* Project page and Demo at http://www.hdvideoshare.net
+* Creation Date: March 30 2011
+*/
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        view.html.php
- * @location    /components/com_contushdvideosahre/views/configxml/view.html.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
+jimport( 'joomla.application.component.view');
 
-/**
- * Description :   GetModel & Getconfig records
- */
 
-//No direct Access
-defined('_JEXEC') or die('Restricted access');
+class contushdvideoshareViewconfigxml extends JView
+{
 
-jimport('joomla.application.component.view');
+	function display()
+	{
+                $model =& $this->getModel();
+		$detail = $model->configgetrecords();
+		$this->assignRef('detail', $detail);
+                $this->setLayout('playerlayout');
+		parent::display();
+	}
 
-class contushdvideoshareViewconfigxml extends JView {
-
-    function display() {
-        $model = & $this->getModel();
-        $detail = $model->configgetrecords();
-        $this->assignRef('detail', $detail);
-        $this->setLayout('playerlayout');
-        parent::display();
-    }
 }
 ?>   

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.3, Creation Date : March-24-2011
+ * @version     2.3, Creation Date : March-24-2011
  * @name        impressionclicks.php
  * @location    /components/com_contushdvideosahre/views/impressionclicks/tmpl/impressionclicks.php
  * @package	Joomla 1.6

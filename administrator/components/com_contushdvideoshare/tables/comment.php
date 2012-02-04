@@ -1,28 +1,17 @@
 <?php
-
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        comment.php
- * @location    /components/com_contushdvideosahre/table/comment.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :    comment Administrator Table
- */
-
-//No direct acesss
+/*
+* "ContusHDVideoShare Component" - Version 2.3
+* Author: Contus Support - http://www.contussupport.com
+* Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+* License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+* Project page and Demo at http://www.hdvideoshare.net
+* Creation Date: March 30 2011
+*/
 defined('_JEXEC') or die('Restricted Access');
 
 class Tablecomment extends JTable {
-
-    var $id = null;
-    var $parentid = null;
+	var $id = null;
+	var $parentid = null;
     var $videoid = null;
     var $name = null;
     var $email = null;
@@ -31,10 +20,11 @@ class Tablecomment extends JTable {
     var $created = null;
     var $published = null;
 
-    function Tablecomment(&$db) {
-        parent::__construct('#__hdflv_comments', 'id', $db);
-    }
+   	function Tablecomment(&$db){
 
+		parent::__construct('#__hdflv_comments', 'id', $db);
+
+	}
 }
 
 ?>

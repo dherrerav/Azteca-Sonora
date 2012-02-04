@@ -1,33 +1,24 @@
 <?php
-
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        view.php
- * @location    /components/com_contushdvideosahre/views/sitesettings/view.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :    HTML View class for the backend of the details Component edit task
- */
-
-// no direct access
-defined('_JEXEC') or die('Restricted access');
-jimport('joomla.application.component.view');
-
-class contushdvideoshareViewsitesettings extends JView {
-
-    function display() {
-        if (JRequest::getVar('task') == 'edit' || JRequest::getVar('task') == '') {
-            JToolBarHelper::title('Site Settings' . ': [<small>Edit</small>]');
-            JToolBarHelper::save('save', 'save');
+/*
+* "ContusHDVideoShare Component" - Version 2.3
+* Author: Contus Support - http://www.contussupport.com
+* Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+* License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+* Project page and Demo at http://www.hdvideoshare.net
+* Creation Date: March 30 2011
+*/
+defined( '_JEXEC' ) or die( 'Restricted access' );
+jimport( 'joomla.application.component.view');
+class contushdvideoshareViewsitesettings extends JView
+{
+    function display()
+    {
+        if(JRequest::getVar('task')=='edit' || JRequest::getVar('task')=='' )
+        {
+            JToolBarHelper::title('Site Settings'.': [<small>Edit</small>]');
+            JToolBarHelper::save();
             $model = $this->getModel();
-            $id = 1;
+            $id=1;
             $setting = $model->getsitesetting($id);
             $this->assignRef('sitesettings', $setting[0]);
             $this->assignRef('jomcomment', $setting[1]);
@@ -35,7 +26,5 @@ class contushdvideoshareViewsitesettings extends JView {
             parent::display();
         }
     }
-
 }
-
 ?>

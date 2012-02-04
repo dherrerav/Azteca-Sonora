@@ -1,18 +1,7 @@
 /**
- * @version     1.3, Creation Date : March-24-2011
- * @name        upload_script.php
- * @location    /components/com_contushdvideosahre/controller/upload_script.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :   Uploading videos added to queue list
- */
+* @Copyright Copyright (C) 2010-2011 Contus Support Interactive Private Limited
+* @license GNU/GPL http://www.gnu.org/copyleft/gpl.html,
+**/
 var uploadqueue = [];
 var uploadmessage = '';
 function addQueue(whichForm)

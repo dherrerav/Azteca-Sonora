@@ -1,28 +1,22 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        sitesettings.php
- * @location    /components/com_contushdvideosahre/models/sitesettings.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
-
-/**
- * Description :    Site Settings Administrator Models
- */
-
-//No direct acesss
 defined('_JEXEC') or die();
+
 jimport('joomla.application.component.model');
 
-class contushdvideoshareModelsitesettings extends JModel {
+class contushdvideoshareModelsitesettings extends JModel
+{
 
-    function getsitesettings() {
+    function getsitesettings()
+    {
         $db = $this->getDBO();
         $db->setQuery('SELECT * from #__hdflv_site_settings');
         $settings = $db->loadObjectList();
@@ -31,12 +25,14 @@ class contushdvideoshareModelsitesettings extends JModel {
         return $settings;
     }
 
-    function getsitesetting($id) {
+    function getsitesetting($id)
+    {
         $jcomment = $jomcomment = 0;
         $query = ' SELECT * FROM #__hdflv_site_settings WHERE id = 1';
         $db = $this->getDBO();
         $db->setQuery($query);
         $settings = $db->loadObject();
+       
         $query1 = " SELECT * FROM  #__components where `option`='com_jomcomment' and enabled =1";
         $db->setQuery($query1);
         $jomcommentquery = $db->loadObject();
@@ -51,20 +47,28 @@ class contushdvideoshareModelsitesettings extends JModel {
             return array($settings, $jomcomment, $jcomment);
     }
 
-    function savesitesettings($detail) {
+    function savesitesettings($detail)
+    {
         $option = 'com_contushdvideoshare';
         global $mainframe;
         $db = & JFactory::getDBO();
+        //$showsitesettings =& JTable::getInstance('contushdvideoshare', 'Table');
         $cid = JRequest::getVar('cid', array(0), '', 'array');
         $id = $cid[0];
+
         $detailTableRow = & $this->getTable('sitesettings');
-        if (!$detailTableRow->bind($detail)) {
+        if (!$detailTableRow->bind($detail))
+        {
             JError::raiseError(500, 'Error binding data');
         }
-        if (!$detailTableRow->check()) {
+
+        if (!$detailTableRow->check())
+        {
             JError::raiseError(500, 'Invalid data');
         }
-        if (!$detailTableRow->store()) {
+
+        if (!$detailTableRow->store())
+        {
             $errorMessage = $detailTableRow->getError();
             JError::raiseError(500, 'Error binding data: ' . $errorMessage);
         }
@@ -72,20 +76,26 @@ class contushdvideoshareModelsitesettings extends JModel {
         $query = "update #__hdflv_site_settings set " . $savepagesettings;
         $db->setQuery($query);
         $db->query();
+
     }
 
-    function fn_imagevalidation_settings(&$logoname, &$task, &$option, &$id) {
+    function fn_imagevalidation_settings(&$logoname, &$task, &$option, &$id)
+    {
         $option = 'com_contushdvideoshare';
         global $mainframe;
-        $exts = $this->findexts($logoname);         // Get file extension
-        if ($exts) {                                // To make sure exts is exists
-            if (($exts != "png") && ($exts != "gif") && ($exts != "jpeg") && ($exts != "jpg")) { // To check file type
+        // Get file extension
+        $exts = $this->findexts($logoname);
+        // To make sure exts is exists
+        if ($exts)
+        {
+            if (($exts != "png") && ($exts != "gif") && ($exts != "jpeg") && ($exts != "jpg"))
+            { // To check file type
                 JError::raiseWarning('SOME_ERROR_CODE', JText::_('File Extensions:Allowed Extensions for image file is .jpg,.jpeg,.png'));
             }
         }
     }
-
-    function findexts($filename) {
+    function findexts($filename)
+    {
         $filename = strtolower($filename);
         $exts = split("[/\\.]", $filename);
         $n = count($exts) - 1;
@@ -94,5 +104,4 @@ class contushdvideoshareModelsitesettings extends JModel {
     }
 
 }
-
 ?>

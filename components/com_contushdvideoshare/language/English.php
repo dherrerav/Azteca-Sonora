@@ -1,17 +1,16 @@
 <?php
 /*
-* "ContusHDVideoShare Component" - Version 1.2
+* "ContusHDVideoShare Component" - Version 2.3
 * Author: Contus Support - http://www.contussupport.com
 * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
 * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
 * Project page and Demo at http://www.hdvideoshare.net
-* Creation Date: June 15 2010
+* Creation Date: March 30 2011
 */
 
 DEFINE("_HDVS_VIDEO_UPLOAD","Video Upload");
 DEFINE("_HDVS_TITLE","Title");
 DEFINE("_HDVS_DESCRIPTION","Description");
-DEFINE("_HDVS_TAGS","Tags");
 DEFINE("_HDVS_DURATION","Duration");
 DEFINE("_HDVS_SELECT_CATEGORY","Select Category");
 DEFINE("_HDVS_CATEGORY","Category");
@@ -69,6 +68,7 @@ DEFINE("_HDVS_PRETTY_COOL","Pretty cool");
 DEFINE("_HDVS_AWESOME","Awesome");
 DEFINE("_HDVS_RELATED_VIDEOS","Related Videos");
 DEFINE("_HDVS_NO_RECORDS_FOUND","No Records Found");
+DEFINE("_HDVS_NO_CATEGORY_VIDEOS_FOUND","No videos found for this category");
 DEFINE("_HDVS_SEARCH_RESULT","Search Result");
 DEFINE("_HDVS_PREVIOUS","Previous");
 DEFINE("_HDVS_NEXT","Next");
@@ -127,5 +127,59 @@ DEFINE("_HDVS_BEBO","Bebo");
 DEFINE("_HDVS_FARK","Fark");
 DEFINE("_HDVS_TWEET","Tweet");
 DEFINE("_HDVS_FURL","Furl");
+DEFINE("_HDVS_VIDEO","video");
 DEFINE("_HDVS_TAGS","Tags");
+
+
+DEFINE("_HDVS_MY_CHANNEL","My Channel");
+DEFINE("_HDVS_MY_PLAYLIST","My Playlist");
+DEFINE("_HDVS_CHANNEL_SETTINGS","Channel Settings");
+DEFINE("_HDVS_PLAYER_WIDTH","Player Width");
+DEFINE("_HDVS_PLAYER_HEIGHT","Player Height");
+DEFINE("_HDVS_NUMBER_ROW","Number of Rows");
+DEFINE("_HDVS_NUMBER_COLUMNS","Number of Columns");
+DEFINE("_HDVS_TOPRATED_VIDEOS","Top Rated Videos");
+DEFINE("_HDVS_PLAYLIST","Playlists");
+DEFINE("_HDVS_SET_PLAYLIST","Playlist");
+DEFINE("_HDVS_ACCESSLEVEL","Access Level");
+DEFINE("_HDVS_FB_COMMENT","FB Comment");
+DEFINE("_HDVS_CHANNEL_VIDEO","Channel Video");
+DEFINE("_HDVS_START_VIDEO","Videos");
+DEFINE("_HDVS_LOGO","Logo");
+DEFINE("_HDVS_MY_PLAYLISTS","My Playlists");
+DEFINE("_HDVS_PLAYLIST_COMMENT","Select Videos for your Playlist");
+DEFINE("_HDVS_PLAYLIST_NAME","Enter Playlist Name");
+DEFINE("_HDVS_CREATE_PLAYLIST","Create New Playlist");
+DEFINE("_HDVS_CHANNEL_NAME","Channel Name");
+DEFINE("_HDVS_CHANNEL_VIEWS","Channel Views");
+DEFINE("_HDVS_TOTAL_UPLOADS","Total Uploads");
+DEFINE("_HDVS_RECENT_ACTIVITY","Recent Activity");
+DEFINE("_HDVS_ABOUT_ME","About Me");
+DEFINE("_HDVS_WEBSITE","Website");
+DEFINE("_HDVS_ADD","Add");
+DEFINE("_HDVS_APPLY","Apply");
+DEFINE("_HDVS_CHANNEL_DETAILS","Channel Details");
+DEFINE("_HDVS_FAVORITE_CHANNEL","Favorite Channels");
+DEFINE("_HDVS_SORT_VIDEOS","Sort my videos by");
+DEFINE("_HDVS_ADD_NEW","Add New");
+DEFINE("_HDVS_ADD_SUCCESS","Added successfully");
+DEFINE("_HDVS_DELETE_SUCCESS","Deleted successfully");
+DEFINE("_HDVS_NO_PLAYLIST","No Playlist");
+DEFINE("_HDVS_FRONTEND_MSG","Please set front end video");
+DEFINE("_HDVS_CHANNEL_ALERT","Create Channel and upload videos for your channel");
+DEFINE("_HDVS_PLAYLIST_EXISTS","Playlist already exists");
+DEFINE("_HDVS_PLAYLIST_NAME_VALIDATION","Please Enter Playlist Name");
+DEFINE("_HDVS_PLAYER_WIDTH_VALIDATION","Please Enter Player width(Recommended width : 600)");
+DEFINE("_HDVS_PLAYER_HEIGHT_VALIDATION","Please Enter Player height(Recommended height : 400)");
+DEFINE("_HDVS_NO_ROW_VALIDATION","Please Enter Number of rows");
+DEFINE("_HDVS_NO_COLUMN_VALIDATION","Please Enter Number of columns");
+DEFINE("_HDVS_NO_CHANNEL_AVAILABLE","No Channel available");
+DEFINE("_HDVS_UPLOAD_URL","Url");
+DEFINE("_HDVS_UPLOAD_HDURL","HD Url");
+DEFINE("_HDVS_UPLOAD_IMAGEURL","Image Url");
+DEFINE("_HDVS_YOUTUBE","Youtube");
+DEFINE("_HDVS_VIMEO","Vimeo");
+DEFINE("_HDVS_IMAGE_UPLOAD","Image Upload");
+DEFINE("_HDVS_ENABLE","Enable");
+DEFINE("_HDVS_DISABLE","Disable");
 ?>

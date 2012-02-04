@@ -1,24 +1,23 @@
 <?php
 
 /**
- * @version     1.3, Creation Date : March-24-2011
- * @name        view.html.php
- * @location    /components/com_contushdvideosahre/views/midrollxml/view.html.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
+ * @version  $Id: view.php 2.3,  03-Feb-2011 $$
+ * @package	Joomla
+ * @subpackage	hdflvplayer
  * @copyright   Copyright (C) 2011 Contus Support
  * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+ * Edited       Gopinath.A
  */
-/**
- * Description :   Get Model & Getads
- */
-//No direct Access
+// no direct access
 defined('_JEXEC') or die('Restricted access');
 
 //importing Default Component Model
 jimport('joomla.application.component.view');
+
+/*
+ * Description : getads()
+ *  This Function Call To UserDefined Ads Function
+ */
 
 class contushdvideoshareViewmidrollxml extends JView {
 

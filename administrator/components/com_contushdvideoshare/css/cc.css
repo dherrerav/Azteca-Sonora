@@ -1,44 +1,32 @@
-
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        cs.css
- * @location    /components/com_contushdvideosahre/css/cs.css
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
-*/
-
-/**
- * Description :    style sheet to displaying upload videos
+/***
+ *  - cc: defaultCSS
+ * author: Contus Support <www.contussupport.com>
  */
 .icon-32-featured {
-    background-image:url(../images/featured.png); width:32px;height:32px;
+background-image:url(../images/featured.png); width:32px;height:32px;
 }
 .icon-32-unfeatured {
-    background-image:url(../images/unfeatured.png); width:32px;height:32px;
+background-image:url(../images/unfeatured.png); width:32px;height:32px;
 }
 .custom2-tip {
-    color: #000;
-    width: 130px;
-    z-index: 13000;
+        color: #000;
+        width: 130px;
+        z-index: 13000;
 }
 
 .custom2-title {
-    font-weight: bold;
-    font-size: 11px;
-    margin: 0;
-    color: #024A68;
-    padding: 8px 8px 4px;
-    background: #ffffff;
-    border-bottom: 1px solid #024A68;
+        font-weight: bold;
+        font-size: 11px;
+        margin: 0;
+        color: #024A68;
+        padding: 8px 8px 4px;
+        background: #ffffff;
+        border-bottom: 1px solid #024A68;
 }
 
 .custom2-text {
-    font-size: 11px;
-    padding: 4px 8px 8px;
-    background: #ffffff;
+        font-size: 11px;
+        padding: 4px 8px 8px;
+        background: #ffffff;
 }
 

@@ -1,35 +1,31 @@
 <?php
 
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        view.php
- * @location    /components/com_contushdvideosahre/views/googlead/view.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
+/*
+ * "ContusHDVideoShare Component" - Version 2.3
+ * Author: Contus Support - http://www.contussupport.com
+ * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+ * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ * Project page and Demo at http://www.hdvideoshare.net
+ * Creation Date: March 30 2011
  */
 
-/**
- * Description :    google ad view page
- */
-
-// no direct access
 defined('_JEXEC') or die('Restricted access');
+
 jimport('joomla.application.component.view');
 
 class contushdvideoshareViewgooglead extends JView {
 
     function display() {
-        JToolBarHelper::title('Google AdSence' . ': [<small>Edit</small>]');
-        JToolBarHelper::save('save', 'save');
+
+        JToolBarHelper::title('Google AdSense' . ': [<small>Edit</small>]');
+        JToolBarHelper::save();
+  //    JToolBarHelper::apply();
         $model = $this->getModel();
         $googlead = $model->getgooglead();
         $this->assignRef('googlead', $googlead);
         parent::display();
     }
+
 }
 
 ?>

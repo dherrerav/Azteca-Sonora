@@ -1,11 +1,11 @@
 <?php
 /*
-* "ContusHDVideoShare Component" - Version 1.2
+* "ContusHDVideoShare Component" - Version 2.3
 * Author: Contus Support - http://www.contussupport.com
 * Copyright (c) 2010 Contus Support - support@hdvideoshare.net
 * License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
 * Project page and Demo at http://www.hdvideoshare.net
-* Creation Date: June 15 2010
+* Creation Date: March 30 2011
 */
 
 
@@ -166,7 +166,7 @@ DEFINE("_HDVS_UPLOAD_FILE_EXCEEDS_THE_UPLOAD_MAX_FILESIZE_DIRECTIVE","Il file ec
 
 DEFINE("_HDVS_UPLOAD_FILE_EXCEEDS_THE_UPLOAD_MAX_FILESIZE_DIRECTIVE_THAT_WAS_SPECIFIED","Il file eccede la dimensione massima di del form HTML");
 
-DEFINE("_HDVS_THE_UPLOAD_FILE_WAS_ONLY_PARTIALLY_UPLOADED","Il file ï¿½ stato caricato solo parzialmente");
+DEFINE("_HDVS_THE_UPLOAD_FILE_WAS_ONLY_PARTIALLY_UPLOADED","Il file &#239;&#191;&#189; stato caricato solo parzialmente");
 
 DEFINE("_HDVS_NO_FILE_WAS_UPLOADED","Nessun file caricato");
 
@@ -191,8 +191,8 @@ DEFINE("_HDVS_MORE_VIDEOS","Altri video");
 // FOR PLAYER LANGUAGE
 //DEFINE("_HDVS_PLAY","play");
 DEFINE("_HDVS_PAUSE","pausa");
-DEFINE("_HDVS_HD_IS_ON","Hd Ã¨ sulla");
-DEFINE("_HDVS_HD_IS_OFF","Hd Ã¨ spento");
+DEFINE("_HDVS_HD_IS_ON","Hd &#195;&#168; sulla");
+DEFINE("_HDVS_HD_IS_OFF","Hd &#195;&#168; spento");
 DEFINE("_HDVS_ZOOM","Zoom");
 DEFINE("_HDVS_SHARE","Quota");
 DEFINE("_HDVS_FULL_SCREEN","Fullscreen");
@@ -219,4 +219,58 @@ DEFINE("_HDVS_FARK","Fark");
 DEFINE("_HDVS_TWEET","Cinguettare");
 DEFINE("_HDVS_FURL","Ammainare");
 
+
+DEFINE("_HDVS_MY_CHANNEL","Il mio canale");
+DEFINE("_HDVS_MY_PLAYLIST","My Playlist");
+DEFINE("_HDVS_CHANNEL_SETTINGS","canale Impostazioni");
+DEFINE("_HDVS_PLAYER_WIDTH","Larghezza lettore");
+DEFINE("_HDVS_PLAYER_HEIGHT","Altezza giocatore");
+DEFINE("_HDVS_NUMBER_ROW","Numero di file");
+DEFINE("_HDVS_NUMBER_COLUMNS","Numero di colonne");
+DEFINE("_HDVS_TOPRATED_VIDEOS","I video migliori");
+DEFINE("_HDVS_PLAYLIST","playlist");
+DEFINE("_HDVS_ACCESSLEVEL","Livello di accesso");
+DEFINE("_HDVS_FB_COMMENT","FB commento");
+DEFINE("_HDVS_CHANNEL_VIDEO","canale Video");
+DEFINE("_HDVS_START_VIDEO","video");
+DEFINE("_HDVS_LOGO","logo");
+DEFINE("_HDVS_MY_PLAYLISTS","Playlist");
+DEFINE("_HDVS_PLAYLIST_COMMENT","Seleziona i tuoi contenuti per playlist");
+DEFINE("_HDVS_PLAYLIST_NAME","Inserisci il nome playlist");
+DEFINE("_HDVS_CREATE_PLAYLIST","Crea una nuova Playlist");
+DEFINE("_HDVS_CHANNEL_NAME","kanal Navn");
+DEFINE("_HDVS_CHANNEL_VIEWS","kanal Visninger");
+DEFINE("_HDVS_TOTAL_UPLOADS","Samlet uploads");
+DEFINE("_HDVS_RECENT_ACTIVITY","seneste aktivitet");
+DEFINE("_HDVS_ABOUT_ME","om mig");
+DEFINE("_HDVS_WEBSITE","hjemmeside");
+DEFINE("_HDVS_ADD","Tilf&#195;¸j");
+DEFINE("_HDVS_APPLY","Anvend");
+DEFINE("_HDVS_CHANNEL_DETAILS","kanal Detaljer");
+DEFINE("_HDVS_FAVORITE_CHANNEL","favoritkanaler");
+DEFINE("_HDVS_SORT_VIDEOS","Sorter mine videoer efter");
+DEFINE("_HDVS_ADD_NEW","Aggiungi nuovo");
+DEFINE("_HDVS_TAGS","tag");
+DEFINE("_HDVS_VIDEO","video");
+DEFINE("_HDVS_ADD_SUCCESS","aggiunto con successo");
+DEFINE("_HDVS_DELETE_SUCCESS","eliminato con successo");
+DEFINE("_HDVS_NO_PLAYLIST","Nessun playlist");
+DEFINE("_HDVS_FRONTEND_MSG","Si prega di impostare il video front-end");
+DEFINE("_HDVS_CHANNEL_ALERT","Nessun video disponibile in channel.Please video caricati");
+DEFINE("_HDVS_PLAYLIST_EXISTS","Playlist esiste già");
+DEFINE("_HDVS_PLAYLIST_NAME_VALIDATION","Inserisci il nome playlist");
+DEFINE("_HDVS_PLAYER_WIDTH_VALIDATION","Prega di inserire larghezza Player (larghezza consigliato: 600)");
+DEFINE("_HDVS_PLAYER_HEIGHT_VALIDATION","Prega di inserire altezza Player (altezza consigliata: 400)");
+DEFINE("_HDVS_NO_ROW_VALIDATION","Inserisci il numero di righe");
+DEFINE("_HDVS_NO_COLUMN_VALIDATION","Inserisci il numero di colonne");
+DEFINE("_HDVS_NO_CHANNEL_AVAILABLE","Nessun canale disponibile");
+DEFINE("_HDVS_UPLOAD_URL","Url");
+DEFINE("_HDVS_UPLOAD_HDURL","HD Url");
+DEFINE("_HDVS_UPLOAD_IMAGEURL","immagine Url");
+DEFINE("_HDVS_YOUTUBE","youtube");
+DEFINE("_HDVS_VIMEO","vimeo");
+DEFINE("_HDVS_IMAGE_UPLOAD","Carica Immagine");
+DEFINE("_HDVS_ENABLE","permettere");
+DEFINE("_HDVS_DISABLE","Disabilita");
+DEFINE("_HDVS_SET_PLAYLIST","Playlist");
 ?>

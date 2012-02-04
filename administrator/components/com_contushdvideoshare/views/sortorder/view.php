@@ -1,35 +1,44 @@
 <?php
-
-/**
- * @version     1.3, Creation Date : March-24-2011
- * @name        view.php
- * @location    /components/com_contushdvideosahre/views/sortorder/view.php
- * @package	Joomla 1.6
- * @subpackage	contushdvideoshare
- * @author      Contus Support - http://www.contussupport.com
- * @copyright   Copyright (C) 2011 Contus Support
- * @license     GNU/GPL http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.hdvideoshare.net
- */
-
-/**
- * Description :    HTML View class for the backend of the details Component edit task
- */
-
+/*
+* "ContusHDVideoShare Component" - Version 2.3
+* Author: Contus Support - http://www.contussupport.com
+* Copyright (c) 2010 Contus Support - support@hdvideoshare.net
+* License: GNU/GPL http://www.gnu.org/copyleft/gpl.html
+* Project page and Demo at http://www.hdvideoshare.net
+* Creation Date: March 30 2011
+*/
 // no direct access
-defined('_JEXEC') or die('Restricted access');
-jimport('joomla.application.component.view');
 
-class contushdvideoshareViewsortorder extends JView {
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
-    function categorysortorder() {
+jimport( 'joomla.application.component.view');
+
+/**
+     * HTML View class for the backend of the details Component edit task
+     *
+     * @package    HelloWorld
+     */
+
+class contushdvideoshareViewsortorder extends JView
+{
+	function categorysortorder()
+	{
+
+        
         $model = $this->getModel();
         $sortorder = $model->categorysortordermodel();
-    }
+		
+		//parent::display();
+	}
+	function videosortorder()
+	{
 
-    function videosortorder() {
+        
         $model = $this->getModel();
         $sortorder = $model->videosortordermodel();
-    }
+		
+		//parent::display();
+	}
+    
 }
 ?>   

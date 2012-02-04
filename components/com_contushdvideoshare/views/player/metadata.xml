@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<view title="Player">
-		<message>HD Video Share</message>
-	</view>
+    <view title="player" >
+        <message>Select Player Page</message>
+    </view>
 </metadata>
