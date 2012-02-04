@@ -51,7 +51,7 @@ class JConfig {
 	public $feed_limit = '10';
 	public $log_path = '/home/samacs/applications/aztecasonora/logs';
 	public $tmp_path = '/home/samacs/applications/aztecasonora/tmp';
-	public $lifetime = '15';
+	public $lifetime = '60';
 	public $session_handler = 'database';
 	public $MetaRights = '';
 	public $sitename_pagetitles = '1';
