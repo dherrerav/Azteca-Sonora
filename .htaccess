@@ -1,4 +1,4 @@
-SetEnv AZTECASONORA_PATH /home/samacs/applications/aztecasonora
+SetEnv AZTECASONORA_PATH "/home/samacs/applications/aztecasonora"
 
 ##
 # @version		$Id: htaccess.txt 21101 2011-04-07 15:47:33Z dextercowley $
