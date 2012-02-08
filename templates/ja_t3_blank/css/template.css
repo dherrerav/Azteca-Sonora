@@ -193,6 +193,41 @@ table.pollstableborder tr.sectiontableentry1 td { background: #fff; font-weight:
 
 /* MODULE STYLES
 --------------------------------------------------------- */
+/* Search Module */
+#ja-search{
+	background: url("http://static.aztecanoticias.com.mx/plantillas/maquetacion/totalnews/Header_noticias2/images/fingbg.jpg") repeat scroll 0 0 transparent;
+    height: 24px;
+    padding: 5px;
+    position: relative;
+    width: 270px;
+    border:1px solid #C8C8C8;
+    border-radius: 5px 5px 5px 5px;
+    float:right;
+    top:10px;
+}
+
+#ja-search .inputbox{
+	background-color: #FFFFFF;
+    border: 1px solid #F3962A;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    height: 17px;
+    width: 185px;
+
+}
+
+#ja-search .button{
+	background-color: #3D7D8B;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    height:24px;
+    width:60px;
+    padding:4px 8px;
+    font-family:helvetica;
+    font-size:12px;
+}
+
 div.ja-moduletable h3, div.moduletable h3 {
 	font-size: 100%;
 	text-transform: uppercase;
