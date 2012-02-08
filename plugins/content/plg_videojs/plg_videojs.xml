@@ -39,11 +39,41 @@
 					<option value="default">PLG_VIDEOJS_DEFAULT_SKIN_OPTION</option>
 				</field>
 				<field
+					name="article_width"
+					type="text"
+					default="636"
+					label="PLG_VIDEOJS_ARTICLE_WIDTH_LABEL"
+					description="PLG_VIDEOJS_ARTICLE_WIDTH_DESC" />
+				<field
+					name="article_height"
+					type="text"
+					default="333"
+					label="PLG_VIDEOJS_ARTICLE_HEIGHT_LABEL"
+					description="PLG_VIDEOJS_ARTICLE_HEIGHT_DESC" />
+				<field
 					name="blog_leading_width"
 					type="text"
 					default="636"
 					label="PLG_VIDEOJS_BLOG_LEADING_WIDTH_LABEL"
 					description="PLG_VIDEOJS_BLOG_LEADING_WIDTH_DESC" />
+				<field
+					name="blog_leading_height"
+					type="text"
+					default="333"
+					label="PLG_VIDEOJS_BLOG_LEADING_HEIGHT_LABEL"
+					description="PLG_VIDEOJS_BLOG_LEADING_HEIGHT_WIDTH_DESC" />
+				<field
+					name="blog_intro_width"
+					type="text"
+					default="250"
+					label="PLG_VIDEOJS_BLOG_INTRO_WIDTH_LABEL"
+					description="PLG_VIDEOJS_BLOG_INTRO_WIDTH_DESC" />
+				<field
+					name="blog_intro_height"
+					type="text"
+					default="131"
+					label="PLG_VIDEOJS_BLOG_INTRO_HEIGHT_LABEL"
+					description="PLG_VIDEOJS_BLOG_INTRO_HEIGHT_DESC" />
 			</fieldset>
 		</fields>
 	</config>

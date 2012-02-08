@@ -1,5 +1,6 @@
 <?php
 defined('_JEXEC') or die;
+require_once JPATH_SITE.'/components/com_content/helpers/route.php';
 jimport('joomla.event.plugin');
 
 Zend_Loader::loadClass('Zend_Gdata_YouTube');
@@ -21,8 +22,10 @@ class plgContentPlg_VideoJS extends JPLugin {
 	public $view = null;
 	public $layout = null;
 	public $youtube = null;
-	public $blogWidth = 636;
-	public $blogHeight = 333;
+	public $blogLeadingWidth = 636;
+	public $blogLeadingHeight = 333;
+	public $blogIntroWidth = 300;
+	public $blogIntroHeight = 157;
 	public $articleWidth = 636;
 	public $articleHeight = 333;
 	public $videoMatches = array();
@@ -35,8 +38,10 @@ class plgContentPlg_VideoJS extends JPLugin {
 		$this->youtube = new Zend_Gdata_YouTube();
 		$this->view = JRequest::getVar('view');
 		$this->layout = JRequest::getVar('layout');
-		$this->blogWidth = $this->params->get('blog_width', 636);
-		$this->blogHeight = $this->params->get('blog_height', 333);
+		$this->blogLeadingWidth = $this->params->get('blog_leading_width', 636);
+		$this->blogLeadingHeight = $this->params->get('blog_leading_height', 333);
+		$this->blogIntroWidth = $this->params->get('blog_intro_width', 300);
+		$this->blogIntroHeight = $this->params->get('blog_intro_height', 157);
 		$this->articleWidth = $this->params->get('article_width', 636);
 		$this->articleHeight = $this->params->get('article_height', 333);
 		$this->skin = $this->params->get('skin', 'default');
@@ -87,6 +92,8 @@ class plgContentPlg_VideoJS extends JPLugin {
 			if (preg_match($this->youtubeCode, $article->introtext, $this->youtubeMatches)) {
 				$video = $this->youtubeMatches[1];
 			}
+			$article->slug = $article->id . ':' . $article->alias;
+			$article->link = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid));
 			if ($this->view === 'article') {
 				$this->_processArticleVideos($video, $article);
 			} else if ($this->view == 'category' || $this->layout == 'blog') {
@@ -99,54 +106,60 @@ class plgContentPlg_VideoJS extends JPLugin {
 		$source = (string)$source;
 		$video = new stdClass();
 		$video->id = 'video_' . $article->id;
+		static $item = 0;
+		$tempParams = $this->_loadContentParams();
+		$leading = false;
+		if ($item < $tempParams->get('num_leading_articles', 0)) {
+			$video->width = $this->blogLeadingWidth;
+			$video->height = $this->blogLeadingHeight;
+			$leading = true;
+		} else if ($item < $tempParams->get('num_leading_articles', 0) + $tempParams->get('num_intro_articles', 0)) {
+			$video->width = $this->blogIntroWidth;
+			$video->height = $this->blogIntroHeight;
+			$leading = false;
+		}
 		if (strpos($source, '.')) {
 			$extension = strtolower(substr(strrchr($source, '.'), 1));
 			$video->source = $source;
 			$video->mp4 = substr($source, 0, strpos($source, '.')) . '.mp4';
 			$video->flv = substr($source, 0, strpos($source, '.')) . '.flv';
-			$video->images = $this->_getVideoImages($source, array('width' => 636, 'height' => 333), array('width' => 120, 'height' => 90));
+			$video->image = $this->_getVideoImages($source, $video->width, $video->width);
 		} else {
 			$extension = 'youtube';
 			$entry = $this->youtube->getVideoEntry($source);
 			$images = $entry->getVideoThumbnails();
 			$video->source = $entry->getVideoWatchPageUrl();
-			$video->images = array(
-				'preview' => $images[0]['url'],
-				'thubnanil' => $images[1]['url'],
-			);
+			$video->image = $leading ? $images[0]['url'] : $images[1]['url'];
 		}
 		$video->format = $this->formats[$extension];
-		$video->width = $this->blogWidth;
-		$video->height = $this->blogHeight;
-		$layout = $this->_getLayoutPath($this->plugin, 'default');
+		$layout = $this->_getLayoutPath($this->plugin, ($leading ? 'leading' : 'intro'));
 		if ($layout) {
 			ob_start();
 			require $layout;
 			$contents = ob_get_clean();
 			$article->introtext = $contents . $article->introtext;
 		}
+		$item++;
+	}
+	protected function _loadContentParams() {
+		static $params = null;
+		if (!$params) {
+			$application =& JFactory::getApplication();
+			$params = clone $application->getParams('com_content');
+			$params->def('num_leading_articles', 1);
+			$params->def('num_intro_articles', 4);
+		}
+		return $params;
 	}
 	protected function _processArticleVideos($videos, &$article) {
 	}
-	protected function _getVideoImages($video, $previewDimensions, $thumbnailDimensions) {
-		$previewWidth = $previewDimensions['width'];
-		$previewHeight = $previewDimensions['height'];
-		$thumbnailWidth = $thumbnailDimensions['width'];
-		$thumbnailHeight = $thumbnailDimensions['height'];
-		$preview = strtolower(substr($video, 0, strpos($video, '.'))) . '_' . $previewWidth . '_' . $previewHeight . '_preview.jpg';
-		$thumbnail = strtolower(substr($video, 0, strpos($video, '.'))) . '_' . $thumbnailWidth . '_' . $thumbnailHeight . '_thumbnail.jpg';
-		if (!file_exists($preview)) {
-			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $video . ' -vframes 1  -s ' . $previewWidth . 'x' . $previewHeight . ' ' . JPATH_SITE . DS . $preview . ' 2>&1';
+	protected function _getVideoImages($source, $width, $height) {
+		$image = strtolower(substr($source, 0, strpos($source, '.'))) . '_' . $width . 'x' . $height . '.jpg';
+		if (!file_exists($image)) {
+			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $source . ' -vframes 1  -s ' . $width . 'x' . $height . ' ' . JPATH_SITE . DS . $image . ' 2>&1';
 			shell_exec($command);
 		}
-		if (!file_exists($thumbnail)) {
-			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $video . ' -vframes 1 -s ' . $thumbnailWidth . 'x' . $thumbnailHeight . ' ' . JPATH_SITE . DS . $thumbnail . ' 2>&1';
-			shell_exec($command);
-		}
-		return array(
-			'preview' => $preview,
-			'thumbnail' => $thumbnail,
-		);
+		return $image;
 	}
 	protected function _removeCode(&$article) {
 		if ($this->videoMatches[0]) $article->introtext = str_replace($this->videoMatches[0], '', $article->introtext);

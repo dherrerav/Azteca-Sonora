@@ -1007,6 +1007,18 @@ h4.content-most-title a:hover {
 
 .blog .items-row {
 	float: left;
-	width: 300px;
+	width: 280px;
 	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.blog .items-row h2.contentheading,
+.blog .items-row h2.contentheading a {
+	font-size: 1.2em;
+	line-height: 1.3em;
+}
+
+.blog .items-row .article-tools {
+	margin-top: 0;
+	padding-top: 0;
 }

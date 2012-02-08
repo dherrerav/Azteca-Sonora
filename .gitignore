@@ -1,4 +1,4 @@
-/configuration.php
+/configuration.php*
 /.htaccess
 /dumps/*
 /images/*
@@ -6,4 +6,5 @@
 /administrator/cache/*
 /tmp/*
 /t3-assets/*
+/t3assets/*
 /.htaccess

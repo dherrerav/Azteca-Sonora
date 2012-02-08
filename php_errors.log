@@ -1,0 +1,15 @@
+[08-Feb-2012 18:43:01] PHP Fatal error:  Call to undefined method plgContentPlg_VideoJS::loadContentParams() in /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php on line 107
+[08-Feb-2012 18:43:01] PHP Stack trace:
+[08-Feb-2012 18:43:01] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[08-Feb-2012 18:43:01] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:43
+[08-Feb-2012 18:43:01] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:188
+[08-Feb-2012 18:43:01] PHP   4. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:152
+[08-Feb-2012 18:43:01] PHP   5. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:19
+[08-Feb-2012 18:43:01] PHP   6. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:649
+[08-Feb-2012 18:43:01] PHP   7. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:78
+[08-Feb-2012 18:43:01] PHP   8. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:616
+[08-Feb-2012 18:43:01] PHP   9. JDispatcher->trigger() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:103
+[08-Feb-2012 18:43:01] PHP  10. JEvent->update() /home/samacs/applications/aztecasonora/libraries/joomla/event/dispatcher.php:115
+[08-Feb-2012 18:43:01] PHP  11. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:46
+[08-Feb-2012 18:43:01] PHP  12. plgContentPlg_VideoJS->onContentBeforeDisplay() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:0
+[08-Feb-2012 18:43:01] PHP  13. plgContentPlg_VideoJS->_processCategoryVideo() /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php:97
