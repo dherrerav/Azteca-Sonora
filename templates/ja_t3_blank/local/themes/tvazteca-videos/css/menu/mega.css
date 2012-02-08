@@ -1,0 +1,163 @@
+#ja-topnavigation  {
+	height: 24px;
+	background: url("http://www.statictvazteca.com/plantillas/maquetacion/totalnews/Header_noticias2/images/top_1.jpg");
+}
+#ja-topnavigation #top-navigation {
+	overflow: hidden;
+	float: right;
+}
+
+#ja-topnavigation #top-navigation ul.menu {
+	text-transform: uppercase;
+	height: 24px;
+	padding: 0 5px;
+	background: url("http://www.statictvazteca.com/plantillas/maquetacion/totalnews/Header_noticias2/images/top_1.jpg");	
+	overflow: hidden;
+}
+
+#ja-topnavigation #top-navigation li {
+	float: left;
+}
+
+#ja-topnavigation #top-navigation li a {
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	height: 18px;
+	text-shadow: #000 1px 1px 0;
+	padding: 6px 6px 0 6px;
+	background: url('../../images/top-navigation-background.jpg') repeat-x 0 -24px;
+}
+
+#ja-topnavigation #top-navigation li a:hover {
+	background-image:none;
+	background-color:#2F2F2F !important;
+	-moz-border-radius-topleft:5px;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-right-radius:5px;
+}
+
+#ja-mainnav {
+	background: url("http://www.statictvazteca.com/plantillas/maquetacion/totalnews/Header_noticias2/images/bnlowerbg.jpg") repeat-x scroll 0 0 transparent;
+	top: -24px;
+}
+
+#ja-mainnav, #ja-mainnav .main, #ja-mainnav .main .main-inner1, #ja-mainnav ul.megamenu {
+	height: 36px;
+}
+
+#ja-mainnav ul.megamenu {
+	overflow: hidden;
+}
+
+#ja-mainnav ul.megamenu li.menu-home {
+	padding: 0 !important;
+}
+
+#ja-mainnav ul.megamenu li.menu-home a {
+	padding: 0;
+	margin: 0;
+	width: 36px;
+	height: 36px;
+	display: block;
+}
+
+#ja-mainnav ul.megamenu li.menu-home span.menu-title {
+	display: none;
+}
+
+#ja-mainnav li.menu-home span.has-image {
+	height: 36px;
+	width: 36px;
+}
+
+#ja-mainnav li.mega a {
+	padding: 0;
+	color: #FFFFFF;
+}
+
+#ja-mainnav li.mega {
+	padding: 11px 10px 0 10px;
+	font-size: 13px;
+	font-weight: bold;
+	text-shadow: #000 1px 1px 0;
+	color: #3e3e3e !important;
+	text-transform: uppercase;
+	background: transparent url('../../images/tvazteca/btnsbg.gif') top right no-repeat;
+	background-position: 0 -570px;
+}
+
+#ja-footer .ja-footnav {
+	width: 720px;
+	overflow: hidden;
+	float: left;
+	margin: 0;
+}
+
+#ja-footer .ja-footnav ul.menu {
+	overflow: hidden;
+}
+
+#ja-footer .ja-footnav .menu li {
+	width: 150px;
+	padding: 0 15px;
+	float: left;
+	text-align: left;
+}
+
+#ja-footer .ja-footnav .menu li a {
+	text-shadow: #fff 1px 1px 0px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #2d2d2d;
+	text-decoration: none;
+}
+
+#ja-footer .ja-footnav .menu li.parent li {
+	padding: 0;
+}
+
+#ja-footer .ja-footnav .menu li.parent li a {
+	color: #454545;
+	text-shadow: #fff 1px 1px 0;
+	font-size: 12px;
+	text-transform: none;
+	font-weight: normal;
+}
+
+#ja-footer .ja-footnav .menu li.parent li a:hover {
+	text-decoration: underline;
+	color: #000;
+}
+
+#ja-footer .ja-footnav ul.menu-legal {
+	text-align: left;
+	color: #454545;
+	margin-top: 20px;
+	font-size: 12px;
+	text-shadow: #fff 1px 1px 0;
+	overflow: hidden;
+	padding-left: 5px;
+}
+
+#ja-footer .ja-footnav ul.menu-legal li {
+	float: left;
+	padding: 0 10px;
+	line-height: 14px;
+	border-right: 1px solid #454545;
+}
+
+#ja-footer .ja-footnav ul.menu-legal li:last-child {
+	border-right: 0;
+}
+
+#ja-footer .ja-footnav ul.menu-legal li a {
+	color: #2d2d2d;
+	text-decoration: none;
+	text-shadow: #fff 1px 1px 0;
+}
+
+#ja-footer .ja-footnav ul.menu-legal li a:hover {
+	text-decoration: underline;
+}

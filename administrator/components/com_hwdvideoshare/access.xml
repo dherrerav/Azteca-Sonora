@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_hwdvideoshare">
+	<section name="component">
+		<action name="core.admin" title="Backend General Access" description="" />
+		<action name="core.manage" title="Backend Settings Access" description="" />
+		<action name="core.frontend.access" title="Frontend Gallery Access" description="" />
+		<action name="core.frontend.upload.local" title="Frontend Video Upload (Local Videos)" description="" />
+		<action name="core.frontend.upload.tp" title="Frontend Video Upload (Third Party Videos)" description="" />
+		<action name="core.frontend.download" title="Frontend Video Download" description="" />
+		<action name="core.frontend.group" title="Frontend Group Access" description="" />
+		<action name="core.frontend.moderator" title="Frontend Moderation" description="" />
+		<action name="core.frontend.wysiwyg" title="Frontend WYSIWYG Editor Access" description="" />
+	</section>
+	<section name="category">
+		<action name="view" title="View Access" description="Permission to view the category" />
+		<action name="upload" title="Upload Access" description="Permission to view the category" />
+	</section>
+	<section name="video">
+		<action name="view" title="View Access" description="Permission to view the video" />
+		<action name="download" title="Download Access" description="Permission to download the video" />
+	</section>
+</access>

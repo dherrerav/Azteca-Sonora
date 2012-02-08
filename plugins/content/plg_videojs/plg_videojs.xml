@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="plugin" group="content" version="1.6" method="upgrade">
+	<name>Content - VideoJS</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://twitter.com/samacs</authorUrl>
+	<version>1.0</version>
+	<description><![CDATA[Display video using javascript libraries.]]></description>
+	<files>
+		<filename plugin="plg_videojs">plg_videojs.php</filename>
+		<filename>plg_videojs.xml</filename>
+		<filename>index.html</filename>
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>tmpl</folder>
+	</files>
+	<languages>
+		<language tag="en-US">plg_content_plg_videojs.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="catids"
+					type="category"
+					extension="com_content"
+					size="10"
+					multiple="true"
+					label="PLG_VIDEOJS_CATEGORIES_LABEL"
+					description="PLG_VIDEOJS_CATEGORIES_DESC">
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+				<field
+					name="skin"
+					type="list"
+					label="PLG_VIDEOJS_SKIN_LABEL"
+					description="PLG_VIDEOJS_SKIN_DESC">
+					<option value="default">PLG_VIDEOJS_DEFAULT_SKIN_OPTION</option>
+				</field>
+				<field
+					name="blog_leading_width"
+					type="text"
+					default="636"
+					label="PLG_VIDEOJS_BLOG_LEADING_WIDTH_LABEL"
+					description="PLG_VIDEOJS_BLOG_LEADING_WIDTH_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</install>

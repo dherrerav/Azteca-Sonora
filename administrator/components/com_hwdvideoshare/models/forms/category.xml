@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC"
+	>
+		<field
+			id="id"
+			name="id"
+			type="hidden"
+			class="inputbox"
+			label="COM_CONTENT_ID_LABEL"
+			size="10"
+			default="0"
+			readonly="true" />
+
+		<field
+			name="asset_id"
+			type="hidden" />
+
+                <field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			validate="rules"
+			filter="rules"
+			component="com_hwdvideoshare"
+			section="category"
+		/>
+	</fieldset>
+</form>

@@ -1,0 +1,16 @@
+[07-Feb-2012 22:52:06] PHP Fatal error:  Class 'Zend_Loader' not found in /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php on line 5
+[07-Feb-2012 22:52:06] PHP Stack trace:
+[07-Feb-2012 22:52:06] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[07-Feb-2012 22:52:06] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[07-Feb-2012 22:52:06] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:154
+[07-Feb-2012 22:52:06] PHP   4. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:152
+[07-Feb-2012 22:52:06] PHP   5. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_config/config.php:23
+[07-Feb-2012 22:52:06] PHP   6. ConfigController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:649
+[07-Feb-2012 22:52:06] PHP   7. ConfigViewApplication->display() /home/samacs/applications/aztecasonora/administrator/components/com_config/controller.php:69
+[07-Feb-2012 22:52:06] PHP   8. JView->get() /home/samacs/applications/aztecasonora/administrator/components/com_config/views/application/view.html.php:30
+[07-Feb-2012 22:52:06] PHP   9. ConfigModelApplication->getForm() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/view.php:365
+[07-Feb-2012 22:52:06] PHP  10. JModelForm->loadForm() /home/samacs/applications/aztecasonora/administrator/components/com_config/models/application.php:32
+[07-Feb-2012 22:52:06] PHP  11. JModelForm->preprocessForm() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/modelform.php:150
+[07-Feb-2012 22:52:06] PHP  12. JPluginHelper::importPlugin() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/modelform.php:189
+[07-Feb-2012 22:52:06] PHP  13. JPluginHelper::_import() /home/samacs/applications/aztecasonora/libraries/joomla/plugin/helper.php:104
+[07-Feb-2012 22:52:06] PHP  14. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/plugin/helper.php:146

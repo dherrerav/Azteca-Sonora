@@ -1,0 +1,11 @@
+@charset 'utf-8';
+
+.video-player {
+	overflow: hidden;
+}
+
+.video-player img.play-button {
+	position: relative;
+	margin-top: 100px;
+	margin-left: 280px;
+}
