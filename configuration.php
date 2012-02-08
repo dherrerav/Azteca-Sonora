@@ -10,9 +10,9 @@ class JConfig {
 	public $debug_lang = '0';
 	public $dbtype = 'mysql';
 	public $host = 'localhost';
-	public $user = 'root';
+	public $user = 'aztecasonora';
 	public $password = 'pjx2f3!';
-	public $db = 'tvnotici_jo161';
+	public $db = 'aztecasonora';
 	public $dbprefix = 'jos_';
 	public $live_site = '';
 	public $secret = 'P5qbL3auEHmN6PFF';
@@ -49,8 +49,8 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = '/home/samacs/applications/aztecasonora/logs';
-	public $tmp_path = '/home/samacs/applications/aztecasonora/tmp';
+	public $log_path = AZTECASONORA_PATH . '/logs';
+	public $tmp_path = AZTECASONORA_PATH . '/tmp';
 	public $lifetime = '15';
 	public $session_handler = 'database';
 	public $MetaRights = '';

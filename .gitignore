@@ -7,3 +7,4 @@ configuration.php
 /administrator/cache/*
 /tmp/*
 /t3-assets/*
+/.htaccess
