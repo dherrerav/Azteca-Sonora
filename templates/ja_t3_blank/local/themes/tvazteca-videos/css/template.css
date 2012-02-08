@@ -999,3 +999,14 @@ h4.content-most-title a:hover {
 	background: transparent url('../images/icon_nota.gif') 3px 3px no-repeat;
 	padding-left: 20px;
 }
+
+.blog .items-leading {
+	float: left;
+	width: 640px;
+}
+
+.blog .items-row {
+	float: left;
+	width: 300px;
+	margin-left: 10px;
+}
