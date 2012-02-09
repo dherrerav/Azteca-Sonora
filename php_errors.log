@@ -13,3 +13,20 @@
 [08-Feb-2012 18:43:01] PHP  11. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:46
 [08-Feb-2012 18:43:01] PHP  12. plgContentPlg_VideoJS->onContentBeforeDisplay() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:0
 [08-Feb-2012 18:43:01] PHP  13. plgContentPlg_VideoJS->_processCategoryVideo() /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php:97
+[09-Feb-2012 00:13:36] PHP Fatal error:  include_once() [<a href='function.include-once'>function.include-once</a>]: Cannot redeclare class browser in /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php on line 16
+[09-Feb-2012 00:13:36] PHP Stack trace:
+[09-Feb-2012 00:13:36] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 00:13:36] PHP   2. JSite->route() /home/samacs/applications/aztecasonora/index.php:38
+[09-Feb-2012 00:13:36] PHP   3. JApplication->route() /home/samacs/applications/aztecasonora/includes/application.php:136
+[09-Feb-2012 00:13:36] PHP   4. JApplication->triggerEvent() /home/samacs/applications/aztecasonora/libraries/joomla/application/application.php:219
+[09-Feb-2012 00:13:36] PHP   5. JDispatcher->trigger() /home/samacs/applications/aztecasonora/libraries/joomla/application/application.php:557
+[09-Feb-2012 00:13:36] PHP   6. JEvent->update() /home/samacs/applications/aztecasonora/libraries/joomla/event/dispatcher.php:115
+[09-Feb-2012 00:13:36] PHP   7. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:46
+[09-Feb-2012 00:13:36] PHP   8. plgSystemJAT3->onAfterRoute() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:0
+[09-Feb-2012 00:13:36] PHP   9. T3Framework->t3_init() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3.php:180
+[09-Feb-2012 00:13:36] PHP  10. T3Template->getInstance() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/framework.php:85
+[09-Feb-2012 00:13:36] PHP  11. T3Template->T3Template() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:50
+[09-Feb-2012 00:13:36] PHP  12. T3Common->get_active_themes_info() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:31
+[09-Feb-2012 00:13:36] PHP  13. T3Common->get_layout_info() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:660
+[09-Feb-2012 00:13:36] PHP  14. T3Common->mobile_device_detect() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:303
+[09-Feb-2012 00:13:36] PHP  15. t3import() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:224

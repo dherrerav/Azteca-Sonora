@@ -21,6 +21,11 @@ if (!defined('_JDEFINES')) {
 
 require_once JPATH_BASE.'/includes/framework.php';
 require_once JPATH_BASE . '/includes/zend.php';
+if (file_exists(JPATH_BASE . '/includes/Browser.php')) {
+	echo 'Browser exists. in ' . JPATH_BASE . '/includes/Browser.php';
+} else {
+	echo 'Browser does not exists in ' . JPATH_BASE . '/includes/Browser.php';
+}
 // Mark afterLoad in the profiler.
 JDEBUG ? $_PROFILER->mark('afterLoad') : null;
 

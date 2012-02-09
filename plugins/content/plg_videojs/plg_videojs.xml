@@ -80,6 +80,24 @@
 					default="UA-1725851-28"
 					label="PLG_VIDEOJS_GOOGLE_ANALYTICS_ACCOUNT_LABEL"
 					description="PLG_VIDEOJS_GOOGLE_ANALYTICS_ACCOUNT_DESC" />
+				<field
+					name="blog_leading_auto_play"
+					type="list"
+					default="1"
+					label="PLG_VIDEO_BLOG_LEADING_AUTO_PLAY_LABEL"
+					description="PLG_VIDEO_BLOG_LEADING_AUTO_PLAY_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="article_auto_play"
+					type="list"
+					default="1"
+					label="PLG_VIDEO_ARTICLE_AUTO_PLAY_LABEL"
+					description="PLG_VIDEO_ARTICLE_AUTO_PLAY_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>

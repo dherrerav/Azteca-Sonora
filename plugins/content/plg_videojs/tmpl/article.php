@@ -17,5 +17,5 @@ flowplayer('<?= $video->id ?>', { src: '<?= JURI::base() . 'plugins/' . $this->p
 			accountId: '<?= $this->params->get('google_analytics_account') ?>'
 		}
 	}
-});
+})<?= $this->isIpad() ? '.ipad()' : '' ?><?= (bool)$this->params->get('blog_leading_auto_play', 1) ? '.play()' : '' ?>;
 </script>

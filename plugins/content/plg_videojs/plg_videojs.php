@@ -1,11 +1,13 @@
 <?php
 defined('_JEXEC') or die;
 require_once JPATH_SITE.'/components/com_content/helpers/route.php';
+
 jimport('joomla.event.plugin');
 
 Zend_Loader::loadClass('Zend_Gdata_YouTube');
 
 class plgContentPlg_VideoJS extends JPLugin {
+	public $browser = null;
 	public $plugin = null;
 	public $params = null;
 	public $youtubeCode = '/{youtube}(.*?){\/youtube}/';
@@ -33,6 +35,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 	public $skin = '';
 	public function plgContentPlg_VideoJS(&$subject) {
 		parent::__construct($subject);
+		//$this->browser = new Browser();
 		$this->plugin = JPluginHelper::getPlugin('content', 'plg_videojs');
 		$this->params = new JParameter($this->plugin->params);
 		$this->youtube = new Zend_Gdata_YouTube();
@@ -200,5 +203,10 @@ class plgContentPlg_VideoJS extends JPLugin {
 			return $pluginPath;
 		}
 		return '';
+	}
+	public function isIpad() {
+		//var_dump($this->browser);
+		//return $this->browser->getPlatform() === Browser::PLATFORM_IPAD;
+		return false;
 	}
 }

@@ -4,17 +4,23 @@
 <script type="text/javascript">
 flowplayer('<?= $video->id ?>', { src: '<?= JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/swf/flowplayer.swf' ?>', wmode: 'transparent'}, {
 	clip: {
-		eventCategory: 'Change Campaign'
+		eventCategory: '<?= $article->title ?>',
+		provider: 'pseudo',
+		url: flashembed.isSupported([9, 115]) ?
+			'<?= $video->mp4 ?>' :
+			'<?= $video->flv ?>'
 	},
 	plugins: {
+		pseudo: {
+			url: '<?= JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/swf/flowplayer.pseudostreaming.swf' ?>'
+		},
 		gatracker: {
 			url: '<?= JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/swf/flowplayer.analytics.swf' ?>',
 			events: {
 				all: true,
 			},
-			debug: true,
 			accountId: '<?= $this->params->get('google_analytics_account') ?>'
 		}
 	}
-});
+})<?= $this->isIpad() ? '.ipad()' : '' ?><?= (bool)$this->params->get('blog_leading_auto_play', 1) ? '.play()' : '' ?>;
 </script>

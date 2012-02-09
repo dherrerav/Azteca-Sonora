@@ -661,6 +661,7 @@ h2.contentheading a:hover {
 
 #ja-container .main {
 	padding: 0 0 0;
+	border: 1px solid #ccc;
 	/*
 	-webkit-box-shadow: 0px 0px 50px 10px #555;
 	-moz-box-shadow: 0px 0px 50px 10px #555;
