@@ -173,8 +173,12 @@
 
 #ja-cssmenu .active.haschild span { background:#fff url( "/templates/ja_t3_blank/local/themes/tvazteca-default/images/arrow2.png" ) no-repeat 5px center;;border-radius:5px 5px 0 0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0; }
 
-#ja-cssmenu .haschild span { background:url( "/templates/ja_t3_blank/local/themes/tvazteca-default/images/arrow2.png" ) no-repeat 5px center;padding-left:26px; }
-#ja-cssmenu .haschild:hover span { background:#666 url( "/templates/ja_t3_blank/local/themes/tvazteca-default/images/arrow2.png" ) no-repeat 5px center; }
+#ja-cssmenu .haschild span {
+	padding: 0 5px 0 5px !important;
+}
+#ja-cssmenu .haschild:hover span {
+	background: none;
+}
 
 #ja-cssmenu a:hover { background:0!important; }
 #ja-cssmenu a:hover span { background:#666;border-radius:5px 5px 0 0;color:#fff;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0; }
@@ -189,5 +193,6 @@
 
 #ja-cssmenu .haschild span,
 #ja-cssmenu li ul a span {
-	padding: 0 5px 0 5px !important;
+	
 }
+

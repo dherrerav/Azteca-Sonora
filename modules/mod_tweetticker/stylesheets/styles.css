@@ -1,3 +1,7 @@
 #tweets li {
 	width: 100%;
 }
+
+ul#tweets li {
+	margin: 0;
+}
