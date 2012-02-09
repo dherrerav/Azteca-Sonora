@@ -126,7 +126,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 			$video->source = $source;
 			$video->mp4 = substr($source, 0, strpos($source, '.')) . '.mp4';
 			$video->flv = substr($source, 0, strpos($source, '.')) . '.flv';
-			$video->image = $this->_getVideoImages($source, $video->width, $video->width);
+			$video->image = $this->_getVideoImages($source, $video->width, $video->height);
 		} else {
 			$extension = 'youtube';
 			$entry = $this->youtube->getVideoEntry($source);
