@@ -1,3 +1,4 @@
+<pre><?= var_dump($video) ?></pre>
 <a class="video-player" style="width: <?= $video->width ?>px; height: <?= $video->height ?>px; background: url(<?= $video->image ?>) no-repeat top left;" id="<?= $video->id ?>" href="<?= $video->source ?>">
 	<img class="play-button" src="<?= 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/images/play_large.png' ?>" width="83" height="83" />
 </a>
