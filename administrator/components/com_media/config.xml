@@ -32,7 +32,13 @@
 			default="images"
 			label="COM_MEDIA_FIELD_PATH_IMAGE_FOLDER_LABEL"
 			description="COM_MEDIA_FIELD_PATH_IAMGE_FOLDER_DESC" />
-
+		<field
+			name="image_path"
+			type="text"
+			size="50"
+			default="images/videos"
+			label="COM_MEDIA_FIELD_PATH_VIDEO_FOLDER_LABEL"
+			description="COM_MEDIA_FIELD_PATH_VIDEO_FOLDER_DESC" />
 		<field
 			name="restrict_uploads"
 			type="radio"
@@ -64,7 +70,13 @@
 			default="bmp,gif,jpg,png"
 			label="COM_MEDIA_FIELD_LEGAL_IMAGE_EXTENSIONS_LABEL"
 			description="COM_MEDIA_FIELD_LEGAL_IMAGE_EXTENSIONS_DESC" />
-
+		<field
+			name="video_extensions"
+			type="text"
+			size="50"
+			default="flv,mp4"
+			label="COM_MEDIA_FIELD_LEGAL_VIDEO_EXTENSIONS_LABEL"
+			description="COM_MEDIA_FIELD_LEGAL_VIDEO_EXTENSIONS_DESC" />
 		<field
 			name="ignore_extensions"
 			type="text"

@@ -171,12 +171,10 @@ class plgContentPlg_VideoJS extends JPLugin {
 		}
 		$video->format = $this->formats[$extension];
 		$layout = $this->_getLayoutPath($this->plugin, 'article');
-		
 		if ($layout) {
 			ob_start();
 			require $layout;
 			$contents = ob_get_clean();
-			echo '<pre>', var_dump($contents), '</pre>';
 			$article->introtext = $contents . $article->introtext;
 		}
 	}

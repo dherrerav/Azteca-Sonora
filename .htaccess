@@ -81,3 +81,4 @@ RewriteRule .* index.php [L]
 ## End - Joomla! core SEF Section.
 
 php_flag display_errors 1
+php_flag display_startup_errors 1

@@ -52,7 +52,11 @@ class MediaController extends JController
 				$vLayout = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
 
 				break;
-
+			case 'videos':
+				$vName = 'video';
+				$vLayout = JRequest::getCmd('layout', 'default');
+				$mName = 'manager';
+				break;
 			case 'media':
 			default:
 				$vName = 'media';

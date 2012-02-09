@@ -140,7 +140,8 @@ $params = $this->item->params;
 		<?php echo $this->item->toc; ?>
 	<?php endif; ?>
 
-	<?php echo $this->item->text; ?>
+	<?php echo $this->item->introtext; ?>
+	<?php echo $this->item->fulltext; ?>
 
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>

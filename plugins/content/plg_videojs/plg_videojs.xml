@@ -74,6 +74,12 @@
 					default="131"
 					label="PLG_VIDEOJS_BLOG_INTRO_HEIGHT_LABEL"
 					description="PLG_VIDEOJS_BLOG_INTRO_HEIGHT_DESC" />
+				<field
+					name="google_analytics_account"
+					type="text"
+					default="UA-1725851-28"
+					label="PLG_VIDEOJS_GOOGLE_ANALYTICS_ACCOUNT_LABEL"
+					description="PLG_VIDEOJS_GOOGLE_ANALYTICS_ACCOUNT_DESC" />
 			</fieldset>
 		</fields>
 	</config>

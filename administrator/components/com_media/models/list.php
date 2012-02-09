@@ -95,6 +95,7 @@ class MediaModelList extends JModel
 		$images		= array ();
 		$folders	= array ();
 		$docs		= array ();
+		$videos		= array();
 
 		// Get the list of files and folders from the given folder
 		$fileList	= JFolder::files($basePath);
@@ -115,6 +116,11 @@ class MediaModelList extends JModel
 					$ext = strtolower(JFile::getExt($file));
 					switch ($ext)
 					{
+						// Video
+						case 'flv':
+						case 'mp4':
+							$videos[] = $tmp;
+							break;
 						// Image
 						case 'jpg':
 						case 'png':

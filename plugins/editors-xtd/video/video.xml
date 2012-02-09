@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="editors-xtd">
+	<name>Button - Video</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://twitter.com/samacs</authorUrl>
+	<version>1.0</version>
+	<files>
+		<filename plugin="video">video.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_editors-xtd_video.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="folder"
+					type="text"
+					default="images/videos/"
+					label="PLG_VIDEO_BUTTON_FOLDER_LABEL"
+					description="PLG_VIDEO_BUTTON_FOLDER_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
