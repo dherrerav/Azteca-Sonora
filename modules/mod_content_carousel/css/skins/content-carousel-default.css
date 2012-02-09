@@ -1,0 +1,14 @@
+@charset 'utf-8';
+
+.content-carousel {
+	overflow: hidden;
+}
+
+.content-carousel ul.articles {
+	list-style: none;
+	list-style-type: none;
+}
+
+.content-carousel ul.articles li.article {
+	float: left;
+}

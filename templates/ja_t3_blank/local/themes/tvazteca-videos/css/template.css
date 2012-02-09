@@ -1003,10 +1003,13 @@ h4.content-most-title a:hover {
 	width: 640px;
 }
 
+.blog .items-intro {
+	float: right;
+	width: 280px;
+}
+
 .blog .items-row {
 	float: left;
-	width: 280px;
-	margin-left: 10px;
 	margin-right: 10px;
 }
 

@@ -68,7 +68,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	$counter=0;
 ?>
 <?php if (!empty($this->intro_items)) : ?>
-
+<div class="items-intro">
 	<?php foreach ($this->intro_items as $key => &$item) : ?>
 	<?php
 		$key= ($key-$leadingcount)+1;
@@ -94,7 +94,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 			<?php endif; ?>
 	<?php endforeach; ?>
 
-
+</div>
 <?php endif; ?>
 
 <?php if (!empty($this->link_items)) : ?>

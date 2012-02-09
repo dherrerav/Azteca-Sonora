@@ -30,3 +30,176 @@
 [09-Feb-2012 00:13:36] PHP  13. T3Common->get_layout_info() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:660
 [09-Feb-2012 00:13:36] PHP  14. T3Common->mobile_device_detect() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:303
 [09-Feb-2012 00:13:36] PHP  15. t3import() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:224
+[09-Feb-2012 00:24:20] PHP Fatal error:  Cannot redeclare class Browser in /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/libs/Browser.php on line 135
+[09-Feb-2012 00:24:20] PHP Stack trace:
+[09-Feb-2012 00:24:20] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 00:24:20] PHP   2. JSite->route() /home/samacs/applications/aztecasonora/index.php:41
+[09-Feb-2012 00:24:20] PHP   3. JApplication->route() /home/samacs/applications/aztecasonora/includes/application.php:136
+[09-Feb-2012 00:24:20] PHP   4. JApplication->triggerEvent() /home/samacs/applications/aztecasonora/libraries/joomla/application/application.php:219
+[09-Feb-2012 00:24:20] PHP   5. JDispatcher->trigger() /home/samacs/applications/aztecasonora/libraries/joomla/application/application.php:557
+[09-Feb-2012 00:24:20] PHP   6. JEvent->update() /home/samacs/applications/aztecasonora/libraries/joomla/event/dispatcher.php:115
+[09-Feb-2012 00:24:20] PHP   7. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:46
+[09-Feb-2012 00:24:20] PHP   8. plgSystemJAT3->onAfterRoute() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:0
+[09-Feb-2012 00:24:20] PHP   9. T3Framework->t3_init() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3.php:180
+[09-Feb-2012 00:24:20] PHP  10. T3Template->getInstance() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/framework.php:85
+[09-Feb-2012 00:24:20] PHP  11. T3Template->T3Template() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:50
+[09-Feb-2012 00:24:20] PHP  12. T3Common->get_active_themes_info() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:31
+[09-Feb-2012 00:24:20] PHP  13. T3Common->get_layout_info() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:660
+[09-Feb-2012 00:24:20] PHP  14. T3Common->mobile_device_detect() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:303
+[09-Feb-2012 00:24:20] PHP  15. t3import() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:224
+[09-Feb-2012 00:24:20] PHP  16. include_once() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/common.php:16
+[09-Feb-2012 07:26:00] PHP Notice:  Undefined offset: 0 in /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php on line 194
+[09-Feb-2012 07:26:00] PHP Stack trace:
+[09-Feb-2012 07:26:00] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 07:26:00] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:44
+[09-Feb-2012 07:26:00] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:188
+[09-Feb-2012 07:26:00] PHP   4. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:152
+[09-Feb-2012 07:26:00] PHP   5. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:19
+[09-Feb-2012 07:26:00] PHP   6. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:649
+[09-Feb-2012 07:26:00] PHP   7. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:78
+[09-Feb-2012 07:26:00] PHP   8. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:616
+[09-Feb-2012 07:26:00] PHP   9. JDispatcher->trigger() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:103
+[09-Feb-2012 07:26:00] PHP  10. JEvent->update() /home/samacs/applications/aztecasonora/libraries/joomla/event/dispatcher.php:115
+[09-Feb-2012 07:26:00] PHP  11. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:46
+[09-Feb-2012 07:26:00] PHP  12. plgContentPlg_VideoJS->onContentBeforeDisplay() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:0
+[09-Feb-2012 07:26:00] PHP  13. plgContentPlg_VideoJS->_removeCode() /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php:106
+[09-Feb-2012 07:26:00] PHP Notice:  Undefined offset: 0 in /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php on line 194
+[09-Feb-2012 07:26:00] PHP Stack trace:
+[09-Feb-2012 07:26:00] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 07:26:00] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:44
+[09-Feb-2012 07:26:00] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:188
+[09-Feb-2012 07:26:00] PHP   4. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:152
+[09-Feb-2012 07:26:00] PHP   5. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:19
+[09-Feb-2012 07:26:00] PHP   6. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:649
+[09-Feb-2012 07:26:00] PHP   7. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:78
+[09-Feb-2012 07:26:00] PHP   8. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:616
+[09-Feb-2012 07:26:00] PHP   9. JDispatcher->trigger() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:103
+[09-Feb-2012 07:26:00] PHP  10. JEvent->update() /home/samacs/applications/aztecasonora/libraries/joomla/event/dispatcher.php:115
+[09-Feb-2012 07:26:00] PHP  11. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:46
+[09-Feb-2012 07:26:00] PHP  12. plgContentPlg_VideoJS->onContentBeforeDisplay() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:0
+[09-Feb-2012 07:26:00] PHP  13. plgContentPlg_VideoJS->_removeCode() /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php:106
+[09-Feb-2012 07:26:00] PHP Notice:  Undefined offset: 0 in /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php on line 194
+[09-Feb-2012 07:26:00] PHP Stack trace:
+[09-Feb-2012 07:26:00] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 07:26:00] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:44
+[09-Feb-2012 07:26:00] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:188
+[09-Feb-2012 07:26:00] PHP   4. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:152
+[09-Feb-2012 07:26:00] PHP   5. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:19
+[09-Feb-2012 07:26:00] PHP   6. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:649
+[09-Feb-2012 07:26:00] PHP   7. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:78
+[09-Feb-2012 07:26:00] PHP   8. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:616
+[09-Feb-2012 07:26:00] PHP   9. JDispatcher->trigger() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:103
+[09-Feb-2012 07:26:00] PHP  10. JEvent->update() /home/samacs/applications/aztecasonora/libraries/joomla/event/dispatcher.php:115
+[09-Feb-2012 07:26:00] PHP  11. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:46
+[09-Feb-2012 07:26:00] PHP  12. plgContentPlg_VideoJS->onContentBeforeDisplay() /home/samacs/applications/aztecasonora/libraries/joomla/event/event.php:0
+[09-Feb-2012 07:26:00] PHP  13. plgContentPlg_VideoJS->_removeCode() /home/samacs/applications/aztecasonora/plugins/content/plg_videojs/plg_videojs.php:106
+[09-Feb-2012 08:58:18] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/samacs/applications/aztecasonora/modules/mod_content_carousel/mod_content_carousel.php on line 4
+[09-Feb-2012 08:58:18] PHP Stack trace:
+[09-Feb-2012 08:58:18] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 08:58:18] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:50
+[09-Feb-2012 08:58:18] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:250
+[09-Feb-2012 08:58:18] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:306
+[09-Feb-2012 08:58:18] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:460
+[09-Feb-2012 08:58:18] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:405
+[09-Feb-2012 08:58:18] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:5
+[09-Feb-2012 08:58:18] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:491
+[09-Feb-2012 08:58:18] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:957
+[09-Feb-2012 08:58:18] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:276
+[09-Feb-2012 08:58:18] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:33
+[09-Feb-2012 08:58:18] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:95
+[09-Feb-2012 08:58:54] PHP Parse error:  syntax error, unexpected ',' in /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php on line 46
+[09-Feb-2012 08:58:54] PHP Stack trace:
+[09-Feb-2012 08:58:54] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 08:58:54] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:50
+[09-Feb-2012 08:58:54] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:250
+[09-Feb-2012 08:58:54] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:306
+[09-Feb-2012 08:58:54] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:460
+[09-Feb-2012 08:58:54] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:405
+[09-Feb-2012 08:58:54] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:5
+[09-Feb-2012 08:58:54] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:491
+[09-Feb-2012 08:58:54] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:957
+[09-Feb-2012 08:58:54] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:276
+[09-Feb-2012 08:58:54] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:33
+[09-Feb-2012 08:58:54] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:95
+[09-Feb-2012 08:58:54] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:162
+[09-Feb-2012 08:59:09] PHP Parse error:  syntax error, unexpected '{' in /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php on line 46
+[09-Feb-2012 08:59:09] PHP Stack trace:
+[09-Feb-2012 08:59:09] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 08:59:09] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:50
+[09-Feb-2012 08:59:09] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:250
+[09-Feb-2012 08:59:09] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:306
+[09-Feb-2012 08:59:09] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:460
+[09-Feb-2012 08:59:09] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:405
+[09-Feb-2012 08:59:09] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:5
+[09-Feb-2012 08:59:09] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:491
+[09-Feb-2012 08:59:09] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:957
+[09-Feb-2012 08:59:09] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:276
+[09-Feb-2012 08:59:09] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:33
+[09-Feb-2012 08:59:09] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:95
+[09-Feb-2012 08:59:09] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:162
+[09-Feb-2012 09:01:45] PHP Parse error:  syntax error, unexpected '{' in /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php on line 46
+[09-Feb-2012 09:01:45] PHP Stack trace:
+[09-Feb-2012 09:01:45] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 09:01:45] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:50
+[09-Feb-2012 09:01:45] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:250
+[09-Feb-2012 09:01:45] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:306
+[09-Feb-2012 09:01:45] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:460
+[09-Feb-2012 09:01:45] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:405
+[09-Feb-2012 09:01:45] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:5
+[09-Feb-2012 09:01:45] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:491
+[09-Feb-2012 09:01:45] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:957
+[09-Feb-2012 09:01:45] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:276
+[09-Feb-2012 09:01:45] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:33
+[09-Feb-2012 09:01:45] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:95
+[09-Feb-2012 09:01:45] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:162
+[09-Feb-2012 09:01:59] PHP Fatal error:  Call to a member function get() on a non-object in /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php on line 25
+[09-Feb-2012 09:01:59] PHP Stack trace:
+[09-Feb-2012 09:01:59] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 09:01:59] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:50
+[09-Feb-2012 09:01:59] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:250
+[09-Feb-2012 09:01:59] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:306
+[09-Feb-2012 09:01:59] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:460
+[09-Feb-2012 09:01:59] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:405
+[09-Feb-2012 09:01:59] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:5
+[09-Feb-2012 09:01:59] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:491
+[09-Feb-2012 09:01:59] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:957
+[09-Feb-2012 09:01:59] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:276
+[09-Feb-2012 09:01:59] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:33
+[09-Feb-2012 09:01:59] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:95
+[09-Feb-2012 09:01:59] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:162
+[09-Feb-2012 09:01:59] PHP  14. modContentCarouselHelper::getArticles() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/mod_content_carousel.php:4
+[09-Feb-2012 09:11:58] PHP Fatal error:  Call to a member function get() on a non-object in /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php on line 60
+[09-Feb-2012 09:11:58] PHP Stack trace:
+[09-Feb-2012 09:11:58] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 09:11:58] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:50
+[09-Feb-2012 09:11:58] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:250
+[09-Feb-2012 09:11:58] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:306
+[09-Feb-2012 09:11:58] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:460
+[09-Feb-2012 09:11:58] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:405
+[09-Feb-2012 09:11:58] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:5
+[09-Feb-2012 09:11:58] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:491
+[09-Feb-2012 09:11:58] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:957
+[09-Feb-2012 09:11:58] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:276
+[09-Feb-2012 09:11:58] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:33
+[09-Feb-2012 09:11:58] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:95
+[09-Feb-2012 09:11:58] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:162
+[09-Feb-2012 09:11:58] PHP  14. modContentCarouselHelper::getArticles() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/mod_content_carousel.php:4
+[09-Feb-2012 09:11:58] PHP  15. modContentCarouselHelper::_getImage() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php:42
+[09-Feb-2012 09:11:58] PHP  16. modContentCarouselHelper::_createImage() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php:49
+[09-Feb-2012 09:20:47] PHP Warning:  array_keys() expects parameter 1 to be array, null given in /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php on line 32
+[09-Feb-2012 09:20:47] PHP Stack trace:
+[09-Feb-2012 09:20:47] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[09-Feb-2012 09:20:47] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:50
+[09-Feb-2012 09:20:47] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:250
+[09-Feb-2012 09:20:47] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:306
+[09-Feb-2012 09:20:47] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:460
+[09-Feb-2012 09:20:47] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:405
+[09-Feb-2012 09:20:47] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:5
+[09-Feb-2012 09:20:47] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:491
+[09-Feb-2012 09:20:47] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:957
+[09-Feb-2012 09:20:47] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:276
+[09-Feb-2012 09:20:47] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:33
+[09-Feb-2012 09:20:47] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:95
+[09-Feb-2012 09:20:47] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:162
+[09-Feb-2012 09:20:47] PHP  14. modContentCarouselHelper::getArticles() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/mod_content_carousel.php:4
+[09-Feb-2012 09:20:47] PHP  15. array_keys() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php:32
