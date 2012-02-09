@@ -23,6 +23,7 @@
 	height: 100%;
 }
 
-.video-preview img.play-button:hover {
+.video-preview img.play-button:hover,
+.video-player img.play-button:hover {
 	border: 0;
 }

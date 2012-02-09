@@ -1015,10 +1015,16 @@ h4.content-most-title a:hover {
 .blog .items-row h2.contentheading,
 .blog .items-row h2.contentheading a {
 	font-size: 1.2em;
-	line-height: 1.3em;
+	line-height: 1.3em !important;
 }
 
 .blog .items-row .article-tools {
 	margin-top: 0;
 	padding-top: 0;
+}
+
+.blog .items-row p {
+	margin: 0;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
 }

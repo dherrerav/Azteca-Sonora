@@ -151,7 +151,32 @@ class plgContentPlg_VideoJS extends JPLugin {
 		}
 		return $params;
 	}
-	protected function _processArticleVideos($videos, &$article) {
+	protected function _processArticleVideos($source, &$article) {
+		$video = new stdClass();
+		$video->id = 'video-' . $article->id;
+		$video->width = $this->params->get('article_width');
+		$video->height = $this->params->get('article_height');
+		if (strpos($source, '.')) {
+			$extension = strtolower(substr(strrchr($source, '.'), 1));
+			$video->source = $source;
+			$video->mp4 = substr($source, 0, strpos($source, '.')) . '.mp4';
+			$video->flv = substr($source, 0, strpos($source, '.')) . '.flv';
+			$video->image = $this->_getVideoImages($source, $video->width, $video->width);
+		} else {
+			$extension = 'youtube';
+			$entry = $this->youtube->getVideoEntry($source);
+			$images = $entry->getVideoThumbnails();
+			$video->source = $entry->getVideoWatchPageUrl();
+			$video->image = $leading ? $images[0]['url'] : $images[1]['url'];
+		}
+		$video->format = $this->formats[$extension];
+		$layout = $this->_getLayoutPath($this->plugin, 'article');
+		if ($layout) {
+			ob_start();
+			require $layout;
+			$contents = ob_get_clean();
+			$article->introtext = $contents . $article->introtext;
+		}
 	}
 	protected function _getVideoImages($source, $width, $height) {
 		$image = strtolower(substr($source, 0, strpos($source, '.'))) . '_' . $width . 'x' . $height . '.jpg';

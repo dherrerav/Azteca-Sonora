@@ -2,5 +2,19 @@
 	<img class="play-button" src="<?= 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/images/play_large.png' ?>" width="83" height="83" />
 </a>
 <script type="text/javascript">
-$f('<?= $video->id ?>', '<?= 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/swf/flowplayer.swf' ?>');
+$f('<?= $video->id ?>', { src: '<?= 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/swf/flowplayer.swf' ?>', wmode: 'transparent'}, {
+	clip: {
+		eventCategory: 'Change Campaign'
+	},
+	plugins: {
+		gatracker: {
+			url: '<?= 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/swf/flowplayer.analytics.swf' ?>',
+			events: {
+				all: true,
+			},
+			debug: true,
+			accountId: ''
+		}
+	}
+});
 </script>

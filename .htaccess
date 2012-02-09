@@ -1,6 +1,6 @@
-SetEnv AZTECASONORA_PATH "/home/samacs/applications/aztecasonora"
-
-ModPagespeed Off
+<IfModule pagespeed_module>
+	ModPagespeed Off
+</IfModule>
 
 ##
 # @version		$Id: htaccess.txt 21101 2011-04-07 15:47:33Z dextercowley $
