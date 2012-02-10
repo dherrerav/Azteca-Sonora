@@ -3,6 +3,9 @@
 	<!--Extra css load for this layout-->
 	<stylesheets>
 	</stylesheets>
+	<scripts>
+		<file>js/jquery.min.js</file>
+	</scripts>
 	<blocks name="top" style="xhtml">
 		<block name="topbanner" type="topbanner" main-inner="1">topbanner</block>
 		<block name="topnavigation" type="topnavigation" main-inner="1">top-navigation</block>

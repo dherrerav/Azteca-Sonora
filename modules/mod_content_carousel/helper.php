@@ -29,6 +29,16 @@ abstract class modContentCarouselHelper {
 		} else {
 			$model->setState('list.direction', 'DESC');
 		}
+		$scripts = array_keys($document->_scripts);
+		$scriptFound = false;
+		for ($i = 0; $i < count($scripts); $i++) {
+			if (stripos($scripts[$i], 'content-carousel.js') !== false) {
+				$scriptFound = true;
+			}
+		}
+		if (!$scriptFound) {
+			$document->addScript(JURI::base() . 'modules/mod_content_carousel/js/content-carousel.js');
+		}
 		$stylesheets = array_keys($document->_styleSheets);
 		$skinFound = false;
 		for ($i = 0; $i < count($stylesheets); $i++) {
@@ -49,14 +59,14 @@ abstract class modContentCarouselHelper {
 			} else {
 				$article->link = JRoute::_('index.php?option=com_user&view=login');
 			}
-			$article->image = self::_getImage($article, $params);
+			$article->image = self::_getImage($article);
 		}
 		return $articles;
 	}
-	protected static function _getImage(&$article, $params) {
+	protected static function _getImage(&$article) {
 		$image = '';
 		if (preg_match('/{video}(.*?){\/video}/', $article->introtext . $article->fulltext, $matches)) {
-			$image = self::_createImage($matches[1], $params);
+			$image = self::_createImage($matches[1]);
 		} else {
 			require_once 'simple_html_dom.php';
 			$html = new simple_html_dom();
@@ -66,10 +76,12 @@ abstract class modContentCarouselHelper {
 		}
 		return $image;
 	}
-	private static function _createImage($source, $params) {
-		$image = strtolower(substr($source, 0, strpos($source, '.'))) . '_' . $params->get('width') . 'x' . $params->get('height') . '.jpg';
+	private static function _createImage($source) {
+		$width = 107;
+		$height = 67;
+		$image = strtolower(substr($source, 0, strpos($source, '.'))) . '_' . $width . 'x' . $height . '.jpg';
 		if (!file_exists($image)) {
-			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $source . ' -vframes 1 -s ' . $params->get('width') . 'x' . $params->get('height') . ' ' . JPATH_SITE . DS . $image . ' 2>&1';
+			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $source . ' -vframes 1 -s ' . $width . 'x' . $height . ' ' . JPATH_SITE . DS . $image . ' 2>&1';
 			shell_exec($command);
 		}
 		return $image;

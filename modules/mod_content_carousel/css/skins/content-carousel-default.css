@@ -1,14 +1,130 @@
 @charset 'utf-8';
 
 .content-carousel {
+	margin-top: 10px;
 	overflow: hidden;
 }
 
+.content-carousel .header {
+	background: transparent url(../../images/barra_video.jpg) no-repeat top left;
+	background-size: 100%;
+	width: 980px;
+	height: 28px;
+	margin-bottom: 10px;
+}
+
+.content-carousel .date {
+	float: right;
+	color: #fff;
+	width: 240px;
+	font-size: 1em;
+	margin-top: 7px;
+	font-size: Arial, Helvetica, sans-serif;
+	text-align: center;
+}
+
+.content-carousel-inner {
+	width: 920px;
+	overflow: hidden;
+	float: left;
+}
+
 .content-carousel ul.articles {
-	list-style: none;
+	position: relative;
+	left: -230px;
 	list-style-type: none;
+	overflow: hidden;
+	
 }
 
 .content-carousel ul.articles li.article {
 	float: left;
+	padding-left: 0 !important;
+	width: 230px;
+	height: 69px;
+}
+
+.content-carousel-control {
+	float: left;
+	width: 29px;
+	height: 69px;
+	cursor: pointer;
+	cursor: hand;
+	background: transparent url(../../images/topnav.png) no-repeat;
+}
+
+.content-carousel-control.next {
+	background-position: 0px -134px !important;
+}
+
+.content-carousel-control.next:hover {
+	background-position: 0px -201px !important;
+}
+
+.content-carousel-control.prev {
+	background-position: 0px 0px;
+}
+
+.content-carousel-control.prev:hover {
+	background-position: 0px -67px;
+}
+
+.content-carousel ul.articles li.article div.article-image,
+.content-carousel ul.articles li.article div.article-title {
+	float: left;
+}
+
+.content-carousel ul.articles li.article div.article-image {
+	border-top: 0;
+	border-bottom: 0;
+	padding: 0;
+	margin: 0;
+	width: 107px;
+	height: 67px;
+}
+
+.content-carousel ul.articles li.article div.article-image a {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: block;
+	float: left;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
+
+.content-carousel ul.articles li.article div.article-image a:hover {
+	background: transparent url(../../images/alpha30.png) repeat;
+}
+
+.content-carousel ul.articles li.article div.article-image a span.play {
+	width: 20px;
+	height: 20px;
+	float: left;
+	position: absolute;
+	right: 3px;
+	bottom: 3px;
+	z-index: 1;
+	background: transparent url(../../images/videoplay2.png) no-repeat top left;
+}
+
+.content-carousel ul.articles li.article div.article-title {
+	width: 108px;
+	height: 100%;
+	overflow: hidden;
+	padding: 0 5px 0 3px;
+}
+
+.content-carousel ul.articles li.article div.article-title a {
+	font-size: 1em;
+	font-weight: normal;
+}
+
+.content-carousel ul.articles li.article div.article-text a {
+	color: #000;
+}
+
+.content-carousel ul.articles li.article div.article-text a:hover {
+	text-decoration: none;
 }

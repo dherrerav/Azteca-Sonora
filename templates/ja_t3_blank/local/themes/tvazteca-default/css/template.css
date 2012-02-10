@@ -1016,3 +1016,7 @@ h4.content-most-title a:hover {
 .body-home .ja-content-main {
 	margin-bottom: 0;
 }
+
+#ja-topsl .ja-box, #ja-botsl .ja-box {
+	background: none;
+}
