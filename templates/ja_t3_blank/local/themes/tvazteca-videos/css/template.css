@@ -1003,6 +1003,10 @@ h4.content-most-title a:hover {
 .blog {
 }
 
+.blog .items-row .contentpaneopen h2.contentheading {
+	padding-top: 5px;
+}
+
 .blog .items-row .contentpaneopen h2.contentheading,
 .blog .items-row .contentpaneopen h2.contentheading a {
 	font-size: 1em !important;
@@ -1025,4 +1029,39 @@ h4.content-most-title a:hover {
 .blog .cols-3 .item {
 	width: 196px;
 	padding: 10px 5px 10px 5px;
+}
+
+.blog .pagination ul,
+.blog ul.pagenav {
+	text-align: center;
+	float: none;
+}
+
+.blog .pagination ul li,
+.blog ul.pagenav li {
+	display: inline;
+	float: none;
+	font-weight: bold;
+}
+
+.blog .pagination ul li a.pagenav,
+.blog .pagination ul li.pagination-next span.pagenav,
+.blog .pagination ul li.pagination-prev span.pagenav,
+.blog .pagination ul li.pagination-start span.pagenav,
+.blog .pagination ul li.pagination-end span.pagenav {
+	border: 1px solid #45727c;
+	color: #fff;
+	background: #333;
+}
+
+.blog .pagination ul li span.pagenav {
+	border: 1px solid #333;
+	color: #fff;
+	background: #45727c;
+}
+
+.blog .pagination ul li a.pagenav:hover {
+	background: #f5ab3f;
+	color: #000;
+	text-decoration: none;
 }
