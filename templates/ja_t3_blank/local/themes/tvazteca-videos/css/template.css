@@ -668,7 +668,12 @@ h2.contentheading a:hover {
 }
 
 #ja-container #ja-main .inner {
-	padding: 10px;
+	
+}
+
+.main .inner {
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .item-page {
@@ -1017,8 +1022,7 @@ h4.content-most-title a:hover {
 	border-bottom: none;
 	padding-top: 0;
 	padding-bottom: 0;
-	margin-left: 10px;
-	margin-right: 5px;
+	padding-left: 18px;
 }
 
 .blog .item .contentpaneopen {
@@ -1028,7 +1032,7 @@ h4.content-most-title a:hover {
 
 .blog .cols-3 .item {
 	width: 196px;
-	padding: 10px 5px 10px 5px;
+	padding: 5px;
 }
 
 .blog .pagination ul,
@@ -1064,4 +1068,14 @@ h4.content-most-title a:hover {
 	background: #f5ab3f;
 	color: #000;
 	text-decoration: none;
+}
+
+.blog h1.componentheading {
+	border-bottom: none;
+	font-size: 25px;
+	font-weight: bold;
+	font-family: Helvetica;
+	color: #666;
+	padding-left: 10px;
+	margin: 5px 0;
 }
