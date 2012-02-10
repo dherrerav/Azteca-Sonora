@@ -238,10 +238,12 @@ a.leading-intro:hover {
 }
 
 #ja-content-main .items-row {
-	border-bottom: 1px solid #E1E1E1;
 	background: #f0f0f0;
+	/*
+	border-bottom: 1px solid #E1E1E1;
 	padding: 10px;
 	margin-bottom: 10px;
+	*/
 }
 
 .items-more .jlinks li a {
@@ -998,34 +1000,29 @@ h4.content-most-title a:hover {
 	padding-left: 20px;
 }
 
-.blog .items-leading {
-	float: left;
-	width: 640px;
+.blog {
 }
 
-.blog .items-intro {
-	float: right;
-	width: 280px;
+.blog .items-row .contentpaneopen h2.contentheading,
+.blog .items-row .contentpaneopen h2.contentheading a {
+	font-size: 1em !important;
+	line-height: 1em !important;
 }
 
 .blog .items-row {
-	float: left;
-	margin-right: 10px;
-}
-
-.blog .items-row h2.contentheading,
-.blog .items-row h2.contentheading a {
-	font-size: 1.2em;
-	line-height: 1.3em !important;
-}
-
-.blog .items-row .article-tools {
-	margin-top: 0;
+	border-bottom: none;
 	padding-top: 0;
+	padding-bottom: 0;
+	margin-left: 10px;
+	margin-right: 5px;
 }
 
-.blog .items-row p {
-	margin: 0;
-	-webkit-margin-before: 0;
-	-webkit-margin-after: 0;
+.blog .item .contentpaneopen {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.blog .cols-3 .item {
+	width: 196px;
+	padding: 10px 5px 10px 5px;
 }

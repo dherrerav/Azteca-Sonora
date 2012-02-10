@@ -30,6 +30,10 @@ $pageClass = $this->params->get('pageclass_sfx');
 
 </h1>
 <?php endif; ?>
+
+
+
+
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
 	<div class="category-desc clearfix">
 	<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
@@ -43,14 +47,14 @@ $pageClass = $this->params->get('pageclass_sfx');
 
 
 
-<?php $leadingcount=0 ; ?>
+<?php $scount=0 ; ?>
 <?php if (!empty($this->lead_items)) : ?>
 <div class="items-leading clearfix">
 	<?php foreach ($this->lead_items as &$item) : ?>
 		<div class="leading leading-<?php echo $leadingcount; ?><?php echo $item->state == 0 ? 'class="system-unpublished"' : null; ?>">
 			<?php
 				$this->item = &$item;
-				echo $this->loadTemplate('item');
+				echo $this->loadTemplate('lead');
 			?>
 		</div>
 		<?php
@@ -64,6 +68,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	$counter=0;
 ?>
 <?php if (!empty($this->intro_items)) : ?>
+
 	<?php foreach ($this->intro_items as $key => &$item) : ?>
 	<?php
 		$key= ($key-$leadingcount)+1;
@@ -88,6 +93,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 
 			<?php endif; ?>
 	<?php endforeach; ?>
+
+
 <?php endif; ?>
 
 <?php if (!empty($this->link_items)) : ?>

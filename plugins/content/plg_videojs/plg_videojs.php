@@ -140,7 +140,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 			ob_start();
 			require $layout;
 			$contents = ob_get_clean();
-			$article->introtext = $contents . $article->introtext;
+			$article->introtext = $contents;
 		}
 		$item++;
 	}
