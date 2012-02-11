@@ -9,8 +9,62 @@
 	width: 20%;
 }
 
+.mod_videoplayer .video-sections ul.sections li.section {
+	background-color: transparent;
+	background-image: url(../images/modsbg.jpg);
+	background-repeat: repeat-x;
+	background-position: 0 -86px;
+	height: 40px;
+	margin: 0 1px 0 1px;
+}
+
+.mod_videoplayer .video-sections ul.sections li.section.active,
+.mod_videoplayer .video-sections ul.sections li.section.active:hover {
+	background-position: 0 -44px;
+}
+
+.mod_videoplayer .video-sections ul.sections li.section:hover {
+	background-position: 0 -126px;
+}
+
+
+.mod_videoplayer .video-sections ul.sections li.section h2,
+.mod_videoplayer .video-sections ul.sections li.section h2 a {
+	display: block;
+	height: 100%;
+	color: #5a5959;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+}
+
+.mod_videoplayer .video-sections ul.sections li.section h2 a {
+	padding: 10px 0 0 10px;
+}
+
+.mod_videoplayer .video-sections ul.sections li.section h2 a:hover {
+	text-decoration: none;
+}
+
+
+.mod_videoplayer .video-sections ul.sections li.section.active h2 a,
+.mod_videoplayer .video-sections ul.sections li.section.active:hover h2 a {
+	color: #e0e0e0;
+	text-shadow: 0 1px 1px #000;
+}
+
+.mod_videoplayer .video-sections ul.sections li.section h2 {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.mod_videoplayer .video-sections ul.sections li.section ul.section-videos {
+	display: none;
+}
+
 .mod_videoplayer .video-player .video {
 	background: #222;
+	display: block;
 }
 
 .mod_videoplayer .video-sections h3,
@@ -39,6 +93,36 @@
 	float: left;
 	width: 30%;
 	margin-right: 10px;
+}
+
+.mod_videoplayer .video-playlist ul.playlist li.video {
+	padding: 10px;
+	cursor: pointer;
+	overflow: hidden;
+	border-bottom: 1px solid #dbd9d9;
+}
+
+.mod_videoplayer .video-playlist ul.playlist li.video:hover {
+	background: transparent url(../images/alpha15.png);
+}
+
+.mod_videoplayer .video-playlist ul.playlist li.video .image {
+	padding-right: 10px;
+}
+
+.mod_videoplayer .video-playlist ul.playlist li.video .image,
+.mod_videoplayer .video-playlist ul.playlist li.video .date {
+	float: left;
+}
+
+.mod_videoplayer .video-playlist ul.playlist li.video div.title h2,
+.mod_videoplayer .video-playlist ul.playlist li.video div.title h2 a {
+	font-size: 1em;
+	color: #222;
+}
+
+.mod_videoplayer .video-playlist ul.playlist li.video div.title h2 a:hover {
+	text-decoration: none;
 }
 
 .mod_videoplayer .video-player {

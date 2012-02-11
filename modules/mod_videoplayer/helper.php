@@ -62,7 +62,7 @@ abstract class modVideoPlayerHelper {
 			$model->setState('list.direction', $params->get('ordering_direction'));
 		}
 		$articles = $model->getItems();
-		$videos = array();
+		$categories = array();
 		foreach ($articles as $article) {
 			if (!preg_match(self::$_videoCode, $article->introtext . $article->fulltext, $match)) continue;
 			$source = $match[1];
@@ -85,12 +85,21 @@ abstract class modVideoPlayerHelper {
 				$video->mp4 = substr($source, 0, strpos($source, '.')) . '.mp4';
 				$video->flv = substr($source, 0, strpos($source, '.')) . '.flv';
 				$video->image = self::_getVideoImage($source, (int)$params->get('image_width'), (int)$params->get('image_height'));
+				$video->preview = self::_getVideoImage($source, (int)$params->get('player_width'), (int)$params->get('player_height'));
 			} else {
 				// TODO: Implement youtube video.
 			}
-			$videos[] = $video;
+			if (!$categories[$article->catid]) {
+				$category = new stdClass();
+				$category->title = $article->category_title;
+				$category->id = (int)$article->catid;
+				$category->link = JRoute::_(ContentHelperRoute::getCategoryRoute($article->catid));
+				$categories[$article->catid]['category'] = $category;
+			}
+			$categories[$article->catid]['videos'][] = $video;
+			//$videos[] = $video;
 		}
-		return $videos;
+		return $categories;
 	}
 	private static function _removeCode($text) {
 		return preg_replace(self::$_videoCode, '', $text);
