@@ -49,7 +49,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 		$this->articleHeight = $this->params->get('article_height', 333);
 		$this->skin = $this->params->get('skin', 'default');
 	}
-	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart) {
+	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 1) {
 		$catids = $this->params->get('catids');
 		if (is_array($catids) && count($catids) == 1) {
 			if (empty($catids[0])) {
