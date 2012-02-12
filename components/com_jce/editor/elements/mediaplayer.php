@@ -1,18 +1,15 @@
 <?php
 /**
- * @version   $Id: mediaplayer.php 53 2011-02-09 10:29:43Z happy_noodle_boy $
- * @package   JCE
- * @copyright Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
- * * @copyright Copyright (C) 2009 Ryan Demmer. All rights reserved.
- * @license   GNU/GPL
- * This version may have been modified pursuant
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is within the rest of the framework
-defined('JPATH_BASE') or die();
+defined('JPATH_BASE') or die('RESTRICTED');
 
 /**
  * Renders a select element
@@ -28,7 +25,7 @@ class JElementMediaplayer extends JElement
      */
     var $_name = 'Mediaplayer';
     
-    function fetchElement($name, $value, &$node, $control_name)
+    public function fetchElement($name, $value, &$node, $control_name)
     {
         jimport('joomla.filesystem.folder');
         
@@ -47,7 +44,9 @@ class JElementMediaplayer extends JElement
 			$document->addScriptDeclaration('$jce.Parameter.add("#' . $id . '", "mediaplayer");');
 		}
         
-        $options = array();
+        $options 	= array();
+		
+		$options[] = JHTML::_('select.option', 'none', WFText::_('WF_OPTION_NONE'));
         
     	if ( is_array($files) )
 		{

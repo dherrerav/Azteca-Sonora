@@ -1,26 +1,16 @@
 <?php
 /**
- * @version		$Id: preferences.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright 	Copyright © 2005 - 2007 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright � 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('RESTRICTED');
 
-/**
- * Plugins Component Controller
- *
- * @package		Joomla
- * @subpackage	Plugins
- * @since 1.5
- */
 class WFControllerPreferences extends WFController
 {
 	/**
@@ -33,9 +23,16 @@ class WFControllerPreferences extends WFController
 		$this->registerTask( 'apply', 'save' );
 	}
 	
-	function display()
+	function filter($data)
 	{
-		parent::display();
+		$model 	= $this->getModel('preferences');
+		$form 	= $model->getForm();
+		
+		if (is_a($form, 'JForm')) {
+			return $form->filter($data);
+		}
+		
+		return $data;
 	}
 
 	function save()
@@ -45,8 +42,9 @@ class WFControllerPreferences extends WFController
 
 		$db = JFactory::getDBO();	
 
+		$post = JRequest::getVar('params', '', 'POST', 'ARRAY');
 		$registry = new JRegistry();
-		$registry->loadArray(JRequest::getVar('params', '', 'POST', 'ARRAY'));
+		$registry->loadArray($post);
 		
 		// get params
 		$component 	= WFExtensionHelper::getComponent();
@@ -55,29 +53,37 @@ class WFControllerPreferences extends WFController
 
 		// set preferences object
 		$preferences = $registry->toObject();	
-		
-		// Save the rules (only in Joomla! 1.6+)
+
 		if (isset($preferences->rules)) {
 			jimport('joomla.access.rules');
-			$rules	= new JRules($params->rules);
-			$asset	= JTable::getInstance('asset');
 			
-			$option = JRequest::getCmd('option');
+			if (class_exists('JRules')) {	
+			
+				$data 	= $this->filter($post);
+			
+				$rules	= new JRules($data['rules']);
+				$asset	= JTable::getInstance('asset');
+				
+				$option = JRequest::getCmd('option');
+	
+				if (!$asset->loadByName($option)) {
+					$root = JTable::getInstance('asset');
+					$root->loadByName('root.1');
+					$asset->name 	= $option;
+					$asset->title 	= $option;
+					$asset->setLocation($root->id,'last-child');
+				}
 
-			if (!$asset->loadByName($option)) {
-				$root = JTable::getInstance('asset');
-				$root->loadByName('root.1');
-				$asset->name 	= $option;
-				$asset->title 	= $option;
-				$asset->setLocation($root->id,'last-child');
-			}
-			$asset->rules = (string) $rules;
-
-			if (!$asset->check() || !$asset->store()) {
-				$this->setError($asset->getError());
-				return false;
-			}
-			unset($preferences->rules);
+				$asset->rules = (string) $rules;
+	
+				if (!$asset->check() || !$asset->store()) {
+					JError::raiseError(500, $asset->getError());
+					return false;
+				}
+			// Joomla! 1.5
+			} else {		
+				$params->access = $preferences->rules;
+			}	
 		}
 		
 		if (isset($preferences->preferences)) {

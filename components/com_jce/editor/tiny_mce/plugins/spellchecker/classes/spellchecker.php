@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: spellchecker.php 54 2011-02-09 16:45:24Z happy_noodle_boy $
+* @version		$Id: spellchecker.php 221 2011-06-11 17:30:33Z happy_noodle_boy $
 * @package      JCE
 * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
 * @author		Ryan Demmer

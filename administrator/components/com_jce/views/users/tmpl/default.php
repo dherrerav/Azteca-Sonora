@@ -1,24 +1,22 @@
-<?php 
+<?php
 /**
- * @version		$Id: default.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('ERROR_403'); 
+defined('_JEXEC') or die('RESTRICTED'); 
 ?>
 <form action="index.php?option=com_jce&tmpl=component" method="post" name="adminForm">
 	<div id="jce">
 	    <table width="100%" cellspacing="0" id="users-toolbar">
 			<tr>
 				<td width="100%">
-					<?php echo WFText::_('WF_LABEL_FILTER'); ?>:
+					<?php echo WFText::_('WF_LABEL_FILTER'); ?>
 					<input type="text" name="search" id="search" size="30" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
 					<button id="filter_go" onclick="this.form.submit();"><?php echo WFText::_('WF_LABEL_GO'); ?></button>
 					<button id="filter_reset" onclick="document.getElementById('search').value='';this.form.submit();"><?php echo WFText::_('WF_LABEL_RESET'); ?></button>

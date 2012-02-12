@@ -1,6 +1,6 @@
 <?php
 /**
-* $Id: config.php 83 2011-02-21 10:49:26Z happy_noodle_boy $
+* $Id: config.php 221 2011-06-11 17:30:33Z happy_noodle_boy $
 * @package      JCE
 * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
 * @author		Ryan Demmer
@@ -17,7 +17,7 @@ class WFSpellcheckerPluginConfig {
 		
 		$settings['spellchecker_languages'] = '+' . $wf->getParam('spellchecker.languages', 'English=en', '' );
 		$settings['spellchecker_engine'] 	= $wf->getParam('spellchecker.engine', 'googlespell', 'googlespell' );
-		$settings['spellchecker_rpc_url'] 	= JURI::base(true).'/index.php?option=com_jce&view=editor&layout=plugin&plugin=spellchecker&cid=' . $settings['component_id'];
+		$settings['spellchecker_rpc_url'] 	= JURI::base(true).'/index.php?option=com_jce&view=editor&layout=plugin&plugin=spellchecker&component_id=' . $settings['component_id'];
 	}
 }
 ?>

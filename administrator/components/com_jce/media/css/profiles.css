@@ -1,14 +1,13 @@
 /**
- * @version		$Id: profiles.css 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-@import url("select.css");
+@import url("../../../../../components/com_jce/editor/libraries/css/select.css");
 @import url("upload.css");
 @import url("colorpicker.css");
 @import url("extensions.css");
@@ -62,7 +61,7 @@ input#components-all, input#components-select, label[for="components-all"], labe
 	background: url("../../../../../components/com_jce/editor/libraries/img/icons.png") no-repeat 0 -880px;
 }
 #jce button span.icon-remove { 
-	background: url("../../../../../components/com_jce/editor/libraries/img/icons.png") no-repeat 0 -340px;
+	background: url("../../../../../components/com_jce/editor/libraries/img/icons.png") no-repeat 0 -180px;
 }
 #jce button span.icon-add { 
 	background: url("../../../../../components/com_jce/editor/libraries/img/icons.png") no-repeat 0 -300px;
@@ -88,16 +87,14 @@ input#components-all, input#components-select, label[for="components-all"], labe
 	text-align:center;
 }
 
-#jce .jgrid span.downarrow {
-	background-image:url("../img/down.png");
-}
-#jce .jgrid span.uparrow {
-	background-image:url("../img/up.png");
-}
 #jce .jgrid span.state {
 	display:inline-block;
-	height:16px;
-	width: 16px;
+	height:12px;
+	width: 12px;
+	vertical-align: middle;
+}
+#jce .jgrid span.text {
+	display: none;
 }
 #jce a.saveorder {
 	display: inline-block;
@@ -136,4 +133,22 @@ div#plugin_params h2 {
 	cursor: pointer;
 	display: inline-block;
 	vertical-align:middle;
+}
+
+html[dir="rtl"] .ui-jce .ui-tabs-vertical .ui-tabs-nav {
+	border-width: 0 0 0 1px;
+    float: right;
+    padding: 0 0.2em 0 0.1em;
+}
+html[dir="rtl"] .ui-jce .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected {
+    padding-left: 0.1em;
+    border-right-width: 1px;
+    margin-right: -1px;
+}
+html[dir="rtl"] .ui-jce .ui-tabs-vertical .ui-tabs-nav li {
+	margin: 0 1px 0.2em 0;
+	border-left: 0 none;
+}
+html[dir="rtl"] .ui-jce .ui-tabs-vertical .ui-tabs-panel {
+	margin: 0 13em 0 0;
 }

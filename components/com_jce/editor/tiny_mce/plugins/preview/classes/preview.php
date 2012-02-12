@@ -1,18 +1,15 @@
 <?php
 /**
-* @version		$Id: preview.php 53 2011-02-09 10:29:43Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
-* @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-// no direct access
-defined('_JEXEC') or die('Restricted access');
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+defined('_JEXEC') or die('RESTRICTED');
 
 // Load class dependencies
 require_once(WF_EDITOR_LIBRARIES .DS. 'classes' .DS. 'plugin.php');
@@ -65,28 +62,28 @@ class WFPreviewPlugin extends WFEditorPlugin
 		$dispatcher	= JDispatcher::getInstance();
 		$language 	= JFactory::getLanguage();
 		
+		// reset document type
+		$document	= &JFactory::getDocument();
+		$document->setType('html');
+		// required by module loadposition
+		jimport('joomla.application.module.helper');
+		
 		wfimport('admin.helpers.extension');
 
 		// Get variables
-		$cid 		= JRequest::getInt('cid');
+		$component_id 	= JRequest::getInt('component_id');
 		// get post data
-		$data   	= JRequest::getVar('data', '', 'POST', 'STRING', JREQUEST_ALLOWRAW );
+		$data   		= JRequest::getVar('data', '', 'POST', 'STRING', JREQUEST_ALLOWRAW );
 		
 		// cleanup data
 		$data   	= preg_replace(array('#<!DOCTYPE([^>]+)>#i', '#<(head|title|meta)([^>]*)>([\w\W]+)<\/1>#i', '#<\/?(html|body)([^>]*)>#i'), '', rawurldecode($data));
 
-		$component 	= WFExtensionHelper::getComponent($cid);
+		$component 	= WFExtensionHelper::getComponent($component_id);
 
 		$params  	= new JParameter($component->params);
-		$article 	= new JObject();
-		
+		$article 	= JTable::getInstance('content');
+
 		$article->id			= 0;
-		$article->state			= 1;
-		$article->cat_pub		= null;
-		$article->sec_pub		= null;
-		$article->cat_access	= null;
-		$article->sec_access	= null;
-		$article->author		= null;
 		$article->created_by	= $user->get('id');
 		$article->parameters	= new JParameter('');
 		$article->text			= $data;
@@ -94,8 +91,13 @@ class WFPreviewPlugin extends WFEditorPlugin
 		$limitstart = 0;
 		JPluginHelper::importPlugin('content');
 		
-		$dispatcher->trigger('onPrepareContent', array (& $article, & $params, $limitstart));
+		require_once(JPATH_SITE .DS. 'components' .DS. 'com_content' .DS. 'helpers' .DS. 'route.php');
 		
+		// set error reporting to error only
+		error_reporting(E_ERROR);
+
+		$dispatcher->trigger('onPrepareContent', array (& $article, & $params, $limitstart));
+
 		$this->processURLS($article);
 
 		return $article->text;

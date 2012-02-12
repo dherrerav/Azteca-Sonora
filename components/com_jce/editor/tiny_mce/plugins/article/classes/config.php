@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: config.php 53 2011-02-09 10:29:43Z happy_noodle_boy $
+* @version		$Id: config.php 257 2011-06-30 11:37:36Z happy_noodle_boy $
 * @package      JCE
 * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
 * @author		Ryan Demmer
@@ -14,7 +14,9 @@ class WFArticlePluginConfig {
 	public function getConfig( &$settings ){
 		$wf = WFEditor::getInstance();
 		
-		$settings['article_hide_xtd_btns'] = $wf->getParam('article.hide_xtd_btns', 0, 0);
+		$settings['article_hide_xtd_btns'] 	= $wf->getParam('article.hide_xtd_btns', 0, 0);
+		$settings['article_show_readmore'] 	= $wf->getParam('article.show_readmore', 1, 1);
+		$settings['article_show_pagebreak'] = $wf->getParam('article.show_pagebreak', 1, 1);
 	}
 }
 ?>

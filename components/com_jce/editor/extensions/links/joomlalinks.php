@@ -1,16 +1,15 @@
 <?php
 /**
-* @version		$Id: joomlalinks.php 53 2011-02-09 10:29:43Z happy_noodle_boy $
-* @package      JCE Advlink
-* @copyright    Copyright (C) 2008 - 2009 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-defined( '_WF_EXT' ) or die( 'ERROR_403' );
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+defined( '_WF_EXT' ) or die('RESTRICTED');
 
 class WFLinkBrowser_Joomlalinks extends JObject {
 	
@@ -35,7 +34,7 @@ class WFLinkBrowser_Joomlalinks extends JObject {
 		if ( !empty( $files ) ) {
 			foreach( $files as $file ) {
 				require_once( $path .DS. $file );
-				$classname = 'Joomlalinks' . ucfirst( JFile::stripExt( $file ) );
+				$classname = 'Joomlalinks' . ucfirst(basename($file, '.php'));
 				$this->_adapters[] = new $classname;
 			}
 		}
@@ -70,7 +69,7 @@ class WFLinkBrowser_Joomlalinks extends JObject {
 	function isEnabled() 
 	{
 		$wf = WFEditorPlugin::getInstance();
-		return $wf->checkAccess($wf->getName() . '.links.joomlalinks', 1);
+		return $wf->checkAccess($wf->getName() . '.links.joomlalinks.enable', 1);
 	}
 	
 	function getOption()

@@ -1,33 +1,34 @@
-<?php 
+<?php
 /**
- * @version		$Id: default.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-defined('_JEXEC') or die('ERROR_403');
+
+defined('_JEXEC') or die('RESTRICTED');
 ?>
 <form enctype="multipart/form-data" action="index.php" method="post" name="adminForm">
 	<div id="jce">
-		<table width="100%" cellspacing="0" id="profiles-toolbar">
+		<table id="profiles-toolbar" cellspacing="0">
 			<tr>
-				<td width="50%"><?php echo WFText::_('WF_LABEL_FILTER'); ?>: <input type="text" name="search" id="search" size="50" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
+				<td>
+					<label for="search"><?php echo WFText::_('WF_LABEL_FILTER'); ?></label><input type="text" name="search" id="search" size="50" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
 					<button id="filter_go" onclick="this.form.submit();"><?php echo WFText::_('WF_LABEL_GO'); ?></button>
 					<button id="filter_reset" onclick="document.getElementById('search').value='';this.form.submit();"><?php echo WFText::_('WF_LABEL_RESET'); ?></button>
 				</td>
-				<td width="50%">	
-					<div style="float:right;">
-						<label for="import"><?php echo WFText::_('WF_PROFILES_IMPORT'); ?>:</label>
+
+				<td nowrap="nowrap">
+					<span class="upload-container">
+						<label for="import"><?php echo WFText::_('WF_PROFILES_IMPORT'); ?></label>
 						<input type="file" name="import" id="upload" accept="application/xml" />
-						<button id="upload_button"><?php echo WFText::_('WF_PROFILES_IMPORT_IMPORT'); ?></button>
-					</div>	
+						<button id="upload_button"><?php echo WFText::_('WF_PROFILES_IMPORT_IMPORT'); ?></button>								
+					</span>
 				</td>
-			</tr>
+			</tr>			
 		</table>
 		<br />
 		<table id="profiles-list" cellspacing="1">
@@ -43,7 +44,7 @@ defined('_JEXEC') or die('ERROR_403');
 					<?php echo JHTML::_('grid.sort',   'WF_PROFILES_DESCRIPTION', 'p.description', @$this->lists['order_Dir'], @$this->lists['order'] ); ?>
 				</th>
 				<th nowrap="nowrap" width="5%">
-					<?php echo JHTML::_('grid.sort',   'WF_PROFILES_ENABLED', 'p.published', @$this->lists['order_Dir'], @$this->lists['order'] ); ?>
+					<?php echo JHTML::_('grid.sort',   'WF_PROFILES_STATE', 'p.published', @$this->lists['order_Dir'], @$this->lists['order'] ); ?>
 				</th>
 		        <th nowrap="nowrap" width="10%" >
 					<?php echo JHTML::_('grid.sort',   'WF_PROFILES_ORDERING', 'p.ordering', @$this->lists['order_Dir'], @$this->lists['order'] ); ?>
@@ -68,15 +69,13 @@ defined('_JEXEC') or die('ERROR_403');
 			for ($i=0, $n=count( $rows ); $i < $n; $i++) {
 			$row = $rows[$i];
 		
-			$link = JRoute::_( 'index.php?option=com_jce&view=profiles&task=edit&cid[]='. $row->id );
-
-			if ($row->published) {
-				$published = '<span class="profiles-enable"></span>';
-			} else {
-				$published = '<span class="profiles-disable"></span>';
-			}
-
-			$checked = JHTML::_('grid.checkedout', $row, $i );
+			$link 		= JRoute::_( 'index.php?option=com_jce&view=profiles&task=edit&cid[]='. $row->id );
+			
+			// state
+			$state 		= JHTML::_('grid.published', $row, $i );
+			
+			// checked out
+			$checked 	= JHTML::_('grid.checkedout', $row, $i );
 		?>
 			<tr>
 				<td align="center">
@@ -97,7 +96,7 @@ defined('_JEXEC') or die('ERROR_403');
 					<?php echo $row->description;?>
 				</td>
 				<td align="center">
-					<?php echo $published;?>
+					<?php echo $state;?>
 				</td>
 		        <td class="order" align="center">
 					<span><?php echo $this->pagination->orderUpIcon( $i, true, 'orderup', 'WF_PROFILES_ORDER_UP', $row->ordering ); ?></span>

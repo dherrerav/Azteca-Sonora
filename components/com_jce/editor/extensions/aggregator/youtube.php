@@ -1,16 +1,14 @@
 <?php
 /**
-* @version		$Id: link.php 46 2011-01-29 09:54:18Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-// no direct access
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
 defined('_JEXEC') or die('RESTRICTED');
 
 class WFAggregatorExtension_Youtube extends WFAggregatorExtension 
@@ -31,9 +29,13 @@ class WFAggregatorExtension_Youtube extends WFAggregatorExtension
 	{
 		$document = WFDocument::getInstance();
 		$document->addScript('youtube', 'extensions/aggregator/youtube/js');
+	}
+	
+	function isEnabled()
+	{
+		$plugin = WFEditorPlugin::getInstance();
 		
-		$plugin = WFMediaManagerPlugin::getInstance();
-		$plugin->setMediaOption('youtube', 'WF_AGGREGATOR_YOUTUBE_TITLE');
+		return $plugin->checkAccess('aggregator.youtube.enable', 1);
 	}
 	
 	function getParams()
@@ -41,8 +43,8 @@ class WFAggregatorExtension_Youtube extends WFAggregatorExtension
 		$plugin = WFEditorPlugin::getInstance();
 	
 		return array(
-			'width'		=>	$plugin->getParam('youtube.width', 425),
-			'height'	=>	$plugin->getParam('youtube.height', 350)
+			'width'		=>	$plugin->getParam('aggregator.youtube.width', 425),
+			'height'	=>	$plugin->getParam('aggregator.youtube.height', 350)
 		);
 	}
 }

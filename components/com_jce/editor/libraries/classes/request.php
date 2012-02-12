@@ -1,42 +1,39 @@
 <?php
 /**
- * @version   $Id: request.php 55 2011-02-13 16:16:19Z happy_noodle_boy $
- * @package      JCE Advlink
- * @copyright    Copyright (C) 2008 - 2009 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-// no direct access
-defined('_JEXEC') or die('ERROR_403');
 
-class WFRequest extends JObject
+defined('_JEXEC') or die('RESTRICTED');
+
+final class WFRequest extends JObject
 {
 	var $request = array();
 	
 	/**
 	 * Constructor activating the default information of the class
 	 *
-	 * @access  protected
+	 * @access  public
 	 */
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 	}
 	/**
-	 * Returns a reference to a plugin object
+	 * Returns a reference to a WFRequest object
 	 *
 	 * This method must be invoked as:
-	 *    <pre>  $advlink =AdvLink::getInstance();</pre>
+	 *    <pre>  $request = WFRequest::getInstance();</pre>
 	 *
 	 * @access  public
-	 * @return  JCE  The editor object.
-	 * @since 1.5
+	 * @return  object WFRequest
 	 */
-	function &getInstance()
+	public static function getInstance()
 	{
 		static $instance;
 
@@ -48,12 +45,12 @@ class WFRequest extends JObject
 	}
 
 	/**
-	 * Setup an Request function
+	 * Set Request function
 	 *
-	 * @access public
-	 * @param array   An array containing the function and object
+	 * @access 	public
+	 * @param 	array	$function An array containing the function and object
 	 */
-	function setRequest($function)
+	public function setRequest($function)
 	{
 		$object = new StdClass();
 		
@@ -71,11 +68,21 @@ class WFRequest extends JObject
 		}
 	}
 	
-	function getRequest($function) {
+	/**
+	 * Get a request function
+	 * @access 	public
+	 * @param 	string $function
+	 */
+	public function getRequest($function) {
 		return $this->request[$function];
 	}
 
-	function checkQuery($query)
+	/**
+	 * Check a request query for bad stuff
+	 * @access 	private
+	 * @param 	array $query
+	 */
+	private function checkQuery($query)
 	{
 		if (is_string($query)) {
 			$query = array($query);
@@ -83,7 +90,7 @@ class WFRequest extends JObject
 
 		// check for null byte
 		foreach ($query as $key => $value) {
-			if (is_array($value)) {
+			if (is_array($value) || is_object($value)) {
 				return self::checkQuery($value);
 			}
 			
@@ -103,30 +110,30 @@ class WFRequest extends JObject
 	 * @access public
 	 * @return string
 	 */
-	function process($array = false)
+	public function process($array = false)
 	{
+		// Check for request forgeries
+		WFToken::checkToken() or die('RESTRICTED ACCESS');	
+			
 		$json   = JRequest::getVar('json', '', 'POST', 'STRING', 2);
-		$method = JRequest::getWord('method', '');
+		$action = JRequest::getWord('action');
 
-		if ($method == 'form' || $json) {
-			// Check for request forgeries
-			WFToken::checkToken() or die('INVALID TOKEN');
-				
+		if ($action || $json) {			
 			$output = array(
                 "result" 	=> null,
 				"text"		=> null,
 				"error"		=> null
 			);
 				
-			JError::setErrorHandling(E_ALL, 'callback', array('WFUtility', 'raiseError'));
+			JError::setErrorHandling(E_ALL, 'callback', array('WFError', 'raiseError'));
 
-			$fn   = JRequest::getWord('action');
-			$args = array();
-
-			if (!$method && $json) {
-				$json 			= json_decode($json);
-				$fn   			= isset($json->fn) ? $json->fn : JError::raiseError(500, 'NO FUNCTION CALL');
-				$args 			= isset($json->args) ? $json->args : array();
+			if ($json) {
+				$json 	= json_decode($json);
+				$fn   	= isset($json->fn) ? $json->fn : JError::raiseError(500, 'NO FUNCTION CALL');
+				$args 	= isset($json->args) ? $json->args : array();
+			} else {
+				$fn 	= $action;
+				$args 	= array();
 			}
 
 			// check query

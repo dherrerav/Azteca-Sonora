@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <install version="1.5.0" type="plugin" plugin="media" core="1" editable="1">
 	<name>WF_MEDIA_TITLE</name>
-	<version>2.0.0beta7</version>
-	<creationDate>12 May 2011</creationDate>
+	<version>2.0.20</version>
+	<creationDate>20 January 2012</creationDate>
 	<author>Ryan Demmer</author>
 	<authorEmail>info@joomlacontenteditor.net</authorEmail>
 	<authorUrl>http://www.joomlacontenteditor.net</authorUrl>
@@ -35,6 +35,13 @@
         	<option value="0">WF_OPTION_NO</option>
         	<option value="1">WF_OPTION_YES</option>
 		</param>
+	</params>
+	<params group="advanced">
+		<param name="version_flash" type="text" size="50" default="10,1,53,64" label="WF_MEDIA_VERSION_FLASH" />
+		<param name="version_windowsmedia" type="text" size="50" default="10,00,00,3646" label="WF_MEDIA_VERSION_WINDOWSMEDIA" />
+		<param name="version_quicktime" type="text" size="50" default="7,3,0,0" label="WF_MEDIA_VERSION_QUICKTIME" />
+		<param name="version_java" type="text" size="50" default="1,5,0,0" label="WF_MEDIA_VERSION_JAVA" />
+		<param name="version_shockwave" type="text" size="50" default="10,2,0,023" label="WF_MEDIA_VERSION_SHOCKWAVE" />
 	</params>
 	<languages></languages>
 </install>

@@ -1,24 +1,26 @@
-<?php 
+<?php
 /**
- * @version		$Id: form_features.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('ERROR_403');
-
-$rows 	= $this->model->getRowArray($this->profile->rows);
-$spacer = file_exists(WF_EDITOR.DS.'tiny_mce'.DS.'themes'.DS.'advanced'.DS.'img'.DS.'spacer.gif'); 
+defined('_JEXEC') or die('RESTRICTED');
 
 ?>
 <fieldset class="first">
 	<legend><?php echo WFText::_( 'WF_PROFILES_FEATURES_LAYOUT' ); ?></legend>
+	<!--  Legend -->	
+	<div style="margin:5px 0 0 2px;">
+		<a class="dialog legend" data-options="{'width': 750, 'height': 600}" target="_blank" title="<?php echo WFText::_('WF_LEGEND_TITLE'); ?>" href="index.php?option=com_jce&tmpl=component&view=legend">
+			<button id="layout-legend"><?php echo WFText::_('WF_PROFILES_LEGEND');?></button>
+		</a>
+	</div>
+	
 	<ul class="adminformlist" id="profileLayoutTable">
 		<!-- Active Editor Layout -->
 		<li>
@@ -26,12 +28,12 @@ $spacer = file_exists(WF_EDITOR.DS.'tiny_mce'.DS.'themes'.DS.'advanced'.DS.'img'
 			<span class="profileLayoutContainer">
 				<ul class="sortableList" id="profileLayout">
 				<?php
-				for ($i=1; $i <= count($rows) + 1; $i++) : ?>
+				for ($i=1; $i <= count($this->rows); $i++) : ?>
 				    <li class="sortableListItem">
 				        <ul class="sortableRow">
-							<?php for ($x = 1; $x <= count($rows); $x++ ) :
+							<?php for ($x = 1; $x <= count($this->rows); $x++ ) :
 						        if ($i == $x) :
-						            $icons = explode(',', $rows[$x]);
+						            $icons = explode(',', $this->rows[$x]);
 		
 									foreach ($icons as $icon) :
 										if ($icon == 'spacer') :
@@ -48,10 +50,11 @@ $spacer = file_exists(WF_EDITOR.DS.'tiny_mce'.DS.'themes'.DS.'advanced'.DS.'img'
 						    endfor;?>
 				        </ul>
 				        <span class="sortableHandle"><span class="ui-icon ui-icon-arrowthick-2-n-s" style="margin-top:7px;"><img src="components/com_jce/media/img/spacer.gif" width="11px" height="20px" /></span></span>
+				    	<span class="sortableOption"></span>
 				    </li>
 				<?php endfor;?>
 				</ul>
-				<span class="widthMarker" style="width:<?php echo $this->width;?>px;"><?php echo $this->width;?>px</span>
+				<span class="widthMarker" style="width:<?php echo $this->width;?>px;"><span><?php echo $this->width;?>px</span></span>
 	 		</span>
 		</li>
 		<!-- Available Buttons -->
@@ -71,7 +74,7 @@ $spacer = file_exists(WF_EDITOR.DS.'tiny_mce'.DS.'themes'.DS.'advanced'.DS.'img'
 							endif;
 
 						    foreach ($this->plugins as $plugin) :
-	                            if (!in_array($plugin->name, explode(',', implode(',', $rows)))) :
+	                            if (!in_array($plugin->name, explode(',', implode(',', $this->rows)))) :
 	                                if ($plugin->icon && $plugin->row == $i) :
 	                                    echo '<li class="sortableRowItem ' . $plugin->type . '" data-name="' . $plugin->name . '">' . $this->model->getIcon($plugin) . '</li>';
 						            endif;
@@ -79,19 +82,13 @@ $spacer = file_exists(WF_EDITOR.DS.'tiny_mce'.DS.'themes'.DS.'advanced'.DS.'img'
 						    endforeach;?>
 				        </ul>
 						<span class="sortableHandle"><span class="ui-icon ui-icon-arrowthick-2-n-s" style="margin-top:7px;"><img src="components/com_jce/media/img/spacer.gif" width="11px" height="20px" /></span></span>
+						<span class="sortableOption"></span>
 					</li>
 				<?php endfor;?>
 				</ul>
 			</span>	
 		</li>
 	</ul>
-	<!--  Legend -->
-	<br style="clear:both;" />
-	<div style="margin:5px 0 0 2px;">
-		<a class="dialog legend" data-options="{'width': 750, 'height': 600}" target="_blank" title="<?php echo WFText::_('WF_LEGEND_TITLE'); ?>" href="index.php?option=com_jce&tmpl=component&view=legend">
-			<button id="layout-legend"><?php echo WFText::_('WF_PROFILES_LEGEND');?></button>
-		</a>
-	</div>
 </fieldset>
 <fieldset>
 	<legend><?php echo WFText::_('WF_PROFILES_FEATURES_ADDITIONAL'); ?></legend>
@@ -102,7 +99,7 @@ $spacer = file_exists(WF_EDITOR.DS.'tiny_mce'.DS.'themes'.DS.'advanced'.DS.'img'
                  if (!$plugin->icon) :
                     if ($plugin->editable) : ?>
                         <li class="editable">
-                            <label valign="top" class="key"><?php echo WFText::_($plugin->title);?>:</label>
+                            <label valign="top" class="key"><?php echo WFText::_($plugin->title);?></label>
 							<input type="checkbox" value="<?php echo $plugin->name;?>" <?php echo in_array( $plugin->name, explode( ',', $this->profile->plugins ) ) ? 'checked="checked"' : '';?>/>
                         	<?php echo WFText::_('WF_'.strtoupper($plugin->name).'_DESC');?>
 						</li>

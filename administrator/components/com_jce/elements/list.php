@@ -1,18 +1,15 @@
 <?php
 /**
- * @version		$Id: list.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
  * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright 	Copyright © 2005 - 2007 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is within the rest of the framework
-defined('JPATH_BASE') or die();
+defined('JPATH_BASE') or die('RESTRICTED');
 
 /**
  * Renders a select element
@@ -83,8 +80,9 @@ class JElementList extends JElement
 		}
 		
 		// revert to default values
-        if ($value == '' || $value == 'default')
+        if ($value === '') {
             $value = $node->attributes('defaults');
+		}
 
         // editable lists
         if (strpos($class, 'editable') !== false) {
@@ -106,7 +104,7 @@ class JElementList extends JElement
             $attribs[]	 = 'multiple="multiple"';
             $ctrl 		.= '[]';
 			
-			$value 		 = !is_array($value) ? explode('|', $value) : $value;
+			$value 		 = !is_array($value) ? preg_split('#[|,]#', $value) : $value;
         }
         
         return JHTML::_('select.genericlist', $options, $ctrl, implode(' ', $attribs), 'value', 'text', $value, $control_name.$name);

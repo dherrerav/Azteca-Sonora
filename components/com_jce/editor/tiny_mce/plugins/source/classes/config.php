@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: config.php 69 2011-02-20 13:51:53Z happy_noodle_boy $
+ * @version		$Id: config.php 226 2011-06-13 09:59:05Z happy_noodle_boy $
  * @package      JCE
  * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
  * @author		Ryan Demmer
@@ -16,22 +16,33 @@ class WFSourcePluginConfig
 	{
 		$wf = WFEditor::getInstance();
 
-		$settings['source_higlight'] 	= $wf->getParam('source.highlight', 1, 1);
-		$settings['source_numbers'] 	= $wf->getParam('source.numbers', 1, 1);
-		$settings['source_wrap'] 		= $wf->getParam('source.wrap', 1, 1);
+		$settings['source_higlight'] 	= $wf->getParam('source.highlight', 1, 1, 'boolean');
+		$settings['source_numbers'] 	= $wf->getParam('source.numbers', 1, 1, 'boolean');
+		$settings['source_wrap'] 		= $wf->getParam('source.wrap', 1, 1, 'boolean');
+		
+		$theme = $wf->getParam('source.theme', 'textmate', 'textmate');
+		
+		// codemirror2 themes...
+		if (preg_match('#(cobalt|default|elegant|monokai|neat|night|rubyblue)#', $theme)) {
+			$theme = 'textmate';
+		}
+		
+		$settings['source_theme'] = $theme;
 	}
 	
 	public function getStyles() {
 		$wf = WFEditor::getInstance();
 		
-		// return file(s) array
-		if ($wf->getParam('editor.compress_css', 0)) {			
-			return array(dirname(dirname(__FILE__)) . DS . 'css' . DS . 'editor.css');
+		if (JRequest::getWord('layout') === 'plugin') {
+			// return file(s) array
+			if ($wf->getParam('editor.compress_css', 0)) {			
+				return array(dirname(dirname(__FILE__)) . DS . 'css' . DS . 'editor.css');
+			}
+			
+			// use document instance	
+			$document = JFactory::getDocument();
+			$document->addStyleSheet(JURI::root(true) . '/components/com_jce/editor/tiny_mce/plugins/source/css/editor.css?version=' . $wf->getVersion());	
 		}
-		
-		// use document instance	
-		$document = JFactory::getDocument();
-		$document->addStyleSheet(JURI::root(true) . '/components/com_jce/editor/tiny_mce/plugins/source/css/editor.css?version=' . $wf->getVersion());
 	}
 }
 ?>

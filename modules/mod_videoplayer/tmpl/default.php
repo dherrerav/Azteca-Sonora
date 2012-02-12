@@ -43,8 +43,10 @@
 		<? endif ?>
 		<div class="video-playlist">
 			<h3>Videos</h3>
-			<ul class="playlist">
-			</ul>
+			<div class="scrollbar">
+				<ul class="playlist">
+				</ul>
+			</div>
 		</div>
 		<div class="video-player">
 			<a class="video" style="width: <?= $params->get('player_width') ?>px; height: <?= $params->get('player_height') ?>px;">

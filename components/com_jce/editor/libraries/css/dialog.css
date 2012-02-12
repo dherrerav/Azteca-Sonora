@@ -1,5 +1,5 @@
 /**
- * @version   $Id: dialog.css 58 2011-02-18 12:40:41Z happy_noodle_boy $
+ * @version   $Id: dialog.css 221 2011-06-11 17:30:33Z happy_noodle_boy $
  * @package   JCE
  * @copyright Copyright (C) 2009 Ryan Demmer. All rights reserved.
  * @license   GNU/GPL
@@ -9,14 +9,17 @@
  * other free or open source software licenses.
  */
 html {
-	overflow: auto;
+	overflow: hidden;
+	height: 100%;
 }
-
 body#jce {
-    padding:0 !important;
+    padding: 5px !important;
 	font: 10px Verdana, Arial, Helvetica, sans-serif;
 	background-color: #FFF;
-	margin: 5px;
+	margin: 0;
+	position: relative;
+	height: 100%;
+	overflow: hidden;
 }
 #jce {
 	border: 0 none;
@@ -55,7 +58,6 @@ label {
 }
 label.invalid {
     color:#E00;
-    display:inline;
 }
 input.invalid {
     border:1px solid #E00;
@@ -140,6 +142,7 @@ input[type="text"] {
 }
 input[type="checkbox"] {
 	margin: 2px;
+	vertical-align: middle;
 }
 .show {
     display:block;
@@ -155,6 +158,10 @@ input[type="checkbox"] {
     width:20px;
     height:20px;
     display:block;
+}
+span.loader {
+	display: inline-block;
+	vertical-align: middle;
 }
 .ui-addselect, .mceAddSelectValue {
     background-color:#DDD;
@@ -238,7 +245,7 @@ input#dialog-prompt {
     overflow:hidden;
 }
 .ui-dialog-content label {
-    min-width:50px;
+    min-width:60px;
     text-align:right;
     display:inline-block;
     margin:0 5px 0 0;
@@ -290,9 +297,9 @@ a.browse:hover span, span.browser_icon:hover {
 }
 a.browse span.disabled, span.browser_icon.disabled {
     border:1px solid #FFF;
-    -moz-opacity:0.3px;
-    opacity:0.3px;
-    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+    opacity:0.3;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
 }
 a.browse:hover span.disabled, span.browser_icon.disabled:hover {
     border:1px solid #FFF;
@@ -302,16 +309,25 @@ a.pickcolor:hover span, span.pickcolor_icon:hover {
     background-color:#B2BBD0;
 }
 .mceActionPanel, div.actionPanel {
-    margin-top:5px;
-	float: right;
+    position: absolute;
+    bottom: 25px;
+    right: 4px;
 }
 label, input, select {
     vertical-align:middle;
 	line-height: 16px;
 }
 .disabled {
-	opacity:0.3; -ms-filter:'alpha(opacity=30)'; filter:alpha(opacity=30);
-	cursor:default !important;
+	cursor:default;
+}
+span[role="button"].disabled {
+    opacity:0.3;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
+}
+input[disabled], select[disabled] {
+	color: #ccc;
+	background-color: #efefef;
 }
 select.editable option.ui-state-highlight {
 	border: 0 none;
@@ -339,12 +355,20 @@ span.ui-slider {
     font-size: 1.1em;
     padding: 0 0 0 32px;
 	margin: 3px 0px;
-	height: 24px;
+	min-height: 24px;
 	background: url('../img/icons-24.png') no-repeat 0 -48px;
+	width: 240px;
+	word-wrap: break-word;
 }
 
 #jce div.ui-dialog div.ui-dialog-content div.alert {
 	background-position: 0 -144px;
+}
+
+#jce div.ui-dialog div.ui-dialog-content div.alert ul {
+	list-style : none;
+	padding: 0;
+	margin: 0;
 }
 
 #jce div.ui-dialog div.ui-dialog-content div.confirm p, #jce div.ui-dialog div.ui-dialog-content div.alert p {
@@ -366,9 +390,17 @@ label[for^="margin_"], label[for^="border_"], label[for="clear"] {
 	min-width: 40px;
 }
 
+label[for="margin_check"] {
+	margin: 0 0 0 5px;
+}
+
 /** Popups **/
 label[for="popup_check"] {
 	margin: 0 0 0 5px;
+}
+
+div#popups_tab {
+	overflow-x : auto;
 }
 
 /** Dialogs **/

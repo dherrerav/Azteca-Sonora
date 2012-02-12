@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <install version="1.5.0" type="plugin" plugin="fullscreen" core="1" editable="0">
 	<name>WF_FULLSCREEN_TITLE</name>
-	<version>2.0.0beta7</version>
-	<creationDate>12 May 2011</creationDate>
+	<version>2.0.20</version>
+	<creationDate>20 January 2012</creationDate>
 	<author>Ryan Demmer</author>
 	<authorEmail>info@joomlacontenteditor.net</authorEmail>
 	<authorUrl>http://www.joomlacontenteditor.net/</authorUrl>

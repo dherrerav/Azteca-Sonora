@@ -1,18 +1,15 @@
 <?php
 /**
- * @version   $Id: profiles.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('RESTRICTED');
 
 // load base model
 require_once(dirname(__FILE__) . DS . 'model.php');
@@ -233,22 +230,46 @@ class WFModelProfiles extends WFModel
                 $row = JTable::getInstance('profiles', 'WFTable');
                 // get profile name                 
                 $name  = (string)$profile->attributes()->name;
-                // check for name
-                $query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
-                $db->setQuery($query);
-                // create name copy if exists
-                while ($db->loadResult()) {
-                    $name = JText::sprintf('WF_PROFILES_COPY_OF', $name);
-                    
-                    $query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
-                    
-                    $db->setQuery($query);
-                }
-                // set name
-                $row->name = $name;
-                
+				
+				// backwards compatability
+				if ($name) {
+					// check for name
+	                $query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
+	                $db->setQuery($query);
+	                // create name copy if exists
+	                while ($db->loadResult()) {
+	                    $name = JText::sprintf('WF_PROFILES_COPY_OF', $name);
+	                    
+	                    $query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
+	                    
+	                    $db->setQuery($query);
+	                }
+	                // set name
+	                $row->name = $name;
+				}
+
                 foreach ($profile->children() as $item) {
                     switch ($item->name()) {
+						case 'name':
+							$name = $item->data();
+							// only if name set and table name not set
+							if ($name && !$row->name) {
+								// check for name
+				                $query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
+				                $db->setQuery($query);
+				                // create name copy if exists
+				                while ($db->loadResult()) {
+				                    $name = JText::sprintf('WF_PROFILES_COPY_OF', $name);
+				                    
+				                    $query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
+				                    
+				                    $db->setQuery($query);
+				                }
+				                // set name
+				                $row->name = $name;
+							}
+
+							break;	
                         case 'description':
                             $row->description = WFText::_($item->data());
                             

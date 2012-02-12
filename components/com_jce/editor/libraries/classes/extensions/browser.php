@@ -1,17 +1,15 @@
 <?php
 /**
-* @version		$Id: browser.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-// no direct access
-defined('_JEXEC') or die('ERROR_403');
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+defined('_JEXEC') or die('RESTRICTED');
 
 wfimport('editor.libraries.classes.extensions');
 
@@ -20,13 +18,13 @@ class WFBrowserExtension extends WFExtension
 	/*
 	*  @var varchar
 	*/
-	var $extensions = array();
+	private $extensions = array();
 	/**
 	* Constructor activating the default information of the class
 	*
 	* @access	protected
 	*/
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 		parent::__construct($config);
 	}
@@ -40,7 +38,7 @@ class WFBrowserExtension extends WFExtension
 	 * @return	JCE  The editor object.
 	 * @since	1.5
 	 */
-	function &getInstance($type, $config = array())
+	public static function getInstance($type, $config = array())
 	{
 		static $instance;
 
@@ -59,12 +57,12 @@ class WFBrowserExtension extends WFExtension
 		return $instance;
 	}
 	
-	function display()
+	public function display()
 	{
 		parent::display();
 	}
 	
-	function getView($layout)
+	protected function getView($layout)
 	{		
 		$view = new WFView(array(
 			'name'		=> 'browser',

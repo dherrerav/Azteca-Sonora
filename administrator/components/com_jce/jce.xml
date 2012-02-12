@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
 <install type="component" version="1.5.0" method="upgrade">
 	<name>JCE</name>
 	<author>Ryan Demmer</author>
-	<creationDate>12 May 2011</creationDate>
+	<creationDate>20 January 2012</creationDate>
 	<copyright>Copyright (C) 2006 - 2011 Ryan Demmer. All rights reserved</copyright>
 	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
 	<authorEmail>info@joomlacontenteditor.net</authorEmail>
 	<authorUrl>www.joomlacontenteditor.net</authorUrl>
-	<version>2.0.0beta7</version>
+	<version>2.0.20</version>
     <description>WF_ADMIN_DESC</description>
 	<installfile>install.php</installfile>
   	<uninstallfile>install.php</uninstallfile>
 	
 	<files folder="components/com_jce">
-		<folder>controller</folder>
 		<folder>editor</folder>
 		<folder>media</folder>
 		<folder>views</folder>
@@ -54,6 +52,7 @@
 			<folder>views</folder>
 			<file>access.xml</file>
 			<file>controller.php</file>
+			<file>config.xml</file>
 			<file>index.html</file>
 			<file>install.php</file>
 			<file>jce.php</file>
@@ -67,4 +66,7 @@
       		<language tag="en-GB">en-GB.plg_editors_jce.sys.ini</language>
 		</languages>
     </administration>
+    <updateservers>
+		<server type="extension" priority="1" name="JCE Editor Updates"><![CDATA[https://www.joomlacontenteditor.net/index.php?option=com_updates&view=update&format=xml&id=1]]></server>
+	</updateservers>
 </install>

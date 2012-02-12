@@ -1,59 +1,55 @@
 <?php
 /**
-* @version		$Id: browser.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
 
-defined( '_JEXEC') or die( 'ERROR_403');
+defined( '_JEXEC') or die('RESTRICTED');
  
 require_once(WF_EDITOR_LIBRARIES .DS. 'classes' .DS. 'manager.php');
 
-class WFFileBrowserPlugin extends WFMediaManager
+final class WFFileBrowserPlugin extends WFMediaManager
 {
 	/* 
 	* @var string
 	*/
-	var $_extensions = 'xml=xml;html=htm,html;word=doc,docx;powerpoint=ppt;excel=xls;text=txt,rtf;image=gif,jpeg,jpg,png;acrobat=pdf;archive=zip,tar,gz;flash=swf;winrar=rar;quicktime=mov,mp4,qt;windowsmedia=wmv,asx,asf,avi;audio=wav,mp3,aiff;openoffice=odt,odg,odp,ods,odf';	
+	protected $_filetypes = 'xml=xml;html=htm,html;word=doc,docx;powerpoint=ppt;excel=xls;text=txt,rtf;image=gif,jpeg,jpg,png;acrobat=pdf;archive=zip,tar,gz;flash=swf;winrar=rar;quicktime=mov,mp4,qt;windowsmedia=wmv,asx,asf,avi;audio=wav,mp3,aiff;openoffice=odt,odg,odp,ods,odf';	
 	
 	/**
 	* @access	protected
 	*/
-	function __construct()
-	{		
-		if (JRequest::getWord('type', 'file') == 'file') {
-			$extensions = 'WF_LABEL_ALL_FILES=*.*;' . $this->getParam('browser.extensions', $this->get('_extensions'));
+	public function __construct()
+	{
+		parent::__construct();	
+					
+		$browser = $this->getBrowser();
+		
+		if (JRequest::getWord('type', 'file') == 'file') {			
+			// Add all files
+			$browser->addFileTypes(array('WF_FILEGROUP_ALL' => '*.*'));
 		} else {
-			$extensions = 'image=jpg,jpeg,png,gif';
+			$browser->setFileTypes('images=jpg,jpeg,png,gif');
 		}
 		
 		if (JRequest::getString('filter')) {
-			$extensions = 'files=' . JRequest::getString('filter');
+			$browser->setFileTypes('files=' . JRequest::getString('filter'));	
 		}
-
-		$config = array(
-			'filetypes' => $extensions
-		);
-		
-		parent::__construct($config);
 	}
 	/**
-	 * Returns a reference to a editor object
+	 * Returns a reference to a WFFileBrowserPlugin object
 	 *
 	 * This method must be invoked as:
-	 * 		<pre>  $browser =Browser::getInstance();</pre>
+	 * 		<pre>  $browser = WFFileBrowserPlugin::getInstance();</pre>
 	 *
 	 * @access	public
-	 * @return	JCE  The editor object.
-	 * @since	1.5
+	 * @return	object WFFileBrowserPlugin
 	 */
-	function &getInstance()
+	public function &getInstance()
 	{
 		static $instance;
 
@@ -65,8 +61,9 @@ class WFFileBrowserPlugin extends WFMediaManager
 	
 	/**
 	 * Display the plugin
+	 * @access public
 	 */
-	function display()
+	public function display()
 	{
 		parent::display();
 		
@@ -83,20 +80,18 @@ class WFFileBrowserPlugin extends WFMediaManager
 				$document->addScript(array('langs/en_dlg.js'), 'tiny_mce');
 			}
 			
+			$element = JRequest::getCmd('element', '');
+			
 			$options = array(
 				'plugin' => array(
 					'root' 	=> JURI::root(),
 					'site' 	=> JURI::base(true) . '/'
 				),
-				'manager' 	=> $settings
+				'manager' 	=> $settings,
+				'element'	=> $element
 			);
-			
-			// add element
-			if (JRequest::getWord('element')) {
-				$options['element'] = JRequest::getWord('element');
-			}
-			
-			$document->addScriptDeclaration('jQuery(document).ready(function($){$.Browser.init('.json_encode($options).');});');
+
+			$document->addScriptDeclaration('jQuery(document).ready(function($){$.WFBrowserWidget.init('.json_encode($options).');});');
 			
 			$document->addStyleSheet(array(
 				'dialog'
@@ -106,7 +101,9 @@ class WFFileBrowserPlugin extends WFMediaManager
 			$document->addScriptDeclaration('BrowserDialog.settings='.json_encode($settings).';');
 		}
 	}
-	
+	/**
+	 * @see WFMediaManager::getSettings()
+	 */
 	function getSettings()
 	{
 		return parent::getSettings();

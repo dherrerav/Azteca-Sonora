@@ -1,17 +1,15 @@
 <?php
 /**
- * @version   $Id: document.php 85 2011-02-21 19:11:08Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-// no direct access
-defined('_JEXEC') or die('ERROR_403');
+
+defined('_JEXEC') or die('RESTRICTED');
 
 class WFDocument extends JObject
 {
@@ -21,7 +19,7 @@ class WFDocument extends JObject
 	 * @var		array
 	 * @access   private
 	 */	
-	var $_scripts 	= array();
+	private $_scripts 	= array();
 	
 	/**
 	 * Array of scripts placed in the header
@@ -29,7 +27,7 @@ class WFDocument extends JObject
 	 * @var  array
 	 * @access   private
 	 */
-	var $_script 	= array();
+	private $_script 	= array();
 
 	/**
 	 * Array of linked style sheets
@@ -37,7 +35,7 @@ class WFDocument extends JObject
 	 * @var	 array
 	 * @access  private
 	 */
-	var $_styles 	= array();
+	private $_styles 	= array();
 
 	/**
 	 * Array of head items
@@ -45,7 +43,7 @@ class WFDocument extends JObject
 	 * @var	 array
 	 * @access  private
 	 */
-	var $_head 		= array();
+	private $_head 		= array();
 	
 	/**
 	 * Body content
@@ -53,7 +51,7 @@ class WFDocument extends JObject
 	 * @var	 array
 	 * @access  private
 	 */
-	var $_body		= '';
+	private $_body		= '';
 	
 	/**
 	 * Document title
@@ -61,14 +59,38 @@ class WFDocument extends JObject
 	 * @var	 string
 	 * @access  public
 	 */
-	var $title = '';
+	public $title = '';
+	
+	/**
+	 * Document version
+	 *
+	 * @var	 string
+	 * @access  public
+	 */
+	public $version = '000000';
+	
+	/**
+	 * Contains the document language setting
+	 *
+	 * @var	 string
+	 * @access  public
+	 */
+	public $language = 'en-gb';
+
+	/**
+	 * Contains the document direction setting
+	 *
+	 * @var	 string
+	 * @access  public
+	 */
+	public $direction = 'ltr';
 
 	/**
 	 * Constructor activating the default information of the class
 	 *
 	 * @access  protected
 	 */
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 		parent::__construct();
 		
@@ -79,17 +101,17 @@ class WFDocument extends JObject
 
 		$this->setProperties($config);
 	}
+	
 	/**
-	 * Returns a reference to a plugin object
+	 * Returns a reference to a WFDocument object
 	 *
 	 * This method must be invoked as:
-	 *    <pre>  $advlink =AdvLink::getInstance();</pre>
+	 *    <pre>  $document = WFDocument::getInstance();</pre>
 	 *
 	 * @access  public
-	 * @return  JCE  The editor object.
-	 * @since 1.5
+	 * @return  object WFDocument
 	 */
-	function &getInstance($config = array())
+	public static function getInstance($config = array())
 	{
 		static $instance;
 
@@ -100,17 +122,53 @@ class WFDocument extends JObject
 		return $instance;
 	}
 	
-	function setTitle($title)
+	/**
+	 * Set the document title
+	 * @access 	public
+	 * @param 	string $title
+	 */
+	public function setTitle($title)
 	{
 		$this->title = $title;
 	}
 	
-	function getTitle()
+	/**
+	 * Get the document title
+	 * @access	public
+	 * @return	string
+	 */
+	public function getTitle()
 	{
 		return $this->title;
 	}
+	
+	/**
+	 * Set the document name
+	 * @access	public
+	 * @param 	string $name
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+	}
+	
+	/**
+	* Get the document name
+	* @access	public
+	* @return 	string
+	*/
+	public function getName()
+	{
+		return $this->name;
+	}
 
-	function getURL($relative = false)
+	/**
+	 * Get the editor URL
+	 * @access	private
+	 * @param 	bool $relative
+	 * @return 	string
+	 */
+	private function getURL($relative = false)
 	{
 		if ($relative) {
 			return JURI::root(true) . '/components/com_jce/editor';
@@ -120,55 +178,53 @@ class WFDocument extends JObject
 	}
 	
 	/**
-	 * Return the curernt language code
-	 *
-	 * @access public
-	 * @return language code
+	 * Sets the global document language declaration. Default is English (en-gb).
+	 * @access 	public
+	 * @param   string   $lang
 	 */
-	function getLanguageDir()
-	{
-		$language = JFactory::getLanguage();
-		return $language->isRTL() ? 'rtl' : 'ltr';
+	public function setLanguage($lang = "en-gb") {
+		$this->language = strtolower($lang);
 	}
+
 	/**
-	 * Return the curernt language code
+	 * Returns the document language.
 	 *
+	 * @return string
 	 * @access public
-	 * @return language code
 	 */
-	function getLanguageTag()
-	{
-		$language = JFactory::getLanguage();
-		if ($language->isRTL()) {
-			return 'en-GB';
-		}
-		return $language->getTag();
+	public function getLanguage() {
+		return $this->language;
 	}
+
 	/**
-	 * Return the curernt language code
+	 * Sets the global document direction declaration. Default is left-to-right (ltr).
 	 *
 	 * @access public
-	 * @return language code
+	 * @param   string   $lang
 	 */
-	function getLanguage()
-	{
-		$tag = $this->getLanguageTag();
-		if (file_exists(JPATH_SITE .DS. 'language' .DS. $tag .DS. $tag .'.com_jce.xml')) {
-			return substr($tag, 0, strpos($tag, '-'));
-		}
-		return 'en';
+	public function setDirection($dir = "ltr") {
+		$this->direction = strtolower($dir);
+	}
+
+	/**
+	 * Returns the document language.
+	 *
+	 * @return string
+	 * @access public
+	 */
+	public function getDirection() {
+		return $this->direction;
 	}
 
 	/**
 	 * Returns a JCE resource url
 	 *
-	 * @access  public
-	 * @param string  The path to resolve eg: libaries
-	 * @param boolean Create a relative url
+	 * @access  private
+	 * @param 	string  The path to resolve eg: libaries
+	 * @param 	boolean Create a relative url
 	 * @return  full url
-	 * @since 1.5
 	 */
-	function getBaseURL($path, $type = '')
+	private function getBaseURL($path, $type = '')
 	{
 		static $url;
 
@@ -238,16 +294,14 @@ class WFDocument extends JObject
 	/**
 	 * Convert a url to path
 	 *
-	 * @access  public
-	 * @param string  The url to convert
-	 * @return  Full path to file
-	 * @since 1.5
+	 * @param 	string $url
+	 * @return  string 
 	 */
-	function urlToPath($url)
+	private function urlToPath($url)
 	{
 		jimport('joomla.filesystem.path');
 		$bool = strpos($url, JURI::root()) === false;
-		return WFUtility::makePath(JPATH_SITE, JPath::clean(str_replace(JURI::root($bool), '', $url)));
+		return WFUtility::makePath(JPATH_SITE, JPath::clean(ltrim($url, JURI::root($bool))));
 	}
 
 	/**
@@ -258,30 +312,33 @@ class WFDocument extends JObject
 	 * @return  Image url
 	 * @since 1.5
 	 */
-	function image($image, $root = 'libraries')
+	public function image($image, $root = 'libraries')
 	{
 		$parts = explode('.', $image);
 		$parts = preg_replace('#[^A-Z0-9-_]#i', '', $parts);
 
 		$ext  = array_pop($parts);
-		$name = array_pop($parts);
-		$path = implode('/', $parts);
+		$name = trim(array_pop($parts), '/');
 
-		return $this->getBaseURL($root) . "/" . $path . "/img/" . $name . "." . $ext;
+		$parts[] = 'img';
+		$parts[] = $name . "." . $ext;
+
+		return $this->getBaseURL($root) . implode('/', $parts);
 	}
 
-	function removeScript($file, $root = 'libraries')
+	public function removeScript($file, $root = 'libraries')
 	{
 		$file = $this->buildScriptPath($file, $root);		
 		unset($this->_scripts[$file]);
 	}
-	function removeCss($file, $root = 'libraries')
+	
+	public function removeCss($file, $root = 'libraries')
 	{
 		$file = $this->buildStylePath($file, $root);		
 		unset($this->_styles[$file]);
 	}
 	
-	function buildScriptPath($file, $root)
+	public function buildScriptPath($file, $root)
 	{
 		$file = preg_replace('#[^A-Z0-9-_\/\.]#i', '', $file);
 		// get base dir
@@ -298,7 +355,7 @@ class WFDocument extends JObject
 		return $file;
 	}
 	
-	function buildStylePath($file, $root)
+	public function buildStylePath($file, $root)
 	{
 		$file = preg_replace('#[^A-Z0-9-_\/\.]#i', '', $file);
 		// get base dir
@@ -324,7 +381,7 @@ class WFDocument extends JObject
 	 * @return  echo script html
 	 * @since 1.5
 	 */
-	function addScript($files, $root = 'libraries', $type = 'text/javascript')
+	public function addScript($files, $root = 'libraries', $type = 'text/javascript')
 	{
 		$files = (array) $files;
 
@@ -348,7 +405,7 @@ class WFDocument extends JObject
 	 * @return  echo css html
 	 * @since 1.5
 	 */
-	function addStyleSheet($files, $root = 'libraries', $type = 'text/css')
+	public function addStyleSheet($files, $root = 'libraries', $type = 'text/css')
 	{
 		$files = (array) $files;
 
@@ -372,7 +429,7 @@ class WFDocument extends JObject
 		}
 	}
 
-	function addScriptDeclaration($content, $type = 'text/javascript')
+	public function addScriptDeclaration($content, $type = 'text/javascript')
 	{
 		if (!isset($this->_script[strtolower($type)])) {
 			$this->_script[strtolower($type)] = $content;
@@ -381,23 +438,20 @@ class WFDocument extends JObject
 		}
 	}
 
-	function getScripts()
+	private function getScripts()
 	{
 		return $this->_scripts;
 	}
 
-	function getStyleSheets()
+	private function getStyleSheets()
 	{
 		return $this->_styles;
 	}
 
 	/**
 	 * Setup head data
-	 *
-	 * @access  public
-	 * @since 1.5
 	 */
-	function setHead($data)
+	private function setHead($data)
 	{
 		if (is_array($data)) {
 			$this->_head = array_merge($this->_head, $data);
@@ -406,49 +460,76 @@ class WFDocument extends JObject
 		}
 	}
 
-	/**
-	 * Render document head data
-	 */
-	private function getHead()
+	private function getQueryString($query = array())
 	{
-		$output = '';
-		
-		$output .= '<title>' . $this->getTitle() . ' : ' . $this->get('version', '000000') . '</title>' . "\n";
-		
+		// get version
+		$version 	= $this->get('version', '000000');		
+		// get layout
 		$layout 	= JRequest::getWord('layout');
-		$item		= JRequest::getWord($layout);
-		$standalone	= '';
-		$dialog		= '';
 		
+		// set layout and item, eg: &layout=plugin&plugin=link
+		$query['layout'] 	= $layout;
+		$query[$layout]		= JRequest::getWord($layout);
+		
+		// set dialog
 		if (JRequest::getWord('dialog')) {
-			$dialog = '&dialog=' . JRequest::getWord('dialog');
+			$query['dialog'] = JRequest::getWord('dialog');
 		}
 		
 		// set standalone mode (for File Browser etc)
 		if ($this->get('standalone') == 1) {
-			$standalone = '&standalone=1';
+			$query['standalone'] = 1;
 		}
-
-		// Get Component / Global params
-		$component 	= WFExtensionHelper::getComponent();	
-		$params 	= new WFParameter($component->params);
-
-		// Render scripts
-		$stamp 	= preg_match('/\d+/', $this->version) ? '?version=' . $this->get('version', '000000') : '';	
+		
+		// get component id
+		$component_id = JRequest::getInt('component_id');
+		// set component id
+		if ($component_id) {
+			$query['component_id'] = $component_id;
+		}
+		
 		// get token
 		$token	= WFToken::getToken();
+		// set token
+		$query[$token] = 1;
+		
+		if (preg_match('/\d+/', $version)) {
+			// set version
+			$query['version'] = preg_replace('/[^a-z0-9]/i', '', $version);
+		}
 
-		if ($params->get('editor.compress_javascript', 0)) {
-			$script = JURI::base(true) . '/index.php?option=com_jce&view=editor&layout='.$layout.'&'.$layout.'=' . $item . $dialog . $standalone . '&task=pack&' . $token . '=1';
+		$output = array();
+		
+		foreach($query as $key => $value) {
+			$output[] = $key . '=' . $value;
+		}
+		
+		return implode('&', $output);
+	}
+
+	/**
+	 * Render document head data
+	 */
+	private function getHead()
+	{		
+		$version = $this->get('version', '000000');
+		// set title		
+		$output = '<title>' . $this->getTitle() . ' : ' . $version . '</title>' . "\n";
+		// create timestamp
+		$stamp 	= preg_match('/\d+/', $version) ? '?version=' . $version : '';	
+
+		// Render scripts
+		if ($this->get('compress_javascript', 0)) {			
+			$script = JURI::base(true) . '/index.php?option=com_jce&view=editor&' . self::getQueryString(array('task' => 'pack'));
 			$output .= "\t\t<script type=\"text/javascript\" src=\"" . $script . "\"></script>\n";
 		} else {
 			foreach ($this->_scripts as $src => $type) {
 				$output .= "\t\t<script type=\"" . $type . "\" src=\"" . $src . $stamp . "\"></script>\n";
 			}
 		}
-
-		if ($params->get('editor.compress_css', 0)) {
-			$file = JURI::base(true) . '/index.php?option=com_jce&view=editor&layout='.$layout.'&'.$layout.'=' . $item . $dialog . $standalone . '&task=pack&type=css&' . $token . '=1';
+		// render stylesheets
+		if ($this->get('compress_css', 0)) {			
+			$file = JURI::base(true) . '/index.php?option=com_jce&view=editor&' . self::getQueryString(array('task' => 'pack', 'type' => 'css'));
 
 			$output .= "\t\t<link href=\"" . $file . "\" rel=\"stylesheet\" type=\"text/css\" />\n";
 		} else {			
@@ -498,7 +579,7 @@ class WFDocument extends JObject
 	{		
 		// assign language
 		$this->language 	= $this->getLanguage();
-		$this->direction 	= $this->getLanguageDir();
+		$this->direction 	= $this->getDirection();
 		
 		// load template data
 		$output = $this->loadData();			
@@ -518,7 +599,7 @@ class WFDocument extends JObject
 	/**
 	 * pack function for plugins
 	 */
-	public function pack()
+	public function pack($minify = true, $gzip = false)
 	{				
 		if (JRequest::getCmd('task') == 'pack') {
 			
@@ -558,7 +639,7 @@ class WFDocument extends JObject
 			}
 
 			$packer->setFiles($files);
-			$packer->pack();
+			$packer->pack($minify, $gzip);
 		}
 	}
 }

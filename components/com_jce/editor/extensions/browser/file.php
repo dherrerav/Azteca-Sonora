@@ -1,17 +1,15 @@
 <?php
 /**
- * @version   $Id: manager.php 85 2011-02-21 19:11:08Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('ERROR_403');
+defined('_JEXEC') or die('RESTRICTED');
 
 wfimport('editor.libraries.classes.extensions.browser');
 wfimport('editor.libraries.classes.extensions.filesystem');
@@ -19,30 +17,25 @@ wfimport('editor.libraries.classes.extensions.filesystem');
 class WFFileBrowser extends WFBrowserExtension 
 {
 	/*
-	 *  @var varchar
+	 *  @var array
 	 */
-	//var $_base = null;
-
+	private $_buttons = array();
 	/*
 	 *  @var array
 	 */
-	var $_buttons = array();
+	private $_actions = array();
 	/*
 	 *  @var array
 	 */
-	var $_actions = array();
+	private $_events = array();
 	/*
 	 *  @var array
 	 */
-	var $_events = array();
-	/*
-	 *  @var array
-	 */
-	var $_result = array('error' => array(), 'files' => array(), 'folders' => array());
+	private $_result = array('error' => array(), 'files' => array(), 'folders' => array());
 	/**
 	 * @access  protected
 	 */
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 
 		$default = array(
@@ -50,9 +43,8 @@ class WFFileBrowser extends WFBrowserExtension
 			'filesystem' 				=> 'joomla',
 			'filetypes'					=> 'images=jpg,jpeg,png,gif',
 			'upload'					=> array(
-				'runtimes'			=> 'html5,flash,silverlight',
+				'runtimes'			=> 'html5,flash',
 				'chunk_size' 		=> null,
-				'conflict'			=> array('overwrite', 'unique'),
 				'max_size'			=> 1024,
 				'validate_mimetype'	=> 0
 			),
@@ -71,7 +63,8 @@ class WFFileBrowser extends WFBrowserExtension
 					'delete' => 1,
 					'move' 	 => 1
 				)
-			)
+			),
+			'websafe_mode'	=> 'utf-8'
 		);
 		
 		$config = array_merge($default, $config);		
@@ -94,8 +87,9 @@ class WFFileBrowser extends WFBrowserExtension
 
 	/**
 	 * Display the browser
+	 * @access public
 	 */
-	function display()
+	public function display()
 	{		
 		parent::display();
 		
@@ -108,7 +102,7 @@ class WFFileBrowser extends WFBrowserExtension
 		), 'libraries');
 		
 		$document->addScript(array(
-			'plupload.full'
+			'plupload.full',
 		), 'jce.libraries.plupload');
 		
 		$document->addScript(array(
@@ -120,12 +114,18 @@ class WFFileBrowser extends WFBrowserExtension
 	
 		//$document->addStyleSheet(array('files', 'tree', 'upload'), 'libraries');
 		$document->addStyleSheet(array('manager'), 'extensions.browser.css');
+		// custom stylesheet
+		//$document->addStyleSheet(array('custom'), 'libraries.css');
 		
 		// file browser options
 		$document->addScriptDeclaration('WFFileBrowser.settings='.json_encode($this->getSettings()).';');
 	}
 	
-	function render()
+	/**
+	 * Render the browser view
+	 * @access public
+	 */
+	public function render()
 	{
 		$session = JFactory::getSession();
 		// create file view
@@ -138,7 +138,12 @@ class WFFileBrowser extends WFBrowserExtension
 		$view->display();
 	}
 	
-	function setRequest($request)
+	/**
+	 * Set a WFRequest item
+	 * @access 	public
+	 * @param 	array $request
+	 */
+	public function setRequest($request)
 	{
 		$xhr = WFRequest::getInstance();		
 		$xhr->setRequest($request);
@@ -152,21 +157,20 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @return	Joomla! component url
 	 * @since	1.5
 	 */
-	function getFormAction() 
+	protected function getFormAction() 
 	{		
 		$wf = WFEditorPlugin::getInstance();
 		
-		$cid = JRequest::getInt('cid');
+		$component_id = JRequest::getInt('component_id');
 		
 		$query = '';
 		
 		$args = array(
-			'plugin' => $wf->getName(),
-			'method' => 'form'
+			'plugin' => $wf->getName()
 		);
 		
-		if ($cid) {
-			$args['cid'] = $cid;
+		if ($component_id) {
+			$args['component_id'] = $component_id;
 		}
 		
 		foreach($args as $k => $v) {
@@ -176,13 +180,16 @@ class WFFileBrowser extends WFBrowserExtension
 		return JURI::base(true) .'/index.php?option=com_jce&view=editor&layout=plugin' . $query; 
 	}
 
-	function getFileSystem()
+	public function getFileSystem()
 	{
 		static $filesystem;
 
 		if (!is_object($filesystem)) {
+			$wf = WFEditorPlugin::getInstance();
+			
 			$config = array(
-				'dir' => $this->get('dir')
+				'dir' 				=> $this->get('dir'),
+				'upload_conflict' 	=> $wf->getParam('editor.upload_conflict', 'overwrite')
 			);
 			
 			$filesystem = WFFileSystem::getInstance($this->get('filesystem'), $config);
@@ -191,7 +198,7 @@ class WFFileBrowser extends WFBrowserExtension
 		return $filesystem;
 	}
 	
-	function getViewable()
+	private function getViewable()
 	{
 		return 'jpeg,jpg,gif,png,avi,wmv,wm,asf,asx,wmx,wvx,mov,qt,mpg,mp3,mp4,m4v,mpeg,ogg,ogv,webm,swf,flv,f4v,xml,dcr,rm,ra,ram,divx,html,htm,txt,rtf,pdf,doc,docx,xls,xlsx,ppt,pptx';
 	}
@@ -202,12 +209,22 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @access public
 	 * @return extension list
 	 */
-	function getFileTypes($format = 'map')
+	private function getFileTypes($format = 'map')
 	{
 		$list = $this->get('filetypes');
 
 		// Remove excluded file types (those that have a - prefix character) from the list
-		$list = preg_replace('#[,]*-([a-z0-9=,]+)[,]*#', '', $list);
+		$data 	= array();
+		
+		foreach(explode(';', $list) as $group) {	
+			if (substr(trim($group), 0, 1) === '-') {
+				continue;
+			}
+			// remove excluded file types (those that have a - prefix character) from the list
+			$data[] = preg_replace('#(,)?-([\w]+)#', '', $group);
+		}
+		
+		$list = implode(';', $data);
 
 		switch ($format) {
 			case 'list':
@@ -222,53 +239,72 @@ class WFFileBrowser extends WFBrowserExtension
 				break;
 		}
 	}
+	
+	public function setFileTypes($list = 'images=jpg,jpeg,png,gif')
+	{		
+		$this->set('filetypes', $list);
+	}
 
 	/**
 	 * Converts the extensions map to a list
 	 * @param string $map The extensions map eg: images=jpg,jpeg,gif,png
 	 * @return string jpg,jpeg,gif,png
 	 */
-	function listFileTypes($map)
+	private function listFileTypes($map)
 	{
-		return preg_replace(array(
-            '/([a-z]+)=/',
-            '/;/'
-            ), array(
-            '',
-            ','
-            ), $map);
+		return preg_replace(array('/([\w]+)=([\w]+)/', '/;/'), array('$2', ','), $map);
 	}
+	
+	public function addFileTypes($types)
+	{
+		$list = explode(';', $this->get('filetypes'));
+			
+		foreach($types as $group => $extensions) {
+			$list[] = $group . '=' . $extensions;
+		}	
+
+		$this->set('filetypes', implode(';', $list));
+	}
+	
 	/**
 	 * Maps upload file types to an upload dialog list, eg: 'images', 'jpeg,jpg,gif,png'
 	 * @return json encoded list
 	 */
-	function mapUploadFileTypes()
+	private function mapUploadFileTypes()
 	{
+		$map = array();
+		
 		// Get the filetype map
-		$list  = $this->getFileTypes();
-		$items = explode(';', $list);
-		$map   = array();
-		// [images=jpeg,jpg,gif,png]
-		foreach ($items as $item) {
-			// ['images', 'jpeg,jpg,gif,png']
-			$kv                                               = explode('=', $item);
-			$extensions                                       = implode(';', preg_replace('/(\w+)/i', '*.$1', explode(',', $kv[1])));
-			$map[WFText::_('WF_FILEGROUP_' . $kv[0], WFText::_($kv[0])) . ' (' . $extensions . ')'] = $kv[1];
-		}
+		$list = $this->getFileTypes();
+		
+		if ($list) {
+			$items = explode(';', $list);
+			
+			// [images=jpeg,jpg,gif,png]
+			foreach ($items as $item) {
+				// ['images', 'jpeg,jpg,gif,png']
+				$kv                                               = explode('=', $item);
+				$extensions                                       = implode(';', preg_replace('/(\w+)/i', '*.$1', explode(',', $kv[1])));
+				$map[WFText::_('WF_FILEGROUP_' . $kv[0], WFText::_($kv[0])) . ' (' . $extensions . ')'] = $kv[1];
+			}
+		}		
+
 		// All file types
-		//$map[WFText::_('All Files') . ' (*.*)'] = '*.*';
+		//$map[WFText::_('WF_FILEGROUP_ALL') . ' (*.*)'] = '*.*';
+		
 		return $map;
 	}
+	
 	/**
 	 * Returns the result variable
 	 * @return var $_result
 	 */
-	function getResult()
+	public function getResult()
 	{
 		return $this->_result;
 	}
 
-	function setResult($value, $key = null)
+	public function setResult($value, $key = null)
 	{
 		if ($key) {
 			if (is_array($this->_result[$key])) {
@@ -280,8 +316,30 @@ class WFFileBrowser extends WFBrowserExtension
 			$this->_result = $value;
 		}
 	}
+	
+	function checkFeature($action, $type = null)
+	{
+		$features = $this->get('features');		
+			
+		if ($type) {
+			if (isset($features[$type])) {
+				
+				$type = $features[$type];
+				
+				if (isset($type[$action])) {
+					return (bool)$type[$action];
+				}
+			}
+		} else {
+			if (isset($features[$action])) {
+				return (bool)$features[$action];
+			}
+		}	
 
-	function getBaseDir()
+		return false;
+	}
+
+	public function getBaseDir()
 	{
 		$filesystem = $this->getFileSystem();
 		return $filesystem->getBaseDir();
@@ -293,7 +351,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $filter A regex filter option
 	 * @return File list array
 	 */
-	function getFiles($relative, $filter = '.')
+	private function getFiles($relative, $filter = '.')
 	{
 		$filesystem = $this->getFileSystem();
 		$list = $filesystem->getFiles($relative, $filter);
@@ -305,7 +363,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $relative The relative path of the folder
 	 * @return Folder list array
 	 */
-	function getFolders($relative)
+	private function getFolders($relative)
 	{
 		$filesystem = $this->getFileSystem();
 		$list = $filesystem->getFolders($relative);
@@ -319,7 +377,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param int $limit List limit
 	 * @param int $start list start point
 	 */
-	function getItems($path, $limit = 25, $start = 0)
+	public function getItems($path, $limit = 25, $start = 0)
 	{
 		$filesystem = $this->getFileSystem();	
 			
@@ -327,6 +385,8 @@ class WFFileBrowser extends WFBrowserExtension
 		
 		// decode path
 		$path = rawurldecode($path);
+
+		WFUtility::checkPath($path);
 		
 		// get source dir from path eg: images/stories/fruit.jpg = images/stories
 		$dir = $filesystem->getSourceDir($path);
@@ -379,9 +439,13 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $dir The relative path of the folder to search
 	 * @return Tree node array
 	 */
-	function getTreeItem($dir)
-	{			
-		$folders = $this->getFolders(rawurldecode($dir));
+	public function getTreeItem($path)
+	{
+		$path = rawurldecode($path);	
+			
+		WFUtility::checkPath($path);	
+			
+		$folders = $this->getFolders($path);
 		$array   = array();
 		if (!empty($folders)) {
 			foreach ($folders as $folder) {
@@ -403,7 +467,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @return string Escaped string
 	 * @param string $string
 	 */
-	function escape($string)
+	private function escape($string)
 	{
 		return preg_replace(array(
             '/%2F/',
@@ -424,12 +488,14 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $dir The relative path of the folder to search
 	 * @return Tree html string
 	 */
-	function getTree($path)
+	public function getTree($path)
 	{
 		$filesystem = $this->getFileSystem();
 
 		// decode path
 		$path = rawurldecode($path);
+		
+		WFUtility::checkPath($path);		
 		
 		// get source dir from path eg: images/stories/fruit.jpg = images/stories
 		$dir = $filesystem->getSourceDir($path);	
@@ -445,7 +511,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param boolean $root[optional] Is root directory
 	 * @param boolean $init[optional] Is tree initialisation
 	 */
-	function getTreeItems($dir, $root = true, $init = true)
+	public function getTreeItems($dir, $root = true, $init = true)
 	{
 		$result = '';
 		if ($init) {
@@ -483,8 +549,10 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @return array Array of properties
 	 * @param string $dir Folder relative path
 	 */
-	function getFolderDetails($dir)
+	public function getFolderDetails($dir)
 	{
+		WFUtility::checkPath($dir);		
+			
 		$filesystem = $this->getFileSystem();
 		// get array with folder date and content count eg: array('date'=>'00-00-000', 'folders'=>1, 'files'=>2);
 		return $filesystem->getFolderDetails($dir);
@@ -497,6 +565,8 @@ class WFFileBrowser extends WFBrowserExtension
 	 */
 	function getFileDetails($file)
 	{
+		WFUtility::checkPath($file);	
+			
 		$filesystem = $this->getFileSystem();
 		// get array with folder date and content count eg: array('date'=>'00-00-000', 'folders'=>1, 'files'=>2);
 		return $filesystem->getFileDetails($file);
@@ -504,18 +574,16 @@ class WFFileBrowser extends WFBrowserExtension
 	/**
 	 * Create standard actions based on access
 	 */
-	function getStdActions()
+	private function getStdActions()
 	{
 		$this->addAction('help', '', '', WFText::_('WF_BUTTON_HELP'));
-
-		$features = $this->get('features');
 		
-		if ($features['upload']) {
+		if ($this->checkFeature('upload')) {
 			$this->addAction('upload');
 			$this->setRequest(array($this, 'upload'));
 		}
 		
-		if ($features['folder']['create']) {
+		if ($this->checkFeature('create', 'folder')) {
 			$this->addAction('folder_new');
 			$this->setRequest(array($this, 'folderNew'));
 		}
@@ -526,7 +594,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $name Action name
 	 * @param array  $options Array of options
 	 */
-	function addAction($name, $options = array())
+	public function addAction($name, $options = array())
 	{
 		/* TODO */
 		// backwards compatability (remove in stable)
@@ -559,7 +627,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * Get all actions
 	 * @return object
 	 */
-	function getActions()
+	private function getActions()
 	{
 		return array_reverse($this->_actions);
 	}
@@ -567,7 +635,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * Remove an action from the list by name
 	 * @param string $name Action name to remove
 	 */
-	function removeAction($name)
+	public function removeAction($name)
 	{
 		if (array_key_exists($this->_actions[$name])) {
 			unset($this->_actions[$name]);
@@ -577,21 +645,19 @@ class WFFileBrowser extends WFBrowserExtension
 	/**
 	 * Create all standard buttons based on access
 	 */
-	function getStdButtons()
-	{
-		$features = $this->get('features');
-		
-		if ($features['folder']['delete']) {
+	private function getStdButtons()
+	{		
+		if ($this->checkFeature('delete', 'folder')) {
 			$this->addButton('folder', 'delete', array('multiple' => true));
 
 			$this->setRequest(array($this,'deleteItem'));
 		}
-		if ($features['folder']['rename']) {
+		if ($this->checkFeature('rename', 'folder')) {
 			$this->addButton('folder', 'rename');
 
 			$this->setRequest(array($this, 'renameItem'));
 		}
-		if ($features['folder']['move']) {
+		if ($this->checkFeature('move', 'folder')) {
 			$this->addButton('folder', 'copy', array('multiple' => true));
 			$this->addButton('folder', 'cut', array('multiple' => true));
 
@@ -600,17 +666,17 @@ class WFFileBrowser extends WFBrowserExtension
 			$this->setRequest(array($this,'copyItem'));
             $this->setRequest(array($this,'moveItem'));
 		}
-		if ($features['file']['rename']) {
+		if ($this->checkFeature('rename', 'file')) {
 			$this->addButton('file', 'rename');
 
 			$this->setRequest(array($this, 'renameItem'));
 		}
-		if ($features['file']['delete']) {
+		if ($this->checkFeature('delete', 'file')) {
 			$this->addButton('file', 'delete', array('multiple' => true));
 
 			$this->setRequest(array($this, 'deleteItem'));
 		}
-		if ($features['file']['move']) {
+		if ($this->checkFeature('move', 'file')) {
 			$this->addButton('file', 'copy', array('multiple' => true));
 			$this->addButton('file', 'cut', array('multiple' => true));
 
@@ -634,7 +700,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param boolean $multiple[optional] Supports multiple file selection
 	 * @param boolean $trigger[optional]
 	 */
-	function addButton($type = 'file', $name, $options = array())
+	public function addButton($type = 'file', $name, $options = array())
 	{			
 		$options = array_merge(array('name' => $name), $options);	
 		
@@ -669,7 +735,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * Return an object list of all buttons
 	 * @return object
 	 */
-	function getButtons()
+	private function getButtons()
 	{
 		return $this->_buttons;
 	}
@@ -678,7 +744,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $type Button type
 	 * @param string $name Button name
 	 */
-	function removeButton($type, $name)
+	public function removeButton($type, $name)
 	{
 		if (array_key_exists($name, $this->_buttons[$type])) {
 			unset($this->_buttons[$type][$name]);
@@ -690,7 +756,7 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $name Button name
 	 * @param string $keys Button keys
 	 */
-	function changeButton($type, $name, $keys)
+	public function changeButton($type, $name, $keys)
 	{
 		foreach ($keys as $key => $value) {
 			if (isset($this->_buttons[$type][$name][$key])) {
@@ -703,17 +769,18 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $name Event name
 	 * @param string $function Event function name
 	 */
-	function addEvent($name, $function)
+	public function addEvent($name, $function)
 	{
 		$this->_events[$name] = $function;
 	}
+	
 	/**
 	 * Execute an event
 	 * @return Evenet result
 	 * @param object $name Event name
 	 * @param array $args[optional] Optional arguments
 	 */
-	function fireEvent($name, $args = null)
+	protected function fireEvent($name, $args = null)
 	{
 		if (array_key_exists($name, $this->_events)) {
 			$event = $this->_events[$name];
@@ -727,12 +794,13 @@ class WFFileBrowser extends WFBrowserExtension
 		}
 		return $this->_result;
 	}
+	
 	/**
 	 * Get a file icon based on extension
 	 * @return string Path to file icon
 	 * @param string $ext File extension
 	 */
-	function getFileIcon($ext)
+	public function getFileIcon($ext)
 	{
 		if (JFile::exists(WF_EDITOR_LIBRARIES . '/img/icons/' . $ext . '.gif')) {
 			return $this->image('libraries.icons/' . $ext . '.gif');
@@ -743,23 +811,21 @@ class WFFileBrowser extends WFBrowserExtension
 		}
 	}
 
-	function getFileSuffix()
+	public function getFileSuffix()
 	{
 		$suffix = WFText::_('WF_MANAGER_FILE_SUFFIX');
 		return str_replace('WF_MANAGER_FILE_SUFFIX', '_copy', $suffix);
 	}
 
-	function validateUploadedFile($file)
+	private function validateUploadedFile($file, &$result)
 	{
 		$chunks = JRequest::getInt('chunks', 1);
-		
-		if (!in_array(strtolower(JFile::getExt($file['name'])), $this->getFileTypes('array'))) {
-			JError::raiseError(406, WFText::_('WF_MANAGER_UPLOAD_INVALID_EXT_ERROR'));
-		}
 
 		if (preg_match('#\.(jpeg|jpg|jpe|png|gif|wbmp|bmp|tiff|tif)$#i', $file['name'])) {
-			if (getimagesize($file['tmp_name']) === false) {
-				JError::raiseError(403, WFText::_('WF_MANAGER_UPLOAD_INVALID_IMAGE_ERROR'));
+			if (@getimagesize($file['tmp_name']) === false) {
+				$result->state = false;
+				$result->message = WFText::_('WF_MANAGER_UPLOAD_INVALID_IMAGE_ERROR');
+				return false;
 			}
 		}
 		$upload = $this->get('upload');
@@ -769,7 +835,9 @@ class WFFileBrowser extends WFBrowserExtension
 			wfimport('editor.libraries.classes.mime');	
 				
 			if (!WFMimeType::check($file['name'], $file['tmp_name'], $file['type'])) {
-				JError::raiseError(403, WFText::_('WF_MANAGER_UPLOAD_INVALID_IMAGE_ERROR'));
+				$result->state = false;
+				$result->message = WFText::_('WF_MANAGER_UPLOAD_INVALID_IMAGE_ERROR');
+				return false;
 			}
 		}
 
@@ -782,7 +850,9 @@ class WFFileBrowser extends WFBrowserExtension
 
 		// check for hidden php tags
 		if (stristr($xss_check, '<?php')) {
-			JError::raiseError(403, WFText::_('WF_MANAGER_UPLOAD_RESTRICTED_ERROR'));
+			$result->state = false;
+			$result->message = WFText::_('WF_MANAGER_UPLOAD_RESTRICTED_ERROR');
+			return false;
 		}
 
 		$html_tags = array(
@@ -907,7 +977,9 @@ class WFFileBrowser extends WFBrowserExtension
             foreach ($html_tags as $tag) {
             	// A tag is '<tagname ', so we need to add < and a space or '<tagname>'
             	if (stristr($xss_check, '<' . $tag . ' ') || stristr($xss_check, '<' . $tag . '>')) {
-            		JError::raiseError(403, WFText::_('WF_MANAGER_UPLOAD_RESTRICTED_ERROR'));
+            		$result->state = false;
+					$result->message = WFText::_('WF_MANAGER_UPLOAD_RESTRICTED_ERROR');
+					return false;
             	}
             }
 
@@ -918,15 +990,24 @@ class WFFileBrowser extends WFBrowserExtension
 	 * Upload a file.
 	 * @return array $error on failure or uploaded file name on success
 	 */
-	function upload()
+	public function upload()
 	{
 		// Check for request forgeries
 		WFToken::checkToken() or die();
+		
+		JError::setErrorHandling(E_ALL, 'callback', array('WFError', 'raiseError'));
+		
+		// check for feature access	
+		if (!$this->checkFeature('upload')) {
+			JError::raiseError(403, 'RESTRICTED ACCESS');
+		}
+		
+		$wf = WFEditor::getInstance();
 
 		jimport('joomla.filesystem.file');
 
 		// HTTP headers for no cache etc
-		header('Content-type: text/plain; charset=UTF-8');
+		//header('Content-type: text/plain; charset=UTF-8');
 		header("Expires: Wed, 4 Apr 1984 13:00:00 GMT");
 		header("Last-Modified: " . gmdate("D, d M_Y H:i:s") . " GMT");
 		header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -937,21 +1018,27 @@ class WFFileBrowser extends WFBrowserExtension
 		$file = JRequest::getVar('file', '', 'files', 'array');
 
 		// get file name
-		$name = JRequest::getVar('name', JFile::stripExt($file['name']));
+		$name 	= JRequest::getVar('name', $file['name']);
 
-		// check for extension in file name
+		$ext 	= WFUtility::getExtension($name);
+		// strip extension
+		$name 	= WFUtility::stripExtension($name);
+		// make file name 'web safe'
+		$name 	= WFUtility::makeSafe($name, $this->get('websafe_mode', 'utf-8'));
+		
+		// empty name
+		if ($name == '') {
+			JError::raiseError(403, 'INVALID FILE NAME');
+		}
+
+		// check for extension in file name or blank file name
 		if (preg_match('#\.(php|php(3|4|5)|phtml|pl|py|jsp|asp|htm|shtml|sh|cgi)#i', $name)) {
-			JError::raiseError(403, 'RESTRICTED');
+			JError::raiseError(403, 'INVALID FILE NAME');
 		}
 
 		// get chunks
 		$chunk  = JRequest::getInt('chunk', 0);
 		$chunks = JRequest::getInt('chunks', 1);
-
-		// validate file before continuing (first chunk only)
-		if ($chunk == 0) {
-			$this->validateUploadedFile($file);
-		}
 
 		// create a filesystem result object
 		$result = new WFFileSystemResult();
@@ -959,62 +1046,102 @@ class WFFileBrowser extends WFBrowserExtension
 		$filesystem = $this->getFileSystem();
 		$complete    = false;
 		$contentType = JRequest::getVar('CONTENT_TYPE', '', 'SERVER');
+		
+		// rebuild file name - name + extension
+		$name = $name . '.' . $ext;
 
 		// Only multipart uploading is supported for now
 		if ($contentType && strpos($contentType, "multipart") !== false) {
 			if (isset($file['tmp_name']) && is_uploaded_file($file['tmp_name'])) {
-				// make file name 'web safe'
-				$name = WFUtility::makeSafe($name);
-
-				// get current dir
-				$dir  = JRequest::getVar('upload-dir', '');
-
-				// Normal upload
-				if ($chunks == 1) {
-					$result = $filesystem->upload('multipart', trim($file['tmp_name']), $dir, $name);
-
-					if (!$result->state) {
-						$result->message = WFText::_('WF_MANAGER_UPLOAD_ERROR');
-						$result->code = 103;
+				// validate file before continuing (first chunk only)
+				if ($chunk == 0) {
+					// check for valid extension
+					if (!in_array(strtolower($ext), $this->getFileTypes('array'))) {
+						$result->state = false;
+						$result->message = WFText::_('WF_MANAGER_UPLOAD_INVALID_EXT_ERROR');
+						$complete = true;
+						
+						@unlink($file['tmp_name']);
 					}
-
-					$complete = true;
-					// Chunk uploading
-				} else {
-					$result = $filesystem->upload('multipart-chunking', trim($file['tmp_name']), $dir, $name, $chunks, $chunk);
-
-					if (!$result->state) {
-						$result->message = WFText::_('WF_MANAGER_UPLOAD_ERROR');
-						$result->code = 103;
+					
+					if ($wf->getParam('validate_mimetype', 0) && !preg_match('#(htm|html|txt)#', $ext)) {
+						if (!$this->validateUploadedFile($file, $result)) {
+							$complete = true;
+							
+							@unlink($file['tmp_name']);
+						}
 					}
-					$complete = ($chunk == $chunks - 1);
+					
+					// check file size
+					if (!$complete && $chunks == 1) {
+						@clearstatcache();
+						$upload 	= $this->get('upload');
+						$max_size 	= intval(preg_replace('/[^0-9]/', '', $upload['max_size'])) * 1024;
+						$file_size 	= @filesize($file['tmp_name']);
+					
+						// check size and finish
+						if ($file_size > $max_size) {
+							$result->message = WFText::sprintf('WF_MANAGER_UPLOAD_SIZE_ERROR', $name, $file_size, ($max_size / 1024) . 'KB');
+							$complete = true;
+							
+							@unlink($file['tmp_name']);
+						}
+					}
+				}	
+				// continue upload
+				if (!$complete) {					
+					// get current dir
+					$dir  = JRequest::getVar('upload-dir', '');
+					
+					// check destination path
+					WFUtility::checkPath($dir);
+					
+					// Normal upload
+					if ($chunks == 1) {
+						$result = $filesystem->upload('multipart', trim($file['tmp_name']), $dir, $name);
+					
+						if (!$result->state) {
+							$result->message 	= WFText::_('WF_MANAGER_UPLOAD_ERROR');
+							$result->code 		= 103;
+						}
+					
+						$complete = true;
+						// Chunk uploading
+					} else {
+						$result = $filesystem->upload('multipart-chunking', trim($file['tmp_name']), $dir, $name, $chunks, $chunk);
+					
+						if (!$result->state) {
+							$result->message = WFText::_('WF_MANAGER_UPLOAD_ERROR');
+							$result->code = 103;
+						}
+						$complete = ($chunk == $chunks - 1);
+					}	
 				}
 			}
 		} else {
-			$result->state   = false;
-			$result->message = WFText::_('WF_MANAGER_UPLOAD_ERROR');
+			$result->state   	= false;
+			$result->code   	= 103;
+			$result->message 	= WFText::_('WF_MANAGER_UPLOAD_ERROR');
 
 			$complete = true;
 		}
 		// upload finished
 		if ($complete) {
-			$output = array(
-            	'error' => array('code' => null, 'message' => '')
-			);
+			
+			if ($result instanceof WFFileSystemResult) {
+				if ($result->state === true) {		
 
-			if (is_a($result, 'WFFileSystemResult')) {
-				if ($result->state === true) {
-					$output = $this->fireEvent('onUpload', array(
-						$result->path
-					));
+					$path = $result->path;
+					
+					$this->setResult($this->fireEvent('onUpload', array($result->path)));					
+					$this->setResult(basename($result->path), 'files');	
 				} else {
-					$output = array('error' => $result);
+					$this->setResult($result->message, 'error');
 				}
 			}
 
-			die(json_encode($output));
+			die(json_encode($this->getResult()));
 		}
-		//die(json_encode($result));
 	}
 
 	/**
@@ -1022,15 +1149,23 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param $files the relative path to the file name or comma seperated list of multiple paths.
 	 * @return string $error on failure.
 	 */
-	function deleteItem($items)
+	public function deleteItem($items)
 	{
+		// check for feature access	
+		if (!$this->checkFeature('delete', 'folder') && !$this->checkFeature('delete', 'file')) {
+			JError::raiseError(403, 'RESTRICTED ACCESS');
+		}	
+			
 		$filesystem = $this->getFileSystem();
 		$items 		= explode(",", rawurldecode($items));
 
 		foreach ($items as $item) {
+			// check path	
+			WFUtility::checkPath($item);	
+				
 			$result = $filesystem->delete($item);
 
-			if (is_a($result, 'WFFileSystemResult')) {
+			if ($result instanceof WFFileSystemResult) {
 				if (!$result->state) {
 					if ($result->message) {
 						$this->setResult($result->message, 'error');
@@ -1053,17 +1188,34 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $dest The name of the new file
 	 * @return string $error
 	 */
-	function renameItem($source, $destination)
+	public function renameItem()
 	{
-		$filesystem = $this->getFileSystem();
-		$result 	= $filesystem->rename($source, trim($destination));
+		// check for feature access	
+		if (!$this->checkFeature('rename', 'folder') && !$this->checkFeature('rename', 'file')) {
+			JError::raiseError(403, 'RESTRICTED ACCESS');
+		}	
+			
+		$args 			= func_get_args();
+		
+		$source 		= array_shift($args);
+		$destination	= array_shift($args);	
+		
+		WFUtility::checkPath($source);
+		WFUtility::checkPath($destination);
+		
+		// check for extension in destination name
+		if (preg_match('#\.(php|php(3|4|5)|phtml|pl|py|jsp|asp|htm|html|shtml|sh|cgi)\b#i', $destination)) {
+			JError::raiseError(403, 'INVALID FILE NAME');
+		}
+	
+		$filesystem 	= $this->getFileSystem();
+		$result 		= $filesystem->rename($source, WFUtility::makeSafe($destination, $this->get('websafe_mode')), $args);
 
-		if (is_a($result, 'WFFileSystemResult')) {
+		if ($result instanceof WFFileSystemResult) {
 			if (!$result->state) {
+				$this->setResult(WFText::sprintf('WF_MANAGER_RENAME_' . strtoupper($result->type) . '_ERROR', basename($source)), 'error');
 				if ($result->message) {
 					$this->setResult($result->message, 'error');
-				} else {
-					$this->setResult(WFText::_('WF_MANAGER_RENAME_' . strtoupper($result->type) . '_ERROR', basename($source)), 'error');
 				}
 			} else {
 				$this->setResult($this->fireEvent('on' . ucfirst($result->type) . 'Rename', array($destination)));
@@ -1080,16 +1232,28 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $dest The relative path of the destination dir
 	 * @return string $error on failure
 	 */
-	function copyItem($items, $destination)
+	public function copyItem($items, $destination)
 	{
+		// check for feature access	
+		if (!$this->checkFeature('move', 'folder') && !$this->checkFeature('move', 'file')) {
+			JError::raiseError(403, 'RESTRICTED ACCESS');
+		}	
+			
 		$filesystem = $this->getFileSystem();
 
 		$items = explode(",", rawurldecode($items));
 
+		// check destination path
+		WFUtility::checkPath($destination);
+
 		foreach ($items as $item) {
+			
+			// check source path
+			WFUtility::checkPath($item);	
+				
 			$result = $filesystem->copy($item, $destination);
 
-			if (is_a($result, 'WFFileSystemResult')) {
+			if ($result instanceof WFFileSystemResult) {
 				if (!$result->state) {
 					if ($result->message) {
 						$this->setResult($result->message, 'error');
@@ -1111,16 +1275,27 @@ class WFFileBrowser extends WFBrowserExtension
 	 * @param string $dest The relative path of the destination dir
 	 * @return string $error on failure
 	 */
-	function moveItem($items, $destination)
+	public function moveItem($items, $destination)
 	{
+		// check for feature access	
+		if (!$this->checkFeature('move', 'folder') && !$this->checkFeature('move', 'file')) {
+			JError::raiseError(403, 'RESTRICTED ACCESS');
+		}	
+			
 		$filesystem = $this->getFileSystem();
 
 		$items = explode(",", rawurldecode($items));
+		
+		// check destination path
+		WFUtility::checkPath($destination);
 
 		foreach ($items as $item) {
+			// check source path
+			WFUtility::checkPath($item);	
+
 			$result = $filesystem->move($item, $destination);
 
-			if (is_a($result, 'WFFileSystemResult')) {
+			if ($result instanceof WFFileSystemResult) {
 				if (!$result->state) {
 					if ($result->message) {
 						$this->setResult($result->message, 'error');
@@ -1137,29 +1312,27 @@ class WFFileBrowser extends WFBrowserExtension
 	}
 
 	/**
-	 * New folder base function. A wrapper for the JFolder::create function
-	 * @param string $folder The folder to create
-	 * @return boolean true on success
-	 */
-	function folderCreate($folder)
-	{
-		$filesystem = $this->getFileSystem();
-		return $filesystem->folderCreate($folder);
-	}
-
-	/**
 	 * New folder
 	 * @param string $dir The base dir
 	 * @param string $new_dir The folder to be created
 	 * @return string $error on failure
 	 */
-	function folderNew($dir, $new)
+	public function folderNew()
 	{
+		if (!$this->checkFeature('create', 'folder')) {
+			JError::raiseError(403, 'RESTRICTED ACCESS');
+		}	
+			
+		$args 	= func_get_args();
+		
+		$dir 	= array_shift($args);
+		$new	= array_shift($args);
+			
 		$filesystem = $this->getFileSystem();
 
-		$result = $filesystem->createFolder($dir, trim($new));
+		$result = $filesystem->createFolder($dir, WFUtility::makeSafe($new, $this->get('websafe_mode')), $args);
 
-		if (is_a($result, 'WFFileSystemResult')) {
+		if ($result instanceof WFFileSystemResult) {
 			if (!$result->state) {
 				if ($result->message) {
 					$this->setResult($result->message, 'error');
@@ -1174,12 +1347,12 @@ class WFFileBrowser extends WFBrowserExtension
 		return $this->getResult();
 	}
 	
-	function getUploadValue() {
+	private function getUploadValue() {
 		$upload = trim(ini_get('upload_max_filesize'));
 		$post 	= trim(ini_get('post_max_size'));	
 			
-		$upload = $this->convertSize($upload);
-		$post 	= $this->convertSize($post);
+		$upload = WFUtility::convertSize($upload);
+		$post 	= WFUtility::convertSize($post);
 		
 		if (intval($upload) <= intval($post)) {
 			return $upload;
@@ -1187,32 +1360,12 @@ class WFFileBrowser extends WFBrowserExtension
 		
 		return $post;
 	}
-	
-	/**
-	 * Convert size value to bytes
-	 */
-	function convertSize($value)
-	{		
-		// Convert to bytes
-		switch(strtolower($value{strlen($value)-1})) {
-			case 'g':
-				$value *= 1073741824;
-				break;
-			case 'm':
-				$value *= 1048576;
-				break;
-			case 'k':
-				$value *= 1024;
-				break;
-		}
-		
-		return $value;
-	}
 
-	function getUploadDefaults()
+	private function getUploadDefaults()
 	{
 		$filesystem = $this->getFileSystem();
 		$features 	= $filesystem->get('upload');
+		$elements	= isset($features['elements']) ? $features['elements'] : array();
 
 		$upload_max	= $this->getUploadValue();
 		
@@ -1225,14 +1378,7 @@ class WFFileBrowser extends WFBrowserExtension
 		if (!$features['chunking']) {
 			$chunk_size = 0;
 		}
-
-		$conflict = $upload['conflict'];
-
-		if (is_array($conflict)) {
-			if (!$features['unique_filenames']) {
-				unset($conflict[array_search('unique', $conflict)]);
-			}
-		}
+		
 		// get upload size
 		$size = intval(preg_replace('/[^0-9]/', '', $upload['max_size'])) . 'kb';
 		
@@ -1240,8 +1386,17 @@ class WFFileBrowser extends WFBrowserExtension
 		if ((int)$size * 1024 > (int)$upload_max) {
 			$size = $upload_max / 1024 . 'kb';
 		}
-
-		$runtimes = explode(',', $upload['runtimes']);
+		
+		$runtimes = array();
+		
+		if (is_string($upload['runtimes'])) {
+			$runtimes = explode(',', $upload['runtimes']);
+		} else {
+			foreach($upload['runtimes'] as $k => $v) {
+				$runtimes[] = $v;
+			}
+		}
+		
 		// add html4
 		$runtimes[] = 'html4';
 
@@ -1252,36 +1407,45 @@ class WFFileBrowser extends WFBrowserExtension
 
 		$defaults = array(
             'runtimes' 		=> implode(',', $runtimes),
-            'conflict' 		=> $conflict,
             'size' 			=> $size,
             'filter' 		=> $this->mapUploadFileTypes(true),
-            'chunk_size' 	=> $chunk_size
+            'chunk_size' 	=> $chunk_size,
+            'elements'		=> $elements
 		);
+		
+		if (isset($features['dialog'])) {
+			$defaults['dialog'] = $features['dialog'];
+ 		}
 
 		return $defaults;
 	}
 
-	function getDimensions($file)
+	public function getDimensions($file)
 	{
 		$filesystem = $this->getFileSystem();
 		return $filesystem->getDimensions($file);
 	}
 
-	function getSettings($settings = array())
+	protected function getSettings($settings = array())
 	{
 		$filesystem = $this->getFileSystem();
 
 		$default = array(
-            'dir'		=> $filesystem->getRootDir(),
-			'actions' 	=> $this->getActions(),
-            'buttons' 	=> $this->getButtons(),
-            'upload' 	=> $this->getUploadDefaults(),
-            'tree' 		=> $this->get('folder_tree'),
-            'listlimit' => $this->get('list_limit')
+            'dir'			=> $filesystem->getRootDir(),
+			'actions' 		=> $this->getActions(),
+            'buttons' 		=> $this->getButtons(),
+            'upload' 		=> $this->getUploadDefaults(),
+            'tree' 			=> $this->get('folder_tree'),
+            'listlimit' 	=> $this->get('list_limit'),
+			'websafe_mode'	=> $this->get('websafe_mode')
 		);
 		
-		if ($filesystem->get('base')) {
-			$default['base'] = $filesystem->get('base');	
+		$properties = array('base', 'delete', 'rename', 'folder_new', 'copy', 'move');
+		
+		foreach($properties as $property) {
+			if ($filesystem->get($property)) {
+				$default[$property] = $filesystem->get($property);
+			}
 		}
 
 		$settings = array_merge_recursive($default, $settings);

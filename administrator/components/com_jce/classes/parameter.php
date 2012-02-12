@@ -1,17 +1,15 @@
 <?php
 /**
- * @version   $Id: parameter.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
- * @package   JCE
- * @copyright Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright Copyright © 2005 - 2007 Open Source Matters. All rights reserved.
- * @license   GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @package   	JCE
+ * @copyright 	Copyright � 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('ERROR_403');
+defined('_JEXEC') or die('RESTRICTED');
 
 jimport('joomla.html.parameter');
 
@@ -44,7 +42,7 @@ class WFParameter extends JParameter
 				}
        	 	}
 			
-			$this->bind($this->_data, $data);
+			$this->bindData($this->_data, $data);
 		}
 	}
 	/**
@@ -56,7 +54,7 @@ class WFParameter extends JParameter
 	 * @return	void
 	 * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
 	 */
-	public function bind(&$parent, $data)
+	public function bindData(&$parent, $data)
 	{
 		// Ensure the input data is an array.
 		if (is_object($data)) {
@@ -68,7 +66,7 @@ class WFParameter extends JParameter
 		foreach ($data as $k => $v) {
 			if (self::is_assoc($v) || is_object($v)) {
 				$parent->$k = new stdClass();
-				$this->bind($parent->$k, $v);
+				$this->bindData($parent->$k, $v);
 			} else {
 				$parent->$k = $v;
 			}
@@ -109,17 +107,22 @@ class WFParameter extends JParameter
 		return $results;
 	}
 	
+	private function isEmpty($value)
+	{
+		return (is_string($value) && $value == "") || (is_array($value) && empty($value));
+	}
+	
 	/**
 	 * Get a parameter value.
 	 *
 	 * @param	string	Registry path (e.g. editor.width)
 	 * @param   string	Optional default value, returned if the internal value is null.
-	 * @param 	string  Optional group name. If teh default vaue is null and the gorup value is set, the default value will be retrieved from the xml file
 	 * @return	mixed	Value of entry or null
 	 * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
 	 */
-	public function get($path, $default = '')
+	public function get($path, $default = '', $allowempty = true)
 	{
+		// set default value as result	
 		$result = $default;
 		
 		// Explode the registry path into an array
@@ -131,15 +134,25 @@ class WFParameter extends JParameter
 		// Traverse the registry to find the correct node for the result.
 		foreach ($nodes as $n) {
 			if (isset($node->$n)) {
-				$node = $node->$n;
-				$found = true;
+				$node 	= $node->$n;
+				$found 	= true;
 			} else {
-				$found = false;
+				$found 	= false;
 				break;
 			}
 		}
-		if ($found && $node !== null && $node !== '') {
-			$result = $node;
+		
+		if ($found) {
+			$result = $node;	
+			if ($allowempty === false) {
+				if (self::isEmpty($result)) {
+					$result = $default;
+				}
+			}	
+		}
+		
+		if (is_numeric($result)) {
+			$result = intval($result);
 		}
 		
 		return $result;
@@ -151,7 +164,7 @@ class WFParameter extends JParameter
 	 * @access	public
 	 * @param	string	The name of the control, or the default text area if a setup file is not found
 	 * @return	array	Array of all parameters, each as array Any array of the label, the form element and the tooltip
-	 * @since	1.5
+	 * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
 	 */
 	public function getParams($name = 'params', $group = '_default')
 	{
@@ -163,8 +176,7 @@ class WFParameter extends JParameter
 		
 		foreach ($this->_xml[$group]->children() as $param)  {
 			$results[] = $this->getParam($param, $name, $group, $parent);	
-			
-			
+						
 			// get sub-parameters
 			if ($param->attributes('parameters')) {
 				jimport('joomla.filesystem.folder');
@@ -191,7 +203,7 @@ class WFParameter extends JParameter
 	 * @param	object	A param tag node
 	 * @param	string	The control name
 	 * @return	array	Any array of the label, the form element and the tooltip
-	 * @since	1.5
+	 * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
 	 */
 	public function getParam(&$node, $control_name = 'params', $group = '_default', $parent = '')
 	{
@@ -214,7 +226,7 @@ class WFParameter extends JParameter
 		if ($node->attributes('group')) {
 			$key = $node->attributes('group') . '.' . $node->attributes('name');
 		}
-
+		
 		// get value
 		$value = $this->get($key, $node->attributes('default'));
 		
@@ -238,8 +250,9 @@ class WFParameter extends JParameter
 		$params = $this->getParams($name, $group);		
 		$html 	= '<ul class="adminformlist">';
 		
-		foreach ($params as $item) {
-			if (is_a($item, 'WFParameter')) {
+		foreach ($params as $item) {			
+			//if (is_a($item, 'WFParameter')) {
+			if ($item instanceof WFParameter) {
 				
 				foreach ($item->getGroups() as $group => $num) {
 					$label 	= $group;
@@ -287,6 +300,27 @@ class WFParameter extends JParameter
 		return false;
 	}
 	
+	public static function mergeParams($params1, $params2, $toObject = true)
+	{
+		$merged = $params1;
+		
+		foreach ($params2 as $key => $value) {
+			if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+				$merged[$key] = self::mergeParams($merged[$key], $value);
+			} else {
+				if ($value !== '') {
+					$merged[$key] = $value;
+				}	
+			}
+		}	
+			
+		if ($toObject) {
+			return self::array_to_object($merged);
+		}	
+			
+		return $merged;
+	}
+	
 	/**
 	 * Method to determine if an array is an associative array.
 	 *
@@ -294,7 +328,7 @@ class WFParameter extends JParameter
 	 * @return	boolean		True if the array is an associative array.
 	 * @link	http://www.php.net/manual/en/function.is-array.php#98305
 	 */
-	private function is_assoc($array) {
+	private static function is_assoc($array) {
     	return (is_array($array) && (count($array) == 0 || 0 !== count(array_diff_key($array, array_keys(array_keys($array))))));
 	}
 	
@@ -302,7 +336,7 @@ class WFParameter extends JParameter
 	 * Convert an associate array to an object
 	 * @param array Associative array
 	 */
-	public function array_to_object($array)
+	public static function array_to_object($array)
 	{
 		$object = new StdClass();
 		

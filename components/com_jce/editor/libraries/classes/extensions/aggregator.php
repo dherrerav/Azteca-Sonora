@@ -1,29 +1,27 @@
 <?php
 /**
- * @version		$Id: browser.php 36 2011-01-20 12:59:29Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author		Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-// no direct access
-defined('_JEXEC') or die('ERROR_403');
+
+defined('_JEXEC') or die('RESTRICTED');
 
 class WFAggregatorExtension extends WFExtension {
 	/*
 	 *  @var varchar
 	 */
-	var $extensions = array();
+	private $extensions = array();
 	/**
 	 * Constructor activating the default information of the class
 	 *
 	 * @access	protected
 	 */
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 		parent::__construct($config);
 	}
@@ -38,7 +36,7 @@ class WFAggregatorExtension extends WFExtension {
 	 * @return	JCE  The editor object.
 	 * @since	1.5
 	 */
-	function & getInstance($config = array())
+	public static function getInstance($config = array())
 	{
 		static $instance;
 
@@ -49,17 +47,17 @@ class WFAggregatorExtension extends WFExtension {
 		return $instance;
 	}
 
-	function getName()
+	public function getName()
 	{
 		return $this->get('name');
 	}
 
-	function getTitle()
+	public function getTitle()
 	{
 		return $this->get('title');
 	}
 
-	function display()
+	public function display()
 	{
 		parent::display();
 
@@ -81,7 +79,7 @@ class WFAggregatorExtension extends WFExtension {
 		}
 	}
 
-	function & getAggregators()
+	public function & getAggregators()
 	{
 		static $aggregators;
 
@@ -96,7 +94,7 @@ class WFAggregatorExtension extends WFExtension {
 			jimport('joomla.filesystem.folder');
 
 			// get a plugin instance
-			$plugin =WFEditorPlugin::getInstance();
+			$plugin = WFEditorPlugin::getInstance();
 
 			$aggregators[$format] = array();
 
@@ -110,13 +108,16 @@ class WFAggregatorExtension extends WFExtension {
 				$classname = 'WFAggregatorExtension_' . ucfirst($name);
 
 				// only load if enabled
-				if(class_exists($classname) && $plugin->getParam('aggregator.' . $name, 1)) {
+				if(class_exists($classname)) {
 					$aggregator = new $classname();
-
-					if($aggregator->get('format') == $format) {
-						$aggregator->set('name', $name);
-						$aggregator->set('title', 'WF_AGGREGATOR_' . strtoupper($name) . '_TITLE');
-						$aggregators[$format][] = $aggregator;
+					
+					// check if enabled
+					if ($aggregator->isEnabled()) {
+						if($aggregator->get('format') == $format) {
+							$aggregator->set('name', $name);
+							$aggregator->set('title', 'WF_AGGREGATOR_' . strtoupper($name) . '_TITLE');
+							$aggregators[$format][] = $aggregator;
+						}
 					}
 				}
 			}
@@ -130,7 +131,7 @@ class WFAggregatorExtension extends WFExtension {
 	 * @param object $player
 	 * @return
 	 */
-	function loadTemplate($name, $tpl ='')
+	public function loadTemplate($name, $tpl ='')
 	{
 		$path = WF_EDITOR_EXTENSIONS . DS . 'aggregator' . DS . $name;
 

@@ -1,22 +1,20 @@
 <?php
 /**
- * @version		$Id: manager.php 85 2009-06-15 15:38:36Z happynoodleboy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author		Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-class WFMimeType 
+abstract class WFMimeType 
 {
 	/*
 	 * @var Array Mimetype values by extension
 	 * From mimetype list maintained at http://svn.apache.org/viewvc/httpd/httpd/trunk/docs/conf/mime.types
 	 */
-	private $mimes = array(
+	private static $mimes = array(
 		'application/andrew-inset' => 'ez',
 		'application/applixware' => 'aw',
 		'application/atom+xml' => 'atom',
@@ -650,13 +648,21 @@ class WFMimeType
 	
 	/**
 	 * $mimes getter - see $mimes
+	 * @access	private
 	 */
-	private function getMimes()
+	private static function getMimes()
 	{
-		return self::mimes;
+		return self::$mimes;
 	}	
 	
-	private function getMime($type)
+	/**
+	 * 
+	 * Get the mime type from the $mimes array
+	 * @access	private
+	 * @param 	string $type
+	 * @return	string 
+	 */
+	private static function getMime($type)
 	{
 		// get mimetype array
 		$mimes = self::getMimes();
@@ -668,6 +674,14 @@ class WFMimeType
 		return null;
 	}
 	
+	/**
+	 * Check file mime type
+	 * @access	public
+	 * @param 	string $name
+	 * @param 	string $path
+	 * @param 	string $type
+	 * @return 	bool
+	 */
 	public function check($name, $path, $type = null) 
 	{	
 		$extension = strtolower(substr(strrchr($name, "."), 1));
@@ -675,7 +689,7 @@ class WFMimeType
 		// check file mime type if possible
 		if (function_exists('mime_content_type')) {			
 			if ($mimetype = @mime_content_type($path)) {
-				if ($mime = mimeType::getMime($mimetype)) {
+				if ($mime = self::getMime($mimetype)) {
 					return in_array($extension, $mime);
 				}
 			}
@@ -684,7 +698,7 @@ class WFMimeType
 			$mimetype 	= finfo_file($finfo, $path);
 			finfo_close($finfo);
 			
-			if ($mime = mimeType::getMime($mimetype)) {
+			if ($mime = self::getMime($mimetype)) {
 				return in_array($extension, $mime);
 			}
 		}

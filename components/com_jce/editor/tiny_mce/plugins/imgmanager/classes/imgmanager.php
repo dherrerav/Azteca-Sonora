@@ -1,43 +1,40 @@
 <?php
 /**
-* @version 		$Id: imgmanager.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
- 
-defined('_JEXEC') or die('ERROR_403'); 
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+defined('_JEXEC') or die('RESTRICTED'); 
 
 // Load class dependencies
 wfimport('editor.libraries.classes.manager');
  
-class WFImageManagerPlugin extends WFMediaManager
+final class WFImageManagerPlugin extends WFMediaManager
 {
+	var $_filetypes = 'images=jpg,jpeg,png,gif';
+	
 	/**
 	* @access	protected
 	*/
-	function __construct()
+	public function __construct()
 	{			
-		parent::__construct(array(
-			'filetypes' => 'images=jpg,jpeg,png,gif'
-		));
+		parent::__construct();
 	}
 	/**
-	 * Returns a reference to a editor object
+	 * Returns a reference to the Image Manager object
 	 *
 	 * This method must be invoked as:
-	 * 		<pre>  $browser =JCE::getInstance();</pre>
+	 * 		<pre>  $imgmanager = WFImageManagerPlugin::getInstance();</pre>
 	 *
 	 * @access	public
-	 * @return	JCE  The editor object.
-	 * @since	1.5
+	 * @return	object WFImageManagerPlugin
 	 */
-	function &getInstance()
+	public function &getInstance()
 	{
 		static $instance;
 
@@ -49,8 +46,9 @@ class WFImageManagerPlugin extends WFMediaManager
 	
 	/**
 	 * Display the plugin
+	 * @access public
 	 */
-	function display()
+	public function display()
 	{
 		parent::display();
 
@@ -78,7 +76,6 @@ class WFImageManagerPlugin extends WFMediaManager
 		$params = $this->getParams();
 		
 		$settings = array(
-			'defaults' 		=> $this->getDefaults(),
 			'attributes' 	=> array(
 				'dimensions'	=> $params->get( 'imgmanager.attributes_dimensions', 1),
 				'align'			=> $params->get( 'imgmanager.attributes_align', 1),

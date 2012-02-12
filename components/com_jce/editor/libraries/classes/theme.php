@@ -1,53 +1,39 @@
 <?php
 /**
- * @version		$Id: theme.php 61 2011-02-19 20:41:32Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author		Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined( '_JEXEC') or die( 'Restricted access');
+defined( '_JEXEC') or die('RESTRICTED');
 
-// Needed for cyrillic languages?
-header("Content-type: text/html; charset=utf-8");
+wfimport('editor.libraries.classes.editor');
+wfimport('editor.libraries.classes.utility');
+wfimport('editor.libraries.classes.document');
+wfimport('editor.libraries.classes.view');
+wfimport('editor.libraries.classes.tabs');
 
-require_once( WF_EDITOR_LIBRARIES .DS. 'classes' .DS. 'editor.php');
-require_once( WF_EDITOR_LIBRARIES .DS. 'classes' .DS. 'utility.php');
-require_once( WF_EDITOR_LIBRARIES .DS. 'classes' .DS. 'document.php');
-require_once( WF_EDITOR_LIBRARIES .DS. 'classes' .DS. 'view.php');
-require_once( WF_EDITOR_LIBRARIES .DS. 'classes' .DS. 'tabs.php');
-
-/**
- * JCE class
- *
- * @static
- * @package		JCE
- * @since	1.5
- */
-
-class WFEditorTheme extends WFEditor
+final class WFEditorTheme extends WFEditor
 {
 	/*
 	 *  @var array
 	 */
-	var $scripts = array();
+	private $scripts = array();
 	/*
 	 *  @var array
 	 */
-	var $styles = array();
+	private $styles = array();
 
 
 	/**
 	 * Constructor activating the default information of the class
-	 *
 	 * @access	protected
 	 */
-	function __construct()
+	public function __construct()
 	{
 		// Call parent
 		parent::__construct();
@@ -57,35 +43,70 @@ class WFEditorTheme extends WFEditor
 		
 		$this->set('dialog', $dialog);
 		$this->set('theme', $theme);
+		
+		$this->execute();
+	}
+	
+	/**
+	 * Get or create the theme view
+	 * @access provate
+	 * @return object WFView
+	 */
+	private function & getView()
+	{
+		static $view;
+		
+		if (!is_object($view)) {
+			// create plugin view
+			$view = new WFView(array(
+				'base_path'		=> WF_EDITOR_THEMES .DS. $this->get('theme'),
+				'template_path'	=> WF_EDITOR_THEMES .DS. $this->get('theme') .DS. 'tmpl',
+				'name' 			=> $this->get('dialog'),
+				'layout'		=> $this->get('dialog')
+			));
+			
+			$view->assign('theme', $this);
+		}
+		
+		return $view;
+	}
+	
+	/**
+	* Execute the theme item
+	* @access public
+	*/
+	public function execute()
+	{
+		WFToken::checkToken() or die('RESTRICTED ACCESS');	
+			
+		$document = WFDocument::getInstance(array(
+			'title'		=> WFText::_('WF_'.strtoupper($this->get('dialog')).'_TITLE'),
+      		'version' 	=> $this->getVersion(),
+      		'name'		=> $this->get('dialog')
+		));
 
 		$this->display();
 		
-		$document = WFDocument::getInstance();
-		$document->pack();
-
-		// create plugin view
-		$view = new WFView(array(
-			'base_path'		=> WF_EDITOR_THEMES .DS. $theme,
-			'template_path'	=> WF_EDITOR_THEMES .DS. $theme .DS. 'tmpl',
-			'name' 			=> $this->get('dialog'),
-			'layout'		=> $this->get('dialog')
-		));
+		// pack assets if required
+		$document->pack(true, $this->getParam('editor.compress_gzip', 0));
+		
+		// get view
+		$view = $this->getView();
 		
 		// set body output
 		$document->setBody($view->loadTemplate());			
 		$document->render();
 	}
 
-	function display()
+	/**
+	 * Show the theme dialog
+	 * @access private
+	 */
+	private function display()
 	{
 		jimport('joomla.filesystem.folder');
 
-		$theme = JRequest::getWord('theme');
-
-		$document = WFDocument::getInstance(array(
-			'title'		=> WFText::_('WF_'.strtoupper($this->get('dialog')).'_TITLE'),
-      		'version' 	=> $this->getVersion()
-		));
+		$document = WFDocument::getInstance();
 
 		// get UI Theme
 		$uitheme = $this->getParam('editor.dialog_theme', 'jce');
@@ -93,30 +114,23 @@ class WFEditorTheme extends WFEditor
 		$document->addScript(array('tiny_mce_popup'), 'tiny_mce');
 
 		// jquery versions
-		$jquery = array();
+        $jquery = array('jquery/jquery-' . WF_JQUERY . '.min.js', 'jquery/jquery-ui-' . WF_JQUERYUI . '.custom.min.js');
 
-		$files = JFolder::files(JPATH_COMPONENT_ADMINISTRATOR.DS.'media'.DS.'js'.DS.'jquery', '\.js$');
+		$document->addScript($jquery, 'libraries');
 
-		foreach ($files as $file) {
-			$jquery[] = 'jquery/' . $file;
-		}
-
-		$document->addScript($jquery, 'component');
-		$ui = JFolder::files(JPATH_COMPONENT_ADMINISTRATOR.DS.'media'.DS.'css'.DS.'jquery'.DS.$uitheme, '\.css$');
-
-		$document->addStyleSheet(array('jquery/'.$uitheme.'/'.basename($ui[0], '.css')), 'component');
+		$ui = JFolder::files(WF_EDITOR_LIBRARIES.DS.'css'.DS.'jquery'.DS.$uitheme, '\.css$');
 
 		$document->addStyleSheet(array(
-      		'plugin',
-      		'theme'
-      	), 'libraries');
+			'jquery/' . $uitheme . '/' . basename($ui[0], '.css'),
+			'plugin'
+		), 'libraries');
 
       	$document->addStyleSheet(array(
       		'themes/'.$this->get('theme').'/css/'.$this->get('dialog')
       	), 'tiny_mce');
 
       	if ($this->get('dialog') == 'colorpicker') {
-      		$document->addScript(array('colorpicker'), 'component');
+      		$document->addScript(array('colorpicker'), 'libraries');
       		
       		require_once(JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'tools.php');
       		
@@ -139,16 +153,15 @@ class WFEditorTheme extends WFEditor
 	}
 
 	/**
-	 * Returns a reference to a editor object
+	 * Returns a reference to a WFEditorTheme object
 	 *
 	 * This method must be invoked as:
-	 * 		<pre>  $browser =JCE::getInstance();</pre>
+	 * 		<pre>  $theme = WFEditorTheme::getInstance();</pre>
 	 *
 	 * @access	public
-	 * @return	JCE  The editor object.
-	 * @since	1.5
+	 * @return	object WFEditorTheme
 	 */
-	function &getInstance() {
+	public function &getInstance() {
 		static $instance;
 
 		if (!is_object($instance)) {

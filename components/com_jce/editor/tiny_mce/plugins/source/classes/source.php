@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: spellchecker.php 54 2011-02-09 16:45:24Z happy_noodle_boy $
+ * @version		$Id: source.php 226 2011-06-13 09:59:05Z happy_noodle_boy $
  * @package      JCE
  * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
  * @author		Ryan Demmer
@@ -12,7 +12,7 @@
  */
 require_once (WF_EDITOR_LIBRARIES . DS . 'classes' . DS . 'plugin.php');
 
-class WFSourcePlugin extends WFEditorPlugin {
+final class WFSourcePlugin extends WFEditorPlugin {
 	/**
 	 * Constructor activating the default information of the class
 	 *
@@ -33,7 +33,7 @@ class WFSourcePlugin extends WFEditorPlugin {
 	 * @return	JCE  The editor object.
 	 * @since	1.5
 	 */
-	function & getInstance()
+	public function & getInstance()
 	{
 		static $instance;
 
@@ -42,71 +42,82 @@ class WFSourcePlugin extends WFEditorPlugin {
 		}
 		return $instance;
 	}
-
-	function execute()
+	
+	public function display()
 	{
-		// check token
-		WFToken::checkToken('GET') or die('RESTRICTED');
+		$document = WFDocument::getInstance();	
+			
+		$view = $this->getView();
 
-		$wf = WFEditor::getInstance();
+		$view->addTemplatePath(WF_EDITOR_PLUGIN .DS. 'tmpl');
+			
+		$document->setTitle(WFText::_('WF_' . strtoupper($this->getName() . '_TITLE')));		
 
+		$document->addScript(array('codemirror'), 'jce.tiny_mce.plugins.source.js.codemirror');
+		$document->addScript(array('editor'), 'plugins');
+		
+		$document->addStyleSheet(array('codemirror'), 'jce.tiny_mce.plugins.source.css.codemirror');
+		$document->addStyleSheet(array('editor'), 'plugins');				
+	}
+
+	public function execute() {			
+		$task = JRequest::getWord('task');
+
+		if ($task == 'compile') {
+			return $this->compile();
+		}
+		
+		parent::execute();
+	}
+
+	protected function compile()
+	{
+		WFToken::checkToken() or die('RESTRICTED ACCESS');
+			
 		wfimport('admin.classes.packer');
 
-		$base = dirname(dirname(__FILE__));
-		$theme = JRequest::getWord('theme', 'textmate');
+		$base 	= dirname(dirname(__FILE__));				
+		$theme 	= JRequest::getWord('theme', 'textmate');
 
-		$start = '';
-		$end = '';
+		$pack	= false;
 
-		switch (JRequest::getWord('type', 'js')) {
-			case 'js' :
+		switch (JRequest::getWord('type', 'base')) {
+			case 'base':
 				$files = array();
-				$names = array('ace-uncompressed', 'mode-css', 'mode-html', 'mode-javascript');
+				
+				$files[] = $base . DS . 'js' . DS . 'codemirror' . DS . 'base.js';
+				
+				$type = 'javsacript';
+				$pack = $this->getParam('editor.compress_javascript', 0);
+				
+				break;	
+			case 'parser' :
+				$files = array();
 
-				foreach($names as $name) {
-					$files[] = $base . DS . 'js' . DS . 'ace' . DS . $name . '.js';
-				}
-
-				// load theme
-				$files[] = $base . DS . 'js' . DS . 'ace' . DS . 'theme-' . $theme . '.js';
-
-				$start = '(function(){';
-				$end = '})();';
+				$files[] = $base . DS . 'js' . DS . 'codemirror' . DS . 'parser.js';
 
 				// javascript
 
 				$type = 'javsacript';
 
+				$pack = $this->getParam('editor.compress_javascript', 0);
+
 				break;
 			case 'css' :
-
-				// load css
-				$files = array($base . DS . 'css' . DS . 'ace' . DS . 'editor.css');
-
-				// load theme
-				$file = $base . DS . 'css' . DS . 'ace' . DS . $theme . '.css';
-
-				if(is_file($file)) {
-					$files[] = $file;
-				} else {
-					$files[] = $base . DS . 'css' . DS . 'ace' . DS . 'textmate.css';
-				}
+				$path = $base . DS . 'css' . DS . 'codemirror';
+				$files = array($path . DS . 'editor.css', $path . DS . 'theme' . DS . $theme . '.css');
 
 				$type = 'css';
 
+				$pack = $this->getParam('editor.compress_css', 0);
 				break;
 		}
 
-		$packer = new WFPacker( array('type' => $type));
+		$packer = new WFPacker(array('type' => $type));
 
-		// set start content
-		$packer->setContentStart($start);
 		// set files
 		$packer->setFiles($files);
-		// set end content
-		$packer->setContentEnd($end);
 		// pack!
-		$packer->pack();
+		$packer->pack($pack, $this->getParam('editor.compress_gzip', 0));
 	}
-
 }

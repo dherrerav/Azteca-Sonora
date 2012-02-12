@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: config.php 55 2011-02-13 16:16:19Z happy_noodle_boy $
+ * @version		$Id: config.php 221 2011-06-11 17:30:33Z happy_noodle_boy $
  * @package      JCE
  * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
  * @author		Ryan Demmer
@@ -22,17 +22,17 @@ class WFCodePluginConfig
 			$settings['plugins'][] = 'code';
 		}
 
-		$settings['code_php'] 			= $wf->getParam('editor.allow_php', 0);
-		$settings['code_javascript'] 	= $wf->getParam('editor.allow_javascript', 0);
-		$settings['code_css'] 			= $wf->getParam('editor.allow_css', 0);
+		$settings['code_php'] 		= $wf->getParam('editor.allow_php', 0, 0, 'boolean');
+		$settings['code_script'] 	= $wf->getParam('editor.allow_javascript', 0, 0, 'boolean');
+		$settings['code_style'] 	= $wf->getParam('editor.allow_css', 0, 0, 'boolean');
 
-		$settings['code_cdata'] 		= $wf->getParam('editor.cdata', 0);
+		$settings['code_cdata'] 	= $wf->getParam('editor.cdata', 1, 1, 'boolean');
 
 		// Invalid Elements
-		if ($settings['code_javascript'] == 1) {
+		if ($settings['code_script']) {
 			$model->removeKeys($settings['invalid_elements'], 'script');
 		}
-		if ($settings['code_css'] == 1) {
+		if ($settings['code_style']) {
 			$model->removeKeys($settings['invalid_elements'], 'style');
 		}
 	}

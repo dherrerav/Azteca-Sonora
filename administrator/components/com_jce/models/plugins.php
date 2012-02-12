@@ -1,18 +1,15 @@
 <?php
 /**
- * @version		$Id: plugins.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('RESTRICTED');
 
 // load base model
 require_once (dirname(__FILE__) . DS . 'model.php');
@@ -97,28 +94,33 @@ class WFModelPlugins extends WFModel {
 				$xml = WFXMLElement::getXML($folder . DS . $name . '.xml');
 
 				if($xml) {
-					$plugins[$name] = new StdClass();
+					$params = $xml->params;	
+						
+					if (!isset($plugins[$name])) {
+						$plugins[$name] = new StdClass();
+						
+						$plugins[$name]->name = $name;
 
-					$plugins[$name]->name = $name;
+						$plugins[$name]->title = (string)$xml->name;
+						$plugins[$name]->icon = (string)$xml->icon;
+						
+						$editable = (int)$xml->attributes()->editable;
+						$plugins[$name]->editable = $editable ? $editable : ($params && count($params->children()) ? 1 : 0);
 
-					$plugins[$name]->title = (string)$xml->name;
-					$plugins[$name]->icon = (string)$xml->icon;
+						$row = (int)$xml->attributes()->row;
+					
+						$plugins[$name]->row = $row ? $row : 4;
 
-					$plugins[$name]->author = (string)$xml->author;
-					$plugins[$name]->version = (string)$xml->version;
-					$plugins[$name]->creationdate = (string)$xml->creationDate;
-					$plugins[$name]->description = (string)$xml->description;
+						$plugins[$name]->core = (int)$xml->attributes()->core ? 1 : 0;
+					}
 
-					$params = $xml->params;
-
-					$editable = (int)$xml->attributes()->editable;
-					$plugins[$name]->editable = $editable ? $editable : ($params && count($params->children()) ? 1 : 0);
-
-					$row = (int)$xml->attributes()->row;
-					$plugins[$name]->row = $row ? $row : 4;
-
-					$plugins[$name]->core = (int)$xml->attributes()->core ? 1 : 0;
-					$plugins[$name]->type = 'plugin';
+					$plugins[$name]->author 		= (string)$xml->author;
+					$plugins[$name]->version 		= (string)$xml->version;
+					$plugins[$name]->creationdate 	= (string)$xml->creationDate;
+					$plugins[$name]->description 	= (string)$xml->description;
+					
+					$plugins[$name]->authorUrl 		= (string)$xml->authorUrl;
+					$plugins[$name]->type 			= 'plugin';
 				}
 			}
 		}
@@ -150,6 +152,7 @@ class WFModelPlugins extends WFModel {
 			$name = basename($file, '.xml');
 			$object->name = $name;
 			$object->description = '';
+			$object->id = $object->folder . '.' . $object->name;
 
 			$xml = WFXMLElement::getXML($file);
 
@@ -168,6 +171,7 @@ class WFModelPlugins extends WFModel {
 				$object->author 		= (string)$xml->author;
 				$object->version 		= (string)$xml->version;
 				$object->type 			= (string)$xml->attributes()->folder;
+				$object->authorUrl 		= (string)$xml->authorUrl;
 				
 				
 				$object->folder = (string)$xml->attributes()->folder;

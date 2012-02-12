@@ -1,17 +1,15 @@
 <?php
 /**
- * @version   $Id: manager.php 85 2011-02-21 19:11:08Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('ERROR_403');
+defined('_JEXEC') or die('RESTRICTED');
 
 // Load class dependencies
 wfimport('editor.libraries.classes.plugin');
@@ -20,9 +18,9 @@ wfimport('editor.libraries.classes.extensions.browser');
 class WFMediaManager extends WFEditorPlugin 
 {
 	/**
-	 * @access  protected
+	 * @access  public
 	 */
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 		// Call parent
 		parent::__construct();
@@ -33,13 +31,18 @@ class WFMediaManager extends WFEditorPlugin
 		$this->set('_base_path', 	WF_EDITOR_LIBRARIES .DS. 'views' .DS. 'plugin');
 		$this->set('_template_path', WF_EDITOR_LIBRARIES .DS. 'views' .DS. 'plugin' .DS. 'tmpl');
 		
-		$this->setProperties(array_merge($this->getConfig(), $config));
+		$this->setProperties(array_merge($this->getConfig(), $this->getProperties()));
 		
 		// initialize the browser
-		$browser = $this->getBrowser();
+		$browser = $this->getBrowser();	
 	}
 
-	function getBrowser()
+	/**
+	 * Get the File Browser instance
+	 * @access public
+	 * @return object WFBrowserExtension
+	 */
+	public function getBrowser()
 	{
 		static $browser;
 		
@@ -51,10 +54,10 @@ class WFMediaManager extends WFEditorPlugin
 	}
 
 	/**
-	 * Initialize the Manager plugin
-	 * Shortcut to setup Manager elements
+	 * Display the plugin
+	 * @access public
 	 */
-	function display()
+	protected function display()
 	{
 		$view 		= $this->getView();
 		$browser 	= $this->getBrowser();
@@ -72,27 +75,27 @@ class WFMediaManager extends WFEditorPlugin
 
 		$browser->set('position', $this->getParam('editor.browser_position', 'bottom'));		
 		$view->assignRef('browser', $browser);
-
-		// Load language files
-		$this->loadLanguages();
 	}
 	
-	function getConfig()
-	{
-		$filesystem = $this->getParam('filesystem.name', 'joomla');
-		
-		$filetypes 	= $this->get('filetypes', $this->getParam('extensions', 'images=jpg,jpeg,png,gif'));
+	/**
+	 * Get the configuration
+	 * @access private
+	 * @return array
+	 */
+	private function getConfig()
+	{												
+		$filesystem = $this->getParam('filesystem.name', 'joomla', '', 'string', false);			
+		$filetypes 	= $this->getParam('extensions', $this->get('_filetypes', 'images=jpg,jpeg,png,gif'));
 		
 		$config = array(
-			'dir'					=> $this->getParam('dir', 'images'),
+			'dir'					=> $this->getParam('dir', 'images', '', 'string', false),
 			'filesystem' 			=> $filesystem,
 			'filetypes'				=> $filetypes,
 			'upload'				=> array(
-				'runtimes'			=> $this->getParam('editor.upload_runtimes', 'html5,flash,silverlight'),
+				'runtimes'			=> $this->getParam('editor.upload_runtimes', array('html5','flash'), '', 'array', false),
 				'chunk_size' 		=> null,
-				'conflict'			=> $this->getParam('editor.upload_conflict', array('overwrite', 'unique')),
-				'max_size'			=> $this->getParam('max_size', 1024),
-				'validate_mimetype'	=> $this->getParam('validate_mimetype', 0),
+				'max_size'			=> $this->getParam('max_size', 1024, '', 'string', false),
+				'validate_mimetype'	=> $this->getParam('validate_mimetype', 0)
 			),
 			'folder_tree'		=> $this->getParam('editor.folder_tree', 1),
 			'list_limit'		=> $this->getParam('editor.list_limit', 'all'),
@@ -110,12 +113,16 @@ class WFMediaManager extends WFEditorPlugin
 					'rename' => $this->getParam('file_rename', 1),
 					'move'	 => $this->getParam('file_move', 1)
 				)
-			)
+			),
+			'websafe_mode'	=> $this->getParam('editor.websafe_mode', 'utf-8')
 		);
 		
 		return $config;
 	}
 	
+	/**
+	 * @see WFEditorPlugin::getSettings()
+	 */
 	function getSettings($settings = array())
 	{
 		return parent::getSettings($settings);

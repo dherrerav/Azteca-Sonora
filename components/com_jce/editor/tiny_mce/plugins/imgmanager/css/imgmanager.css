@@ -11,9 +11,10 @@
 div.preview {
   overflow: hidden;
   padding: 6px 0;
-  margin: 0px;
+  margin: 0;
   text-align:left;
   height: 150px;
+  position: relative;
 }
 
 #width, #height {
@@ -21,21 +22,19 @@ div.preview {
 	text-align: center;
 }
 
-#constrain, #onmousemovecheck {
+#constrain {
 	width: auto;
 }
-#id, #dir, #lang, #usemap, #longdesc, #class, #src, #title, #alt, #onmouseoutsrc, #onmouseoversrc, #classlist, #style, #classes {
+#id, #dir, #lang, #usemap, #longdesc, #class, #src, #title, #alt, #onmouseout, #onmouseover, #classlist, #style, #classes {
 	width: 350px;
 }
 #margin_top, #margin_right, #margin_bottom, #margin_left, #border_style, #border_width, #border_color, #clear {
 	margin: 0px 5px;
 }
-#border_style {
+#border_style, input.editable-input {
 	margin: 0 0 0 5px;
 }
-input.editable-edit {
-	margin: 0px 5px;
-}
+
 #align {
 	margin-right: 5px;
 }
@@ -48,6 +47,7 @@ input.editable-edit {
 label[for="rollover_check"] {
 	min-width: 30px;
 }
+
 #jce table td {
 	padding: 3px 2px;
 }
@@ -55,6 +55,9 @@ label[for="rollover_check"] {
 #jce.ie7 .ui-tabs-panel {
 	height: 210px;
 } 
+#jce.ie div.preview {
+	padding: 7px 0 8px 0;
+}
 #jce.ie7 div.preview {
-	padding: 8px 0 10px 0;
+	padding: 8px 0 8px 0;
 }

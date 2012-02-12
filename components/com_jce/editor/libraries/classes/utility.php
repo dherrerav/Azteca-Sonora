@@ -1,62 +1,33 @@
 <?php
 /**
- * @version   $Id: utility.php 68 2011-02-20 13:51:08Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright ¬© 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-defined('_JEXEC') or die('Restricted access');
-class WFUtility
+
+defined('_JEXEC') or die('RESTRICTED');
+abstract class WFUtility
 {
-	/**
-	 * Format a JError object as a JSON string
-	 */
-	public function raiseError($error)
+
+	public static function getExtension($path)
 	{
-		$data = array();
-
-		$data[] = JError::translateErrorLevel($error->get('level')) . ' ' . $error->get('code') . ': ';
-
-		if ($error->get('message')) {
-			$data[] = $error->get('message');
-		}
-
-		if ($error->get('line')) {
-			$data[] = ' IN LINE ' . $error->get('line');
-		}
-
-		if ($error->get('function')) {
-			$text = ' IN ';
-
-			if ($error->get('class')) {
-				$text = $error->get('class') . '::';
-			}
-
-			$text = $error->get('function');
-
-			$data[] = $text;
-		}
-
-		if ($error->get('file')) {
-			$data[] = 'IN FILE ' . $error->get('file');
-		}
-
-		header('Content-Type: text/json');
-		header('Content-Encoding: UTF-8');
-		
-		$output = array(
-			'result'	=> '',
-        	'error'  	=> true,
-			'code'	 	=> $error->get('code'),
-			'text'		=> $data
-		);
-
-		exit(json_encode($output));
+		$dot = strrpos($path, '.') + 1;
+		return substr($path, $dot);
+	}
+	
+	public static function stripExtension($path)
+	{
+		$dot = strrpos($path, '.');
+		return substr($path, 0, $dot);
+	}
+	
+	public static function cleanPath($path)
+	{
+		return preg_replace('#[/\\\\]+#', '/', trim($path));
 	}
 
 	/**
@@ -64,38 +35,89 @@ class WFUtility
 	 * @param string $path the path
 	 * @return string path with trailing /
 	 */
-	public function fixPath($path)
+	public static function fixPath($path)
 	{
-		//append a slash to the path if it doesn't exists.
-		if (!(substr($path, -1) == '/'))
-		$path .= '/';
-		return $path;
+		return self::cleanPath($path . '/');
+	}
+	
+	public static function checkPath($path)
+	{
+		if (strpos($path, '..') !== false) {
+			JError::raiseError(403, 'RELATIVE PATHS NOT PERMITTED'); // don't translate
+			exit();
+		}
 	}
 
 	/**
-	 * Concat two paths together. Basically $pathA+$pathB
-	 * @param string $pathA path one
-	 * @param string $pathB path two
-	 * @return string a trailing slash combinded path.
+	 * Concat two paths together. Basically $a + $b
+	 * @param string $a path one
+	 * @param string $b path two
+	 * @return string $a DIRECTORY_SEPARATOR $b
 	 */
-	public function makePath($a, $b)
+	public static function makePath($a, $b)
 	{
-		$a = self::fixPath($a);
-		if (substr($b, 0, 1) == '/') {
-			$b = substr($b, 1);
+		return self::cleanPath($a . '/' . $b);
+	}
+
+	private static function utf8_latin_to_ascii( $subject ){
+
+		static $CHARS = NULL;
+
+		if (is_null($CHARS)) {
+			$CHARS = array(
+				'À'=>'A','Á'=>'A','Â'=>'A','Ã'=>'A','Ä'=>'A','Å'=>'A','Æ'=>'AE',
+				'Ç'=>'C','È'=>'E','É'=>'E','Ê'=>'E','Ë'=>'E','Ì'=>'I','Í'=>'I','Î'=>'I','Ï'=>'I',
+				'Ð'=>'D','Ñ'=>'N','Ò'=>'O','Ó'=>'O','Ô'=>'O','Õ'=>'O','Ö'=>'O','Ø'=>'O',
+				'Ù'=>'U','Ú'=>'U','Û'=>'U','Ü'=>'U','Ý'=>'Y','ß'=>'s',
+				'à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','å'=>'a','æ'=>'ae',
+				'ç'=>'c','è'=>'e','é'=>'e','ê'=>'e','ë'=>'e','ì'=>'i','í'=>'i','î'=>'i','ï'=>'i',
+				'ñ'=>'n','ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ø'=>'o','ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u',
+				'ý'=>'y','ÿ'=>'y','Ā'=>'A','ā'=>'a','Ă'=>'A','ă'=>'a','Ą'=>'A','ą'=>'a',
+				'Ć'=>'C','ć'=>'c','Ĉ'=>'C','ĉ'=>'c','Ċ'=>'C','ċ'=>'c','Č'=>'C','č'=>'c','Ď'=>'D','ď'=>'d','Đ'=>'D','đ'=>'d',
+				'Ē'=>'E','ē'=>'e','Ĕ'=>'E','ĕ'=>'e','Ė'=>'E','ė'=>'e','Ę'=>'E','ę'=>'e','Ě'=>'E','ě'=>'e',
+				'Ĝ'=>'G','ĝ'=>'g','Ğ'=>'G','ğ'=>'g','Ġ'=>'G','ġ'=>'g','Ģ'=>'G','ģ'=>'g','Ĥ'=>'H','ĥ'=>'h','Ħ'=>'H','ħ'=>'h',
+				'Ĩ'=>'I','ĩ'=>'i','Ī'=>'I','ī'=>'i','Ĭ'=>'I','ĭ'=>'i','Į'=>'I','į'=>'i','İ'=>'I','ı'=>'i',
+				'Ĳ'=>'IJ','ĳ'=>'ij','Ĵ'=>'J','ĵ'=>'j','Ķ'=>'K','ķ'=>'k','Ĺ'=>'L','ĺ'=>'l','Ļ'=>'L','ļ'=>'l','Ľ'=>'L','ľ'=>'l','Ŀ'=>'L','ŀ'=>'l','Ł'=>'l','ł'=>'l',
+				'Ń'=>'N','ń'=>'n','Ņ'=>'N','ņ'=>'n','Ň'=>'N','ň'=>'n','ŉ'=>'n','Ō'=>'O','ō'=>'o','Ŏ'=>'O','ŏ'=>'o','Ő'=>'O','ő'=>'o','Œ'=>'OE','œ'=>'oe',
+				'Ŕ'=>'R','ŕ'=>'r','Ŗ'=>'R','ŗ'=>'r','Ř'=>'R','ř'=>'r','Ś'=>'S','ś'=>'s','Ŝ'=>'S','ŝ'=>'s','Ş'=>'S','ş'=>'s','Š'=>'S','š'=>'s',
+				'Ţ'=>'T','ţ'=>'t','Ť'=>'T','ť'=>'t','Ŧ'=>'T','ŧ'=>'t','Ũ'=>'U','ũ'=>'u','Ū'=>'U','ū'=>'u','Ŭ'=>'U','ŭ'=>'u','Ů'=>'U','ů'=>'u','Ű'=>'U','ű'=>'u','Ų'=>'U','ų'=>'u',
+				'Ŵ'=>'W','ŵ'=>'w','Ŷ'=>'Y','ŷ'=>'y','Ÿ'=>'Y','Ź'=>'Z','ź'=>'z','Ż'=>'Z','ż'=>'z','Ž'=>'Z','ž'=>'z','ſ'=>'s','ƒ'=>'f','Ơ'=>'O','ơ'=>'o','Ư'=>'U','ư'=>'u',
+				'Ǎ'=>'A','ǎ'=>'a','Ǐ'=>'I','ǐ'=>'i','Ǒ'=>'O','ǒ'=>'o','Ǔ'=>'U','ǔ'=>'u','Ǖ'=>'U','ǖ'=>'u','Ǘ'=>'U','ǘ'=>'u','Ǚ'=>'U','ǚ'=>'u','Ǜ'=>'U','ǜ'=>'u',
+				'Ǻ'=>'A','ǻ'=>'a','Ǽ'=>'AE','ǽ'=>'ae','Ǿ'=>'O','ǿ'=>'o'
+			);
 		}
-		return $a . $b;
+			
+		return str_replace(array_keys($CHARS), array_values($CHARS), $subject);
 	}
 
 	/**
 	 * Makes file name safe to use
-	 * @param string The name of the file (not full path)
-	 * @return string The sanitised string
+	 * @param mixed The name of the file (not full path)
+	 * @return mixed The sanitised string or array
 	 */
-	public function makeSafe($file)
-	{
-		jimport('joomla.filesystem.file');
-		return trim(JFile::makeSafe(preg_replace('#\s#', '_', $file)));
+	public static function makeSafe($subject, $mode = 'utf-8')
+	{		
+		// remove multiple . characters
+		$search = array('#(\.){2,}#');
+
+		switch($mode) {
+			default:
+			case 'utf-8':
+				$search[] = '#[^a-zA-Z0-9_\.\-\s~ \p{L}\p{N}]#u';
+				break;
+			case 'ascii':
+				$subject = self::utf8_latin_to_ascii($subject);
+
+				$search[] = '#[^a-zA-Z0-9_\.\-\s~ ]#';
+				break;
+		}
+		
+		// strip leading .
+		$search[] = '#^\.*#';
+		// strip whitespace
+		$saerch[] = '#^\s*|\s*$#';
+
+		return preg_replace($search, '', $subject);
 	}
 
 	/**
@@ -103,14 +125,15 @@ class WFUtility
 	 * @param int $size the raw filesize
 	 * @return string formated file size.
 	 */
-	public function formatSize($size)
+	public static function formatSize($size)
 	{
-		if ($size < 1024)
-		return $size . ' ' . WFText::_('WF_LABEL_BYTES');
-		else if ($size >= 1024 && $size < 1024 * 1024)
-		return sprintf('%01.2f', $size / 1024.0) . ' ' . WFText::_('WF_LABEL_KB');
-		else
-		return sprintf('%01.2f', $size / (1024.0 * 1024)) . ' ' . WFText::_('WF_LABEL_MB');
+		if ($size < 1024) {
+			return $size . ' ' . WFText::_('WF_LABEL_BYTES');
+		} else if ($size >= 1024 && $size < 1024 * 1024) {
+			return sprintf('%01.2f', $size / 1024.0) . ' ' . WFText::_('WF_LABEL_KB');
+		} else {
+			return sprintf('%01.2f', $size / (1024.0 * 1024)) . ' ' . WFText::_('WF_LABEL_MB');
+		}
 	}
 
 	/**
@@ -118,7 +141,7 @@ class WFUtility
 	 * @param int $date the unix datestamp
 	 * @return string formated date.
 	 */
-	public function formatDate($date, $format = "%d/%m/%Y, %H:%M")
+	public static function formatDate($date, $format = "%d/%m/%Y, %H:%M")
 	{
 		return strftime($format, $date);
 	}
@@ -129,7 +152,7 @@ class WFUtility
 	 * @return Formatted modified date
 	 * @param string $file Absolute path to file
 	 */
-	public function getDate($file)
+	public static function getDate($file)
 	{
 		return self::formatDate(@filemtime($file));
 	}
@@ -140,12 +163,12 @@ class WFUtility
 	 * @return Formatted filesize value
 	 * @param string $file Absolute path to file
 	 */
-	public function getSize($file)
+	public static function getSize($file)
 	{
 		return self::formatSize(@filesize($file));
 	}
 
-	public function isUtf8($string)
+	public static function isUtf8($string)
 	{
 		if (!function_exists('mb_detect_encoding')) {
 			// From http://w3.org/International/questions/qa-forms-utf-8.html 
@@ -162,6 +185,27 @@ class WFUtility
 		}
 		
 		return mb_detect_encoding($string, 'UTF-8', true);
+	}
+	
+	/**
+	 * Convert size value to bytes
+	 */
+	public static function convertSize($value)
+	{		
+		// Convert to bytes
+		switch(strtolower($value{strlen($value)-1})) {
+			case 'g':
+				$value = intval($value) * 1073741824;
+				break;
+			case 'm':
+				$value = intval($value) * 1048576;
+				break;
+			case 'k':
+				$value = intval($value) * 1024;
+				break;
+		}
+		
+		return $value;
 	}
 }
 ?>

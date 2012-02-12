@@ -1,17 +1,15 @@
 <?php
 /**
- * @version		$Id: menu.php 64 2011-02-20 13:47:12Z happy_noodle_boy $
- * @package      JCE Advlink
- * @copyright    Copyright (C) 2008 - 2009 Ryan Demmer. All rights reserved.
- * @author		Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-// no direct access
-defined('_WF_EXT') or die('Restricted access');
+
+defined('_WF_EXT') or die('RESTRICTED');
 class JoomlalinksMenu extends JObject
 {
     
@@ -52,7 +50,7 @@ class JoomlalinksMenu extends JObject
     {
        	$wf = WFEditorPlugin::getInstance();
        	
-        if ($wf->checkAccess('joomlalinks.menu', '1')) {
+        if ($wf->checkAccess('links.joomlalinks.menu', 1)) {
             return '<li id="index.php?option=com_menu"><div class="tree-row"><div class="tree-image"></div><span class="folder menu nolink"><a href="javascript:;">'.WFText::_('WF_LINKS_JOOMLALINKS_MENU').'</a></span></div></li>';
         }
     }
@@ -78,27 +76,45 @@ class JoomlalinksMenu extends JObject
 				$id 	= $type ? 0 : $args->id;
 				
 				$menus = self::_menu($id, $type);
-				
+
 				foreach ($menus as $menu) {
-					$children = self::_children($menu->id);
+					$link = $menu->link;	
 					
-					if ($menu->type == 'menulink') {
-						//$menu = AdvlinkMenu::_alias($menu->id);
+					$class = array();
+						
+					switch ($menu->type) {
+						case 'separator':
+							if (!$link) {
+								$class[] = 'nolink';
+							}
+							break;
+						case 'alias':
+							$params = new JParameter($menu->params);
+							
+							// If this is an alias use the item id stored in the parameters to make the link.
+							$link .= $params->get('aliasoptions');
+							break;
 					}
 					
-					$link 	= $menu->link;
-					$title 	= isset($menu->name) ? $menu->name : $menu->title; 
+					// internal link with no Itemid
+					if ($link && strpos($link, 'index.php') === 0 && strpos($link, 'Itemid') === false) {
+						$link .= '&Itemid=' . $menu->id;
+					}
+						
+					$children 	= self::_children($menu->id);
+					$title 		= isset($menu->name) ? $menu->name : $menu->title; 
 					
-					if (preg_match('/^index.php/i', $link) && strpos($link, 'Itemid') === false) {
-						$link = $menu->link . '&Itemid=' . $menu->id;
-						//$link = 'index.php?Itemid=' . $menu->id;
+					if ($children) {
+						$class = array_merge($class, array('folder', 'menu'));
+					} else {
+						$class[] = 'file';
 					}
 					
 					$items[] = array(
 						'id'		=>	$children ? 'index.php?option=com_menu&view=menu&id=' . $menu->id : $link,
 						'url'		=>	$link,
 						'name'		=>	$title . ' / ' . $menu->alias,
-						'class'		=>	$children ? 'folder menu' : 'file'
+						'class'		=>	implode(' ', $class)
 					);
 				}
 				break;
@@ -110,12 +126,12 @@ class JoomlalinksMenu extends JObject
 						//$menu = AdvlinkMenu::_alias($menu->id);
 					}
 					
-					$link = $menu->link;
+					$link 	= $menu->link;
 					$title 	= isset($menu->name) ? $menu->name : $menu->title;
 					
-					if (preg_match('/^index.php/i', $link) && strpos($link, 'Itemid') === false) {
-						$link = $menu->link . '&Itemid=' . $menu->id;
-						//$link = 'index.php?Itemid=' . $menu->id;
+					// internal link with no Itemid
+					if ($link && strpos($link, 'index.php') === 0 && strpos($link, 'Itemid') === false) {
+						$link .= '&Itemid=' . $menu->id;
 					}
 	
 					$items[] = array(
@@ -170,17 +186,17 @@ class JoomlalinksMenu extends JObject
 		
 		$where  = '';
 		
-		// Joomla! 1.5
-		if (isset($user->gid)) {
-			$where .= ' AND access <= '.(int) $user->get('aid');
-			$where .=  ' AND parent = '.(int) $id;
-		} else {
+		// Joomla! 1.6+
+		if (method_exists('JUser', 'getAuthorisedViewLevels')) {
 			$groups	= implode(',', $user->authorisedLevels());
 			$where .= ' AND menutype != '.$db->Quote('_adminmenu');
 			$where .= ' AND access IN ('.$groups.')';
 			if ($id) {
 				$where .= ' AND parent_id = '.(int) $id;
 			}
+		} else {
+			$where .= ' AND access <= '.(int) $user->get('aid');
+			$where .=  ' AND parent = '.(int) $id;
 		}
 		
 		$query = 'SELECT COUNT(id)'
@@ -206,18 +222,21 @@ class JoomlalinksMenu extends JObject
 			$where 	.= ' AND m.menutype = s.menutype';
 		}
 		
-		// Joomla! 1.5
-		if (isset($user->gid)) {
+		// Joomla! 1.6+
+		if (method_exists('JUser', 'getAuthorisedViewLevels')) {
+			$groups	= implode(',', $user->getAuthorisedViewLevels());
+			$where 	.= ' AND m.access IN ('.$groups.')';
+			
+			if (!$parent) {
+				$parent = 1;
+			}
+			$where .= ' AND m.parent_id = '.(int) $parent;
+
+			$order  .= ' ORDER BY m.lft asc';
+		} else {
 			$where 	.= ' AND m.access <= '.(int) $user->get('aid');
 			$where 	.= ' AND m.parent = '.(int) $parent;
-			$order  .= ' ORDER BY m.name';
-		} else {
-			$groups	= implode(',', $user->authorisedLevels());
-			$where 	.= ' AND m.access IN ('.$groups.')';
-			if ($parent) {
-				$where .= ' AND m.parent_id = '.(int) $parent;
-			}
-			$order  .= ' ORDER BY m.title';
+			$order  .= ' ORDER BY m.id';
 		}
 		
 		$query = 'SELECT m.*'

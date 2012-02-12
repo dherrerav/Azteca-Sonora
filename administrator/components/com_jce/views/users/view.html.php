@@ -1,28 +1,18 @@
-<?php 
+<?php
 /**
- * @version		$Id: view.html.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die('RESTRICTED');
 
 jimport( 'joomla.application.component.view');
 
-/**
- * HTML View class for the Users component
- *
- * @static
- * @package		Joomla
- * @subpackage	Users
- * @since 1.0
- */
 class WFViewUsers extends JView
 {
 	function display($tpl = null)
@@ -37,16 +27,18 @@ class WFViewUsers extends JView
 		$currentUser	= JFactory::getUser();
 		$acl			= JFactory::getACL();
 		
-		$this->document->addScript('components/com_jce/media/js/users.js');
+		$model 			= $this->getModel();
+		
+		$this->document->addScript('components/com_jce/media/js/users.js?version=' . $model->getVersion());
 
-		$filter_order		= $app->getUserStateFromRequest( "$option.$view.$client.filter_order",		'filter_order',		'a.name',	'cmd' );
-		$filter_order_Dir	= $app->getUserStateFromRequest( "$option.$view.$client.filter_order_Dir",	'filter_order_Dir',	'',			'word' );
-		$filter_type		= $app->getUserStateFromRequest( "$option.$view.$client.filter_type",			'filter_type', 		0,			'string' );
-		$search				= $app->getUserStateFromRequest( "$option.$view.$client.search",				'search', 			'',			'string' );
+		$filter_order		= $app->getUserStateFromRequest("$option.$view.filter_order",		'filter_order',		'a.name',	'cmd' );
+		$filter_order_Dir	= $app->getUserStateFromRequest("$option.$view.filter_order_Dir",	'filter_order_Dir',	'',			'word' );
+		$filter_type		= $app->getUserStateFromRequest("$option.$view.filter_type",		'filter_type', 		0,			'string' );
+		$search				= $app->getUserStateFromRequest("$option.$view.search",				'search', 			'',			'string' );
 		$search				= JString::strtolower( $search );
 
-		$limit		= $app->getUserStateFromRequest( 'global.list.limit', 'limit', $app->getCfg('list_limit'), 'int' );
-		$limitstart = $app->getUserStateFromRequest( $option.'.limitstart', 'limitstart', 0, 'int' );
+		$limit				= $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'), 'int' );
+		$limitstart 		= $app->getUserStateFromRequest("$option.$view.limitstart", 'limitstart', 0, 'int' );
 
 		$where = array();
 		
@@ -60,7 +52,7 @@ class WFViewUsers extends JView
 		
 		if (WF_JOOMLA15) {
 			if ($filter_type) {
-				$where[] = 'a.usertype = LOWER('.$db->Quote($filter_type).') ';
+				$where[] = 'a.gid ='.(int)$filter_type;
 			}
 			// exclude any child group id's for this user
 			$pgids = $acl->get_group_children( $currentUser->get('gid'), 'ARO', 'RECURSE' );

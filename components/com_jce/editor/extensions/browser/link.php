@@ -1,16 +1,14 @@
 <?php
 /**
-* @version		$Id: link.php 65 2011-02-20 13:47:45Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-// no direct access
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
 defined('_JEXEC') or die('RESTRICTED');
 
 wfimport('editor.libraries.classes.extensions.browser');
@@ -20,13 +18,13 @@ class WFLinkBrowser extends WFBrowserExtension
 	/*
 	*  @var varchar
 	*/
-	var $extensions = array();
+	private $extensions = array();
 	/**
 	* Constructor activating the default information of the class
 	*
 	* @access	protected
 	*/
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		
@@ -43,7 +41,7 @@ class WFLinkBrowser extends WFBrowserExtension
 		$request->setRequest(array($this, 'getLinks'));
 	}
 	
-	function display()
+	public function display()
 	{		
 		parent::display();
 		
@@ -58,7 +56,7 @@ class WFLinkBrowser extends WFBrowserExtension
 		}
 	}
 
-	function &getLinkExtension($name)
+	private function &getLinkExtension($name)
 	{
 		static $links;
 		
@@ -76,23 +74,24 @@ class WFLinkBrowser extends WFBrowserExtension
 		return $links[$name];
 	}
 	
-    function getLinkBrowser()
-	{				
-		$view = $this->getView('links');
-		
-		$list = '';
-		
+    public function getLinkBrowser()
+	{	
+		$list = array();
+			
 		foreach ($this->extensions as $extension) {
 			if ($extension->isEnabled()) {
-				 $list .= $extension->getList();
+				$list[] = $extension->getList();
 			}
-	    }
+		}
 		
-		$view->assign('list', $list);
-		$view->display();
+		if (count($list)) {
+			$view = $this->getView('links');	
+			$view->assign('list', implode("\n", $list));
+			$view->display();
+		}
 	}
 
-    function getLinks($args)
+    public function getLinks($args)
 	{	    
 	    foreach ($this->extensions as $extension) {
 	        if (in_array($args->option, $extension->getOption())) {
@@ -120,22 +119,19 @@ class WFLinkBrowser extends WFBrowserExtension
 	 * @return	Category list object.
 	 * @since	1.5
 	 */
-	function getCategory($section, $parent = 1)
+	public function getCategory($section, $parent = 1)
 	{
 		$db			= JFactory::getDBO();
 		$user		= JFactory::getUser();
 		$wf 		= WFEditorPlugin::getInstance();
 
-		$query = 'SELECT id AS slug, id AS id, title, alias';
+		$query = 'SELECT id AS slug, id AS id, title, alias, access';
 		
 		if ($wf->getParam('category_alias', 1) == 1) {
 			$query .= ', CASE WHEN CHAR_LENGTH(alias) THEN CONCAT_WS(":", id, alias) ELSE id END as slug';
 		}
-		// Joomla! 1.5 section / category
-		if (isset($user->gid)) {
-			$where  = ' WHERE section = '.$db->Quote($section);
-			$where .= ' AND access <= '.(int) $user->get('aid');
-		} else {
+		
+		if (method_exists('JUser', 'getAuthorisedViewLevels')) {
 			$where  = ' WHERE parent_id = '.(int) $parent;
 			$where .= ' AND extension = '.$db->Quote($section);
 			$where .= ' AND access IN ('.implode(',', $user->authorisedLevels()).')';
@@ -143,6 +139,9 @@ class WFLinkBrowser extends WFBrowserExtension
 			if (!$wf->checkAccess('static', 1)) {
 				$where .= ' AND path != '.$db->Quote('uncategorised');
 			}
+		} else {
+			$where  = ' WHERE section = '.$db->Quote($section);
+			$where .= ' AND access <= '.(int) $user->get('aid');
 		}
 		
 		$query .= ' FROM #__categories'
@@ -159,10 +158,11 @@ class WFLinkBrowser extends WFBrowserExtension
 	 * (Attempt to) Get an Itemid
 	 *
 	 * @access	public
+	 * @param	string $component
+	 * @param	array $needles
 	 * @return	Category list object.
-	 * @since	1.5
 	 */
-	function getItemId($component, $needles = array())
+	public function getItemId($component, $needles = array())
 	{		
 		$match = null;
 		

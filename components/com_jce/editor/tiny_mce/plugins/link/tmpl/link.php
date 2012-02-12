@@ -1,16 +1,15 @@
 <?php
 /**
- * @version		$Id: link.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author		Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-defined('_JEXEC') or die('ERROR_403');
+
+defined('_JEXEC') or die('RESTRICTED');
 
 $plugin = WFLinkPlugin::getInstance();
 
@@ -31,11 +30,11 @@ $plugin = WFLinkPlugin::getInstance();
 </table>
 <h4><?php echo WFText::_('WF_LABEL_ATTRIBUTES');?></h4>
 <table>
-	<tr>
-		<td><label for="anchorlist" class="hastip" title="<?php echo WFText::_('WF_LABEL_ANCHORS_DESC');?>"><?php echo WFText::_('WF_LABEL_ANCHORS');?></label></td>
-		<td id="anchorlistcontainer">&nbsp;</td>
+	<tr id="attributes-anchor">
+		<td><label for="anchor" class="hastip" title="<?php echo WFText::_('WF_LABEL_ANCHORS_DESC');?>"><?php echo WFText::_('WF_LABEL_ANCHORS');?></label></td>
+		<td id="anchor_container">&nbsp;</td>
 	</tr>
-	<tr>
+	<tr id="attributes-target">
 		<td><label for="target" class="hastip" title="<?php echo WFText::_('WF_LABEL_TARGET_DESC');?>"><?php echo WFText::_('WF_LABEL_TARGET');?></label></td>
 		<td><select id="target">
 			<option value=""><?php echo WFText::_('WF_OPTION_NOT_SET');?></option>

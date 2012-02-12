@@ -1,11 +1,9 @@
 <?php
 /**
- * @version		$Id: packer.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
- * @package   JCE
- * @copyright Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright Copyright © 2005 - 2007 Open Source Matters. All rights reserved.
- * @license   GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @package   	JCE
+ * @copyright 	Copyright � 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
@@ -72,8 +70,26 @@ class WFPacker extends JObject
 	{
 		return $this->type;
 	}
+	
+	/**
+	 * Get encoding
+	 * @copyright Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
+	 */
+	private function _getEncoding()
+	{		
+		// Check if it supports gzip
+		$encodings 	= (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) ? strtolower($_SERVER['HTTP_ACCEPT_ENCODING']) : "";
+		$encoding 	= preg_match( '/\b(x-gzip|gzip)\b/', $encodings, $match) ? $match[1] : "";
+		
+		// Is northon antivirus header
+		if (isset($_SERVER['---------------'])) {
+			$encoding = "x-gzip";
+		}
+		
+		return $encoding;
+	}
 
-	function pack($minify = true, $gzip = true)
+	function pack($minify = true, $gzip = false)
 	{
 		$type = $this->getType();
 
@@ -97,18 +113,11 @@ class WFPacker extends JObject
 		header("Expires: " . gmdate ("D, d M Y H:i:s", time() + $expires) . " GMT");
 
 		$files = $this->getFiles();
-
-		// Check if it supports gzip
-		if(isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
-			$encodings = explode(',', strtolower(preg_replace("/\s+/", "", $_SERVER['HTTP_ACCEPT_ENCODING'])));
-		}
 		
-		if((in_array('gzip', $encodings) || in_array('x-gzip', $encodings) || isset($_SERVER['---------------'])) && function_exists('ob_gzhandler') && !ini_get('zlib.output_compression')) {
-			$enc = in_array('x-gzip', $encodings) ? "x-gzip" : "gzip";
-		} else {
-			// flag $gzip false regardless of parameter
-			$gzip = false;
-		}
+		$encoding = self::_getEncoding();
+
+		$zlib 	= extension_loaded('zlib') && ini_get('zlib.output_compression');
+		$gzip 	= $gzip && !empty($encoding) && $zlib && function_exists('gzencode');
 
 		$content = $this->getContentStart();
 
@@ -117,42 +126,31 @@ class WFPacker extends JObject
 		}
 
 		$content .= $this->getContentEnd();
+		
+		// pack javascript
+		if($minify) {
+			if($this->getType() == 'javascript') {
+				$content = $this->jsmin($content);
+			}
+
+			if($this->getType() == 'css') {
+				$content = $this->cssmin($content);
+			}
+		}
 
 		// Generate GZIP'd content
 		if($gzip) {
-			// pack javascript
-			if($minify) {
-				if($this->getType() == 'javascript') {
-					require_once (dirname(__FILE__) . DS . 'jsmin.php');
-
-					$content = trim(JSMin::minify($content));
-				}
-
-				if($this->getType() == 'css') {
-					$content = $this->cssMin($content);
-				}
-			}
-
-			header("Content-Encoding: " . $enc);
-			$data = gzencode($content, 9, FORCE_GZIP);
-
-			// Stream to client
-			die($data);
-		} else {
-			if($minify) {
-				if($type == 'javascript') {
-					require_once (dirname(__FILE__) . DS . 'jsmin.php');
-
-					$content = trim(JSMin::minify($content));
-				}
-
-				if($type == 'css') {
-					$content = $this->cssMin($content);
-				}
-			}
-			// Stream uncompressed content
-			die($content);
+			header("Content-Encoding: " . $encoding);
+			$content = gzencode($content, 9, FORCE_GZIP);
 		}
+		
+		// stream to client
+		die($content);
+	}
+
+	function jsmin($data) 
+	{		
+		return $data;
 	}
 	
 	/**
@@ -214,6 +212,10 @@ class WFPacker extends JObject
 
 					// process urls
 					$text = preg_replace_callback('#url\s?\([\'"]?([^\'"\))]+)[\'"]?\)#', array('WFPacker', 'processPaths'), $text);
+				}
+				// make sure text ends in a semi-colon;
+				if ($this->getType() == 'javascript') {
+					$text = rtrim($text, ';') . ';';
 				}
 
 				return $text;

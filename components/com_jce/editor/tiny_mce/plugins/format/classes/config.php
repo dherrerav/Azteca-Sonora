@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: config.php 71 2011-02-20 14:01:27Z happy_noodle_boy $
+ * @version		$Id: config.php 221 2011-06-11 17:30:33Z happy_noodle_boy $
  * @package     JCE
  * @copyright   Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
  * @author		Ryan Demmer
@@ -23,55 +23,55 @@ class WFFormatPluginConfig
         }
 
         // Encoding
-        $settings['entity_encoding'] 	= $wf->getParam('editor.entity_encoding', 'raw', 'named');
-        $settings['inline_styles'] 		= $wf->getParam('editor.inline_styles', 1, 1);
+        $settings['entity_encoding'] 		= $wf->getParam('editor.entity_encoding', 'raw', 'named');
+        $settings['inline_styles'] 			= $wf->getParam('editor.inline_styles', 1, 1, 'boolean');
         
         // Paragraph handling
-        $settings['forced_root_block'] 	= $wf->getParam('editor.forced_root_block', 'p', 'p');
+        $settings['forced_root_block'] 		= $wf->getParam('editor.forced_root_block', 'p', 'p');
+		$settings['removeformat_selector'] 	= $wf->getParam('editor.removeformat_selector', 'span,b,strong,em,i,font,u,strike', 'span,b,strong,em,i,font,u,strike');
         
         $formats = array(
-        	'advanced.paragraph' 	=> 'p',
-			'advanced.address' 		=> 'address',
-			'advanced.pre' 			=> 'pre',
-			'advanced.h1' 			=> 'h1',
-			'advanced.h2' 			=> 'h2',
-			'advanced.h3' 			=> 'h3',
-			'advanced.h4' 			=> 'h4',
-			'advanced.h5' 			=> 'h5',
-			'advanced.h6' 			=> 'h6',
-			'advanced.div'			=> 'div',
-			'advanced.blockquote' 	=> 'blockquote',
-			'advanced.code' 		=> 'code',
-			'advanced.dt' 			=> 'dt',
-			'advanced.dd' 			=> 'dd',
-			'advanced.samp' 		=> 'samp',
-			'advanced.span' 		=> 'span'
+        	'p' 			=> 'advanced.paragraph',
+			'address' 		=> 'advanced.address',
+			'pre' 			=> 'advanced.pre',
+			'h1' 			=> 'advanced.h1',
+			'h2' 			=> 'advanced.h2',
+			'h3' 			=> 'advanced.h3',
+			'h4' 			=> 'advanced.h4',
+			'h5' 			=> 'advanced.h5',
+			'h6' 			=> 'advanced.h6',
+			'div' 			=> 'advanced.div',
+			'blockquote' 	=> 'advanced.blockquote',
+			'code' 			=> 'advanced.code',
+			'dt' 			=> 'advanced.dt',
+			'dd' 			=> 'advanced.dd',
+			'samp' 			=> 'advanced.samp',
+			'span' 			=> 'advanced.span'
         );
         
-        $blocks = $wf->getParam('editor.theme_advanced_blockformats', 'p,div,address,pre,h1,h2,h3,h4,h5,h6,code,samp,span', 'p,address,pre,h1,h2,h3,h4,h5,h6');
-        
-        $list = array();
-        
-        foreach($formats as $k => $v) {
-        	if (in_array($v, explode(',', $blocks))) {
-        		$list[$k] = $v; 
-        	}
-        }
+        $tmpblocks 	= $wf->getParam('editor.theme_advanced_blockformats', 'p,div,address,pre,h1,h2,h3,h4,h5,h6,code,samp,span', 'p,address,pre,h1,h2,h3,h4,h5,h6');
+		$list 		= array();
+		$blocks 	= array();
+
+		if (is_string($tmpblocks)) {
+			$tmpblocks = explode(',', $tmpblocks);	
+		}
 		
-		// Format list / Remove Format
-		$settings['theme_advanced_blockformats'] = json_encode($list);
-
-        $settings['removeformat_selector'] = $wf->getParam('editor.removeformat_selector', 'span,b,strong,em,i,font,u,strike', 'span,b,strong,em,i,font,u,strike');
-        
-        // add span 'format'
-        $settings['formats'] = "{span : {inline : 'span'}}";
-        
-        $selector = $settings['removeformat_selector'] == '' ? 'span,b,strong,em,i,font,u,strike' : $settings['removeformat_selector'];
-
+		foreach ($tmpblocks as $k => $v) {
+			$key = $formats[$v];
+			
+			if ($key) {
+				$list[$key] = $v;
+			}
+			
+			$blocks[] = $v;
+		}		
+		
+		$selector 	= $settings['removeformat_selector'] == '' ? 'span,b,strong,em,i,font,u,strike' : $settings['removeformat_selector'];
         $selector 	= explode(',', $selector);
-        $blocks 	= explode(',', $blocks);
         
-        $rootblock 	= ($settings['forced_root_block'] === '') ? 'p' : $settings['forced_root_block'];
+		// set the root block
+        $rootblock 	= (!$settings['forced_root_block']) ? 'p' : $settings['forced_root_block'];
 
         if ($k = array_search($rootblock, $blocks) !== false) {
         	unset($blocks[$k]);
@@ -79,16 +79,24 @@ class WFFormatPluginConfig
 
         // remove format selector
         $settings['removeformat_selector'] = implode(',', array_unique(array_merge($blocks, $selector)));
+		
+		// Format list / Remove Format
+		$settings['theme_advanced_blockformats'] = json_encode($list);
         
+        // add span 'format'
+        $settings['formats'] = "{span : {inline : 'span'}}";
+
         // new lines (paragraphs or linebreaks)
-        $newlines = $wf->getParam('editor.newlines', 0);
-        $settings['force_br_newlines'] 	= $newlines == 1 ? 1 : 0;
-        $settings['force_p_newlines'] 	= $newlines == 0 ? 1 : 0;
-        
+		if ($wf->getParam('editor.newlines', 0)) {
+			$settings['force_br_newlines'] 	= true;
+        	$settings['force_p_newlines'] 	= false;			
+			$settings['forced_root_block']	= false;
+		}
+
         // Relative urls
-        $settings['relative_urls'] = $wf->getParam('editor.relative_urls', 1, 1);
+        $settings['relative_urls'] = $wf->getParam('editor.relative_urls', 1, 1, 'boolean');
         if ($settings['relative_urls'] == 0) {
-            $settings['remove_script_host'] = 0;
+            $settings['remove_script_host'] = false;
         }
         
         // Fonts

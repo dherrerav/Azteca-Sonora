@@ -1,22 +1,19 @@
 <?php
 /**
- * @version   $Id: installer.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
- * @package   JCE
- * @copyright Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright Copyright © 2005 - 2007 Open Source Matters. All rights reserved.
- * @license   GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @package   	JCE
+ * @copyright 	Copyright � 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// Do not allow direct access
 defined('_JEXEC') or die('RESTRICTED');
 
 class WFInstaller extends JObject
 {
-    var $version = '2.0.0beta7';
+    var $version = '2.0.20';
     /**
      * @var Boolean Profiles table exists
      */
@@ -47,7 +44,7 @@ class WFInstaller extends JObject
      * @return  WF_The editor object.
      * @since 1.5
      */
-    function &getInstance()
+    public static function &getInstance()
     {
         static $instance;
         
@@ -59,7 +56,7 @@ class WFInstaller extends JObject
     /**
      * Check upgrade / database status
      */
-    function initCheck()
+    function check()
     {
         $this->profiles = $this->checkTable('#__wf_profiles');
         
@@ -75,22 +72,13 @@ class WFInstaller extends JObject
         if (!$this->profiles) {
             return $this->redirect();
         }
+		
         // Check Editor is installed
-        if (!$this->checkEditorFiles()) {
-            return $this->redirect(WFText::_('WF_EDITOR_FILES_ERROR'), 'error');
-        }
-        if (!$this->checkEditor() && $this->checkEditorFiles()) {
+        if (!$this->checkEditor()) {
             $link = JHTML::link('index.php?option=com_jce&amp;task=repair&amp;type=editor', WFText::_('WF_EDITOR_INSTALL'));
             return $this->redirect(WFText::_('WF_EDITOR_INSTALLED_MANUAL_ERROR') . ' - ' . $link, 'error');
         }
-        // Check Editor is installed
-        if (!$this->checkEditor()) {
-            return $this->redirect(WFText::_('WF_EDITOR_INSTALLED_ERROR'), 'error');
-        }
-        // Check Editor version
-        if (!$this->checkEditorVersion()) {
-            return $this->redirect();
-        }
+		
         // Check Editor is enabled
         if (!$this->checkEditorEnabled()) {
             return $this->redirect(WFText::_('WF_EDITOR_ENABLED_ERROR'), 'error');
@@ -158,6 +146,53 @@ class WFInstaller extends JObject
 		wfimport('admin.helpers.xml');
         
        	$base = dirname(dirname(__FILE__));
+		
+		// remove old jQuery and jQuery UI versions
+		if (version_compare($version, '2.0.20', '<')) {
+			$path 	= JPATH_SITE . DS . 'components' . DS . 'com_jce' . DS . 'editor' . DS . 'libraries' . DS . 'js' . DS . 'jquery';	
+			$files 	= JFolder::files($path, '\.js', false, false, array('jquery-1.7.1.min.js', 'jquery-ui-1.8.17.custom.min.js', 'jquery-ui-layout.js'));
+
+			foreach($files as $file) {
+				if (is_file($path . DS . $file)) {
+					@JFile::delete($path . DS . $file);
+				}
+			}
+		}
+		
+		// cleanup javascript and css files moved to site
+		if (version_compare($version, '2.0.10', '<')) {
+       		$path 		= dirname(dirname(__FILE__)) . DS . 'media';	
+				
+       		$scripts 	= array('colorpicker.js', 'help.js', 'html5.js', 'select.js', 'tips.js');	
+			
+			foreach($scripts as $script) {
+				if (is_file($path . DS . 'js' . DS . $script)) {
+					@JFile::delete($path . DS . 'js' . DS . $script);
+				}
+			}
+			
+			if (is_dir($path . DS . 'js' . DS . 'jquery')) {
+				@JFolder::delete($path . DS . 'js' . DS . 'jquery');
+			}
+					
+			$styles 	= array('help.css', 'select.css', 'tips.css');
+			
+			foreach($styles as $style) {
+				if (is_file($path . DS . 'css' . DS . $style)) {
+					@JFile::delete($path . DS . 'css' . DS . $style);
+				}
+			}
+			
+			// delete jquery
+			if (is_dir($path . DS . 'css' . DS . 'jquery')) {
+				@JFolder::delete($path . DS . 'css' . DS . 'jquery');
+			}
+			
+			// remove popup controller
+			if (is_dir(JPATH_SITE . DS . 'components' . DS . 'com_jce' . DS . 'controller')) {
+				@JFolder::delete(JPATH_SITE . DS . 'components' . DS . 'com_jce' . DS . 'controller');
+			}
+       	}
        	
        	if (version_compare($version, '2.0.0beta2', '<')) {
        		if ($this->checkTable('#__jce_profiles')) {
@@ -206,9 +241,18 @@ class WFInstaller extends JObject
                 $db->setQuery($query);
                 $plugins = $db->loadAssocList('id');
                 
+                $map = array(
+                	'advlink' 		=> 'link',
+                	'advcode' 		=> 'source',
+                	'tablecontrols' => 'table',
+                	'styleprops'	=> 'style'
+                );
+                
                 if ($this->createProfilesTable()) {
                     foreach ($groups as $group) {
                         $row = JTable::getInstance('profiles', 'WFTable');
+						
+						$rows = array();
 						
 						// transfer row ids to names
                         foreach (explode(';', $group->rows) as $item) {
@@ -216,26 +260,41 @@ class WFInstaller extends JObject
                             foreach (explode(',', $item) as $id) {
                                 // spacer
                                 if ($id == '00') {
-                                    $icons[] = 'spacer';
+                                    $icon = 'spacer';
                                 } else {
                                     if (isset($plugins[$id])) {
-                                        $icons[] = $plugins[$id]['icon'];
+                                        $icon = $plugins[$id]['icon'];
+                                        
+                                        // map old icon names to new
+                                        if (isset($map[$icon])) {
+                                        	$icon = $map[$icon];
+                                        }
                                     }
                                 }
+								$icons[] = $icon;
                             }
-                            $rows[] = implode(',', $icons);
+
+                            $rows[] = str_replace(array('cite,abbr,acronym,del,ins,attribs', 'search,replace', 'ltr,rtl', 'readmore,pagebreak', 'cut,copy,paste'), array('xhtmlxtras', 'searchreplace', 'directionality', 'article', 'paste'), implode(',', $icons));
                         }
-                        
-                        $group->rows = implode(';', $rows);
+                        // re-assign rows
+                        $row->rows = implode(';', $rows);
                         
                         $names = array();
                         // transfer plugin ids to names
                         foreach (explode(',', $group->plugins) as $id) {
                             if (isset($plugins[$id])) {
-                                $items[] = $plugins[$id]['name'];
+                                $name = $plugins[$id]['name'];
+                                
+                                // map old icon names to new
+                                if (isset($map[$name])) {
+                                    $name = $map[$name];
+                                }
+                                
+                                $names[] = $name;
                             }
                         }
-                        $group->plugins = implode(',', $names);
+						 // re-assign plugins
+                        $row->plugins = implode(',', $names);
 						
 						// convert params to JSON
                         $params = WFParameterHelper::toObject($group->params);
@@ -244,36 +303,60 @@ class WFInstaller extends JObject
                         foreach($params as $key => $value) {
                         	$parts 	= explode('_', $key);
 
-							$node = array_shift($parts);	
-							
+							$node 	= array_shift($parts);
+
 							// special consideration for imgmanager_ext!!
 							if (strpos($key, 'imgmanager_ext_') !== false) {
 								$node = $node . '_' . array_shift($parts);
 							}
 							
-							// convert some keys
-							if ($key == 'advlink') {
-								$key = 'link';
+							// convert some nodes
+							if (isset($map[$node])) {
+								$node = $map[$node];
 							}
 
                         	$key = implode('_', $parts);
-                        	
+
                         	if ($value !== '') {
-	                        	if (isset($data->$node) && is_object($data->$node)) {
-	                        		$data->$node->$key = $value;
-	                        	} else {
+	                        	if (!isset($data->$node) || !is_object($data->$node)) {
 	                        		$data->$node = new StdClass();
-									$this->log(json_encode(array($node, $key, $value)));
-	                        		$data->$node->$key = $value;
 	                        	}
+	                        	// convert Link parameters
+	                        	if ($node == 'link' && $key != 'target') {
+                        			$sub = $key;
+                        			$key = 'links';
+                        			
+                        			if (!isset($data->$node->$key)) {
+                        				$data->$node->$key = new StdClass();	
+                        			}
+                        			
+                        			if (preg_match('#^(content|contacts|static|weblinks|menu)$#', $sub)) {
+										if (!isset($data->$node->$key->joomlalinks)) {
+                        					$data->$node->$key->joomlalinks = new StdClass();
+                        					$data->$node->$key->joomlalinks->enable = 1;
+                        				}
+                        				$data->$node->$key->joomlalinks->$sub = $value;
+                        			} else {
+                        				$data->$node->$key->$sub = new StdClass();
+                        				$data->$node->$key->$sub->enable = 1;
+                        			}
+                        		} else {
+                        			$data->$node->$key = $value;
+                        		}
                         	}
                         }
-                        
-                        $group->params = json_encode($data);
-                        
-                        // bind data
-                        $row->bind($group);
-                        
+                        // re-assign params
+                        $row->params = json_encode($data);
+						
+						// re-assign other values
+						$row->name 			= $group->name;
+						$row->description 	= $group->description;
+						$row->users 		= $group->users;
+						$row->types 		= $group->types;
+						$row->components 	= $group->components;
+						$row->published 	= $group->published;
+						$row->ordering 		= $group->ordering;
+
 						// add area data
                         if ($row->name == 'Default') {
                             $row->area = 0;
@@ -282,16 +365,36 @@ class WFInstaller extends JObject
                         if ($row->name == 'Front End') {
                             $row->area = 1;
                         }
-
-                        if (!$row->store()) {
+						
+						if ($this->checkTable('#__wf_profiles')) {
+                        	$name = $row->name;
+                        
+                        	// check for existing profile
+	                		$query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
+	                		$db->setQuery($query);
+	                		// create name copy if exists
+	                		while ($db->loadResult()) {
+	                    		$name = JText::sprintf('WF_PROFILES_COPY_OF', $name);
+	                    
+	                    		$query = 'SELECT id FROM #__wf_profiles' . ' WHERE name = ' . $db->Quote($name);
+	                    
+	                    		$db->setQuery($query);
+	                		}
+	                		// set name
+	                		$row->name = $name;
+                        }
+                        	
+                    	if (!$row->store()) {
                         	$mainframe->enqueueMessage('Conversion of group data failed : ' . $row->name, 'error');
                     	}
+						
+						unset($row);
                     }
                     
                     // Drop tables
                     $query = 'DROP TABLE IF EXISTS #__jce_groups';
                     $db->setQuery($query);
-                    $db->query();
+                   	$db->query();
                     
                     // If profiles table empty due to error, install profiles data
                     if (!$this->checkTableContents('#__wf_profiles')) {
@@ -309,7 +412,7 @@ class WFInstaller extends JObject
             // Drop tables
             $query = 'DROP TABLE IF EXISTS #__jce_plugins';
             $db->setQuery($query);
-            $db->query();
+           	$db->query();
             
             // Drop tables
             $query = 'DROP TABLE IF EXISTS #__jce_extensions';
@@ -353,6 +456,28 @@ class WFInstaller extends JObject
                     }
                 }
             }
+			
+			$folders = JFolder::folders(JPATH_ADMINISTRATOR . DS . 'language', '.', false, true, array('.svn', 'CVS', 'en-GB'));
+			
+			// remove old admin language files
+			foreach($folders as $folder) {
+				$name = basename($folder);
+				$files = array($name . '.com_jce.ini', $name . '.com_jce.menu.ini', $name . '.com_jce.xml');
+				foreach($files as $file) {
+					if (is_file($folder . DS . $file)) {
+						@JFile::delete($folder . DS . $file);
+					}
+				}
+			}
+
+			$folders = JFolder::folders(JPATH_SITE . DS . 'language', '.', false, true, array('.svn', 'CVS', 'en-GB'));
+			
+			// remove old site language files
+			foreach($folders as $folder) {
+				$files 	= JFolder::files($folder, '^' . basename($folder) . '\.com_jce([_a-z0-9]+)?\.(ini|xml)$', false, true);				
+				@JFile::delete($files);
+			}
+			
         } // end JCE 1.5 upgrade
         
         return true;
@@ -460,7 +585,7 @@ class WFInstaller extends JObject
             if (is_dir($editor) && is_file($editor . DS . 'jce.php') && is_file($editor . DS . 'jce.xml')) {	
             	$xml = JApplicationHelper::parseXMLInstallFile($editor . DS . 'jce.xml');
                     
-                if ($result = $this->installEditor($editor)) {
+                if ($result = $this->installEditor($editor, true)) {
                 	$message .= $result;
                 } else {
                     $message .= '<tr><td>' . WFText::_('WF_EDITOR_TITLE') . '</td><td>' . $xml['version'] . '</td><td class="title" style="text-align:center;">' . JHTML::image(JURI::root() . 'administrator/components/com_jce/media/img/error.png', WFText::_('WF_LABEL_ERROR')) . '</td></tr>';
@@ -522,8 +647,8 @@ class WFInstaller extends JObject
     function uninstall()
     {
 		// remove profiles table if empty		
-		if (!$this->checkTableContents('wf_profiles')) {
-			$this->removeTable('wf_profiles');
+		if (!$this->checkTableContents('#__wf_profiles')) {
+			$this->removeTable('#__wf_profiles');
 		}
 			
         $this->removeEditor();
@@ -653,10 +778,10 @@ class WFInstaller extends JObject
 		if (!empty($tables)) {
 			// swap array values with keys, convert to lowercase and return array keys as values
 			$tables = array_keys(array_change_key_case(array_flip($tables)));
-			// convert prefix to lowercase
-			$prefix = strtolower($db->replacePrefix($table));
+			$app	= JFactory::getApplication();
+			$match 	= str_replace('#__', strtolower($app->getCfg('dbprefix', '')), $table);
 			
-			return in_array($prefix, $tables);
+			return in_array($match, $tables);
 		}
 		
 		// try with query
@@ -709,19 +834,15 @@ class WFInstaller extends JObject
             'profiles'
         );
         
-        $list = $db->getTableList();
-        
         foreach ($tables as $table) {
-            if (in_array($db->replacePrefix('#__jce_' . $table), $list)) {
-                if (!$this->removeTable($table)) {
-                    $msg   = JText::sprintf('WF_DB_REMOVE_ERROR', ucfirst($table));
-                    $state = 'error';
-                } else {
-                    $msg   = JText::sprintf('WF_DB_REMOVE_SUCCESS', ucfirst($table));
-                    $state = '';
-                }
-                $mainframe->enqueueMessage($msg, $state);
+        	if (!$this->removeTable($table)) {
+            	$msg   = JText::sprintf('WF_DB_REMOVE_ERROR', ucfirst($table));
+                $state = 'error';
+            } else {
+                $msg   = JText::sprintf('WF_DB_REMOVE_SUCCESS', ucfirst($table));
+                $state = '';
             }
+            $mainframe->enqueueMessage($msg, $state);
         }
         if (!$uninstall) {
             $mainframe->redirect('index.php?option=com_jce');
@@ -822,7 +943,7 @@ class WFInstaller extends JObject
                 $version = $xml['version'];
                 
                 // Development version
-                if (strpos($this->version, '2.0.0beta7') !== false || strpos($version, '2.0.0beta7') !== false) {
+                if (strpos($this->version, '2.0.20') !== false || strpos($version, '2.0.20') !== false) {
                     return true;
                 }
                 
@@ -932,8 +1053,10 @@ class WFInstaller extends JObject
      * @return Array or false
      * @param object $path[optional] Path to package folder
      */
-    function installEditor($source)
+    function installEditor($source, $install = false)
     {
+        jimport('joomla.installer.installer');	
+			
         $mainframe = JFactory::getApplication();
         
         $db = JFactory::getDBO();
@@ -953,14 +1076,26 @@ class WFInstaller extends JObject
         $installer = new JInstaller();
         
         if ($installer->install($source)) {
-            $language = JFactory::getLanguage();
-            $language->load('plg_editors_jce', JPATH_ADMINISTRATOR);
-            
-            $result = '<tr><td>' . WFText::_('WF_EDITOR_TITLE') . '</td><td>' . $version . '</td><td class="title" style="text-align:center;">' . JHTML::image(JURI::root() . 'administrator/components/com_jce/media/img/tick.png', WFText::_('WF_ADMIN_SUCCESS')) . '</td></tr>';
-            
-            if ($installer->message) {
-                $result .= '<tr><td colspan="3">' . WFText::_($installer->message, $installer->message) . '</td></tr>';
+            if ($install) {
+            	$language = JFactory::getLanguage();
+	            $language->load('plg_editors_jce', JPATH_ADMINISTRATOR);
+	            
+	            $result = '<tr><td>' . WFText::_('WF_EDITOR_TITLE') . '</td><td>' . $version . '</td><td class="title" style="text-align:center;">' . JHTML::image(JURI::root() . 'administrator/components/com_jce/media/img/tick.png', WFText::_('WF_ADMIN_SUCCESS')) . '</td></tr>';
+	            
+	            if ($installer->message) {
+	                $result .= '<tr><td colspan="3">' . WFText::_($installer->message, $installer->message) . '</td></tr>';
+	            }
+            } else {
+            	$mainframe->enqueueMessage(WFText::_('WF_EDITOR_INSTALL_SUCCESS'));
             }
+        } else {
+        	if (!$install) {
+        		$mainframe->enqueueMessage(WFText::_('WF_EDITOR_INSTALL_FAILED'));
+        	}
+        }
+		
+		if (!$install) {
+            $mainframe->redirect('index.php?option=com_jce');
         }
 		
         return $result;

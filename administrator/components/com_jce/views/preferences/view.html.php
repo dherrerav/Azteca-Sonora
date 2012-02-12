@@ -1,18 +1,15 @@
 <?php
 /**
- * @version		$Id: view.html.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die('RESTRICTED');
 
 jimport('joomla.application.component.view');
 
@@ -30,6 +27,7 @@ class WFViewPreferences extends JView
         $db =JFactory::getDBO();
 
         $client = JRequest::getWord('client', 'admin');
+		$model = $this->getModel();
         
         $this->document->setTitle(WFText::_('WF_PREFERENCES_TITLE'));		
 		$this->document->addStyleSheet('templates/system/css/system.css');
@@ -41,16 +39,16 @@ class WFViewPreferences extends JView
         $params = new WFParameter($component->params, $xml, 'preferences');
         $params->addElementPath(JPATH_COMPONENT.DS.'elements');
         
-        $this->assignRef('params', $params);
+        if ($model->authorize('admin')) {
+        	$form = $model->getForm('permissions');
+        } else {
+        	$form = null;
+        }
 
-		$model = $this->getModel();	
-							
-		//$access = $model->getAccessRules();	
-		//$this->assignRef('access', $access);
-		
-		$this->assign('access', null);
-        
-		$this->document->addScript('components/com_jce/media/js/preferences.js');
+        $this->assignRef('params', $params);		
+		$this->assignRef('permissons', $form);
+
+		$this->document->addScript('components/com_jce/media/js/preferences.js?version=' . $model->getVersion());
 		
         if (JRequest::getInt('close') == 1) {
         	$this->document->addScriptDeclaration('jQuery(document).ready(function($){$.jce.Preferences.close();});');

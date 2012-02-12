@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <install version="1.5.0" type="plugin" plugin="browser" core="1" editable="1">
 	<name>WF_BROWSER_TITLE</name>
-	<version>2.0.0beta7</version>
-	<creationDate>12 May 2011</creationDate>
+	<version>2.0.20</version>
+	<creationDate>20 January 2012</creationDate>
 	<author>Ryan Demmer</author>
 	<authorEmail>info@joomlacontenteditor.net</authorEmail>
 	<authorUrl>http://www.joomlacontenteditor.net/</authorUrl>
@@ -15,7 +15,7 @@
         <param name="dir" type="text" default="" size="50" label="WF_PARAM_DIRECTORY" description="WF_PARAM_DIRECTORY_DESC"/>
 		<param name="max_size" class="upload_size" max="" type="text" default="" label="WF_PARAM_UPLOAD_SIZE" description="WF_PARAM_UPLOAD_SIZE_DESC" placeholder="" />
 		<param name="extensions" type="extension" class="extensions create" default="xml=xml;html=htm,html;office=doc,docx,ppt,xls;text=txt,rtf;image=gif,jpeg,jpg,png;acrobat=pdf;archive=zip,tar,gz,rar;flash=swf;quicktime=mov,mp4,qt;windowsmedia=wmv,asx,asf,avi;audio=wav,mp3,aiff;openoffice=odt,odg,odp,ods,odf" label="WF_PARAM_EXTENSIONS" description="WF_PARAM_EXTENSIONS_DESC" />
-	   <param name="filesystem" type="filesystem" default="" label="WF_PARAM_FILESYSTEM" description="WF_PARAM_FILESYSTEM_DESC" />
+	   	<param name="name" type="filesystem" group="filesystem" default="" label="WF_PARAM_FILESYSTEM" description="WF_PARAM_FILESYSTEM_DESC" />
 	</params>
 	<params group="access">
         <param name="upload" type="list" default="1" label="WF_PARAM_UPLOAD" description="WF_PARAM_UPLOAD_DESC">
@@ -31,6 +31,10 @@
             <option value="0">WF_OPTION_NO</option>
 		</param>
 		<param name="folder_rename" type="list" default="1" label="WF_PARAM_FOLDER_RENAME" description="WF_PARAM_FOLDER_RENAME_DESC">
+            <option value="1">WF_OPTION_YES</option>
+            <option value="0">WF_OPTION_NO</option>
+		</param>
+		<param name="folder_move" type="list" default="1" label="WF_PARAM_FOLDER_PASTE" description="WF_PARAM_FOLDER_PASTE_DESC">
             <option value="1">WF_OPTION_YES</option>
             <option value="0">WF_OPTION_NO</option>
 		</param>

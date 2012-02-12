@@ -1,16 +1,16 @@
 <?php
 /**
-* $Id: file.php 55 2011-02-13 16:16:19Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-defined('WF_EDITOR') or die('ERROR_403');
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+defined('WF_EDITOR') or die('RESTRICTED');
+
 ?> 
 <!DOCTYPE HTML> 
 <html lang="<?php echo $this->language;?>" dir="<?php echo $this->direction;?>">
@@ -19,7 +19,7 @@ defined('WF_EDITOR') or die('ERROR_403');
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!-- [head] -->
 	</head>
-	<body lang="<?php echo $this->language;?>" id="jce" class="ui-jce">
+	<body lang="<?php echo $this->language;?>" id="jce" class="ui-jce" data-plugin="<?php echo $this->getName();?>">
 		<!-- [body] -->
 	</body>
 </html>

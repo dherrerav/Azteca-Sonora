@@ -1,9 +1,8 @@
 /**
-* @version		$Id: cpanel.css 131 2011-04-01 16:26:21Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
@@ -22,12 +21,16 @@ ul#cpanel li.cpanel-icon {
     height:100px;
     display: block;
     float: left;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    text-shadow: 0 1px 0 #FFFFFF;
     -moz-box-shadow: 0.5pt 0.5pt 0.8pt #cccccc;
     -webkit-box-shadow: 1px 1px 1px #cccccc;
     box-shadow: 1px 1px 1px #cccccc;
-    padding: 1px;
+    padding: 5px;
 }
+html[dir="rtl"] ul#cpanel li.cpanel-icon {
+	float: right;
+}
+
 ul#cpanel li.cpanel-icon span {
     background: url('../img/cpanel.png') no-repeat 0 0;
     display: block;

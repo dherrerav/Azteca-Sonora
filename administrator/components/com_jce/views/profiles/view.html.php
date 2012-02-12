@@ -1,17 +1,15 @@
 <?php
 /**
- * @version   	$Id: view.html.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
  * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die('RESTRICTED');
 
 jimport('joomla.application.component.view');
 
@@ -19,7 +17,7 @@ class WFViewProfiles extends JView
 {	
 	function display($tpl = null)
     {
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
         
         $db = JFactory::getDBO();
         $user = JFactory::getUser();
@@ -42,16 +40,14 @@ class WFViewProfiles extends JView
             case 'remove':
             case 'save':
             case 'copy':
-                $filter_order     = $mainframe->getUserStateFromRequest("$client.$option.$view.$task.filter_order", 'filter_order', 'p.name', 'cmd');
-                $filter_order_Dir = $mainframe->getUserStateFromRequest("$client.$option.$view.$task.filter_order_Dir", 'filter_order_Dir', '', 'word');
-                $filter_state     = $mainframe->getUserStateFromRequest("$client.$option.$view.$task.filter_state", 'filter_state', '', 'word');
-                $search           = $mainframe->getUserStateFromRequest("$client.$option.$view.$task.search", 'search', '', 'string');
-                $search           = JString::strtolower($search);
+                $filter_order     	= $app->getUserStateFromRequest("$option.$view.filter_order", 'filter_order', 'p.ordering', 'cmd');
+                $filter_order_Dir 	= $app->getUserStateFromRequest("$option.$view.filter_order_Dir", 'filter_order_Dir', '', 'word');
+                $filter_state     	= $app->getUserStateFromRequest("$option.$view.filter_state", 'filter_state', '', 'word');
+                $search           	= $app->getUserStateFromRequest("$option.$view.search", 'search', '', 'string');
+                $search          	 = JString::strtolower($search);
                 
-                $limit      = $mainframe->getUserStateFromRequest('global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int');
-                $limitstart = $mainframe->getUserStateFromRequest("$client.$option.$view.$task.limitstart", 'limitstart', 0, 'int');
-                
-                //$limitstart = isset( $limitstart->group ) ? $limitstart->group : 0;
+                $limit				= $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'), 'int' );
+				$limitstart 		= $app->getUserStateFromRequest("$option.$view.limitstart", 'limitstart', 0, 'int' );
                 
                 $where = array();
                 
@@ -66,7 +62,7 @@ class WFViewProfiles extends JView
                     }
                 }
                 $where   = (count($where) ? ' WHERE ' . implode(' AND ', $where) : '');
-                $orderby = ' ORDER BY p.ordering ASC';
+                $orderby = ' ORDER BY '. $filter_order .' '. $filter_order_Dir;
                 
                 // get the total number of records
                 $query = 'SELECT COUNT(p.id)' . ' FROM #__wf_profiles AS p' . $where;
@@ -91,7 +87,7 @@ class WFViewProfiles extends JView
                 // search filter
                 $lists['search'] = $search;
                 
-                $this->assignRef('user', JFactory::getUser());
+                $this->assignRef('user', $user);
                 $this->assignRef('lists', $lists);
                 $this->assignRef('rows', $rows);
                 $this->assignRef('pagination', $pagination);
@@ -101,8 +97,8 @@ class WFViewProfiles extends JView
                 WFToolbarHelper::editListX();
                 WFToolbarHelper::addNewX();
                 WFToolbarHelper::custom('copy', 'copy.png', 'copy_f2.png', WFText::_('WF_PROFILES_COPY'), true);
-                WFToolbarHelper::custom('export', 'export.png', 'export_f2.png', WFText::_('WF_PROFILES_EXPORT'), true);
-                
+                WFToolbarHelper::export();
+  
                 if (count($rows) > 1) {
                     WFToolbarHelper::publishList();
                     WFToolbarHelper::unpublishList();
@@ -110,21 +106,17 @@ class WFViewProfiles extends JView
                 }
                 WFToolbarHelper::help('profiles.about');
                 
-                $options = array(
-                    'extensions' => array(
-                        'xml'
-                    ),					
-                    'button' => 'upload_button',
-                    'task' => 'import',
-                    'labels' => array(
+                $options = array(					
+                    'button' 	=> 'upload_button',
+                    'task' 		=> 'import',
+                    'labels' 	=> array(
                         'browse' => WFText::_('WF_LABEL_BROWSE'),
                         'alert' => WFText::_('WF_PROFILES_IMPORT_BROWSE_ERROR')
                     )
                 );
-                
-                $this->document->addScript('components/com_jce/media/js/profiles.js');
-                $this->document->addScript('components/com_jce/media/js/uploads.js');
-                $this->document->addScriptDeclaration('jQuery(document).ready(function($){$.jce.Profiles.initList();$.jce.Uploads.init(' . json_encode($options) . ')});');
+
+                $this->document->addScript(JURI::root(true) . '/administrator/components/com_jce/media/js/uploads.js?version=' . $model->getVersion());
+                $this->document->addScriptDeclaration('jQuery(document).ready(function($){$(":file").upload(' . json_encode($options) . ')});');
                 
                 $this->setLayout('default');
                 break;
@@ -134,16 +126,17 @@ class WFViewProfiles extends JView
                 // Load media   
                 $scripts = array(
                     'profiles.js',
-                    'select.js',
-                    'colorpicker.js',
                     'extensions.js',
                     'checklist.js',
                 	'parameter.js'
                 );
                 // Load scripts
                 foreach ($scripts as $script) {
-                    $this->document->addScript('components/com_jce/media/js/' . $script);
+                    $this->document->addScript(JURI::root(true) . '/administrator/components/com_jce/media/js/' . $script . '?version=' . $model->getVersion());
                 }
+
+				$this->document->addScript(JURI::root(true) . '/components/com_jce/editor/libraries/js/colorpicker.js?version=' . $model->getVersion());
+				$this->document->addScript(JURI::root(true) . '/components/com_jce/editor/libraries/js/select.js?version=' . $model->getVersion());
                 
                 $cid = JRequest::getVar('cid', array(
                     0
@@ -221,9 +214,9 @@ class WFViewProfiles extends JView
                 );
                 
                 if (WF_JOOMLA15) {
-                    $query = "SELECT *" . " FROM #__components" . " WHERE link <> ''" . " AND parent = 0" . " AND enabled = 1" . " ORDER BY name";
+                    $query = "SELECT *" . " FROM #__components" . " WHERE parent = 0" . " AND enabled = 1" . " ORDER BY name";
                 } else {
-                    $query = "SELECT *" . " FROM #__extensions" . " WHERE type = " . $db->Quote('component') . " AND enabled = 1" . " ORDER BY name";
+                    $query = "SELECT *" . " FROM #__extensions" . " WHERE type = " . $db->Quote('component') . " AND client_id = 1 AND enabled = 1" . " ORDER BY name";
                 }
                 $db->setQuery($query);
                 $components = $db->loadObjectList();
@@ -334,18 +327,20 @@ class WFViewProfiles extends JView
                 // get width
                 $width = $params->get('editor_width', 600);
                 
-                $groups = $params->getGroups();
+                $groups = $params->getGroups();                
+                $rows 	= $model->getRowArray($row->rows);
                 
                 $this->assign('width', 		$width);
                 $this->assignRef('lists', 	$lists);
                 $this->assignRef('profile', $row);
+                $this->assignRef('rows', 	$rows);
                 $this->assignRef('params', 	$params);
                 $this->assignRef('groups', 	$groups);
                 $this->assignRef('plugins', $plugins);
                 
                 $options = WFToolsHelper::getOptions($params);
                 
-                $this->document->addScriptDeclaration('jQuery(document).ready(function($){$.jce.Profiles.initEdit(' . json_encode($options) . ')});');
+                $this->document->addScriptDeclaration('jQuery(document).ready(function($){$.jce.Profiles.init(' . json_encode($options) . ')});');
                 
                 if ($row->id) {
 					JToolBarHelper::title(WFText::_('WF_ADMINISTRATION') . ' :: ' . WFText::_('WF_PROFILES_EDIT') . ' - [' . $row->name . ']', 'logo.png');

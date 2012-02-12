@@ -1,26 +1,24 @@
 <?php
 /**
- * @version   $Id: extensions.php 55 2011-02-13 16:16:19Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-// no direct access
-defined('_JEXEC') or die('ERROR_403');
+
+defined('_JEXEC') or die('RESTRICTED');
 
 class WFExtension extends JObject
 {
 	/**
 	 * Constructor activating the default information of the class
 	 *
-	 * @access protected
+	 * @access public
 	 */
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 		parent::__construct();
 		
@@ -29,16 +27,15 @@ class WFExtension extends JObject
 	}
 	 
 	/**
-	 * Returns a reference to a plugin object
+	 * Returns a reference to a WFExtension object
 	 *
 	 * This method must be invoked as:
-	 *    <pre>  $advlink =AdvLink::getInstance();</pre>
+	 *    <pre>  $extension = WFExtension::getInstance();</pre>
 	 *
 	 * @access  public
-	 * @return  JCE  The editor object.
-	 * @since 1.5
+	 * @return  object WFExtension
 	 */
-	function &getInstance()
+	public static function getInstance()
 	{
 		static $instance;
 
@@ -48,7 +45,11 @@ class WFExtension extends JObject
 		return $instance;
 	}
 	
-	function display()
+	/**
+	 * Display the extension
+	 * @access $public
+	 */
+	public function display()
 	{
 		$document = WFDocument::getInstance();
 		// Load Extensions Object
@@ -61,9 +62,9 @@ class WFExtension extends JObject
 	 * Load a plugin extension
 	 *
 	 * @access  public
-	 * @since 1.5
+	 * @return 	array
 	 */
-	function getExtensions($config)
+	public static function getExtensions($config)
 	{
 		jimport('joomla.filesystem.folder');
 		jimport('joomla.filesystem.file');
@@ -111,13 +112,15 @@ class WFExtension extends JObject
 		}
 		return $extensions;
 	}
+	
 	/**
 	 * Load & Call an extension
 	 *
 	 * @access  public
-	 * @since 1.5
+	 * @param	array $config
+	 * @return 	mixed
 	 */
-	function loadExtensions($config = array())
+	public static function loadExtensions($config = array())
 	{
 		jimport('joomla.filesystem.folder');
 		jimport('joomla.filesystem.file');
@@ -176,11 +179,11 @@ class WFExtension extends JObject
 
 	/**
 	 * Return a parameter for the current plugin / group
-	 * @param object $param Parameter name
-	 * @param object $default Default value
-	 * @return Parameter value
+	 * @param 	object $param Parameter name
+	 * @param 	object $default Default value
+	 * @return 	string Parameter value
 	 */
-	function getParam($param, $default = '')
+	public function getParam($param, $default = '')
 	{
 		$wf = WFEditorPlugin::getInstance();
 

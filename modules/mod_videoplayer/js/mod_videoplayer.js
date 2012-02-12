@@ -1,8 +1,9 @@
-$(function() {
+jQuery(function($) {
 	var title_holder = $('.mod_videoplayer .video-player .content .title h3 a');
 	var description_holder = $('.mod_videoplayer .video-player .content .description');
 	var sections = $('.mod_videoplayer .video-sections ul.sections li.section, .mod_videoplayer .video-sections ul.sections li.section .title h2 a');
 	var current_section = null;
+	$('.scrollbar').scrollbar();
 	sections.each(function() {
 		$(this).removeClass('active');
 		$(this).click(function(e) {
@@ -32,6 +33,7 @@ $(function() {
 				var anchor = $(this).find('a').first();
 				prepareVideo(anchor, true);
 			});
+			$('.video-playlist .scrollbar').scrollbar();
 		}
 	}
 	function prepareVideo(anchor, play) {
@@ -51,7 +53,6 @@ $(function() {
 		description_holder.html(new_description);
 	}
 	function setVideo(new_id, new_video, new_preview, autoplay) {
-		console.debug(autoplay);
 		if (new_video != 'undefined') {
 			new_id = 'play-' + new_id;
 			var player = $('.mod_videoplayer .video-player .video');

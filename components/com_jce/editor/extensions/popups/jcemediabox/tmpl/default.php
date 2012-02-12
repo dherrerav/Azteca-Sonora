@@ -1,16 +1,15 @@
-<?php 
+<?php
 /**
-* @version		$Id: jcemediabox.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2011 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL 2 or later
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-defined( '_WF_EXT' ) or die( 'Restricted access' );
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+defined( '_WF_EXT' ) or die('RESTRICTED');
 
 $this->popup->checkVersion();
 
@@ -91,12 +90,24 @@ $this->popup->checkVersion();
                 <option value="video/divx"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_DIVX');?></option> 
 				<option value="application/x-director"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_DIRECTOR');?></option>
 				<option value="audio/x-pn-realaudio-plugin"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_REAL');?></option>
-				<option value="application/x-silverlight-2"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_SILVERLIGHT');?></option>         
+				<option value="video/mp4"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_VIDEO_MP4');?></option>   
+				<option value="audio/mp3"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_AUDIO_MP3');?></option>
+				<option value="video/webm"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_VIDEO_WEBM');?></option>
+				<option value="audio/webm"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_AUDIO_WEBM');?></option>      
             </select>
         </td>
 	</tr>
 	<tr>
-		<td><label for="jcemediabox_popup_params" class="hastip" title="<?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_PARAMS_DESC');?>"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_PARAMS');?></label></td>
-		<td><textarea id="jcemediabox_popup_params" rows="5" cols="46"></textarea></td>
+		<td colspan="2">
+			<label for="jcemediabox_popup_params" class="hastip" title="<?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_PARAMS_DESC');?>"><?php echo WFText::_('WF_POPUPS_JCEMEDIABOX_PARAMS');?></label>
+
+			<ul id="jcemediabox_popup_params">
+				<li>
+					<label><?php echo WFText::_('WF_LABEL_NAME');?></label><input type="text" class="name" /><label><?php echo WFText::_('WF_LABEL_VALUE');?></label><input type="text" class="value" />
+					<span class="add" role="button" title="<?php echo WFText::_('WF_LABEL_ADD');?>"></span>
+					<span class="remove" role="button" title="<?php echo WFText::_('WF_LABEL_REMOVE');?>"></span>
+				</li>
+			</ul>
+		</td>
 	</tr>
 </table>

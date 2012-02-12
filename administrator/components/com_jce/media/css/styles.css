@@ -1,9 +1,8 @@
 /**
- * @version		$Id: styles.css 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright � 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
@@ -30,6 +29,7 @@
 #jce fieldset {
     padding: 5px;
 	margin: 5px 0;
+	clear:none;
 }
 #jce input, #jce textarea, #jce select, #jce img, #jce label {
     float: none;
@@ -63,6 +63,11 @@
 }
 #jce legend {
     font-size: 1.1em;
+    font-weight: bold;
+    border: 0 none;
+    margin: auto;
+    padding: 0 5px;
+    width: auto;
 }
 #jce select.inputbox.levels, select.inputbox.users {
     width: 200px;
@@ -119,6 +124,13 @@ div#jce button {
 #jce ul.adminformlist {
     /*display: inline-block;*/
 }
+/* Mission Control resets */
+#jce ul.adminformlist li label {
+	clear: none;
+	float: none;
+	width: auto;
+	padding: 0;
+}
 #jce ul.adminformlist, #jce dl.adminformlist, dl.adminformlist > dd, #jce ul.adminformlist > li {
     list-style: none outside none !important;
     margin: 5px;
@@ -140,22 +152,25 @@ div#jce button {
     float: left;
     clear: both;
     display: inline-block;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     width: 100%;
 }
+html[dir="rtl"] #jce ul.adminformlist > li, 
+html[dir="rtl"] #jce dl.adminformlist > dd {
+	background-position: right;
+}
 #jce ul.adminformlist > li > div {
-	margin-left: 210px;
+	margin-left: 215px;
 }
 #jce ul.adminformlist > li > div h4 {
 	margin-left: 10px;
 }
 #jce ul.adminformlist > li {
-    line-height: 24px;
+    line-height: 30px;
 }
 #jce dl.adminformlist > dd {
     display: block;
@@ -164,7 +179,9 @@ div#jce button {
 #jce dl.adminformlist dd {
     margin: 10px 2px;
 }
-#jce ul.adminformlist > li > label:first-child, #jce ul.adminformlist > li > h4:first-child, #jce ul.adminformlist > li > span:first-child, #jce dl.adminformlist > dd > label:first-child, #jce dl.adminformlist > dd > span:first-child {
+#jce ul.adminformlist > li > label:first-child, #jce ul.adminformlist > li > h4:first-child, 
+#jce ul.adminformlist > li > span:first-child, #jce dl.adminformlist > dd > label:first-child, 
+#jce dl.adminformlist > dd > span:first-child {
     display: inline-block;
     margin: 2px 5px;
     width: 200px;
@@ -172,7 +189,15 @@ div#jce button {
     min-width: 200px;
     padding: 0 0 0 5px;
     vertical-align: top;
-	float: left;
+    line-height: 30px;
+    float: left;
+}
+html[dir="rtl"] #jce ul.adminformlist > li > label:first-child, 
+html[dir="rtl"] #jce ul.adminformlist > li > h4:first-child, 
+html[dir="rtl"] #jce ul.adminformlist > li > span:first-child, 
+html[dir="rtl"] #jce dl.adminformlist > dd > label:first-child, 
+html[dir="rtl"] #jce dl.adminformlist > dd > span:first-child {
+    float: none;
 }
 #jce ul.adminformlist li input, #jce ul.adminformlist li textarea, #jce ul.adminformlist li select, #jce dl.adminformlist dd input, #jce dl.adminformlist dd textarea, #jce dl.adminformlist dd select {
     vertical-align: middle;
@@ -196,10 +221,11 @@ div#jce button {
     margin: 0 !important;
     padding: 0;
     display: inline-block;
+    min-width : 200px;
 }
 #jce ul.widget-checklist li {
     line-height : 20px;
-    min-width : 150px;
+    width: 100%;
     margin: 1px 0;
     padding: 0;
     background-repeat: no-repeat;
@@ -221,6 +247,22 @@ div#jce button {
 #jce ul.widget-checklist li.html5 {
     background-image: url('../img/html5.gif');
 }
+
+#jce ul.widget-checklist li.ui-state-highlight {
+	border: 1px dashed #ccc;
+	height: 22px; 
+}
+/* Formats */
+#jce ul.widget-checklist.sortable li span.widget-checklist-p {}
+#jce ul.widget-checklist.sortable li span.widget-checklist-address {font-style:italic}
+#jce ul.widget-checklist.sortable li span.widget-checklist-pre {font-family:monospace}
+#jce ul.widget-checklist.sortable li span.widget-checklist-h1 {font-weight:bolder; font-size: 1.8em}
+#jce ul.widget-checklist.sortable li span.widget-checklist-h2 {font-weight:bolder; font-size: 1.5em}
+#jce ul.widget-checklist.sortable li span.widget-checklist-h3 {font-weight:bolder; font-size: 1.17em}
+#jce ul.widget-checklist.sortable li span.widget-checklist-h4 {font-weight:bolder; font-size: 1em}
+#jce ul.widget-checklist.sortable li span.widget-checklist-h5 {font-weight:bolder; font-size: .83em}
+#jce ul.widget-checklist.sortable li span.widget-checklist-h6 {font-weight:bolder; font-size: .75em}
+
 #jce ul.widget-checklist.sortable li input {
     cursor: default;
 }
@@ -316,7 +358,7 @@ div#jce button {
     background-color: #F8F8F8;
 }
 #jce table tbody tr:hover {
-    background-color: #dfeffc;
+    background-color: #f4f8fd;
 }
 #jce table#profiles-toolbar tbody tr:hover, #jce table#users-toolbar tbody tr:hover {
     background-color: inherit;
@@ -409,5 +451,27 @@ body.ui-jce .ui-dialog-content.ui-widget-content {
 }
 
 #jce #search {
-	width: 100px;
+	width: 200px;
+}
+
+#toolbar span.icon-32-update span.icon-32-error {
+	background: url('../img/error.png') no-repeat bottom right;
+}
+
+#jce #profiles-toolbar span.upload-container {
+	float: right;
+	display : inline-block;
+	position: relative;
+}
+html[dir="rtl"] #jce #profiles-toolbar span.upload-container {
+	float: left;
+}
+#jce #profiles-toolbar label[for="search"] {
+	margin : 0 5px;
+}
+html[dir="rtl"] div.ui-dialog-buttonset button.ui-button span.ui-button-text {
+	padding: 0.4em 2.1em 0.4em 1em
+}
+html[dir="rtl"] .ui-jce .ui-tabs .ui-tabs-nav li {
+	float: right;
 }

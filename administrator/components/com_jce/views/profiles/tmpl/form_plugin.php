@@ -1,17 +1,15 @@
 <?php
 /**
- * @version   $Id: form_plugin.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
  * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die('RESTRICTED');
 
 $count = 0;
 
@@ -65,9 +63,9 @@ foreach ($this->plugins as $plugin) :
 						$language->load('com_jce_' . $extension->folder . '_' . trim($extension->extension), JPATH_SITE);
 					}
 
-					if (JFile::exists($file)) :			
+					if (JFile::exists($file)) :									
 						// get params for plugin
-						$key 	= $plugin->name . '.' . $extension->extension;
+						$key 	= $plugin->name . '.' . $extension->type . '.' . $extension->extension;
 						$params = new WFParameter($this->profile->params, $file, $key);
 				
 						// add element paths
@@ -80,7 +78,7 @@ foreach ($this->plugins as $plugin) :
 							echo '<fieldset class="adminform panelform"><legend>' . WFText::_($extension->name) . '</legend>';
 							echo '<p>' . WFText::_($extension->description) . '</p>';
 							foreach ($params->getGroups() as $group => $num) :
-								echo $params->render('params[' . $plugin->name . '][' . $group . ']', $group);
+								echo $params->render('params[' . $plugin->name . ']['. $extension->type .'][' . $group . ']', $group);
 							endforeach;
 							echo '</fieldset>';
 						endif;

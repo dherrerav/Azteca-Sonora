@@ -1,17 +1,15 @@
 <?php
 /**
-* @version		$Id: joomla.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
-* @package      JCE
-* @copyright    Copyright (C) 2005 - 2011 Ryan Demmer. All rights reserved.
-* @author		Ryan Demmer
-* @license      GNU/GPL
-* JCE is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-*/
-// no direct access
-defined('_JEXEC') or die('Restricted access');
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+defined('_JEXEC') or die('RESTRICTED');
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -88,8 +86,8 @@ class WFJoomlaFileSystem extends WFFileSystem
 			$wf 	= WFEditorPlugin::getInstance();
 	
 			// Restricted Joomla! folders
-			$restricted = explode(',', $wf->getParam('editor.filesystem.restrict_dir', 'administrator,cache,components,includes,language,libraries,logs,media,modules,plugins,templates,xmlrpc'));
-			$allowroot	= $wf->getParam('editor.filesystem.allow_root', 0);
+			$restricted = explode(',', $wf->getParam('editor.filesystem.joomla.restrict_dir', 'administrator,cache,components,includes,language,libraries,logs,media,modules,plugins,templates,xmlrpc'));
+			$allowroot	= $wf->getParam('editor.filesystem.joomla.allow_root', 0);
 			
 			// Revert to default if empty
 			if (!$root && !$allowroot) {
@@ -132,42 +130,44 @@ class WFJoomlaFileSystem extends WFFileSystem
 	/**
 	 * Count the number of folders in a given folder
 	 * @return integer Total number of folders
-	 * @param string $path Relative path to folder
+	 * @param string $path Absolute path to folder
 	 */
 	public function countFolders($path)
 	{
 		jimport('joomla.filesystem.folder');
 		$total 	= 0;
-		$path 	= WFUtility::makePath($this->getBaseDir(), $path);
+		
+		if (strpos($path, $this->getBaseDir()) === false) {
+			$path = WFUtility::makePath($this->getBaseDir(), $path);
+		}
 		
 		if (JFolder::exists($path)) {
 			$folders = JFolder::folders($path);
-			$total   = count($folders);
+			return count($folders);
 		}
-		return $total;
+		
+		return 0;
 	}
 
 	/**
 	 * Count the number of files in a folder
 	 * @return integer File total
-	 * @param string $path Relative path to folder
+	 * @param string $path Absolute path to folder
 	 */
 	public function countFiles($path)
 	{
 		jimport('joomla.filesystem.file');
-		$total 	= 0;
-		$path 	= WFUtility::makePath($this->getBaseDir(), $path);
 		
-		if (JFolder::exists($path)) {
-			$files = JFolder::files($path);
-			$total = count($files);
-			foreach ($files as $file) {
-				if (strtolower($file) == 'index.html' || strtolower($file) == 'thumbs.db') {
-					$total = $total - 1;
-				}
-			}
+		if (strpos($path, $this->getBaseDir()) === false) {
+			$path = WFUtility::makePath($this->getBaseDir(), $path);
 		}
-		return $total;
+
+		if (JFolder::exists($path)) {
+			$files = JFolder::files($path, '.', false, false, array('index.html', 'thumbs.db'));
+			return count($files);
+		}
+		
+		return 0;
 	}
 	
 	function getFolders($relative)
@@ -366,7 +366,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 		} else if (is_dir($path)) {					
 			$result->type = 'folders';
 			
-			if ($this->countFiles($path, '^[(index.html)]') != 0 || $this->countFolders($path) != 0) {
+			if ($this->countFiles($path) > 0 || $this->countFolders($path) > 0) {
 				$result->message = JText::sprintf('WF_MANAGER_FOLDER_NOT_EMPTY', basename($path));
 			} else {
 				$result->state = JFolder::delete($path);	
@@ -392,12 +392,12 @@ class WFJoomlaFileSystem extends WFFileSystem
 		
 		if (is_file($src)) {
 			$ext 	= JFile::getExt($src);
-			$file 	= $dest.'.'.$ext;
+			$file 	= $dest . '.' .$ext;
 			$path 	= WFUtility::makePath($dir, $file);
 			
 			$result->type 	= 'files';			
 			$result->state 	= JFile::move($src, $path);
-			$reult->path	= $path;
+			$result->path	= $path;
 			
 		} else if (is_dir($src)) {
 			$path = WFUtility::makePath($dir, $dest);
@@ -422,13 +422,19 @@ class WFJoomlaFileSystem extends WFFileSystem
 		
 		$src 	= WFUtility::makePath($this->getBaseDir(), $file);
 		$dest 	= WFUtility::makePath($this->getBaseDir(), WFUtility::makePath($destination, basename($file)));
-		
+
 		// src is a file
 		if (is_file($src)) {
 			$result->type 	= 'files';
 			$result->state 	= JFile::copy($src, $dest);
 		} else if (is_dir($src)) {
-			$result->type 	= 'folders';
+			// Folders cannot be copied into themselves as this creates an infinite copy / paste loop	
+			if ($file === $destination) {
+				$result->state = false;
+				$result->message = WFText::_('WF_MANAGER_COPY_INTO_ERROR');
+			}
+
+			$result->type 	= 'folders';				
 			$result->state 	= JFolder::copy($src, $dest);
 			$result->path 	= $dest;
 		}
@@ -454,7 +460,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 				$result->type 	= 'files';
 				$result->state 	= JFile::move($src, $dest);
 			} else if (is_dir($src)) {
-				$result->type 	= 'folders';
+				$result->type 	= 'folders';				
 				$result->state 	= JFolder::move($src, $dest);
 				$result->path 	= $dest;
 			}
@@ -485,7 +491,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 	*/
 	function createFolder($dir, $new)
 	{							
-		$dir 	= WFUtility::makePath(rawurldecode($dir), WFUtility::makeSafe($new));
+		$dir 	= WFUtility::makePath(rawurldecode($dir), $new);
 		$path 	= WFUtility::makePath($this->getBaseDir(), $dir); 
 		$result = new WFFileSystemResult();
 		
@@ -516,7 +522,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 		jimport('joomla.filesystem.file');
 		
 		$path 	= WFUtility::makePath($this->getBaseDir(), rawurldecode($dir));
-		$dest 	= WFUtility::makePath($path, WFUtility::makeSafe($name));
+		$dest 	= WFUtility::makePath($path, $name);
 		
 		// check for safe mode
 		$safe_mode = false;
@@ -530,13 +536,13 @@ class WFJoomlaFileSystem extends WFFileSystem
 		$result = new WFFileSystemResult();
 		
 		// get overwrite state
-        $overwrite 	= JRequest::getInt('upload-overwrite', 0);
+        $conflict 	= $this->get('upload_conflict', 'overwrite');
         // get suffix
         $suffix		= WFFileBrowser::getFileSuffix();
 		
 		switch($method) {
 			case 'multipart' :
-				if ($overwrite) {
+				if ($conflict == 'unique') {
 				    // get extension
 					$extension 		= JFile::getExt($name);
 					// get name without extension
@@ -544,7 +550,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 					
 					while (JFile::exists($dest)) {
 						$name .= $suffix;	
-						$dest  = WFUtility::makePath($path, WFUtility::makeSafe($name.'.'.$extension));
+						$dest  = WFUtility::makePath($path, $name.'.'.$extension);
 				    }
 				}
 
@@ -567,7 +573,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 						// make unique file name
 					    while (JFile::exists($dest)) {
 							$name .= $suffix;	
-							$dest  = WFUtility::makePath($path, WFUtility::makeSafe($name.'.'.$extension));
+							$dest  = WFUtility::makePath($path, $name.'.'.$extension);
 					    }
 					}
 					
@@ -590,7 +596,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 							
 							if ($chunk == $chunks - 1) {
 								if (is_file($dest)) {
-									$result->path  = basename($dest);
+									$result->path  = $dest;
 								}
 							}
 						} else {
@@ -621,7 +627,7 @@ class WFJoomlaFileSystem extends WFFileSystem
 							
 							if (fclose($out) && is_file($dest)) {
 								$result->state = true;
-								$result->path  = basename($dest);
+								$result->path  = $dest;
 							}
 						}
 					}

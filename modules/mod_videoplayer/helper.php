@@ -14,12 +14,17 @@ abstract class modVideoPlayerHelper {
 		$videoPlayerJsFound = false;
 		$videoPlayerCssFound = false;
 		$videoPlayerSkinFound = false;
+		$scrollbarJsFound = false;
+		$scrollbarCssFound = false;
 		for ($i = 0; $i < count($scripts); $i++) {
 			if (stripos($scripts[$i], 'flowplayer.min.js') !== false) {
 				$flowplayerFound = true;
 			}
 			if (stripos($scripts[$i], 'mod_videoplayer.js') !== false) {
 				$videoPlayerJsFound = true;
+			}
+			if (stripos($scripts[$i], 'jquery.scroll.min.js') !== false) {
+				$scrollbarJsFound = true;
 			}
 		}
 		for ($i = 0; $i < count($styleSheets); $i++) {
@@ -29,6 +34,9 @@ abstract class modVideoPlayerHelper {
 			if (stripos($styleSheets[$i], $params->get('skin') . '.css') !== false) {
 				$videoPlayerSkinFound = true;
 			}
+			if (stripos($styleSheets[$i], 'scrollbar.css') !== false) {
+				$scrollbarCssFound = true;
+			}
 		}
 		if (!$flowplayerFound) {
 			$document->addScript(JURI::base() . 'modules/mod_videoplayer/js/flowplayer.min.js');
@@ -36,11 +44,17 @@ abstract class modVideoPlayerHelper {
 		if (!$videoPlayerJsFound) {
 			$document->addScript(JURI::base() . 'modules/mod_videoplayer/js/mod_videoplayer.js');
 		}
+		if (!$scrollbarJsFound) {
+			$document->addScript(JURI::base() . 'modules/mod_videoplayer/js/jquery.scroll.min.js');
+		}
 		if (!$videoPlayerCssFound) {
 			$document->addStyleSheet(JURI::base() . 'modules/mod_videoplayer/css/mod_videoplayer.css');
 		}
 		if (!$videoPlayerSkinFound) {
 			$document->addStyleSheet(JURI::base() . 'modules/mod_videoplayer/css/skins/' . $params->get('skin')  . '.css');
+		}
+		if (!$scrollbarCssFound) {
+			$document->addStyleSheet(JURI::base() . 'modules/mod_videoplayer/css/scrollbar.css');
 		}
 		$model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 		$applicationParams = $application->getParams();

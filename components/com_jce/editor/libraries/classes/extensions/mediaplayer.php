@@ -1,16 +1,14 @@
 <?php
 /**
- * @package      JCE Media Player
- * @copyright   Copyright (C) 2005 - 2010 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license     http://www.gnu.org/copyleft/gpl.html GNU/GPL, see licence.txt
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// no direct access
 defined('_JEXEC') or die('RESTRICTED');
 
 wfimport('editor.libraries.classes.extensions');
@@ -20,7 +18,7 @@ class WFMediaPlayerExtension extends WFExtension
     /**
      * @access  protected
      */
-    function __construct($config = array())
+    public function __construct($config = array())
     {
         $default = array(
         	'name'		=> '',
@@ -43,21 +41,25 @@ class WFMediaPlayerExtension extends WFExtension
      * @return  MediaManager  The manager object.
      * @since 1.5
      */
-	function &getInstance($name = 'jceplayer')
+	public static function getInstance($name = 'jceplayer')
     {
         static $instance;
         
         if (!is_object($instance)) {
-            $player = parent::loadExtensions(array(
-	            'types' => array(
-	                'mediaplayer'
-	            ),
-	            'extension' => $name
-	        ));
-	        
-	        $classname = 'WFMediaPlayerExtension_' . ucfirst($player);
-	        
-	        if (class_exists($classname)) {
+        	$classname = '';
+				
+        	if ($name && $name != 'none') {
+        		$player = parent::loadExtensions(array(
+		            'types' => array(
+		                'mediaplayer'
+		            ),
+		            'extension' => $name
+		        ));
+		        
+		        $classname = 'WFMediaPlayerExtension_' . ucfirst($player);
+        	}
+
+	        if ($classname && class_exists($classname)) {
             	$instance = new $classname();
 	        } else {
 	        	$instance = new WFMediaPlayerExtension();
@@ -67,7 +69,7 @@ class WFMediaPlayerExtension extends WFExtension
         return $instance;
     }
     
-    function display()
+    public function display()
     {
     	parent::display();
     	
@@ -78,7 +80,7 @@ class WFMediaPlayerExtension extends WFExtension
             'extensions/mediaplayer'
         ), 'libraries');
         
-        if ($this->get('name')) {
+        if ($this->isEnabled() && $this->get('name')) {
         	$document->addScript(array(
             	'mediaplayer/' . $this->get('name') . '/js/' . $this->get('name')
         	), 'extensions');
@@ -86,30 +88,32 @@ class WFMediaPlayerExtension extends WFExtension
         	$document->addStyleSheet(array(
             	'mediaplayer/' . $this->get('name') . '/css/' . $this->get('name')
         	), 'extensions');
+				
+			$document->addScriptDeclaration('WFExtensions.MediaPlayer.init(' . json_encode($this->getProperties()) . ')');	
         }
-        
-        $document->addScriptDeclaration('WFExtensions.MediaPlayer.init(' . json_encode($this->getProperties()) . ')');
-		
-		$plugin = WFMediaManagerPlugin::getInstance();
-		$plugin->setMediaOption('mediaplayer', 'WF_MEDIAPLAYER_' . $this->get('name') . '_TITLE');
     }
+	
+	public function isEnabled()
+	{
+		return false;
+	}
     
-    function getName()
+    public function getName()
     {
     	return $this->get('name');
     }
     
-	function getTitle()
+	public function getTitle()
     {
     	return $this->get('title');
     }
     
-    function getParams()
+    public function getParams()
     {
     	return $this->params;
     }
     
-    function getParam($param, $default = '')
+    public function getParam($param, $default = '')
     {
     	$params = $this->getParams();
     	
@@ -121,25 +125,29 @@ class WFMediaPlayerExtension extends WFExtension
      * @param object $player
      * @return 
      */
-    function loadTemplate($tpl = '')
+    public function loadTemplate($tpl = '')
     {
-        $path = WF_EDITOR_EXTENSIONS . DS . 'mediaplayer' . DS . $this->get('name');
+        $output = '';
+		
+		if ($this->isEnabled()) {
+			$path = WF_EDITOR_EXTENSIONS . DS . 'mediaplayer' . DS . $this->get('name');
         
-        $file = 'default.php';
-        
-        if ($tpl) {
-            $file = 'default_' . $tpl . '.php';
-        }
-        
-        if (file_exists($path . DS . 'tmpl' . DS . $file)) {
-            ob_start();
-            
-            include $path . DS . 'tmpl' . DS . $file;
-            
-            $output .= ob_get_contents();
-            ob_end_clean();
-        }
-        
+	        $file = 'default.php';
+	        
+	        if ($tpl) {
+	            $file = 'default_' . $tpl . '.php';
+	        }
+	        
+	        if (file_exists($path . DS . 'tmpl' . DS . $file)) {
+	            ob_start();
+	            
+	            include $path . DS . 'tmpl' . DS . $file;
+	            
+	            $output .= ob_get_contents();
+	            ob_end_clean();
+	        }
+		}
+
         return $output;
     }
 }

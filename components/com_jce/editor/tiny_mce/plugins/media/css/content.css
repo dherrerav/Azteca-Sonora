@@ -1,29 +1,31 @@
-.mceItemFlash, .mceItemShockWave, .mceItemQuickTime, .mceItemWindowsMedia, .mceItemRealMedia, .mceItemDivX, .mceItemSilverlight, .mceItemGeneric, .mceItemAudio, .mceItemVideo, .mceItemIframe {
+.mceItemFlash, .mceItemShockWave, .mceItemQuickTime, .mceItemWindowsMedia, .mceItemRealMedia, .mceItemDivX, .mceItemSilverlight, .mceItemGeneric, .mceItemEmbed, .mceItemAudio, .mceItemVideo, .mceItemIframe {
     border:1px dotted #cc0000;
     background-position:center;
     background-repeat:no-repeat;
     background-color:#ffffcc;
 }
+
+.mceItemGeneric, .mceItemEmbed {
+    background-image:url(../img/generic.png);
+}
+
 .mceItemShockWave {
-    background-image: url(../img/video.png);
+    background-image: url(../img/shockwave.png);
 }
 .mceItemFlash {
-    background-image:url(../img/video.png);
+    background-image:url(../img/swf.png);
 }
 .mceItemQuickTime {
-    background-image:url(../img/video.png);
+    background-image:url(../img/quicktime.png);
 }
 .mceItemWindowsMedia {
-    background-image:url(../img/video.png);
+    background-image:url(../img/windowsmedia.png);
 }
 .mceItemRealMedia {
-    background-image:url(../img/video.png);
+    background-image:url(../img/real.png);
 }
 .mceItemDivX {
     background-image:url(../img/video.png);
-}
-.mceItemGeneric {
-    background-image:url(../img/generic.png);
 }
 .mceItemSilverlight {
     background-image:url(../img/video.png);
@@ -45,13 +47,13 @@
     width: 200px;
     height: 25px;
 }
-.mceItemAudio.mceAgentGecko {
+.mceItemAudio.mceItemAgentGecko {
     height: 28px;
 }
-.mceItemAudio.mceAgentOpera, .mceItemAudio.mceAgentChrome, .mceItemAudio.mceAgentGecko {
+.mceItemAudio.mceItemAgentOpera, .mceItemAudio.mceItemAgentChrome, .mceItemAudio.mceItemAgentGecko {
     width: 300px;
 }
-mceItemAudio.mceAgentChrome {
+.mceItemAudio.mceItemAgentChrome {
     height: 32px;
 }
 .mceItemSelected {

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: config.php 69 2011-02-20 13:51:53Z happy_noodle_boy $
+* @version		$Id: config.php 221 2011-06-11 17:30:33Z happy_noodle_boy $
 * @package      JCE
 * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
 * @author		Ryan Demmer

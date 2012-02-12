@@ -1,29 +1,70 @@
 <?php
 /**
- * @version		$Id: model.php 201 2011-05-08 16:27:15Z happy_noodle_boy $
  * @package   	JCE
- * @copyright 	Copyright Â© 2009-2011 Ryan Demmer. All rights reserved.
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
- * @license   	GNU/GPL 2 or later
- * This version may have been modified pursuant
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('RESTRICTED');
 
 jimport('joomla.application.component.model');
 
-/**
- * Hello Model
- *
- * @package    Joomla.Tutorials
- * @subpackage Components
- */
 class WFModel extends JModel 
 {
+	function authorize($task)
+	{
+		$user = JFactory::getUser();
+		
+		// Joomla! 1.7+
+		if (method_exists('JUser', 'getAuthorisedViewLevels')) {
+			$action = ($task == 'admin' || $task == 'manage') ? 'core.' . $task : 'jce.' . $task;
+			
+			if (!$user->authorise($action, 'com_jce')) {
+				return false;
+			}
+		} else {
+			// get rules from parameters
+			$component 	= JComponentHelper::getComponent('com_jce');
+			$params		= json_decode($component->params);
+			$rules 		= isset($params->access) ? $params->access : null;
+				
+			if (is_object($rules)) {
+				$action 	= ($task == 'admin' || $task == 'manage') ? 'core.' . $task : 'jce.' . $task;
+			
+				if (isset($rules->$action)) {
+					$rule = $rules->$action;
+					$gid = $user->gid;
+					if (isset($rule->$gid) && $rule->$gid == 0) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+     * Get the current version
+     * @return Version
+     */
+    function getVersion()
+    {
+        // Get Component xml
+        $xml = JApplicationHelper::parseXMLInstallFile(WF_ADMINISTRATOR . DS . 'jce.xml');
+        
+        // return cleaned version number or date
+        $version = preg_replace('/[^0-9a-z]/i', '', $xml['version']);
+        if (!$version) {
+            return date('Y-m-d', strtotime('today'));
+        }
+        return $version;
+    }	
+		
 	function getStyles()
 	{
 		$view = JRequest::getCmd('view');
@@ -75,11 +116,11 @@ class WFModel extends JModel
         }
         
         $span  = '';
-        $img   = '';
+        $img   = ''; 
         $icons = explode(',', $plugin->icon);
         
-        foreach ($icons as $icon) {
-            if ($icon == '|' || $icon == 'spacer') {
+        foreach ($icons as $icon) {        	
+        	if ($icon == '|' || $icon == 'spacer') {
                 $span .= '<span class="mceSeparator"></span>';
             } else {
                 $path = $base . '/' . $icon . '.png';
@@ -96,5 +137,24 @@ class WFModel extends JModel
         
         return $output;
     }
+
+	public function getBrowserLink($element = null, $filter = '')
+	{
+		require_once(JPATH_SITE .DS. 'components' .DS. 'com_jce' .DS. 'editor' .DS. 'libraries' .DS. 'classes' .DS. 'token.php');	
+		
+		$token = WFToken::getToken();
+		
+		$url = 'index.php?option=com_jce&view=editor&layout=plugin&plugin=browser&standalone=1&' . $token . '=1';
+		
+		if ($element) {
+			$url .= '&element=' . $element;
+		}
+		
+		if ($filter) {
+			$url .= '&filter=' . $filter;
+		}
+
+		return $url;
+	}
 }
 ?>

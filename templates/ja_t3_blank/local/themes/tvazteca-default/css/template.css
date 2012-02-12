@@ -1020,3 +1020,118 @@ h4.content-most-title a:hover {
 #ja-topsl .ja-box, #ja-botsl .ja-box {
 	background: none;
 }
+
+#ja-footer-bottom {
+	background: #fff;
+}
+
+.body-hechos-noche #ja-wrapper {
+	background: transparent url(../images/hechos-noche.jpg) no-repeat 0 118px;
+	background-size: 100%;
+}
+
+#ja-botsl .main,
+#ja-navhelper .main {
+	background: #fff;
+}
+
+.body-hechos-noche #ja-container .main {
+	border: none;
+}
+
+.body-hechos-noche div.category-image img {
+	float: right;
+}
+
+.body-hechos-noche div.category-image,
+.body-hechos-noche div.category-description {
+	overflow: hidden;
+	clear: both;
+}
+
+.body-hechos-noche div.category-description {
+	background: #fff;
+	padding: 10px;
+	border-top-left-radius: 10px;
+}
+
+.body-hechos-noche #ja-right {
+	background: none;
+}
+
+.body-hechos-noche #ja-right1 {
+	border-left: none;
+}
+
+.body-hechos-noche #ja-right1 .ja-moduletable {
+	background: transparent;
+	border-bottom: 0;
+
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 {
+	background: transparent url(../images/alpha75.png) repeat !important;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 img {
+	margin-left: 80px;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link {
+	display: block;
+	width: 271px;
+	height: 30px;
+	margin: 0 auto;
+	background: transparent url(../images/transparent-background-link.png) no-repeat top left;
+	background-size: 100%;
+	color: #fff;
+	font-weight: bold;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icotv,
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icopc {
+	width: 40px;
+	height: 30px;
+	display: block;
+	float: left;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.text {
+	margin-top: 7px;
+	float: left;
+	display: block;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icotv {
+	background: transparent url(../images/icotv.gif) no-repeat top left;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icopc {
+	background: transparent url(../images/icopc.gif) no-repeat top left;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link:hover {
+	text-decoration: none;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link:hover span.text {
+	color: #5c9ecc;
+}
+
+.body-hechos-noche #ja-main .inner {
+	margin-right: -10px;
+	padding-bottom: 0 !important;
+}
+
+.body-hechos-noche #ja-content-main {
+	margin-bottom: 0;
+}
+
+.body-hechos-noche .blog-hechos-noche .category-desc {
+	background: transparent url(../images/azteca-trece.png) no-repeat top left;
+}

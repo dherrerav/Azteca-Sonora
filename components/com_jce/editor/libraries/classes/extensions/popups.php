@@ -1,33 +1,31 @@
 <?php
 /**
- * @version   $Id: popups.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2011 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-// no direct access
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die('RESTRICTED');
 
 class WFPopupsExtension extends WFExtension
 {
     /*
      *  @var varchar
      */
-    var $_popups 	= array();
+    private $_popups 	= array();
     
-    var $_templates = array();
+    private $_templates = array();
     
     /**
      * Constructor activating the default information of the class
      *
      * @access  protected
      */
-    function __construct($config = array())
+    public function __construct($config = array())
     {
         parent::__construct($config);
         
@@ -43,7 +41,7 @@ class WFPopupsExtension extends WFExtension
      * @return  JCE  The editor object.
      * @since 1.5
      */
-    function &getInstance($config = array())
+    public static function getInstance($config = array())
     {
         static $instance;
         
@@ -54,7 +52,7 @@ class WFPopupsExtension extends WFExtension
         return $instance;
     }
     
-    function display()
+    public function display()
     {    	
     	parent::display();
     	
@@ -101,27 +99,27 @@ class WFPopupsExtension extends WFExtension
         }
     }
 
-	function getPopups()
+	private function getPopups()
 	{
 		return $this->_popups;
 	}
 
-	function addPopup($popup)
+	public function addPopup($popup)
 	{
 		$this->_popups[] = $popup;
 	}
 	
-	function getTemplates()
+	private function getTemplates()
 	{
 		return $this->_templates;
 	}
     
-    function addTemplate($template)
+    public function addTemplate($template)
     {
         $this->_templates[] = $template;
     }
     
-    function &getPopupExtension($name)
+    private function &getPopupExtension($name)
     {
         static $popups;
         
@@ -138,7 +136,7 @@ class WFPopupsExtension extends WFExtension
         return $popups[$name];
     }
     
-    function getPopupList()
+    public function getPopupList()
     {
         $options = array();
         
@@ -148,10 +146,10 @@ class WFPopupsExtension extends WFExtension
             $options[] = JHTML::_('select.option', $popup, WFText::_('WF_POPUPS_' . strtoupper($popup) . '_TITLE'));
         }
         
-        return JHTML::_('select.genericlist', $options, 'popup_list', 'class="inputbox levels" size="1" onchange="WFExtensions.Popups.selectPopup(this.value);" disabled="disabled"', 'value', 'text');
+        return JHTML::_('select.genericlist', $options, 'popup_list', 'class="inputbox levels" size="1" onchange="WFExtensions.Popups.selectPopup(this.value);"', 'value', 'text');
     }
     
-    function getPopupTemplates()
+    public function getPopupTemplates()
     {
         $output = '';
         
@@ -160,10 +158,10 @@ class WFPopupsExtension extends WFExtension
         $file = 'default.php';
         
         foreach ($this->getTemplates() as $template) {
-            $document = WFDocument::getInstance();
-            $view = $document->getView($template);
-            
-            $view->display();
+        	$wf 	= WFEditorPlugin::getInstance();
+			$view 	= $wf->getView();
+			
+			$output .= $view->loadTemplate($template);
         }
         
         foreach ($this->getPopups() as $popup) {

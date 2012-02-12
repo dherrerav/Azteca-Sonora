@@ -1,15 +1,14 @@
 <?php
 /**
- * @version    $Id: search.php 58 2011-02-18 12:40:41Z happy_noodle_boy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author   Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright © 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
+
 defined('WF_EDITOR') or die('RESTRICTED');
 ?>
 <table border="0" cellspacing="0" cellpadding="2">
@@ -22,9 +21,9 @@ defined('WF_EDITOR') or die('RESTRICTED');
 	<tr>
 		<td colspan="2">
 			<label>{#searchreplace_dlg.direction}</label>
-			<input id="search_panel_backwardsu" class="radio" type="radio" />
+			<input id="search_panel_backwardsu" name="search_panel_backwards" class="radio" type="radio" />
 			<label for="search_panel_backwardsu">{#searchreplace_dlg.up}</label>
-			<input id="search_panel_backwardsd" class="radio" type="radio" checked="checked" />
+			<input id="search_panel_backwardsd" name="search_panel_backwards" class="radio" type="radio" checked="checked" />
 			<label for="search_panel_backwardsd">{#searchreplace_dlg.down}</label>
 		</td>
 	</tr>
