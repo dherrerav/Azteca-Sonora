@@ -3,7 +3,6 @@ jQuery(function($) {
 	var description_holder = $('.mod_videoplayer .video-player .content .description');
 	var sections = $('.mod_videoplayer .video-sections ul.sections li.section, .mod_videoplayer .video-sections ul.sections li.section .title h2 a');
 	var current_section = null;
-	$('.scrollbar').scrollbar();
 	sections.each(function() {
 		$(this).removeClass('active');
 		$(this).click(function(e) {
@@ -33,7 +32,9 @@ jQuery(function($) {
 				var anchor = $(this).find('a').first();
 				prepareVideo(anchor, true);
 			});
-			$('.video-playlist .scrollbar').scrollbar();
+			$('.video-playlist .scrollbar, .video-sections .scrollbar').scrollbar({
+				handleHeight: 26
+			});
 		}
 	}
 	function prepareVideo(anchor, play) {

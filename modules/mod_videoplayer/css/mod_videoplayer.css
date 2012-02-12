@@ -130,4 +130,19 @@
 .mod_videoplayer .video-player {
 	width: 48%;
 	float: right;
+	height: 436px;
+}
+
+.mod_videoplayer .scrollbar {
+	height: 436px;
+	overflow-y: scroll;
+}
+
+.mod_videoplayer .scrollbar .scrollbar-handle {
+	background: transparent url(../images/scrollhandle.jpg) no-repeat top center;
+	background-position: 0 -7px;
+}
+
+.mod_videoplayer .scrollbar .scrollbar-handle-container {
+	background: transparent url(../images/scrollbg.jpg) repeat-y top center;
 }

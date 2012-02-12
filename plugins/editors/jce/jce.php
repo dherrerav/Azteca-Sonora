@@ -1,10 +1,8 @@
 <?php
 /**
- * @version   $Id: jce.php 110 2009-06-21 19:25:09Z happynoodleboy $
- * @package      JCE
- * @copyright    Copyright (C) 2005 - 2009 Ryan Demmer. All rights reserved.
- * @author    Ryan Demmer
- * @license      GNU/GPL
+ * @package   	JCE
+ * @copyright 	Copyright � 2009-2011 Ryan Demmer. All rights reserved.
+ * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
@@ -12,32 +10,26 @@
  */
 
 // Do not allow direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die('RESTRICTED');
 
 jimport('joomla.plugin.plugin');
 jimport('joomla.application.component.model');
 
 /**
  * JCE WYSIWYG Editor Plugin
- *
- * @author Ryan Demmer <ryandemmer@gmail.com>
- * @package Editor - JCE
  * @since 1.5
  */
 class plgEditorJCE extends JPlugin
 {
     /**
-     * Constructor
-     *
-     * For php4 compatability we must not use the __constructor as a constructor for plugins
-     * because func_get_args (void) returns a copy of all passed arguments NOT references.
-     * This causes problems with cross-referencing necessary for the observer design pattern.
-     *
-     * @vars  object $subject The object to observe
-     * @vars  array  $config  An array that holds the plugin configuration
-     * @since 1.5
-     */
-    function plgEditorJCE(&$subject, $config)
+	 * Constructor
+	 *
+	 * @access      public
+	 * @param       object  $subject The object to observe
+	 * @param       array   $config  An array that holds the plugin configuration
+	 * @since       1.5
+	 */
+    public function __construct(& $subject, $config)
     {
         parent::__construct($subject, $config);
     }
@@ -50,10 +42,14 @@ class plgEditorJCE extends JPlugin
      * @return string JavaScript Initialization string
      * @since 1.5
      */
-    function onInit()
+    public function onInit()
     {
         $app 		= JFactory::getApplication();
 		$language 	= JFactory::getLanguage();
+		
+		$document 	= JFactory::getDocument();
+		// set IE mode
+		//$document->setMetaData('X-UA-Compatible', 'IE=Edge', true);
         
     	// Check for existence of Admin Component
         if (!is_dir(JPATH_SITE . DS . 'components' . DS . 'com_jce') || !is_dir(JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_jce')) {
@@ -71,8 +67,7 @@ class plgEditorJCE extends JPlugin
         JModel::addIncludePath($base . DS . 'models');
         $model = JModel::getInstance('editor', 'WFModel');
 
-        $model->buildEditor();
-        
+        $model->buildEditor();        
     }
     
     /**
@@ -80,9 +75,10 @@ class plgEditorJCE extends JPlugin
      *
      * @vars string   The name of the editor
      */
-    function onGetContent($editor)
+    public function onGetContent($editor)
     {
-        return "WFEditor.getContent('" . $editor . "');";
+        //return "WFEditor.getContent('" . $editor . "');";
+        return $this->onSave($editor);
     }
     
     /**
@@ -90,9 +86,9 @@ class plgEditorJCE extends JPlugin
      *
      * @vars string   The name of the editor
      */
-    function onSetContent($editor, $html)
+    public function onSetContent($editor, $html)
     {
-        return "WFEditor.setContent('" . $editor . "','" . $html . "');";
+    	return "WFEditor.setContent('" . $editor . "','" . $html . "');";
     }
     
     /**
@@ -100,9 +96,9 @@ class plgEditorJCE extends JPlugin
      *
      * @vars string   The name of the editor
      */
-    function onSave($editor)
+    public function onSave($editor)
     {
-        return "WFEditor.save('" . $editor . "');";
+        return "WFEditor.getContent('" . $editor . "');";
     }
     
     /**
@@ -116,10 +112,8 @@ class plgEditorJCE extends JPlugin
      * @vars int The number of rows for the editor area
      * @vars mixed Can be boolean or array.
      */
-     function onDisplay($name, $content, $width, $height, $col, $row, $buttons = true, $id = null, $asset = null, $author = null)
-	{
-		$model = JModel::getInstance('editor', 'WFModel');
-        
+     public function onDisplay($name, $content, $width, $height, $col, $row, $buttons = true, $id = null, $asset = null, $author = null)
+     {
         if (empty($id)) {
 			$id = $name;
 		}
@@ -136,26 +130,18 @@ class plgEditorJCE extends JPlugin
             $id = $name;
         }
         
-        $buttons = $this->_displayButtons($id, $buttons, $asset, $author);
-        
         $editor  = '<label for="' . $id . '" style="display:none;" aria-visible="false">' . $id . '_textarea</label><textarea id="' . $id . '" name="' . $name . '" cols="' . $col . '" rows="' . $row . '" style="width:' . $width . ';height:' . $height . ';" class="wfEditor source" wrap="off">' . $content . '</textarea>';
-        $editor .= $model->getToken($id);
-        $editor .= $buttons;
+		$editor .= $this->_displayButtons($id, $buttons, $asset, $author);
+
 
 		return $editor;
 	}
     
-    function onGetInsertMethod($name)
+    public function onGetInsertMethod($name)
     {
-        $document = JFactory::getDocument();
-        
-        $js = "function jInsertEditorText(text,editor){WFEditor.insert(editor,text);}";
-        $document->addScriptDeclaration($js);
-        
-        return true;
     }
     
-	function _displayButtons($name, $buttons, $asset, $author)
+	private function _displayButtons($name, $buttons, $asset, $author)
 	{
 		// Load modal popup behavior
 		JHTML::_('behavior.modal', 'a.modal-button');

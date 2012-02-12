@@ -3,42 +3,44 @@
 		<? if ($params->get('show_sections')) : ?>
 		<div class="video-sections">
 			<h3>Secciones</h3>
-			<ul class="sections">
-				<? foreach ($categories as $item) : ?>
-				<?
-				$category = $item['category'];
-				$videos = $item['videos'];
-				?>
-				<li class="section">
-					<h2>
-						<a href="<?= $category->link ?>" title="<?= $category->title ?>"><?= $category->title ?></a>
-					</h2>
-					<ul class="section-videos" id="section-<?= $category->id ?>-videos">
-						<? foreach ($videos as $video) : ?>
-						<li class="video">
-							<div class="image">
-								<img src="<?= $video->image ?>" width="<?= $params->get('image_width') ?>" height="<?= $params->get('image_height') ?>" alt="<?= str_replace('"', '&quote;', $video->title) ?>" data-preview="<?= $video->preview ?>" />
-							</div>
-							<div class="date">
-								<?= $video->date ?>
-							</div>
-							<div class="duration">
-								<?= $video->time ?>
-							</div>
-							<div class="title">
-								<h2>
-									<a id="<?= $video->id ?>" href="<?= $video->source ?>" title="<?= $video->title ?>"><?= $video->title ?></a>
-								</h2>
-							</div>
-							<div class="description" style="display: none;">
-								<?= $video->description ?>
-							</div>
-						</li>
-						<? endforeach ?>
-					</ul>
-				</li>
-				<? endforeach ?>
-			</ul>
+			<div class="scrollbar">
+				<ul class="sections">
+					<? foreach ($categories as $item) : ?>
+					<?
+					$category = $item['category'];
+					$videos = $item['videos'];
+					?>
+					<li class="section">
+						<h2>
+							<a href="<?= $category->link ?>" title="<?= $category->title ?>"><?= $category->title ?></a>
+						</h2>
+						<ul class="section-videos" id="section-<?= $category->id ?>-videos">
+							<? foreach ($videos as $video) : ?>
+							<li class="video">
+								<div class="image">
+									<img src="<?= $video->image ?>" width="<?= $params->get('image_width') ?>" height="<?= $params->get('image_height') ?>" alt="<?= str_replace('"', '&quote;', $video->title) ?>" data-preview="<?= $video->preview ?>" />
+								</div>
+								<div class="date">
+									<?= $video->date ?>
+								</div>
+								<div class="duration">
+									<?= $video->time ?>
+								</div>
+								<div class="title">
+									<h2>
+										<a id="<?= $video->id ?>" href="<?= $video->source ?>" title="<?= $video->title ?>"><?= $video->title ?></a>
+									</h2>
+								</div>
+								<div class="description" style="display: none;">
+									<?= $video->description ?>
+								</div>
+							</li>
+							<? endforeach ?>
+						</ul>
+					</li>
+					<? endforeach ?>
+				</ul>
+			</div>
 		</div>
 		<? endif ?>
 		<div class="video-playlist">
