@@ -3,6 +3,7 @@
 		<? if ($params->get('show_sections')) : ?>
 		<div class="video-sections">
 			<h3>Secciones</h3>
+			<span></span>
 			<div class="scrollbar">
 				<ul class="sections">
 					<? foreach ($categories as $item) : ?>
@@ -39,12 +40,19 @@
 						</ul>
 					</li>
 					<? endforeach ?>
+					<? if ($count < 11) : ?>
+					<? for ($i = 0; $i < (11 - $count); $i++) : ?>
+					<li class="section">
+					</li>
+					<? endfor ?>
+					<? endif ?>
 				</ul>
 			</div>
 		</div>
 		<? endif ?>
 		<div class="video-playlist">
 			<h3>Videos</h3>
+			<span></span>
 			<div class="scrollbar">
 				<ul class="playlist">
 				</ul>

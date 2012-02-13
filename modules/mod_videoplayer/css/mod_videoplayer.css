@@ -3,7 +3,8 @@
 .mod_videoplayer {
 	width: 100%;
 	overflow: hidden;
-	height: 500px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .mod_videoplayer .video-sections {
@@ -14,6 +15,16 @@
 .mod_videoplayer .video-sections ul.sections {
 	display: block;
 	height: 100%;
+}
+
+.mod_videoplayer .video-sections span {
+	background: transparent url(../images/video-categories-icon.png) no-repeat top left;
+	width: 29px;
+	height: 32px;
+	float: right;
+	position: absolute;
+	top: 0;
+	left: 170px;
 }
 
 .mod_videoplayer .video-sections ul.sections li.section {
@@ -80,6 +91,7 @@
 	background: #dfe1d3;
 	padding: 10px;
 	overflow: hidden;
+	height: 125px;
 }
 
 .mod_videoplayer .video-player .content .title {
@@ -88,7 +100,32 @@
 }
 
 .mod_videoplayer .video-player .content .title span {
-	
+	width: 10px;
+	height: 9px;
+	float: left;
+	background: transparent url(../images/video-title-bullet.jpg) no-repeat top left;
+	padding-right: 5px;
+	margin-top: 6px;
+}
+
+.mod_videoplayer .video-player .content .title h3 {
+	font-size: 17px;
+	color: #010101;
+	text-shadow: 0 1px 1px #fff;
+	font-weight: bold;
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.mod_videoplayer .video-player .content .title h3 a {
+	text-transform: none;
+	color: #010101;
+	font-weight: bold;
+}
+
+.mod_videoplayer .video-player .content .title h3 a:hover {
+	text-decoration: none;
 }
 
 .mod_videoplayer .video-sections h3,
@@ -117,6 +154,15 @@
 	float: left;
 	width: 30%;
 	margin-right: 10px;
+}
+
+.mod_videoplayer .video-playlist span {
+	background: transparent url(../images/video-icon.png) no-repeat top left;
+	width: 36px;
+	height: 32px;
+	position: absolute;
+	top: 0;
+	left: 450px;
 }
 
 .mod_videoplayer .video-playlist ul.playlist li.video {
@@ -167,4 +213,8 @@
 
 .mod_videoplayer .scrollbar .scrollbar-handle-container {
 	background: transparent url(../images/scrollbg.jpg) repeat-y top center;
+}
+
+.mod_videoplayer .scrollbar .scrollbar-pane {
+	width: 100%;
 }

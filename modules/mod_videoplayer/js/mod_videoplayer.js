@@ -50,8 +50,12 @@ jQuery(function($) {
 		setDescription(description);
 		setVideo(id, video, preview, play);
 	}
-	function setTitle(new_title) {
+	function setTitle(new_title, new_link) {
 		title_holder.text(new_title);
+		title_holder.attr({
+			href: new_link,
+			title: new_title
+		});
 	}
 	function setDescription(new_description) {
 		description_holder.html(new_description);
