@@ -79,7 +79,7 @@ abstract class modContentCarouselHelper {
 	private static function _createImage($source) {
 		$width = 108;
 		$height = 68;
-		$image = strtolower(substr($source, 0, strpos($source, '.'))) . '_' . $width . 'x' . $height . '.jpg';
+		$image = substr($source, 0, strpos($source, '.')) . '_' . $width . 'x' . $height . '.jpg';
 		if (!file_exists($image)) {
 			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $source . ' -vframes 1 -s ' . $width . 'x' . $height . ' ' . JPATH_SITE . DS . $image . ' 2>&1';
 			shell_exec($command);
