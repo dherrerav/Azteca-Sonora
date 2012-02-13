@@ -22,9 +22,7 @@ flowplayer('<?= $video->id ?>', { src: '<?= JURI::base() . 'plugins/' . $this->p
 	clip: {
 		eventCategory: '<?= $article->title ?>',
 		provider: 'pseudo',
-		url: flashembed.isSupported([9, 115]) ?
-			'<?= JURI::base() . $video->mp4 ?>' :
-			'<?= JURI::base() . $video->flv ?>'
+		url: '<?= JURI::base() . $video->flv ?>'
 	},
 	plugins: {
 		pseudo: {
