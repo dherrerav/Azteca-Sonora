@@ -22,7 +22,7 @@ flowplayer('<?= $video->id ?>', { src: '<?= JURI::base() . 'plugins/' . $this->p
 	clip: {
 		eventCategory: '<?= $article->title ?>',
 		provider: 'pseudo',
-		url: '<?= JURI::base() . $video->flv ?>'
+		url: '<?= JURI::base() . $video->source ?>'
 	},
 	plugins: {
 		pseudo: {
