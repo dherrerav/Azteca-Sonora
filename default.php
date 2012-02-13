@@ -13,8 +13,9 @@ $date = dateDifference('now', '2012-02-15 00:00:00');
   		<title>Azteca Sonora</title>
   		<meta name="description" content="" />
   		<meta name="viewport" content="width=device-width" />
-  		<link rel="stylesheet" href="css/bootstrap.min.css" />
-  		<link rel="stylesheet" href="css/styles.css">
+  		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  		<link rel="stylesheet" type="text/css" href="css/styles.css">
+  		<link rel="shortcut icon" type="image/x-icon" href="templates/ja_t3_blank/local/themes/tvazteca-default/images/favicon.ico" />
   		<script src="js/modernizr.min.js"></script>
   	</head>
   	<body>
