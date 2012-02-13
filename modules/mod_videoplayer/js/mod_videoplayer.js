@@ -32,7 +32,10 @@ jQuery(function($) {
 				var anchor = $(this).find('a').first();
 				prepareVideo(anchor, true);
 			});
-			$('.video-playlist .scrollbar, .video-sections .scrollbar').scrollbar({
+			$('.video-playlist .scrollbar').scrollbar({
+				handleHeight: 26
+			});
+			$('.video-sections .scrollbar').scrollbar({
 				handleHeight: 26
 			});
 		}

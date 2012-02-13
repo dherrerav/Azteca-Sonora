@@ -11,6 +11,11 @@
 	width: 20%;
 }
 
+.mod_videoplayer .video-sections ul.sections {
+	display: block;
+	height: 100%;
+}
+
 .mod_videoplayer .video-sections ul.sections li.section {
 	background-color: transparent;
 	background-image: url(../images/modsbg.jpg);
@@ -67,6 +72,23 @@
 .mod_videoplayer .video-player .video {
 	background: #222;
 	display: block;
+}
+
+.mod_videoplayer .video-player .content {
+	margin-top: 4px;
+	border: 1px solid #bcc2c7;
+	background: #dfe1d3;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.mod_videoplayer .video-player .content .title {
+	background: transparent url(../images/video-title-bg.jpg) bottom left repeat-x;
+	padding-bottom: 5px;
+}
+
+.mod_videoplayer .video-player .content .title span {
+	
 }
 
 .mod_videoplayer .video-sections h3,

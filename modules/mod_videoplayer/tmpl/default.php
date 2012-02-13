@@ -56,6 +56,7 @@
 			<div class="content">
 				<? if ($params->get('show_title')) : ?>
 				<div class="title">
+					<span></span>
 					<h3>
 						<a></a>
 					</h3>
