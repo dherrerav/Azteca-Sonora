@@ -109,7 +109,7 @@ preg_match_all('/<img[^>]+>/i', $this->item->text, $images);
 preg_match_all('/(alt|title|src)=("[^"]*")/i', $images[0][0], $attributes);
 $image = $images[0][0];
 $src = $attributes[0][0];
-$title = $attributes[0][2];
+$title = empty($attributes[0][2]) ? '' : $attributes[0][2];
 $alt = $attributes[0][1];
 $caption = str_replace('"', '', $title);
 $caption = str_replace('title=', '', $caption);

@@ -1209,13 +1209,18 @@ h4.content-most-title a:hover {
 .body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icotv,
 .body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link span.icotv,
 .body-info-7 .ja-moduletable.moduletable-alpha75 a.link span.icotv {
-	background: transparent url(../images/icotv.gif) no-repeat top left;
+	background: transparent url(../images/icotv.gif) no-repeat 0 -7px;
+	width: 100%;
+	padding-left: 50px;
 }
 
 .body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icopc,
 .body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link span.icopc,
 .body-info-7 .ja-moduletable.moduletable-alpha75 a.link span.icopc {
-	background: transparent url(../images/icopc.gif) no-repeat top left;
+	background: transparent url(../images/icopc.gif) no-repeat 0 -7px;
+	width: 100%;
+	padding-left: 50px;
+	text-transform: uppercase;
 }
 
 .body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link:hover,
@@ -1245,6 +1250,6 @@ h4.content-most-title a:hover {
 
 .body-hechos-noche .blog-hechos-noche .category-desc,
 .body-hechos-meridiano .blog-hechos-meridiano .category-desc,
-.body-info-7 .blog-hechos-meridiano .category-desc {
+.body-info-7 .blog-info-7 .category-desc {
 	background: transparent url(../images/azteca-trece.png) no-repeat top left;
 }

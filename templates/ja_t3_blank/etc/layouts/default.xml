@@ -17,7 +17,6 @@
 	</blocks>
 	<blocks name="bottom" style="xhtml">
 		<block name="botsl" type="spotlight" main-inner="1">user6,user7,user8,user9,user10</block>
-		<block name="navhelper" type="navhelper" main-inner="1"></block>
 		<block name="footer" type="footer"></block>
 	</blocks>
 </layout>
