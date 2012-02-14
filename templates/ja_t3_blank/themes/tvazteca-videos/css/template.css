@@ -1162,7 +1162,6 @@ h4.content-most-title a:hover {
 .body-hechos-meridiano .ja-moduletable.moduletable-alpha75,
 .body-info-7 .ja-moduletable.moduletable-alpha75 {
 	background: transparent url(../images/alpha75.png) repeat !important;
-	height: 340px;
 }
 
 .body-hechos-noche .ja-moduletable.moduletable-alpha75 img,
@@ -1252,4 +1251,17 @@ h4.content-most-title a:hover {
 .body-hechos-meridiano .blog-hechos-meridiano .category-desc,
 .body-info-7 .blog-info-7 .category-desc {
 	background: transparent url(../images/azteca-trece.png) no-repeat top left;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 .news-description,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 .news-description,
+.body-info-7 .ja-moduletable.moduletable-alpha75 .news-description {
+	color: #fff;
+	margin-top: 30px;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 .news-description p,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 .news-description p,
+.body-info-7 .ja-moduletable.moduletable-alpha75 .news-description p {
+	margin: 20px 0 !important;
 }
