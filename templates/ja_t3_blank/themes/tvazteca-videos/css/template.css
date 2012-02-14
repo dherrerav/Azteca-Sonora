@@ -1079,3 +1079,172 @@ h4.content-most-title a:hover {
 	padding-left: 10px;
 	margin: 5px 0;
 }
+
+.body-hechos-noche #ja-wrapper {
+	background: transparent url(../images/hechos-noche.jpg) no-repeat 0 118px;
+	background-size: 100%;
+}
+
+.body-hechos-meridiano #ja-wrapper {
+	background: transparent url(../images/hechos-meridiano-background.jpg) no-repeat 0 118px;
+	background-size: 100%;
+}
+
+.body-info-7 #ja-wrapper {
+	background: transparent url(../images/info-7.png) no-repeat 0 118px;
+	background-size: 100%;
+}
+
+#ja-botsl .main,
+#ja-navhelper .main {
+	background: #fff;
+}
+
+.body-hechos-noche #ja-container .main,
+.body-hechos-meridiano #ja-container .main,
+.body-info-7 #ja-container .main {
+	border: none;
+}
+
+.body-hechos-noche div.category-image,
+.body-hechos-meridiano div.category-image,
+.body-info-7 div.category-image {
+	text-align: center;
+}
+
+.body-hechos-noche div.category-image img,
+.body-hechos-meridiano div.category-image img,
+.body-info-7 div.category-image img {
+	float: none;
+}
+
+.body-hechos-noche div.category-image,
+.body-hechos-noche div.category-description,
+.body-hechos-meridiano div.category-image,
+.body-hechos-meridiano div.category-description,
+.body-info-7 div.category-image,
+.body-info-7 div.category-description {
+	overflow: hidden;
+	clear: both;
+}
+
+.body-hechos-noche div.category-description,
+.body-hechos-meridiano div.category-description,
+.body-info-7 div.category-description {
+	background: #fff;
+	padding: 10px;
+	border-top-left-radius: 10px;
+}
+
+.body-hechos-noche #ja-right,
+.body-hechos-meridiano #ja-right,
+.body-info-7 #ja-right {
+	background: none;
+}
+
+.body-hechos-noche #ja-right1,
+.body-hechos-meridiano #ja-right1,
+.body-info-7 #ja-right1 {
+	border-left: none;
+}
+
+.body-hechos-noche #ja-right1 .ja-moduletable,
+.body-hechos-meridiano #ja-right1 .ja-moduletable,
+.body-info-7 #ja-right1 .ja-moduletable {
+	background: transparent;
+	border-bottom: 0;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75,
+.body-info-7 .ja-moduletable.moduletable-alpha75 {
+	background: transparent url(../images/alpha75.png) repeat !important;
+	height: 340px;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 img,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 img,
+.body-info-7 .ja-moduletable.moduletable-alpha75 img {
+	margin-left: 80px;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link {
+	display: block;
+	width: 271px;
+	height: 30px;
+	margin: 0 auto;
+	background: transparent url(../images/transparent-background-link.png) no-repeat top left;
+	background-size: 100%;
+	color: #fff;
+	font-weight: bold;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icotv,
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icopc,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link span.icotv,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link span.icopc,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link span.icotv,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link span.icopc {
+	width: 40px;
+	height: 30px;
+	display: block;
+	float: left;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.text,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link span.text,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link span.text {
+	margin-top: 7px;
+	float: left;
+	display: block;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icotv,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link span.icotv,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link span.icotv {
+	background: transparent url(../images/icotv.gif) no-repeat top left;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link span.icopc,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link span.icopc,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link span.icopc {
+	background: transparent url(../images/icopc.gif) no-repeat top left;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link:hover,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link:hover,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link:hover {
+	text-decoration: none;
+}
+
+.body-hechos-noche .ja-moduletable.moduletable-alpha75 a.link:hover span.text,
+.body-hechos-meridiano .ja-moduletable.moduletable-alpha75 a.link:hover span.text,
+.body-info-7 .ja-moduletable.moduletable-alpha75 a.link:hover span.text {
+	color: #5c9ecc;
+}
+
+.body-hechos-noche #ja-main .inner,
+.body-hechos-meridiano #ja-main .inner,
+.body-info-7 #ja-main .inner {
+	margin-right: -10px;
+	padding-bottom: 0 !important;
+}
+
+.body-hechos-noche #ja-content-main,
+.body-hechos-meridiano #ja-content-main,
+.body-info-7 #ja-content-main {
+	margin-bottom: 0;
+}
+
+.body-hechos-noche .blog-hechos-noche .category-desc,
+.body-hechos-meridiano .blog-hechos-meridiano .category-desc,
+.body-info-7 .blog-hechos-meridiano .category-desc {
+	background: transparent url(../images/azteca-trece.png) no-repeat top left;
+}

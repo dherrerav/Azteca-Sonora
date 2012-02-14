@@ -1,0 +1,94 @@
+<?php
+/**===========================================================================================
+# mod_otminitabs        OT Mini Tabs module for Joomla 1.7
+#=============================================================================================
+# author                OmegaTheme.com
+# copyright             Copyright (C) 2011 OmegaTheme.com. All rights reserved.
+# @license              http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+# Website               http://omegatheme.com
+# Technical support     Forum - http://omegatheme.com/forum/
+#=============================================================================================*/
+
+/**------------------------------------------------------------------------
+* file:           css/mod_otminitabs.css 1.7.0 00001, Mar 2011 12:00:00Z OmegaTheme:Linh $
+* package:        OT Mini Tabs module
+* description:    stylesheet file
+*------------------------------------------------------------------------*/
+
+/*==================== general style ====================*/
+.ot-wrapper {
+    margin: 0;
+    padding: 0;
+}
+.tab_selector_wrapper {
+    overflow: hidden;
+}
+/* tab selector */
+.tab_selector {
+    overflow: hidden;
+}
+.tab_selector li {
+    
+}
+.tab_selector li span {
+    display: block;
+}
+/* tab panel */
+.tab_panel_wrapper {
+    position: relative;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/* content type tab */
+.ot-items-wrapper {
+    overflow: hidden;
+}
+.ot-item-wrapper {
+    clear: both;
+    overflow: hidden;
+    padding: 0;
+    margin: 10px 0;
+    padding: 5px 0;
+}
+.ot-thumb-wrapper {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+.ot-thumbnail {
+    border: 1px solid #999999;
+    padding: 2px;
+}
+.ot-title {
+}
+.ot-title-link {
+    text-decoration: none;
+}
+.created_date {
+    font-size: 0.85em;
+}
+.ot-article-introtext {
+}
+.ot-readmore-link {
+    text-decoration: none;
+    display: block;
+    float: right;
+}
+.view-all {
+    text-decoration: none;
+    display: block;
+    float: left;
+}
+a.ot-mini-tabs {
+    color: #999999 !important;
+    float: right;
+    font-size: 11px !important;
+    outline: medium none;
+    padding: 0 !important;
+    text-decoration: none;
+}
+div.ot-mini-tabs a:hover, div.ot-mini-tabs a:active, div.ot-mini-tabs a:focus {
+    background: none repeat scroll 0 0 transparent !important;
+    text-decoration: underline;
+}

@@ -32,7 +32,7 @@ class plgContentPlg_JAThumbnail extends JPlugin {
 		$this->pluginParams = new JParameter( $this->plugin->params);
 		$this->stylesheet ($this->plugin);
 	}
-	function onContentBeforeDisplay( $context, &$article, &$params, $limitstart = 1) {		
+	function onContentBeforeDisplay( $context, &$article, &$params, $limitstart = 0) {		
 	//}
 	//function onPrepareContent(&$article, &$params, $limitstart) {
 	    

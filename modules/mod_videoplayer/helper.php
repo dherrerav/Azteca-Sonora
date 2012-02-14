@@ -62,7 +62,7 @@ abstract class modVideoPlayerHelper {
 		$model->setState('list.start', 0);
 		$model->setState('list.limit', (int)$params->get('count', 20));
 		$model->setState('filter.published', 1);
-		$model->setState('list.select', 'a.id, a.title, a.alias, a.catid, a.introtext, a.fulltext, a.created, a.created_by, a.created_by_alias, a.publish_up');
+		$model->setState('list.select', 'a.id, a.title, a.alias, a.catid, a.introtext, a.fulltext, a.created, a.created_by, a.created_by_alias, a.publish_up, a.attribs');
 		$access = !JComponentHelper::getParams('com_content')->get('show_noauth');
 		$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 		$model->setState('filter.access', $access);
@@ -103,7 +103,7 @@ abstract class modVideoPlayerHelper {
 			} else {
 				// TODO: Implement youtube video.
 			}
-			if (!$categories[$article->catid]) {
+			if (empty($categories[$article->catid])) {
 				$category = new stdClass();
 				$category->title = $article->category_title;
 				$category->id = (int)$article->catid;

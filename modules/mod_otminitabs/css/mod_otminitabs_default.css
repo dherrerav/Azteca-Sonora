@@ -1,0 +1,63 @@
+<?php
+/**===========================================================================================
+# mod_otminitabs        OT Mini Tabs module for Joomla 1.7
+#=============================================================================================
+# author                OmegaTheme.com
+# copyright             Copyright (C) 2011 OmegaTheme.com. All rights reserved.
+# @license              http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+# Website               http://omegatheme.com
+# Technical support     Forum - http://omegatheme.com/forum/
+#=============================================================================================*/
+
+/**------------------------------------------------------------------------
+* file:           css/mod_otminitabs_default.css 1.7.0 00001, Mar 2011 12:00:00Z OmegaTheme:Linh $
+* package:        OT Mini Tabs module
+* description:    stylesheet file for default layout
+*------------------------------------------------------------------------*/
+
+/* =========== default layout =============*/
+.ot-wrapper {}
+.tab_selector_wrapper {}
+
+/* tab selector */
+.tab_selector {
+    background: #F5F5F5 url(../images/default/tab.png) repeat-x 0 0;
+    border-color: #DDDDDD #DDDDDD;
+    border-style: solid solid none;
+    border-width: 1px 1px 0;
+}
+.tab_selector li {
+    background: #F5F5F5 url(../images/default/tab.png) repeat-x 0 0;
+    border-right: 1px solid #DDDDDD;
+}
+.tab_selector li span {
+    color: #025A8D;
+}
+.tab_selector li.open_tab span {
+    background: #FFFFFF;
+}
+/* tab panel */
+.tab_panel_wrapper {
+    border: 1px solid #DDDDDD;
+    border-top: 0 none;
+    background: #FFFFFF;
+}
+.tab_panel {
+    padding: 5px 10px;
+}
+
+/* content type tab */
+.ot-items-wrapper {
+    background: #FFFFFF;
+}
+.ot-item-wrapper {
+    border-bottom: 1px dashed #CCCCCC;
+}
+.ot-thumb-wrapper {}
+.ot-thumbnail {}
+.ot-title {}
+.ot-title-link {}
+.created_date {}
+.ot-article-introtext {}
+.ot-readmore-link {}
+.view-all {}

@@ -16,6 +16,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 		'mp4' => 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
 		'webm' => 'video/webm; codecs="vp8, vorbis"',
 		'ogv' => 'video/ogg; codecs="theora, vorbis"',
+		'm4v' => 'video/x-m4v',
 		'flv' => 'video/x-flv',
 		'youtube' => 'video/youtube',
 	);
@@ -49,7 +50,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 		$this->articleHeight = $this->params->get('article_height', 333);
 		$this->skin = $this->params->get('skin', 'default');
 	}
-	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 1) {
+	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 0) {
 		$catids = $this->params->get('catids');
 		if (is_array($catids) && count($catids) == 1) {
 			if (empty($catids[0])) {
@@ -89,12 +90,14 @@ class plgContentPlg_VideoJS extends JPLugin {
 			if (!$styleSheetFound) {
 				$document->addStyleSheet(JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/css/skins/flowplayer-' . $this->skin . '.css');
 			}
+			$video = null;
 			if (preg_match($this->videoCode, $article->introtext, $this->videoMatches)) {
 				$video = $this->videoMatches[1];
 			}
 			if (preg_match($this->youtubeCode, $article->introtext, $this->youtubeMatches)) {
 				$video = $this->youtubeMatches[1];
 			}
+			if (!$video) return;
 			$article->slug = $article->id . ':' . $article->alias;
 			$article->link = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid));
 			if ($this->view === 'article') {
@@ -192,8 +195,14 @@ class plgContentPlg_VideoJS extends JPLugin {
 		return $image;
 	}
 	protected function _removeCode(&$article) {
-		if ($this->videoMatches[0]) $article->introtext = str_replace($this->videoMatches[0], '', $article->introtext);
-		if ($this->youtubeMatches[0]) $article->introtext = str_replace($this->youtubeMatches[0], '', $article->introtext);
+		if (preg_match($this->videoCode, $article->introtext, $match)) {
+			$article->introtext = str_replace($match[0], '', $article->introtext);
+		}
+		//if ($this->videoMatches[0]) $article->introtext = str_replace($this->videoMatches[0], '', $article->introtext);
+		if (preg_match($this->youtubeCode, $article->introtext, $match)) {
+			$article->introtext = str_replace($match[0], '', $article->introtext);
+		}
+		//if ($this->youtubeMatches[0] !== null) $article->introtext = str_replace($this->youtubeMatches[0], '', $article->introtext);
 	}
 	protected function _getLayoutPath($plugin, $layout = 'default') {
 		$application =& JFactory::getApplication();

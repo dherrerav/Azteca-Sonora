@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+    type="module"
+    version="1.7"
+    client="site"
+    method="upgrade">
+    <name>MOD_OT_MINI_TABS</name>
+    <author>OmegaTheme</author>
+    <creationDate>Mar 2011</creationDate>
+    <copyright>Copyright (C) 2011 OmegaTheme.com. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <authorEmail>services@omegatheme.com</authorEmail>
+    <authorUrl>http://omegatheme.com</authorUrl>
+    <version>1.7.0</version>
+    <description>MOD_OT_MINI_TABS_XML_DESCRIPTION</description>
+    <files>
+        <filename module="mod_otminitabs">mod_otminitabs.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>mod_otminitabs.xml</filename>
+        <folder>css</folder>
+        <folder>elements</folder>
+        <folder>images</folder>
+        <folder>language</folder>
+        <folder>tmpl</folder>
+    </files>
+    <help key="JHELP_EXTENSIONS_MODULE_MANAGER_OT_MINI_TABS" />
+    <config>
+        <fields addfieldpath="/modules/mod_otminitabs/elements" name="params">
+            <fieldset name="OT_TAB_SETTINGS">
+                <field name="tab_type"
+                    type="list"
+                    default="mID"
+                    label="MOD_OT_MINI_TABS_TAB_TYPE_LABEL"
+                    description="MOD_OT_MINI_TABS_TAB_TYPE_LABEL">
+                    <option value="mID">MOD_OT_MINI_TABS_TAB_TYPE_VALUE_MODULES</option>
+                    <option value="cID">MOD_OT_MINI_TABS_TAB_TYPE_VALUE_CONTENTS</option>
+                </field>
+                
+                <field name="module_type"
+                    type="moduletype"
+                    label="MOD_OT_MINI_TABS_MODULE_TYPE_LABEL"
+                    description="MOD_OT_MINI_TABS_MODULE_TYPE_DESC" />
+                    
+                <field name="tab_select"
+                    type="tabselect"
+                    multiple="true"
+                    default=""
+                    label="MOD_OT_MINI_TABS_TAB_SELECT_LABEL"
+                    description="MOD_OT_MINI_TABS_TAB_SELECT_DESC">
+                </field>
+                
+                <field name="tab_selection"
+                    type="hidden"
+                    default=""
+                    label="Tabs"
+                    description="Tabs">
+                </field>
+            </fieldset>
+            
+            <fieldset
+                name="OT_CONTENT_SETTINGS">
+                <field name="number_of_article"
+                    type="text"
+                    default="4"
+                    label="MOD_OT_MINI_TABS_FIELD_NUMBER_ARTICLES_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_NUMBER_ARTICLES_DESC" />
+                <field name="number_of_character"
+                    type="text"
+                    default="100"
+                    filter="int"
+                    label="MOD_OT_MINI_TABS_FIELD_LIMIT_CHARACTER_OF_INTRO_TEXT_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_LIMIT_CHARACTER_OF_INTRO_TEXT_DESC" />
+                <field name="ordering"
+                    type="list"
+                    default="published"
+                    label="MOD_OT_MINI_TABS_FIELD_ORDERING_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_ORDERING_DESC">
+                    <option value="c_dsc">MOD_OT_MINI_TABS_VALUE_RECENT_ADDED</option>
+                    <option value="m_dsc">MOD_OT_MINI_TABS_VALUE_RECENT_MODIFIED</option>
+                    <option value="p_dsc">MOD_OT_MINI_TABS_VALUE_RECENT_PUBLISHED</option>
+                    <option value="mc_dsc">MOD_OT_MINI_TABS_VALUE_RECENT_TOUCHED</option>
+                    <option value="h_dsc">MOD_OT_MINI_TABS_VALUE_MOST_HITS</option>
+                </field>
+                <field name="user_id"
+                    type="list"
+                    default="0"
+                    label="MOD_OT_MINI_TABS_FIELD_USER_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_USER_DESC">
+                    <option value="0">MOD_OT_MINI_TABS_VALUE_ANYONE</option>
+                    <option value="by_me">MOD_OT_MINI_TABS_VALUE_ADDED_BY_ME</option>
+                    <option value="not_me">MOD_OT_MINI_TABS_VALUE_NOTADDED_BY_ME</option>
+                </field>
+                <field name="show_featured"
+                    type="list"
+                    default=""
+                    label="MOD_OT_MINI_TABS_FIELD_FEATURED_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_FEATURED_DESC">
+                    <option value="">JSHOW</option>
+                    <option value="0">JHIDE</option>
+                    <option value="1">MOD_OT_MINI_TABS_VALUE_ONLY_SHOW_FEATURED</option>
+                </field>
+                <field name="show_link"
+                    type="radio"
+                    default="1"
+                    label="MOD_OT_MINI_TABS_FIELD_ARTICLE_TITLE_LINK_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_ARTICLE_TITLE_LINK_DESC">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="show_readmore"
+                    type="radio"
+                    default="0"
+                    label="MOD_OT_MINI_TABS_FIELD_SHOW_READMORE_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_SHOW_READMORE_DESC">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                
+                <field name="show_date" 
+                    type="radio" 
+                    default="1" 
+                    label="MOD_OT_MINI_TABS_FIELD_SHOW_CREATED_DATE_LABEL" 
+                    description="MOD_OT_MINI_TABS_FIELD_SHOW_CREATED_DATE_DESC" 
+                    filter="int">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                
+                <field name="date_format" 
+                    type="text" 
+                    default="d.m.Y" 
+                    label="MOD_OT_MINI_TABS_FIELD_DATE_FORMAT_LABEL" 
+                    description="MOD_OT_MINI_TABS_FIELD_DATE_FORMAT_DESC" />
+                
+                <field name="show_thumbnail"
+                    type="radio"
+                    default="1"
+                    label="MOD_OT_MINI_TABS_FIELD_SHOW_THUMBNAIL_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_SHOW_THUMBNAIL_DESC">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                
+                <field name="default_image"
+                    type="text"
+                    size="50"
+                    default="modules/mod_otminitabs/images/sampledefault.jpg"
+                    label="MOD_OT_MINI_TABS_FIELD_DEFAULT_IMAGE_PATH_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_DEFAULT_IMAGE_PATH_DESC" />
+                
+                <field name="thumb_width"
+                    type="text"
+                    default="70"
+                    label="MOD_OT_MINI_TABS_FIELD_THUMB_WIDTH_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_THUMB_WIDTH_DESC" 
+                    filter="int" />
+                
+                <field name="thumb_height"
+                    type="text"
+                    default="50"
+                    label="MOD_OT_MINI_TABS_FIELD_THUMB_HEIGHT_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_THUMB_HEIGHT_DESC" 
+                    filter="int" />
+                
+                <field name="show_view_all"
+                    type="radio"
+                    default="1"
+                    label="MOD_OT_MINI_TABS_FIELD_SHOW_VIEW_ALL_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_SHOW_VIEW_ALL_DESC">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+            </fieldset>
+            
+            <fieldset
+                name="advanced">
+                <field
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+                    <field name="unique_id"
+                    type="text"
+                    default=""
+                    label="MOD_OT_MINI_TABS_FIELD_UNIQUE_ID_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_UNIQUE_ID_DESC" />
+                
+                <field
+                    name="moduleclass_sfx"
+                    type="text"
+                    label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                    description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+                
+                <field name="module_width"
+                    type="text"
+                    default="100%"
+                    disabled="true"
+                    label="MOD_OT_MINI_TABS_FIELD_MODULE_WIDTH_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_MODULE_WIDTH_DESC" />
+                
+                <field name="module_height"
+                    type="text"
+                    default="auto"
+                    disabled="true"
+                    label="MOD_OT_MINI_TABS_FIELD_MODULE_HEIGHT_LABEL"
+                    description="MOD_OT_MINI_TABS_FIELD_MODULE_HEIGHT_DESC" />
+                    
+                <field
+                    name="cache"
+                    type="list"
+                    default="1"
+                    label="COM_MODULES_FIELD_CACHING_LABEL"
+                    description="COM_MODULES_FIELD_CACHING_DESC">
+                    <option
+                        value="1">JGLOBAL_USE_GLOBAL</option>
+                    <option
+                        value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+                </field>
+                
+                <field
+                    name="cache_time"
+                    type="text"
+                    default="900"
+                    label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+                    description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+                <field
+                    name="cachemode"
+                    type="hidden"
+                    default="static">
+                    <option
+                        value="static"></option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
