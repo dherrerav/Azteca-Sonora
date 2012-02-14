@@ -36,7 +36,6 @@ The second part will define the visual look for this menu.
 	display: block;
 	background: none;
 	cursor: pointer;
-	overflow: visible;
 }
 
 #ja-cssmenu li ul {
@@ -60,7 +59,7 @@ The second part will define the visual look for this menu.
 
 #ja-cssmenu ul a {
 	width: 14.8em;
-	w\idth: 10.8em;
+	width: 10.8em;
 }
 
 #ja-cssmenu li:hover ul ul, #ja-cssmenu li:hover ul ul ul,
@@ -82,10 +81,8 @@ The second part will define the visual look for this menu.
 /* 1st level */
 #ja-cssmenu li a {
 	margin: 0;
-	padding: 8px 15px;
 	display: block;
 	line-height: normal;
-	font-weight: bold;
 	text-decoration: none;
 }
 
@@ -152,4 +149,3 @@ The second part will define the visual look for this menu.
 #ja-cssmenu ul li a.active:focus {
 	font-weight: bold;
 }
-
