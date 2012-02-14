@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	Templates.hathor
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  */
@@ -16,11 +15,13 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
-JHtml::_('script','system/multiselect.js',false,true);
+JHtml::_('behavior.multiselect');
+JHtml::_('behavior.modal');
 
-$canDo 		= UsersHelper::getActions();
-$listOrder	= $this->escape($this->state->get('list.ordering'));
-$listDirn	= $this->escape($this->state->get('list.direction'));
+$canDo = UsersHelper::getActions();
+$listOrder = $this->escape($this->state->get('list.ordering'));
+$listDirn = $this->escape($this->state->get('list.direction'));
+$loggeduser = JFactory::getUser();
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_users&view=users');?>" method="post" name="adminForm" id="adminForm">
@@ -32,13 +33,14 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_RESET'); ?></button>
 		</div>
+
 		<div class="filter-select">
 			<span class="faux-label")><?php echo JText::_('COM_USERS_FILTER_LABEL'); ?></span>
 
 			<label class="selectlabel" for="filter_state">
 				<?php echo JText::_('COM_USERS_FILTER_LABEL'); ?>
 			</label>
-			<select name="filter_state" id="filter_state" class="inputbox">
+			<select name="filter_state" class="inputbox" id="filter_state">
 				<option value="*"><?php echo JText::_('COM_USERS_FILTER_STATE');?></option>
 				<?php echo JHtml::_('select.options', UsersHelper::getStateOptions(), 'value', 'text', $this->state->get('filter.state'));?>
 			</select>
@@ -46,7 +48,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 			<label class="selectlabel" for="filter_active">
 				<?php echo JText::_('COM_USERS_FILTER_ACTIVE'); ?>
 			</label>
-			<select name="filter_active" id="filter_active" class="inputbox">
+			<select name="filter_active" class="inputbox" id="filter_active">
 				<option value="*"><?php echo JText::_('COM_USERS_FILTER_ACTIVE');?></option>
 				<?php echo JHtml::_('select.options', UsersHelper::getActiveOptions(), 'value', 'text', $this->state->get('filter.active'));?>
 			</select>
@@ -54,14 +56,21 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 			<label class="selectlabel" for="filter_group_id">
 				<?php echo JText::_('COM_USERS_FILTER_USERGROUP'); ?>
 			</label>
-			<select name="filter_group_id" id="filter_group_id" class="inputbox">
+			<select name="filter_group_id" class="inputbox" id="filter_group_id">
 				<option value=""><?php echo JText::_('COM_USERS_FILTER_USERGROUP');?></option>
 				<?php echo JHtml::_('select.options', UsersHelper::getGroups(), 'value', 'text', $this->state->get('filter.group_id'));?>
 			</select>
 
-			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('JSUBMIT'); ?></button>
+			<label class="selectlabel" for="filter_range">
+				<?php echo JText::_('COM_USERS_FILTER_FILTER_DATE'); ?>
+			</label>
+			<select name="filter_range" class="inputbox"  id="filter_range" >
+				<option value=""><?php echo JText::_('COM_USERS_OPTION_FILTER_DATE');?></option>
+				<?php echo JHtml::_('select.options', Usershelper::getRangeOptions(), 'value', 'text', $this->state->get('filter.range'));?>
+			</select>
 
+			<button type="submit" id="filter-go">
+				<?php echo JText::_('JSUBMIT'); ?></button>
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
@@ -70,7 +79,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
+					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
@@ -103,14 +112,29 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 		</thead>
 
 		<tbody>
-		<?php foreach ($this->items as $i => $item) : ?>
+		<?php foreach ($this->items as $i => $item) :
+			$canEdit	= $canDo->get('core.edit');
+			$canChange	= $loggeduser->authorise('core.edit.state',	'com_users');
+			// If this group is super admin and this user is not super admin, $canEdit is false
+			if ((!$loggeduser->authorise('core.admin')) && JAccess::check($item->id, 'core.admin')) {
+				$canEdit	= false;
+				$canChange	= false;
+			}
+		?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td>
-					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php if ($canEdit) : ?>
+						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php endif; ?>
 				</td>
 				<td>
-					<?php if ($canDo->get('core.edit')) : ?>
-					<a href="<?php echo JRoute::_('index.php?option=com_users&task=user.edit&id='.$item->id); ?>" title="<?php echo JText::sprintf('COM_USERS_EDIT_USER', $this->escape($item->name)); ?>">
+					<div class="fltrt">
+						<?php echo JHtml::_('users.filterNotes', $item->note_count, $item->id); ?>
+						<?php echo JHtml::_('users.notes', $item->note_count, $item->id); ?>
+						<?php echo JHtml::_('users.addNote', $item->id); ?>
+					</div>
+					<?php if ($canEdit) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_users&task=user.edit&id='.(int) $item->id); ?>" title="<?php echo JText::sprintf('COM_USERS_EDIT_USER', $this->escape($item->name)); ?>">
 						<?php echo $this->escape($item->name); ?></a>
 					<?php else : ?>
 						<?php echo $this->escape($item->name); ?>
@@ -124,13 +148,21 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 					<?php echo $this->escape($item->username); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'users.unblock', 'users.block'); ?>
+					<?php if ($canChange) : ?>
+						<?php if ($loggeduser->id != $item->id) : ?>
+							<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'users.unblock', 'users.block'); ?>
+						<?php else : ?>
+							<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'users.block', null); ?>
+						<?php endif; ?>
+					<?php else : ?>
+						<?php echo JText::_($item->block ? 'JNO' : 'JYES'); ?>
+					<?php endif; ?>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('grid.boolean', $i, !$item->activation, 'users.activate', null); ?>
 				</td>
 				<td class="center">
-					<?php if (substr_count($item->group_names,"\n") > 1) : ?>
+					<?php if (substr_count($item->group_names, "\n") > 1) : ?>
 						<span class="hasTip" title="<?php echo JText::_('COM_USERS_HEADING_GROUPS').'::'.nl2br($item->group_names); ?>"><?php echo JText::_('COM_USERS_USERS_MULTIPLE_GROUPS'); ?></span>
 					<?php else : ?>
 						<?php echo nl2br($item->group_names); ?>
@@ -141,13 +173,13 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 				</td>
 				<td class="center">
 					<?php if ($item->lastvisitDate!='0000-00-00 00:00:00'):?>
-						<?php echo JHtml::_('date',$item->lastvisitDate, 'Y-m-d H:i:s'); ?>
+						<?php echo JHtml::_('date', $item->lastvisitDate, 'Y-m-d H:i:s'); ?>
 					<?php else:?>
 						<?php echo JText::_('JNEVER'); ?>
 					<?php endif;?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('date',$item->registerDate, 'Y-m-d H:i:s'); ?>
+					<?php echo JHtml::_('date', $item->registerDate, 'Y-m-d H:i:s'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>
@@ -157,11 +189,15 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 		</tbody>
 	</table>
 
-	<?php echo $this->pagination->getListFooter(); ?>
+	<?php //Load the batch processing form. ?>
+	<?php echo $this->loadTemplate('batch'); ?>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo $this->pagination->getListFooter(); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

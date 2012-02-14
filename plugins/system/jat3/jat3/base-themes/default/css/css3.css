@@ -1,13 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 /* Using CSS3 for some visual enhancements.
 (Will be degraded nicely for non-CSS3 browsers.)
@@ -18,7 +18,6 @@
 /* ------------------- */
 
 #ja-cpanel {
-	box-shadow: 0 1px 5px rgba(0,0,0,.5);
 	-moz-box-shadow: 0 1px 5px rgba(0,0,0,.5);
 	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
 

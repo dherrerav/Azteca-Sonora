@@ -1,6 +1,5 @@
 <?php
 /**
-* @version $Id: strspn.php 18212 2010-07-22 06:02:54Z eddieajau $
 * @package utf8
 * @subpackage strings
 */

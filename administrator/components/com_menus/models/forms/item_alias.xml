@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!--
-		$Id: item_alias.xml 18253 2010-07-26 08:55:01Z infograf768 $
-	-->
 <form>
 	<!-- Add fields to the request variables for the layout. -->
 	<fields name="params">
@@ -29,6 +26,15 @@
 			<field name="menu_image" type="media"
 				label="COM_MENUS_ITEM_FIELD_MENU_IMAGE_LABEL"
 				description="COM_MENUS_ITEM_FIELD_MENU_IMAGE_DESC" />
+
+			<field name="menu_text" type="radio"
+				label="COM_MENUS_ITEM_FIELD_MENU_TEXT_LABEL"
+				description="COM_MENUS_ITEM_FIELD_MENU_TEXT_DESC"
+				default="1" filter="integer"
+			>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
 
 		</fieldset>
 	</fields>

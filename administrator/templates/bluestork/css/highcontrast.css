@@ -1,11 +1,9 @@
 /**
- * @version		$Id: highcontrast.css 21016 2011-03-24 17:26:08Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	templates.bluestork
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 
 body,
 div#sbox-content {
@@ -45,7 +43,6 @@ a:hover {
 #border-top.h_blue div div   { background: none }
 
 
-
 table.adminform {
 	background-color: #000;
 	/* border: solid 1px #fff; */
@@ -56,7 +53,6 @@ table.adminform tr.row1 { background-color: #000000; }
 table.adminform th {
 	color: #fff;
 }
-
 
 div#element-box,
 div#toolbar-box,
@@ -105,13 +101,13 @@ input.text-area-order,
 .filter-search button:hover {
 	background-color: #383838;
 }
-div.current span.spacer > span.text label, 
-fieldset.adminform span.spacer > span.text label, 
+div.current span.spacer > span.text label,
+fieldset.adminform span.spacer > span.text label,
 fieldset.panelform span.spacer > span.text label {
 	color: #fff;
 }
 div.toolbar-list a:hover,
-div.toolbar-list a:focus, 
+div.toolbar-list a:focus,
 div.toolbar-list a:active {
 	color: #fff;
 }
@@ -155,9 +151,9 @@ div.header {
 	font-weight: bold !important;
 }
 
-
-#menu li.disabled a { color: #fff; }
-
+#menu li.disabled a {
+	color: #fff;
+}
 
 /* 1 level - hover */
 #menu li.hover a {  color:000; background-color: #e8e8e8; border-left: 1px solid #025a8d;  border-right:1px solid #025a8d; margin: 0; font-weight: bold !important;}
@@ -284,58 +280,6 @@ table.adminlist {
 border-top: 1px solid #fff;
 }
 
-div#submenu-box div.t div.t {
-   background: url(../images/j_crn_tr_black.png) 100% 0 no-repeat;
-}
-
-div#submenu-box div.t div.t div.t {
-   background: url(../images/j_crn_tl_black.png) 0 0 no-repeat;
-}
-
-div#submenu-box div.b div.b {
-   background: url(../images/j_crn_br_black.png) 100% 0 no-repeat;
-}
-
-div#submenu-box div.b div.b div.b {
-   background: url(../images/j_crn_bl_black.png) 0 0 no-repeat;
-}
-
-
-div#toolbar-box div.t div.t,
-div#element-box div.section-box div.t div.t {
-   background: url(../images/j_crn_tr_black.png) 100% 0 no-repeat;
-}
-
-div#toolbar-box div.t div.t div.t,
-div#element-box div.section-box div.t div.t div.t {
-   background: url(../images/j_crn_tl_black.png) 0 0 no-repeat;
-}
-div#toolbar-box div.b div.b,
-div#element-box div.section-box div.b div.b {
-   background: url(../images/j_crn_br_black.png) 100% 0 no-repeat;
-}
-
-div#toolbar-box div.b div.b div.b,
-div#element-box div.section-box div.b div.b div.b {
-   background: url(../images/j_crn_bl_black.png) 0 0 no-repeat;
-}
-
-div#element-box div.t div.t {
-   background: url(../images/j_crn_tr_black.png) 100% 0 no-repeat;
-}
-
-div#element-box div.t div.t div.t {
-   background: url(../images/j_crn_tl_black.png) 0 0 no-repeat;
-}
-
-div#element-box div.b div.b {
-   background: url(../images/j_crn_br_black.png) 100% 0 no-repeat;
-}
-
-div#element-box div.b div.b div.b {
-   background: url(../images/j_crn_bl_black.png) 0 0 no-repeat;
-}
-
 .mooTree_selected {
 	background-color:#999999 !important;
 }
@@ -351,9 +295,7 @@ div#element-box div.b div.b div.b {
 
 #system-message dd ul {
 	color:#fff;
-
 }
-
 
 #menu li.disabled a {
 	color:#acacac;
@@ -365,8 +307,8 @@ div.pagetitle h2 {
 .button2-left a,
 .button2-right a {
 	color:#000;
-
 }
+
 .pane-toggler a,
 .pane-toggler-down a {
 	text-decoration:none;
@@ -384,4 +326,9 @@ div.toolbar-list a  {
 body.contentpane,
 .manager {
 	background: #000;
+}
+
+/* -- Codemirror Editor  ----------- */
+div.editor-border, div.CodeMirror-wrapping {
+	background-color: #ffffff;
 }

@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -55,12 +54,14 @@ class LanguagesViewInstalled extends JView
 	function display($tpl = null)
 	{
 		// Get data from the model
-
 		$this->ftp			= $this->get('Ftp');
 		$this->option		= $this->get('Option');
 		$this->pagination	= $this->get('Pagination');
 		$this->rows			= $this->get('Data');
 		$this->state		= $this->get('State');
+
+		$document = JFactory::getDocument();
+		$document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
 
 		$this->addToolbar();
 		parent::display($tpl);
@@ -73,16 +74,16 @@ class LanguagesViewInstalled extends JView
 	protected function addToolbar()
 	{
 		require_once JPATH_COMPONENT.'/helpers/languages.php';
-		
+
 		$canDo	= LanguagesHelper::getActions();
 
 		JToolBarHelper::title(JText::_('COM_LANGUAGES_VIEW_INSTALLED_TITLE'), 'langmanager.png');
 
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::makeDefault('installed.setDefault','JTOOLBAR_DEFAULT');
+			JToolBarHelper::makeDefault('installed.setDefault');
 			JToolBarHelper::divider();
 		}
-		
+
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_languages');
 			JToolBarHelper::divider();

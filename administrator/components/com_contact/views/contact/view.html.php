@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20989 2011-03-18 09:19:41Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -56,39 +55,40 @@ class ContactViewContact extends JView
 		$userId		= $user->get('id');
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
-		$canDo		= ContactHelper::getActions($this->state->get('filter.category_id'));
+		// Since we don't track these assets at the item level, use the category id.
+		$canDo		= ContactHelper::getActions($this->item->catid, 0);
 
 		JToolBarHelper::title(JText::_('COM_CONTACT_MANAGER_CONTACT'), 'contact.png');
 
-		// Built the actions for new and existing records.
+		// Build the actions for new and existing records.
 		if ($isNew)  {
 			// For new records, check the create permission.
 			if ($isNew && (count($user->getAuthorisedCategories('com_contact', 'core.create')) > 0)) {
-				JToolBarHelper::apply('contact.apply', 'JTOOLBAR_APPLY');
-				JToolBarHelper::save('contact.save', 'JTOOLBAR_SAVE');
-				JToolBarHelper::custom('contact.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+				JToolBarHelper::apply('contact.apply');
+				JToolBarHelper::save('contact.save');
+				JToolBarHelper::save2new('contact.save2new');
 			}
 
-			JToolBarHelper::cancel('contact.cancel', 'JTOOLBAR_CANCEL');
+			JToolBarHelper::cancel('contact.cancel');
 		}
 		else {
 			// Can't save the record if it's checked out.
 			if (!$checkedOut) {
 				// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
 				if ($canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId)) {
-					JToolBarHelper::apply('contact.apply', 'JTOOLBAR_APPLY');
-					JToolBarHelper::save('contact.save', 'JTOOLBAR_SAVE');
+					JToolBarHelper::apply('contact.apply');
+					JToolBarHelper::save('contact.save');
 
 					// We can save this record, but check the create permission to see if we can return to make a new one.
 					if ($canDo->get('core.create')) {
-						JToolBarHelper::custom('contact.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+						JToolBarHelper::save2new('contact.save2new');
 					}
 				}
 			}
 
 			// If checked out, we can still save
 			if ($canDo->get('core.create')) {
-				JToolBarHelper::custom('contact.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+				JToolBarHelper::save2copy('contact.save2copy');
 			}
 
 			JToolBarHelper::cancel('contact.cancel', 'JTOOLBAR_CLOSE');

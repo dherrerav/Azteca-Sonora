@@ -1,43 +1,45 @@
 <?php
 /**
- * @version		$Id: filelist.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Form
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
-jimport('joomla.html.html');
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
-jimport('joomla.form.formfield');
-jimport('joomla.form.helper');
 JFormHelper::loadFieldClass('list');
 
 /**
- * Supports an HTML select list of file
+ * Supports an HTML select list of files
  *
- * @package		Joomla.Framework
- * @subpackage	Form
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  Form
+ * @since       11.1
  */
 class JFormFieldFileList extends JFormFieldList
 {
+
 	/**
 	 * The form field type.
 	 *
-	 * @var		string
-	 * @since	1.6
+	 * @var    string
+	 * @since  11.1
 	 */
 	public $type = 'FileList';
 
 	/**
-	 * Method to get the field options.
+	 * Method to get the list of files for the field options.
+	 * Specify the target directory with a directory attribute
+	 * Attributes allow an exclude mask and stripping of extensions from file name.
+	 * Default attribute may optionally be set to null (no file) or -1 (use a default).
 	 *
-	 * @return	array	The field option objects.
-	 * @since	1.6
+	 * @return  array  The field option objects.
+	 *
+	 * @since   11.1
 	 */
 	protected function getOptions()
 	{
@@ -45,23 +47,26 @@ class JFormFieldFileList extends JFormFieldList
 		$options = array();
 
 		// Initialize some field attributes.
-		$filter			= (string) $this->element['filter'];
-		$exclude		= (string) $this->element['exclude'];
-		$stripExt		= (string) $this->element['stripext'];
-		$hideNone		= (string) $this->element['hide_none'];
-		$hideDefault	= (string) $this->element['hide_default'];
+		$filter = (string) $this->element['filter'];
+		$exclude = (string) $this->element['exclude'];
+		$stripExt = (string) $this->element['stripext'];
+		$hideNone = (string) $this->element['hide_none'];
+		$hideDefault = (string) $this->element['hide_default'];
 
 		// Get the path in which to search for file options.
 		$path = (string) $this->element['directory'];
-		if (!is_dir($path)) {
-			$path = JPATH_ROOT.'/'.$path;
+		if (!is_dir($path))
+		{
+			$path = JPATH_ROOT . '/' . $path;
 		}
 
 		// Prepend some default options based on field attributes.
-		if (!$hideNone) {
+		if (!$hideNone)
+		{
 			$options[] = JHtml::_('select.option', '-1', JText::alt('JOPTION_DO_NOT_USE', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
 		}
-		if (!$hideDefault) {
+		if (!$hideDefault)
+		{
 			$options[] = JHtml::_('select.option', '', JText::alt('JOPTION_USE_DEFAULT', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
 		}
 
@@ -69,18 +74,23 @@ class JFormFieldFileList extends JFormFieldList
 		$files = JFolder::files($path, $filter);
 
 		// Build the options list from the list of files.
-		if (is_array($files)) {
-			foreach($files as $file) {
+		if (is_array($files))
+		{
+			foreach ($files as $file)
+			{
 
 				// Check to see if the file is in the exclude mask.
-				if ($exclude) {
-					if (preg_match(chr(1).$exclude.chr(1), $file)) {
+				if ($exclude)
+				{
+					if (preg_match(chr(1) . $exclude . chr(1), $file))
+					{
 						continue;
 					}
 				}
 
 				// If the extension is to be stripped, do it.
-				if ($stripExt) {
+				if ($stripExt)
+				{
 					$file = JFile::stripExt($file);
 				}
 

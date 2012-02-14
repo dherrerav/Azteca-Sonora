@@ -1,6 +1,5 @@
 <?php
 /**
- * @version	$Id: contactcreator.php 21097 2011-04-07 15:38:03Z dextercowley $
  *
  * Contact Creator
  * A tool to automatically create and synchronise contacts with a user
@@ -10,8 +9,6 @@
 
 // No direct access.
 defined('_JEXEC') or die;
-
-jimport('joomla.plugins.plugin');
 
 /**
  * Class for Contact Creator
@@ -39,6 +36,10 @@ class plgUserContactCreator extends JPlugin
 	{
 		if(!$success) {
 			return false; // if the user wasn't stored we don't resync
+		}
+
+		if(!$isnew) {
+			return false; // if the user isn't new we don't sync
 		}
 
 		// ensure the user id is really an int
@@ -70,7 +71,7 @@ class plgUserContactCreator extends JPlugin
 		if ($id) {
 			$contact->load($id);
 		}
-		else if($this->params->get('autopublish', 0)) {
+		elseif($this->params->get('autopublish', 0)) {
 			$contact->published = 1;
 		}
 
@@ -83,9 +84,9 @@ class plgUserContactCreator extends JPlugin
 
 		if (!empty($autowebpage)) {
 			// search terms
-			$search_array = Array('[name]', '[username]','[userid]','[email]');
+			$search_array = array('[name]', '[username]', '[userid]', '[email]');
 			// replacement terms, urlencoded
-			$replace_array = array_map('urlencode', Array($user['name'], $user['username'],$user['id'],$user['email']));
+			$replace_array = array_map('urlencode', array($user['name'], $user['username'], $user['id'], $user['email']));
 			// now replace it in together
 			$contact->webpage = str_replace($search_array, $replace_array, $autowebpage);
 		}

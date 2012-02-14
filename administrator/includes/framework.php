@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: framework.php 21171 2011-04-18 21:50:18Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,33 +19,71 @@ defined('_JEXEC') or die;
 /*
  * Installation check, and check on removal of the install directory.
  */
-if (!file_exists(JPATH_CONFIGURATION.'/configuration.php') || (filesize(JPATH_CONFIGURATION.'/configuration.php') < 10) || file_exists(JPATH_INSTALLATION.'/index.php')) {	header('Location: ../installation/index.php');
+if (!file_exists(JPATH_CONFIGURATION.'/configuration.php') || (filesize(JPATH_CONFIGURATION.'/configuration.php') < 10) || file_exists(JPATH_INSTALLATION.'/index.php')) {
+	header('Location: ../installation/index.php');
 	exit();
 }
 
-/*
- * Joomla! system startup
- */
+//
+// Joomla system startup.
+//
 
 // System includes.
-require_once JPATH_LIBRARIES.'/joomla/import.php';
+require_once JPATH_LIBRARIES.'/import.php';
+
+// Force library to be in JError legacy mode
+JError::$legacy = true;
+JError::setErrorHandling(E_NOTICE, 'message');
+JError::setErrorHandling(E_WARNING, 'message');
+JError::setErrorHandling(E_ERROR, 'message', array('JError', 'customErrorPage'));
+
+// Botstrap the CMS libraries.
+require_once JPATH_LIBRARIES.'/cms.php';
 
 // Pre-Load configuration.
+ob_start();
 require_once JPATH_CONFIGURATION.'/configuration.php';
+ob_end_clean();
 
 // System configuration.
-$CONFIG = new JConfig();
+$config = new JConfig();
 
-if (@$CONFIG->error_reporting === 0) {
-	error_reporting(0);
-} else if (@$CONFIG->error_reporting > 0) {
-	error_reporting($CONFIG->error_reporting);
-	ini_set('display_errors', 1);
+// Set the error_reporting
+switch ($config->error_reporting)
+{
+	case 'default':
+	case '-1':
+		break;
+
+	case 'none':
+	case '0':
+		error_reporting(0);
+		break;
+
+	case 'simple':
+		error_reporting(E_ERROR | E_WARNING | E_PARSE);
+		ini_set('display_errors', 1);
+		break;
+
+	case 'maximum':
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		break;
+
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+		break;
+
+	default:
+		error_reporting($config->error_reporting);
+		ini_set('display_errors', 1);
+		break;
 }
 
-define('JDEBUG', $CONFIG->debug);
+define('JDEBUG', $config->debug);
 
-unset($CONFIG);
+unset($config);
 
 /*
  * Joomla! framework loading.
@@ -60,12 +97,8 @@ if (JDEBUG) {
 
 // Joomla! library imports.
 jimport('joomla.application.menu');
-jimport('joomla.user.user');
 jimport('joomla.environment.uri');
-jimport('joomla.html.html');
 jimport('joomla.html.parameter');
 jimport('joomla.utilities.utility');
-jimport('joomla.event.event');
 jimport('joomla.event.dispatcher');
-jimport('joomla.language.language');
-jimport('joomla.utilities.string');
+jimport('joomla.utilities.arrayhelper');

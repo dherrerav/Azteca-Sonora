@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: link.php 21167 2011-04-18 18:25:26Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,7 +23,7 @@ class RedirectModelLink extends JModelAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_REDIRECT';
-	
+
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
@@ -35,13 +34,13 @@ class RedirectModelLink extends JModelAdmin
 	 */
 	protected function canDelete($record)
 	{
-		
+
 			if ($record->published != -2) {
 				return false;
 			}
 			$user = JFactory::getUser();
 			return $user->authorise('core.admin', 'com_redirect');
-		
+
 	}
 
 	/**
@@ -60,8 +59,8 @@ class RedirectModelLink extends JModelAdmin
 			return $user->authorise('core.admin', 'com_redirect');
 
 	}
-	
-	
+
+
 	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
@@ -143,7 +142,7 @@ class RedirectModelLink extends JModelAdmin
 		JArrayHelper::toInteger($pks);
 
 		// Populate default comment if necessary.
-		$comment = (!empty($comment)) ? $comment : JText::sprintf('COM_REDIRECT_REDIRECTED_ON', JHtml::_('date',time()));
+		$comment = (!empty($comment)) ? $comment : JText::sprintf('COM_REDIRECT_REDIRECTED_ON', JHtml::_('date', time()));
 
 		// Access checks.
 		if (!$user->authorise('core.admin', 'com_redirect')) {
@@ -155,9 +154,9 @@ class RedirectModelLink extends JModelAdmin
 		if (!empty($pks)) {
 			// Update the link rows.
 			$db->setQuery(
-				'UPDATE `#__redirect_links`' .
-				' SET `new_url` = '.$db->Quote($url).', `published` = 1, `comment` = '.$db->Quote($comment) .
-				' WHERE `id` IN ('.implode(',', $pks).')'
+				'UPDATE '.$db->quoteName('#__redirect_links') .
+				' SET '.$db->quoteName('new_url').' = '.$db->Quote($url).', '.$db->quoteName('published').' = 1, '.$db->quoteName('comment').' = '.$db->Quote($comment) .
+				' WHERE '.$db->quoteName('id').' IN ('.implode(',', $pks).')'
 			);
 			$db->query();
 

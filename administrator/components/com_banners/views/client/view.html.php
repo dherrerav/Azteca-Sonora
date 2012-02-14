@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -9,6 +8,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
+JLoader::register('BannersHelper', JPATH_COMPONENT.'/helpers/banners.php');
 
 /**
  * View to edit a client.
@@ -60,17 +60,17 @@ class BannersViewClient extends JView
 		JToolBarHelper::title($isNew ? JText::_('COM_BANNERS_MANAGER_CLIENT_NEW') : JText::_('COM_BANNERS_MANAGER_CLIENT_EDIT'), 'banners-clients.png');
 
 		// If not checked out, can save the item.
-		if (!$checkedOut && ($canDo->get('core.edit')||$canDo->get('core.create'))) {	
-			JToolBarHelper::apply('client.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('client.save', 'JTOOLBAR_SAVE');
+		if (!$checkedOut && ($canDo->get('core.edit')||$canDo->get('core.create'))) {
+			JToolBarHelper::apply('client.apply');
+			JToolBarHelper::save('client.save');
 		}
 		if (!$checkedOut && $canDo->get('core.create')) {
-		
-			JToolBarHelper::custom('client.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+
+			JToolBarHelper::save2new('client.save2new');
 		}
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('client.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+			JToolBarHelper::save2copy('client.save2copy');
 		}
 
 		if (empty($this->item->id))  {

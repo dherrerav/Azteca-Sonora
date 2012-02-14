@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_form.php 21021 2011-03-27 07:22:54Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.5
  */
@@ -23,7 +22,7 @@ defined('_JEXEC') or die;
 			form.submit();
 		}
 	}
-        
+
 	Joomla.submitbutton3 = function(pressbutton) {
 		var form = document.getElementById('adminForm');
 

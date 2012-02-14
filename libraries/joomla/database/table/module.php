@@ -1,14 +1,13 @@
 <?php
 /**
- * @version		$Id: module.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	Table
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Database
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.database.table');
 jimport('joomla.database.tableasset');
@@ -16,16 +15,18 @@ jimport('joomla.database.tableasset');
 /**
  * Module table
  *
- * @package		Joomla.Framework
- * @subpackage	Table
- * @since		1.0
+ * @package     Joomla.Platform
+ * @subpackage  Table
+ * @since       11.1
  */
 class JTableModule extends JTable
 {
 	/**
-	 * Contructor.
+	 * Constructor.
 	 *
-	 * @param database A database connector object
+	 * @param   JDatabase  &$db  A database connector object
+	 *
+	 * @since   11.1
 	 */
 	public function __construct(&$db)
 	{
@@ -37,18 +38,23 @@ class JTableModule extends JTable
 	/**
 	 * Overloaded check function.
 	 *
-	 * @return	boolean	True if the object is ok
+	 * @return  boolean  True if the instance is sane and able to be stored in the database.
+	 *
+	 * @see     JTable::check
+	 * @since   11.1
 	 */
 	public function check()
 	{
 		// check for valid name
-		if (trim($this->title) == '') {
+		if (trim($this->title) == '')
+		{
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_MUSTCONTAIN_A_TITLE_MODULE'));
 			return false;
 		}
 
 		// Check the publish down date is not earlier than publish up.
-		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up) {
+		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up)
+		{
 			// Swap the dates.
 			$temp = $this->publish_up;
 			$this->publish_up = $this->publish_down;
@@ -61,17 +67,21 @@ class JTableModule extends JTable
 	/**
 	 * Overloaded bind function.
 	 *
-	 * @param	array		named array
-	 * @return	null|string	null is operation was satisfactory, otherwise returns an error
-	 * @see		JTable:bind
-	 * @since	1.5
+	 * @param   array  $array   Named array.
+	 * @param   mixed  $ignore  An optional array or space separated list of properties to ignore while binding.
+	 *
+	 * @return  mixed  Null if operation was satisfactory, otherwise returns an error
+	 *
+	 * @see     JTable::bind
+	 * @since   11.1
 	 */
 	public function bind($array, $ignore = '')
 	{
-		if (isset($array['params']) && is_array($array['params'])) {
-			$registry = new JRegistry();
+		if (isset($array['params']) && is_array($array['params']))
+		{
+			$registry = new JRegistry;
 			$registry->loadArray($array['params']);
-			$array['params'] = (string)$registry;
+			$array['params'] = (string) $registry;
 		}
 
 		return parent::bind($array, $ignore);

@@ -1,21 +1,20 @@
 <?php
 /**
- * @version		$Id: default_params.php 20214 2011-01-09 20:25:57Z chdemko $
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  */
 defined('_JEXEC') or die;
 
 JLoader::register('JHtmlUsers', JPATH_COMPONENT . '/helpers/html/users.php');
-JHtml::register('users.spacer', array('JHtmlUsers','spacer'));
-JHtml::register('users.helpsite', array('JHtmlUsers','helpsite'));
-JHtml::register('users.templatestyle', array('JHtmlUsers','templatestyle'));
-JHtml::register('users.admin_language', array('JHtmlUsers','admin_language'));
-JHtml::register('users.language', array('JHtmlUsers','language'));
-JHtml::register('users.editor', array('JHtmlUsers','editor'));
+JHtml::register('users.spacer', array('JHtmlUsers', 'spacer'));
+JHtml::register('users.helpsite', array('JHtmlUsers', 'helpsite'));
+JHtml::register('users.templatestyle', array('JHtmlUsers', 'templatestyle'));
+JHtml::register('users.admin_language', array('JHtmlUsers', 'admin_language'));
+JHtml::register('users.language', array('JHtmlUsers', 'language'));
+JHtml::register('users.editor', array('JHtmlUsers', 'editor'));
 
 ?>
 <?php $fields = $this->form->getFieldset('params'); ?>
@@ -42,4 +41,3 @@ JHtml::register('users.editor', array('JHtmlUsers','editor'));
 	</dl>
 </fieldset>
 <?php endif;?>
-

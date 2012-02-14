@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -38,7 +37,17 @@ class ModulesViewModules extends JView
 			return false;
 		}
 
+		// Check if there are no matching items
+		if(!count($this->items)){
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_MODULES_MSG_MANAGE_NO_MODULES')
+				, 'warning'
+			);
+		}
+
 		$this->addToolbar();
+		// Include the component HTML helpers.
+		JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 		parent::display($tpl);
 	}
 
@@ -61,27 +70,27 @@ class ModulesViewModules extends JView
 		}
 
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::editList('module.edit','JTOOLBAR_EDIT');
+			JToolBarHelper::editList('module.edit');
 		}
 
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::custom('modules.duplicate', 'copy.png', 'copy_f2.png','JTOOLBAR_DUPLICATE', true);
+			JToolBarHelper::custom('modules.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
 		}
 
 		if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::divider();
-			JToolBarHelper::custom('modules.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
-			JToolBarHelper::custom('modules.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::publish('modules.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::unpublish('modules.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 			JToolBarHelper::divider();
-			JToolBarHelper::custom('modules.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+			JToolBarHelper::checkin('modules.checkin');
 		}
 
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'modules.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::deleteList('', 'modules.delete', 'JTOOLBAR_EMPTY_TRASH');
 			JToolBarHelper::divider();
-		} else if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::trash('modules.trash','JTOOLBAR_TRASH');
-			JToolBarHelper::divider();			
+		} elseif ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('modules.trash');
+			JToolBarHelper::divider();
 		}
 
 		if ($canDo->get('core.admin')) {

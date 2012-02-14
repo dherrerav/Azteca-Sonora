@@ -1,8 +1,7 @@
 <?php
 /**
- * @version		$Id: error.php 17282 2010-05-26 15:24:49Z infograf768 $
  * @package		Joomla.Site
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -14,12 +13,13 @@ $showleft = 0;
 $showbottom = 0;
 
 // get params
-$color              = $params->get('templatecolor');
-$navposition        = $params->get('navposition');
+$color			= $params->get('templatecolor');
+$navposition	= $params->get('navposition');
 
-?>
-<?php 
-$templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
+//get language and direction
+$doc = JFactory::getDocument();
+$this->language = $doc->language;
+$this->direction = $doc->direction;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -27,21 +27,20 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<?php  $doc=JFactory::getDocument();
- $language=$doc->language;?>
-<meta name="language" content="<?php echo $language; ?>" />
+
+<meta name="language" content="<?php echo $this->language; ?>" />
 
 	<title><?php echo $this->error->getCode(); ?> - <?php echo $this->title; ?></title>
 <?php if ($this->error->getCode()>=400 && $this->error->getCode() < 500) { 	?>
 
 
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/position.css" type="text/css" media="screen,projection" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/layout.css" type="text/css" media="screen,projection" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/print.css" type="text/css" media="Print" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/<?php echo htmlspecialchars($color); ?>.css" type="text/css" />     
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/position.css" type="text/css" media="screen,projection" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/layout.css" type="text/css" media="screen,projection" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/print.css" type="text/css" media="Print" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/<?php echo htmlspecialchars($color); ?>.css" type="text/css" />
 <?php
-	$files = JHtml::_('stylesheet','templates/beez5/css/general.css',null,false,true);
+	$files = JHtml::_('stylesheet', 'templates/'.$this->template.'/css/general.css', null, false, true);
 	if ($files):
 		if (!is_array($files)):
 			$files = array($files);
@@ -50,31 +49,35 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 ?>
 		<link rel="stylesheet" href="<?php echo $file;?>" type="text/css" />
 <?php
-	 	endforeach;
+		endforeach;
 	endif;
 ?>
+		 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/<?php echo htmlspecialchars($color); ?>.css" type="text/css" />
 		<?php if ($this->direction == 'rtl') : ?>
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/template_rtl.css" type="text/css" />
+			<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template_rtl.css" type="text/css" />
+			<?php if (file_exists(JPATH_SITE . '/templates/'.$this->template.'/css/' . $color . '_rtl.css')) :?>
+				<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/<?php echo $color ?>_rtl.css" type="text/css" />
+			<?php endif; ?>
 		<?php endif; ?>
 		<!--[if lte IE 6]>
-			<link href="<?php echo $this->baseurl ?>/templates/beez_20/css/ieonly.css" rel="stylesheet" type="text/css" />
+			<link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/ieonly.css" rel="stylesheet" type="text/css" />
 		<![endif]-->
 		<!--[if IE 7]>
-			<link href="<?php echo $this->baseurl ?>/templates/beez_20/css/ie7only.css" rel="stylesheet" type="text/css" />
+			<link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/ie7only.css" rel="stylesheet" type="text/css" />
 		<![endif]-->
-	
-	
+
+
 <style type="text/css">
 			<!--
 			#errorboxbody
 			{margin:30px}
 			#errorboxbody h2
-			{font-weight:normal; 
+			{font-weight:normal;
 			font-size:1.5em}
-			#searchbox 
-			{background:#eee; 
-			padding:10px; 
-			margin-top:20px; 
+			#searchbox
+			{background:#eee;
+			padding:10px;
+			margin-top:20px;
 			border:solid 1px #ddd
 			}
 			-->
@@ -89,13 +92,13 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 		<div id="back">
 
 		<div id="header">
-		
+
 					<div class="logoheader">
 						<?php
 								$params = JFactory::getApplication()->getTemplate(true)->params;
-								$logo =  $params->get('logo'); 
+								$logo =  $params->get('logo');
 							?>
-						
+
 							<?php jimport( 'joomla.application.module.helper' ); ?>
 
 						 <h1 id="logo">
@@ -110,29 +113,29 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
                                         <?php echo htmlspecialchars($params->get('sitedescription'));?>
                                         </span></h1>
 					</div><!-- end logoheader -->
-	
+
 						<ul class="skiplinks">
 							<li><a href="#wrapper2" class="u2"><?php echo JText::_('TPL_BEEZ2_SKIP_TO_ERROR_CONTENT'); ?></a></li>
 							<li><a href="#nav" class="u2"><?php echo JText::_('TPL_BEEZ2_ERROR_JUMP_TO_NAV'); ?></a></li>
-							
+
 						</ul>
 						<div id="line"></div>
-					
-				
-	
+
+
+
 				</div><!-- end header -->
-		
+
 		<div id="contentarea2" >
-			
-				
+
+
 							<div class="left1" id="nav">
-					
+
 				<h2 class="unseen"><?php echo JText::_('TPL_BEEZ2_NAVIGATION'); ?></h2>
 											<?php $module = JModuleHelper::getModule( 'menu' );
 											echo JModuleHelper::renderModule( $module);	?>
-				
+
 							</div>
-					
+
 					<!-- end navi -->
 			<div id="wrapper2">
 			<div id="errorboxbody">
@@ -146,8 +149,8 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 									echo JModuleHelper::renderModule( $module);	?>
 									</div>
 								<?php endif; ?>
-								<div>	 
-								<p><a href="<?php echo $this->baseurl; ?>/index.php" title="<?php echo JText::_('JERROR_LAYOUT_GO_TO_THE_HOME_PAGE'); ?>"><?php echo JText::_('JERROR_LAYOUT_HOME_PAGE'); ?></a></p>	
+								<div>
+								<p><a href="<?php echo $this->baseurl; ?>/index.php" title="<?php echo JText::_('JERROR_LAYOUT_GO_TO_THE_HOME_PAGE'); ?>"><?php echo JText::_('JERROR_LAYOUT_HOME_PAGE'); ?></a></p>
 								</div>
 
 						<h3><?php echo JText::_('JERROR_LAYOUT_PLEASE_CONTACT_THE_SYSTEM_ADMINISTRATOR'); ?></h3>
@@ -161,14 +164,14 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 						<?php if ($this->debug) :
 							echo $this->renderBacktrace();
 						endif; ?>
-					
+
 
 			</div>  <!--end all -->
-			
+
 			</div>
-			</div> 
+			</div>
 			 <div id="footer-outer">
-		
+
 			<div id="footer-sub">
 
 
@@ -179,18 +182,18 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 
                                 </div><!-- end footer -->
                          </div><!-- end footer-sub -->
-              
+
                        </div>
-            
+
 
 
 </body>
 </html>
 <?php } else { ?>
-<?php 
+<?php
 if (!isset($this->error)) {
 	$this->error = JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
-	$this->debug = false; 
+	$this->debug = false;
 }
 ?>
 	<link rel="stylesheet" href="<?php echo $this->baseurl; ?>/templates/system/css/error.css" type="text/css" />

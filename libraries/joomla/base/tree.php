@@ -1,55 +1,92 @@
 <?php
 /**
- * @version		$Id: tree.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Base
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access
-defined('JPATH_BASE') or die;
-require_once dirname(__FILE__).'/node.php';
+defined('JPATH_PLATFORM') or die;
+
+jimport('joomla.base.node');
 
 /**
  * Tree Class.
  *
- * @package		Joomla.Framework
- * @subpackage	Base
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  Base
+ * @since       11.1
  */
 class JTree extends JObject
 {
 	/**
 	 * Root node
+	 *
+	 * @var    object
+	 * @since  11.1
 	 */
 	protected $_root = null;
 
 	/**
 	 * Current working node
+	 *
+	 * @var    object
+	 * @since  11.1
 	 */
 	protected $_current = null;
 
-	function __construct()
+	/**
+	 * Constructor
+	 *
+	 * @since   11.1
+	 */
+	public function __construct()
 	{
 		$this->_root = new JNode('ROOT');
 		$this->_current = & $this->_root;
 	}
 
-	function addChild(&$node, $setCurrent = false)
+	/**
+	 * Method to add a child
+	 *
+	 * @param   array    &$node       The node to process
+	 * @param   boolean  $setCurrent  True to set as current working node
+	 *
+	 * @return  mixed
+	 *
+	 * @since   11.1
+	 */
+	public function addChild(&$node, $setCurrent = false)
 	{
 		$this->_current->addChild($node);
-		if ($setCurrent) {
+		if ($setCurrent)
+		{
 			$this->_current = &$node;
 		}
 	}
 
-	function getParent()
+	/**
+	 * Method to get the parent
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
+	 */
+	public function getParent()
 	{
 		$this->_current = &$this->_current->getParent();
 	}
 
-	function reset()
+	/**
+	 * Method to get the parent
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
+	 */
+	public function reset()
 	{
 		$this->_current = &$this->_root;
 	}
 }
-

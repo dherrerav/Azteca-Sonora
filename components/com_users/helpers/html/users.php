@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: users.php 20641 2011-02-10 06:33:04Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -47,7 +46,7 @@ abstract class JHtmlUsers
 			$version = new JVersion();
 			$jver = explode( '.', $version->getShortVersion() );
 
-			$pathToXml = JPATH_ADMINISTRATOR.'/help/helpsites-'.$jver[0].$jver[1].'.xml';
+			$pathToXml = JPATH_ADMINISTRATOR.'/help/helpsites.xml';
 
 			$text = $value;
 			if (!empty($pathToXml) && $xml = JFactory::getXML($pathToXml))
@@ -111,7 +110,7 @@ abstract class JHtmlUsers
 			if (is_file("$path/$file")) {
 				$result = JLanguage::parseXMLLanguageFile("$path/$file");
 			}
-			
+
 			if ($result) {
 				return htmlspecialchars($result['name']);
 			}
@@ -136,7 +135,7 @@ abstract class JHtmlUsers
 			if (is_file("$path/$file")) {
 				$result = JLanguage::parseXMLLanguageFile("$path/$file");
 			}
-			
+
 			if ($result) {
 				return htmlspecialchars($result['name']);
 			}
@@ -166,9 +165,9 @@ abstract class JHtmlUsers
 			if ($title)
 			{
 					$lang->load("plg_editors_$value.sys", JPATH_ADMINISTRATOR, null, false, false)
-				||	$lang->load("plg_editors_$value.sys", JPATH_PLUGINS .DS.'editors'.DS.$value, null, false, false)
+				||	$lang->load("plg_editors_$value.sys", JPATH_PLUGINS . '/editors/' . $value, null, false, false)
 				||	$lang->load("plg_editors_$value.sys", JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-				||	$lang->load("plg_editors_$value.sys", JPATH_PLUGINS .DS.'editors'.DS.$value, $lang->getDefault(), false, false);
+				||	$lang->load("plg_editors_$value.sys", JPATH_PLUGINS . '/editors/' . $value, $lang->getDefault(), false, false);
 				$lang->load($title.'.sys');
 				return JText::_($title);
 			}
@@ -180,4 +179,3 @@ abstract class JHtmlUsers
 	}
 
 }
-

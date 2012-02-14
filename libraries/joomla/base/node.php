@@ -1,38 +1,45 @@
 <?php
-
 /**
- * @version		$Id: node.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Base
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Tree Node Class.
  *
- * @package 	Joomla.Framework
- * @subpackage	Base
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  Base
+ * @since       11.1
  */
 class JNode extends JObject
 {
-
 	/**
-	 * @var Parent node
+	 * Parent node
+	 * @var    object
+	 *
+	 * @since  11.1
 	 */
 	protected $_parent = null;
 
 	/**
-	 * @var Array of Children
+	 * Array of Children
+	 *
+	 * @var    array
+	 * @since  11.1
 	 */
 	protected $_children = array();
 
 	/**
 	 * Constructor
+	 *
+	 * @since  11.1
 	 */
-	function __construct()
+	public function __construct()
 	{
 		return true;
 	}
@@ -42,9 +49,13 @@ class JNode extends JObject
 	 *
 	 * If the child already has a parent, the link is unset
 	 *
-	 * @param JNode the child to be added
+	 * @param   JNode  &$child  The child to be added
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
 	 */
-	function addChild(&$child)
+	public function addChild(&$child)
 	{
 		if ($child instanceof Jnode)
 		{
@@ -57,9 +68,13 @@ class JNode extends JObject
 	 *
 	 * If the node already has a parent, the link is unset
 	 *
-	 * @param JNode|null the parent to be setted
+	 * @param   mixed  &$parent  The JNode for parent to be set or null
+	 *
+	 * @return  void
+	 *
+	 * @since    11.1
 	 */
-	function setParent(&$parent)
+	public function setParent(&$parent)
 	{
 		if ($parent instanceof JNode || is_null($parent))
 		{
@@ -79,9 +94,11 @@ class JNode extends JObject
 	/**
 	 * Get the children of this node
 	 *
-	 * @return array the children
+	 * @return  array    The children
+	 *
+	 * @since   11.1
 	 */
-	function &getChildren()
+	public function &getChildren()
 	{
 		return $this->_children;
 	}
@@ -89,9 +106,11 @@ class JNode extends JObject
 	/**
 	 * Get the parent of this node
 	 *
-	 * @return JNode|null the parent
+	 * @return  mixed   JNode object with the parent or null for no parent
+	 *
+	 * @since   11.1
 	 */
-	function &getParent()
+	public function &getParent()
 	{
 		return $this->_parent;
 	}
@@ -99,21 +118,24 @@ class JNode extends JObject
 	/**
 	 * Test if this node has children
 	 *
-	 * @return bool
+	 * @return   boolean  True if there are children
+	 *
+	 * @since    11.1
 	 */
-	function hasChildren()
+	public function hasChildren()
 	{
-		return count($this->_children);
+		return (bool) count($this->_children);
 	}
 
 	/**
 	 * Test if this node has a parent
 	 *
-	 * @return bool
+	 * @return  boolean  True if there is a parent
+	 *
+	 * @since   11.1
 	 */
-	function hasParent()
+	public function hasParent()
 	{
 		return $this->getParent() != null;
 	}
 }
-

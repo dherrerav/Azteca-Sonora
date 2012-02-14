@@ -1,14 +1,13 @@
 <?php
 /**
-* @version		$Id: update.php 20196 2011-01-09 02:40:25Z ian $
-* @package		Joomla.Framework
-* @subpackage	Table
-* @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
-* @license		GNU General Public License, see LICENSE.php
-*/
+ * @package     Joomla.Platform
+ * @subpackage  Database
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
+ */
 
-// Check to ensure this file is within the rest of the framework
-defined('JPATH_BASE') or die();
+defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.database.table');
 
@@ -16,33 +15,37 @@ jimport('joomla.database.table');
  * Update table
  * Stores updates temporarily
  *
- * @package		Joomla.Framework
- * @subpackage	Table
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  Table
+ * @since       11.1
  */
 class JTableUpdate extends JTable
 {
 	/**
-	 * Contructor
+	 * Constructor
 	 *
-	 * @access protected
-	 * @param database A database connector object
+	 * @param   JDatabase  &$db  A database connector object
+	 *
+	 * @since   11.1
 	 */
-	function __construct( &$db ) {
-		parent::__construct( '#__updates', 'update_id', $db );
+	public function __construct(&$db)
+	{
+		parent::__construct('#__updates', 'update_id', $db);
 	}
 
 	/**
-	* Overloaded check function
-	*
-	* @access public
-	* @return boolean True if the object is ok
-	* @see JTable:bind
-	*/
-	function check()
+	 * Overloaded check function
+	 *
+	 * @return  boolean  True if the object is ok
+	 *
+	 * @see     JTable::check
+	 * @since   11.1
+	 */
+	public function check()
 	{
 		// check for valid name
-		if (trim( $this->name ) == '' || trim( $this->element ) == '') {
+		if (trim($this->name) == '' || trim($this->element) == '')
+		{
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_MUSTCONTAIN_A_TITLE_EXTENSION'));
 			return false;
 		}
@@ -50,41 +53,57 @@ class JTableUpdate extends JTable
 	}
 
 	/**
-	* Overloaded bind function
-	*
-	* @access public
-	* @param array $hash named array
-	* @return null|string	null is operation was satisfactory, otherwise returns an error
-	* @see JTable:bind
-	* @since 1.5
-	*/
-	function bind($array, $ignore = '')
+	 * Overloaded bind function
+	 *
+	 * @param   array  $array   Named array
+	 * @param   mixed  $ignore  An optional array or space separated list of properties
+	 * to ignore while binding.
+	 *
+	 * @return  mixed  Null if operation was satisfactory, otherwise returns an error
+	 *
+	 * @see     JTable::bind
+	 * @since   11.1
+	 */
+	public function bind($array, $ignore = '')
 	{
-		if (isset( $array['params'] ) && is_array($array['params']))
+		if (isset($array['params']) && is_array($array['params']))
 		{
-			$registry = new JRegistry();
+			$registry = new JRegistry;
 			$registry->loadArray($array['params']);
-			$array['params'] = (string)$registry;
+			$array['params'] = (string) $registry;
 		}
 
-		if (isset( $array['control'] ) && is_array( $array['control'] ))
+		if (isset($array['control']) && is_array($array['control']))
 		{
-			$registry = new JRegistry();
+			$registry = new JRegistry;
 			$registry->loadArray($array['control']);
-			$array['control'] = (string)$registry;
+			$array['control'] = (string) $registry;
 		}
 
 		return parent::bind($array, $ignore);
 	}
 
-	function find($options=Array()) {
-		$dbo = JFactory::getDBO();
-		$where = Array();
-		foreach($options as $col=>$val) {
-			$where[] = $col .' = '. $dbo->Quote($val);
+	/**
+	 * Method to create and execute a SELECT WHERE query.
+	 *
+	 * @param   array  $options  Array of options
+	 *
+	 * @return  JDatabase  Results of query
+	 *
+	 * @since   11.1
+	 */
+	public function find($options = array())
+	{
+		$where = array();
+		foreach ($options as $col => $val)
+		{
+			$where[] = $col . ' = ' . $this->_db->Quote($val);
 		}
-		$query = 'SELECT update_id FROM #__updates WHERE '. implode(' AND ', $where);
-		$dbo->setQuery($query);
-		return $dbo->loadResult();
+		$query = $this->_db->getQuery(true);
+		$query->select($this->_db->quoteName($this->_tbl_key));
+		$query->from($this->_db->quoteName($this->_tbl));
+		$query->where(implode(' AND ', $where));
+		$this->_db->setQuery($query);
+		return $this->_db->loadResult();
 	}
 }

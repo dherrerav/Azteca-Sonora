@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: file.php 20808 2011-02-21 19:55:35Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -37,10 +36,9 @@ class MediaControllerFile extends JController
 		$file		= JRequest::getVar('Filedata', '', 'files', 'array');
 		$folder		= JRequest::getVar('folder', '', '', 'path');
 		$return		= JRequest::getVar('return-url', null, 'post', 'base64');
-		
+
 
 		// Set FTP credentials, if given
-		jimport('joomla.client.helper');
 		JClientHelper::setCredentialsFromRequest('ftp');
 
 		// Set the redirect
@@ -61,8 +59,8 @@ class MediaControllerFile extends JController
 				JError::raiseNotice(100, JText::_($err));
 				return false;
 			}
-			
-			$filepath = JPath::clean(COM_MEDIA_BASE.DS.$folder.DS.strtolower($file['name']));
+
+			$filepath = JPath::clean(COM_MEDIA_BASE . '/' . $folder . '/' . strtolower($file['name']));
 
 			// Trigger the onContentBeforeSave event.
 			JPluginHelper::importPlugin('content');
@@ -99,7 +97,7 @@ class MediaControllerFile extends JController
 			else
 			{
 				// Trigger the onContentAfterSave event.
-				$dispatcher->trigger('onContentAfterSave', array('com_media.file', &$object_file,true));
+				$dispatcher->trigger('onContentAfterSave', array('com_media.file', &$object_file, true));
 				$this->setMessage(JText::sprintf('COM_MEDIA_UPLOAD_COMPLETE', substr($file['filepath'], strlen(COM_MEDIA_BASE))));
 				return true;
 			}
@@ -135,7 +133,7 @@ class MediaControllerFile extends JController
 			$this->setRedirect('index.php?option=com_media&folder='.$folder);
 		}
 
-		if (!$user->authorise('core.delete','com_media'))
+		if (!$user->authorise('core.delete', 'com_media'))
 		{
 			// User is not authorised to delete
 			JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'));
@@ -144,7 +142,6 @@ class MediaControllerFile extends JController
 		else
 		{
 			// Set FTP credentials, if given
-			jimport('joomla.client.helper');
 			JClientHelper::setCredentialsFromRequest('ftp');
 
 			// Initialise variables.
@@ -164,7 +161,7 @@ class MediaControllerFile extends JController
 						continue;
 					}
 
-					$fullPath = JPath::clean(COM_MEDIA_BASE.DS.$folder.DS.$path);
+					$fullPath = JPath::clean(COM_MEDIA_BASE . '/' . $folder . '/' . $path);
 					$object_file = new JObject(array('filepath' => $fullPath));
 					if (is_file($fullPath))
 					{
@@ -182,9 +179,9 @@ class MediaControllerFile extends JController
 						$dispatcher->trigger('onContentAfterDelete', array('com_media.file', &$object_file));
 						$this->setMessage(JText::sprintf('COM_MEDIA_DELETE_COMPLETE', substr($fullPath, strlen(COM_MEDIA_BASE))));
 					}
-					else if (is_dir($fullPath))
+					elseif (is_dir($fullPath))
 					{
-						if (count(JFolder::files($fullPath, '.', true, false, array('.svn', 'CVS','.DS_Store','__MACOSX'), array('index.html', '^\..*','.*~'))) == 0)
+						if (count(JFolder::files($fullPath, '.', true, false, array('.svn', 'CVS', '.DS_Store', '__MACOSX'), array('index.html', '^\..*', '.*~'))) == 0)
 						{
 							// Trigger the onContentBeforeDelete event.
 							$result = $dispatcher->trigger('onContentBeforeDelete', array('com_media.folder', &$object_file));
@@ -203,7 +200,7 @@ class MediaControllerFile extends JController
 						else
 						{
 							//This makes no sense...
-							JError::raiseWarning(100, JText::sprintf('COM_MEDIA_ERROR_UNABLE_TO_DELETE_FOLDER_NOT_EMPTY',substr($fullPath, strlen(COM_MEDIA_BASE))));
+							JError::raiseWarning(100, JText::sprintf('COM_MEDIA_ERROR_UNABLE_TO_DELETE_FOLDER_NOT_EMPTY', substr($fullPath, strlen(COM_MEDIA_BASE))));
 						}
 					}
 				}

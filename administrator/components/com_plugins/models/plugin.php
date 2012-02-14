@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: plugin.php 21035 2011-03-31 06:01:38Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -141,7 +140,7 @@ class PluginsModelPlugin extends JModelAdmin
 
 			// Convert the params field to an array.
 			$registry = new JRegistry;
-			$registry->loadJSON($table->params);
+			$registry->loadString($table->params);
 			$this->_cache[$pk]->params = $registry->toArray();
 
 			// Get the plugin XML.
@@ -197,7 +196,7 @@ class PluginsModelPlugin extends JModelAdmin
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm(JForm $form, $data, $group = '')
+	protected function preprocessForm(JForm $form, $data, $group = 'content')
 	{
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
@@ -214,8 +213,8 @@ class PluginsModelPlugin extends JModelAdmin
 				' FROM #__extensions' .
 				' WHERE (type =' .$db->Quote('plugin'). 'AND folder='. $db->Quote($folder) . ')';
 		$db->setQuery($query);
-		$elements = $db->loadResultArray();
-		
+		$elements = $db->loadColumn();
+
 		foreach ($elements as $elementa)
 		{
 				$lang->load('plg_'.$folder.'_'.$elementa.'.sys', JPATH_ADMINISTRATOR, null, false, false)
@@ -223,10 +222,10 @@ class PluginsModelPlugin extends JModelAdmin
 			||	$lang->load('plg_'.$folder.'_'.$elementa.'.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
 			||	$lang->load('plg_'.$folder.'_'.$elementa.'.sys', JPATH_PLUGINS.'/'.$folder.'/'.$elementa, $lang->getDefault(), false, false);
 		}
-		
+
 		if (empty($folder) || empty($element)) {
 			$app = JFactory::getApplication();
-			$app->redirect(JRoute::_('index.php?option=com_plugins&view=plugins',false));
+			$app->redirect(JRoute::_('index.php?option=com_plugins&view=plugins', false));
 		}
 		// Try 1.6 format: /plugins/folder/element/element.xml
 		$formFile = JPath::clean(JPATH_PLUGINS.'/'.$folder.'/'.$element.'/'.$element.'.xml');
@@ -238,13 +237,13 @@ class PluginsModelPlugin extends JModelAdmin
 				return false;
 			}
 		}
-		
+
 		// Load the core and/or local language file(s).
 			$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, null, false, false)
 		||	$lang->load('plg_'.$folder.'_'.$element, JPATH_PLUGINS.'/'.$folder.'/'.$element, null, false, false)
 		||	$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
 		||	$lang->load('plg_'.$folder.'_'.$element, JPATH_PLUGINS.'/'.$folder.'/'.$element, $lang->getDefault(), false, false);
-		
+
 
 		if (file_exists($formFile)) {
 			// Get the plugin form.
@@ -321,8 +320,8 @@ class PluginsModelPlugin extends JModelAdmin
 	 *
 	 * @since	1.6
 	 */
-	function cleanCache() {
+	protected function cleanCache($group = null, $client_id = 0) {
 		parent::cleanCache('com_plugins', 0);
 		parent::cleanCache('com_plugins', 1);
-	}	
+	}
 }

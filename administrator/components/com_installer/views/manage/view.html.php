@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -47,6 +46,7 @@ class InstallerViewManage extends InstallerViewDefault
 		if(!count($this->items)){
 			JFactory::getApplication()->enqueueMessage(
 				JText::_('COM_INSTALLER_MSG_MANAGE_NOEXTENSION')
+				, 'warning'
 			);
 		}
 
@@ -63,14 +63,14 @@ class InstallerViewManage extends InstallerViewDefault
 	{
 		$canDo	= InstallerHelper::getActions();
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('manage.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_ENABLE', true);
-			JToolBarHelper::custom('manage.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
+			JToolBarHelper::publish('manage.publish', 'JTOOLBAR_ENABLE', true);
+			JToolBarHelper::unpublish('manage.unpublish', 'JTOOLBAR_DISABLE', true);
 			JToolBarHelper::divider();
 		}
-		JToolBarHelper::custom('manage.refresh', 'refresh', 'refresh','JTOOLBAR_REFRESH_CACHE',true);
+		JToolBarHelper::custom('manage.refresh', 'refresh', 'refresh', 'JTOOLBAR_REFRESH_CACHE', true);
 		JToolBarHelper::divider();
 		if ($canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'manage.remove','JTOOLBAR_UNINSTALL');
+			JToolBarHelper::deleteList('', 'manage.remove', 'JTOOLBAR_UNINSTALL');
 			JToolBarHelper::divider();
 		}
 		parent::addToolbar();

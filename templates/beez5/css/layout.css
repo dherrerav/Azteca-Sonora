@@ -192,7 +192,7 @@ em
 {
         text-transform:none;
         font-weight:normal;
-       
+
 }
 
 #breadcrumbs span a:hover,
@@ -296,7 +296,7 @@ h3.js_heading a
 
  ul.menu
 {
-        list-style-type:none ;
+        list-style-type:none !important;
         margin:0 0 0px 0px ;
         padding: 0px 5px 20px 5px;
 
@@ -661,7 +661,7 @@ ul#archive-items li.row1
 
 .newsflash  a.readmore:link,
 .newsflash a.readmore:visited
-{margin:10px 0;display:block}
+{margin:10px 0;}
 
 a.readmore:hover,
 a.readmore:active,
@@ -791,6 +791,7 @@ dd.createdby
 {
         margin:10px 0 ;
         padding:10px 0 10px 0px;
+        clear:both;
 
 }
 
@@ -812,7 +813,7 @@ dd.createdby
 }
 
 .pagenav
-{padding:2px}
+{padding:2px; clear:both;}
 
 #main .pagination li.pagination-start,
 #main .pagination li.pagination-next,
@@ -937,7 +938,8 @@ form fieldset dd
         margin:20px 0 20px;
 }
 
-#searchForm
+#searchForm,
+#finder-search
 {
         padding:0 5px
 }
@@ -1021,9 +1023,17 @@ fieldset.phrases label
 }
 
 
-form .search label
+form .search label,
+form .finder label
 {
         display:none
+}
+
+form #finder-filter-select-list label
+{
+        display:block;
+        margin-top: 10px;
+        margin-bottom: 2px;
 }
 
 /* ++++++++++++++  selects  ++++++++++++++ */
@@ -1060,6 +1070,12 @@ dl.search-results dd.result-text
 {
         padding:10px 15px 10px 5px;
         line-height:1.7em
+}
+
+dl.search-results dd.result-url
+{
+        font-size:90%;
+        padding:2px 15px 15px 5px;
 }
 
 dl.search-results dd.result-created
@@ -1194,7 +1210,7 @@ div.current {
     clear: both;
     border: 1px solid #ccc;
     padding: 10px 10px;
-    max-width: 500px;
+
 }
 
 
@@ -1623,12 +1639,13 @@ ul.latestnews,
 ul.mostread
 {
         padding-left:10px;
+        list-style-type:none !important;
 }
 
 ul.latestnews li a,
 ul.mostread li a
 {
-        padding:2px 2px 2px 15px ;
+    padding:2px 2px 2px 15px ;
     display:block;
     text-decoration:none
 }
@@ -1848,7 +1865,7 @@ ul.tabs li a:focus
 {
         padding:15px 10px;
         margin-top:-1px;
-                
+
 }
 
 .tabcontent:focus
@@ -1985,7 +2002,7 @@ a.mod-articles-category-title
 }
 
 #main .cat-children
-{ 
+{
 	padding-left:5px
 }
 #main .cat-children ul dl dt,
@@ -2031,7 +2048,7 @@ a.mod-articles-category-title
 .stats-module dt,
 .stats-module dd
 {
-	padding:2px 0 2px 0 
+	padding:2px 0 2px 0
 }
 /* syndicate */
 
@@ -2057,26 +2074,26 @@ ul.pagenav li
 	margin:0;
 	border:solid 0px #cc0000;
 	position:relative;
-	
+
 }
 
-#main ul.pagenav li 
+#main ul.pagenav li
 {
 	line-height:2em
 }
 
 ul.pagenav li a
 {
-	border:solid 1px #ccc; 
-	display:inline; 
-	background:#eee; 
-	padding:2px; 
+	border:solid 1px #ccc;
+	display:inline;
+	background:#eee;
+	padding:2px;
 	text-decoration:none;
-	
+
 }
-ul.pagenav li.pagenav-prev 
+ul.pagenav li.pagenav-prev
 {float:left}
-ul.pagenav li.pagenav-next 
+ul.pagenav li.pagenav-next
 {float:right}
 
 /* pagebreak */
@@ -2084,7 +2101,7 @@ ul.pagenav li.pagenav-next
 #article-index
 {
 	width:25%;
-	float:right; 
+	float:right;
 	border:solid 1px #eee;
 	padding:10px;
 	margin: 10px 0px 20px 30px;
@@ -2108,7 +2125,7 @@ ul.pagenav li.pagenav-next
 /* mailto window */
 
 
-#mailto-window 
+#mailto-window
 {
 	background:#f5f5f5;
 	padding:15px;
@@ -2122,21 +2139,21 @@ ul.pagenav li.pagenav-next
 
 .mailto-close
 {
-	position:absolute; 
-	right:0; 
-	top:5px; 
+	position:absolute;
+	right:0;
+	top:5px;
 	background:none;
 
 
-	
-	
+
+
 }
 
 
-.mailto-close a 
+.mailto-close a
 {
 background:#f5f5f5 url(../images/close.png) no-repeat !important;
-min-width:25px; 
+min-width:25px;
 display:block;
 min-height:25px;
 overflow:visible
@@ -2196,4 +2213,41 @@ span.spacer > span.text label {
 .redirect-rtl {
 	direction:rtl;
 	text-align: right;
+}
+#main h3.title,
+#main2 h3.title,
+#main dl.tabs h3,
+#main2 dl.tabs h3
+{margin:0}
+
+/* ++++++++++++++  feed display module ++++++++++++++ */
+
+div.feed {
+	display:block;
+	padding: 5px 10px;
+}
+
+/* ++++++++++++++  image float style ++++++++++++++ */
+.img-fulltext-left {
+	float:left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.img-intro-left {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.img-fulltext-right {
+	float: right;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+.img-intro-right {
+	float: right;
+	margin-left: 10px;
+	margin-bottom: 10px;
 }

@@ -1,33 +1,42 @@
 <?php
 /**
- * @version		$Id: custom.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Renders a custom button
  *
- * @package		Joomla.Framework
- * @subpackage	HTML
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ * @since       11.1
  */
 class JButtonCustom extends JButton
 {
 	/**
 	 * Button type
 	 *
-	 * @access	protected
-	 * @var		string
+	 * @var    string
 	 */
 	protected $_name = 'Custom';
 
-	public function fetchButton($type='Custom', $html = '', $id = 'custom')
+	/**
+	 * Fetch the HTML for the button
+	 *
+	 * @param   string  $type  Button type, unused string.
+	 * @param   string  $html  HTML strng for the button
+	 * @param   string  $id    CSS id for the button
+	 *
+	 * @return  string   HTML string for the button
+	 *
+	 * @since   11.1
+	 */
+	public function fetchButton($type = 'Custom', $html = '', $id = 'custom')
 	{
 		return $html;
 	}
@@ -35,12 +44,16 @@ class JButtonCustom extends JButton
 	/**
 	 * Get the button CSS Id
 	 *
-	 * @access	public
-	 * @return	string	Button CSS Id
-	 * @since	1.5
+	 * @param   string  $type  Not used.
+	 * @param   string  $html  Not used.
+	 * @param   string  $id    The id prefix for the button.
+	 *
+	 * @return  string  Button CSS Id
+	 *
+	 * @since   11.1
 	 */
-	public function fetchId($type='Custom', $html = '', $id = 'custom')
+	public function fetchId($type = 'Custom', $html = '', $id = 'custom')
 	{
-		return $this->_parent->getName().'-'.$id;
+		return $this->_parent->getName() . '-' . $id;
 	}
 }

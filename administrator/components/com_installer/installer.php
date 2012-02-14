@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: installer.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.0
  */
@@ -18,7 +17,6 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_installer')) {
 
 // Include dependancies
 jimport('joomla.application.component.controller');
-jimport('joomla.client.helper');
 
 $controller	= JController::getInstance('Installer');
 $controller->execute(JRequest::getCmd('task'));

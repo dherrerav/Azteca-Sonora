@@ -1,6 +1,5 @@
 /**
- * @version		$Id: popup-imagemanager.js 20828 2011-02-22 04:22:21Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -66,7 +65,7 @@ var ImageManager = this.ImageManager = {
 		q.set('folder', folder);
 		var query = [];
 		q.each(function(v, k){
-			if ($chk(v)) {
+			if (v !== null) {
 				this.push(k+'='+v);
 			}
 		}, query);

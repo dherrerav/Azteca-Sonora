@@ -192,7 +192,7 @@ form fieldset dd
 {
         float:right;
         width:12em;
-        padding:3px 0;  
+        padding:3px 0;
 }
 
 .profile-edit form#member-profile fieldset dt,
@@ -202,10 +202,6 @@ form fieldset dd
 .login-fields label
 {float:right}
 
-#system-debug li {
-direction: ltr;
-}
-
 /* ++++++++++++++  pagination  ++++++++++++++ */
 
 #main .pagination
@@ -213,6 +209,7 @@ direction: ltr;
 	float:right;
 	text-align:right;
 	padding:10px 10px 0px 0px;
+	clear:both;
 
 }
 
@@ -322,7 +319,7 @@ ul.tabs li {
 #login-form fieldset
 {
         padding:0px;
-  
+
 }
 
 #login-form .inputbox
@@ -459,9 +456,51 @@ ul.latestnews li a, ul.mostread li a {
 
 .content_rating {
 	text-align: right;
-	
+
 }
 
 ul.menu li ul li ul li ul li ul {
 	padding-right: 7px;
+}
+
+#system-message dd.notice ul,
+#system-message dd.error ul,
+#system-message dd.message  ul {
+        background-position: 100% 0!important;
+        padding: 10px 40px 10px 10px!important;
+}
+#system-message dd.message  ul {
+        background-image:url(../images/system/notice-info_rtl.png)!important;
+}
+#system-message dd.notice ul {
+        background-image:url("../images/system/notice-note_rtl.png")!important;
+}
+#system-message dd.error ul {
+        background-image:url(../images/system/notice-alert_rtl.png)!important;
+}
+
+
+/* ++++++++++++++  image float style ++++++++++++++ */
+.img-fulltext-left {
+	float: right;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+.img-intro-left {
+	float: right;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.img-fulltext-right {
+	float:left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.img-intro-right {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }

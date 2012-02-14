@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: weblink.php 20228 2011-01-10 00:52:54Z eddieajau $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -34,7 +33,7 @@ class WeblinksModelWeblink extends JModelItem
 	 *
 	 * @since	1.6
 	 */
-	public function populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication();
 		$params	= $app->getParams();
@@ -82,7 +81,7 @@ class WeblinksModelWeblink extends JModelItem
 				$properties = $table->getProperties(1);
 				$this->_item = JArrayHelper::toObject($properties, 'JObject');
 			}
-			else if ($error = $table->getError()) {
+			elseif ($error = $table->getError()) {
 				$this->setError($error);
 			}
 		}

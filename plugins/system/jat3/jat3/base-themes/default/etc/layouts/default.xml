@@ -4,6 +4,10 @@
 	<stylesheets>
 		<file>css/layout.css</file>
 		<file>css/template.css</file>
+		<file condition="ie">css/template-ie.css</file>
+		<file condition="ie 7">css/template-ie7.css</file>
+		<file condition="ie 8">css/template-ie8.css</file>
+		<file condition="ie 9">css/template-ie9.css</file>
 		<file>css/color.css</file>
 		<file>css/usertools.css</file>
 		<file>css/css3.css</file>

@@ -1,13 +1,12 @@
 <?php
 /**
- * @version		$Id: edit.php 20649 2011-02-10 09:15:04Z chdemko $
  * @package		Joomla.Administrator
  * @subpackage	com_banners
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// No direct access.
+// no direct access
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
@@ -56,19 +55,17 @@ JHtml::_('behavior.formvalidation');
 
 				<li><?php echo $this->form->getLabel('catid'); ?>
 				<?php echo $this->form->getInput('catid'); ?></li>
-				
+
 				<li><?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?></li>
 
 				<li><?php echo $this->form->getLabel('type'); ?>
-				<?php echo $this->form->getInput('type'); ?></li> 
+				<?php echo $this->form->getInput('type'); ?></li>
 
 				<li>
 				<div id="image">
 					<?php foreach($this->form->getFieldset('image') as $field): ?>
-						<?php if (!$field->hidden): ?>
-							<?php echo $field->label; ?>
-						<?php endif; ?>
+						<?php echo $field->label; ?>
 						<?php echo $field->input; ?>
 					<?php endforeach; ?>
 				</div>
@@ -101,30 +98,24 @@ JHtml::_('behavior.formvalidation');
 	</div>
 
 <div class="width-40 fltrt">
-	<?php echo JHtml::_('sliders.start','banner-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+	<?php echo JHtml::_('sliders.start', 'banner-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 
-	<?php echo JHtml::_('sliders.panel',JText::_('COM_BANNERS_GROUP_LABEL_PUBLISHING_DETAILS'), 'publishing-details'); ?>
+	<?php echo JHtml::_('sliders.panel', JText::_('COM_BANNERS_GROUP_LABEL_PUBLISHING_DETAILS'), 'publishing-details'); ?>
 		<fieldset class="panelform">
 		<ul class="adminformlist">
 			<?php foreach($this->form->getFieldset('publish') as $field): ?>
-				<li>
-					<?php if (!$field->hidden): ?>
-						<?php echo $field->label; ?>
-					<?php endif; ?>
-					<?php echo $field->input; ?>
-				</li>
+				<li><?php echo $field->label; ?>
+					<?php echo $field->input; ?></li>
 			<?php endforeach; ?>
 			</ul>
 		</fieldset>
 
-	<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'metadata'); ?>
+	<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'metadata'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('metadata') as $field): ?>
-					<?php if (!$field->hidden): ?>
-						<li><?php echo $field->label; ?></li>
-					<?php endif; ?>
-					<li><?php echo $field->input; ?></li>
+					<li><?php echo $field->label; ?>
+						<?php echo $field->input; ?></li>
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>

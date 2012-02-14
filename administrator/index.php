@@ -1,8 +1,7 @@
 <?php
 /**
- * @version		$Id: index.php 20806 2011-02-21 19:44:59Z dextercowley $
  * @package		Joomla.Administrator
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,7 +19,7 @@ if (!defined('_JDEFINES')) {
 }
 
 require_once JPATH_BASE.'/includes/framework.php';
-require_once JPATH_BASE . '/includes/zend.php';
+require_once JPATH_BASE .'/includes/zend.php';
 require_once JPATH_BASE.'/includes/helper.php';
 require_once JPATH_BASE.'/includes/toolbar.php';
 
@@ -32,7 +31,7 @@ $app = JFactory::getApplication('administrator');
 
 // Initialise the application.
 $app->initialise(array(
-	'language' => $app->getUserState('application.lang', 'lang')
+	'language' => $app->getUserState('application.lang')
 ));
 
 // Mark afterIntialise in the profiler.

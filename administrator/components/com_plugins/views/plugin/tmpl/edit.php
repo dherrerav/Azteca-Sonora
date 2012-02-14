@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 21020 2011-03-27 06:52:01Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	com_plugins
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -55,11 +54,14 @@ JHtml::_('behavior.formvalidation');
 			<!-- Plugin metadata -->
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = trim($this->item->xml->description)) : ?>
+
 					<label id="jform_extdescription-lbl">
 						<?php echo JText::_('JGLOBAL_DESCRIPTION'); ?>
-						</label>
-						<div class="clr"></div>
-						<span class="readonly plg-desc"><?php echo JText::_($text); ?></span>
+					</label>
+					<div class="clr"></div>
+					<span class="readonly plg-desc">
+						<?php echo JText::_($text); ?>
+					</span>
 
 				<?php endif; ?>
 			<?php else : ?>
@@ -70,7 +72,7 @@ JHtml::_('behavior.formvalidation');
 	</div>
 
 	<div class="width-40 fltrt">
-	<?php echo JHtml::_('sliders.start','plugin-sliders-'.$this->item->extension_id); ?>
+	<?php echo JHtml::_('sliders.start', 'plugin-sliders-'.$this->item->extension_id); ?>
 
 		<?php echo $this->loadTemplate('options'); ?>
 

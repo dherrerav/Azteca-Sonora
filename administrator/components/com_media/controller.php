@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -52,11 +51,7 @@ class MediaController extends JController
 				$vLayout = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
 
 				break;
-			case 'videos':
-				$vName = 'video';
-				$vLayout = JRequest::getCmd('layout', 'default');
-				$mName = 'manager';
-				break;
+
 			case 'media':
 			default:
 				$vName = 'media';
@@ -89,7 +84,6 @@ class MediaController extends JController
 	function ftpValidate()
 	{
 		// Set FTP credentials, if given
-		jimport('joomla.client.helper');
 		JClientHelper::setCredentialsFromRequest('ftp');
 	}
 }

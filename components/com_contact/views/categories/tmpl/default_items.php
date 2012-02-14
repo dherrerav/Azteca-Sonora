@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_items.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_contact
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -26,15 +25,15 @@ if (count($this->items[$this->parent->id]) > 0 && $this->maxLevelcat != 0) :
 		<span class="item-title"><a href="<?php echo JRoute::_(ContactHelperRoute::getCategoryRoute($item->id));?>">
 			<?php echo $this->escape($item->title); ?></a>
 		</span>
-        
+
 		<?php if ($this->params->get('show_subcat_desc_cat') == 1) :?>
 		<?php if ($item->description) : ?>
 			<div class="category-desc">
-				<?php echo JHtml::_('content.prepare', $item->description); ?>
+				<?php echo JHtml::_('content.prepare', $item->description, '', 'com_contact.categories'); ?>
 			</div>
 		<?php endif; ?>
         <?php endif; ?>
-        
+
 		<?php if ($this->params->get('show_cat_items_cat') == 1) :?>
 			<dl><dt>
 				<?php echo JText::_('COM_CONTACT_COUNT'); ?></dt>

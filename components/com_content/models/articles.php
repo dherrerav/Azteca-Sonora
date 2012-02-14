@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: articles.php 21603 2011-06-21 18:31:49Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -47,6 +46,8 @@ class ContentModelArticles extends JModelList
 				'hits', 'a.hits',
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
+				'images', 'a.images',
+				'urls', 'a.urls',
 			);
 		}
 
@@ -95,7 +96,7 @@ class ContentModelArticles extends JModelList
 			$this->setState('filter.published', 1);
 		}
 
-		$this->setState('filter.language',$app->getLanguageFilter());
+		$this->setState('filter.language', $app->getLanguageFilter());
 
 		// process show_noauth parameter
 		if (!$params->get('show_noauth')) {
@@ -166,9 +167,9 @@ class ContentModelArticles extends JModelList
 				'CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END as modified, ' .
 					'a.modified_by, uam.name as modified_by_name,' .
 				// use created if publish_up is 0
-				'CASE WHEN a.publish_up = 0 THEN a.created ELSE a.publish_up END as publish_up, ' .
-					'a.publish_down, a.attribs, a.metadata, a.metakey, a.metadesc, a.access, '.
-					'a.hits, a.xreference, a.featured,'.' LENGTH(a.fulltext) AS readmore '
+				'CASE WHEN a.publish_up = 0 THEN a.created ELSE a.publish_up END as publish_up,' .
+					'a.publish_down, a.images, a.urls, a.attribs, a.metadata, a.metakey, a.metadesc, a.access, ' .
+					'a.hits, a.xreference, a.featured,'.' '.$query->length('a.fulltext').' AS readmore'
 			)
 		);
 
@@ -176,13 +177,13 @@ class ContentModelArticles extends JModelList
 		if ($this->getState('filter.published') == 2) {
 			// If badcats is not null, this means that the article is inside an archived category
 			// In this case, the state is set to 2 to indicate Archived (even if the article state is Published)
-			$query->select($this->getState('list.select','CASE WHEN badcats.id is null THEN a.state ELSE 2 END AS state'));
+			$query->select($this->getState('list.select', 'CASE WHEN badcats.id is null THEN a.state ELSE 2 END AS state'));
 		}
 		else {
 			// Process non-archived layout
 			// If badcats is not null, this means that the article is inside an unpublished category
 			// In this case, the state is set to 0 to indicate Unpublished (even if the article state is Published)
-			$query->select($this->getState('list.select','CASE WHEN badcats.id is not null THEN 0 ELSE a.state END AS state'));
+			$query->select($this->getState('list.select', 'CASE WHEN badcats.id is not null THEN 0 ELSE a.state END AS state'));
 		}
 
 		$query->from('#__content AS a');
@@ -204,15 +205,20 @@ class ContentModelArticles extends JModelList
 		$query->join('LEFT', '#__users AS uam ON uam.id = a.modified_by');
 
 		// Join on contact table
-		$query->select('contact.id as contactid' ) ;
-		$query->join('LEFT','#__contact_details AS contact on contact.user_id = a.created_by');
-
+		$subQuery = $db->getQuery(true);
+		$subQuery->select('contact.user_id, MAX(contact.id) AS id, contact.language');
+		$subQuery->from('#__contact_details AS contact');
+		$subQuery->where('contact.published = 1');
+		$subQuery->group('contact.user_id, contact.language');
+		$query->select('contact.id as contactid' );
+		$query->join('LEFT', '(' . $subQuery . ') AS contact ON contact.user_id = a.created_by');
+		
 		// Join over the categories to get parent category titles
 		$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 		$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
 
 		// Join on voting table
-		$query->select('ROUND( v.rating_sum / v.rating_count ) AS rating, v.rating_count as rating_count');
+		$query->select('ROUND(v.rating_sum / v.rating_count, 0) AS rating, v.rating_count as rating_count');
 		$query->join('LEFT', '#__content_rating AS v ON a.id = v.content_id');
 
 		// Join to check for category published state in parent categories up the tree
@@ -251,7 +257,7 @@ class ContentModelArticles extends JModelList
 			// Use article state if badcats.id is null, otherwise, force 0 for unpublished
 			$query->where($publishedWhere . ' = ' . (int) $published);
 		}
-		else if (is_array($published)) {
+		elseif (is_array($published)) {
 			JArrayHelper::toInteger($published);
 			$published = implode(',', $published);
 			// Use article state if badcats.id is null, otherwise, force 0 for unpublished
@@ -284,7 +290,7 @@ class ContentModelArticles extends JModelList
 			$type = $this->getState('filter.article_id.include', true) ? '= ' : '<> ';
 			$query->where('a.id '.$type.(int) $articleId);
 		}
-		else if (is_array($articleId)) {
+		elseif (is_array($articleId)) {
 			JArrayHelper::toInteger($articleId);
 			$articleId = implode(',', $articleId);
 			$type = $this->getState('filter.article_id.include', true) ? 'IN' : 'NOT IN';
@@ -320,7 +326,7 @@ class ContentModelArticles extends JModelList
 				$query->where($categoryEquals);
 			}
 		}
-		else if (is_array($categoryId) && (count($categoryId) > 0)) {
+		elseif (is_array($categoryId) && (count($categoryId) > 0)) {
 			JArrayHelper::toInteger($categoryId);
 			$categoryId = implode(',', $categoryId);
 			if (!empty($categoryId)) {
@@ -337,7 +343,7 @@ class ContentModelArticles extends JModelList
 			$type = $this->getState('filter.author_id.include', true) ? '= ' : '<> ';
 			$authorWhere = 'a.created_by '.$type.(int) $authorId;
 		}
-		else if (is_array($authorId)) {
+		elseif (is_array($authorId)) {
 			JArrayHelper::toInteger($authorId);
 			$authorId = implode(',', $authorId);
 
@@ -355,7 +361,7 @@ class ContentModelArticles extends JModelList
 			$type = $this->getState('filter.author_alias.include', true) ? '= ' : '<> ';
 			$authorAliasWhere = 'a.created_by_alias '.$type.$db->Quote($authorAlias);
 		}
-		else if (is_array($authorAlias)) {
+		elseif (is_array($authorAlias)) {
 			$first = current($authorAlias);
 
 			if (!empty($first)) {
@@ -379,7 +385,7 @@ class ContentModelArticles extends JModelList
 		if (!empty($authorWhere) && !empty($authorAliasWhere)) {
 			$query->where('('.$authorWhere.' OR '.$authorAliasWhere.')');
 		}
-		else if (empty($authorWhere) && empty($authorAliasWhere)) {
+		elseif (empty($authorWhere) && empty($authorAliasWhere)) {
 			// If both are empty we don't want to add to the query
 		}
 		else {
@@ -389,7 +395,7 @@ class ContentModelArticles extends JModelList
 
 		// Filter by start and end dates.
 		$nullDate	= $db->Quote($db->getNullDate());
-		$nowDate	= $db->Quote(JFactory::getDate()->toMySQL());
+		$nowDate	= $db->Quote(JFactory::getDate()->toSql());
 
 		$query->where('(a.publish_up = '.$nullDate.' OR a.publish_up <= '.$nowDate.')');
 		$query->where('(a.publish_down = '.$nullDate.' OR a.publish_down >= '.$nowDate.')');
@@ -425,7 +431,7 @@ class ContentModelArticles extends JModelList
 			// clean filter variable
 			$filter = JString::strtolower($filter);
 			$hitsFilter = intval($filter);
-			$filter = $db->Quote('%'.$db->getEscaped($filter, true).'%', false);
+			$filter = $db->Quote('%'.$db->escape($filter, true).'%', false);
 
 			switch ($params->get('filter_field'))
 			{
@@ -455,7 +461,7 @@ class ContentModelArticles extends JModelList
 
 		// Add the list ordering clause.
 		$query->order($this->getState('list.ordering', 'a.ordering').' '.$this->getState('list.direction', 'ASC'));
-
+		$query->group('a.id, a.title, a.alias, a.title_alias, a.introtext, a.checked_out, a.checked_out_time, a.catid, a.created, a.created_by, a.created_by_alias, a.created, a.modified, a.modified_by, uam.name, a.publish_up, a.attribs, a.metadata, a.metakey, a.metadesc, a.access, a.hits, a.xreference, a.featured, a.fulltext, a.state, a.publish_down, badcats.id, c.title, c.path, c.access, c.alias, uam.id, ua.name, ua.email, contact.id, parent.title, parent.id, parent.path, parent.alias, v.rating_sum, v.rating_count, c.published, c.lft, a.ordering, parent.lft, fp.ordering, c.id, a.images, a.urls');
 		return $query;
 	}
 
@@ -482,7 +488,7 @@ class ContentModelArticles extends JModelList
 		foreach ($items as &$item)
 		{
 			$articleParams = new JRegistry;
-			$articleParams->loadJSON($item->attribs);
+			$articleParams->loadString($item->attribs);
 
 			// Unpack readmore and layout params
 			$item->alternative_readmore = $articleParams->get('alternative_readmore');
@@ -527,7 +533,7 @@ class ContentModelArticles extends JModelList
 			}
 
 			// get display date
-			switch ($item->params->get('show_date'))
+			switch ($item->params->get('list_show_date'))
 			{
 				case 'modified':
 					$item->displayDate = $item->modified;
@@ -553,7 +559,7 @@ class ContentModelArticles extends JModelList
 					$item->params->set('access-edit', true);
 				}
 				// Now check if edit.own is available.
-				else if (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
+				elseif (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
 					// Check for a valid user and that they are the owner.
 					if ($userId == $item->created_by) {
 						$item->params->set('access-edit', true);

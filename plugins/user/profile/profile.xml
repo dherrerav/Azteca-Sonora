@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id: profile.xml 21036 2011-03-31 09:12:46Z infograf768 $ -->
-<extension version="1.6" type="plugin" group="user">
+<extension version="2.5" type="plugin" group="user">
 	<name>plg_user_profile</name>
 	<author>Joomla! Project</author>
 	<creationDate>January 2008</creationDate>
-	<copyright>(C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
+	<copyright>(C) 2005 - 2012 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<version>1.6.0</version>
+	<version>2.5.0</version>
 	<description>PLG_USER_PROFILE_XML_DESCRIPTION</description>
 
 	<files>
@@ -29,7 +28,7 @@
 				/>
 
 				<field name="register-require_address1" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_ADDRESS1_DESC"
 					label="PLG_USER_PROFILE_FIELD_ADDRESS1_LABEL"
 				>
@@ -39,7 +38,7 @@
 				</field>
 
 				<field name="register-require_address2" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_ADDRESS2_DESC"
 					label="PLG_USER_PROFILE_FIELD_ADDRESS2_LABEL"
 				>
@@ -49,7 +48,7 @@
 				</field>
 
 				<field name="register-require_city" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_CITY_DESC"
 					label="PLG_USER_PROFILE_FIELD_CITY_LABEL"
 				>
@@ -59,7 +58,7 @@
 				</field>
 
 				<field name="register-require_region" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_REGION_DESC"
 					label="PLG_USER_PROFILE_FIELD_REGION_LABEL"
 				>
@@ -69,7 +68,7 @@
 				</field>
 
 				<field name="register-require_country" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_COUNTRY_DESC"
 					label="PLG_USER_PROFILE_FIELD_COUNTRY_LABEL"
 				>
@@ -79,7 +78,7 @@
 				</field>
 
 				<field name="register-require_postal_code" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_POSTAL_CODE_DESC"
 					label="PLG_USER_PROFILE_FIELD_POSTAL_CODE_LABEL"
 				>
@@ -89,7 +88,7 @@
 				</field>
 
 				<field name="register-require_phone" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_PHONE_DESC"
 					label="PLG_USER_PROFILE_FIELD_PHONE_LABEL"
 				>
@@ -99,7 +98,7 @@
 				</field>
 
 				<field name="register-require_website" type="list"
-					
+
 					description="PLG_USER_PROFILE_FIELD_WEB_SITE_DESC"
 					label="PLG_USER_PROFILE_FIELD_WEB_SITE_LABEL"
 				>
@@ -109,7 +108,7 @@
 				</field>
 				<field 	name="register-require_favoritebook"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_FAVORITE_BOOK_LABEL"
 					description="PLG_USER_PROFILE_FIELD_FAVORITE_BOOK_DESC"
 				>
@@ -121,7 +120,7 @@
 				<field
 					name="register-require_aboutme"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_ABOUT_ME_LABEL"
 					description="PLG_USER_PROFILE_FIELD_ABOUT_ME_DESC"
 				>
@@ -132,7 +131,7 @@
 				<field
 					name="register-require_tos"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_TOS_LABEL"
 					description="PLG_USER_PROFILE_FIELD_TOS_DESC"
 				>
@@ -143,17 +142,17 @@
 				<field
 					name="register-require_dob"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_DOB_LABEL"
 					description="PLG_USER_PROFILE_FIELD_DOB_DESC">
 					<option	value="2">JOPTION_REQUIRED</option>
 					<option	value="1">JOPTION_OPTIONAL</option>
 					<option	value="0">JDISABLED</option>
 				</field>
-		 
+
 				<field name="spacer1" type="spacer"
 					hr="true"
-				/>				 
+				/>
 				<field name="profile-require-user" type="spacer" class="text"
 					label="PLG_USER_PROFILE_FIELD_NAME_PROFILE_REQUIRE_USER"
 				/>
@@ -239,7 +238,7 @@
 				</field>
 				<field 	name="profile-require_favoritebook"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_FAVORITE_BOOK_LABEL"
 					description="PLG_USER_PROFILE_FIELD_FAVORITE_BOOK_DESC">
 					<option value="2">JOPTION_REQUIRED</option>
@@ -250,7 +249,7 @@
 				<field
 					name="profile-require_aboutme"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_ABOUT_ME_LABEL"
 					description="PLG_USER_PROFILE_FIELD_ABOUT_ME_DESC">
 					<option	value="2">JOPTION_REQUIRED</option>
@@ -260,7 +259,7 @@
 				<field
 					name="profile-require_tos"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_TOS_LABEL"
 					description="PLG_USER_PROFILE_FIELD_TOS_DESC">
 					<option	value="2">JOPTION_REQUIRED</option>
@@ -270,7 +269,7 @@
 				<field
 					name="profile-require_dob"
 					type="list"
-					
+
 					label="PLG_USER_PROFILE_FIELD_DOB_LABEL"
 					description="PLG_USER_PROFILE_FIELD_DOB_DESC"
 				 >

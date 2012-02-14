@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
 <extension
-	version="1.6"
+	version="2.5"
 	type="template"
 	method="upgrade">
-	<name>ja_t3_blank</name>
-	<version>1.0.3</version>
-	<creationDate>22 Feb 2011</creationDate>
+	<name>JA_T3_Blank</name>
+	<version>2.5.0</version>
+	<creationDate>10 Feb 2012</creationDate>
 	<author>JoomlArt.com</author>
 	<authorEmail>webmaster@joomlart.com</authorEmail>
 	<authorUrl>http://www.joomlart.com</authorUrl>
 	<copyright>Copyright (C), J.O.O.M Solutions Co., Ltd. All Rights Reserved.</copyright>
 	<license>license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
-	<description>JA T3 Blank for Joomla 1.6</description>
+	<description>TEMPLATE_DESCRIPTION</description>
 	<engine>t3</engine>
 	<files>
 		<filename>component.php</filename>
@@ -21,22 +21,22 @@
 		<filename>index.php</filename>
 		<filename>info.xml</filename>
 		<filename>params.ini</filename>
+		<filename>template_preview.png</filename>
 		<filename>template_thumbnail.png</filename>
-		<filename>images/emailButton.png</filename>
-		<folder>core</folder>
+		<folder>etc</folder>
+		<folder>themes</folder>
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>info</folder>
+		<folder>blocks</folder>
 	</files>
 
 	<languages>
-		<language tag="en-GB">en-GB.tpl_ja_t3_blank.ini
-		</language>
+		<language tag="en-GB">en-GB.tpl_ja_t3_blank.ini</language>
 	</languages>
 	<administration>
 		<languages folder="admin">
-			<language tag="en-GB">en-GB.tpl_ja_t3_blank.ini
-			</language>
+			<language tag="en-GB">en-GB.tpl_ja_t3_blank.ini</language>
 		</languages>
 	</administration>
 

@@ -1,8 +1,13 @@
 /**
- * @version		$Id: tabs.js 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
+
+Object.append(Browser.Features, {
+	localstorage: (function() {
+		return ('localStorage' in window) && window.localStorage !== null;
+	})()
+});
 
 /**
  * Tabs behavior
@@ -16,6 +21,7 @@ var JTabs = new Class({
 
 	options : {
 		display: 0,
+		useStorage: true,
 		onActive: function(title, description) {
 			description.setStyle('display', 'block');
 			title.addClass('open').removeClass('closed');
@@ -34,10 +40,22 @@ var JTabs = new Class({
 		this.titles = this.dlist.getChildren(this.options.titleSelector);
 		this.descriptions = this.dlist.getChildren(this.options.descriptionSelector);
 		this.content = new Element('div').inject(this.dlist, 'after').addClass('current');
+		this.storageName = 'jpanetabs_'+this.dlist.id;
 
-	this.options.display = this.options.display.toInt().limit(0, this.titles.length-1);
+		if (this.options.useStorage) {
+			if (Browser.Features.localstorage) {
+				this.options.display = localStorage[this.storageName];
+			} else {
+				this.options.display = Cookie.read(this.storageName);
+			}
+		}
+		if (this.options.display === null || this.options.display === undefined) {
+			this.options.display = 0;
+		}
+		this.options.display = this.options.display.toInt().limit(0, this.titles.length-1);
 
-		for (var i = 0, l = this.titles.length; i < l; i++){
+		for (var i = 0, l = this.titles.length; i < l; i++)
+		{
 			var title = this.titles[i];
 			var description = this.descriptions[i];
 			title.setStyle('cursor', 'pointer');
@@ -51,7 +69,8 @@ var JTabs = new Class({
 	},
 
 	hideAllBut: function(but) {
-		for (var i = 0, l = this.titles.length; i < l; i++){
+		for (var i = 0, l = this.titles.length; i < l; i++)
+		{
 			if (i != but) this.fireEvent('onBackground', [this.titles[i], this.descriptions[i]]);
 		}
 	},
@@ -59,6 +78,12 @@ var JTabs = new Class({
 	display: function(i) {
 		this.hideAllBut(i);
 		this.fireEvent('onActive', [this.titles[i], this.descriptions[i]]);
-	Cookie.write('jpanetabs_' + this.dlist.id, i);
+		if (this.options.useStorage) {
+			if (Browser.Features.localstorage) {
+				localStorage[this.storageName] = i;
+			} else {
+				Cookie.write(this.storageName, i);
+			}
+		}
 	}
 });

@@ -1,10 +1,11 @@
 <?php
 /**
- * @version		$Id: router.php 20759 2011-02-18 04:45:08Z dextercowley $
  * @package		Joomla.Site
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
+
+defined('_JEXEC') or die;
 
 /**
  * @param	array

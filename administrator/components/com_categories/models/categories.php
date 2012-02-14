@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: categories.php 20267 2011-01-11 03:44:44Z eddieajau $
  * @package		Joomla.Administrator
  * @subpackage	com_categories
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -69,10 +68,10 @@ class CategoriesModelCategories extends JModelList
 		$app		= JFactory::getApplication();
 		$context	= $this->context;
 
-		$extension = $app->getUserStateFromRequest('com_categories.categories.filter.extension', 'extension', 'com_content');
+		$extension = $app->getUserStateFromRequest('com_categories.categories.filter.extension', 'extension', 'com_content', 'cmd');
 
 		$this->setState('filter.extension', $extension);
-		$parts = explode('.',$extension);
+		$parts = explode('.', $extension);
 
 		// extract the component name
 		$this->setState('filter.component', $parts[0]);
@@ -129,8 +128,9 @@ class CategoriesModelCategories extends JModelList
 	function getListQuery()
 	{
 		// Create a new query object.
-		$db = $this->getDbo();
-		$query = $db->getQuery(true);
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		$user	= JFactory::getUser();
 
 		// Select the required fields from the table.
 		$query->select(
@@ -146,7 +146,7 @@ class CategoriesModelCategories extends JModelList
 
 		// Join over the language
 		$query->select('l.title AS language_title');
-		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		$query->join('LEFT', $db->quoteName('#__languages').' AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
@@ -175,12 +175,19 @@ class CategoriesModelCategories extends JModelList
 			$query->where('a.access = ' . (int) $access);
 		}
 
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+		    $groups	= implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.access IN ('.$groups.')');
+		}
+
 		// Filter by published state
 		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
 			$query->where('a.published = ' . (int) $published);
 		}
-		else if ($published === '') {
+		elseif ($published === '') {
 			$query->where('(a.published IN (0, 1))');
 		}
 
@@ -190,12 +197,12 @@ class CategoriesModelCategories extends JModelList
 			if (stripos($search, 'id:') === 0) {
 				$query->where('a.id = '.(int) substr($search, 3));
 			}
-			else if (stripos($search, 'author:') === 0) {
-				$search = $db->Quote('%'.$db->getEscaped(substr($search, 7), true).'%');
+			elseif (stripos($search, 'author:') === 0) {
+				$search = $db->Quote('%'.$db->escape(substr($search, 7), true).'%');
 				$query->where('(ua.name LIKE '.$search.' OR ua.username LIKE '.$search.')');
 			}
 			else {
-				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+				$search = $db->Quote('%'.$db->escape($search, true).'%');
 				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.' OR a.note LIKE '.$search.')');
 			}
 		}
@@ -205,8 +212,14 @@ class CategoriesModelCategories extends JModelList
 			$query->where('a.language = '.$db->quote($language));
 		}
 
-		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		// Add the list ordering clause
+		$listOrdering = $this->getState('list.ordering', 'a.lft');
+		$listDirn = $db->escape($this->getState('list.direction', 'ASC'));
+		if ($listOrdering == 'a.access') {
+			$query->order('a.access '.$listDirn.', a.lft '.$listDirn);
+		} else {
+			$query->order($db->escape($listOrdering).' '.$listDirn);
+		}
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

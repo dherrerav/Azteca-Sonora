@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -48,7 +47,6 @@ class ConfigViewApplication extends JView
 		$mediaParams = JComponentHelper::getParams('com_media');
 
 		// Load settings for the FTP layer.
-		jimport('joomla.client.helper');
 		$ftp = JClientHelper::setCredentialsFromRequest('ftp');
 
 		$this->assignRef('form',	$form);
@@ -69,10 +67,10 @@ class ConfigViewApplication extends JView
 	protected function addToolbar()
 	{
 		JToolBarHelper::title(JText::_('COM_CONFIG_GLOBAL_CONFIGURATION'), 'config.png');
-		JToolBarHelper::apply('application.apply', 'JTOOLBAR_APPLY');
-		JToolBarHelper::save('application.save', 'JTOOLBAR_SAVE');
+		JToolBarHelper::apply('application.apply');
+		JToolBarHelper::save('application.save');
 		JToolBarHelper::divider();
-		JToolBarHelper::cancel('application.cancel', 'JTOOLBAR_CANCEL');
+		JToolBarHelper::cancel('application.cancel');
 		JToolBarHelper::divider();
 		JToolBarHelper::help('JHELP_SITE_GLOBAL_CONFIGURATION');
 	}

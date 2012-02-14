@@ -1,9 +1,10 @@
 <?php
 /**
- * @version		$Id: media.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
+
+defined('_JEXEC') or die;
 
 /**
  * @package		Joomla.Administrator
@@ -19,7 +20,7 @@ abstract class MediaHelper
 	public static function isImage($fileName)
 	{
 		static $imageTypes = 'xcf|odg|gif|jpg|png|bmp';
-		return preg_match("/\.(?:$imageTypes)$/i",$fileName);
+		return preg_match("/\.(?:$imageTypes)$/i", $fileName);
 	}
 
 	/**
@@ -59,7 +60,7 @@ abstract class MediaHelper
 
 		$allowable = explode(',', $params->get('upload_extensions'));
 		$ignored = explode(',', $params->get('ignore_extensions'));
-		if (!in_array($format, $allowable) && !in_array($format,$ignored))
+		if (!in_array($format, $allowable) && !in_array($format, $ignored))
 		{
 			$err = 'COM_MEDIA_ERROR_WARNFILETYPE';
 			return false;
@@ -74,7 +75,7 @@ abstract class MediaHelper
 
 		$user = JFactory::getUser();
 		$imginfo = null;
-		if ($params->get('restrict_uploads',1)) {
+		if ($params->get('restrict_uploads', 1)) {
 			$images = explode(',', $params->get('image_extensions'));
 			if (in_array($format, $images)) { // if its an image run it through getimagesize
 				// if tmp_name is empty, then the file was bigger than the PHP limit
@@ -87,11 +88,11 @@ abstract class MediaHelper
 					$err = 'COM_MEDIA_ERROR_WARNFILETOOLARGE';
 					return false;
 				}
-			} else if (!in_array($format, $ignored)) {
+			} elseif (!in_array($format, $ignored)) {
 				// if its not an image...and we're not ignoring it
 				$allowed_mime = explode(',', $params->get('upload_mime'));
 				$illegal_mime = explode(',', $params->get('upload_mime_illegal'));
-				if (function_exists('finfo_open') && $params->get('check_mime',1)) {
+				if (function_exists('finfo_open') && $params->get('check_mime', 1)) {
 					// We have fileinfo
 					$finfo = finfo_open(FILEINFO_MIME);
 					$type = finfo_file($finfo, $file['tmp_name']);
@@ -100,22 +101,22 @@ abstract class MediaHelper
 						return false;
 					}
 					finfo_close($finfo);
-				} else if (function_exists('mime_content_type') && $params->get('check_mime',1)) {
+				} elseif (function_exists('mime_content_type') && $params->get('check_mime', 1)) {
 					// we have mime magic
 					$type = mime_content_type($file['tmp_name']);
 					if (strlen($type) && !in_array($type, $allowed_mime) && in_array($type, $illegal_mime)) {
 						$err = 'COM_MEDIA_ERROR_WARNINVALID_MIME';
 						return false;
 					}
-				} else if (!$user->authorise('core.manage')) {
+				} elseif (!$user->authorise('core.manage')) {
 					$err = 'COM_MEDIA_ERROR_WARNNOTADMIN';
 					return false;
 				}
 			}
 		}
 
-		$xss_check =  JFile::read($file['tmp_name'],false,256);
-		$html_tags = array('abbr','acronym','address','applet','area','audioscope','base','basefont','bdo','bgsound','big','blackface','blink','blockquote','body','bq','br','button','caption','center','cite','code','col','colgroup','comment','custom','dd','del','dfn','dir','div','dl','dt','em','embed','fieldset','fn','font','form','frame','frameset','h1','h2','h3','h4','h5','h6','head','hr','html','iframe','ilayer','img','input','ins','isindex','keygen','kbd','label','layer','legend','li','limittext','link','listing','map','marquee','menu','meta','multicol','nobr','noembed','noframes','noscript','nosmartquotes','object','ol','optgroup','option','param','plaintext','pre','rt','ruby','s','samp','script','select','server','shadow','sidebar','small','spacer','span','strike','strong','style','sub','sup','table','tbody','td','textarea','tfoot','th','thead','title','tr','tt','ul','var','wbr','xml','xmp','!DOCTYPE', '!--');
+		$xss_check =  JFile::read($file['tmp_name'], false, 256);
+		$html_tags = array('abbr', 'acronym', 'address', 'applet', 'area', 'audioscope', 'base', 'basefont', 'bdo', 'bgsound', 'big', 'blackface', 'blink', 'blockquote', 'body', 'bq', 'br', 'button', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'comment', 'custom', 'dd', 'del', 'dfn', 'dir', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'fn', 'font', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'hr', 'html', 'iframe', 'ilayer', 'img', 'input', 'ins', 'isindex', 'keygen', 'kbd', 'label', 'layer', 'legend', 'li', 'limittext', 'link', 'listing', 'map', 'marquee', 'menu', 'meta', 'multicol', 'nobr', 'noembed', 'noframes', 'noscript', 'nosmartquotes', 'object', 'ol', 'optgroup', 'option', 'param', 'plaintext', 'pre', 'rt', 'ruby', 's', 'samp', 'script', 'select', 'server', 'shadow', 'sidebar', 'small', 'spacer', 'span', 'strike', 'strong', 'style', 'sub', 'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'title', 'tr', 'tt', 'ul', 'var', 'wbr', 'xml', 'xmp', '!DOCTYPE', '!--');
 		foreach($html_tags as $tag) {
 			// A tag is '<tagname ', so we need to add < and a space or '<tagname>'
 			if (stristr($xss_check, '<'.$tag.' ') || stristr($xss_check, '<'.$tag.'>')) {

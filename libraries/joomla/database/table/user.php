@@ -1,34 +1,41 @@
 <?php
 /**
- * @version		$Id: user.php 20228 2011-01-10 00:52:54Z eddieajau $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Database
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
+
+jimport('joomla.database.table');
 
 /**
  * Users table
  *
- * @package		Joomla.Framework
- * @subpackage	Table
- * @since		1.0
+ * @package     Joomla.Platform
+ * @subpackage  Table
+ * @since       11.1
  */
 class JTableUser extends JTable
 {
 	/**
 	 * Associative array of user names => group ids
 	 *
-	 * @access	public
-	 * @since	1.6
-	 * @var		array
+	 * @var    array
+	 * @since  11.1
 	 */
-	var $groups;
+	public $groups;
 
 	/**
-	* @param database A database connector object
-	*/
-	function __construct(&$db)
+	 * Constructor
+	 *
+	 * @param   JDatabase  &$db  A database connector object.
+	 *
+	 * @since  11.1
+	 */
+	public function __construct(&$db)
 	{
 		parent::__construct('#__users', 'id', $db);
 
@@ -41,22 +48,29 @@ class JTableUser extends JTable
 	 * Method to load a user, user groups, and any other necessary data
 	 * from the database so that it can be bound to the user object.
 	 *
-	 * @access	public
-	 * @param	integer		$userId		An optional user id.
-	 * @return	boolean		True on success, false on failure.
-	 * @since	1.0
+	 * @param   integer  $userId  An optional user id.
+	 * @param   boolean  $reset   False if row not found or on error
+	 * (internal error state set in that case).
+	 *
+	 * @return  boolean  True on success, false on failure.
+	 *
+	 * @since   11.1
 	 */
-	function load($userId = null, $reset = true)
+	public function load($userId = null, $reset = true)
 	{
 		// Get the id to load.
-		if ($userId !== null) {
+		if ($userId !== null)
+		{
 			$this->id = $userId;
-		} else {
+		}
+		else
+		{
 			$userId = $this->id;
 		}
 
 		// Check for a valid id to load.
-		if ($userId === null) {
+		if ($userId === null)
+		{
 			return false;
 		}
 
@@ -64,20 +78,21 @@ class JTableUser extends JTable
 		$this->reset();
 
 		// Load the user data.
-		$this->_db->setQuery(
-			'SELECT *' .
-			' FROM #__users' .
-			' WHERE id = '.(int) $userId
-		);
+		$query = $this->_db->getQuery(true);
+		$query->select('*');
+		$query->from($this->_db->quoteName('#__users'));
+		$query->where($this->_db->quoteName('id') . ' = ' . (int) $userId);
+		$this->_db->setQuery($query);
 		$data = (array) $this->_db->loadAssoc();
 
 		// Check for an error message.
-		if ($this->_db->getErrorNum()) {
+		if ($this->_db->getErrorNum())
+		{
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
 
-		if(!count($data))
+		if (!count($data))
 		{
 			return false;
 		}
@@ -87,17 +102,19 @@ class JTableUser extends JTable
 		if ($return !== false)
 		{
 			// Load the user groups.
-			$this->_db->setQuery(
-				'SELECT g.id, g.title' .
-				' FROM #__usergroups AS g' .
-				' JOIN #__user_usergroup_map AS m ON m.group_id = g.id' .
-				' WHERE m.user_id = '.(int) $userId
-			);
+			$query->clear();
+			$query->select($this->_db->quoteName('g') . '.' . $this->_db->quoteName('id'));
+			$query->select($this->_db->quoteName('g') . '.' . $this->_db->quoteName('title'));
+			$query->from($this->_db->quoteName('#__usergroups') . ' AS g');
+			$query->join('INNER', $this->_db->quoteName('#__user_usergroup_map') . ' AS m ON m.group_id = g.id');
+			$query->where($this->_db->quoteName('m.user_id') . ' = ' . (int) $userId);
+			$this->_db->setQuery($query);
 			// Add the groups to the user data.
-			$this->groups = $this->_db->loadAssocList('title','id');
+			$this->groups = $this->_db->loadAssocList('id', 'id');
 
 			// Check for an error message.
-			if ($this->_db->getErrorNum()) {
+			if ($this->_db->getErrorNum())
+			{
 				$this->setError($this->_db->getErrorMsg());
 				return false;
 			}
@@ -109,18 +126,20 @@ class JTableUser extends JTable
 	/**
 	 * Method to bind the user, user groups, and any other necessary data.
 	 *
-	 * @access	public
-	 * @param	array		$array		The data to bind.
-	 * @param	mixed		$ignore		An array or space separated list of fields to ignore.
-	 * @return	boolean		True on success, false on failure.
-	 * @since	1.0
+	 * @param   array  $array   The data to bind.
+	 * @param   mixed  $ignore  An array or space separated list of fields to ignore.
+	 *
+	 * @return  boolean  True on success, false on failure.
+	 *
+	 * @since   11.1
 	 */
-	function bind($array, $ignore = '')
+	public function bind($array, $ignore = '')
 	{
-		if (key_exists('params', $array) && is_array($array['params'])) {
-			$registry = new JRegistry();
+		if (key_exists('params', $array) && is_array($array['params']))
+		{
+			$registry = new JRegistry;
 			$registry->loadArray($array['params']);
-			$array['params'] = (string)$registry;
+			$array['params'] = (string) $registry;
 		}
 
 		// Attempt to bind the data.
@@ -133,16 +152,18 @@ class JTableUser extends JTable
 			JArrayHelper::toInteger($this->groups);
 
 			// Get the titles for the user groups.
-			$this->_db->setQuery(
-				'SELECT `id`, `title`' .
-				' FROM `#__usergroups`' .
-				' WHERE `id` = '.implode(' OR `id` = ', $this->groups)
-			);
+			$query = $this->_db->getQuery(true);
+			$query->select($this->_db->quoteName('id'));
+			$query->select($this->_db->quoteName('title'));
+			$query->from($this->_db->quoteName('#__usergroups'));
+			$query->where($this->_db->quoteName('id') . ' = ' . implode(' OR ' . $this->_db->quoteName('id') . ' = ', $this->groups));
+			$this->_db->setQuery($query);
 			// Set the titles for the user groups.
-			$this->groups = $this->_db->loadAssocList('title','id');
+			$this->groups = $this->_db->loadAssocList('id', 'id');
 
 			// Check for a database error.
-			if ($this->_db->getErrorNum()) {
+			if ($this->_db->getErrorNum())
+			{
 				$this->setError($this->_db->getErrorMsg());
 				return false;
 			}
@@ -154,79 +175,88 @@ class JTableUser extends JTable
 	/**
 	 * Validation and filtering
 	 *
-	 * @return boolean True is satisfactory
+	 * @return  boolean  True if satisfactory
+	 *
+	 * @since   11.1
 	 */
-	function check()
+	public function check()
 	{
-		jimport('joomla.mail.helper');
-
 		// Validate user information
-		if (trim($this->name) == '') {
+		if (trim($this->name) == '')
+		{
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_PLEASE_ENTER_YOUR_NAME'));
 			return false;
 		}
 
-		if (trim($this->username) == '') {
+		if (trim($this->username) == '')
+		{
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_PLEASE_ENTER_A_USER_NAME'));
 			return false;
 		}
 
-		if (preg_match( "#[<>\"'%;()&]#i", $this->username) || strlen(utf8_decode($this->username )) < 2) {
-			$this->setError( JText::sprintf( 'JLIB_DATABASE_ERROR_VALID_AZ09', 2 ));
+		if (preg_match("#[<>\"'%;()&]#i", $this->username) || strlen(utf8_decode($this->username)) < 2)
+		{
+			$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_VALID_AZ09', 2));
 			return false;
 		}
 
-		if ((trim($this->email) == "") || ! JMailHelper::isEmailAddress($this->email)) {
+		if ((trim($this->email) == "") || !JMailHelper::isEmailAddress($this->email))
+		{
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_VALID_MAIL'));
 			return false;
 		}
 
 		// Set the registration timestamp
-		if ($this->registerDate == null || $this->registerDate == '0000-00-00 00:00:00' ) {
-			$this->registerDate = JFactory::getDate()->toMySQL();
+		if ($this->registerDate == null || $this->registerDate == $this->_db->getNullDate())
+		{
+			$this->registerDate = JFactory::getDate()->toSql();
 		}
 
-
 		// check for existing username
-		$query = 'SELECT id'
-		. ' FROM #__users '
-		. ' WHERE username = ' . $this->_db->Quote($this->username)
-		. ' AND id != '. (int) $this->id;
-		;
+		$query = $this->_db->getQuery(true);
+		$query->select($this->_db->quoteName('id'));
+		$query->from($this->_db->quoteName('#__users'));
+		$query->where($this->_db->quoteName('username') . ' = ' . $this->_db->quote($this->username));
+		$query->where($this->_db->quoteName('id') . ' != ' . (int) $this->id);
+		$this->_db->setQuery($query);
+
 		$this->_db->setQuery($query);
 		$xid = intval($this->_db->loadResult());
-		if ($xid && $xid != intval($this->id)) {
-			$this->setError( JText::_('JLIB_DATABASE_ERROR_USERNAME_INUSE'));
+		if ($xid && $xid != intval($this->id))
+		{
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_USERNAME_INUSE'));
 			return false;
 		}
 
-
 		// check for existing email
-		$query = 'SELECT id'
-			. ' FROM #__users '
-			. ' WHERE email = '. $this->_db->Quote($this->email)
-			. ' AND id != '. (int) $this->id
-			;
+		$query->clear();
+		$query->select($this->_db->quoteName('id'));
+		$query->from($this->_db->quoteName('#__users'));
+		$query->where($this->_db->quoteName('email') . ' = ' . $this->_db->quote($this->email));
+		$query->where($this->_db->quoteName('id') . ' != ' . (int) $this->id);
 		$this->_db->setQuery($query);
 		$xid = intval($this->_db->loadResult());
-		if ($xid && $xid != intval($this->id)) {
+		if ($xid && $xid != intval($this->id))
+		{
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_EMAIL_INUSE'));
 			return false;
 		}
 
 		// check for root_user != username
-		$config		= JFactory::getConfig();
-		$rootUser	= $config->get('root_user');
+		$config = JFactory::getConfig();
+		$rootUser = $config->get('root_user');
 		if (!is_numeric($rootUser))
 		{
-			$query = $this->_db->getQuery(true);
-			$query->select('id');
-			$query->from('#__users');
-			$query->where('username = '.$this->_db->quote($rootUser));
+			$query->clear();
+			$query->select($this->_db->quoteName('id'));
+			$query->from($this->_db->quoteName('#__users'));
+			$query->where($this->_db->quoteName('username') . ' = ' . $this->_db->quote($rootUser));
 			$this->_db->setQuery($query);
 			$xid = intval($this->_db->loadResult());
-			if ($rootUser==$this->username && (!$xid || $xid && $xid != intval($this->id))  || $xid && $xid == intval($this->id) && $rootUser!=$this->username) {
-				$this->setError( JText::_('JLIB_DATABASE_ERROR_USERNAME_CANNOT_CHANGE'));
+			if ($rootUser == $this->username && (!$xid || $xid && $xid != intval($this->id))
+				|| $xid && $xid == intval($this->id) && $rootUser != $this->username)
+			{
+				$this->setError(JText::_('JLIB_DATABASE_ERROR_USERNAME_CANNOT_CHANGE'));
 				return false;
 			}
 		}
@@ -234,11 +264,25 @@ class JTableUser extends JTable
 		return true;
 	}
 
-	function store($updateNulls = false)
+	/**
+	 * Method to store a row in the database from the JTable instance properties.
+	 * If a primary key value is set the row with that primary key value will be
+	 * updated with the instance property values.  If no primary key value is set
+	 * a new row will be inserted into the database with the properties from the
+	 * JTable instance.
+	 *
+	 * @param   boolean  $updateNulls  True to update fields even if they are null.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @link    http://docs.joomla.org/JTable/store
+	 * @since   11.1
+	 */
+	public function store($updateNulls = false)
 	{
 		// Get the table key and key value.
 		$k = $this->_tbl_key;
-		$key =  $this->$k;
+		$key = $this->$k;
 
 		// TODO: This is a dumb way to handle the groups.
 		// Store groups locally so as to not update directly.
@@ -246,11 +290,13 @@ class JTableUser extends JTable
 		unset($this->groups);
 
 		// Insert or update the object based on presence of a key value.
-		if ($key) {
+		if ($key)
+		{
 			// Already have a table key, update the row.
 			$return = $this->_db->updateObject($this->_tbl, $this, $this->_tbl_key, $updateNulls);
 		}
-		else {
+		else
+		{
 			// Don't have a table key, insert the row.
 			$return = $this->_db->insertObject($this->_tbl, $this, $this->_tbl_key);
 		}
@@ -270,27 +316,31 @@ class JTableUser extends JTable
 		if ($return && is_array($this->groups) && count($this->groups))
 		{
 			// Delete the old user group maps.
-			$this->_db->setQuery(
-				'DELETE FROM `#__user_usergroup_map`' .
-				' WHERE `user_id` = '.(int) $this->id
-			);
+			$query = $this->_db->getQuery(true);
+			$query->delete();
+			$query->from($this->_db->quoteName('#__user_usergroup_map'));
+			$query->where($this->_db->quoteName('user_id') . ' = ' . (int) $this->id);
+			$this->_db->setQuery($query);
 			$this->_db->query();
 
 			// Check for a database error.
-			if ($this->_db->getErrorNum()) {
+			if ($this->_db->getErrorNum())
+			{
 				$this->setError($this->_db->getErrorMsg());
 				return false;
 			}
 
 			// Set the new user group maps.
-			$this->_db->setQuery(
-				'INSERT INTO `#__user_usergroup_map` (`user_id`, `group_id`)' .
-				' VALUES ('.$this->id.', '.implode('), ('.$this->id.', ', $this->groups).')'
-			);
+			$query->clear();
+			$query->insert($this->_db->quoteName('#__user_usergroup_map'));
+			$query->columns(array($this->_db->quoteName('user_id'), $this->_db->quoteName('group_id')));
+			$query->values($this->id . ', ' . implode('), (' . $this->id . ', ', $this->groups));
+			$this->_db->setQuery($query);
 			$this->_db->query();
 
 			// Check for a database error.
-			if ($this->_db->getErrorNum()) {
+			if ($this->_db->getErrorNum())
+			{
 				$this->setError($this->_db->getErrorMsg());
 				return false;
 			}
@@ -300,44 +350,49 @@ class JTableUser extends JTable
 	}
 
 	/**
-	 * Method to delete a user, user groups, and any other necessary
-	 * data from the database.
+	 * Method to delete a user, user groups, and any other necessary data from the database.
 	 *
-	 * @access	public
-	 * @param	integer		$userId		An optional user id.
-	 * @return	boolean		True on success, false on failure.
-	 * @since	1.0
+	 * @param   integer  $userId  An optional user id.
+	 *
+	 * @return  boolean  True on success, false on failure.
+	 *
+	 * @since   11.1
 	 */
-	function delete($userId = null)
+	public function delete($userId = null)
 	{
 		// Set the primary key to delete.
 		$k = $this->_tbl_key;
-		if ($userId) {
+		if ($userId)
+		{
 			$this->$k = intval($userId);
 		}
 
 		// Delete the user.
-		$this->_db->setQuery(
-			'DELETE FROM `'.$this->_tbl.'`' .
-			' WHERE `'.$this->_tbl_key.'` = '.(int) $this->$k
-		);
+		$query = $this->_db->getQuery(true);
+		$query->delete();
+		$query->from($this->_db->quoteName($this->_tbl));
+		$query->where($this->_db->quoteName($this->_tbl_key) . ' = ' . (int) $this->$k);
+		$this->_db->setQuery($query);
 		$this->_db->query();
 
 		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
+		if ($this->_db->getErrorNum())
+		{
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
 
 		// Delete the user group maps.
-		$this->_db->setQuery(
-			'DELETE FROM `#__user_usergroup_map`' .
-			' WHERE `user_id` = '.(int) $this->$k
-		);
+		$query->clear();
+		$query->delete();
+		$query->from($this->_db->quoteName('#__user_usergroup_map'));
+		$query->where($this->_db->quoteName('user_id') . ' = ' . (int) $this->$k);
+		$this->_db->setQuery($query);
 		$this->_db->query();
 
 		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
+		if ($this->_db->getErrorNum())
+		{
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
@@ -346,26 +401,30 @@ class JTableUser extends JTable
 		 * Clean Up Related Data.
 		 */
 
-		$this->_db->setQuery(
-			'DELETE FROM `#__messages_cfg`' .
-			' WHERE `user_id` = '.(int) $this->$k
-		);
+		$query->clear();
+		$query->delete();
+		$query->from($this->_db->quoteName('#__messages_cfg'));
+		$query->where($this->_db->quoteName('user_id') . ' = ' . (int) $this->$k);
+		$this->_db->setQuery($query);
 		$this->_db->query();
 
 		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
+		if ($this->_db->getErrorNum())
+		{
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
 
-		$this->_db->setQuery(
-			'DELETE FROM `#__messages`' .
-			' WHERE `user_id_to` = '.(int) $this->$k
-		);
+		$query->clear();
+		$query->delete();
+		$query->from($this->_db->quoteName('#__messages'));
+		$query->where($this->_db->quoteName('user_id_to') . ' = ' . (int) $this->$k);
+		$this->_db->setQuery($query);
 		$this->_db->query();
 
 		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
+		if ($this->_db->getErrorNum())
+		{
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
@@ -376,36 +435,45 @@ class JTableUser extends JTable
 	/**
 	 * Updates last visit time of user
 	 *
-	 * @param int The timestamp, defaults to 'now'
-	 * @return boolean False if an error occurs
+	 * @param   integer  $timeStamp  The timestamp, defaults to 'now'.
+	 * @param   integer  $userId     The user id (optional).
+	 *
+	 * @return  boolean  False if an error occurs
+	 *
+	 * @since   11.1
 	 */
-	function setLastVisit($timeStamp = null, $userId = null)
+	public function setLastVisit($timeStamp = null, $userId = null)
 	{
 		// Check for User ID
 		if (is_null($userId))
 		{
-			if (isset($this)) {
+			if (isset($this))
+			{
 				$userId = $this->id;
-			} else {
+			}
+			else
+			{
 				// do not translate
 				jexit(JText::_('JLIB_DATABASE_ERROR_SETLASTVISIT'));
 			}
 		}
 
-		// If no timestamp value is passed to functon, than current time is used.
+		// If no timestamp value is passed to function, than current time is used.
 		$date = JFactory::getDate($timeStamp);
 
 		// Update the database row for the user.
-		$this->_db->setQuery(
-			'UPDATE `'.$this->_tbl.'`' .
-			' SET `lastvisitDate` = '.$this->_db->Quote($date->toMySQL()) .
-			' WHERE `id` = '.(int) $userId
-		);
-		$this->_db->query();
+		$db = $this->_db;
+		$query = $db->getQuery(true);
+		$query->update($db->quoteName($this->_tbl));
+		$query->set($db->quoteName('lastvisitDate') . '=' . $db->quote($date->toSql()));
+		$query->where($db->quoteName('id') . '=' . (int) $userId);
+		$db->setQuery($query);
+		$db->query();
 
 		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
-			$this->setError($this->_db->getErrorMsg());
+		if ($db->getErrorNum())
+		{
+			$this->setError($db->getErrorMsg());
 			return false;
 		}
 

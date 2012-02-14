@@ -160,9 +160,9 @@ div.current
 #mailto-window  .mailto-close a
 {
 
-	width:25px; 
+	width:25px;
 	height:25px;
-	
+
 
 
 }
@@ -183,3 +183,13 @@ div.current
 
 dd.error
 {zoom:1}
+
+#close a
+{
+	cursor:pointer
+}
+
+#close a span
+{
+	line-height:normal
+}

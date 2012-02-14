@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 21020 2011-03-27 06:52:01Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	mod_popular
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,7 +28,7 @@ defined('_JEXEC') or die;
 	<tbody>
 	<?php foreach ($list as $i=>$item) : ?>
 		<tr>
-			<td>
+			<th scope="row">
 				<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time); ?>
 				<?php endif; ?>
@@ -40,9 +39,9 @@ defined('_JEXEC') or die;
 				<?php else :
 					echo htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
 				endif; ?>
-			</td>
+			</th>
 			<td class="center">
-				<?php echo JHtml::_('date',$item->created, 'Y-m-d H:i:s'); ?>
+				<?php echo JHtml::_('date', $item->created, 'Y-m-d H:i:s'); ?>
 			</td>
 			<td class="center">
 				<?php echo $item->hits;?>

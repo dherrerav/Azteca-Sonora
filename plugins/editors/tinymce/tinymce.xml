@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="1.6" type="plugin" group="editors" method="upgrade">
+<extension version="2.5" type="plugin" group="editors" method="upgrade">
 	<name>plg_editors_tinymce</name>
-	<version>3.3.9.3</version>
-	<creationDate>2005-2010</creationDate>
+	<version>3.4.7</version>
+	<creationDate>2005-2011</creationDate>
 	<author>Moxiecode Systems AB</author>
 	<authorEmail>N/A</authorEmail>
 	<authorUrl>tinymce.moxiecode.com/</authorUrl>
@@ -41,37 +41,9 @@
 					<option value="3">PLG_TINY_FIELD_VALUE_BLACK</option>
 				</field>
 
-				<field name="compressed" type="radio"
-					default="0"
-					description="PLG_TINY_FIELD_COMPRESSED_DESC"
-					label="PLG_TINY_FIELD_COMPRESSED_LABEL"
-				>
-					<option value="0">JOFF</option>
-					<option value="1">JON</option>
-				</field>
-
 				<field name="spacer1" type="spacer"
 					hr="true"
 				/>
-
-				<field name="cleanup_startup" type="radio"
-					default="0"
-					description="PLG_TINY_FIELD_CLEANUPSTARTUP_DESC"
-					label="PLG_TINY_FIELD_CLEANUPSTARTUP_LABEL"
-				>
-					<option value="0">JOFF</option>
-					<option value="1">JON</option>
-				</field>
-
-				<field name="cleanup_save" type="list"
-					default="2"
-					description="PLG_TINY_FIELD_CLEANUPSAVE_DESC"
-					label="PLG_TINY_FIELD_CLEANUPSAVE_LABEL"
-				>
-					<option value="0">PLG_TINY_FIELD_VALUE_NEVER</option>
-					<option value="1">PLG_TINY_FIELD_VALUE_FRONT</option>
-					<option value="2">PLG_TINY_FIELD_VALUE_ALWAYS</option>
-				</field>
 
 				<field name="entity_encoding" type="list"
 					default="raw"
@@ -203,7 +175,7 @@
 					description="PLG_TINY_FIELD_HTMLWIDTH_DESC"
 					label="PLG_TINY_FIELD_HTMLWIDTH_LABEL"
 				/>
-				
+
 				<field name="resizing" type="radio"
 					default="true"
 					description="PLG_TINY_FIELD_RESIZING_DESC"
@@ -212,7 +184,7 @@
 					<option value="false">JOFF</option>
 					<option value="true">JON</option>
 				</field>
-				
+
 				<field name="resize_horizontal" type="radio"
 					default="false"
 					description="PLG_TINY_FIELD_RESIZE_HORIZONTAL_DESC"
@@ -448,7 +420,7 @@
 					<option value="0">JOFF</option>
 					<option value="1">JON</option>
 				</field>
-				
+
 				<field name="advlist" type="radio"
 					default="1"
 					description="PLG_TINY_FIELD_ADVLIST_DESC"

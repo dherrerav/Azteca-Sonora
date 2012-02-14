@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id: manage.xml 18691 2010-08-28 05:43:17Z infograf768 $ -->
 <form>
 	<fields name="filters">
 		<fieldset
@@ -32,7 +31,7 @@
 				<option value="0">JSITE</option>
 				<option value="1">JADMINISTRATOR</option>
 			</field>
-			
+
 			<field type="list"
 				name="enabled"
 				hidden="true"

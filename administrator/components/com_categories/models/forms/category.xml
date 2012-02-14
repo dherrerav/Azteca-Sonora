@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id: category.xml 20990 2011-03-18 16:42:30Z infograf768 $ -->
 <form>
 	<field
 		name="id"
@@ -17,7 +16,7 @@
 
 	<field
 		name="parent_id"
-		type="categoryparent"
+		type="categoryedit"
 		label="COM_CATEGORIES_FIELD_PARENT_LABEL"
 		description="COM_CATEGORIES_FIELD_PARENT_DESC"
 		class="inputbox"/>
@@ -81,7 +80,7 @@
 		label="JGLOBAL_DESCRIPTION"
 		description="COM_CATEGORIES_DESCRIPTION_DESC"
 		class="inputbox"
-		filter="safehtml"
+		filter="JComponentHelper::filterText"
 		buttons="true"
 		hide="readmore,pagebreak"/>
 
@@ -108,7 +107,7 @@
 	</field>
 	<field
 		name="buttonspacer"
-		label="JGLOBAL_ACTION_PERMISSIONS_LABEL" 
+		label="JGLOBAL_ACTION_PERMISSIONS_LABEL"
 		description="JGLOBAL_ACTION_PERMISSIONS_DESCRIPTION"
 		type="spacer" />
 	<field
@@ -218,7 +217,7 @@
 	</fields>
 
 	<fields name="metadata">
-		
+
 		<field
 			name="author"
 			type="text"

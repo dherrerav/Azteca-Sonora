@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: language.php 21032 2011-03-29 16:38:31Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -59,7 +58,7 @@ class LanguagesModelLanguage extends JModelAdmin
 	 * @return	mixed	User data object on success, false on failure.
 	 * @since	1.0
 	 */
-	public function &getItem($langId = null)
+	public function getItem($langId = null)
 	{
 		// Initialise variables.
 		$langId	= (!empty($langId)) ? $langId : (int) $this->getState('language.id');
@@ -168,7 +167,7 @@ class LanguagesModelLanguage extends JModelAdmin
 
 		// Store the data
 		if (!$table->store()) {
-			$this->setError($this->_db->getErrorMsg());
+			$this->setError($table->getError());
 			return false;
 		}
 
@@ -184,53 +183,15 @@ class LanguagesModelLanguage extends JModelAdmin
 	}
 
 	/**
-	 * Method to delete from the database.
-	 *
-	 * @param	integer	$cid	An array of	numeric ids of the rows.
-	 *
-	 * @return	boolean	True on success/false on failure.
-	 * @since	1.6
-	 */
-	public function delete($cid)
-	{
-		$table = $this->getTable();
-
-		for ($i = 0, $c = count($cid); $i < $c; $i++)
-		{
-			// Load the row.
-			$return = $table->load($cid[$i]);
-
-			// Check for an error.
-			if ($return === false) {
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Delete the row.
-			$return = $table->delete();
-
-			// Check for an error.
-			if ($return === false) {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		// Clean the cache.
-		$this->cleanCache();
-
-		return true;
-	}
-	
-	/**
 	 * Custom clean cache method
 	 *
 	 * @since	1.6
 	 */
-	function cleanCache() {
+	protected function cleanCache($group = null, $client_id = 0)
+	{
 		parent::cleanCache('_system', 0);
 		parent::cleanCache('_system', 1);
 		parent::cleanCache('com_languages', 0);
 		parent::cleanCache('com_languages', 1);
-	}	
+	}
 }

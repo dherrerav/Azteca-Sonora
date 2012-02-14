@@ -1,13 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 /* COMMON STYLE
 --------------------------------------------------------- */
@@ -100,6 +100,15 @@ input, select, textarea, .inputbox { font-size: 100%; }
 .radio { }
 
 fieldset { border: none; margin: 0; padding: 5px 0; }
+
+dd input[type="text"],
+dd textarea {
+	width: 90%;
+}
+
+#jform_contact_email_copy-lbl {
+	float: left;
+}
 
 legend {	font-size: 125%; font-weight: bolder; line-height: 1.2; }
 
@@ -196,14 +205,13 @@ legend {	font-size: 125%; font-weight: bolder; line-height: 1.2; }
 #ja-login p#form-login-submit label {
 	float: left;
 	display: block;
-	width: 50%;
+	/*width: 50%;*/
 	padding: 9px 0;
 }
 
 #ja-login p#form-login-submit input.button {
 	float: right;
 	margin-top: 5px;
-	min-width: 40%;
 }
 
 #ja-login ul { margin: 13px 18px 9px; }
@@ -450,7 +458,8 @@ p.modifydate { font-size: 10pt; color: #7f7f7f; margin: 9px 0 0; }
 
 .contentdescription p { margin: 0; }
 
-ul.actions { float: right; margin: 0; padding: 0; line-height: 1; }
+ul.actions,
+.buttonheading { float: right; margin: 0; padding: 0; line-height: 1; }
 
 ul.actions li {
 	display: block;
@@ -587,7 +596,7 @@ ul.pagenav li span { padding: 0; }
 
 .tip-title { font-weight: bold; padding: 5px 10px; border-bottom: 1px solid #e2e2b5; }
 
-.tip-text { font-size: 100%; margin: 0; padding: 5px 10px; }
+.tip-text { font-size: 100%; margin: 0; padding: 5px 10px; min-width:200px;}
 
 .hasTip img { border: none; margin: 0 5px 0 0; }
 

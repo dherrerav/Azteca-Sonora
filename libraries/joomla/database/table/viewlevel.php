@@ -1,29 +1,31 @@
 <?php
 /**
- * @version		$Id: viewlevel.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Database
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.database.table');
 
 /**
  * Viewlevels table class.
  *
- * @package		Joomla.Framework
- * @subpackage	Database
- * @version		1.0
+ * @package     Joomla.Platform
+ * @subpackage  Database
+ * @since       11.1
  */
 class JTableViewlevel extends JTable
 {
 	/**
 	 * Constructor
 	 *
-	 * @param	object	Database object
-	 * @return	void
-	 * @since	1.0
+	 * @param   JDatabase  &$db  Database object.
+	 *
+	 * @since   11.1
 	 */
 	public function __construct(&$db)
 	{
@@ -33,16 +35,20 @@ class JTableViewlevel extends JTable
 	/**
 	 * Method to bind the data.
 	 *
-	 * @param	array		$array		The data to bind.
-	 * @param	mixed		$ignore		An array or space separated list of fields to ignore.
-	 * @return	boolean		True on success, false on failure.
-	 * @since	1.6
+	 * @param   array  $array   The data to bind.
+	 * @param   mixed  $ignore  An array or space separated list of fields to ignore.
+	 *
+	 * @return  boolean  True on success, false on failure.
+	 *
+	 * @since   11.1
 	 */
 	public function bind($array, $ignore = '')
 	{
 		// Bind the rules as appropriate.
-		if (isset($array['rules'])) {
-			if (is_array($array['rules'])) {
+		if (isset($array['rules']))
+		{
+			if (is_array($array['rules']))
+			{
 				$array['rules'] = json_encode($array['rules']);
 			}
 		}
@@ -53,13 +59,15 @@ class JTableViewlevel extends JTable
 	/**
 	 * Method to check the current record to save
 	 *
-	 * @return	boolean	True on success
-	 * @since	1.0
+	 * @return  boolean  True on success
+	 *
+	 * @since   11.1
 	 */
 	public function check()
 	{
 		// Validate the title.
-		if ((trim($this->title)) == '') {
+		if ((trim($this->title)) == '')
+		{
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_VIEWLEVEL'));
 			return false;
 		}

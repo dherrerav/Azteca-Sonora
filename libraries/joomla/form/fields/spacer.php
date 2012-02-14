@@ -1,38 +1,39 @@
 <?php
 /**
- * @version		$Id: spacer.php 20206 2011-01-09 17:11:35Z chdemko $
- * @package		Joomla.Framework
- * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Form
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('JPATH_BASE') or die;
-
-jimport('joomla.form.formfield');
+defined('JPATH_PLATFORM') or die;
 
 /**
- * Form Field class for the Joomla Framework.
+ * Form Field class for the Joomla Platform.
+ * Provides spacer markup to be used in form layouts.
  *
- * @package		Joomla.Framework
- * @subpackage	Form
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  Form
+ * @since       11.1
  */
 class JFormFieldSpacer extends JFormField
 {
 	/**
 	 * The form field type.
 	 *
-	 * @var		string
-	 * @since	1.6
+	 * @var    string
+	 * @since  11.1
 	 */
 	protected $type = 'Spacer';
 
 	/**
-	 * Method to get the field input markup.
+	 * Method to get the field input markup for a spacer.
+	 * The spacer does not have accept input.
 	 *
-	 * @return	string	The field input markup.
-	 * @since	1.6
+	 * @return  string  The field input markup.
+	 *
+	 * @since   11.1
 	 */
 	protected function getInput()
 	{
@@ -40,10 +41,13 @@ class JFormFieldSpacer extends JFormField
 	}
 
 	/**
-	 * Method to get the field label markup.
+	 * Method to get the field label markup for a spacer.
+	 * Use the label text or name from the XML element as the spacer or
+	 * Use a hr="true" to automatically generate plain hr markup
 	 *
-	 * @return	string	The field label markup.
-	 * @since	1.6
+	 * @return  string  The field label markup.
+	 *
+	 * @since   11.1
 	 */
 	protected function getLabel()
 	{
@@ -52,11 +56,13 @@ class JFormFieldSpacer extends JFormField
 
 		$html[] = '<span class="spacer">';
 		$html[] = '<span class="before"></span>';
-		$html[] = '<span class="'.$class.'">';
-		if ((string) $this->element['hr'] == 'true') {
-			$html[] = '<hr class="'.$class.'" />';
+		$html[] = '<span class="' . $class . '">';
+		if ((string) $this->element['hr'] == 'true')
+		{
+			$html[] = '<hr class="' . $class . '" />';
 		}
-		else {
+		else
+		{
 			$label = '';
 			// Get the label text from the XML element, defaulting to the element name.
 			$text = $this->element['label'] ? (string) $this->element['label'] : (string) $this->element['name'];
@@ -64,31 +70,38 @@ class JFormFieldSpacer extends JFormField
 
 			// Build the class for the label.
 			$class = !empty($this->description) ? 'hasTip' : '';
-			$class = $this->required == true ? $class.' required' : $class;
+			$class = $this->required == true ? $class . ' required' : $class;
 
 			// Add the opening label tag and main attributes attributes.
-			$label .= '<label id="'.$this->id.'-lbl" class="'.$class.'"';
+			$label .= '<label id="' . $this->id . '-lbl" class="' . $class . '"';
 
 			// If a description is specified, use it to build a tooltip.
-			if (!empty($this->description)) {
-				$label .= ' title="'.htmlspecialchars(trim($text, ':').'::' .
-							($this->translateDescription ? JText::_($this->description) : $this->description), ENT_COMPAT, 'UTF-8').'"';
+			if (!empty($this->description))
+			{
+				$label .= ' title="'
+					. htmlspecialchars(
+					trim($text, ':') . '::' . ($this->translateDescription ? JText::_($this->description) : $this->description),
+					ENT_COMPAT, 'UTF-8'
+				) . '"';
 			}
 
 			// Add the label text and closing tag.
-			$label .= '>'.$text.'</label>';
+			$label .= '>' . $text . '</label>';
 			$html[] = $label;
 		}
 		$html[] = '</span>';
 		$html[] = '<span class="after"></span>';
 		$html[] = '</span>';
-		return implode('',$html);
+
+		return implode('', $html);
 	}
+
 	/**
 	 * Method to get the field title.
 	 *
-	 * @return	string	The field title.
-	 * @since	1.6
+	 * @return  string  The field title.
+	 *
+	 * @since   11.1
 	 */
 	protected function getTitle()
 	{

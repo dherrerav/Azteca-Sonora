@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 /**
- * @version		$Id: highcontrast_rtl.css 19655 2010-11-27 05:23:58Z chdemko $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  *
@@ -26,11 +25,6 @@
 /**
  * Status layout
  */
-
-#module-status {
-	/*background: url(../images/mini_icon.png) 3px 5px no-repeat;*/
-}
-
 #module-status .preview {
 	background: url(../images/menu/icon-16-media.png) right 3px no-repeat;
 }
@@ -51,6 +45,10 @@
 	background: url(../images/menu/icon-16-back-user.png) right 3px no-repeat;
 }
 
+#module-status .multilanguage {
+	background: url(../images/menu/icon-16-language.png) right 3px no-repeat;
+}
+
 #module-status .logout {
 	background: url(../images/menu/icon-16-logout.png) right 3px no-repeat;
 }
@@ -59,8 +57,8 @@
  * Various Styles
  */
 
-div.checkin-tick { 
-	background: url(../images/admin/tick.png) 20px 50% no-repeat; 
+div.checkin-tick {
+	background: url(../images/admin/tick.png) 20px 50% no-repeat;
 }
 
 /**
@@ -85,13 +83,12 @@ div.toolbar-list a:hover {
 /**
  * Pane Slider pane Toggler styles
  */
-.pane-toggler  span { 
+.pane-toggler  span {
 	background: transparent url(../images/j_arrow_left.png) right 50% no-repeat;
 }
 
 .pane-toggler-down span {
-	background: transparent url(../images/j_arrow_down.png) right 50%
-		no-repeat;
+	background: transparent url(../images/j_arrow_down.png) right 50% no-repeat;
 }
 
 /**
@@ -162,7 +159,7 @@ a.saveorder {
 }
 
 a.saveorder.inactive {
-	background-position: 0px -16px;
+	background-position: 0 -16px;
 }
 
 /**
@@ -282,7 +279,7 @@ a.saveorder.inactive {
  */
 
 .helpFrame {
-	border-right: 0px solid #1b3f7c;
+	border-right: 0 solid #1b3f7c;
 	border-left: none;
 	border-top: none;
 }
@@ -366,16 +363,14 @@ span.icon-16-locked {
 * Permission Rules
 */
 
-#permissions-sliders ul#rules table.group-rules td
-{
-    border-left:solid 1px #1b3f7c; 
-    border-right:solid 0px #1b3f7c; 
+#permissions-sliders ul#rules table.group-rules td {
+    border-left:solid 1px #1b3f7c;
+    border-right:solid 0 #1b3f7c;
 }
 
-#permissions-sliders ul#rules table.group-rules th
-{
-    border-left:solid 1px #1b3f7c; 
-    border-right:solid 0px #1b3f7c; 
+#permissions-sliders ul#rules table.group-rules th {
+    border-left:solid 1px #1b3f7c;
+    border-right:solid 0 #1b3f7c;
 }
 
 /**
@@ -451,10 +446,11 @@ span.icon-16-locked {
 	border-right: 1px solid #000000;
 }
 
-/**
- * Submenu styling
- */
+/* Installer Database */
+#installer-database p.warning {
+	background-position: center right;
+}
 
-
-#submenu a, #submenu span.nolink {
+#installer-database p.nowarning {
+	background-position: center right;
 }

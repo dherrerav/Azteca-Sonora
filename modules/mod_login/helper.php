@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: helper.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Site
  * @subpackage	mod_login
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -22,10 +21,10 @@ class modLoginHelper
 			$db		= JFactory::getDbo();
 			$query	= $db->getQuery(true);
 
-			$query->select($db->nameQuote('link'));
-			$query->from($db->nameQuote('#__menu'));
-			$query->where($db->nameQuote('published') . '=1');
-			$query->where($db->nameQuote('id') . '=' . $db->quote($itemid));
+			$query->select($db->quoteName('link'));
+			$query->from($db->quoteName('#__menu'));
+			$query->where($db->quoteName('published') . '=1');
+			$query->where($db->quoteName('id') . '=' . $db->quote($itemid));
 
 			$db->setQuery($query);
 			if ($link = $db->loadResult()) {
@@ -40,7 +39,7 @@ class modLoginHelper
 		if (!$url)
 		{
 			// stay on the same page
-			$uri = JFactory::getURI();
+			$uri = clone JFactory::getURI();
 			$vars = $router->parse($uri);
 			unset($vars['lang']);
 			if ($router->getMode() == JROUTER_MODE_SEF)
@@ -71,7 +70,7 @@ class modLoginHelper
 
 		return base64_encode($url);
 	}
-	
+
 	static function getType()
 	{
 		$user = JFactory::getUser();

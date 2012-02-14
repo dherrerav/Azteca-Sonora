@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 /**
- * @version		$Id: highcontrast.css 19524 2010-11-17 11:45:07Z eddieajau $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  *
@@ -132,10 +131,6 @@ a:hover,a:focus {
 	color: #163365;
 }
 
-#module-status {
-	/*background: url(../images/mini_icon.png) 3px 5px no-repeat;*/
-}
-
 #module-status .preview {
 	background: url(../images/menu/icon-16-media.png) 3px 3px no-repeat;
 }
@@ -156,6 +151,10 @@ a:hover,a:focus {
 	background: url(../images/menu/icon-16-back-user.png) 3px 3px no-repeat;
 }
 
+#module-status .multilanguage {
+	background: url(../images/menu/icon-16-language.png) 3px 3px no-repeat;
+}
+
 #module-status .logout {
 	background: url(../images/menu/icon-16-logout.png) 3px 3px no-repeat;
 }
@@ -163,42 +162,26 @@ a:hover,a:focus {
 /**
  * Various Styles
  */
-.enabled {
-	color: #00f800;
-}
-.disabled {
-	color: #a20000;
-}
-p.error {
-	color: #a20000;
-}
-.warning {
-	color: #a20000;
-}
-.nowarning {
-	color: #fcff20;
-}
-.success {
-	color: #00f800;
-}
-.allow {
-	color: #00f800;
-}
+.enabled,
+.success ,
+.allow,
 span.writable {
 	color: #00f800;
 }
-.deny {
-	color: #a20000;
-}
+
+.disabled,
+p.error,
+.warning,
+.deny,
 span.unwritable	{
 	color: #a20000;
 }
 
-.none {
-	color: #feffbf;
+.nowarning {
+	color: #fcff20;
 }
 
-.protected {
+.none,.protected {
 	color: #feffbf;
 }
 
@@ -237,13 +220,6 @@ div.checkin-tick {
 /**
  * Subheader, toolbar, page title
  */
-/* div.subheader .padding {
-	background: #163365;
-} */
-
-div.pagetitle {
-}
-
 .pagetitle h2 {
 	color: #fcff20;
 }
@@ -398,7 +374,6 @@ div#menu-assignment h3 {
 	color: #fcff20;
 	background-color: #1b3f7c;
 	border: 1px solid #10254a;
-	/* padding: 0 30px 0 6px; use this if you use images */
 }
 
 #form-login div.button1 a:hover,#form-login div.button1 a:focus {
@@ -414,19 +389,21 @@ div#menu-assignment h3 {
 /**
  * Cpanel Settings
  */
-.cpanel#element-box {
+.cpanel-page div#element-box {
 	background: #163365;
 	border: 1px solid #10254a;
 }
 
-#cpanel div.icon a {
+#cpanel div.icon a, .cpanel div.icon a {
 	border: 1px solid #10254a;
 	background: #1b3f7c;
 	color: #fcff20;
 }
 
 #cpanel div.icon a:hover,
-#cpanel div.icon a:focus {
+#cpanel div.icon a:focus,
+.cpanel div.icon a:hover,
+.cpanel div.icon a:focus {
 	border-left: 1px solid #000000;
 	border-top: 1px solid #000000;
 	border-right: 1px solid #1b3f7c;
@@ -488,9 +465,6 @@ input.required {
 
 input.disabled {
 	background-color: #eeeeee;
-}
-
-input,select, span.faux-input {
 }
 
 /* Inputs used as buttons */
@@ -593,9 +567,6 @@ table.adminlist {
 	color: #fcff20;
 }
 
-table.adminlist.modal {
-}
-
 table.adminlist a {
 	color: #ffffff;
 }
@@ -603,9 +574,6 @@ table.adminlist a {
 table.adminlist thead th {
 	background: #163365;
 	color: #fcff20;
-}
-
-table.adminlist thead a:hover {
 }
 
 /* Table row styles */
@@ -640,11 +608,6 @@ table.adminlist tbody tr th {
 
 table.adminlist tbody tr td:last-child {
 	border-right: none;
-}
-
-table.adminlist tbody tr.row0:first-child td,
-table.adminlist tbody tr.row0:first-child th {
-	/*border-top: 1px solid #1b3f7c;*/
 }
 
 table.adminlist tbody tr.row0:last-child td,
@@ -693,7 +656,7 @@ a.saveorder {
 }
 
 a.saveorder.inactive {
-	background-position: 0px -16px;
+	background-position: 0 -16px;
 }
 
 /**
@@ -720,10 +683,6 @@ button:hover, button:focus {
 	border-bottom: 1px solid #1b3f7c;
 	border-left: 1px solid #000000;
 	color: #fcff20;
-}
-
-.invalid {
-	/* color: #ff0000; */
 }
 
 /* Button 1 Type */
@@ -786,89 +745,13 @@ button:hover, button:focus {
 	color: #fcff20;
 }
 
-/* Note: use these references to add images/arrows to the buttons */
-
-.button2-right .prev {
-	/* background-image: url(../images/j_button2_prev.png);
-	background-position: left center;
-	background-repeat: no-repeat; */
-}
-
-.button2-right.off .prev {
-	/* background: url(../images/j_button2_prev_off.png) no-repeat; */
-}
-
-.button2-right .start {
-}
-
-.button2-right.off .start {
-}
-
-.button2-left .page,.button2-left .blank {
-}
-
-.button2-left .next {
-}
-
-.button2-left.off .next {
-}
-
-.button2-left .end {
-}
-
-.button2-left.off .end {
-}
-
-.button2-left .image {
-}
-
-.button2-left .readmore {
-}
-
-.button2-left .pagebreak {
-}
-
-.button2-left .blank {
-}
-
 /**
  * Pagination styles
  */
 
-	/* Normal pagination styles */
-
-.pagination div.limit {
-}
-
-.pagination div.limit label {
-}
-
-.pagination div.limit select {
-}
-
-	/* The Go submittal button */
-.pagination button {
-}
-
-div.pagination .button2-right, div.pagination .button2-left {
-}
-
 	/* Grey out the current page number */
 .pagination .page span {
 	color: #cccccc;
-}
-
-	/* Style if pagination is part of the table (old style) */
-table.adminlist .pagination {
-}
-
-table.adminlist .pagination button {
-}
-
-/**
- * MCE Editor
- */
-div.toggle-editor {
 }
 
 /**
@@ -883,9 +766,6 @@ div.toggle-editor {
 	background: url(../images/selector-arrow-hc.png) no-repeat;
 }
 
-.tip-text {
-}
-
 /**
  * Calendar
  */
@@ -896,9 +776,6 @@ a img.calendar {
 /**
  * JGrid styles
  */
-a.jgrid:hover {
-}
-
 .jgrid span.publish {
 	background-image: url(../images/admin/tick.png);
 }
@@ -952,6 +829,10 @@ a.jgrid:hover {
 }
 
 .jgrid span.pending	{
+	background-image: url(../images/admin/publish_y.png);
+}
+
+.jgrid span.warning	{
 	background-image: url(../images/admin/publish_y.png);
 }
 
@@ -1189,6 +1070,10 @@ a.jgrid:hover {
 	background-image: url(../images/menu/icon-16-user.png);
 }
 
+.icon-16-user-note {
+	background-image: url(../images/menu/icon-16-user-note.png);
+}
+
 .icon-16-delete {
 	background-image: url(../images/menu/icon-16-delete.png);
 }
@@ -1210,6 +1095,10 @@ a.jgrid:hover {
 }
 
 .icon-16-search {
+	background-image: url(../images/menu/icon-16-search.png);
+}
+
+.icon-16-finder {
 	background-image: url(../images/menu/icon-16-search.png);
 }
 
@@ -1369,9 +1258,19 @@ a.jgrid:hover {
 .icon-32-remove {
 	background-image: url(../images/toolbar/icon-32-remove.png);
 }
+
 .icon-32-featured {
 	background-image: url(../images/toolbar/icon-32-featured.png);
 }
+
+.icon-32-export {
+	background-image: url(../images/toolbar/icon-32-export.png);
+}
+
+.icon-32-stats {
+	background-image: url(../images/toolbar/icon-32-stats.png);
+}
+
 /**
  * Quick Icons
  * Also knows as Header Icons
@@ -1618,6 +1517,10 @@ a.jgrid:hover {
 	background-image: url(../images/header/icon-48-search.png);
 }
 
+.icon-48-finder	{
+	background-image: url(../images/header/icon-48-search.png);
+}
+
 .icon-48-newsfeeds {
 	background-image: url(../images/header/icon-48-newsfeeds.png);
 }
@@ -1659,13 +1562,10 @@ div.message {
 }
 
 .helpFrame {
-	border-left: 0px solid #1b3f7c;
+	border-left: 0 solid #1b3f7c;
 	border-right: none;
 	border-top: none;
 	border-bottom: none;
-}
-
-.outline {
 }
 
 /**
@@ -1730,37 +1630,37 @@ fieldset.panelform {
  * ACL STYLES relocated from com_users/media/grid.css
  */
 a.move_up {
-	background-image:url('../images/admin/uparrow.png');
+	background-image: url('../images/admin/uparrow.png');
 }
 
 span.move_up {
-	background-image:url('../images/admin/uparrow0.png');
+	background-image: url('../images/admin/uparrow0.png');
 }
 
 a.move_down {
-	background-image:url('../images/admin/downarrow.png');
+	background-image: url('../images/admin/downarrow.png');
 }
 
 span.move_down {
-	background-image:url('../images/admin/downarrow0.png');
+	background-image: url('../images/admin/downarrow0.png');
 }
 
 a.grid_false {
-	background-image:url('../images/admin/publish_x.png');
+	background-image: url('../images/admin/publish_x.png');
 }
 
 a.grid_true {
-	background-image:url('../images/admin/tick.png');
+	background-image: url('../images/admin/tick.png');
 }
 
 a.grid_trash {
-	background-image:url('../images/admin/icon-16-trash.png');
+	background-image: url('../images/admin/icon-16-trash.png');
 }
 
 /**
  * ACL PANEL STYLES
  */
- 
+
 /* All Tabs */
 
 tr.row1 {
@@ -1802,33 +1702,33 @@ span.icon-16-locked {
 }
 
 label.icon-16-allow {
-	background:url(../images/admin/icon-16-allow.png) no-repeat;
+	background: url(../images/admin/icon-16-allow.png) no-repeat;
 }
 
 label.icon-16-deny {
-	background:url(../images/admin/icon-16-deny.png) no-repeat;
+	background: url(../images/admin/icon-16-deny.png) no-repeat;
 }
 a.icon-16-allow {
-	background:url(../images/admin/icon-16-allow.png) no-repeat ;
+	background: url(../images/admin/icon-16-allow.png) no-repeat ;
 }
 a.icon-16-deny {
-	background:url(../images/admin/icon-16-deny.png) no-repeat ;
+	background: url(../images/admin/icon-16-deny.png) no-repeat ;
 }
 a.icon-16-allowinactive {
-	background:url(../images/admin/icon-16-allowinactive.png) no-repeat ;
+	background: url(../images/admin/icon-16-allowinactive.png) no-repeat ;
 }
 a.icon-16-denyinactive {
-	background:url(../images/admin/icon-16-denyinactive.png) no-repeat ;
+	background: url(../images/admin/icon-16-denyinactive.png) no-repeat ;
 }
 
 /* ACL footer/legend */
 
 ul.acllegend li.acl-allowed {
-	background:url(../images/admin/icon-16-allow.png) no-repeat left;
+	background: url(../images/admin/icon-16-allow.png) no-repeat left;
 }
 
 ul.acllegend li.acl-denied {
-	background:url(../images/admin/icon-16-deny.png) no-repeat left;
+	background: url(../images/admin/icon-16-deny.png) no-repeat left;
 }
 
 li.acl-editgroups,
@@ -1840,12 +1740,6 @@ li.acl-resetbtn {
 li.acl-editgroups a,
 li.acl-resetbtn a {
 	color: #fcff20
-}
-
-li.acl-editgroups a:hover,
-li.acl-resetbtn a:hover,
-li.acl-editgroups a:focus,
-li.acl-resetbtn a:focus {
 }
 
 li.acl-editgroups:hover,
@@ -1895,105 +1789,63 @@ table#acl-config th.acl-groups {
 */
 
 #permissions-sliders ul#rules,
-#permissions-sliders ul#rules ul
-{  
-    border:solid 0px #1b3f7c; 
-    background:#163365; 
+#permissions-sliders ul#rules ul {
+    border:solid 0 #1b3f7c;
+    background:#163365;
 }
 
-ul#rules li .pane-sliders .panel h3.title
-{
-	border:solid 0px #1b3f7c;
+ul#rules li .pane-sliders .panel h3.title {
+	border:solid 0 #1b3f7c;
 }
 
-#permissions-sliders ul#rules .pane-slider
-{
+#permissions-sliders ul#rules .pane-slider {
 	border:solid 1px #1b3f7c;
 }
 
-#permissions-sliders ul#rules li h3
-{
+#permissions-sliders ul#rules li h3 {
 	background:#1c4181;
 	border: 1px solid #1b3f7c;
 }
 
-#permissions-sliders ul#rules li h3.pane-toggler-down a
-{	
-	border:solid 0px;
+#permissions-sliders ul#rules li h3.pane-toggler-down a {
+	border:solid 0;
 }
 
-#permissions-sliders ul#rules li h3.pane-toggler-down
-{ 
-}
-    
-#permissions-sliders ul#rules li h3.pane-toggler-down span
-{ 
-}   
-        
-#permissions-sliders ul#rules .group-kind
-{
+#permissions-sliders ul#rules .group-kind {
 	color:#fcff20;
 }
-            
-#permissions-sliders ul#rules table.group-rules caption
-{
+
+#permissions-sliders ul#rules table.group-rules td {
+    border-right:solid 1px #1b3f7c;
+    border-bottom:solid 1px #1b3f7c;
 }
 
-#permissions-sliders ul#rules table.group-rules td
-{
-    border-right:solid 1px #1b3f7c; 
-    border-bottom:solid 1px #1b3f7c; 
-}
-
-#permissions-sliders ul#rules table.group-rules th
-{
-    background: #10254a; 
-    border-right:solid 1px #1b3f7c; 
-    border-bottom:solid 1px #1b3f7c; 
+#permissions-sliders ul#rules table.group-rules th {
+    background: #10254a;
+    border-right:solid 1px #1b3f7c;
+    border-bottom:solid 1px #1b3f7c;
     color:#fcff20;
 }
 
-ul#rules table.aclmodify-table
-{
+ul#rules table.aclmodify-table {
 	border:solid 1px #fcff20;
 }
-	
-ul#rules table.group-rules td label
-{
-	border:solid 0px #1b3f7c;
+
+ul#rules table.group-rules td label {
+	border:solid 0 #1b3f7c;
 }
 
-#permissions-sliders ul#rules .mypanel
-{
-	border:solid 0px #1b3f7c; 
-	/*background:#163365;  */
+#permissions-sliders ul#rules .mypanel {
+	border:solid 0 #1b3f7c;
 }
 
-#permissions-sliders .mypanel table.group-rules caption
-{
-	/*border:solid 1px #10254a;*/
-}  
-
-#permissions-sliders  ul#rules  table.group-rules td
-{
+#permissions-sliders  ul#rules  table.group-rules td {
    background: #163365;
 }
-#permissions-sliders span.level
-{
-	color:#ffffff; 
+
+#permissions-sliders span.level {
+	color:#ffffff;
 	background-image:none;
-}
-
-#permissions-sliders .pane-toggler span
-{
-}
-
-#permissions-sliders .pane-toggler-down span
-{
-}
-
-#permissions-sliders ul#rules .panel h3
-{
 }
 
 /*
@@ -2059,7 +1911,7 @@ table.adminlist tbody tr:hover td.check-d {
 	/* Note: set up the font-size on the id and used 100% on the elements.
 	If ul/li/a are different ems, then the shifting back via non-js keyboard
 	doesn't work properly */
-	
+
 /**
  * Menu Styling
  */
@@ -2096,7 +1948,9 @@ table.adminlist tbody tr:hover td.check-d {
 	border: 1px solid #10254a;
 }
 
-#menu li a:hover, #menu li a:active, #menu li a:focus {
+#menu li a:hover,
+#menu li a:active,
+#menu li a:focus {
 	background-color: #163365;
 	border-top: 1px solid #000000;
 	border-right: 1px solid #1b3f7c;
@@ -2105,8 +1959,9 @@ table.adminlist tbody tr:hover td.check-d {
 	color: #ffffff;
 }
 
-#menu li.disabled a:hover, #menu li.disabled a:focus, #menu li.disabled a
-	{
+#menu li.disabled a:hover,
+#menu li.disabled a:focus,
+#menu li.disabled a {
 	color: #feffbf;
 	background-color: #1b3f7c;
 	border-top: 1px solid #163365;
@@ -2122,12 +1977,6 @@ table.adminlist tbody tr:hover td.check-d {
 
 #menu li li { /* second-level row */
 	background-color: #163365;
-}
-
-#menu li ul ul { /* third-and-above-level lists */
-}
-
-#menu li:hover ul ul,#menu li.sfhover ul ul {
 }
 
 #menu li:hover ul,#menu li.sfhover ul {
@@ -2209,12 +2058,6 @@ table.adminlist tbody tr:hover td.check-d {
 	color: #ffffff;
 }
 
-#menu li:hover a:focus,#menu li.sfhover a.sffocus {
-}
-
-#menu li li:hover a:focus+ul,#menu li li.sfhover a.sffocus+ul {
-}
-
 /**
  * Submenu styling
  */
@@ -2231,9 +2074,6 @@ table.adminlist tbody tr:hover td.check-d {
 	color: #ffffff;
 }
 
-#submenu span.nolink {
-}
-
 #submenu a:hover, #submenu a:focus {
 	background-color: #10254a;
 }
@@ -2246,7 +2086,34 @@ table.adminlist tbody tr:hover td.check-d {
 
 /**
  * Webkit fixes
- **
+ **/
 input:-webkit-autofill {
 	background-color: #163365 !important;
+}
+
+/* -- Codemirror Editor  ----------- */
+div.editor-border, div.CodeMirror-wrapping {
+	border: 1px solid #163365;
+	background-color: #ffffff;
+}
+
+/* User Notes */
+div.unotes h1 {
+	background-color: #ffffff;
+}
+ul.alternating > li:nth-child(odd) { background-color: #163365; }
+ul.alternating > li:nth-child(even) { background-color: #10254a; }
+ol.alternating > li:nth-child(odd) { background-color: #163365; }
+ol.alternating > li:nth-child(even) { background-color: #10254a;}
+
+/* Installer Database */
+#installer-database, #installer-discover, #installer-update, #installer-warnings {
+	border-top: 1px solid #1b3f7c;
+}
+#installer-database p.warning {
+	background: transparent url(../images/admin/icon-16-deny.png) center left no-repeat;
+}
+
+#installer-database p.nowarning {
+	background: transparent url(../images/admin/icon-16-allow.png) center left no-repeat;
 }

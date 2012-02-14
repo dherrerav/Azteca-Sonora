@@ -1,13 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 /* COMMON STYLE
 --------------------------------------------------------- */
@@ -19,6 +19,8 @@ body {
 }
 
 body#bd { background: #ffffff; color: #000000; font-size: 12px;}
+
+body#bd #ja-wrapper { overflow: hidden; }
 
 body.fs1 #ja-wrapper { font-size: 80%; }
 body.fs2 #ja-wrapper { font-size: 90%; }
@@ -71,6 +73,21 @@ small, .small { }
 
 .smalldark { text-align: left; }
 
+/* List ---*/
+.column ul li {
+	background: url(../images/bullet.gif) no-repeat 20px 7px;
+	line-height: 160%;
+	margin-bottom: 5px;
+	overflow: hidden;
+	padding-left: 30px;
+}
+
+.column ol li { line-height: 180%; margin-left: 30px; }
+
+.column dt { font-weight: bold; }
+
+.column dd { margin-left: 15px; }
+
 /* Readon links ---*/
 p.readmore { margin: 0; }
 
@@ -109,15 +126,18 @@ fieldset { border: none; margin: 0; padding: 5px 0; }
 
 legend {	font-size: 125%; font-weight: bolder; line-height: 1.2; }
 
+.hidelabeltxt { display: none; }
+
 fieldset dt {
-	clear: both;
+	clear: left;
 	float: left;
-	min-width: 160px;
-	margin: 0 10px 10px 0;
+	min-width: 12em;
+	padding: 3px 0;
 }
 
 fieldset dd {
-	margin: 0 0 10px;
+	padding: 3px 0;
+	min-height: 25px;
 }
 
 /* Login ---*/
@@ -167,6 +187,10 @@ fieldset dd {
 
 .form-register .button { margin-left: 140px; }
 
+.registration fieldset dt  {
+	margin-right: 5px;
+}
+
 /* User ---*/
 .user-details { padding: 10px 0; }
 
@@ -189,6 +213,15 @@ fieldset dd {
 .user-details .paramlist .paramlist_value { padding: 0 0 5px; }
 
 .user-details .user_name span { font-weight: bold; padding-left: 10px; }
+
+.remind fieldset dl,
+.reset fieldset dl { margin: 0; }
+
+.remind fieldset dt,
+.reset fieldset dt { padding: 0; margin: 0; }
+
+.remind fieldset dd,
+.reset fieldset dd { min-height: 0; padding: 0; margin: 5px 0; }
 
 /* Search ---*/
 form#searchForm { padding: 15px 0; }
@@ -215,7 +248,6 @@ form#searchForm { padding: 15px 0; }
 
 .search .word button {
 	margin-left: 5px;
-	height: 23px;
 }
 
 .search .word .inputbox {
@@ -248,6 +280,10 @@ form#searchForm { padding: 15px 0; }
 
 .contact-email-copy label {
 	display: inline;
+}
+
+div.contact-links ul li {
+	background: none;
 }
 
 /* Display Contact ---*/
@@ -288,12 +324,12 @@ form#searchForm { padding: 15px 0; }
 	border: solid 0px;
 	padding: 0px 15px !important;
 	margin: 0;
+	height: 0;
+	overflow: hidden;
 }
 
 .panel .contact-form,
-.panel  .contact-miscinfo {
-	padding: 10px;
-}
+.panel  .contact-miscinfo {}
 
 .contact .panel .contact-form form,
 .contact .panel .contact-address {
@@ -308,6 +344,10 @@ form#searchForm { padding: 15px 0; }
 
 .categories-list .category-desc ul li { list-style-type: square; }
 
+#ja-content-main .contact .panel .pane-hide {
+	display: none;
+}
+
 /* Tabs */
 div.current {
 	border: 1px solid #CCCCCC;
@@ -321,7 +361,7 @@ div.current {
 #contact-slider.tabs {
 	clear: both;
 	float: left;
-	margin: 50px 0 0;
+	margin: 15px 0 0;
 	z-index: 50;
 }
 
@@ -359,12 +399,12 @@ div.current {
 .form-required {
 	font-weight: bold;
 	margin: 10px 0;
-	background: #fff url(../images/req.png) no-repeat;
+	background: #fff url(../images/req.png) no-repeat !important;
 	padding: 10px 40px;
 }
 
 .contact .inputbox {
-	background: #fff url(../images/content_bg.gif) repeat-x;
+	background: #fff;
 	border: solid 1px #ccc;
 	padding: 3px;
 }
@@ -405,6 +445,19 @@ div.encyclopedia_links ul li {
 	white-space: nowrap;
 }
 
+/* FAQ ---*/
+div.jcat-children dt {
+	clear: left;
+	float: left;
+	min-width: 7em;
+	padding: 3px 0;
+}
+
+div.jcat-children dd {
+	padding: 3px 0;
+	min-height: 25px;
+}
+
 /* JOOMLA STYLE
 --------------------------------------------------------- */
 /* Layout Deco ---*/
@@ -413,8 +466,8 @@ div.encyclopedia_links ul li {
 .item-separator, .row-separator { display: none; }
 
 /*Leading*/
-.items-leading { padding-top: 10px; }
-.items-leading .leading { padding-bottom: 10px; }
+.items-leading {}
+.items-leading .leading { padding-bottom: 15px; }
 
 /*Articles grids*/
 .items-row { padding-bottom: 15px; padding-top: 15px; }
@@ -462,6 +515,19 @@ ul.actions li {
 
 ul.actions li img { border: 0; margin: 0 5px 0 0; }
 
+/* Archive ---*/
+ul#archive-items > li {
+	line-height: normal;
+	overflow: visible;
+	padding: 0;
+	margin: 0;
+}
+
+ul#archive-items div.intro {
+	clear: both;
+	overflow: hidden;
+}
+
 /* Article ---*/
 .article-content { overflow: hidden; }
 
@@ -507,11 +573,11 @@ div.categories-list ul li li.last {
 .cat-children h3 {}
 .cat-children ul {}
 .cat-children ul li {}
-.cat-children ul li span.item-title {}
-.cat-children ul li span.item-title a {}
+.cat-children ul li span.jitem-title {}
+.cat-children ul li span.jitem-title a {}
 
 /*Inline images ---*/
-.img_caption { margin-top: 10px; margin-bottom: 10px; }
+.img_caption { margin-top: 15px; margin-bottom: 10px; }
 
 .img_caption.left { margin-right: 10px; }
 
@@ -614,7 +680,7 @@ ul.pagenav li a { padding: 0 5px; }
 .ja-content-main fieldset.filters { font-size: 92%; margin: 10px 0 5px; }
 .ja-content-main .display-limit { font-size: 92%; margin: 10px 0 5px; }
 .ja-content-main fieldset.filters .filter-search,
-.ja-content-main fieldset.filters .display-limit { float: left; width: 40%; }
+.ja-content-main fieldset.filters .display-limit { float: left; width: 50%; }
 
 .ja-content-main fieldset.filters .display-limit { float: right; text-align: right; }
 
@@ -695,6 +761,7 @@ div.back_button a:active { display: block; margin: 10px 0; }
 .edit .formelm label {
 	min-width: 100px;
 	font-weight: bold;
+	display: inline-block;
 }
 
 .edit .formelm-buttons,
@@ -706,6 +773,10 @@ div.back_button a:active { display: block; margin: 10px 0; }
 	display: block;
 	margin-bottom: 5px;
 	font-weight: bold;
+}
+
+.profile-edit fieldset dt {
+	min-width: 17em;
 }
 
 /* MODULE STYLES
@@ -1006,7 +1077,9 @@ span.menu-desc { display: block; font-size: 92%; font-weight: normal; }
 #ja-container ul.menu li a:active,
 #ja-container ul.menu li a:focus { }
 
-#ja-container ul.menu li.active a { font-weight: bold; }
+#ja-container ul.menu li.active > a { font-weight: bold; }
+
+#ja-container ul.menu li a img { margin-right: 3px; }
 
 #ja-container ul.menu li ul { margin: 0 0 0 10px; }
 
@@ -1077,7 +1150,7 @@ span.menu-desc { display: block; font-size: 92%; font-weight: normal; }
 
 .ja-footnav ul { line-height: normal; }
 
-.ja-footnav li { display: inline; padding: 0 5px; }
+.ja-footnav li { display: inline; padding: 0 5px; background: none; }
 
 .ja-footnav li a { }
 

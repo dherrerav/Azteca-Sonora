@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: index.php 17268 2010-05-25 20:32:21Z a.radtke $
  * @package		Joomla.Site
  * @subpackage	Templates.beez5
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,7 +28,7 @@ $app			= JFactory::getApplication();
 $doc			= JFactory::getDocument();
 $templateparams	= $app->getTemplate(true)->params;
 
-$doc->addScript($this->baseurl.'/templates/beez5/javascript/md_stylechanger.js', 'text/javascript', true);
+$doc->addScript($this->baseurl.'/templates/'.$this->template.'/javascript/md_stylechanger.js', 'text/javascript', true);
 ?>
 <?php if(!$templateparams->get('html5', 0)): ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -40,12 +39,12 @@ $doc->addScript($this->baseurl.'/templates/beez5/javascript/md_stylechanger.js',
 	<head>
 		<jdoc:include type="head" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/position.css" type="text/css" media="screen,projection" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/layout.css" type="text/css" media="screen,projection" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/print.css" type="text/css" media="Print" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/beez5.css" type="text/css" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/position.css" type="text/css" media="screen,projection" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/layout.css" type="text/css" media="screen,projection" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/print.css" type="text/css" media="Print" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/beez5.css" type="text/css" />
 <?php
-	$files = JHtml::_('stylesheet','templates/beez5/css/general.css',null,false,true);
+	$files = JHtml::_('stylesheet', 'templates/'.$this->template.'/css/general.css', null, false, true);
 	if ($files):
 		if (!is_array($files)):
 			$files = array($files);
@@ -58,29 +57,29 @@ $doc->addScript($this->baseurl.'/templates/beez5/javascript/md_stylechanger.js',
 	endif;
 ?>
 		<?php if ($this->direction == 'rtl') : ?>
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/template_rtl.css" type="text/css" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template_rtl.css" type="text/css" />
 		<?php endif; ?>
 		<!--[if lte IE 6]>
-			<link href="<?php echo $this->baseurl ?>/templates/beez5/css/ieonly.css" rel="stylesheet" type="text/css" />
+			<link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/ieonly.css" rel="stylesheet" type="text/css" />
 		<![endif]-->
 		<!--[if IE 7]>
-			<link href="<?php echo $this->baseurl ?>/templates/beez5/css/ie7only.css" rel="stylesheet" type="text/css" />
+			<link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/ie7only.css" rel="stylesheet" type="text/css" />
 		<![endif]-->
 <?php if($templateparams->get('html5', 0)) { ?>
 		<!--[if lt IE 9]>
-			<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez5/javascript/html5.js"></script>
+			<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/javascript/html5.js"></script>
 		<![endif]-->
 <?php } ?>
-		<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez5/javascript/hide.js"></script>
+		<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/javascript/hide.js"></script>
 
 		<script type="text/javascript">
 			var big ='<?php echo (int)$this->params->get('wrapperLarge');?>%';
 			var small='<?php echo (int)$this->params->get('wrapperSmall'); ?>%';
-			var altopen='<?php echo JText::_('TPL_BEEZ5_ALTOPEN',true); ?>';
-			var altclose='<?php echo JText::_('TPL_BEEZ5_ALTCLOSE',true); ?>';
-			var bildauf='<?php echo $this->baseurl ?>/templates/beez5/images/plus.png';
-			var bildzu='<?php echo $this->baseurl ?>/templates/beez5/images/minus.png';
-			var rightopen='<?php echo JText::_('TPL_BEEZ5_TEXTRIGHTOPEN',true); ?>';
+			var altopen='<?php echo JText::_('TPL_BEEZ5_ALTOPEN', true); ?>';
+			var altclose='<?php echo JText::_('TPL_BEEZ5_ALTCLOSE', true); ?>';
+			var bildauf='<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/images/plus.png';
+			var bildzu='<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/images/minus.png';
+			var rightopen='<?php echo JText::_('TPL_BEEZ5_TEXTRIGHTOPEN', true); ?>';
 			var rightclose='<?php echo JText::_('TPL_BEEZ5_TEXTRIGHTCLOSE'); ?>';
 			var fontSizeTitle='<?php echo JText::_('TPL_BEEZ5_FONTSIZE'); ?>';
             var bigger='<?php echo JText::_('TPL_BEEZ5_BIGGER'); ?>';
@@ -133,7 +132,7 @@ $doc->addScript($this->baseurl.'/templates/beez5/javascript/md_stylechanger.js',
 		<div id="header-image">
 			<jdoc:include type="modules" name="position-15" />
 			<?php if ($this->countModules('position-15')==0): ?>
-				<img src="<?php echo $this->baseurl ?>/templates/beez5/images/fruits.jpg"  alt="<?php echo JText::_('TPL_BEEZ5_LOGO'); ?>" />
+				<img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/images/fruits.jpg"  alt="<?php echo JText::_('TPL_BEEZ5_LOGO'); ?>" />
 			<?php endif; ?>
 		</div>
 		<?php if (!$templateparams->get('html5', 0)): ?>
@@ -143,12 +142,12 @@ $doc->addScript($this->baseurl.'/templates/beez5/javascript/md_stylechanger.js',
 		<?php endif; ?>
 		<div id="<?php echo $showRightColumn ? 'contentarea2' : 'contentarea'; ?>">
 					<div id="breadcrumbs">
-						
+
 							<jdoc:include type="modules" name="position-2" />
-					
+
 					</div>
 
-					<?php if ($navposition=='left' AND $showleft) : ?>
+					<?php if ($navposition=='left' and $showleft) : ?>
 
 						<?php if(!$this->params->get('html5', 0)): ?>
 							<div class="left1 <?php if ($showRightColumn==NULL){ echo 'leftbigger';} ?>" id="nav">
@@ -177,15 +176,7 @@ $doc->addScript($this->baseurl.'/templates/beez5/javascript/md_stylechanger.js',
 							</div>
 						<?php endif; ?>
 
-						<?php if ($this->getBuffer('message')) : ?>
-							<div class="error">
-								<h2>
-									<?php echo JText::_('TPL_BEEZ5_SYSTEM_MESSAGE'); ?>
-								</h2>
-								<jdoc:include type="message" />
-							</div>
-						<?php endif; ?>
-
+							<jdoc:include type="message" />
 							<jdoc:include type="component" />
 
 						</div><!-- end main -->
@@ -220,7 +211,7 @@ $doc->addScript($this->baseurl.'/templates/beez5/javascript/md_stylechanger.js',
 				<?php endif; ?>
 			<?php endif; ?>
 
-			<?php if ($navposition=='center' AND $showleft) : ?>
+			<?php if ($navposition=='center' and $showleft) : ?>
 
 				<?php if (!$this->params->get('html5', 0)): ?>
 					<div class="left <?php if ($showRightColumn==NULL){ echo 'leftbigger';} ?>" id="nav" >

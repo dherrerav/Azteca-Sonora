@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 20724 2011-02-16 08:41:47Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,7 +30,7 @@ JHtml::_('behavior.formvalidation');
 				<?php echo JText::_('JAPPLY');?></button>
 			<button type="button" onclick="Joomla.submitform('component.save', this.form);">
 				<?php echo JText::_('JSAVE');?></button>
-			<button type="button" onclick="window.parent.SqueezeBox.close();">
+			<button type="button" onclick="<?php echo JRequest::getBool('refresh', 0) ? 'window.parent.location.href=window.parent.location.href;' : '';?>  window.parent.SqueezeBox.close();">
 				<?php echo JText::_('JCANCEL');?></button>
 		</div>
 		<div class="configuration" >
@@ -40,11 +39,11 @@ JHtml::_('behavior.formvalidation');
 	</fieldset>
 
 	<?php
-	echo JHtml::_('tabs.start','config-tabs-'.$this->component->option.'_configuration', array('useCookie'=>1));
+	echo JHtml::_('tabs.start', 'config-tabs-'.$this->component->option.'_configuration', array('useCookie'=>1));
 		$fieldSets = $this->form->getFieldsets();
 		foreach ($fieldSets as $name => $fieldSet) :
 			$label = empty($fieldSet->label) ? 'COM_CONFIG_'.$name.'_FIELDSET_LABEL' : $fieldSet->label;
-			echo JHtml::_('tabs.panel',JText::_($label), 'publishing-details');
+			echo JHtml::_('tabs.panel', JText::_($label), 'publishing-details');
 			if (isset($fieldSet->description) && !empty($fieldSet->description)) :
 				echo '<p class="tab-description">'.JText::_($fieldSet->description).'</p>';
 			endif;

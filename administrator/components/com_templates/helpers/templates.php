@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: templates.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -81,19 +80,19 @@ class TemplatesHelper
 	{
 		// Build the filter options.
 		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
 
-		if ($clientId == '*') {
-			$where = '';
-		} else {
-			$where = ' WHERE client_id = '.(int) $clientId;
+		if ($clientId != '*') {
+			$query->where('client_id='.(int) $clientId);
 		}
 
-		$db->setQuery(
-			'SELECT DISTINCT(template) AS value, template AS text' .
-			' FROM #__template_styles' .
-			$where .
-			' ORDER BY template'
-		);
+		$query->select('element as value, name as text, extension_id as e_id');
+		$query->from('#__extensions');
+		$query->where('type='.$db->quote('template'));
+		$query->where('enabled=1');
+		$query->order('client_id');
+		$query->order('name');
+		$db->setQuery($query);
 		$options = $db->loadObjectList();
 		return $options;
 	}

@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: search.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_search
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -88,6 +87,10 @@ class SearchModelSearch extends JModel
 	function setSearch($keyword, $match = 'all', $ordering = 'newest')
 	{
 		if (isset($keyword)) {
+			$this->setState('origkeyword', $keyword);
+			if($match !== 'exact') {
+				$keyword 		= preg_replace('#\xE3\x80\x80#s', ' ', $keyword);
+			}
 			$this->setState('keyword', $keyword);
 		}
 

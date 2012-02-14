@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -59,22 +58,22 @@ class LanguagesViewLanguage extends JView
 
 		// If a new item, can save.
 		if ($isNew && $canDo->get('core.create')) {
-			JToolBarHelper::save('language.save','JTOOLBAR_SAVE');
+			JToolBarHelper::save('language.save');
 		}
 
 		//If an existing item, allow to Apply and Save.
 		if (!$isNew && $canDo->get('core.edit')) {
-			JToolBarHelper::apply('language.apply','JTOOLBAR_APPLY');
-			JToolBarHelper::save('language.save','JTOOLBAR_SAVE');
+			JToolBarHelper::apply('language.apply');
+			JToolBarHelper::save('language.save');
 		}
 
 		// If an existing item, can save to a copy only if we have create rights.
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::custom('language.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+			JToolBarHelper::save2new('language.save2new');
 		}
 
 		if ($isNew) {
-			JToolBarHelper::cancel('language.cancel','JTOOLBAR_CANCEL');
+			JToolBarHelper::cancel('language.cancel');
 		}
 		else {
 			JToolBarHelper::cancel('language.cancel', 'JTOOLBAR_CLOSE');

@@ -1,10 +1,12 @@
 <?php
 /**
- * @version		$Id: language.php 15628 2010-03-27 05:20:29Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @version		$Id: es-ES.localise.php 480 2012-01-23 20:07:46Z shacker $
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
- * Traducido por www.joomlaspanish.org
+ * Traducido por www.joomlaspanish.org 2012
  */
+
+defined('_JEXEC') or die;
 
 /**
  * es-ES localise class
@@ -12,7 +14,7 @@
  * @package		Joomla.Site
  * @since		1.6
  */
-abstract class en_GBLocalise {
+abstract class es_ESLocalise {
 	/**
 	 * Devuelve los sufijos potenciales para un número determinado de artículos
 	 *
@@ -73,4 +75,3 @@ abstract class en_GBLocalise {
 		return 200;
 	}
 }
-

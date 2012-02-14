@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: weblinks.php 20267 2011-01-11 03:44:44Z eddieajau $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -18,7 +17,7 @@ jimport('joomla.application.component.modellist');
  */
 class WeblinksModelWeblinks extends JModelList
 {
-	
+
 	/**
 	 * Constructor.
 	 *
@@ -52,8 +51,8 @@ class WeblinksModelWeblinks extends JModelList
 
 		parent::__construct($config);
 	}
-	
-	
+
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -124,6 +123,7 @@ class WeblinksModelWeblinks extends JModelList
 		// Create a new query object.
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
+		$user	= JFactory::getUser();
 
 		// Select the required fields from the table.
 		$query->select(
@@ -135,11 +135,11 @@ class WeblinksModelWeblinks extends JModelList
 				'a.language, a.publish_up, a.publish_down'
 			)
 		);
-		$query->from('`#__weblinks` AS a');
+		$query->from($db->quoteName('#__weblinks').' AS a');
 
 		// Join over the language
 		$query->select('l.title AS language_title');
-		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		$query->join('LEFT', $db->quoteName('#__languages').' AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
@@ -158,11 +158,18 @@ class WeblinksModelWeblinks extends JModelList
 			$query->where('a.access = '.(int) $access);
 		}
 
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+		    $groups	= implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.access IN ('.$groups.')');
+		}
+
 		// Filter by published state
 		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.state = '.(int) $published);
-		} else if ($published === '') {
+		} elseif ($published === '') {
 			$query->where('(a.state IN (0, 1))');
 		}
 
@@ -178,7 +185,7 @@ class WeblinksModelWeblinks extends JModelList
 			if (stripos($search, 'id:') === 0) {
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
-				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+				$search = $db->Quote('%'.$db->escape($search, true).'%');
 				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}
 		}
@@ -192,9 +199,9 @@ class WeblinksModelWeblinks extends JModelList
 		$orderCol	= $this->state->get('list.ordering');
 		$orderDirn	= $this->state->get('list.direction');
 		if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
-			$orderCol = 'category_title '.$orderDirn.', a.ordering';
+			$orderCol = 'c.title '.$orderDirn.', a.ordering';
 		}
-		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
+		$query->order($db->escape($orderCol.' '.$orderDirn));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

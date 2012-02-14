@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: installed.php 21032 2011-03-29 16:38:31Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -73,7 +72,7 @@ class LanguagesModelInstalled extends JModelList
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$clientId = $this->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', 0);
+		$clientId = JRequest::getInt('client');
 		$this->setState('filter.client_id', $clientId);
 
 		// Load the parameters.
@@ -128,7 +127,6 @@ class LanguagesModelInstalled extends JModelList
 	public function &getFtp()
 	{
 		if (is_null($this->ftp)) {
-			jimport('joomla.client.helper');
 			$this->ftp = JClientHelper::setCredentialsFromRequest('ftp');
 		}
 
@@ -167,7 +165,7 @@ class LanguagesModelInstalled extends JModelList
 			$data	= array ();
 
 			foreach($langlist as $lang){
-				$file = $path.DS.$lang.DS.$lang.'.xml';
+				$file = $path . '/' . $lang . '/' . $lang.'.xml';
 				$info = JApplicationHelper::parseXMLLangMetaFile($file);
 				$row = new JObject();
 				$row->language = $lang;
@@ -193,7 +191,7 @@ class LanguagesModelInstalled extends JModelList
 				$row->checked_out = 0;
 				$data[] = $row;
 			}
-			usort($data,array($this,'compareLanguages'));
+			usort($data, array($this, 'compareLanguages'));
 
 			// Prepare data
 			$limit = $this->getState('list.limit');
@@ -241,7 +239,7 @@ class LanguagesModelInstalled extends JModelList
 		$type = "language";
 		// Select field element from the extensions table.
 		$query->select($this->getState('list.select', 'a.element'));
-		$query->from('`#__extensions` AS a');
+		$query->from('#__extensions AS a');
 
 		$type = $db->Quote($type);
 		$query->where('(a.type = '.$type.')');
@@ -254,7 +252,7 @@ class LanguagesModelInstalled extends JModelList
 		// for client_id = 1 do we need to check language table also ?
 		$db->setQuery($query);
 
-		$this->langlist = $db->loadResultArray();
+		$this->langlist = $db->loadColumn();
 
 		return $this->langlist;
 	}
@@ -320,7 +318,7 @@ class LanguagesModelInstalled extends JModelList
 		$this->cleanCache();
 		$this->cleanCache('_system', 0);
 		$this->cleanCache('_system', 1);
-		
+
 		return true;
 	}
 
@@ -335,7 +333,7 @@ class LanguagesModelInstalled extends JModelList
 		if (is_null($this->folders)) {
 			$path = $this->getPath();
 			jimport('joomla.filesystem.folder');
-			$this->folders = JFolder::folders($path, '.', false, false, array('.svn', 'CVS', '.DS_Store', '__MACOSX', 'pdf_fonts','overrides'));
+			$this->folders = JFolder::folders($path, '.', false, false, array('.svn', 'CVS', '.DS_Store', '__MACOSX', 'pdf_fonts', 'overrides'));
 		}
 
 		return $this->folders;
@@ -366,8 +364,8 @@ class LanguagesModelInstalled extends JModelList
 	 * @return	integer
 	 * @since	1.6
 	 */
-	protected function compareLanguages($lang1,$lang2)
+	protected function compareLanguages($lang1, $lang2)
 	{
-		return strcmp($lang1->name,$lang2->name);
+		return strcmp($lang1->name, $lang2->name);
 	}
 }

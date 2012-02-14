@@ -1,39 +1,47 @@
 <?php
 /**
- * @version		$Id: contentlanguage.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage		HTML
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// no direct access
-defined('_JEXEC') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Utility class working with content language select lists
  *
- * @static
- * @package		Joomla.Framework
- * @subpackage	HTML
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ * @since       11.1
  */
 abstract class JHtmlContentLanguage
 {
 	/**
-	 * @var	array	Cached array of the content language items.
+	 * Cached array of the content language items.
+	 *
+	 * @var    array
+	 * @since  11.1
 	 */
 	protected static $items = null;
 
 	/**
 	 * Get a list of the available content language items.
 	 *
-	 * @return	string
-	 * @since	1.6
+	 * @param   boolean  $all        True to include All (*)
+	 * @param   boolean  $translate  True to translate All
+	 *
+	 * @return  string
+	 *
+	 * @since   11.1
+	 *
+	 * @see     JFormFieldContentLanguage
 	 */
-	public static function existing($all = false, $translate=false)
+	public static function existing($all = false, $translate = false)
 	{
-		if (empty(self::$items)) {
+		if (empty(self::$items))
+		{
 			// Get the database object and a new query object.
 			$db		= JFactory::getDBO();
 			$query	= $db->getQuery(true);
@@ -47,12 +55,14 @@ abstract class JHtmlContentLanguage
 			// Set the query and load the options.
 			$db->setQuery($query);
 			self::$items = $db->loadObjectList();
-			if ($all) {
-				array_unshift(self::$items, new JObject(array('value'=>'*','text'=>$translate ? JText::alt('JALL','language') : 'JALL_LANGUAGE')));
+			if ($all)
+			{
+				array_unshift(self::$items, new JObject(array('value' => '*', 'text' => $translate ? JText::alt('JALL', 'language') : 'JALL_LANGUAGE')));
 			}
 
 			// Detect errors
-			if ($db->getErrorNum()) {
+			if ($db->getErrorNum())
+			{
 				JError::raiseWarning(500, $db->getErrorMsg());
 			}
 		}

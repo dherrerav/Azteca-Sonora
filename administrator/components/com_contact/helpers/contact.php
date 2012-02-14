@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: contact.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -40,7 +39,7 @@ class ContactHelper
 
 		if ($vName=='categories') {
 			JToolBarHelper::title(
-				JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE',JText::_('com_contact')),
+				JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE', JText::_('com_contact')),
 				'contact-categories');
 		}
 	}
@@ -62,7 +61,7 @@ class ContactHelper
 		if (empty($contactId) && empty($categoryId)) {
 			$assetName = 'com_contact';
 		}
-		else if (empty($contactId)) {
+		elseif (empty($contactId)) {
 			$assetName = 'com_contact.category.'.(int) $categoryId;
 		}
 		else {

@@ -1,9 +1,8 @@
 <?php
 /**
- * version $Id: view.html.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_newsfeeds
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -58,7 +57,7 @@ class NewsfeedsViewCategory extends JView
 		// Check whether category access level allows access.
 		$groups	= $user->getAuthorisedViewLevels();
 		if (!in_array($category->access, $groups)) {
-			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
+			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
 
 		// Prepare the data.
@@ -68,7 +67,7 @@ class NewsfeedsViewCategory extends JView
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 			$temp		= new JRegistry();
-			$temp->loadJSON($item->params);
+			$temp->loadString($item->params);
 			$item->params = clone($params);
 			$item->params->merge($temp);
 		}
@@ -96,7 +95,7 @@ class NewsfeedsViewCategory extends JView
 		// Check for layout override only if this is not the active menu item
 		// If it is the active menu item, then the view and category id will match
 		$active	= $app->getMenu()->getActive();
-		if ((!$active) || ((strpos($active->link, 'view=category') === false) || (strpos($active->link, '&id=' . (string) $this->category->id) === false))) {			
+		if ((!$active) || ((strpos($active->link, 'view=category') === false) || (strpos($active->link, '&id=' . (string) $this->category->id) === false))) {
 			if ($layout = $category->params->get('category_layout')) {
 			$this->setLayout($layout);
 			}
@@ -157,8 +156,11 @@ class NewsfeedsViewCategory extends JView
 		if (empty($title)) {
 			$title = $app->getCfg('sitename');
 		}
-		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 1) {
 			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
+			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 
 		$this->document->setTitle($title);
@@ -167,7 +169,7 @@ class NewsfeedsViewCategory extends JView
 		{
 			$this->document->setDescription($this->category->metadesc);
 		}
-		elseif (!$this->category->metadesc && $this->params->get('menu-meta_description')) 
+		elseif (!$this->category->metadesc && $this->params->get('menu-meta_description'))
 		{
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
@@ -176,18 +178,14 @@ class NewsfeedsViewCategory extends JView
 		{
 			$this->document->setMetadata('keywords', $this->category->metakey);
 		}
-		elseif (!$this->category->metakey && $this->params->get('menu-meta_keywords')) 
+		elseif (!$this->category->metakey && $this->params->get('menu-meta_keywords'))
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}
 
-		if ($this->params->get('robots')) 
+		if ($this->params->get('robots'))
 		{
 			$this->document->setMetadata('robots', $this->params->get('robots'));
-		}
-
-		if ($app->getCfg('MetaTitle') == '1') {
-			$this->document->setMetaData('title', $this->category->getMetadata()->get('page_title'));
 		}
 
 		if ($app->getCfg('MetaAuthor') == '1') {

@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: registration.php 20228 2011-01-10 00:52:54Z eddieajau $
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,7 +10,6 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modelform');
 jimport('joomla.event.dispatcher');
-jimport('joomla.plugin.helper');
 
 /**
  * Registration model class for Users.
@@ -43,10 +41,10 @@ class UsersModelRegistration extends JModelForm
 
 		// Get the user id based on the token.
 		$db->setQuery(
-			'SELECT `id` FROM `#__users`' .
-			' WHERE `activation` = '.$db->Quote($token) .
-			' AND `block` = 1' .
-			' AND `lastvisitDate` = '.$db->Quote($db->getNullDate())
+			'SELECT '.$db->quoteName('id').' FROM '.$db->quoteName('#__users') .
+			' WHERE '.$db->quoteName('activation').' = '.$db->Quote($token) .
+			' AND '.$db->quoteName('block').' = 1' .
+			' AND '.$db->quoteName('lastvisitDate').' = '.$db->Quote($db->getNullDate())
 		);
 		$userId = (int) $db->loadResult();
 
@@ -66,11 +64,10 @@ class UsersModelRegistration extends JModelForm
 		if (($userParams->get('useractivation') == 2) && !$user->getParam('activate', 0))
 		{
 			$uri = JURI::getInstance();
-			jimport('joomla.user.helper');
 
 			// Compile the admin notification mail values.
 			$data = $user->getProperties();
-			$data['activation'] = JUtility::getHash(JUserHelper::genRandomPassword());
+			$data['activation'] = JApplication::getHash(JUserHelper::genRandomPassword());
 			$user->set('activation', $data['activation']);
 			$data['siteurl']	= JUri::base();
 			$base = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
@@ -105,7 +102,7 @@ class UsersModelRegistration extends JModelForm
 			// Send mail to all superadministrators id
 			foreach( $rows as $row )
 			{
-				$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $row->email, $emailSubject, $emailBody);
+				$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $row->email, $emailSubject, $emailBody);
 
 				// Check for an error.
 				if ($return !== true) {
@@ -116,13 +113,12 @@ class UsersModelRegistration extends JModelForm
 		}
 
 		//Admin activation is on and admin is activating the account
-		else if (($userParams->get('useractivation') == 2) && $user->getParam('activate', 0))
+		elseif (($userParams->get('useractivation') == 2) && $user->getParam('activate', 0))
 		{
 			$user->set('activation', '');
 			$user->set('block', '0');
 
 			$uri = JURI::getInstance();
-			jimport('joomla.user.helper');
 
 			// Compile the user activated notification mail values.
 			$data = $user->getProperties();
@@ -144,7 +140,7 @@ class UsersModelRegistration extends JModelForm
 				$data['username']
 			);
 
-			$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
+			$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
 
 			// Check for an error.
 			if ($return !== true) {
@@ -262,6 +258,14 @@ class UsersModelRegistration extends JModelForm
 	 */
 	protected function preprocessForm(JForm $form, $data, $group = 'user')
 	{
+		$userParams	= JComponentHelper::getParams('com_users');
+
+		//Add the choice for site language at registration time
+		if ($userParams->get('site_language') == 1 && $userParams->get('frontend_userparams') == 1)
+		{
+			$form->loadFile('sitelang', false);
+		}
+
 		parent::preprocessForm($form, $data, $group);
 	}
 
@@ -292,6 +296,7 @@ class UsersModelRegistration extends JModelForm
 	public function register($temp)
 	{
 		$config = JFactory::getConfig();
+		$db		= $this->getDbo();
 		$params = JComponentHelper::getParams('com_users');
 
 		// Initialise the table with JUser.
@@ -310,8 +315,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Check if the user needs to activate their account.
 		if (($useractivation == 1) || ($useractivation == 2)) {
-			jimport('joomla.user.helper');
-			$data['activation'] = JUtility::getHash(JUserHelper::genRandomPassword());
+			$data['activation'] = JApplication::getHash(JUserHelper::genRandomPassword());
 			$data['block'] = 1;
 		}
 
@@ -335,7 +339,7 @@ class UsersModelRegistration extends JModelForm
 		$data['fromname']	= $config->get('fromname');
 		$data['mailfrom']	= $config->get('mailfrom');
 		$data['sitename']	= $config->get('sitename');
-		$data['siteurl']	= JUri::base();
+		$data['siteurl']	= JUri::root();
 
 		// Handle account activation/confirmation emails.
 		if ($useractivation == 2)
@@ -361,7 +365,7 @@ class UsersModelRegistration extends JModelForm
 				$data['password_clear']
 			);
 		}
-		else if ($useractivation == 1)
+		elseif ($useractivation == 1)
 		{
 			// Set the link to activate the user account.
 			$uri = JURI::getInstance();
@@ -400,8 +404,43 @@ class UsersModelRegistration extends JModelForm
 		}
 
 		// Send the registration email.
-		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
+		$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
 
+		//Send Notification mail to administrators
+		if (($params->get('useractivation') < 2) && ($params->get('mail_to_admin') == 1)) {
+			$emailSubject = JText::sprintf(
+				'COM_USERS_EMAIL_ACCOUNT_DETAILS',
+				$data['name'],
+				$data['sitename']
+			);
+
+			$emailBodyAdmin = JText::sprintf(
+				'COM_USERS_EMAIL_REGISTERED_NOTIFICATION_TO_ADMIN_BODY',
+				$data['name'],
+				$data['username'],
+				$data['siteurl']
+			);
+
+			// get all admin users
+			$query = 'SELECT name, email, sendEmail' .
+					' FROM #__users' .
+					' WHERE sendEmail=1';
+
+			$db->setQuery( $query );
+			$rows = $db->loadObjectList();
+
+			// Send mail to all superadministrators id
+			foreach( $rows as $row )
+			{
+				$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $row->email, $emailSubject, $emailBodyAdmin);
+
+				// Check for an error.
+				if ($return !== true) {
+					$this->setError(JText::_('COM_USERS_REGISTRATION_ACTIVATION_NOTIFY_SEND_MAIL_FAILED'));
+					return false;
+				}
+			}
+		}
 		// Check for an error.
 		if ($return !== true) {
 			$this->setError(JText::_('COM_USERS_REGISTRATION_SEND_MAIL_FAILED'));
@@ -413,15 +452,17 @@ class UsersModelRegistration extends JModelForm
 				WHERE block = 0
 				AND sendEmail = 1";
 			$db->setQuery($q);
-			$sendEmail = $db->loadResultArray();
+			$sendEmail = $db->loadColumn();
 			if (count($sendEmail) > 0) {
 				$jdate = new JDate();
 				// Build the query to add the messages
-				$q = "INSERT INTO `#__messages` (`user_id_from`, `user_id_to`, `date_time`, `subject`, `message`)
-					VALUES ";
+				$q = "INSERT INTO ".$db->quoteName('#__messages')." (".$db->quoteName('user_id_from').
+				", ".$db->quoteName('user_id_to').", ".$db->quoteName('date_time').
+				", ".$db->quoteName('subject').", ".$db->quoteName('message').") VALUES ";
 				$messages = array();
+
 				foreach ($sendEmail as $userid) {
-					$messages[] = "(".$userid.", ".$userid.", '".$jdate->toMySQL()."', '".JText::_('COM_USERS_MAIL_SEND_FAILURE_SUBJECT')."', '".JText::sprintf('COM_USERS_MAIL_SEND_FAILURE_BODY', $return, $data['username'])."')";
+					$messages[] = "(".$userid.", ".$userid.", '".$jdate->toSql()."', '".JText::_('COM_USERS_MAIL_SEND_FAILURE_SUBJECT')."', '".JText::sprintf('COM_USERS_MAIL_SEND_FAILURE_BODY', $return, $data['username'])."')";
 				}
 				$q .= implode(',', $messages);
 				$db->setQuery($q);
@@ -432,7 +473,7 @@ class UsersModelRegistration extends JModelForm
 
 		if ($useractivation == 1)
 			return "useractivate";
-		else if ($useractivation == 2)
+		elseif ($useractivation == 2)
 			return "adminactivate";
 		else
 			return $user->id;

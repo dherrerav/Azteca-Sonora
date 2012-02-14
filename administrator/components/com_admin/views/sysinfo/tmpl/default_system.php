@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_system.php 20542 2011-02-04 07:06:15Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	com_admin
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -67,7 +66,7 @@ defined('_JEXEC') or die;
 					<strong><?php echo JText::_('COM_ADMIN_WEB_SERVER'); ?></strong>
 				</td>
 				<td>
-					<?php echo JHtml::_('system.server',$this->info['server']); ?>
+					<?php echo JHtml::_('system.server', $this->info['server']); ?>
 				</td>
 			</tr>
 			<tr>
@@ -84,6 +83,13 @@ defined('_JEXEC') or die;
 				</td>
 				<td>
 					<?php echo $this->info['version'];?>
+				</td>
+			</tr>
+				<td>
+					<strong><?php echo JText::_('COM_ADMIN_PLATFORM_VERSION'); ?></strong>
+				</td>
+				<td>
+					<?php echo $this->info['platform'];?>
 				</td>
 			</tr>
 			<tr>

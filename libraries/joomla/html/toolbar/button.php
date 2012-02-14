@@ -1,24 +1,22 @@
 <?php
 /**
- * @version		$Id: button.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Button base class
  *
  * The JButton is the base class for all JButton types
  *
- * @abstract
- * @package		Joomla.Framework
- * @subpackage		HTML
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ * @since       11.1
  */
 abstract class JButton extends JObject
 {
@@ -27,23 +25,21 @@ abstract class JButton extends JObject
 	 *
 	 * This has to be set in the final renderer classes.
 	 *
-	 * @access	protected
-	 * @var		string
+	 * @var    string
 	 */
 	protected $_name = null;
 
 	/**
 	 * reference to the object that instantiated the element
 	 *
-	 * @access	protected
-	 * @var		object
+	 * @var    JButton
 	 */
 	protected $_parent = null;
 
 	/**
 	 * Constructor
 	 *
-	 * @access protected
+	 * @param   object  $parent  The parent
 	 */
 	public function __construct($parent = null)
 	{
@@ -51,34 +47,41 @@ abstract class JButton extends JObject
 	}
 
 	/**
-	 * get the element name
+	 * Get the element name
 	 *
-	 * @access	public
-	 * @return	string	type of the parameter
+	 * @return  string   type of the parameter
 	 */
 	public function getName()
 	{
 		return $this->_name;
 	}
 
+	/**
+	 * Get the HTML to render the button
+	 *
+	 * @param   array  &$definition  Parameters to be passed
+	 *
+	 * @return  string
+	 */
 	public function render(&$definition)
 	{
 		/*
 		 * Initialise some variables
 		 */
-		$html	= null;
-		$id		= call_user_func_array(array(&$this, 'fetchId'), $definition);
-		$action	= call_user_func_array(array(&$this, 'fetchButton'), $definition);
+		$html = null;
+		$id = call_user_func_array(array(&$this, 'fetchId'), $definition);
+		$action = call_user_func_array(array(&$this, 'fetchButton'), $definition);
 
 		// Build id attribute
-		if ($id) {
+		if ($id)
+		{
 			$id = "id=\"$id\"";
 		}
 
 		// Build the HTML Button
-		$html	.= "<li class=\"button\" $id>\n";
-		$html	.= $action;
-		$html	.= "</li>\n";
+		$html .= "<li class=\"button\" $id>\n";
+		$html .= $action;
+		$html .= "</li>\n";
 
 		return $html;
 	}
@@ -88,10 +91,11 @@ abstract class JButton extends JObject
 	 *
 	 * Can be redefined in the final class
 	 *
-	 * @access	public
-	 * @param	string	$identifier	Icon identification string
-	 * @return	string	CSS class name
-	 * @since	1.5
+	 * @param   string  $identifier  Icon identification string
+	 *
+	 * @return  string  CSS class name
+	 *
+	 * @since   11.1
 	 */
 	public function fetchIconClass($identifier)
 	{
@@ -99,26 +103,13 @@ abstract class JButton extends JObject
 	}
 
 	/**
-	 * Get the button id
-	 *
-	 * Can be redefined in the final button class
-	 *
-	 * @access		public
-	 * @since		1.5
-	 */
-	public function fetchId()
-	{
-		return;
-	}
-
-	/**
 	 * Get the button
 	 *
 	 * Defined in the final button class
 	 *
-	 * @abstract
-	 * @access		public
-	 * @since		1.5
+	 * @return  string
+	 *
+	 * @since   11.1
 	 */
 	abstract public function fetchButton();
 }

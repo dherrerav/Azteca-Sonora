@@ -1,4 +1,7 @@
 <?php
+// no direct access
+defined ( '_JEXEC' ) or die ( 'Restricted access' ); 
+
 /**
  * @version		$Id: html.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Framework
@@ -7,7 +10,8 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('JPATH_BASE') or die;
+// Fix for compatible both J17 & J16
+defined('JPATH_BASE') or defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.application.module.helper');
 

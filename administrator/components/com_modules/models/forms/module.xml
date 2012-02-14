@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id: module.xml 20990 2011-03-18 16:42:30Z infograf768 $ -->
 <form>
 	<fieldset>
 		<field name="id" type="text"
@@ -80,7 +79,6 @@
 			description="COM_MODULES_FIELD_POSITION_DESC"
 			label="COM_MODULES_FIELD_POSITION_LABEL"
 			maxlength="50"
-			required="true"
 		/>
 
 		<field name="access" type="accesslevel"
@@ -97,7 +95,7 @@
 		<field name="content" type="editor"
 			buttons="true"
 			description="COM_MODULES_FIELD_CONTENT_DESC"
-			filter="ContentHelper::filterText"
+			filter="JComponentHelper::filterText"
 			label="COM_MODULES_FIELD_CONTENT_LABEL"
 		/>
 

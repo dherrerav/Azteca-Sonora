@@ -1,53 +1,60 @@
 <?php
 /**
- * @version		$Id: observable.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	Base
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Base
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Abstract observable class to implement the observer design pattern
  *
- * @package		Joomla.Framework
- * @subpackage	Base
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  Base
+ * @since       11.1
+ * @deprecated  12.3
+ * @codeCoverageIgnore
  */
 class JObservable extends JObject
 {
 	/**
 	 * An array of Observer objects to notify
 	 *
-	 * @access protected
-	 * @var array
+	 * @var    array
+	 * @since  11.1
+	 * @deprecated  12.3
 	 */
 	protected $_observers = array();
 
 	/**
 	 * The state of the observable object
 	 *
-	 * @access protected
-	 * @var mixed
+	 * @var    mixed
+	 * @since  11.1
+	 * @deprecated  12.3
 	 */
 	protected $_state = null;
 
 	/**
 	 * A multi dimensional array of [function][] = key for observers
 	 *
-	 * @access protected
-	 * @var array
+	 * @var    array
+	 * @since  11.1
+	 * @deprecated  12.3
 	 */
 	protected $_methods = array();
 
 	/**
 	 * Constructor
 	 *
-	 * @access protected - Make Sure it's not directly instansiated
+	 * Note: Make Sure it's not directly instantiated
+	 *
+	 * @deprecated  12.3
 	 */
-	function __construct()
+	public function __construct()
 	{
 		$this->_observers = array();
 	}
@@ -55,8 +62,10 @@ class JObservable extends JObject
 	/**
 	 * Get the state of the JObservable object
 	 *
-	 * @return	mixed	The state of the object.
-	 * @since	1.5
+	 * @return  mixed    The state of the object.
+	 *
+	 * @since   11.1
+	 * @deprecated  12.3
 	 */
 	public function getState()
 	{
@@ -66,8 +75,10 @@ class JObservable extends JObject
 	/**
 	 * Update each attached observer object and return an array of their return values
 	 *
-	 * @return	array	Array of return values from the observers
-	 * @since	1.5
+	 * @return  array    Array of return values from the observers
+	 *
+	 * @since   11.1
+	 * @deprecated  12.3
 	 */
 	public function notify()
 	{
@@ -83,22 +94,27 @@ class JObservable extends JObject
 	/**
 	 * Attach an observer object
 	 *
-	 * @param	object	$observer	An observer object to attach
+	 * @param   object  $observer  An observer object to attach
 	 *
-	 * @return	void
-	 * @since	1.5
+	 * @return  void
+	 *
+	 * @since   11.1
+	 * @deprecated  12.3
 	 */
 	public function attach($observer)
 	{
-		if (is_array($observer)) {
-			if (!isset($observer['handler']) || !isset($observer['event']) || !is_callable($observer['handler'])) {
+		if (is_array($observer))
+		{
+			if (!isset($observer['handler']) || !isset($observer['event']) || !is_callable($observer['handler']))
+			{
 				return;
 			}
 
 			// Make sure we haven't already attached this array as an observer
 			foreach ($this->_observers as $check)
 			{
-				if (is_array($check) && $check['event']==$observer['event'] && $check['handler']==$observer['handler']) {
+				if (is_array($check) && $check['event'] == $observer['event'] && $check['handler'] == $observer['handler'])
+				{
 					return;
 				}
 			}
@@ -107,8 +123,10 @@ class JObservable extends JObject
 			end($this->_observers);
 			$methods = array($observer['event']);
 		}
-		else {
-			if (!($observer instanceof JObserver)) {
+		else
+		{
+			if (!($observer instanceof JObserver))
+			{
 				return;
 			}
 
@@ -117,7 +135,8 @@ class JObservable extends JObject
 
 			foreach ($this->_observers as $check)
 			{
-				if ($check instanceof $class) {
+				if ($check instanceof $class)
+				{
 					return;
 				}
 			}
@@ -128,11 +147,12 @@ class JObservable extends JObject
 
 		$key = key($this->_observers);
 
-		foreach($methods AS $method)
+		foreach ($methods as $method)
 		{
 			$method = strtolower($method);
 
-			if (!isset($this->_methods[$method])) {
+			if (!isset($this->_methods[$method]))
+			{
 				$this->_methods[$method] = array();
 			}
 
@@ -143,10 +163,12 @@ class JObservable extends JObject
 	/**
 	 * Detach an observer object
 	 *
-	 * @param	object	$observer	An observer object to detach.
+	 * @param   object  $observer  An observer object to detach.
 	 *
-	 * @return	boolean	True if the observer object was detached.
-	 * @since 1.5
+	 * @return  boolean  True if the observer object was detached.
+	 *
+	 * @since   11.1
+	 * @deprecated  12.3
 	 */
 	public function detach($observer)
 	{
@@ -155,15 +177,17 @@ class JObservable extends JObject
 
 		$key = array_search($observer, $this->_observers);
 
-		if ($key !== false) {
+		if ($key !== false)
+		{
 			unset($this->_observers[$key]);
 			$retval = true;
 
-			foreach($this->_methods AS &$method)
+			foreach ($this->_methods as &$method)
 			{
 				$k = array_search($key, $method);
 
-				if ($k !== false) {
+				if ($k !== false)
+				{
 					unset($method[$k]);
 				}
 			}

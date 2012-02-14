@@ -1,16 +1,16 @@
 <?php
 /**
- * @version		$Id: default_items.php 18862 2010-09-13 06:21:29Z infograf768 $
+ * @version		$Id: default_items.php 21538 2011-06-14 09:39:42Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 $params = &$this->params;
 ?>
 
@@ -20,7 +20,7 @@ $params = &$this->params;
 
 		<h2>
 		<?php if ($params->get('link_titles')): ?>
-			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug,$item->catslug)); ?>">
 				<?php echo $this->escape($item->title); ?></a>
 		<?php else: ?>
 				<?php echo $this->escape($item->title); ?>
@@ -56,25 +56,31 @@ $params = &$this->params;
 <?php endif; ?>
 <?php if ($params->get('show_create_date')) : ?>
 		<dd class="create">
-		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON', JHTML::_('date',$item->created, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON', JHtml::_('date',$item->created, JText::_('DATE_FORMAT_LC2'))); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_modify_date')) : ?>
 		<dd class="modified">
-		<?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHTML::_('date',$item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHtml::_('date',$item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_publish_date')) : ?>
 		<dd class="published">
-		<?php echo JText::sprintf('COM_CONTENT_PUBLISHED_DATE', JHTML::_('date',$item->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_PUBLISHED_DATE', JHtml::_('date',$item->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_author') && !empty($item->author)) : ?>
 	<dd class="createdby">
-		<?php $author = $params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$item->created_by),$item->author) : $item->author; ?>
-		<?php $author = ($item->created_by_alias ? $item->created_by_alias : $author); ?>
-	<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
-		</dd>
+	<?php $author =  $item->author; ?>
+	<?php $author = ($item->created_by_alias ? $item->created_by_alias : $author);?>
+			<?php if (!empty($item->contactid ) &&  $params->get('link_author') == true):?>
+				<?php 	echo JText::sprintf('COM_CONTENT_WRITTEN_BY' ,
+				 JHtml::_('link',JRoute::_('index.php?option=com_contact&view=contact&id='.$item->contactid),$author)); ?>
+
+			<?php else :?>
+				<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
+			<?php endif; ?>
+	</dd>
 	<?php endif; ?>
 <?php if ($params->get('show_hits')) : ?>
 		<dd class="hits">
@@ -87,7 +93,7 @@ $params = &$this->params;
 
 <?php if ($params->get('show_intro')) :?>
 	<div class="intro">
-		<?php echo JHTML::_('string.truncate', $item->introtext, $params->get('introtext_limit')); ?>
+		<?php echo JHtml::_('string.truncate', $item->introtext, $params->get('introtext_limit')); ?>
 	</div>
 <?php if ($params->get('show_readmore') && $item->readmore) :
 	if ($item->params->get('access-view')) :

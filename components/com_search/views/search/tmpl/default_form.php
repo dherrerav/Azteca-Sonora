@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_form.php 20876 2011-03-03 17:10:37Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_search
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -19,7 +18,7 @@ $upper_limit = $lang->getUpperLimitSearchWord();
 		<label for="search-searchword">
 			<?php echo JText::_('COM_SEARCH_SEARCH_KEYWORD'); ?>
 		</label>
-		<input type="text" name="searchword" id="search-searchword" size="30" maxlength="<?php echo $upper_limit; ?>" value="<?php echo $this->escape($this->searchword); ?>" class="inputbox" />
+		<input type="text" name="searchword" id="search-searchword" size="30" maxlength="<?php echo $upper_limit; ?>" value="<?php echo $this->escape($this->origkeyword); ?>" class="inputbox" />
 		<button name="Search" onclick="this.form.submit()" class="button"><?php echo JText::_('COM_SEARCH_SEARCH');?></button>
 		<input type="hidden" name="task" value="search" />
 	</fieldset>

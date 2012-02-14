@@ -61,7 +61,7 @@ abstract class modMegaMiniTabsHelper
 	{
 		$db	= JFactory::getDbo();
 		
-		$query = new JDatabaseQuery;
+		$query = $db->getQuery(true);
 		$query->select('*');
 		$query->from('#__modules');
 		$query->where('id='.$modId);

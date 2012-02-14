@@ -1,6 +1,5 @@
 <?php
 /**
-* @version $Id: bad.php 16235 2010-04-20 04:13:25Z pasamio $
 * Tools for locating / replacing bad bytes in UTF-8 strings
 * The Original Code is Mozilla Communicator client code.
 * The Initial Developer of the Original Code is

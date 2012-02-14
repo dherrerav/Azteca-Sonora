@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -58,32 +57,32 @@ class RedirectViewLinks extends JView
 
 		JToolBarHelper::title(JText::_('COM_REDIRECT_MANAGER_LINKS'), 'redirect');
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::addNew('link.add','JTOOLBAR_NEW');
+			JToolBarHelper::addNew('link.add');
 		}
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::editList('link.edit','JTOOLBAR_EDIT');
+			JToolBarHelper::editList('link.edit');
 		}
 		if ($canDo->get('core.edit.state')) {
 			if ($state->get('filter.state') != 2){
 				JToolBarHelper::divider();
-				JToolBarHelper::custom('links.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_ENABLE', true);
-				JToolBarHelper::custom('links.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
+				JToolBarHelper::publish('links.publish', 'JTOOLBAR_ENABLE', true);
+				JToolBarHelper::unpublish('links.unpublish', 'JTOOLBAR_DISABLE', true);
 			}
 			if ($state->get('filter.state') != -1 ) {
 				JToolBarHelper::divider();
 				if ($state->get('filter.state') != 2) {
-					JToolBarHelper::archiveList('links.archive','JTOOLBAR_ARCHIVE');
+					JToolBarHelper::archiveList('links.archive');
 				}
-				else if ($state->get('filter.state') == 2) {
+				elseif ($state->get('filter.state') == 2) {
 					JToolBarHelper::unarchiveList('links.publish', 'JTOOLBAR_UNARCHIVE');
 				}
 			}
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'links.delete','JTOOLBAR_EMPTY_TRASH');
-		} else if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::trash('links.trash','JTOOLBAR_TRASH');
-			JToolBarHelper::divider();			
+			JToolBarHelper::deleteList('', 'links.delete', 'JTOOLBAR_EMPTY_TRASH');
+		} elseif ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('links.trash');
+			JToolBarHelper::divider();
 		}
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_redirect');

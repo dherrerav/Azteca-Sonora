@@ -1,14 +1,11 @@
 <?php
 /**
- * @version		$Id: joomla.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('_JEXEC') or die;
-
-jimport('joomla.plugin.plugin');
 
 /**
  * Example Content Plugin
@@ -54,7 +51,7 @@ class plgContentJoomla extends JPlugin
 
 		$db = JFactory::getDbo();
 		$db->setQuery('SELECT id FROM #__users WHERE sendEmail = 1');
-		$users = (array) $db->loadResultArray();
+		$users = (array) $db->loadColumn();
 
 		$default_language = JComponentHelper::getParams('com_languages')->get('administrator');
 		$debug = JFactory::getConfig()->get('debug_lang');

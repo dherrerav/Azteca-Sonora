@@ -1,8 +1,7 @@
 <?php
 /**
- * @version		$Id: index.php 20806 2011-02-21 19:44:59Z dextercowley $
  * @package		Joomla.Site
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,7 +19,7 @@ if (!defined('_JDEFINES')) {
 }
 
 require_once JPATH_BASE.'/includes/framework.php';
-require_once JPATH_BASE . '/includes/zend.php';
+require_once JPATH_BASE .'/includes/zend.php';
 
 // Mark afterLoad in the profiler.
 JDEBUG ? $_PROFILER->mark('afterLoad') : null;

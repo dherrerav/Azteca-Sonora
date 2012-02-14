@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: blog.php 20960 2011-03-12 14:14:00Z chdemko $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,7 +19,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 	</h1>
 	<?php endif; ?>
 
-	<?php if ($this->params->get('show_category_title', 1) OR $this->params->get('page_subheading')) : ?>
+	<?php if ($this->params->get('show_category_title', 1) or $this->params->get('page_subheading')) : ?>
 	<h2>
 		<?php echo $this->escape($this->params->get('page_subheading')); ?>
 		<?php if ($this->params->get('show_category_title')) : ?>
@@ -38,7 +37,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_description') && $this->category->description) : ?>
-		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
+		<?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
 	<?php endif; ?>
 	<div class="clr"></div>
 	</div>

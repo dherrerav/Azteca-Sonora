@@ -1,42 +1,41 @@
 <?php
 /**
- * @version		$Id: sessionhandler.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Form
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
-jimport('joomla.html.html');
-jimport('joomla.session.session');
-jimport('joomla.form.formfield');
-jimport('joomla.form.helper');
 JFormHelper::loadFieldClass('list');
 
 /**
- * Form Field class for the Joomla Framework.
+ * Form Field class for the Joomla Platform.
+ * Provides a select list of session handler options.
  *
- * @package		Joomla.Framework
- * @subpackage	Form
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  Form
+ * @since       11.1
  */
 class JFormFieldSessionHandler extends JFormFieldList
 {
+
 	/**
 	 * The form field type.
 	 *
-	 * @var		string
-	 * @since	1.6
+	 * @var    string
+	 * @since  11.1
 	 */
 	protected $type = 'SessionHandler';
 
 	/**
-	 * Method to get the field options.
+	 * Method to get the session handler field options.
 	 *
-	 * @return	array	The field option objects.
-	 * @since	1.6
+	 * @return  array  The field option objects.
+	 *
+	 * @since   11.1
 	 */
 	protected function getOptions()
 	{
@@ -44,8 +43,9 @@ class JFormFieldSessionHandler extends JFormFieldList
 		$options = array();
 
 		// Get the options from JSession.
-		foreach (JSession::getStores() as $store) {
-			$options[] = JHtml::_('select.option', $store, JText::_('JLIB_FORM_VALUE_SESSION_'.$store), 'value', 'text');
+		foreach (JSession::getStores() as $store)
+		{
+			$options[] = JHtml::_('select.option', $store, JText::_('JLIB_FORM_VALUE_SESSION_' . $store), 'value', 'text');
 		}
 
 		// Merge any additional options in the XML definition.

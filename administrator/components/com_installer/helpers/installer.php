@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: installer.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -47,9 +46,14 @@ class InstallerHelper
 			$vName == 'discover'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('COM_INSTALLER_SUBMENU_WARNINGS'),
-			'index.php?option=com_installer&view=warnings',
-			$vName == 'warnings'
+			JText::_('COM_INSTALLER_SUBMENU_DATABASE'),
+			'index.php?option=com_installer&view=database',
+			$vName == 'database'
+		);
+		JSubMenuHelper::addEntry(
+		JText::_('COM_INSTALLER_SUBMENU_WARNINGS'),
+					'index.php?option=com_installer&view=warnings',
+		$vName == 'warnings'
 		);
 	}
 

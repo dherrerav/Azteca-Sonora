@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: application.php 21916 2011-07-26 16:48:11Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -57,11 +56,8 @@ final class JSite extends JApplication
 	{
 		$config = JFactory::getConfig();
 
-		jimport('joomla.language.helper');
-
 		// if a language was specified it has priority
 		// otherwise use user or default language settings
-		jimport('joomla.plugin.helper');
 		JPluginHelper::importPlugin('system', 'languagefilter');
 
 		if (empty($options['language'])) {
@@ -74,7 +70,7 @@ final class JSite extends JApplication
 		if ($this->_language_filter && empty($options['language'])) {
 			// Detect cookie language
 			jimport('joomla.utilities.utility');
-			$lang = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
+			$lang = JRequest::getString(self::getHash('language'), null , 'cookie');
 			// Make sure that the user's language exists
 			if ($lang && JLanguage::exists($lang)) {
 				$options['language'] = $lang;
@@ -108,7 +104,7 @@ final class JSite extends JApplication
 
 		// One last check to make sure we have something
 		if (!JLanguage::exists($options['language'])) {
-			$lang = $config->get('language','en-GB');
+			$lang = $config->get('language', 'en-GB');
 			if (JLanguage::exists($lang)) {
 				$options['language'] = $lang;
 			}
@@ -122,9 +118,13 @@ final class JSite extends JApplication
 
 		// Load Library language
 		$lang = JFactory::getLanguage();
-		$lang->load('lib_joomla', JPATH_SITE)
-		|| $lang->load('lib_joomla', JPATH_ADMINISTRATOR);
 
+		// Try the lib_joomla file in the current language (without allowing the loading of the file in the default language)
+		$lang->load('lib_joomla', JPATH_SITE, null, false, false)
+		|| $lang->load('lib_joomla', JPATH_ADMINISTRATOR, null, false, false)
+		// Fallback to the lib_joomla file in the default language
+		|| $lang->load('lib_joomla', JPATH_SITE, null, true)
+		|| $lang->load('lib_joomla', JPATH_ADMINISTRATOR, null, true);
 	}
 
 	/**
@@ -172,7 +172,6 @@ final class JSite extends JApplication
 						$document->setMetaData('keywords', $this->getCfg('MetaKeys'));
 					}
 					$document->setMetaData('rights', $this->getCfg('MetaRights'));
-					$document->setMetaData('language', $lang_code);
 					if ($router->getMode() == JROUTER_MODE_SEF) {
 						$document->setBase(htmlspecialchars(JURI::current()));
 					}
@@ -226,14 +225,14 @@ final class JSite extends JApplication
 					$file = 'index';
 				}
 
-				if ($this->getCfg('offline') && !$user->authorise('core.admin')) {
+				if ($this->getCfg('offline') && !$user->authorise('core.login.offline')) {
 					$uri		= JFactory::getURI();
 					$return		= (string)$uri;
-					$this->setUserState('users.login.form.data',array( 'return' => $return ) );
+					$this->setUserState('users.login.form.data', array( 'return' => $return ) );
 					$file = 'offline';
 					JResponse::setHeader('Status', '503 Service Temporarily Unavailable', 'true');
 				}
-				if (!is_dir(JPATH_THEMES.DS.$template->template) && !$this->getCfg('offline')) {
+				if (!is_dir(JPATH_THEMES . '/' . $template->template) && !$this->getCfg('offline')) {
 					$file = 'component';
 				}
 				$params = array(
@@ -254,7 +253,7 @@ final class JSite extends JApplication
 		$this->triggerEvent('onBeforeRender');
 
 		$caching = false;
-		if ($this->getCfg('caching') && $this->getCfg('caching',2) == 2 && !$user->get('id')) {
+		if ($this->getCfg('caching') && $this->getCfg('caching', 2) == 2 && !$user->get('id')) {
 			$caching = true;
 		}
 
@@ -291,6 +290,7 @@ final class JSite extends JApplication
 	 */
 	public function authorize($itemid)
 	{
+		JLog::add('JSite::authorize() is deprecated. Use JSite::authorise() instead.', JLog::WARNING, 'deprecated');
 		return $this->authorise($itemid);
 	}
 
@@ -310,7 +310,7 @@ final class JSite extends JApplication
 				$uri		= JFactory::getURI();
 				$return		= (string)$uri;
 
-				$this->setUserState('users.login.form.data',array( 'return' => $return ) );
+				$this->setUserState('users.login.form.data', array( 'return' => $return ) );
 
 				$url	= 'index.php?option=com_users&view=login';
 				$url	= JRoute::_($url, false);
@@ -362,10 +362,11 @@ final class JSite extends JApplication
 				$description = $this->getCfg('MetaDesc');
 			}
 			$rights = $this->getCfg('MetaRights');
+			$robots = $this->getCfg('robots');
 			// Lets cascade the parameters if we have menu item parameters
 			if (is_object($menu)) {
 				$temp = new JRegistry;
-				$temp->loadJSON($menu->params);
+				$temp->loadString($menu->params);
 				$params[$hash]->merge($temp);
 				$title = $menu->title;
 			}
@@ -373,6 +374,7 @@ final class JSite extends JApplication
 			$params[$hash]->def('page_title', $title);
 			$params[$hash]->def('page_description', $description);
 			$params[$hash]->def('page_rights', $rights);
+			$params[$hash]->def('robots', $robots);
 		}
 
 		return $params[$hash];
@@ -419,8 +421,8 @@ final class JSite extends JApplication
 		}
 		$condition = '';
 
-		$tid = JRequest::getVar('template', 0);
-		if (is_int($tid) && $tid > 0) {
+		$tid = JRequest::getVar('templateStyle', 0);
+		if (is_numeric($tid) && (int) $tid > 0) {
 			$id = (int) $tid;
 		}
 
@@ -436,36 +438,44 @@ final class JSite extends JApplication
 			// Load styles
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
-			$query->select('id, home, template, params');
-			$query->from('#__template_styles');
-			$query->where('client_id = 0');
+			$query->select('id, home, template, s.params');
+			$query->from('#__template_styles as s');
+			$query->where('s.client_id = 0');
+			$query->where('e.enabled = 1');
+			$query->leftJoin('#__extensions as e ON e.element=s.template AND e.type='.$db->quote('template').' AND e.client_id=s.client_id');
 
 			$db->setQuery($query);
 			$templates = $db->loadObjectList('id');
 			foreach($templates as &$template) {
 				$registry = new JRegistry;
-				$registry->loadJSON($template->params);
+				$registry->loadString($template->params);
 				$template->params = $registry;
 
 				// Create home element
-				if ($template->home == '1' && !isset($templates[0]) || $this->_language_filter && $template->home == $tag) {
+				//sqlsrv change
+				if ($template->home == 1 && !isset($templates[0]) || $this->_language_filter && $template->home == $tag) {
 					$templates[0] = clone $template;
 				}
 			}
 			$cache->store($templates, 'templates0'.$tag);
 		}
 
-		$template = $templates[$id];
+		if (isset($templates[$id])) {
+			$template = $templates[$id];
+		}
+		else {
+			$template = $templates[0];
+		}
 
 		// Allows for overriding the active template from the request
 		$template->template = JRequest::getCmd('template', $template->template);
 		$template->template = JFilterInput::getInstance()->clean($template->template, 'cmd'); // need to filter the default value as well
 
 		// Fallback template
-		if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php')) {
+		if (!file_exists(JPATH_THEMES . '/' . $template->template . '/index.php')) {
 			JError::raiseWarning(0, JText::_('JERROR_ALERTNOTEMPLATE'));
 		    $template->template = 'beez_20';
-		    if (!file_exists(JPATH_THEMES.DS.'beez_20'.DS.'index.php')) {
+		    if (!file_exists(JPATH_THEMES . '/beez_20/index.php')) {
 		    	$template->template = '';
 		    }
 		}
@@ -481,16 +491,22 @@ final class JSite extends JApplication
 	/**
 	 * Overrides the default template that would be used
 	 *
-	 * @param string The template name
+	 * @param string	The template name
+	 * @param mixed		The template style parameters
 	 */
-	public function setTemplate($template)
-	{
-		if (is_dir(JPATH_THEMES.DS.$template)) {
-			$this->template = new stdClass();
-			$this->template->params = new JRegistry;
-			$this->template->template = $template;
-		}
-	}
+	public function setTemplate($template, $styleParams=null)
+ 	{
+ 		if (is_dir(JPATH_THEMES.DS.$template)) {
+ 			$this->template = new stdClass();
+ 			$this->template->template = $template;
+			if ($styleParams instanceof JRegistry) {
+				$this->template->params = $styleParams;
+			}
+			else {
+				$this->template->params = new JRegistry($styleParams);
+			}
+ 		}
+ 	}
 
 	/**
 	 * Return a reference to the JPathway object.

@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: client.php 21148 2011-04-14 17:30:08Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -33,7 +32,7 @@ class BannersModelClient extends JModelAdmin
 					return ;
 				}
 			$user = JFactory::getUser();
-	
+
 			if (!empty($record->catid)) {
 				return $user->authorise('core.delete', 'com_banners.category.'.(int) $record->catid);
 			}

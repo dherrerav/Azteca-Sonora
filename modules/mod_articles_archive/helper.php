@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: helper.php 21049 2011-04-01 02:05:21Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	mod_articles_archive
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -41,14 +40,16 @@ class modArchiveHelper
 			$date = JFactory::getDate($row->created);
 
 			$created_month	= $date->format('n');
-			$month_name	= $date->format('F');
 			$created_year	= $date->format('Y');
 
+			$created_year_cal	= JHTML::_('date', $row->created, 'Y');
+			$month_name_cal	= JHTML::_('date', $row->created, 'F');
+
 			$lists[$i] = new stdClass;
-			
+
 			$lists[$i]->link	= JRoute::_('index.php?option=com_content&view=archive&year='.$created_year.'&month='.$created_month.$itemid);
-			$lists[$i]->text	= JText::sprintf('MOD_ARTICLES_ARCHIVE_DATE',$month_name,$created_year);
-			
+			$lists[$i]->text	= JText::sprintf('MOD_ARTICLES_ARCHIVE_DATE', $month_name_cal, $created_year_cal);
+
 			$i++;
 		}
 		return $lists;

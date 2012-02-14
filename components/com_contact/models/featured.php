@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: featured.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_contact
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -78,17 +77,17 @@ class ContactModelFeatured extends JModelList
 	 *
 	 * @return	mixed	An array of objects on success, false on failure.
 	 */
-	public function &getItems()
+	public function getItems()
 	{
 		// Invoke the parent getItems method to get the main list
-		$items = &parent::getItems();
+		$items = parent::getItems();
 
 		// Convert the params field into an object, saving original in _params
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
 			$item = &$items[$i];
 			if (!isset($this->_params)) {
 				$params = new JRegistry();
-				$params->loadJSON($item->params);
+				$params->loadString($item->params);
 				$item->params = $params;
 			}
 		}
@@ -113,7 +112,7 @@ class ContactModelFeatured extends JModelList
 
 		// Select required fields from the categories.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__contact_details` AS a');
+		$query->from($db->quoteName('#__contact_details').' AS a');
 		$query->where('a.access IN ('.$groups.')');
 		$query->where('a.featured=1');
 		$query->join('INNER', '#__categories AS c ON c.id = a.catid');
@@ -122,9 +121,9 @@ class ContactModelFeatured extends JModelList
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
 		}
-
+		//sqlsrv change... aliased c.published to cat_published
 		// Join to check for category published state in parent categories up the tree
-		$query->select('c.published, CASE WHEN badcats.id is null THEN c.published ELSE 0 END AS parents_published');
+		$query->select('c.published as cat_published, CASE WHEN badcats.id is null THEN c.published ELSE 0 END AS parents_published');
 		$subquery = 'SELECT cat.id as id FROM #__categories AS cat JOIN #__categories AS parent ';
 		$subquery .= 'ON cat.lft BETWEEN parent.lft AND parent.rgt ';
 		$subquery .= 'WHERE parent.extension = ' . $db->quote('com_contact');
@@ -142,7 +141,8 @@ class ContactModelFeatured extends JModelList
 
 			// Filter by start and end dates.
 			$nullDate = $db->Quote($db->getNullDate());
-			$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+			$date = JFactory::getDate();
+			$nowDate = $db->Quote($date->toSql());
 			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 			$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
 			$query->where($publishedWhere . ' = ' . (int) $state);
@@ -156,7 +156,7 @@ class ContactModelFeatured extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->escape($this->getState('list.ordering', 'a.ordering')).' '.$db->escape($this->getState('list.direction', 'ASC')));
 
 		return $query;
 	}
@@ -202,7 +202,7 @@ class ContactModelFeatured extends JModelList
 			$this->setState('filter.publish_date', true);
 		}
 
-		$this->setState('filter.language',$app->getLanguageFilter());
+		$this->setState('filter.language', $app->getLanguageFilter());
 
 		// Load the parameters.
 		$this->setState('params', $params);

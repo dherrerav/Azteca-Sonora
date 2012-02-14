@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fieldset>
+	<fieldset addfieldpath="/administrator/components/com_categories/models/fields">
 		<field name="id"
 			type="text"
 			label="JGLOBAL_FIELD_ID_LABEL"
@@ -51,11 +51,11 @@
 				JARCHIVED</option>
 			<option value="-2">
 				JTRASHED</option>
-			
+
 		</field>
 
 		<field name="catid"
-			type="category"
+			type="categoryedit"
 			extension="com_contact"
 			label="JCATEGORY"
 			description="JFIELD_CATEGORY_DESC"
@@ -163,6 +163,7 @@
 
 		<field name="webpage"
 			type="url"
+			filter="url"
 			label="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL"
 			description="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_DESC"
 			class="inputbox"
@@ -173,7 +174,7 @@
 			label="COM_CONTACT_FIELD_INFORMATION_MISC_LABEL"
 			description="COM_CONTACT_FIELD_INFORMATION_MISC_DESC"
 			class="inputbox"
-			filter="safehtml"
+			filter="JComponentHelper::filterText"
 			buttons="true"
 			hide="readmore,pagebreak"
 			 />
@@ -194,7 +195,7 @@
 		<field name="created" type="calendar" label="COM_CONTACT_FIELD_CREATED_LABEL"
 			description="COM_CONTACT_FIELD_CREATED_DESC" class="inputbox" size="22"
 			format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
-		
+
 		<field name="modified" type="calendar" class="readonly"
 			label="JGLOBAL_FIELD_MODIFIED_LABEL" description="COM_CONTACT_FIELD_MODIFIED_DESC"
 			size="22" readonly="true" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
@@ -234,7 +235,7 @@
 			label="COM_CONTACT_FIELD_PUBLISH_DOWN_LABEL" description="COM_CONTACT_FIELD_PUBLISH_DOWN_DESC"
 			class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22"
 			filter="user_utc"
-		/>		 
+		/>
 
 		<field name="metakey"
 			type="textarea"
@@ -357,7 +358,7 @@
 				<option value="tabs">COM_CONTACT_FIELD_VALUE_TABS</option>
 				<option value="plain">COM_CONTACT_FIELD_VALUE_PLAIN</option>
 			</field>
-			
+
 			<field name="show_name"
 				type="list"
 				label="COM_CONTACT_FIELD_PARAMS_NAME_LABEL" description="COM_CONTACT_FIELD_PARAMS_NAME_DESC"
@@ -531,7 +532,7 @@
 				size="30"
 			/>
 
-			<field name="linka" type="text"
+			<field name="linka" type="url" filter="url"
 				label="COM_CONTACT_FIELD_LINKA_LABEL"
 				description="COM_CONTACT_FIELD_LINKA_DESC"
 				class="inputbox"
@@ -545,7 +546,7 @@
 				size="30"
 			/>
 
-			<field name="linkb" type="text"
+			<field name="linkb" type="url" filter="url"
 				label="COM_CONTACT_FIELD_LINKB_LABEL"
 				description="COM_CONTACT_FIELD_LINKB_DESC"
 				class="inputbox"
@@ -561,7 +562,7 @@
 			/>
 
 			<field name="linkc"
-			type="text"
+				type="url" filter="url"
 				label="COM_CONTACT_FIELD_LINKC_LABEL"
 				description="COM_CONTACT_FIELD_LINKC_DESC"
 				class="inputbox"
@@ -577,7 +578,7 @@
 				/>
 
 			<field name="linkd"
-				type="text"
+				type="url" filter="url"
 				label="COM_CONTACT_FIELD_LINKD_LABEL"
 				description="COM_CONTACT_FIELD_LINKD_DESC"
 				class="inputbox"
@@ -607,11 +608,11 @@
 				extension="com_contact"
 				view="contact"
 				useglobal="true"
-				/>			
+				/>
 		</fieldset>
 
 		<fieldset name="email"
-			label="COM_CONTACT_FIELDSET_CONTACT_FORM"			
+			label="COM_CONTACT_FIELDSET_CONTACT_FORM"
 		>
 
 			<field name="show_email_form" type="list"

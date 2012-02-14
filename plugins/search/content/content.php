@@ -1,14 +1,11 @@
 <?php
 /**
- * @version		$Id: content.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
-
-jimport('joomla.plugin.plugin');
 
 require_once JPATH_SITE.'/components/com_content/router.php';
 
@@ -65,7 +62,7 @@ class plgSearchContent extends JPlugin
 
 		$nullDate		= $db->getNullDate();
 		$date = JFactory::getDate();
-		$now = $date->toMySQL();
+		$now = $date->toSql();
 
 		$text = trim($text);
 		if ($text == '') {
@@ -75,7 +72,7 @@ class plgSearchContent extends JPlugin
 		$wheres = array();
 		switch ($phrase) {
 			case 'exact':
-				$text		= $db->Quote('%'.$db->getEscaped($text, true).'%', false);
+				$text		= $db->Quote('%'.$db->escape($text, true).'%', false);
 				$wheres2	= array();
 				$wheres2[]	= 'a.title LIKE '.$text;
 				$wheres2[]	= 'a.introtext LIKE '.$text;
@@ -91,7 +88,7 @@ class plgSearchContent extends JPlugin
 				$words = explode(' ', $text);
 				$wheres = array();
 				foreach ($words as $word) {
-					$word		= $db->Quote('%'.$db->getEscaped($word, true).'%', false);
+					$word		= $db->Quote('%'.$db->escape($word, true).'%', false);
 					$wheres2	= array();
 					$wheres2[]	= 'a.title LIKE '.$word;
 					$wheres2[]	= 'a.introtext LIKE '.$word;
@@ -136,18 +133,34 @@ class plgSearchContent extends JPlugin
 		if ($sContent && $limit > 0)
 		{
 			$query->clear();
-			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created, '
-						.'CONCAT(a.introtext, a.fulltext) AS text, c.title AS section, '
-						.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug, '
-						.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as catslug, '
-						.'"2" AS browsernav');
+			//sqlsrv changes
+			$case_when = ' CASE WHEN ';
+			$case_when .= $query->charLength('a.alias');
+			$case_when .= ' THEN ';
+			$a_id = $query->castAsChar('a.id');
+			$case_when .= $query->concatenate(array($a_id, 'a.alias'), ':');
+			$case_when .= ' ELSE ';
+			$case_when .= $a_id.' END as slug';
+
+			$case_when1 = ' CASE WHEN ';
+			$case_when1 .= $query->charLength('c.alias');
+			$case_when1 .= ' THEN ';
+			$c_id = $query->castAsChar('c.id');
+			$case_when1 .= $query->concatenate(array($c_id, 'c.alias'), ':');
+			$case_when1 .= ' ELSE ';
+			$case_when1 .= $c_id.' END as catslug';
+
+			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created');
+			$query->select($query->concatenate(array('a.introtext', 'a.fulltext')).' AS text');
+			$query->select('c.title AS section, '.$case_when.','.$case_when1.', '.'\'2\' AS browsernav');
+
 			$query->from('#__content AS a');
 			$query->innerJoin('#__categories AS c ON c.id=a.catid');
 			$query->where('('. $where .')' . 'AND a.state=1 AND c.published = 1 AND a.access IN ('.$groups.') '
 						.'AND c.access IN ('.$groups.') '
 						.'AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).') '
 						.'AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')' );
-			$query->group('a.id');
+			$query->group('a.id, a.title, a.metadesc, a.metakey, a.created, a.introtext, a.fulltext, c.title, a.alias, c.alias, c.id');
 			$query->order($order);
 
 			// Filter by language
@@ -176,11 +189,28 @@ class plgSearchContent extends JPlugin
 			$searchArchived = JText::_('JARCHIVED');
 
 			$query->clear();
+			//sqlsrv changes
+			$case_when = ' CASE WHEN ';
+			$case_when .= $query->charLength('a.alias');
+			$case_when .= ' THEN ';
+			$a_id = $query->castAsChar('a.id');
+			$case_when .= $query->concatenate(array($a_id, 'a.alias'), ':');
+			$case_when .= ' ELSE ';
+			$case_when .= $a_id.' END as slug';
+
+			$case_when1 = ' CASE WHEN ';
+			$case_when1 .= $query->charLength('c.alias');
+			$case_when1 .= ' THEN ';
+			$c_id = $query->castAsChar('c.id');
+			$case_when1 .= $query->concatenate(array($c_id, 'c.alias'), ':');
+			$case_when1 .= ' ELSE ';
+			$case_when1 .= $c_id.' END as catslug';
+
 			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created, '
-						.'CONCAT(a.introtext, a.fulltext) AS text, '
-						.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug, '
-						.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as catslug, '
-						.'CONCAT_WS("/", c.title) AS section, "2" AS browsernav' );
+			.$query->concatenate(array("a.introtext", "a.fulltext")).' AS text,'
+			.$case_when.','.$case_when1.', '
+			.'c.title AS section, \'2\' AS browsernav');
+			//.'CONCAT_WS("/", c.title) AS section, \'2\' AS browsernav' );
 			$query->from('#__content AS a');
 			$query->innerJoin('#__categories AS c ON c.id=a.catid AND c.access IN ('. $groups .')');
 			$query->where('('. $where .') AND a.state = 2 AND c.published = 1 AND a.access IN ('. $groups
@@ -225,7 +255,7 @@ class plgSearchContent extends JPlugin
 			foreach($rows as $row)
 			{
 				$new_row = array();
-				foreach($row AS $key => $article) {
+				foreach($row as $key => $article) {
 					if (searchHelper::checkNoHTML($article, $searchText, array('text', 'title', 'metadesc', 'metakey'))) {
 						$new_row[] = $article;
 					}

@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 21023 2011-03-28 10:55:01Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -49,7 +48,13 @@ class ContentViewForm extends JView
 		}
 
 		if (!empty($this->item)) {
+			$this->item->images = json_decode($this->item->images);
+			$this->item->urls = json_decode($this->item->urls);
+
 			$this->form->bind($this->item);
+			$this->form->bind($this->item->urls);
+			$this->form->bind($this->item->images);
+
 		}
 
 		// Check for errors.
@@ -66,6 +71,12 @@ class ContentViewForm extends JView
 
 		$this->params	= $params;
 		$this->user		= $user;
+
+		if ($this->params->get('enable_category') == 1) {
+			$catid = JRequest::getInt('catid');
+			$category = JCategories::getInstance('Content')->get($this->params->get('catid', 1));
+			$this->category_title = $category->title;
+		}
 
 		$this->_prepareDocument();
 		parent::display($tpl);
@@ -92,31 +103,28 @@ class ContentViewForm extends JView
 		}
 
 		$title = $this->params->def('page_title', JText::_('COM_CONTENT_FORM_EDIT_ARTICLE'));
-		if ($app->getCfg('sitename_pagetitles', 0)) {
+		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
 			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
+			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		$this->document->setTitle($title);
 
 		$pathway = $app->getPathWay();
 		$pathway->addItem($title, '');
 
-		// If there is a pagebreak heading or title, add it to the page title
-		if (!empty($this->item->page_title))
-		{
-			$article->title = $article->title .' - '. $article->page_title;
-			$this->document->setTitle($article->page_title.' - '.JText::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('page.offset') + 1));
-		}
 		if ($this->params->get('menu-meta_description'))
 		{
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
 
-		if ($this->params->get('menu-meta_keywords')) 
+		if ($this->params->get('menu-meta_keywords'))
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}
 
-		if ($this->params->get('robots')) 
+		if ($this->params->get('robots'))
 		{
 			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}

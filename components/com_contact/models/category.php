@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: category.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @package		Joomla.Site
+bv * @package		Joomla.Site
  * @subpackage	com_contact
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -67,6 +66,10 @@ class ContactModelCategory extends JModelList
 				'state', 'a.state',
 				'country', 'a.country',
 				'ordering', 'a.ordering',
+				'sortname',
+				'sortname1', 'a.sortname1',
+				'sortname2', 'a.sortname2',
+				'sortname3', 'a.sortname3'
 			);
 		}
 
@@ -78,17 +81,17 @@ class ContactModelCategory extends JModelList
 	 *
 	 * @return	mixed	An array of objects on success, false on failure.
 	 */
-	public function &getItems()
+	public function getItems()
 	{
 		// Invoke the parent getItems method to get the main list
-		$items = &parent::getItems();
+		$items = parent::getItems();
 
 		// Convert the params field into an object, saving original in _params
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
 			$item = &$items[$i];
 			if (!isset($this->_params)) {
 				$params = new JRegistry();
-				$params->loadJSON($item->params);
+				$params->loadString($item->params);
 				$item->params = $params;
 			}
 		}
@@ -112,12 +115,29 @@ class ContactModelCategory extends JModelList
 		$query	= $db->getQuery(true);
 
 		// Select required fields from the categories.
-		$query->select($this->getState('list.select', 'a.*') . ','
-		. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-		. ' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END AS catslug ');
-		$query->from('`#__contact_details` AS a');
+		//sqlsrv changes
+		$case_when = ' CASE WHEN ';
+		$case_when .= $query->charLength('a.alias');
+		$case_when .= ' THEN ';
+		$a_id = $query->castAsChar('a.id');
+		$case_when .= $query->concatenate(array($a_id, 'a.alias'), ':');
+		$case_when .= ' ELSE ';
+		$case_when .= $a_id.' END as slug';
+
+		$case_when1 = ' CASE WHEN ';
+		$case_when1 .= $query->charLength('c.alias');
+		$case_when1 .= ' THEN ';
+		$c_id = $query->castAsChar('c.id');
+		$case_when1 .= $query->concatenate(array($c_id, 'c.alias'), ':');
+		$case_when1 .= ' ELSE ';
+		$case_when1 .= $c_id.' END as catslug';
+		$query->select($this->getState('list.select', 'a.*') . ','.$case_when.','.$case_when1);
+	//	. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
+	//	. ' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END AS catslug ');
+		$query->from($db->quoteName('#__contact_details').' AS a');
 		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 		$query->where('a.access IN ('.$groups.')');
+
 
 		// Filter by category.
 		if ($categoryId = $this->getState('category.id')) {
@@ -132,7 +152,7 @@ class ContactModelCategory extends JModelList
 		}
 		// Filter by start and end dates.
 		$nullDate = $db->Quote($db->getNullDate());
-		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+		$nowDate = $db->Quote(JFactory::getDate()->toSql());
 
 		if ($this->getState('filter.publish_date')){
 			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
@@ -144,8 +164,14 @@ class ContactModelCategory extends JModelList
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
 
-		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		// Set sortname ordering if selected
+		if ($this->getState('list.ordering') == 'sortname') {
+			$query->order($db->escape('a.sortname1').' '.$db->escape($this->getState('list.direction', 'ASC')));
+			$query->order($db->escape('a.sortname2').' '.$db->escape($this->getState('list.direction', 'ASC')));
+			$query->order($db->escape('a.sortname3').' '.$db->escape($this->getState('list.direction', 'ASC')));
+		} else {
+			$query->order($db->escape($this->getState('list.ordering', 'a.ordering')).' '.$db->escape($this->getState('list.direction', 'ASC')));
+		}
 
 		return $query;
 	}
@@ -176,7 +202,15 @@ class ContactModelCategory extends JModelList
 		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
 		$this->setState('list.start', $limitstart);
 
-		$orderCol	= JRequest::getCmd('filter_order', 'ordering');
+		// Get list ordering default from the parameters
+		$menuParams = new JRegistry();
+		if ($menu = $app->getMenu()->getActive()) {
+			$menuParams->loadString($menu->params);
+		}
+		$mergedParams = clone $params;
+		$mergedParams->merge($menuParams);
+
+		$orderCol	= JRequest::getCmd('filter_order', $mergedParams->get('initial_sort', 'ordering'));
 		if (!in_array($orderCol, $this->filter_fields)) {
 			$orderCol = 'ordering';
 		}
@@ -199,7 +233,7 @@ class ContactModelCategory extends JModelList
 			// Filter by start and end dates.
 			$this->setState('filter.publish_date', true);
 		}
-		$this->setState('filter.language',$app->getLanguageFilter());
+		$this->setState('filter.language', $app->getLanguageFilter());
 
 		// Load the parameters.
 		$this->setState('params', $params);
@@ -221,12 +255,12 @@ class ContactModelCategory extends JModelList
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new JRegistry();
-			
+
 			if($active)
 			{
-				$params->loadJSON($active->params);
+				$params->loadString($active->params);
 			}
-			
+
 			$options = array();
 			$options['countItems'] = $params->get('show_cat_items', 1) || $params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('Contact', $options);
@@ -251,7 +285,7 @@ class ContactModelCategory extends JModelList
 	}
 
 	/**
-	 * Get the parent categorie.
+	 * Get the parent category.
 	 *
 	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
 	 *

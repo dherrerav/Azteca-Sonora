@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: login.php 20228 2011-01-10 00:52:54Z eddieajau $
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,7 +10,6 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modelform');
 jimport('joomla.event.dispatcher');
-jimport('joomla.plugin.helper');
 /**
  * Rest model class for Users.
  *
@@ -114,7 +112,7 @@ class UsersModelLogin extends JModelForm
 			$error = $dispatcher->getError();
 
 			// Convert to a JException if necessary.
-			if (!JError::isError($error)) {
+			if (!($error instanceof Exception)) {
 				throw new Exception($error);
 			}
 		}

@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 20338 2011-01-18 08:44:38Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	mod_breadcrumbs
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,7 +30,7 @@ defined('_JEXEC') or die;
 		if($i < $count -2){
 			echo ' '.$separator.' ';
 		}
-	}  else if ($params->get('showLast', 1)) { // when $i == $count -1 and 'showLast' is true
+	}  elseif ($params->get('showLast', 1)) { // when $i == $count -1 and 'showLast' is true
 		if($i > 0){
 			echo ' '.$separator.' ';
 		}

@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 /**
- * @version		$Id: ie6.css 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  *
@@ -21,8 +20,7 @@ div.toolbar-box {
 }
 
 #minwidth,#minwidth-body {
-	width: expression(document.body.clientWidth <=   960 ?   "960px" :   "auto")
-		;
+	width: expression(document.body.clientWidth <=   960 ?   "960px" :   "auto");
 }
 
 #content {
@@ -30,12 +28,11 @@ div.toolbar-box {
 }
 
 input {
-	border-width: expression(this.type == "radio" ? '0px' : this.type == "checkbox" ?
-		'0px' : '1px');
+	border-width: expression(this.type == "radio" ? '0px' : this.type == "checkbox" ? '0px' : '1px');
 }
 
 div.toolbar-list span {
-	margin: 0px;
+	margin: 0;
 	position: relative
 }
 
@@ -48,8 +45,8 @@ div#subheader {
 }
 
 #login-page .pagetitle h2 {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 * html .clearfix {
@@ -58,5 +55,5 @@ div#subheader {
 
 .hidelabeltxt 	{
 	position: relative;
-	text-indent:-9999em;
+	text-indent: -9999em;
 }

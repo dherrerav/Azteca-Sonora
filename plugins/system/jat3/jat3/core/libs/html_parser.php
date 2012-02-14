@@ -1,4 +1,7 @@
 <?php
+// No direct access
+defined('_JEXEC') or die;
+
 /*******************************************************************************
 Version: 1.11 ($Rev: 175 $)
 Website: http://sourceforge.net/projects/simplehtmldom/
@@ -147,10 +150,20 @@ class simple_html_dom_node extends JObject {
 
     // clean up memory due to php5 circular references memory leak...
     function clear() {
-        $this->dom = null;
-        $this->nodes = null;
-        $this->parent = null;
-        $this->children = null;
+//        $this->dom = null;
+//        $this->nodes = null;
+//        $this->parent = null;
+//        $this->children = null;
+        unset($this->dom);
+        unset($this->nodes);
+        unset($this->parent);
+        if (isset($this->children)) {
+            foreach($this->children as $n){
+                $n->clear();
+                $n = null;
+            }
+        }
+        unset($this->children);
     }
     
     // dump node's tree

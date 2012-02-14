@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: contacts.php 20228 2011-01-10 00:52:54Z eddieajau $
  * @package		Joomla.Administrator
  * @subpackage	com_contact
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -54,11 +53,14 @@ class ContactControllerContacts extends JControllerAdmin
 		$values	= array('featured' => 1, 'unfeatured' => 0);
 		$task	= $this->getTask();
 		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
+		// Get the model.
+		$model = $this->getModel();
 
 		// Access checks.
 		foreach ($ids as $i => $id)
 		{
-			if (!$user->authorise('core.edit.state', 'com_contact.contact.'.(int) $id)) {
+			$item = $model->getItem($id);
+			if (!$user->authorise('core.edit.state', 'com_contact.category.'.(int) $item->catid)) {
 				// Prune items that you can't change.
 				unset($ids[$i]);
 				JError::raiseNotice(403, JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'));
@@ -67,11 +69,7 @@ class ContactControllerContacts extends JControllerAdmin
 
 		if (empty($ids)) {
 			JError::raiseWarning(500, JText::_('COM_CONTACT_NO_ITEM_SELECTED'));
-		}
-		else {
-			// Get the model.
-			$model = $this->getModel();
-
+		} else {
 			// Publish the items.
 			if (!$model->featured($ids, $value)) {
 				JError::raiseWarning(500, $model->getError());

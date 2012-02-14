@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_items.php 13471 2009-11-12 00:38:49Z eddieajau
  * @package		Joomla.Site
  * @subpackage	com_weblinks
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -75,8 +74,8 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 					 <?php echo JText::_('COM_WEBLINKS_LINK'); ?>
 				<?php elseif ($this->params->get('icons') == 1) : ?>
 					<?php if (!$this->params->get('link_icons')) : ?>
-						<?php echo JHtml::_('image','system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true); ?>
-					<?php else: ?> 
+						<?php echo JHtml::_('image', 'system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true); ?>
+					<?php else: ?>
 						<?php echo '<img src="'.$this->params->get('link_icons').'" alt="'.JText::_('COM_WEBLINKS_LINK').'" />'; ?>
 					<?php endif; ?>
 				<?php endif; ?>
@@ -124,16 +123,14 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 						<?php if ($canEdit) : ?>
 							<ul class="actions">
 								<li class="edit-icon">
-									<?php echo JHtml::_('icon.edit',$item, $params); ?>
+									<?php echo JHtml::_('icon.edit', $item, $params); ?>
 								</li>
 							</ul>
 						<?php endif; ?>
 			</p>
 
-			<?php if (($this->params->get('show_link_description')) AND ($item->description !='')): ?>
-				<p>
-				<?php echo nl2br($item->description); ?>
-				</p>
+			<?php if (($this->params->get('show_link_description')) and ($item->description !='')): ?>
+				<?php echo $item->description; ?>
 			<?php endif; ?>
 		</td>
 		<?php if ($this->params->get('show_link_hits')) : ?>

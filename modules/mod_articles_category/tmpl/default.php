@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 21020 2011-03-27 06:52:01Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	mod_articles_category
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -68,9 +67,9 @@ defined('_JEXEC') or die;
 							echo JHtml::_('string.truncate', ($this->item->title), $params->get('readmore_limit'));
 						endif;
 					elseif ($params->get('show_readmore_title', 0) == 0) :
-						echo JText::sprintf('MOD_ARTICLES_CATEGORY_READ_MORE_TITLE');	
+						echo JText::sprintf('MOD_ARTICLES_CATEGORY_READ_MORE_TITLE');
 					else :
-						
+
 						echo JText::_('MOD_ARTICLES_CATEGORY_READ_MORE');
 						echo JHtml::_('string.truncate', ($item->title), $params->get('readmore_limit'));
 					endif; ?>
@@ -130,7 +129,7 @@ defined('_JEXEC') or die;
 						echo $readmore;
 						echo JHtml::_('string.truncate', $item->title, $params->get('readmore_limit'));
 					elseif ($params->get('show_readmore_title', 0) == 0) :
-						echo JText::sprintf('MOD_ARTICLES_CATEGORY_READ_MORE_TITLE');	
+						echo JText::sprintf('MOD_ARTICLES_CATEGORY_READ_MORE_TITLE');
 					else :
 						echo JText::_('MOD_ARTICLES_CATEGORY_READ_MORE');
 						echo JHtml::_('string.truncate', $item->title, $params->get('readmore_limit'));

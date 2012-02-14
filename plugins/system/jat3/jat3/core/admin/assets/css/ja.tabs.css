@@ -1,13 +1,15 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
+ 
+ 
 form {
 	display: block;
 }
@@ -53,10 +55,19 @@ form {
 }
 
 .ja-tabswrap .ja-tab-content li {
-	padding: 4px 0 6px;
+	padding: 4px 0 6px 15px;
 	margin: 0;
 	background: none;
-	display: block;
+	display: block;	
+}
+
+.ja-tabswrap .ja-tab-content li label {
+	width: 38% !important;
+	max-width: 267px !important;
+}
+
+fieldset.adminform fieldset.radio label, fieldset.panelform fieldset.radio label {
+	width: 20% !important;
 }
 
 .ja-tab-subcontent table.ja-core-themes tr,
@@ -70,7 +81,7 @@ form {
 
 .ja-tab-panels-top .ja-tab-subcontent table.ja-core-themes,
 .ja-tab-panels-top .ja-tab-subcontent table.ja-user-themes  {
-	width: 90%;
+	width: 100%;
 	margin: auto;
 }
 

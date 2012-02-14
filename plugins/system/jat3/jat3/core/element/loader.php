@@ -1,4 +1,7 @@
 <?php
+// no direct access
+defined ( '_JEXEC' ) or die ( 'Restricted access' ); 
+
 /**
  * @version		$Id: text.php 15576 2010-03-25 12:43:26Z louis $
  * @package		Joomla.Framework
@@ -7,7 +10,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('JPATH_BASE') or die;
+defined('JPATH_BASE') or defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.form.formfield');
 

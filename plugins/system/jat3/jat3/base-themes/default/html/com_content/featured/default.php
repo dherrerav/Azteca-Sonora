@@ -1,23 +1,23 @@
 
 <?php
 /**
- * @version		$Id: default.php 17212 2010-05-21 16:15:17Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 
 // If the page class is defined, add to class as suffix.
 // It will be a separate class if the user starts it with a space
-$pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="blog-featured<?php echo $pageClass;?>">
+
+<div class="blog-featured<?php echo $this->pageclass_sfx;?>">
+
 <?php if ( $this->params->get('show_page_heading')!=0) : ?>
 	<h1 class="componentheading">
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -64,7 +64,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 		</div>
 		<?php $counter++; ?>
 			<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
-				<span class="row-separator"></span>
+				<!--span class="row-separator"></span-->
 			</div>
 			<?php endif; ?>
 	<?php endforeach; ?>

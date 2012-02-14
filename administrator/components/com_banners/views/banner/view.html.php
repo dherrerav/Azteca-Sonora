@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20989 2011-03-18 09:19:41Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -9,6 +8,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
+JLoader::register('BannersHelper', JPATH_COMPONENT.'/helpers/banners.php');
 
 /**
  * View to edit a banner.
@@ -56,27 +56,28 @@ class BannersViewBanner extends JView
 		$userId		= $user->get('id');
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
-		$canDo		= BannersHelper::getActions($this->state->get('filter.category_id'));
+		// Since we don't track these assets at the item level, use the category id.
+		$canDo		= BannersHelper::getActions($this->item->catid,0);
 
 		JToolBarHelper::title($isNew ? JText::_('COM_BANNERS_MANAGER_BANNER_NEW') : JText::_('COM_BANNERS_MANAGER_BANNER_EDIT'), 'banners.png');
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && ($canDo->get('core.edit') || count($user->getAuthorisedCategories('com_banners', 'core.create')) > 0)) {
-			JToolBarHelper::apply('banner.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('banner.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::apply('banner.apply');
+			JToolBarHelper::save('banner.save');
 
 			if ($canDo->get('core.create')) {
-				JToolBarHelper::custom('banner.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+				JToolBarHelper::save2new('banner.save2new');
 			}
 		}
 
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('banner.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+			JToolBarHelper::save2copy('banner.save2copy');
 		}
 
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('banner.cancel','JTOOLBAR_CANCEL');
+			JToolBarHelper::cancel('banner.cancel');
 		}
 		else {
 			JToolBarHelper::cancel('banner.cancel', 'JTOOLBAR_CLOSE');

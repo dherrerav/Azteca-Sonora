@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: form.php 20228 2011-01-10 00:52:54Z eddieajau $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -78,7 +77,7 @@ class ContentModelForm extends ContentModelArticle
 
 		// Convert attrib field to Registry.
 		$value->params = new JRegistry;
-		$value->params->loadJSON($value->attribs);
+		$value->params->loadString($value->attribs);
 
 		// Compute selected asset permissions.
 		$user	= JFactory::getUser();
@@ -90,7 +89,7 @@ class ContentModelForm extends ContentModelArticle
 			$value->params->set('access-edit', true);
 		}
 		// Now check if edit.own is available.
-		else if (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
+		elseif (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
 			// Check for a valid user and that they are the owner.
 			if ($userId == $value->created_by) {
 				$value->params->set('access-edit', true);
@@ -105,8 +104,10 @@ class ContentModelForm extends ContentModelArticle
 		else {
 			// New item.
 			$catId = (int) $this->getState('article.catid');
+
 			if ($catId) {
 				$value->params->set('access-change', $user->authorise('core.edit.state', 'com_content.category.'.$catId));
+				$value->catid = $catId;
 			}
 			else {
 				$value->params->set('access-change', $user->authorise('core.edit.state', 'com_content'));

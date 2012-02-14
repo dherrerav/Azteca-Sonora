@@ -1,6 +1,5 @@
 <?php
 /**
- * @version		$Id: helper.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	mod_weblinks
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
@@ -10,8 +9,8 @@
 // no direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.DS.'components'.DS.'com_weblinks'.DS.'helpers'.DS.'route.php';
-JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_weblinks'.DS.'models', 'WeblinksModel');
+require_once JPATH_SITE . '/components/com_weblinks/helpers/route.php';
+JModel::addIncludePath(JPATH_SITE . '/components/com_weblinks/models', 'WeblinksModel');
 
 class modWeblinksHelper
 {
@@ -39,21 +38,40 @@ class modWeblinksHelper
 		$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 		$model->setState('filter.access', $access);
 
-		$model->setState('list.ordering', 'title');
-		$model->setState('list.direction', 'asc');
+		$ordering = $params->get('ordering', 'ordering');
+		$model->setState('list.ordering', $ordering == 'order' ? 'ordering' : $ordering);
+		$model->setState('list.direction', $params->get('direction', 'asc'));
 
 		$catid	= (int) $params->get('catid', 0);
 		$model->setState('category.id', $catid);
 
-		$model->setState('list.select', 'a.*, c.published AS c_published,
-		CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug,
-		CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as catslug,
-		DATE_FORMAT(a.date, "%Y-%m-%d") AS created');
+		// Create query object
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$case_when1 = ' CASE WHEN ';
+		$case_when1 .= $query->charLength('a.alias');
+		$case_when1 .= ' THEN ';
+		$a_id = $query->castAsChar('a.id');
+		$case_when1 .= $query->concatenate(array($a_id, 'a.alias'), ':');
+		$case_when1 .= ' ELSE ';
+		$case_when1 .= $a_id.' END as slug';
+
+		$case_when2 = ' CASE WHEN ';
+		$case_when2 .= $query->charLength('c.alias');
+		$case_when2 .= ' THEN ';
+		$c_id = $query->castAsChar('c.id');
+		$case_when2 .= $query->concatenate(array($c_id, 'c.alias'), ':');
+		$case_when2 .= ' ELSE ';
+		$case_when2 .= $c_id.' END as slug';
+
+		$model->setState('list.select', 'a.*, c.published AS c_published,'.$case_when1.','.$case_when2.','.
+		'DATE_FORMAT(a.date, "%Y-%m-%d") AS created');
 
 		$model->setState('filter.c.published', 1);
 
 		// Filter by language
-		$model->setState('filter.language',$app->getLanguageFilter());
+		$model->setState('filter.language', $app->getLanguageFilter());
 
 		$items = $model->getItems();
 

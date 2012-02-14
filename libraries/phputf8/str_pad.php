@@ -1,6 +1,5 @@
 <?php
 /**
-* @version $Id: str_pad.php 16235 2010-04-20 04:13:25Z pasamio $
 * @package utf8
 * @subpackage strings
 */

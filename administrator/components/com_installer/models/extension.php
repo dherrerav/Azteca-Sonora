@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: extension.php 21137 2011-04-11 17:03:16Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -83,7 +82,7 @@ class InstallerModel extends JModelList
 			}
 			return array_slice($result, $limitstart, $limit ? $limit : null);
 		} else {
-			$query->order($db->nameQuote($ordering) . ' ' . $this->getState('list.direction'));
+			$query->order($db->quoteName($ordering) . ' ' . $this->getState('list.direction'));
 			$result = parent::_getList($query, $limitstart, $limit);
 			$this->translate($result);
 			return $result;
@@ -164,8 +163,13 @@ class InstallerModel extends JModelList
 					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
 				break;
 			}
-			$item->name = JText::_($item->name);
-			$item->description = JText::_(@$item->description);
+			if (!in_array($item->type, array('language', 'template', 'library'))) {
+				$item->name = JText::_($item->name);
+			}
+			settype($item->description, 'string');
+			if (!in_array($item->type, array('language'))) {
+				$item->description = JText::_($item->description);
+			}
 		}
 	}
 }

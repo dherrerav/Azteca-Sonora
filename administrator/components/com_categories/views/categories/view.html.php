@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -74,6 +73,7 @@ class CategoriesViewCategories extends JView
 		$component	= $this->state->get('filter.component');
 		$section	= $this->state->get('filter.section');
 		$canDo		= null;
+		$user		= JFactory::getUser();
 
 		// Avoid nonsense situation.
 		if ($component == 'com_categories') {
@@ -106,37 +106,37 @@ class CategoriesViewCategories extends JView
 			$title = JText::_('COM_CATEGORIES_CATEGORIES_BASE_TITLE');
 		}
 
-		// Load specific css component 
-		JHtml::_('stylesheet',$component.'/administrator/categories.css', array(), true);
-		
-		// Prepare the toolbar.
-		JToolBarHelper::title($title, 'categories '.substr($component,4).($section?"-$section":'').'-categories');
+		// Load specific css component
+		JHtml::_('stylesheet', $component.'/administrator/categories.css', array(), true);
 
-		if ($canDo->get('core.create')) {
-			 JToolBarHelper::custom('category.add', 'new.png', 'new_f2.png', 'JTOOLBAR_NEW', false);
+		// Prepare the toolbar.
+		JToolBarHelper::title($title, 'categories '.substr($component, 4).($section?"-$section":'').'-categories');
+
+		if ($canDo->get('core.create') || (count($user->getAuthorisedCategories($component, 'core.create'))) > 0 ) {
+			 JToolBarHelper::addNew('category.add');
 		}
 
 		if ($canDo->get('core.edit' ) || $canDo->get('core.edit.own')) {
-			JToolBarHelper::custom('category.edit', 'edit.png', 'edit_f2.png', 'JTOOLBAR_EDIT', true);
+			JToolBarHelper::editList('category.edit');
 			JToolBarHelper::divider();
 		}
 
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('categories.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
-			JToolBarHelper::custom('categories.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::publish('categories.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::unpublish('categories.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 			JToolBarHelper::divider();
-			JToolBarHelper::archiveList('categories.archive','JTOOLBAR_ARCHIVE');
+			JToolBarHelper::archiveList('categories.archive');
 		}
 
 		if (JFactory::getUser()->authorise('core.admin')) {
-			JToolBarHelper::custom('categories.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+			JToolBarHelper::checkin('categories.checkin');
 		}
 
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete', $component)) {
-			JToolBarHelper::deleteList('', 'categories.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::deleteList('', 'categories.delete', 'JTOOLBAR_EMPTY_TRASH');
 		}
-		else if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::trash('categories.trash','JTOOLBAR_TRASH');
+		elseif ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('categories.trash');
 			JToolBarHelper::divider();
 		}
 
@@ -148,7 +148,7 @@ class CategoriesViewCategories extends JView
 
 		// Compute the ref_key if it does exist in the component
 		if (!$lang->hasKey($ref_key = strtoupper($component.($section?"_$section":'')).'_CATEGORIES_HELP_KEY')) {
-			$ref_key = 'JHELP_COMPONENTS_'.strtoupper(substr($component,4).($section?"_$section":'')).'_CATEGORIES';
+			$ref_key = 'JHELP_COMPONENTS_'.strtoupper(substr($component, 4).($section?"_$section":'')).'_CATEGORIES';
 		}
 
 		// Get help for the categories view for the component by

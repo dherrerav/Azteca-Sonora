@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: helper.php 20541 2011-02-03 21:12:06Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	mod_articles_latest
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -65,7 +64,7 @@ abstract class modArticlesLatestHelper
 		}
 
 		// Filter by language
-		$model->setState('filter.language',$app->getLanguageFilter());
+		$model->setState('filter.language', $app->getLanguageFilter());
 
 		//  Featured switch
 		switch ($params->get('show_featured'))
@@ -104,7 +103,7 @@ abstract class modArticlesLatestHelper
 				// We know that user has the privilege to view the article
 				$item->link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
 			} else {
-				$item->link = JRoute::_('index.php?option=com_user&view=login');
+				$item->link = JRoute::_('index.php?option=com_users&view=login');
 			}
 		}
 

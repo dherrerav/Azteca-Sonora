@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: media.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_media
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,10 +28,8 @@ define('COM_MEDIA_BASE',	JPATH_ROOT.'/'.$params->get('image_path', 'images'));
 define('COM_MEDIA_BASEURL', JURI::root().'/'.$params->get('image_path', 'images'));
 
 $lang = JFactory::getLanguage();
-	$lang->load($option, JPATH_ADMINISTRATOR, null, false, false)
-||	$lang->load($option, JPATH_COMPONENT_ADMINISTRATOR, null, false, false)
-||	$lang->load($option, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-||	$lang->load($option, JPATH_COMPONENT_ADMINISTRATOR, $lang->getDefault(), false, false);
+	$lang->load('com_media', JPATH_ADMINISTRATOR, null, false, false)
+	||	$lang->load('com_media', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false);
 
 // Load the admin HTML view
 require_once JPATH_COMPONENT_ADMINISTRATOR.'/helpers/media.php';

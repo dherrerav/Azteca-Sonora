@@ -1,16 +1,20 @@
 <?php
 /**
- * @version		$Id: cpanel.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	Templates.hathor
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  */
 
 // no direct access
 defined('_JEXEC') or die;
+
+jimport('joomla.filesystem.file');
+
 $app	= JFactory::getApplication();
+$lang = JFactory::getLanguage();
+$file = 'language/'.$lang->getTag().'/'.$lang->getTag().'.css';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo  $this->language; ?>" lang="<?php echo  $this->language; ?>" dir="<?php echo  $this->direction; ?>">
@@ -24,12 +28,12 @@ $app	= JFactory::getApplication();
 <link href="templates/<?php echo  $this->template ?>/css/template.css" rel="stylesheet" type="text/css" />
 
 <!-- Load additional CSS styles for colors -->
-<?php 
-	if (!$this->params->get('colourChoice')) : 
+<?php
+	if (!$this->params->get('colourChoice')) :
 		$colour = 'standard';
 	else :
 		$colour = htmlspecialchars($this->params->get('colourChoice'));
-	endif; 
+	endif;
 ?>
 <link href="templates/<?php echo $this->template ?>/css/colour_<?php echo $colour; ?>.css" rel="stylesheet" type="text/css" />
 
@@ -38,6 +42,11 @@ $app	= JFactory::getApplication();
 	<link href="templates/<?php echo  $this->template ?>/css/template_rtl.css" rel="stylesheet" type="text/css" />
 	<link href="templates/<?php echo $this->template ?>/css/colour_<?php echo $colour; ?>_rtl.css" rel="stylesheet" type="text/css" />
 <?php endif; ?>
+
+<!-- Load specific language related css -->
+<?php if (JFile::exists($file)) : ?>
+	<link href="<?php echo $file ?>" rel="stylesheet" type="text/css" />
+<?php  endif; ?>
 
 <!-- Load additional CSS styles for bold Text -->
 <?php if ($this->params->get('boldText')) : ?>
@@ -59,7 +68,7 @@ $app	= JFactory::getApplication();
 <script type="text/javascript" src="templates/<?php  echo  $this->template  ?>/js/template.js"></script>
 
 </head>
-<body id="minwidth" class="cpanel">
+<body id="minwidth" class="cpanel-page">
 <div id="containerwrap">
 
 	<!-- Header Logo -->
@@ -91,16 +100,14 @@ $app	= JFactory::getApplication();
 			if ($task == 'edit' || $task == 'editA' || JRequest::getInt('hidemainmenu')) {
 				$logoutLink = '';
 			} else {
-				$logoutLink = JRoute::_('index.php?option=com_login&task=logout&'. JUtility::getToken() .'=1');
+				$logoutLink = JRoute::_('index.php?option=com_login&task=logout&'. JSession::getFormToken() .'=1');
 			}
 			$hideLinks	= JRequest::getBool('hidemainmenu');
 			$output = array();
+			// Print the Preview link to Main site.
+			$output[] = '<span class="viewsite"><a href="'.JURI::root().'" target="_blank">'.JText::_('JGLOBAL_VIEW_SITE').'</a></span>';
 			// Print the logout link.
 			$output[] = '<span class="logout">' .($hideLinks ? '' : '<a href="'.$logoutLink.'">').JText::_('JLOGOUT').($hideLinks ? '' : '</a>').'</span>';
-			// Reverse rendering order for rtl display.
-			if ($this->direction == "rtl") :
-				$output = array_reverse($output);
-			endif;
 			// Output the items.
 			foreach ($output as $item) :
 			echo $item;
@@ -117,11 +124,11 @@ $app	= JFactory::getApplication();
 		<!-- System Messages -->
 		<jdoc:include type="message" />
 		<!-- Sub Menu Navigation -->
-		<div id="no-submenu" class="cpanel"></div>
+		<div id="no-submenu"></div>
    		<div class="clr"></div>
 
 		<!-- Beginning of Actual Content -->
-		<div id="element-box" class="cpanel">
+		<div id="element-box">
 			<p id="skiptargetholder"><a id="skiptarget" class="skip" tabindex="-1"></a></p>
 
 				<div class="adminform">
@@ -162,7 +169,6 @@ $app	= JFactory::getApplication();
 		<p class="copyright">
 			<?php $joomla= '<a href="http://www.joomla.org">Joomla!&#174;</a>';
 			echo JText::sprintf('JGLOBAL_ISFREESOFTWARE', $joomla) ?>
-			<span class="version"><?php echo  JText::_('JVERSION') ?> <?php echo  JVERSION; ?></span>
 		</p>
 	</div>
 </body>

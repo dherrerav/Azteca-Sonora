@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	Templates.hathor
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  */
@@ -12,31 +11,16 @@ defined('_JEXEC') or die;
 
 // Add specific helper files for html generation
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
-$user	= JFactory::getUser();
-$userId	= $user->get('id');
-$client = $this->state->get('filter.client_id', 0) ? JText::_('JADMINISTRATOR') : JText::_('JSITE');
+$user		= JFactory::getUser();
+$userId		= $user->get('id');
+$client		= $this->state->get('filter.client_id', 0) ? JText::_('JADMINISTRATOR') : JText::_('JSITE');
+$clientId	= $this->state->get('filter.client_id', 0);
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_languages&view=installed'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_languages&view=installed&client='.$clientId); ?>" method="post" id="adminForm" name="adminForm">
 
 	<?php if ($this->ftp): ?>
 		<?php echo $this->loadTemplate('ftp');?>
 	<?php endif; ?>
-
-	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
-		<div class="filter-select">
-			<label class="filter-search-lbl" for="filter_client_id">
-				<?php echo JText::_('COM_LANGUAGES_FILTER_CLIENT_LABEL'); ?>
-			</label>
-			<select id="filter_client_id" name="filter_client_id" class="inputbox">
-				<?php echo JHtml::_('select.options', JHtml::_('languages.clients'), 'value', 'text', $this->state->get('filter.client_id'));?>
-			</select>
-
-			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('JSUBMIT'); ?></button>
-
-		</div>
-	</fieldset>
 
 	<table class="adminlist">
 		<thead>
@@ -49,6 +33,9 @@ $client = $this->state->get('filter.client_id', 0) ? JText::_('JADMINISTRATOR') 
 				</th>
 				<th class="title">
 					<?php echo JText::_('COM_LANGUAGES_HEADING_LANGUAGE'); ?>
+				</th>
+				<th>
+					<?php echo JText::_('COM_LANGUAGES_FIELD_LANG_TAG_LABEL'); ?>
 				</th>
 				<th class="width-10">
 					<?php echo JText::_('JCLIENT'); ?>
@@ -82,10 +69,13 @@ $client = $this->state->get('filter.client_id', 0) ? JText::_('JADMINISTRATOR') 
 					<?php echo $this->pagination->getRowOffset($i); ?>
 				</th>
 				<td>
-					<?php echo JHtml::_('languages.id',$i,$row->language);?>
+					<?php echo JHtml::_('languages.id', $i, $row->language);?>
 				</td>
 				<td>
-					<?php echo $row->name;?>
+					<?php echo $this->escape($row->name); ?>
+				</td>
+				<td align="center">
+					<?php echo $this->escape($row->language); ?>
 				</td>
 				<td class="center">
 					<?php echo $client;?>
@@ -94,16 +84,16 @@ $client = $this->state->get('filter.client_id', 0) ? JText::_('JADMINISTRATOR') 
 					<?php echo JHtml::_('jgrid.isdefault', $row->published, $i, 'installed.',  !$row->published && $canChange);?>
 				</td>
 				<td class="center">
-					<?php echo $row->version; ?>
+					<?php echo $this->escape($row->version); ?>
 				</td>
 				<td class="center">
-					<?php echo $row->creationDate; ?>
+					<?php echo $this->escape($row->creationDate); ?>
 				</td>
 				<td class="center">
-					<?php echo $row->author; ?>
+					<?php echo $this->escape($row->author); ?>
 				</td>
 				<td class="center">
-					<?php echo $row->authorEmail; ?>
+					<?php echo $this->escape($row->authorEmail); ?>
 				</td>
 			</tr>
 		<?php endforeach;?>

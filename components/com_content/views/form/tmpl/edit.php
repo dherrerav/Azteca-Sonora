@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 21020 2011-03-27 06:52:01Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -17,6 +16,14 @@ JHtml::_('behavior.formvalidation');
 
 // Create shortcut to parameters.
 $params = $this->state->get('params');
+//$images = json_decode($this->item->images);
+//$urls = json_decode($this->item->urls);
+
+// This checks if the editor config options have ever been saved. If they haven't they will fall back to the original settings.
+$editoroptions = isset($params->show_publishing_options);
+if (!$editoroptions):
+	$params->show_urls_images_frontend = '0';
+endif;
 ?>
 
 <script type="text/javascript">
@@ -64,12 +71,86 @@ $params = $this->state->get('params');
 			<?php echo $this->form->getInput('articletext'); ?>
 
 	</fieldset>
+	<?php if ($params->get('show_urls_images_frontend')  ): ?>
+	<fieldset>
+		<legend><?php echo JText::_('COM_CONTENT_IMAGES_AND_URLS'); ?></legend>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('image_intro', 'images'); ?>
+			<?php echo $this->form->getInput('image_intro', 'images'); ?>
+			</div>
+			<div style="clear:both"></div>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('image_intro_alt', 'images'); ?>
+			<?php echo $this->form->getInput('image_intro_alt', 'images'); ?>
+			</div>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('image_intro_caption', 'images'); ?>
+			<?php echo $this->form->getInput('image_intro_caption', 'images'); ?>
+			</div>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('float_intro', 'images'); ?>
+			<?php echo $this->form->getInput('float_intro', 'images'); ?>
+			</div>
+
+			<div class="formelm">
+			<?php echo $this->form->getLabel('image_fulltext', 'images'); ?>
+			<?php echo $this->form->getInput('image_fulltext', 'images'); ?>
+			</div>
+			<div style="clear:both"></div>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('image_fulltext_alt', 'images'); ?>
+			<?php echo $this->form->getInput('image_fulltext_alt', 'images'); ?>
+			</div>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('image_fulltext_caption', 'images'); ?>
+			<?php echo $this->form->getInput('image_fulltext_caption', 'images'); ?>
+			</div>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('float_fulltext', 'images'); ?>
+			<?php echo $this->form->getInput('float_fulltext', 'images'); ?>
+			</div>
+
+			<div  class="formelm">
+			<?php echo $this->form->getLabel('urla', 'urls'); ?>
+			<?php echo $this->form->getInput('urla', 'urls'); ?>
+			</div>
+			<div  class="formelm">
+			<?php echo $this->form->getLabel('urlatext', 'urls'); ?>
+			<?php echo $this->form->getInput('urlatext', 'urls'); ?>
+			</div>
+			<?php echo $this->form->getInput('targeta', 'urls'); ?>
+			<div  class="formelm">
+			<?php echo $this->form->getLabel('urlb', 'urls'); ?>
+			<?php echo $this->form->getInput('urlb', 'urls'); ?>
+			</div>
+			<div  class="formelm">
+			<?php echo $this->form->getLabel('urlbtext', 'urls'); ?>
+			<?php echo $this->form->getInput('urlbtext', 'urls'); ?>
+			</div>
+			<?php echo $this->form->getInput('targetb', 'urls'); ?>
+			<div  class="formelm">
+			<?php echo $this->form->getLabel('urlc', 'urls'); ?>
+			<?php echo $this->form->getInput('urlc', 'urls'); ?>
+			</div>
+			<div  class="formelm">
+			<?php echo $this->form->getLabel('urlctext', 'urls'); ?>
+			<?php echo $this->form->getInput('urlctext', 'urls'); ?>
+			</div>
+			<?php echo $this->form->getInput('targetc', 'urls'); ?>
+	</fieldset>
+	<?php endif; ?>
 
 	<fieldset>
 		<legend><?php echo JText::_('COM_CONTENT_PUBLISHING'); ?></legend>
 		<div class="formelm">
 		<?php echo $this->form->getLabel('catid'); ?>
-		<?php echo $this->form->getInput('catid'); ?>
+		<?php if($this->params->get('enable_category', 0) == 1) : ?>
+		<span class="category">
+		<?php echo $this->category_title; ?>
+		</span>
+		<?php else : ?>
+		<?php echo $this->form->getInput('catid', null, $this->item->catid); ?>
+		<?php endif;?>
 		</div>
 		<div class="formelm">
 		<?php echo $this->form->getLabel('created_by_alias'); ?>
@@ -129,6 +210,9 @@ $params = $this->state->get('params');
 
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
+		<?php if($this->params->get('enable_category', 0) == 1) :?>
+		<input type="hidden" name="jform[catid]" value="<?php echo $this->params->get('catid', 1);?>"/>
+		<?php endif;?>
 		<?php echo JHtml::_( 'form.token' ); ?>
 	</fieldset>
 </form>

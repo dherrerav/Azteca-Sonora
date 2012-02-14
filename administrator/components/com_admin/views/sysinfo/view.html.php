@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -52,10 +51,10 @@ class AdminViewSysinfo extends JView
 
 		// Initialise variables.
 		$this->php_settings	= $this->get('PhpSettings');
-		$this->config			= $this->get('config');
+		$this->config		= $this->get('config');
 		$this->info			= $this->get('info');
 		$this->php_info		= $this->get('PhpInfo');
-		$this->directory		= $this->get('directory');
+		$this->directory	= $this->get('directory');
 
 		$this->addToolbar();
 		$this->_setSubMenu();

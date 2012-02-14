@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_articles.php 21687 2011-06-26 23:41:41Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -23,7 +22,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 
 <?php if (empty($this->items)) : ?>
 
-	<?php if ($this->params->get('show_no_articles',1)) : ?>
+	<?php if ($this->params->get('show_no_articles', 1)) : ?>
 	<p><?php echo JText::_('COM_CONTENT_NO_ARTICLES'); ?></p>
 	<?php endif; ?>
 
@@ -32,7 +31,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 <form action="<?php echo htmlspecialchars(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 	<?php if ($this->params->get('show_headings') || $this->params->get('filter_field') != 'hide' || $this->params->get('show_pagination_limit')) :?>
 	<fieldset class="filters">
-		<?php if ($this->params->get('filter_field') != 'hide') :?>	
+		<?php if ($this->params->get('filter_field') != 'hide') :?>
 		<legend class="hidelabeltxt">
 			<?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?>
 		</legend>
@@ -49,7 +48,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 		<?php endif; ?>
-		
+
 	<!-- @TODO add hidden inputs -->
 		<input type="hidden" name="filter_order" value="" />
 		<input type="hidden" name="filter_order_Dir" value="" />
@@ -67,17 +66,23 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 
 				<?php if ($date = $this->params->get('list_show_date')) : ?>
 				<th class="list-date" id="tableOrdering2">
-					<?php echo JHtml::_('grid.sort', 'COM_CONTENT_'.$date.'_DATE', 'a.created', $listDirn, $listOrder); ?>
+					<?php if ($date == "created") : ?>
+						<?php echo JHtml::_('grid.sort', 'COM_CONTENT_'.$date.'_DATE', 'a.created', $listDirn, $listOrder); ?>
+					<?php elseif ($date == "modified") : ?>
+						<?php echo JHtml::_('grid.sort', 'COM_CONTENT_'.$date.'_DATE', 'a.modified', $listDirn, $listOrder); ?>
+					<?php elseif ($date == "published") : ?>
+						<?php echo JHtml::_('grid.sort', 'COM_CONTENT_'.$date.'_DATE', 'a.publish_up', $listDirn, $listOrder); ?>
+					<?php endif; ?>
 				</th>
 				<?php endif; ?>
 
-				<?php if ($this->params->get('list_show_author',1)) : ?>
+				<?php if ($this->params->get('list_show_author', 1)) : ?>
 				<th class="list-author" id="tableOrdering3">
 					<?php echo JHtml::_('grid.sort', 'JAUTHOR', 'author', $listDirn, $listOrder); ?>
 				</th>
 				<?php endif; ?>
 
-				<?php if ($this->params->get('list_show_hits',1)) : ?>
+				<?php if ($this->params->get('list_show_hits', 1)) : ?>
 				<th class="list-hits" id="tableOrdering4">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_HITS', 'a.hits', $listDirn, $listOrder); ?>
 				</th>
@@ -103,7 +108,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 						<?php if ($article->params->get('access-edit')) : ?>
 						<ul class="actions">
 							<li class="edit-icon">
-								<?php echo JHtml::_('icon.edit',$article, $params); ?>
+								<?php echo JHtml::_('icon.edit', $article, $params); ?>
 							</li>
 						</ul>
 						<?php endif; ?>
@@ -111,12 +116,12 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 
 					<?php if ($this->params->get('list_show_date')) : ?>
 					<td class="list-date">
-						<?php echo JHtml::_('date',$article->displayDate, $this->escape(
+						<?php echo JHtml::_('date', $article->displayDate, $this->escape(
 						$this->params->get('date_format', JText::_('DATE_FORMAT_LC3')))); ?>
 					</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('list_show_author',1) && !empty($article->author )) : ?>
+					<?php if ($this->params->get('list_show_author', 1) && !empty($article->author )) : ?>
 					<td class="list-author">
 						<?php $author =  $article->author ?>
 						<?php $author = ($article->created_by_alias ? $article->created_by_alias : $author);?>
@@ -134,7 +139,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 					</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('list_show_hits',1)) : ?>
+					<?php if ($this->params->get('list_show_hits', 1)) : ?>
 					<td class="list-hits">
 						<?php echo $article->hits; ?>
 					</td>
@@ -160,11 +165,15 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 		<?php endforeach; ?>
 		</tbody>
 	</table>
+<?php endif; ?>
 
 <?php // Code to add a link to submit an article. ?>
 <?php if ($this->category->getParams()->get('access-create')) : ?>
-	<?php echo JHtml::_('icon.create', $article, $article->params); ?>
+	<?php echo JHtml::_('icon.create', $this->category, $this->category->params); ?>
 <?php  endif; ?>
+
+<?php // Add pagination links ?>
+<?php if (!empty($this->items)) : ?>
 	<?php if (($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) : ?>
 	<div class="pagination">
 
@@ -178,4 +187,4 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 	</div>
 	<?php endif; ?>
 </form>
-<?php endif; ?>
+<?php  endif; ?>

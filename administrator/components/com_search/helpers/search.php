@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: search.php 20228 2011-01-10 00:52:54Z eddieajau $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -59,7 +58,7 @@ class SearchHelper
 		$search_ignore	= $lang->getIgnoredSearchWords();
 
 		// Deprecated in 1.6 use $lang->getIgnoredSearchWords instead
-		$ignoreFile		= $lang->getLanguagePath().DS.$tag.DS.$tag.'.ignore.php';
+		$ignoreFile		= $lang->getLanguagePath() . '/' . $tag . '/' . $tag.'.ignore.php';
 		if (file_exists($ignoreFile)) {
 			include $ignoreFile;
 		}
@@ -74,7 +73,7 @@ class SearchHelper
 
 		// filter out search terms that are too small
 		$lower_limit = $lang->getLowerLimitSearchWord();
-		foreach($aterms AS $aterm) {
+		foreach($aterms as $aterm) {
 			if (JString::strlen($aterm) < $lower_limit) {
 				$search_ignore[] = $aterm;
 			}
@@ -118,7 +117,7 @@ class SearchHelper
 		$params = JComponentHelper::getParams('com_search');
 		$enable_log_searches = $params->get('enabled');
 
-		$search_term = $db->getEscaped(trim($search_term));
+		$search_term = $db->escape(trim($search_term));
 
 		if (@$enable_log_searches)
 		{
@@ -181,13 +180,13 @@ class SearchHelper
 				);
 		$terms = explode(' ', $searchTerm);
 		if (empty($fields)) return false;
-		foreach($fields AS $field) {
+		foreach($fields as $field) {
 			if (!isset($object->$field)) continue;
 			$text = $object->$field;
-			foreach($searchRegex As $regex) {
+			foreach($searchRegex as $regex) {
 				$text = preg_replace($regex, '', $text);
 			}
-			foreach($terms AS $term) {
+			foreach($terms as $term) {
 				if (JString::stristr($text, $term) !== false) {
 					return true;
 				}

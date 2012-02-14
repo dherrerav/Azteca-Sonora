@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: toolbar.php 20224 2011-01-09 22:46:21Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,12 +30,12 @@ abstract class JToolBarHelper
 	public static function title($title, $icon = 'generic.png')
 	{
 		// Strip the extension.
-		$icons = explode(' ',$icon);
+		$icons = explode(' ', $icon);
 		foreach($icons as &$icon) {
 			$icon = 'icon-48-'.preg_replace('#\.[^.]*$#', '', $icon);
 		}
 
-		$html = '<div class="pagetitle '.implode(' ', $icons).'"><h2>'.$title.'</h2></div>';
+		$html = '<div class="pagetitle '.htmlspecialchars(implode(' ', $icons)).'"><h2>'.$title.'</h2></div>';
 
 		$app = JFactory::getApplication();
 		$app->set('JComponentTitle', $html);
@@ -196,13 +195,14 @@ abstract class JToolBarHelper
 	 *
 	 * @param	string	$task	An override for the task.
 	 * @param	string	$alt	An override for the alt text.
+	 * @param	boolean	$check	True if required to check that a standard list item is checked.
 	 * @since	1.0
 	 */
-	public static function addNew($task = 'add', $alt = 'JTOOLBAR_NEW')
+	public static function addNew($task = 'add', $alt = 'JTOOLBAR_NEW', $check = false)
 	{
 		$bar = JToolBar::getInstance('toolbar');
 		// Add a new button.
-		$bar->appendButton('Standard', 'new', $alt, $task, false);
+		$bar->appendButton('Standard', 'new', $alt, $task, $check);
 	}
 
 	/**
@@ -224,13 +224,14 @@ abstract class JToolBarHelper
 	 *
 	 * @param	string	$task	An override for the task.
 	 * @param	string	$alt	An override for the alt text.
+	 * @param	boolean	$check	True if required to check that a standard list item is checked.
 	 * @since	1.0
 	 */
-	public static function publish($task = 'publish', $alt = 'JTOOLBAR_PUBLISH')
+	public static function publish($task = 'publish', $alt = 'JTOOLBAR_PUBLISH', $check = false)
 	{
 		$bar = JToolBar::getInstance('toolbar');
 		// Add a publish button.
-		$bar->appendButton('Standard', 'publish', $alt, $task, false);
+		$bar->appendButton('Standard', 'publish', $alt, $task, $check);
 	}
 
 	/**
@@ -252,13 +253,14 @@ abstract class JToolBarHelper
 	 *
 	 * @param	string	$task	An override for the task.
 	 * @param	string	$alt	An override for the alt text.
+	 * @param	boolean	$check	True if required to check that a standard list item is checked.
 	 * @since	1.0
 	 */
-	public static function unpublish($task = 'unpublish', $alt = 'JTOOLBAR_UNPUBLISH')
+	public static function unpublish($task = 'unpublish', $alt = 'JTOOLBAR_UNPUBLISH', $check = false)
 	{
 		$bar = JToolBar::getInstance('toolbar');
 		// Add an unpublish button
-		$bar->appendButton('Standard', 'unpublish', $alt, $task, false);
+		$bar->appendButton('Standard', 'unpublish', $alt, $task, $check);
 	}
 
 	/**
@@ -467,6 +469,52 @@ abstract class JToolBarHelper
 	}
 
 	/**
+	 * Writes a save and create new button for a given option.
+	 * Save and create operation leads to a save and then add action.
+	 *
+	 * @param string $task
+	 * @param string $alt
+	 * @since 1.6
+	 */
+	public static function save2new($task = 'save2new', $alt = 'JTOOLBAR_SAVE_AND_NEW')
+	{
+		$bar = JToolBar::getInstance('toolbar');
+		// Add a save and create new button.
+		$bar->appendButton('Standard', 'save-new', $alt, $task, false);
+	}
+
+	/**
+	 * Writes a save as copy button for a given option.
+	 * Save as copy operation leads to a save after clearing the key,
+	 * then returns user to edit mode with new key.
+	 *
+	 * @param string $task
+	 * @param string $alt
+	 * @since 1.6
+	 */
+	public static function save2copy($task = 'save2copy', $alt = 'JTOOLBAR_SAVE_AS_COPY')
+	{
+		$bar = JToolBar::getInstance('toolbar');
+		// Add a save and create new button.
+		$bar->appendButton('Standard', 'save-copy', $alt, $task, false);
+	}
+
+	/**
+	 * Writes a checkin button for a given option.
+	 *
+	 * @param string $task
+	 * @param string $alt
+	 * @param boolean $check True if required to check that a standard list item is checked.
+	 * @since 1.7
+	 */
+	public static function checkin($task = 'checkin', $alt = 'JTOOLBAR_CHECKIN', $check = true)
+	{
+		$bar = JToolBar::getInstance('toolbar');
+		// Add a save and create new button.
+		$bar->appendButton('Standard', 'checkin', $alt, $task, $check);
+	}
+
+	/**
 	 * Writes a cancel button and invokes a cancel operation (eg a checkin).
 	 *
 	 * @param	string	$task	An override for the task.
@@ -499,7 +547,7 @@ abstract class JToolBarHelper
 		$bar = JToolBar::getInstance('toolbar');
 		// Add a configuration button.
 		$bar->appendButton('Popup', 'options', $alt, 'index.php?option=com_config&amp;view=component&amp;component='.$component.'&amp;path='.$path.'&amp;tmpl=component', $width, $height, $top, $left, $onClose);
-		
+
 	}
 }
 

@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: reset.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -38,7 +37,7 @@ class UsersControllerReset extends UsersController
 		$return	= $model->processResetRequest($data);
 
 		// Check for a hard error.
-		if (JError::isError($return)) {
+		if ($return instanceof Exception) {
 			// Get the error message to display.
 			if ($app->getCfg('error_reporting')) {
 				$message = $return->getMessage();
@@ -97,7 +96,7 @@ class UsersControllerReset extends UsersController
 		$return	= $model->processResetConfirm($data);
 
 		// Check for a hard error.
-		if (JError::isError($return))
+		if ($return instanceof Exception)
 		{
 			// Get the error message to display.
 			if ($app->getCfg('error_reporting')) {
@@ -155,7 +154,7 @@ class UsersControllerReset extends UsersController
 		$return	= $model->processResetComplete($data);
 
 		// Check for a hard error.
-		if (JError::isError($return)) {
+		if ($return instanceof Exception) {
 			// Get the error message to display.
 			if ($app->getCfg('error_reporting')) {
 				$message = $return->getMessage();

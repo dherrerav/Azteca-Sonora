@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: article.php 20899 2011-03-07 20:56:09Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -199,9 +198,14 @@ class ContentControllerArticle extends JControllerForm
 
 		$itemId	= JRequest::getInt('Itemid');
 		$return	= $this->getReturnPage();
+		$catId = JRequest::getInt('catid', null, 'get');
 
 		if ($itemId) {
 			$append .= '&Itemid='.$itemId;
+		}
+
+		if($catId) {
+			$append .= '&catid='.$catId;
 		}
 
 		if ($return) {
@@ -272,7 +276,7 @@ class ContentControllerArticle extends JControllerForm
 
 		return $result;
 	}
-	
+
 	/**
 	 * Method to save a vote.
 	 *

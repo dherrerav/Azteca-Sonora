@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: plugins.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -78,8 +77,8 @@ class PluginsHelper
 
 		$query->select('DISTINCT(folder) AS value, folder AS text');
 		$query->from('#__extensions');
-		$query->where('`type` = '.$db->quote('plugin'));
-		$query->order('name');
+		$query->where($db->quoteName('type').' = '.$db->quote('plugin'));
+		$query->order('folder');
 
 		$db->setQuery($query);
 		$options = $db->loadObjectList();

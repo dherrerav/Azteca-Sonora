@@ -1,47 +1,60 @@
 <?php
 /**
- * @version		$Id: filelist.php 20972 2011-03-16 13:57:36Z chdemko $
- * @package		Joomla.Framework
- * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Renders a filelist element
  *
- * @package		Joomla.Framework
- * @subpackage	Parameter
- * @deprecated	JParameter is deprecated and will be removed in a future version. Use JForm instead.
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  Parameter
+ * @since       11.1
+ * @deprecated  use JFormFieldFileList instead
  */
-
 class JElementFilelist extends JElement
 {
 	/**
-	* Element name
-	*
-	* @access	protected
-	* @var		string
-	*/
+	 * Element name
+	 *
+	 * @var    string
+	 */
 	protected $_name = 'Filelist';
 
+	/**
+	 * Fetch a filelist element
+	 *
+	 * @param   string       $name          Element name
+	 * @param   string       $value         Element value
+	 * @param   JXMLElement  &$node         JXMLElement node object containing the settings for the element
+	 * @param   string       $control_name  Control name
+	 *
+	 * @return  string
+	 *
+	 * @deprecated    12.1   Use JFormFieldFileList::getOptions instead
+	 * @since   11.1
+	 */
 	public function fetchElement($name, $value, &$node, $control_name)
 	{
+		// Deprecation warning.
+		JLog::add('JElementFileList::fetchElement() is deprecated.', JLog::WARNING, 'deprecated');
+
 		jimport('joomla.filesystem.folder');
 		jimport('joomla.filesystem.file');
 
 		// path to images directory
-		$path		= JPATH_ROOT.DS.$node->attributes('directory');
-		$filter		= $node->attributes('filter');
-		$exclude	= $node->attributes('exclude');
-		$stripExt	= $node->attributes('stripext');
-		$files		= JFolder::files($path, $filter);
+		$path = JPATH_ROOT . '/' . $node->attributes('directory');
+		$filter = $node->attributes('filter');
+		$exclude = $node->attributes('exclude');
+		$stripExt = $node->attributes('stripext');
+		$files = JFolder::files($path, $filter);
 
-		$options = array ();
+		$options = array();
 
 		if (!$node->attributes('hide_none'))
 		{
@@ -72,12 +85,11 @@ class JElementFilelist extends JElement
 			}
 		}
 
-		return JHtml::_('select.genericlist', $options, $control_name .'['. $name .']',
-			array(
-				'id' => 'param'.$name,
-				'list.attr' => 'class="inputbox"',
-				'list.select' => $value
-			)
+		return JHtml::_(
+			'select.genericlist',
+			$options,
+			$control_name . '[' . $name . ']',
+			array('id' => 'param' . $name, 'list.attr' => 'class="inputbox"', 'list.select' => $value)
 		);
 	}
 }

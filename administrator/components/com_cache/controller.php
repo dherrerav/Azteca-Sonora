@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: controller.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	com_cache
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,7 +30,7 @@ class CacheController extends JController
 	public function display($cachable = false, $urlparams = false)
 	{
 		require_once JPATH_COMPONENT.'/helpers/cache.php';
-		
+
 		// Get the document object.
 		$document	= JFactory::getDocument();
 
@@ -61,7 +60,7 @@ class CacheController extends JController
 
 			// Load the submenu.
 			CacheHelper::addSubmenu(JRequest::getCmd('view', 'cache'));
-			
+
 			$view->display();
 		}
 	}

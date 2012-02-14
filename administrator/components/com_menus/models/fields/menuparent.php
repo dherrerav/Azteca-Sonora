@@ -1,15 +1,11 @@
 <?php
 /**
- * @version		$Id: menuparent.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('JPATH_BASE') or die;
 
-jimport('joomla.html.html');
-jimport('joomla.form.formfield');
-jimport('joomla.form.helper');
 JFormHelper::loadFieldClass('list');
 
 /**
@@ -45,7 +41,7 @@ class JFormFieldMenuParent extends JFormFieldList
 
 		$query->select('a.id AS value, a.title AS text, a.level');
 		$query->from('#__menu AS a');
-		$query->join('LEFT', '`#__menu` AS b ON a.lft > b.lft AND a.rgt < b.rgt');
+		$query->join('LEFT', $db->quoteName('#__menu').' AS b ON a.lft > b.lft AND a.rgt < b.rgt');
 
 		if ($menuType = $this->form->getValue('menutype')) {
 			$query->where('a.menutype = '.$db->quote($menuType));
@@ -56,12 +52,12 @@ class JFormFieldMenuParent extends JFormFieldList
 
 		// Prevent parenting to children of this item.
 		if ($id = $this->form->getValue('id')) {
-			$query->join('LEFT', '`#__menu` AS p ON p.id = '.(int) $id);
+			$query->join('LEFT', $db->quoteName('#__menu').' AS p ON p.id = '.(int) $id);
 			$query->where('NOT(a.lft >= p.lft AND a.rgt <= p.rgt)');
 		}
 
 		$query->where('a.published != -2');
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.level, a.lft, a.rgt, a.menutype, a.parent_id, a.published');
 		$query->order('a.lft ASC');
 
 		// Get the options.
@@ -76,7 +72,7 @@ class JFormFieldMenuParent extends JFormFieldList
 
 		// Pad the option text with spaces using depth level as a multiplier.
 		for ($i = 0, $n = count($options); $i < $n; $i++) {
-			$options[$i]->text = str_repeat('- ',$options[$i]->level).$options[$i]->text;
+			$options[$i]->text = str_repeat('- ', $options[$i]->level).$options[$i]->text;
 		}
 
 		// Merge any additional options in the XML definition.

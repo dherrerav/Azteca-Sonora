@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: helper.php 20502 2011-01-31 17:59:20Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,7 +23,7 @@ abstract class modLoginHelper
 	{
 		jimport('joomla.language.helper');
 		$languages = array();
-		$languages = JLanguageHelper::createLanguageList(null, JPATH_BASE, false, true);
+		$languages = JLanguageHelper::createLanguageList(null, JPATH_ADMINISTRATOR, false, true);
 		array_unshift($languages, JHtml::_('select.option', '', JText::_('JDEFAULT')));
 		return JHtml::_('select.genericlist', $languages, 'lang', ' class="inputbox"', 'value', 'text', null);
 	}

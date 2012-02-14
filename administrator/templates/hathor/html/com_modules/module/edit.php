@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	Templates.hathor
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  */
@@ -16,6 +15,7 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.combobox');
 $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $this->item->module == 'mod_custom';
+
 $script = "Joomla.submitbutton = function(task)
 	{
 			if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {";
@@ -38,15 +38,15 @@ JFactory::getDocument()->addScriptDeclaration($script);
 <form action="<?php echo JRoute::_('index.php?option=com_modules&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="module-form" class="form-validate">
 	<div class="col main-section">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('JDETAILS');?></legend>
+			<legend><?php echo JText::_('JDETAILS'); ?></legend>
 			<ul class="adminformlist">
 
 			<li><?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?></li>
-			
+
 			<li><?php echo $this->form->getLabel('showtitle'); ?>
 			<?php echo $this->form->getInput('showtitle'); ?></li>
-			
+
 			<li><?php echo $this->form->getLabel('position'); ?>
 			<?php echo $this->form->getInput('custom_position'); ?>
 			<label id="jform_custom_position-lbl" for="jform_custom_position" class="element-invisible"><?php echo JText::_('TPL_HATHOR_COM_MODULES_CUSTOM_POSITION_LABEL');?></label>
@@ -73,13 +73,13 @@ JFactory::getDocument()->addScriptDeclaration($script);
 
 			<li><?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?></li>
-			
+
 			<li><?php echo $this->form->getLabel('note'); ?>
 			<?php echo $this->form->getInput('note'); ?></li>
 
 			<?php if ($this->item->id) : ?>
-			<li><?php echo $this->form->getLabel('id'); ?>
-			<?php echo $this->form->getInput('id'); ?></li>
+				<li><?php echo $this->form->getLabel('id'); ?>
+				<?php echo $this->form->getInput('id'); ?></li>
 			<?php endif; ?>
 
 			<li><?php echo $this->form->getLabel('module'); ?>
@@ -91,7 +91,7 @@ JFactory::getDocument()->addScriptDeclaration($script);
 			<?php echo $this->form->getInput('client_id'); ?></li>
 			</ul>
 			<div class="clr"></div>
-			
+
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = trim($this->item->xml->description)) : ?>
 					<span class="faux-label">
@@ -108,15 +108,13 @@ JFactory::getDocument()->addScriptDeclaration($script);
 			<div class="clr"></div>
 		</fieldset>
 	</div>
-		
+
 	<div class="col options-section">
-	<?php echo JHtml::_('sliders.start','module-sliders'); ?>
-
+	<?php echo JHtml::_('sliders.start', 'module-sliders'); ?>
 		<?php echo $this->loadTemplate('options'); ?>
-
 	<?php echo JHtml::_('sliders.end'); ?>
 	</div>
-	
+
 	<?php if ($hasContent) : ?>
 		<div class="col main-section">
 		<fieldset class="adminform">

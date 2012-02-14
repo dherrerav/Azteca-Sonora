@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: category.php 21145 2011-04-12 23:21:04Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -81,6 +80,7 @@ class ContentModelCategory extends JModelList
 				'access', 'a.access', 'access_level',
 				'created', 'a.created',
 				'created_by', 'a.created_by',
+				'modified', 'a.modified',
 				'ordering', 'a.ordering',
 				'featured', 'a.featured',
 				'language', 'a.language',
@@ -115,7 +115,7 @@ class ContentModelCategory extends JModelList
 		$menuParams = new JRegistry;
 
 		if ($menu = $app->getMenu()->getActive()) {
-			$menuParams->loadJSON($menu->params);
+			$menuParams->loadString($menu->params);
 		}
 
 		$mergedParams = clone $menuParams;
@@ -133,10 +133,13 @@ class ContentModelCategory extends JModelList
 			$this->setState('filter.published', 1);
 			// Filter by start and end dates.
 			$nullDate = $db->Quote($db->getNullDate());
-			$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+			$nowDate = $db->Quote(JFactory::getDate()->toSQL());
 
 			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 			$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+		}
+		else {
+			$this->setState('filter.published', array(0, 1, 2));
 		}
 
 		// process show_noauth parameter
@@ -166,7 +169,7 @@ class ContentModelCategory extends JModelList
 		$this->setState('list.direction', $listOrder);
 
 		$this->setState('list.start', JRequest::getVar('limitstart', 0, '', 'int'));
-		
+
 		// set limit for query. If list, use parameter. If blog, add blog parameters for limit.
 		if ((JRequest::getCmd('layout') == 'blog') || $params->get('layout_type') == 'blog') {
 			$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
@@ -188,7 +191,7 @@ class ContentModelCategory extends JModelList
 
 
 
-		$this->setState('filter.language',$app->getLanguageFilter());
+		$this->setState('filter.language', $app->getLanguageFilter());
 
 		$this->setState('layout', JRequest::getCmd('layout'));
 
@@ -264,7 +267,7 @@ class ContentModelCategory extends JModelList
 		}
 
 		if ($orderCol && $orderDirn) {
-			$orderby .= $db->getEscaped($orderCol) . ' ' . $db->getEscaped($orderDirn) . ', ';
+			$orderby .= $db->escape($orderCol) . ' ' . $db->escape($orderDirn) . ', ';
 		}
 
 		$articleOrderby		= $params->get('orderby_sec', 'rdate');
@@ -273,7 +276,7 @@ class ContentModelCategory extends JModelList
 		$secondary			= ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
 		$primary			= ContentHelperQuery::orderbyPrimary($categoryOrderby);
 
-		$orderby .= $db->getEscaped($primary) . ' ' . $db->getEscaped($secondary) . ' a.created ';
+		$orderby .= $db->escape($primary) . ' ' . $db->escape($secondary) . ' a.created ';
 
 		return $orderby;
 	}
@@ -399,6 +402,15 @@ class ContentModelCategory extends JModelList
 	{
 		if (!is_object($this->_item)) {
 			$this->getCategory();
+		}
+
+		// Order subcategories
+		if (sizeof($this->_children)) {
+			$params = $this->getState()->get('params');
+			if ($params->get('orderby_pri') == 'alpha' || $params->get('orderby_pri') == 'ralpha') {
+				jimport('joomla.utilities.arrayhelper');
+				JArrayHelper::sortObjects($this->_children, 'title', ($params->get('orderby_pri') == 'alpha') ? 1 : -1);
+			}
 		}
 
 		return $this->_children;

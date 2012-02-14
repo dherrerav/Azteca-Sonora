@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension version="1.6" type="file" method="upgrade">
+<extension version="2.5" type="file" method="upgrade">
 	<name>files_joomla</name>
-	<author>Joomla!</author>
+	<author>Joomla! Project</author>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<copyright>(C) 2005 - 2011 Open Source Matters. All rights reserved</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<version>1.6.6</version>
-	<creationDate>July 2011</creationDate>
+	<copyright>(C) 2005 - 2012 Open Source Matters. All rights reserved</copyright>
+	<license>GNU General Public License version 2 or later; see     LICENSE.txt</license>
+	<version>2.5.1</version>
+	<creationDate>February 2012</creationDate>
 	<description>FILES_JOOMLA_XML_DESCRIPTION</description>
+
+	<scriptfile>administrator/components/com_admin/script.php</scriptfile>
+
+	<update> <!-- Runs on update; New in 1.7 -->
+		<schemas>
+			<schemapath type="mysql">administrator/components/com_admin/sql/updates/mysql</schemapath>
+			<schemapath type="sqlsrv">administrator/components/com_admin/sql/updates/sqlsrv</schemapath>
+			<schemapath type="sqlazure">administrator/components/com_admin/sql/updates/sqlazure</schemapath>
+		</schemas>
+	</update>
 
 	<fileset>
 		<files>
 			<folder>administrator</folder>
 			<folder>cache</folder>
+			<folder>cli</folder>
 			<folder>components</folder>
 			<folder>images</folder>
 			<folder>includes</folder>

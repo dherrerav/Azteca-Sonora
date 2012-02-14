@@ -1,6 +1,5 @@
 /**
- * @version		$Id: core-uncompressed.js 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -90,6 +89,150 @@ Joomla.isEmail = function(text) {
 	var regex = new RegExp("^[\\w-_\.]*[\\w-_\.]\@[\\w]\.+[\\w]+[\\w]$");
 	return regex.test(text);
 };
+
+/**
+ * USED IN: all list forms.
+ *
+ * Toggles the check state of a group of boxes
+ *
+ * Checkboxes must have an id attribute in the form cb0, cb1...
+ *
+ * @param	mixed	The number of box to 'check', for a checkbox element
+ * @param	string	An alternative field name
+ */
+Joomla.checkAll = function(checkbox, stub) {
+	if (!stub) {
+		stub = 'cb';
+	}
+	if (checkbox.form) {
+		var c = 0;
+		for (var i = 0, n = checkbox.form.elements.length; i < n; i++) {
+			var e = checkbox.form.elements[i];
+			if (e.type == checkbox.type) {
+				if ((stub && e.id.indexOf(stub) == 0) || !stub) {
+					e.checked = checkbox.checked;
+					c += (e.checked == true ? 1 : 0);
+				}
+			}
+		}
+		if (checkbox.form.boxchecked) {
+			checkbox.form.boxchecked.value = c;
+		}
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Render messages send via JSON
+ *
+ * @param	object	messages	JavaScript object containing the messages to render
+ * @return	void
+ */
+Joomla.renderMessages = function(messages) {
+	Joomla.removeMessages();
+	var container = document.id('system-message-container');
+
+	var dl = new Element('dl', {
+		id: 'system-message',
+		role: 'alert'
+	});
+	Object.each(messages, function (item, type) {
+		var dt = new Element('dt', {
+			'class': type,
+			html: type
+		});
+		dt.inject(dl);
+		var dd = new Element('dd', {
+			'class': type
+		});
+		dd.addClass('message');
+		var list = new Element('ul');
+
+		Array.each(item, function (item, index, object) {
+			var li = new Element('li', {
+				html: item
+			});
+			li.inject(list);
+		}, this);
+		list.inject(dd);
+		dd.inject(dl);
+	}, this);
+	dl.inject(container);
+};
+
+
+/**
+ * Remove messages
+ *
+ * @return	void
+ */
+Joomla.removeMessages = function() {
+	var children = $$('#system-message-container > *');
+	children.destroy();
+}
+
+/**
+ * USED IN: administrator/components/com_cache/views/cache/tmpl/default.php
+ * administrator/components/com_installer/views/discover/tmpl/default_item.php
+ * administrator/components/com_installer/views/update/tmpl/default_item.php
+ * administrator/components/com_languages/helpers/html/languages.php
+ * libraries/joomla/html/html/grid.php
+ *
+ * @param isitchecked
+ * @param form
+ * @return
+ */
+Joomla.isChecked = function(isitchecked, form) {
+	if (typeof(form) === 'undefined') {
+		form = document.getElementById('adminForm');
+		/**
+		 * Added to ensure Joomla 1.5 compatibility
+		 */
+		if(!form){
+			form = document.adminForm;
+		}
+	}
+
+	if (isitchecked == true) {
+		form.boxchecked.value++;
+	} else {
+		form.boxchecked.value--;
+	}
+}
+
+/**
+ * USED IN: libraries/joomla/html/toolbar/button/help.php
+ *
+ * Pops up a new window in the middle of the screen
+ */
+Joomla.popupWindow = function(mypage, myname, w, h, scroll) {
+	var winl = (screen.width - w) / 2;
+	var wint = (screen.height - h) / 2;
+	var winprops = 'height=' + h + ',width=' + w + ',top=' + wint + ',left=' + winl
+			+ ',scrollbars=' + scroll + ',resizable'
+	var win = window.open(mypage, myname, winprops)
+	win.window.focus();
+}
+
+/**
+ * USED IN: libraries/joomla/html/html/grid.php
+ */
+Joomla.tableOrdering = function(order, dir, task, form) {
+	if (typeof(form) === 'undefined') {
+		form = document.getElementById('adminForm');
+		/**
+		 * Added to ensure Joomla 1.5 compatibility
+		 */
+		if(!form){
+			form = document.adminForm;
+		}
+	}
+
+	form.filter_order.value = order;
+	form.filter_order_Dir.value = dir;
+	Joomla.submitform(task, form);
+}
 
 /**
  * USED IN: administrator/components/com_modules/views/module/tmpl/default.php
@@ -233,6 +376,8 @@ function getSelectedValue(frmName, srcListName) {
  *
  * @param	mixed	The number of box to 'check', for a checkbox element
  * @param	string	An alternative field name
+ *
+ * @deprecated	12.1 This function will be removed in a future version. Use Joomla.checkAll() instead.
  */
 function checkAll(checkbox, stub) {
 	if (!stub) {
@@ -300,27 +445,16 @@ function listItemTask(id, task) {
 
 /**
  * USED IN: administrator/components/com_cache/views/cache/tmpl/default.php
- * administrator/components/com_installer/views/components/tmpl/default_item.php
  * administrator/components/com_installer/views/discover/tmpl/default_item.php
- * administrator/components/com_installer/views/languages/tmpl/default_item.php
- * administrator/components/com_installer/views/libraries/tmpl/default_item.php
- * administrator/components/com_installer/views/modules/tmpl/default_item.php
- * administrator/components/com_installer/views/packages/tmpl/default_item.php
- * administrator/components/com_installer/views/plugins/tmpl/default_item.php
- * administrator/components/com_installer/views/templates/tmpl/default_item.php
  * administrator/components/com_installer/views/update/tmpl/default_item.php
- * administrator/components/com_languages/views/languages/tmpl/default.php
- * administrator/components/com_localise/views/translations/tmpl/files.php
- * administrator/components/com_menus/views/list/tmpl/default.php
- * administrator/components/com_menus/views/menus/tmpl/default.php
- * administrator/components/com_templates/views/csschose/tmpl/default.php
- * administrator/components/com_templates/views/templates/tmpl/default.php
- * administrator/components/com_trash/admin.trash.html.php
- * administrator/components/com_update/views/update/tmpl/default_item.php
+ * administrator/components/com_languages/helpers/html/languages.php
  * libraries/joomla/html/html/grid.php
+ *
+ * @deprecated	12.1 This function will be removed in a future version. Use Joomla.isChecked() instead.
  *
  * @param isitchecked
  * @return
+ *
  */
 function isChecked(isitchecked) {
 	if (isitchecked == true) {
@@ -332,6 +466,8 @@ function isChecked(isitchecked) {
 
 /**
  * Default function. Usually would be overriden by the component
+ *
+ * @deprecated	12.1 This function will be removed in a future version. Use Joomla.submitbutton() instead.
  */
 function submitbutton(pressbutton) {
 	submitform(pressbutton);
@@ -339,6 +475,8 @@ function submitbutton(pressbutton) {
 
 /**
  * Submit the admin form
+ *
+ * @deprecated	12.1 This function will be removed in a future version. Use Joomla.submitform() instead.
  */
 function submitform(pressbutton) {
 	if (pressbutton) {
@@ -357,6 +495,8 @@ function submitform(pressbutton) {
  * USED IN: libraries/joomla/html/toolbar/button/help.php
  *
  * Pops up a new window in the middle of the screen
+ *
+ * @deprecated	12.1 This function will be removed in a future version. Use Joomla.popupWindow() instead.
  */
 function popupWindow(mypage, myname, w, h, scroll) {
 	var winl = (screen.width - w) / 2;
@@ -372,6 +512,8 @@ function popupWindow(mypage, myname, w, h, scroll) {
 // needed for Table Column ordering
 /**
  * USED IN: libraries/joomla/html/html/grid.php
+ *
+ * @deprecated	12.1 This function will be removed in a future version. Use Joomla.tableOrdering() instead.
  */
 function tableOrdering(order, dir, task) {
 	var form = document.adminForm;
@@ -387,6 +529,7 @@ function tableOrdering(order, dir, task) {
 function saveorder(n, task) {
 	checkAll_button(n, task);
 }
+
 function checkAll_button(n, task) {
 	if (!task) {
 		task = 'saveorder';

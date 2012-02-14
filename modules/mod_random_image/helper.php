@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: helper.php 20228 2011-01-10 00:52:54Z eddieajau $
  * @package		Joomla.Site
  * @subpackage	mod_random_image
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,7 +19,7 @@ class modRandomImageHelper
 		$i			= count($images);
 		$random		= mt_rand(0, $i - 1);
 		$image		= $images[$random];
-		$size		= getimagesize (JPATH_BASE.DS.$image->folder .DS. $image->name);
+		$size		= getimagesize (JPATH_BASE . '/' . $image->folder . '/' . $image->name);
 
 
 		if ($width == '') {
@@ -57,7 +56,7 @@ class modRandomImageHelper
 		$files	= array();
 		$images	= array();
 
-		$dir = JPATH_BASE.DS.$folder;
+		$dir = JPATH_BASE . '/' . $folder;
 
 		// check if directory exists
 		if (is_dir($dir))
@@ -74,11 +73,11 @@ class modRandomImageHelper
 			$i = 0;
 			foreach ($files as $img)
 			{
-				if (!is_dir($dir .DS. $img))
+				if (!is_dir($dir . '/' . $img))
 				{
 					if (preg_match('/'.$type.'/', $img)) {
 						$images[$i] = new stdClass;
-						
+
 						$images[$i]->name	= $img;
 						$images[$i]->folder	= $folder;
 						$i++;

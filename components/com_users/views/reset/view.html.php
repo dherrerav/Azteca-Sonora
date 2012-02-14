@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: view.html.php 21023 2011-03-28 10:55:01Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -32,13 +31,21 @@ class UsersViewReset extends JView
 	 */
 	function display($tpl = null)
 	{
-		// Get the view data.
-                if ($this->getLayout() == 'default') {
-                    $formname = "Form";
-                } else {
-                    $formname = ucfirst($this->_name).ucfirst($this->getLayout())."Form";
-                }
+		// This name will be used to get the model
+		$name = $this->getLayout();
 
+		// Check that the name is valid - has an associated model.
+		if( ! in_array($name, array('confirm', 'complete'))) {
+			$name = 'default';
+		}
+
+		if ('default' == $name) {
+			$formname = 'Form';
+		} else {
+			$formname = ucfirst($this->_name).ucfirst($name).'Form';
+		}
+
+		// Get the view data.
 		$this->form	= $this->get($formname);
 		$this->state	= $this->get('State');
 		$this->params	= $this->state->params;
@@ -82,8 +89,11 @@ class UsersViewReset extends JView
 		if (empty($title)) {
 			$title = $app->getCfg('sitename');
 		}
-		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 1) {
 			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
+			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		$this->document->setTitle($title);
 
@@ -92,12 +102,12 @@ class UsersViewReset extends JView
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
 
-		if ($this->params->get('menu-meta_keywords')) 
+		if ($this->params->get('menu-meta_keywords'))
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}
 
-		if ($this->params->get('robots')) 
+		if ($this->params->get('robots'))
 		{
 			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}

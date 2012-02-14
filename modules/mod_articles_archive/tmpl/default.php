@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 21049 2011-04-01 02:05:21Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	mod_articles_archive
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 

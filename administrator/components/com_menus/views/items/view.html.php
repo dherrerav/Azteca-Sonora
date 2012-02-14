@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: view.html.php 21148 2011-04-14 17:30:08Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_menus
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -97,7 +96,7 @@ class MenusViewItems extends JView
 											||	$lang->load('tpl_'.$temp[0].'.sys', JPATH_SITE.'/templates/'.$temp[0], null, false, false)
 											||	$lang->load('tpl_'.$temp[0].'.sys', JPATH_SITE, $lang->getDefault(), false, false)
 											||	$lang->load('tpl_'.$temp[0].'.sys', JPATH_SITE.'/templates/'.$temp[0], $lang->getDefault(), false, false);
-											
+
 										}
 										else
 										{
@@ -127,7 +126,7 @@ class MenusViewItems extends JView
 					}
 					else {
 						if (preg_match("/^index.php\?option=([a-zA-Z\-0-9_]*)/", $item->link, $result)) {
-							$value = JText::sprintf('COM_MENUS_TYPE_UNEXISTING',$result[1]);
+							$value = JText::sprintf('COM_MENUS_TYPE_UNEXISTING', $result[1]);
 						}
 						else {
 							$value = JText::_('COM_MENUS_TYPE_UNKNOWN');
@@ -171,28 +170,28 @@ class MenusViewItems extends JView
 		JToolBarHelper::title(JText::_('COM_MENUS_VIEW_ITEMS_TITLE'), 'menumgr.png');
 
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::custom('item.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
+			JToolBarHelper::addNew('item.add');
 		}
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::custom('item.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
+			JToolBarHelper::editList('item.edit');
 		}
 		if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::divider();
-			JToolBarHelper::custom('items.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-			JToolBarHelper::custom('items.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::publish('items.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::unpublish('items.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 		}
 		if (JFactory::getUser()->authorise('core.admin')) {
 			JToolBarHelper::divider();
-			JToolBarHelper::custom('items.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
-		}
-		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::trash('items.trash','JTOOLBAR_TRASH');
-		}		
-		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'items.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::checkin('items.checkin', 'JTOOLBAR_CHECKIN', true);
 		}
 
-		
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'items.delete', 'JTOOLBAR_EMPTY_TRASH');
+		}
+		elseif ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('items.trash');
+		}
+
 		if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::makeDefault('items.setDefault', 'COM_MENUS_TOOLBAR_SET_HOME');
 			JToolBarHelper::divider();

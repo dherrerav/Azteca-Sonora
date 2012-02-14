@@ -1,13 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 table.admintable td.key, table.admintable td.paramlist_key, 
 table.admintable td.paramlist_value {
@@ -40,7 +40,7 @@ table.ja-list-themes td{
 	padding: 2px 0px;
 }
 
-.ja-list-themes span{
+.ja-list-themes span {
 	cursor: pointer;
 	text-transform: capitalize;
 }
@@ -253,11 +253,12 @@ div.ja-popup-pageids{
 }
 
 div.ja-popup-pageids {
-	width: 232px !important; 
+	width: 301px !important; 
 }
 
-div.ja-popup-pageids select {
-	width: 230px !important; 
+div.ja-popup-pageids .pages {
+    float: left;
+    width: 300px;
 }
 
 .selections{

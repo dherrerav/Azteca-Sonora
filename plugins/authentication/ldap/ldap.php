@@ -1,14 +1,11 @@
 <?php
 /**
- * @version		$Id: ldap.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('_JEXEC') or die;
-
-jimport('joomla.plugin.plugin');
 
 /**
  * LDAP Authentication Plugin
@@ -35,14 +32,14 @@ class plgAuthenticationLdap extends JPlugin
 		// Initialise variables.
 		$userdetails = null;
 		$success = 0;
-		$userdetails = Array();
+		$userdetails = array();
 
 		// For JLog
 		$response->type = 'LDAP';
 		// LDAP does not like Blank passwords (tries to Anon Bind which is bad)
 		if (empty($credentials['password']))
 		{
-			$response->status = JAUTHENTICATE_STATUS_FAILURE;
+			$response->status = JAuthentication::STATUS_FAILURE;
 			$response->error_message = JText::_('JGLOBAL_AUTH_PASS_BLANK');
 			return false;
 		}
@@ -58,7 +55,7 @@ class plgAuthenticationLdap extends JPlugin
 
 		if (!$ldap->connect())
 		{
-			$response->status = JAUTHENTICATE_STATUS_FAILURE;
+			$response->status = JAuthentication::STATUS_FAILURE;
 			$response->error_message = JText::_('JGLOBAL_AUTH_NO_CONNECT');
 			return;
 		}
@@ -69,11 +66,11 @@ class plgAuthenticationLdap extends JPlugin
 			{
 				// Bind using Connect Username/password
 				// Force anon bind to mitigate misconfiguration like [#7119]
-				if (strlen($this->params->get('username'))) 
+				if (strlen($this->params->get('username')))
 				{
 					$bindtest = $ldap->bind();
 				}
-				else 
+				else
 				{
 					$bindtest = $ldap->anonymous_bind();
 				}
@@ -84,17 +81,17 @@ class plgAuthenticationLdap extends JPlugin
 					$binddata = $ldap->simple_search(str_replace("[search]", $credentials['username'], $this->params->get('search_string')));
 					if (isset($binddata[0]) && isset($binddata[0]['dn'])) {
 						// Verify Users Credentials
-						$success = $ldap->bind($binddata[0]['dn'],$credentials['password'],1);
+						$success = $ldap->bind($binddata[0]['dn'], $credentials['password'], 1);
 						// Get users details
 						$userdetails = $binddata;
 					} else {
-						$response->status = JAUTHENTICATE_STATUS_FAILURE;
+						$response->status = JAuthentication::STATUS_FAILURE;
 						$response->error_message = JText::_('JGLOBAL_AUTH_USER_NOT_FOUND');
 					}
 				}
 				else
 				{
-					$response->status = JAUTHENTICATE_STATUS_FAILURE;
+					$response->status = JAuthentication::STATUS_FAILURE;
 					$response->error_message = JText::_('JGLOBAL_AUTH_NO_BIND');
 				}
 			}	break;
@@ -102,11 +99,11 @@ class plgAuthenticationLdap extends JPlugin
 			case 'bind':
 			{
 				// We just accept the result here
-				$success = $ldap->bind($credentials['username'],$credentials['password']);
+				$success = $ldap->bind($credentials['username'], $credentials['password']);
 				if ($success) {
 					$userdetails = $ldap->simple_search(str_replace("[search]", $credentials['username'], $this->params->get('search_string')));
 				} else {
-					$response->status = JAUTHENTICATE_STATUS_FAILURE;
+					$response->status = JAuthentication::STATUS_FAILURE;
 					$response->error_message = JText::_('JGLOBAL_AUTH_BIND_FAILED');
 				}
 			}	break;
@@ -114,7 +111,7 @@ class plgAuthenticationLdap extends JPlugin
 
 		if (!$success)
 		{
-			$response->status = JAUTHENTICATE_STATUS_FAILURE;
+			$response->status = JAuthentication::STATUS_FAILURE;
 			if (!strlen($response->error_message)) $response->error_message = JText::_('JGLOBAL_AUTH_INCORRECT');
 		}
 		else
@@ -135,7 +132,7 @@ class plgAuthenticationLdap extends JPlugin
 			}
 
 			// Were good - So say so.
-			$response->status		= JAUTHENTICATE_STATUS_SUCCESS;
+			$response->status		= JAuthentication::STATUS_SUCCESS;
 			$response->error_message = '';
 		}
 

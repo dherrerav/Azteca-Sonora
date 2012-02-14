@@ -1,40 +1,38 @@
 <?php
 /**
-* @version		$Id: json.php 20196 2011-01-09 02:40:25Z ian $
-* @package		Joomla.Framework
-* @subpackage	Document
-* @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
-* @license		GNU General Public License, see LICENSE.php
-*/
+ * @package     Joomla.Platform
+ * @subpackage  Document
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
+ */
 
-// Check to ensure this file is within the rest of the framework
-defined('JPATH_BASE') or die();
+defined('JPATH_PLATFORM') or die;
 
 /**
  * JDocumentJSON class, provides an easy interface to parse and display JSON output
  *
- * @package		Joomla.Framework
- * @subpackage	Document
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  Document
+ * @see         http://www.json.org/
+ * @since       11.1
  */
-
-jimport('joomla.document.document');
-
 class JDocumentJSON extends JDocument
 {
 	/**
 	 * Document name
 	 *
-	 * @var		string
-	 * @access  protected
+	 * @var    string
+	 * @since  11.1
 	 */
 	protected $_name = 'joomla';
 
 	/**
 	 * Class constructor
 	 *
-	 * @access public
-	 * @param	array	$options Associative array of options
+	 * @param   array  $options  Associative array of options
+	 *
+	 * @since  11.1
 	 */
 	public function __construct($options = array())
 	{
@@ -50,15 +48,17 @@ class JDocumentJSON extends JDocument
 	/**
 	 * Render the document.
 	 *
-	 * @access public
-	 * @param boolean	$cache		If true, cache the output
-	 * @param array	$params		Associative array of attributes
-	 * @return	The rendered data
+	 * @param   boolean  $cache   If true, cache the output
+	 * @param   array    $params  Associative array of attributes
+	 *
+	 * @return  The rendered data
+	 *
+	 * @since  11.1
 	 */
 	public function render($cache = false, $params = array())
 	{
 		JResponse::allowCache(false);
-		JResponse::setHeader('Content-disposition', 'attachment; filename="'.$this->getName().'.json"', true);
+		JResponse::setHeader('Content-disposition', 'attachment; filename="' . $this->getName() . '.json"', true);
 
 		parent::render();
 
@@ -66,43 +66,30 @@ class JDocumentJSON extends JDocument
 	}
 
 	/**
-	 * Get the document head data
-	 *
-	 * @access	public
-	 * @return	array	The document head data in array form
-	 */
-	public function getHeadData()
-	{
-	}
-
-	/**
-	 * Set the document head data
-	 *
-	 * @access	public
-	 * @param	array	$data	The document head data in array form
-	 */
-	public function setHeadData($data)
-	{
-	}
-
-	/**
 	 * Returns the document name
 	 *
-	 * @access public
-	 * @return string
+	 * @return  string
+	 *
+	 * @since  11.1
 	 */
-	public function getName() {
+	public function getName()
+	{
 		return $this->_name;
 	}
 
 	/**
 	 * Sets the document name
 	 *
-	 * @param	string	$name	Document name
-	 * @access  public
-	 * @return  void
+	 * @param   string  $name  Document name
+	 *
+	 * @return  JDocumentJSON instance of $this to allow chaining
+	 *
+	 * @since   11.1
 	 */
-	public function setName($name = 'joomla') {
+	public function setName($name = 'joomla')
+	{
 		$this->_name = $name;
+
+		return $this;
 	}
 }

@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: component.php 21032 2011-03-29 16:38:31Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -34,7 +33,7 @@ class ConfigModelComponent extends JModelForm
 
 		// Set an alternative path for the configuration file.
 		if ($path = JRequest::getString('path')) {
-			$path = JPath::clean(JPATH_SITE.DS.$path);
+			$path = JPath::clean(JPATH_SITE . '/' . $path);
 			JPath::check($path);
 			$this->setState('component.path', $path);
 		}
@@ -51,8 +50,6 @@ class ConfigModelComponent extends JModelForm
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
-		jimport('joomla.form.form');
-
 		if ($path = $this->getState('component.path')) {
 			// Add the search path for the admin component config.xml file.
 			JForm::addFormPath($path);
@@ -115,8 +112,7 @@ class ConfigModelComponent extends JModelForm
 
 		// Save the rules.
 		if (isset($data['params']) && isset($data['params']['rules'])) {
-			jimport('joomla.access.rules');
-			$rules	= new JRules($data['params']['rules']);
+			$rules	= new JAccessRules($data['params']['rules']);
 			$asset	= JTable::getInstance('asset');
 
 			if (!$asset->loadByName($data['option'])) {
@@ -124,7 +120,7 @@ class ConfigModelComponent extends JModelForm
 				$root->loadByName('root.1');
 				$asset->name = $data['option'];
 				$asset->title = $data['option'];
-				$asset->setLocation($root->id,'last-child');
+				$asset->setLocation($root->id, 'last-child');
 			}
 			$asset->rules = (string) $rules;
 

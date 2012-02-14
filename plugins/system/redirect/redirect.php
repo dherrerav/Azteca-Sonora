@@ -1,13 +1,10 @@
 <?php
 /**
- * @version		$Id: redirect.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('JPATH_BASE') or die;
-
-jimport('joomla.plugin.plugin');
 
 /**
  * Plugin class for redirect handling.
@@ -54,29 +51,46 @@ class plgSystemRedirect extends JPlugin
 
 			// See if the current url exists in the database as a redirect.
 			$db = JFactory::getDBO();
-			$db->setQuery(
-				'SELECT `new_url`, `published`' .
-				' FROM `#__redirect_links`' .
-				' WHERE `old_url` = '.$db->quote($current),
+				$db->setQuery(
+				'SELECT '.$db->quoteName('new_url').', '.$db->quoteName('published').
+				' FROM '.$db->quoteName('#__redirect_links') .
+				' WHERE '.$db->quoteName('old_url').' = '.$db->quote($current),
 				0, 1
 			);
 			$link = $db->loadObject();
 
 			// If a redirect exists and is published, permanently redirect.
 			if ($link and ($link->published == 1)) {
-				$app->redirect($link->new_url, null, null, true, false);
+				$app->redirect($link->new_url, null, null, true, true);
 			}
 			else
 			{
 				$referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 
-				// If not, add the new url to the database.
-				$db->setQuery(
-					'INSERT IGNORE INTO `#__redirect_links` (`old_url`, `referer`, `published`, `created_date`)' .
-					' VALUES ('.$db->Quote($current).', '.$db->Quote($referer).', 0, '.$db->Quote(JFactory::getDate()->toMySQL()).')'
-				);
-				$db->query();
+				$db->setQuery('select id from '.$db->quoteName('#__redirect_links')."  where old_url='".$current."'");
+				$res = $db->loadResult();
+				if(!$res) {
 
+					// If not, add the new url to the database.
+					 $query = $db->getQuery(true);
+					 $query->insert($db->quoteName('#__redirect_links'), false);
+					 $columns = array( $db->quoteName('old_url'),
+									$db->quoteName('new_url'),
+									$db->quoteName('referer'),
+									$db->quoteName('comment'),
+									$db->quoteName('published'),
+									$db->quoteName('created_date')
+								);
+					$query->columns($columns);
+				    $query->values($db->Quote($current). ', '. $db->Quote('').
+				  				' ,'.$db->Quote($referer).', '.$db->Quote('').',0, '.
+								  $db->Quote(JFactory::getDate()->toSql())
+								);
+
+					$db->setQuery($query);
+					$db->query();
+
+				}
 				// Render the error page.
 				JError::customErrorPage($error);
 			}

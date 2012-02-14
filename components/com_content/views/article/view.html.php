@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 21018 2011-03-25 17:30:03Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -107,13 +106,13 @@ class ContentViewArticle extends JView
 						JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 
 				return;
-			
+
 		}
 
-		if ($item->params->get('show_intro','1')=='1') {
+		if ($item->params->get('show_intro', '1')=='1') {
 			$item->text = $item->introtext.' '.$item->fulltext;
 		}
-		else if ($item->fulltext) {
+		elseif ($item->fulltext) {
 			$item->text = $item->fulltext;
 		}
 		else  {
@@ -201,19 +200,22 @@ class ContentViewArticle extends JView
 		if (empty($title)) {
 			$title = $app->getCfg('sitename');
 		}
-		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 1) {
 			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
+			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		if (empty($title)) {
 			$title = $this->item->title;
 		}
 		$this->document->setTitle($title);
-		
+
 		if ($this->item->metadesc)
 		{
 			$this->document->setDescription($this->item->metadesc);
 		}
-		elseif (!$this->item->metadesc && $this->params->get('menu-meta_description')) 
+		elseif (!$this->item->metadesc && $this->params->get('menu-meta_description'))
 		{
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
@@ -222,19 +224,14 @@ class ContentViewArticle extends JView
 		{
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
-		elseif (!$this->item->metakey && $this->params->get('menu-meta_keywords')) 
+		elseif (!$this->item->metakey && $this->params->get('menu-meta_keywords'))
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}
-		
-		if ($this->params->get('robots')) 
+
+		if ($this->params->get('robots'))
 		{
 			$this->document->setMetadata('robots', $this->params->get('robots'));
-		}
-
-		if ($app->getCfg('MetaTitle') == '1')
-		{
-			$this->document->setMetaData('title', $this->item->title);
 		}
 
 		if ($app->getCfg('MetaAuthor') == '1')

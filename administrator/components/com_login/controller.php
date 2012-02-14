@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 20899 2011-03-07 20:56:09Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
  */
 
@@ -60,7 +59,7 @@ class LoginController extends JController
 
 		$result = $app->login($credentials, array('action' => 'core.login.admin'));
 
-		if (!JError::isError($result)) {
+		if (!($result instanceof Exception)) {
 			$app->redirect($return);
 		}
 
@@ -75,7 +74,7 @@ class LoginController extends JController
 	public function logout()
 	{
 		JRequest::checkToken('default') or jexit(JText::_('JInvalid_Token'));
-				
+
 		$app = JFactory::getApplication();
 
 		$userid = JRequest::getInt('uid', null);
@@ -86,7 +85,7 @@ class LoginController extends JController
 
 		$result = $app->logout($userid, $options);
 
-		if (!JError::isError($result)) {
+		if (!($result instanceof Exception)) {
 			$model 	= $this->getModel('login');
 			$return = $model->getState('return');
 			$app->redirect($return);

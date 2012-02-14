@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="library" version="1.6">
+<extension type="library" version="2.5">
 	<name>PHPMailer</name>
 	<libraryname>phpmailer</libraryname>
-	<version>1.6.0</version>
-	<description>Classes for sending email</description>
+	<version>2.5.0</version>
+	<description>LIB_PHPMAILER_XML_DESCRIPTION</description>
 	<creationDate>2008</creationDate>
 	<copyright>Copyright (C) PHPMailer.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>

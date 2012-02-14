@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: level.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -9,7 +8,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modeladmin');
-jimport('joomla.access.helper');
 
 /**
  * User view level model.
@@ -59,10 +57,10 @@ class UsersModelLevel extends JModelAdmin
 				if ((strpos($table, $prefix) === 0) && (isset($fields[$table]['access']))) {
 					// Lookup the distinct values of the field.
 					$query->clear('from')
-						->from($db->nameQuote($table));
+						->from($db->quoteName($table));
 					$db->setQuery($query);
 
-					$values = $db->loadResultArray();
+					$values = $db->loadColumn();
 					$error	= $db->getErrorMsg();
 
 					// Check for DB error.

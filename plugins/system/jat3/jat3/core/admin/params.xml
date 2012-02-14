@@ -35,12 +35,7 @@
 				<field name="hide_content_block" type="list" default="0" label="Hide Main content block" description="HIDE_MAIN_CONTENT_BLOCK_DESC">
 					<option value="0">No</option>
 					<option value="1">Yes</option>
-				</field>			
-				<!-- Direction setting -->
-				<field name="setting_direction" type="list" default="ltr" label="Direction" description="DIRECTION_DESC">
-					<option value="ltr">LTR</option>
-					<option value="rtl">RTL</option>
-				</field>			
+				</field>
 				<!-- T3 Logo setting -->
 				<field name="setting_t3logo" type="list" default="t3-logo-light" label="T3_LOGO" description="T3_LOGO_DESCRIPTION">
 					<option value="t3-logo t3-logo-light">Light logo</option>
@@ -95,10 +90,6 @@
 					<option value="0">hide</option>
 				</field>
 				<field name="option_layouts" type="radio" default="0" label="Show/Hide Layouts Tools" description="SHOW_HIDE_LAYOUTS_TOOLS_DESC">
-					<option value="1">show</option>
-					<option value="0">hide</option>
-				</field>
-				<field name="option_direction" type="radio" default="0" label="Show/Hide Direction Tools" description="SHOW_HIDE_DIRECTION_TOOLS_DESC">
 					<option value="1">show</option>
 					<option value="0">hide</option>
 				</field>

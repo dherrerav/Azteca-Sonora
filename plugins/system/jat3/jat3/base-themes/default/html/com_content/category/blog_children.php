@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: blog_children.php 17017 2010-05-13 10:48:48Z eddieajau $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,7 +11,7 @@ defined('_JEXEC') or die;
 $class = ' class="first"';
 ?>
 
-<?php if (count($this->children[$this->category->id]) > 0) : ?>
+<?php if (count($this->children[$this->category->id]) > 0 && $this->maxLevel != 0) : ?>
 	<ul>
 	<?php foreach($this->children[$this->category->id] as $id => $child) : ?>
 		<?php
@@ -27,11 +26,13 @@ $class = ' class="first"';
 				<?php echo $this->escape($child->title); ?></a>
 			</span>
 
+			<?php if ($this->params->get('show_subcat_desc') == 1) :?>
 			<?php if ($child->description) : ?>
 				<div class="category-desc">
-					<?php echo JHtml::_('content.prepare', $child->description); ?>
+					<?php echo JHtml::_('content.prepare', $child->description, '', 'com_content.category'); ?>
 				</div>
 			<?php endif; ?>
+            <?php endif; ?>
 
 			<?php if ( $this->params->get('show_cat_num_articles',1)) : ?>
 			<dl>

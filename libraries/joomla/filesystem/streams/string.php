@@ -1,116 +1,189 @@
 <?php
 /**
- * @version		$Id: string.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	FileSystem
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License, see LICENSE.php
+ * @package     Joomla.Platform
+ * @subpackage  FileSystem
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access.
-defined('JPATH_BASE') or die();
+defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.filesystem.support.stringcontroller');
 
 /**
  * String Stream Wrapper
  *
- * This class allows you to use a PHP string like
+ * This class allows you to use a PHP string in the same way that
  * you would normally use a regular stream wrapper
  *
- * @package		Joomla.Framework
- * @subpackage	FileSystem
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  FileSystem
+ * @since       11.1
  */
 class JStreamString
 {
-	private $_currentstring;
-
-	private $_path;
-
-	private $_mode;
-
-	private $_options;
-
-	private $_opened_path;
-
-	private $_pos;
-
-	private $_len;
-
-	private $_stat;
+	/**
+	 * The current string
+	 *
+	 * @var   string
+	 * @since  11.1
+	 */
+	protected $_currentstring;
 
 	/**
-	 * @param	$path
-	 * @param	$mode
-	 * @param	$options
-	 * @param	$opened_path
 	 *
-	 * @return	boolean
-	 * @since	1.6
+	 * The path
+	 *
+	 * @var   string
+	 * @since  11.1
 	 */
-	function stream_open($path, $mode, $options, &$opened_path)
-	{
-		$this->_currentstring = &JStringController::getRef(str_replace('string://','',$path));
+	protected $_path;
 
-		if($this->_currentstring) {
+	/**
+	 *
+	 * The mode
+	 *
+	 * @var   string
+	 * @since  11.1
+	 */
+	protected $_mode;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var   string
+	 *
+	 * @since  11.1
+	 */
+	protected $_options;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var   string
+	 *
+	 * @since  11.1
+	 */
+	protected $_opened_path;
+
+	/**
+	 * Current position
+	 *
+	 * @var   integer
+	 * @since  11.1
+	 */
+	protected $_pos;
+
+	/**
+	 * Length of the string
+	 *
+	 * @var   string
+	 *
+	 * @since  11.1
+	 */
+	protected $_len;
+
+	/**
+	 * Statistics for a file
+	 *
+	 * @var    array
+	 * @since  11.1
+	 *
+	 * @see    http://us.php.net/manual/en/function.stat.php
+	 */
+	protected $_stat;
+
+	/**
+	 * Method to open a file or URL.
+	 *
+	 * @param   string   $path          The stream path.
+	 * @param   string   $mode          Not used.
+	 * @param   integer  $options       Not used.
+	 * @param   string   &$opened_path  Not used.
+	 *
+	 * @return  boolean
+	 *
+	 * @since   11.1
+	 */
+	public function stream_open($path, $mode, $options, &$opened_path)
+	{
+		$this->_currentstring = &JStringController::getRef(str_replace('string://', '', $path));
+
+		if ($this->_currentstring)
+		{
 			$this->_len = strlen($this->_currentstring);
 			$this->_pos = 0;
 			$this->_stat = $this->url_stat($path, 0);
 
 			return true;
 		}
-		else {
+		else
+		{
 			return false;
 		}
 	}
 
 	/**
-	 * @return
-	 * @since	1.6
+	 * Method to retrieve information from a file resource
+	 *
+	 * @return  array
+	 *
+	 * @see     http://www.php.net/manual/en/streamwrapper.stream-stat.php
+	 * @since   11.1
 	 */
-	function stream_stat()
+	public function stream_stat()
 	{
 		return $this->_stat;
 	}
 
 	/**
-	 * @param	$path
-	 * @param	$flags
+	 * Method to retrieve information about a file.
 	 *
-	 * @return
-	 * @since	1.6
+	 * @param   string   $path   File path or URL to stat
+	 * @param   integer  $flags  Additional flags set by the streams API
+	 *
+	 * @return  array
+	 *
+	 * @see     http://php.net/manual/en/streamwrapper.url-stat.php
+	 * @since   11.1
 	 */
-	function url_stat($path, $flags = 0)
+	public function url_stat($path, $flags = 0)
 	{
 		$now = time();
-		$string = &JStringController::getRef(str_replace('string://','',$path));
+		$string = &JStringController::getRef(str_replace('string://', '', $path));
 		$stat = array(
-			'dev'		=> 0,
-			'ino'		=> 0,
-			'mode'		=> 0,
-			'nlink'		=> 1,
-			'uid'		=> 0,
-			'gid'		=> 0,
-			'rdev'		=> 0,
-			'size'		=> strlen($string),
-			'atime'		=> $now,
-			'mtime'		=> $now,
-			'ctime'		=> $now,
-			'blksize'	=> '512',
-			'blocks'	=> ceil(strlen($string) / 512)
-		);
+			'dev' => 0,
+			'ino' => 0,
+			'mode' => 0,
+			'nlink' => 1,
+			'uid' => 0,
+			'gid' => 0,
+			'rdev' => 0,
+			'size' => strlen($string),
+			'atime' => $now,
+			'mtime' => $now,
+			'ctime' => $now,
+			'blksize' => '512',
+			'blocks' => ceil(strlen($string) / 512));
 
 		return $stat;
 	}
 
 	/**
-	 * @param	$count
+	 * Method to read a given number of bytes starting at the current position
+	 * and moving to the end of the string defined by the current position plus the
+	 * given number.
 	 *
-	 * @return
-	 * @since	1.6
+	 * @param   integer  $count  Bytes of data from the current position should be returned.
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
+	 *
+	 * @see     http://www.php.net/manual/en/streamwrapper.stream-read.php
 	 */
-	function stream_read($count)
+	public function stream_read($count)
 	{
 		$result = substr($this->_currentstring, $this->_pos, $count);
 		$this->_pos += $count;
@@ -119,31 +192,44 @@ class JStreamString
 	}
 
 	/**
-	 * @return	boolean
-	 * @since	1.6
+	 * Stream write, always returning false.
+	 *
+	 * @param   string  $data  The data to write.
+	 *
+	 * @return  boolean
+	 *
+	 * @since   11.1
+	 * @note    Updating the string is not supported.
 	 */
-	function stream_write($data)
+	public function stream_write($data)
 	{
 		// We don't support updating the string.
 		return false;
 	}
 
 	/**
-	 * @return
-	 * @since	1.6
+	 * Method to get the current position
+	 *
+	 * @return  integer  The position
+	 *
+	 * @since   11.1
 	 */
-	function stream_tell()
+	public function stream_tell()
 	{
 		return $this->_pos;
 	}
 
 	/**
-	 * @return	boolean
-	 * @since	1.6
+	 * End of field check
+	 *
+	 * @return  boolean  True if at end of field.
+	 *
+	 * @since   11.1
 	 */
-	function stream_eof()
+	public function stream_eof()
 	{
-		if ($this->_pos > $this->_len) {
+		if ($this->_pos > $this->_len)
+		{
 			return true;
 		}
 
@@ -151,30 +237,37 @@ class JStreamString
 	}
 
 	/**
-	 * @param	$offset
-	 * @param	$whence
+	 * Stream offset
 	 *
-	 * @return
-	 * @since	1.6
+	 * @param   integer  $offset  The starting offset.
+	 * @param   integer  $whence  SEEK_SET, SEEK_CUR, SEEK_END
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since   11.1
 	 */
-	function stream_seek($offset, $whence)
+	public function stream_seek($offset, $whence)
 	{
-		//$whence: SEEK_SET, SEEK_CUR, SEEK_END
-		if ($offset > $this->_len) {
-			return false; // we can't seek beyond our len
+		// $whence: SEEK_SET, SEEK_CUR, SEEK_END
+		if ($offset > $this->_len)
+		{
+			// We can't seek beyond our len.
+			return false;
 		}
 
-		switch($whence)
+		switch ($whence)
 		{
 			case SEEK_SET:
 				$this->_pos = $offset;
 				break;
 
 			case SEEK_CUR:
-				if (($this->_pos + $offset) < $this->_len) {
+				if (($this->_pos + $offset) < $this->_len)
+				{
 					$this->_pos += $offset;
 				}
-				else {
+				else
+				{
 					return false;
 				}
 				break;
@@ -188,12 +281,17 @@ class JStreamString
 	}
 
 	/**
-	 * @return	boolean
-	 * @since	1.6
+	 * Stream flush, always returns true.
+	 *
+	 * @return  boolean
+	 *
+	 * @since   11.1
+	 * @note    Data storage is not supported
 	 */
-	function stream_flush()
+	public function stream_flush()
 	{
-		return true; // we don't store data
+		// We don't store data.
+		return true;
 	}
 }
 

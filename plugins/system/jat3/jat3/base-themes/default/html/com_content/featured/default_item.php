@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_item.php 18052 2010-07-08 04:56:08Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,10 +11,11 @@ defined('_JEXEC') or die;
 
 // Create a shortcut for params.
 $params = &$this->item->params;
-$canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->item->id);
+$images = json_decode(isset($this->item->images) ? $this->item->images : null);
+$canEdit	= $this->item->params->get('access-edit');
 ?>
 
-<div class="contentpaneopen">
+<div class="contentpaneopen clearfix">
 
 <?php if ($this->item->state == 0) : ?>
 <div class="system-unpublished">
@@ -39,20 +39,20 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 <?php echo $this->item->event->beforeDisplayContent; ?>
 
 <?php // to do not that elegant would be nice to group the params ?>
-
+<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date')) or ($params->get('show_parent_category')) or ($params->get('show_hits')) or ($params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit) ) : ?>
 <div class="article-tools clearfix">
 <?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date')) or ($params->get('show_parent_category')) or ($params->get('show_hits'))) : ?>
  <dl class="article-info">
  <dt class="article-info-term"><?php  echo JText::_('COM_CONTENT_ARTICLE_INFO'); ?></dt>
 <?php endif; ?>
-<?php if ($params->get('show_parent_category')) : ?>
+<?php if ($params->get('show_parent_category') && $this->item->parent_id != 1) : ?>
 		<dd class="parent-category-name">
 			<?php $title = $this->escape($this->item->parent_title);
 				$url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->parent_slug)) . '">' . $title . '</a>'; ?>
 			<?php if ($params->get('link_parent_category') AND $this->item->parent_slug) : ?>
-				<?php echo JText::sprintf('COM_CONTENT_PARENT', $url); ?>
+				<?php echo JText::sprintf('COM_CONTENT_PARENT', '<span>'.$url.'</span>'); ?>
 				<?php else : ?>
-				<?php echo JText::sprintf('COM_CONTENT_PARENT', $title); ?>
+				<?php echo JText::sprintf('COM_CONTENT_PARENT', '<span>'.$title.'</span>'); ?>
 			<?php endif; ?>
 		</dd>
 <?php endif; ?>
@@ -61,25 +61,25 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 			<?php $title = $this->escape($this->item->category_title);
 				$url = '<a href="'.JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->catslug)).'">'.$title.'</a>';?>
 			<?php if ($params->get('link_category') AND $this->item->catslug) : ?>
-				<?php echo JText::sprintf('COM_CONTENT_CATEGORY', $url); ?>
+				<?php echo JText::sprintf('COM_CONTENT_CATEGORY', '<span>'.$url.'</span>'); ?>
 				<?php else : ?>
-				<?php echo JText::sprintf('COM_CONTENT_CATEGORY', $title); ?>
+				<?php echo JText::sprintf('COM_CONTENT_CATEGORY', '<span>'.$title.'</span>'); ?>
 			<?php endif; ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_create_date')) : ?>
 		<dd class="create">
-		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON', '<span>'.JHtml::_('date',$this->item->created, JText::_('DATE_FORMAT_LC3')).'</span>'); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_modify_date')) : ?>
 		<dd class="modified">
-		<?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', '<span>'.JHtml::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC3')).'</span>'); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_publish_date')) : ?>
 		<dd class="published">
-		<?php echo JText::sprintf('COM_CONTENT_PUBLISHED_DATE', JHTML::_('date',$this->item->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_PUBLISHED_DATE_ON', '<span>'.JHtml::_('date', $this->item->publish_up, JText::_('DATE_FORMAT_LC3')).'</span>'); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_author') && !empty($this->item->author)) : ?>
@@ -88,17 +88,17 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 		<?php $author = ($this->item->created_by_alias ? $this->item->created_by_alias : $author);?>
 
 			<?php if (!empty($this->item->contactid ) &&  $params->get('link_author') == true):?>
-				<?php 	echo JText::sprintf('COM_CONTENT_WRITTEN_BY' , 
-				 JHTML::_('link',JRoute::_('index.php?option=com_contact&view=contact&id='.$this->item->contactid),$author)); ?>
+				<?php 	echo JText::sprintf('COM_CONTENT_WRITTEN_BY' ,
+				 '<span>'.JHtml::_('link',JRoute::_('index.php?option=com_contact&view=contact&id='.$this->item->contactid),$author).'</span>'); ?>
 
 			<?php else :?>
-				<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
+				<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', '<span>'.$author.'</span>'); ?>
 			<?php endif; ?>
 		</dd>
 	<?php endif; ?>
 <?php if ($params->get('show_hits')) : ?>
 		<dd class="hits">
-		<?php echo JText::sprintf('COM_CONTENT_ARTICLE_HITS', $this->item->hits); ?>
+		<?php echo JText::sprintf('COM_CONTENT_ARTICLE_HITS', '<span>'.$this->item->hits.'</span>'); ?>
 		</dd>
 <?php endif; ?>
 <?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date')) or ($params->get('show_parent_category')) or ($params->get('show_hits'))) : ?>
@@ -126,6 +126,19 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 	</ul>
 <?php endif; ?>
 </div>
+<?php endif; ?>
+
+<?php  if (isset($images->image_intro) and !empty($images->image_intro)) : ?>
+	<?php $imgfloat = (empty($images->float_intro)) ? $params->get('float_intro') : $images->float_intro; ?>
+
+	<div class="img-intro-<?php echo htmlspecialchars($imgfloat); ?>">
+	<img
+		<?php if ($images->image_intro_caption):
+			echo 'class="caption"'.' title="' .htmlspecialchars($images->image_intro_caption) .'"';
+		endif; ?>
+		src="<?php echo htmlspecialchars($images->image_intro); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>"/>
+	</div>
+<?php endif; ?>
 
 <?php echo $this->item->introtext; ?>
 
@@ -149,13 +162,13 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 					elseif ($readmore = $this->item->alternative_readmore) :
 						echo $readmore;
 						if ($params->get('show_readmore_title', 0) != 0) :
-						    echo JHTML::_('string.truncate', ($this->item->title), $params->get('readmore_limit'));
+						    echo JHtml::_('string.truncate', ($this->item->title), $params->get('readmore_limit'));
 						endif;
 					elseif ($params->get('show_readmore_title', 0) == 0) :
 						echo JText::sprintf('COM_CONTENT_READ_MORE_TITLE');	
 					else :
 						echo JText::_('COM_CONTENT_READ_MORE');
-						echo JHTML::_('string.truncate', ($this->item->title), $params->get('readmore_limit'));
+						echo JHtml::_('string.truncate', ($this->item->title), $params->get('readmore_limit'));
 					endif; ?></a>
 		</p>
 <?php endif; ?>

@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: install.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,8 +12,6 @@ defined('_JEXEC') or die;
 // Import library dependencies
 
 jimport('joomla.application.component.model');
-jimport('joomla.installer.installer');
-jimport('joomla.installer.helper');
 
 /**
  * Extension Manager Install Model
@@ -54,10 +51,10 @@ class InstallerModelInstall extends JModel
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
-		$this->setState('message',$app->getUserState('com_installer.message'));
-		$this->setState('extension_message',$app->getUserState('com_installer.extension_message'));
-		$app->setUserState('com_installer.message','');
-		$app->setUserState('com_installer.extension_message','');
+		$this->setState('message', $app->getUserState('com_installer.message'));
+		$this->setState('extension_message', $app->getUserState('com_installer.extension_message'));
+		$app->setUserState('com_installer.message', '');
+		$app->setUserState('com_installer.extension_message', '');
 
 		// Recall the 'Install from Directory' path.
 		$path = $app->getUserStateFromRequest($this->_context.'.install_directory', 'install_directory', $app->getCfg('tmp_path'));
@@ -73,7 +70,6 @@ class InstallerModelInstall extends JModel
 	 */
 	function install()
 	{
-		jimport('joomla.client.helper');
 		$this->setState('action', 'install');
 
 		// Set FTP credentials, if given.
@@ -133,7 +129,7 @@ class InstallerModelInstall extends JModel
 		// Cleanup the install files
 		if (!is_file($package['packagefile'])) {
 			$config = JFactory::getConfig();
-			$package['packagefile'] = $config->get('tmp_path').DS.$package['packagefile'];
+			$package['packagefile'] = $config->get('tmp_path') . '/' . $package['packagefile'];
 		}
 
 		JInstallerHelper::cleanupInstall($package['packagefile'], $package['extractdir']);
@@ -178,7 +174,7 @@ class InstallerModelInstall extends JModel
 
 		// Build the appropriate paths
 		$config		= JFactory::getConfig();
-		$tmp_dest	= $config->get('tmp_path').DS.$userfile['name'];
+		$tmp_dest	= $config->get('tmp_path') . '/' . $userfile['name'];
 		$tmp_src	= $userfile['tmp_name'];
 
 		// Move uploaded file
@@ -259,7 +255,7 @@ class InstallerModelInstall extends JModel
 		$tmp_dest	= $config->get('tmp_path');
 
 		// Unpack the downloaded package file
-		$package = JInstallerHelper::unpack($tmp_dest.DS.$p_file);
+		$package = JInstallerHelper::unpack($tmp_dest . '/' . $p_file);
 
 		return $package;
 	}

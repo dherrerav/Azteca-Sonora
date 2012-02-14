@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: helper.php 21144 2011-04-12 23:18:56Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	mod_articles_category
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -18,7 +17,7 @@ require_once $com_path.'helpers/route.php';
 
 jimport('joomla.application.component.model');
 
-JModel::addIncludePath($com_path.DS.'models', 'ContentModel');
+JModel::addIncludePath($com_path . '/models', 'ContentModel');
 
 abstract class modArticlesCategoryHelper
 {
@@ -169,7 +168,7 @@ abstract class modArticlesCategoryHelper
 		}
 
 		// Filter by language
-		$articles->setState('filter.language',$app->getLanguageFilter());
+		$articles->setState('filter.language', $app->getLanguageFilter());
 
 		$items = $articles->getItems();
 
@@ -211,7 +210,7 @@ abstract class modArticlesCategoryHelper
 				$menuitems	= $menu->getItems('link', 'index.php?option=com_users&view=login');
 			if(isset($menuitems[0])) {
 					$Itemid = $menuitems[0]->id;
-				} else if (JRequest::getInt('Itemid') > 0) { //use Itemid from requesting page only if there is no existing menu
+				} elseif (JRequest::getInt('Itemid') > 0) { //use Itemid from requesting page only if there is no existing menu
 					$Itemid = JRequest::getInt('Itemid');
 				}
 
@@ -237,7 +236,7 @@ abstract class modArticlesCategoryHelper
 			$item->displayHits = $show_hits ? $item->hits : '';
 			$item->displayAuthorName = $show_author ? $item->author : '';
 			if ($show_introtext) {
-				$item->introtext = JHtml::_('content.prepare', $item->introtext);
+				$item->introtext = JHtml::_('content.prepare', $item->introtext, '', 'mod_articles_category.content');
 				$item->introtext = self::_cleanIntrotext($item->introtext);
 			}
 			$item->displayIntrotext = $show_introtext ? self::truncate($item->introtext, $introtext_limit) : '';
@@ -322,7 +321,7 @@ abstract class modArticlesCategoryHelper
 
 					$output .= $tag;
 				}
-				else if ($tag[JString::strlen($tag) - 2] == '/') {
+				elseif ($tag[JString::strlen($tag) - 2] == '/') {
 					// Self-closing tag.
 					$output .= $tag;
 				}

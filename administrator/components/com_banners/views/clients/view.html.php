@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 21148 2011-04-14 17:30:08Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -56,24 +55,24 @@ class BannersViewClients extends JView
 
 		JToolBarHelper::title(JText::_('COM_BANNERS_MANAGER_CLIENTS'), 'banners-clients.png');
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::addNew('client.add','JTOOLBAR_NEW');
+			JToolBarHelper::addNew('client.add');
 		}
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::editList('client.edit','JTOOLBAR_EDIT');
+			JToolBarHelper::editList('client.edit');
 		}
 		if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::divider();
-			JToolBarHelper::custom('clients.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-			JToolBarHelper::custom('clients.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::publish('clients.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::unpublish('clients.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 			JToolBarHelper::divider();
-			JToolBarHelper::archiveList('clients.archive','JTOOLBAR_ARCHIVE');
-			JToolBarHelper::custom('clients.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+			JToolBarHelper::archiveList('clients.archive');
+			JToolBarHelper::checkin('clients.checkin');
 		}
-		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::trash('clients.trash','JTOOLBAR_TRASH');
-		}
-		if ( $canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'clients.delete','JTOOLBAR_EMPTY_TRASH');
+		if ($this->state->get('filter.state') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'clients.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
+		} elseif ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('clients.trash');
 			JToolBarHelper::divider();
 		}
 

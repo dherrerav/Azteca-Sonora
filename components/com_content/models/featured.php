@@ -1,16 +1,15 @@
 <?php
 /**
- * @version		$Id: featured.php 20469 2011-01-28 14:35:19Z chdemko $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('_JEXEC') or die;
 
-require_once dirname(__FILE__) . DS . 'articles.php';
+require_once dirname(__FILE__) . '/articles.php';
 
 /**
  * Frontpage Component Model
@@ -60,9 +59,10 @@ class ContentModelFeatured extends ContentModelArticles
 		}
 
 		// check for category selection
-		if (is_array($featuredCategories = $params->get('featured_categories'))) {
-			$this->setState('filter.frontpage.categories', $featuredCategories);
-		}
+		if ($params->get('featured_categories') && implode(',', $params->get('featured_categories'))  == true) {
+			$featuredCategories = $params->get('featured_categories');
+ 			$this->setState('filter.frontpage.categories', $featuredCategories);
+ 		}
 	}
 
 	/**
@@ -129,10 +129,10 @@ class ContentModelFeatured extends ContentModelArticles
 
 		// Filter by categories
 		if (is_array($featuredCategories = $this->getState('filter.frontpage.categories'))) {
-			$query->where('a.catid IN (' . implode(',',$featuredCategories) . ')');
+			$query->where('a.catid IN (' . implode(',', $featuredCategories) . ')');
 		}
 
-		//echo nl2br(str_replace('#__','jos_',$query));
+
 		return $query;
 	}
 }

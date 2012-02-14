@@ -1,4 +1,8 @@
 <?php
+
+// No direct access
+defined('_JEXEC') or die;
+
 	/**
 	 * File: Browser.php
 	 * Author: Chris Schuld (http://chrisschuld.com/)
@@ -444,7 +448,7 @@
 	    protected function checkBrowserGoogleBot() {
 		    if( stripos($this->_agent,'googlebot') !== false ) {
 				$aresult = explode('/',stristr($this->_agent,'googlebot'));
-				$aversion = explode(' ',$aresult[1]);
+				$aversion = isset($aresult[1]) ? explode(' ',$aresult[1]) : array(0);
 				$this->setVersion(str_replace(';','',$aversion[0]));
 				$this->_browser_name = self::BROWSER_GOOGLEBOT;
 				$this->setRobot(true);
@@ -460,7 +464,7 @@
 		protected function checkBrowserMSNBot() {
 			if( stripos($this->_agent,"msnbot") !== false ) {
 				$aresult = explode("/",stristr($this->_agent,"msnbot"));
-				$aversion = explode(" ",$aresult[1]);
+				$aversion = isset($aresult[1]) ? explode(' ',$aresult[1]) : array(0);
 				$this->setVersion(str_replace(";","",$aversion[0]));
 				$this->_browser_name = self::BROWSER_MSNBOT;
 				$this->setRobot(true);

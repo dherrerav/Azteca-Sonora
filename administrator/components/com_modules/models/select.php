@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: select.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	com_modules
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -85,7 +84,7 @@ class ModulesModelSelect extends JModelList
 				'a.extension_id, a.name, a.element AS module'
 			)
 		);
-		$query->from('`#__extensions` AS a');
+		$query->from($db->quoteName('#__extensions').' AS a');
 
 		// Filter by module
 		$query->where('a.type = '.$db->Quote('module'));
@@ -94,8 +93,11 @@ class ModulesModelSelect extends JModelList
 		$clientId = $this->getState('filter.client_id');
 		$query->where('a.client_id = '.(int) $clientId);
 
+		// Filter by enabled
+		$query->where('a.enabled = 1');
+
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->escape($this->getState('list.ordering', 'a.ordering')).' '.$db->escape($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

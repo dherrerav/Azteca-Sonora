@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -58,6 +57,14 @@ class TemplatesViewTemplates extends JView
 			return false;
 		}
 
+		// Check if there are no matching items
+		if(!count($this->items)) {
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_TEMPLATES_MSG_MANAGE_NO_TEMPLATES')
+				, 'warning'
+			);
+		}
+
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -76,7 +83,7 @@ class TemplatesViewTemplates extends JView
 		JToolBarHelper::title(JText::_('COM_TEMPLATES_MANAGER_TEMPLATES'), 'thememanager');
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_templates');
-			JToolBarHelper::divider();	
+			JToolBarHelper::divider();
 		}
 		JToolBarHelper::help('JHELP_EXTENSIONS_TEMPLATE_MANAGER_TEMPLATES');
 	}

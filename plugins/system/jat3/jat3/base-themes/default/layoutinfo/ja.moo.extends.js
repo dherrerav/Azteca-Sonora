@@ -1,14 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3v2 Plugin - Template framework for Joomla 1.5
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2010 JoomlArt.com. All Rights Reserved.
-# @license - GNU/GPL V2, http://www.gnu.org/licenses/gpl2.html. For details 
-# on licensing, Please Read Terms of Use at http://www.joomlart.com/terms_of_use.html.
-# Author: JoomlArt.com
-# Websites: http://www.joomlart.com - http://www.joomlancers.com.
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 //Extend Sortables class to enable sort element in horizontal direction
 HSortables = Sortables.extend ({

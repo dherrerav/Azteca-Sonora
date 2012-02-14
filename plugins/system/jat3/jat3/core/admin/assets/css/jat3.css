@@ -1,30 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
-
-/* Clearfix
--------------------------------------------------------------*/
-* html .clearfix {
-	height: 1%; /* IE5-6 */
-}
-
-html[xmlns] .clearfix { /* O */
-	display: block;  
-}
-
-.clearfix:after { /* FF, O, etc. */
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 form, 
 #ja-tabswrapmain {
@@ -33,9 +16,9 @@ form,
 
 #ja-tabswrap { margin: 0; }
 
-.admintable{ width: 100%; }
+.admintable { width: 100%; }
 
-td.paramlist_value { width: 60% !important; }
+.paramlist td.paramlist_value { width: 60% !important; padding: 5px 0 !important; }
 
 table.ja-list-pageids,
 table.ja-user-theme,
@@ -67,6 +50,12 @@ table tr.ja-item td {
 	border-bottom: solid 1px #ddd;
 	padding: 5px 10px 5px 35px !important;
 	text-transform: capitalize;
+}
+
+#pages_profile-ja-list-pageids tr.changed td {
+    background: #ffdddd;
+    border-top: dotted 1px red !important;
+    border-bottom: dotted 1px red !important;
 }
 
 table.admintable tr.cjanmtd.key, 
@@ -173,15 +162,36 @@ div.ja-popup-pageids {
 }
 
 div.ja-popup-pageids div {
-	padding: 5px 0px !important;
 	background: url("../images/table-bg.gif") repeat-x scroll center top #F8F8F8 !important;
+	padding: 5px 0px;
 }
+
+div.ja-popup-pageids .page-assignment-bar {
+	border-bottom: 1px solid #dde8ed;
+	text-align: right;
+}
+
+div.ja-popup-pageids div.language {
+	background: none;
+	margin: -30px 0 3px;
+	padding-left: 10px;
+}
+
+div.ja-popup-pageids div.language span {
+	font-weight: bold;
+}
+
 div.ja-popup-pageids div input {
 	width: 70px;
-	padding: 2px 0px;
+	padding: 2px 0;
 	cursor: pointer;
 	font-weight: bold;
 	border: none !important;
+	text-transform: capitalize;
+}
+
+div.ja-popup-pageids div input:hover {
+	color: #ed4208;
 }
 
 div.ja-popup-pageids div input.save {
@@ -396,7 +406,7 @@ table.ja-layout-titles td{
 
 #ja-layout-container li {
 	padding: 2px 15px 2px 20px;
-	margin: 3px 0px;
+	margin: 4px 0px 3px;
 	display: block;
 	font-weight: bold;
 	cursor: pointer;
@@ -538,7 +548,7 @@ table.ja-list-pageids {
 	float:right;
 	background: url("../images/icon-add.gif") no-repeat top left !important;	
 	padding: 1px 5px 1px 20px !important;
-	margin: 5px 5px 0px 0px;
+	margin: 5px 5px 5px 0px;
 	font-weight: bold;
 	cursor: pointer;
 }
@@ -718,10 +728,16 @@ fieldset.panelform {
 	border-right: none !important;
 }
 
+.pane-sliders .pane-toggler span {
+	background: none;
+	padding-left: 0;
+}
+
 .jpane-slider fieldset.panelform, .ja-tab-subcontent fieldset.panelform {
 	padding: 0px;
 	margin: 0px;
 }
+
 
 .pane-sliders {
 	margin-top: 10px;
@@ -729,7 +745,7 @@ fieldset.panelform {
 
 fieldset.panelform table.admintable td.paramlist_key {
 	padding-left: 15px !important;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 label.editlinktip {
@@ -739,6 +755,7 @@ label.editlinktip {
 	padding: 0px;
 	margin: 0px;
 }
+
 #ja-page-assignment{
 	border: 1px solid #CCCCCC;
 	border-top: none;
@@ -748,15 +765,20 @@ label.editlinktip {
 	top: 10px;
 	position: relative;
 }
+
 #ja-head-page-settings{
 	margin-top: 0;
+	margin-bottom: 0;
 }
-.tip-wrap{
+
+.tip-wrap {
 	z-index: 100 !important;
 }
+
 label.txtgfont{
 	clear: none !important;
 }
+
 #jat3-help-content{
 	float: left;
 	position: fixed;
@@ -877,6 +899,7 @@ div.ja-subcontent-help{
 	width: 95%;
 	display: block;
 }
+
 .ja-youtubeslider-center div.js-youtube-slide {
 	border:1px solid #FFFFFF;
 	margin:0 5px;
@@ -885,10 +908,12 @@ div.ja-subcontent-help{
 	display: block;
 	
 }
+
 .js-youtube-slide .inner {
 	padding:9px 0 0 !important;
 	
 }
+
 .ja-youtubeslider-center .ja-utobe-top-img {
 	background:url("../images/video_thumb.jpg") no-repeat scroll right top transparent;
 	float:left;
@@ -896,6 +921,7 @@ div.ja-subcontent-help{
 	width:130px;
 	margin-right: 20px;
 }
+
 .ja-youtubeslider-center .ja-utobe-top-img a {
 	background:url("../images/play.png") no-repeat scroll right top transparent;
 	height:40px;
@@ -905,16 +931,19 @@ div.ja-subcontent-help{
 	text-decoration:none !important;
 	float: left;
 }
+
 .ja-youtubeslider-center .ja-utobe-top-content {
 	padding:0 8px 0 10px;
 	color:#28739A;
 	font-weight:bold;
 	margin-right: 25px;
 }
+
 .ja-utobe-top-content h3 {
 	margin:0 0 5px;
 	padding: 0;
 }
+
 .ja-utobe-top-content p {
 	color:#333333;
 	font-size:85%;
@@ -923,6 +952,7 @@ div.ja-subcontent-help{
 	margin:0;
 	padding: 0;
 }
+
 div.width-40 {
 	position: relative;
 }
@@ -936,6 +966,7 @@ div.width-40 #ja-tabswrapmain {
 div.width-60 #ja-page-assignment {
 	margin-bottom: 18px;
 }
+
 #sbox-content{
 	overflow: hidden;
 }
@@ -962,4 +993,148 @@ span.page-more, span.more {
 
 .help-support-content{
 	width: 98%;
+}
+
+/* ------------------------------------------------
+	page-assignment-list Styler 	
+---------------------------------------------------*/
+div.ja-popup-pageids div.pages {
+	background: #eee !important;
+	overflow: auto;
+	padding: 8px 0;
+	position: relative;
+	width: 300px;
+}
+
+div.ja-popup-pageids div.pages span {
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+div.ja-popup-pageids div.page-assignment-panel {
+	background: none !important;
+}
+
+div.ja-popup-pageids div.page-assignment-panel ul#page-assignment-list {
+	margin-left: 10px;
+}
+
+#page-assignment-list,
+#page-assignment-list ul,
+#page-assignment-list li{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#page-assignment-list {
+}
+
+#page-assignment-list ul {
+	display:none;
+}
+
+#page-assignment-list li {
+	line-height: 200%;
+	background: #eee;
+	position: relative;
+	width: 100%;
+}
+
+/* IE leaves a blank space where span is added so this is to avoid that */
+* html #page-assignment-list li{
+	float: left;
+	display: inline;
+}
+
+#page-assignment-list li span,
+#page-assignment-list li span.collapsed {
+	background: url(../images/collapsed.gif) no-repeat 0 0;
+} 
+
+#page-assignment-list li span.expanded {
+    background:url(../images/expanded.gif) no-repeat 0 0;
+}
+
+#page-assignment-list li input.menutype {
+    margin-left: 0px;
+    visibility: hidden;
+}
+
+#page-assignment-list li input { 
+	margin-left: 18px;
+	width: 20px;
+}
+
+#page-assignment-list li span {
+	float: left;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 13px;
+	height: 13px;
+	cursor: auto;
+	font-size: 0;
+}
+
+#page-assignment-list li li { 
+	background:#fff;
+	border-top: 1px solid #eee;
+}
+
+#page-assignment-list li li input { margin-left: 32px; }
+#page-assignment-list li li span{left:18px;}
+
+#page-assignment-list li li li input { margin-left: 48px; }
+#page-assignment-list li li li span{left:32px;}
+
+#page-assignment-list li li li li input { margin-left: 66px; }
+#page-assignment-list li li li li span{left:48px;}
+
+#page-assignment-list li li li li li input { margin-left: 84px; }
+#page-assignment-list li li li li li span{left:66px;}
+
+#page-assignment-list li li li li li li input { margin-left: 102px; }
+#page-assignment-list li li li li li li span{left:84px;}
+
+#page-assignment-list li li li li li li li input { margin-left: 120px; }
+#page-assignment-list li li li li li li li span{left:102px;}
+
+/* Convert error message style */
+#convert-folder-structure {
+    background: #ffd;
+    border: 1px solid #ccc;
+    margin-top: 15px;
+}
+
+#convert-folder-structure h3 {
+    padding-left: 10px;
+}
+
+#convert-folder-structure ul {
+    padding-left: 25px;
+    color: red;
+    font-weight: bold;
+}
+
+#convert-folder-structure ul li {
+    list-style: circle;
+    padding-left: 0px;
+}
+
+/* Clearfix
+-------------------------------------------------------------*/
+* html .clearfix {
+	height: 1%; /* IE5-6 */
+}
+
+html[xmlns] .clearfix { /* O */
+	display: block;  
+}
+
+.clearfix:after { /* FF, O, etc. */
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
 }

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id: language.xml 20990 2011-03-18 16:42:30Z infograf768 $ -->
 <form>
 	<fieldset>
 		<field name="lang_id" type="text"
@@ -33,6 +32,7 @@
 			description="COM_LANGUAGES_FIELD_TITLE_NATIVE_DESC"
 			label="COM_LANGUAGES_FIELD_TITLE_NATIVE_LABEL"
 			maxlength="50"
+			required="true"
 			size="40"
 		/>
 
@@ -50,6 +50,7 @@
 			description="COM_LANGUAGES_FIELD_IMAGE_DESC"
 			label="COM_LANGUAGES_FIELD_IMAGE_LABEL"
 			maxlength="7"
+			required="true"
 			size="10"
 		/>
 
@@ -88,6 +89,14 @@
 			label="JFIELD_META_DESCRIPTION_LABEL"
 			rows="3"
 			cols="30"
+		/>
+	</fieldset>
+	<fieldset name="site_name" label="COM_LANGUAGES_FIELDSET_SITE_NAME_LABEL">
+		<field name="sitename" type="text"
+			description="COM_LANGUAGES_FIELD_SITE_NAME_DESC"
+			label="COM_LANGUAGES_FIELD_SITE_NAME_LABEL"
+			filter="string"
+			size="50"
 		/>
 	</fieldset>
 </form>

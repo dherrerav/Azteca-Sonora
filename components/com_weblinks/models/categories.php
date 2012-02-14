@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: categories.php
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -97,7 +96,7 @@ class WeblinksModelCategories extends JModel
 			$params = new JRegistry();
 			if($active)
 			{
-				$params->loadJSON($active->params);
+				$params->loadString($active->params);
 			}
 			$options = array();
 			$options['countItems'] = $params->get('show_cat_num_links', 1) || !$params->get('show_empty_categories_cat', 0);

@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -49,7 +48,7 @@ class MenusController extends JController
 
 			return false;
 		}
-		else if ($view == 'item' && $layout == 'edit' && !$this->checkEditId('com_menus.edit.item', $id)) {
+		elseif ($view == 'item' && $layout == 'edit' && !$this->checkEditId('com_menus.edit.item', $id)) {
 
 			// Somehow the person just went to the form - we don't allow that.
 			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));

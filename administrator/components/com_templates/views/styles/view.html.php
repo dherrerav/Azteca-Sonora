@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.html.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,11 +30,20 @@ class TemplatesViewStyles extends JView
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state		= $this->get('State');
+		$this->preview		= JComponentHelper::getParams('com_templates')->get('template_positions_display');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
+		}
+
+			// Check if there are no matching items
+		if(!count($this->items)) {
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_TEMPLATES_MSG_MANAGE_NO_STYLES')
+				, 'warning'
+			);
 		}
 
 		$this->addToolbar();
@@ -61,21 +69,21 @@ class TemplatesViewStyles extends JView
 		}
 
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::editList('style.edit','JTOOLBAR_EDIT');
+			JToolBarHelper::editList('style.edit');
 		}
-		if ($canDo->get('core.create') && $isSite) {
-			JToolBarHelper::addNew('styles.duplicate', 'JTOOLBAR_DUPLICATE');
-			JToolBarHelper::divider();			
+		if ($canDo->get('core.create')) {
+			JToolBarHelper::custom('styles.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
+			JToolBarHelper::divider();
 		}
 
-		if ($canDo->get('core.delete') && $isSite) {
-			JToolBarHelper::deleteList('', 'styles.delete','JTOOLBAR_DELETE');
-			JToolBarHelper::divider();			
+		if ($canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'styles.delete');
+			JToolBarHelper::divider();
 		}
 
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_templates');
-			JToolBarHelper::divider();			
+			JToolBarHelper::divider();
 		}
 		JToolBarHelper::help('JHELP_EXTENSIONS_TEMPLATE_MANAGER_STYLES');
 	}

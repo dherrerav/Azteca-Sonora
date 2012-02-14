@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: manager.php 21030 2011-03-29 16:32:56Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -64,7 +63,7 @@ class MediaModelManager extends JModel
 		$document->setTitle(JText::_('COM_MEDIA_INSERT_IMAGE'));
 
 		// Build the array of select options for the folder list
-		$options[] = JHtml::_('select.option', "","/");
+		$options[] = JHtml::_('select.option', "", "/");
 
 		foreach ($folders as $folder)
 		{
@@ -79,10 +78,13 @@ class MediaModelManager extends JModel
 			sort($options);
 		}
 
+		// Get asset and author id (use integer filter)
+		$input = JFactory::getApplication()->input;
+		$asset = $input->get('asset', 0, 'integer');
+		$author = $input->get('author', 0, 'integer');
+
 		// Create the drop-down folder select list
-		$asset = JRequest::getVar('asset');
-		$author = JRequest::getVar('author');
-		$list = JHtml::_('select.genericlist',  $options, 'folderlist', "class=\"inputbox\" size=\"1\" onchange=\"ImageManager.setFolder(this.options[this.selectedIndex].value,'".$asset."','$author'".")\" ", 'value', 'text', $base);
+		$list = JHtml::_('select.genericlist',  $options, 'folderlist', 'class="inputbox" size="1" onchange="ImageManager.setFolder(this.options[this.selectedIndex].value, "'.$asset.'","'.$author.'")" ', 'value', 'text', $base);
 
 		return $list;
 	}
@@ -112,7 +114,7 @@ class MediaModelManager extends JModel
 			$node		= (object) array('name' => $name, 'relative' => $relative, 'absolute' => $absolute);
 
 			$tmp = &$tree;
-			for ($i=0,$n=count($path); $i<$n; $i++)
+			for ($i=0, $n=count($path); $i<$n; $i++)
 			{
 				if (!isset($tmp['children'])) {
 					$tmp['children'] = array();

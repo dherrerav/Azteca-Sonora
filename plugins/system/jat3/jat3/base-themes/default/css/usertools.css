@@ -1,13 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 /* CPanel ---*/
 #ja-cpanel-wrapper {
@@ -64,6 +64,7 @@
 	width: 45%;
 	padding: 2px 0;
 	margin-right: 10px;
+	background-image: none;
 }
 
 .ja-box-usertools { background: #fff; }
@@ -159,6 +160,11 @@ a#ja-cpanel-toggle:hover,
 	overflow: hidden;
 }
 
+.ja-cpanel-action a {
+	padding: 2px 2px;
+	float: left;
+}
+
 .ja-cpanel-action a.button {
 	display: inline-block;
 	border: 1px solid #333;
@@ -167,10 +173,6 @@ a#ja-cpanel-toggle:hover,
 	padding: 2px 10px;
 	font-weight: bold;
 	margin-right: 10px;
-}
-
-.ja-cpanel-action a {
-	float: left;
 }
 
 .ja-cpanel-action a.ja-cpanel-video {

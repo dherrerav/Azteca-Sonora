@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default_results.php 20244 2011-01-10 10:23:58Z eddieajau $
  * @package		Joomla.Site
  * @subpackage	com_search
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,7 +23,7 @@ defined('_JEXEC') or die;
 		<?php endif; ?>
 	</dt>
 	<?php if ($result->section) : ?>
-		<dd class="result-category">		
+		<dd class="result-category">
 			<span class="small<?php echo $this->pageclass_sfx; ?>">
 				(<?php echo $this->escape($result->section); ?>)
 			</span>

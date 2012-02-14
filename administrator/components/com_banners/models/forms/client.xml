@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id: client.xml 20990 2011-03-18 16:42:30Z infograf768 $ -->
 <form>
 	<fieldset name="details"
 		addfieldpath="/administrator/components/com_banners/models/fields"
 	>
-		<field name="id" type="text" default="0" 
+		<field name="id" type="text" default="0"
 			readonly="true" class="readonly"
 			label="JGLOBAL_FIELD_ID_LABEL" description ="JGLOBAL_FIELD_ID_DESC"/>
 

@@ -1,13 +1,13 @@
-/*
-# ------------------------------------------------------------------------
-# JA T3 System plugin for Joomla 1.6
-# ------------------------------------------------------------------------
-# Copyright (C) 2004-2009 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
-# @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
-# Author: J.O.O.M Solutions Co., Ltd
-# Websites: http://www.joomlart.com - http://www.joomlancers.com
-# ------------------------------------------------------------------------
-*/
+/**
+ * ------------------------------------------------------------------------
+ * JA T3 System Plugin for Joomla 2.5
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2004-2011 J.O.O.M Solutions Co., Ltd. All Rights Reserved.
+ * @license - GNU/GPL, http://www.gnu.org/licenses/gpl.html
+ * Author: J.O.O.M Solutions Co., Ltd
+ * Websites: http://www.joomlart.com - http://www.joomlancers.com
+ * ------------------------------------------------------------------------
+ */
 
 /*===========
 template.css
@@ -22,17 +22,13 @@ th { text-align: right; }
 a.readon {}
 
 /* List ---*/
-.ja-moduletable ul li,
-.ja-module ul li,
-.ja-content-main ul li {
+.column ul li {
 	background-position: 97% 8px;
 	padding-right: 30px;
 	padding-left: 0;
 }
 
-.ja-moduletable ol li,
-.ja-module ol li,
-.ja-content-main ol li { margin-left: 0; margin-right: 30px; }
+.column ol li { margin-left: 0; margin-right: 30px; }
 
 /* FORM
 --------------------------------------------------------- */
@@ -90,6 +86,10 @@ fieldset dd {
     float: right;
  }
 
+#contact-slider .contact-image {
+	float: left;
+}
+ 
 /* JOOMLA STYLE
 --------------------------------------------------------- */
 /* Meta ---*/
@@ -129,6 +129,11 @@ img[align="right"] {
 
 .img_caption.left img[align="left"] {
 	margin-left: 0;
+}
+
+#ja-container ul.menu li a img {
+	margin-left: 3px;
+	margin-right: 0;
 }
 
 /* Content Toc */
@@ -372,7 +377,7 @@ menu/*.css
 .ja-megamenu li.mega li.haschild-over li.mega .childcontent ,
 .ja-megamenu li.mega li.mega li.haschild-over li.mega .childcontent, 
 .ja-megamenu li.mega li.mega li.mega li.haschild-over li.mega .childcontent, 
-.ja-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .childcontent { left: auto; right: -999em; /*hide the menu*/ }
+.ja-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .childcontent { /*left: auto; right: -999em;*/ /*hide the menu*/ }
 
 .ja-megamenu li.haschild-over .childcontent,
 .ja-megamenu li.mega li.haschild-over .childcontent,

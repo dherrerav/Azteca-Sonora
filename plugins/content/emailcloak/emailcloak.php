@@ -1,14 +1,11 @@
 <?php
 /**
- * @version		$Id: emailcloak.php 21141 2011-04-11 17:20:15Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access.
 defined('_JEXEC') or die;
-
-jimport('joomla.plugin.plugin');
 
 /**
  * Email cloack plugin class.
@@ -29,6 +26,11 @@ class plgContentEmailcloak extends JPlugin
 	 */
 	public function onContentPrepare($context, &$row, &$params, $page = 0)
 	{
+		// Don't run this plugin when the content is being indexed
+		if ($context == 'com_finder.indexer') {
+			return true;
+		}
+
 		if (is_object($row)) {
 			return $this->_cloak($row->text, $params);
 		}
@@ -80,7 +82,7 @@ class plgContentEmailcloak extends JPlugin
 		$searchEmailLink = $searchEmail . '([?&][\x20-\x7f][^"<>]+)';
 		// anyText
 		$searchText = '([\x20-\x7f][^<>]+)';
-		
+
 		//Any Image link
 		$searchImage	=	"(<img[^>]+>)";
 
@@ -150,7 +152,7 @@ class plgContentEmailcloak extends JPlugin
 			// Replace the found address with the js cloaked email
 			$text = substr_replace($text, $replacement, $regs[0][1], strlen($regs[0][0]));
 		}
-		
+
 	/*
 		 * Search for derivatives of link code <a href="mailto:email@amail.com">
 		 * <img anything></a>

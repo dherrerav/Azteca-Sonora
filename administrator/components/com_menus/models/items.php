@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: items.php 21006 2011-03-21 06:20:03Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -45,6 +44,9 @@ class MenusModelItems extends JModelList
 				'client_id', 'a.client_id',
 				'home', 'a.home',
 			);
+			if (JFactory::getApplication()->get('menu_associations', 0)) {
+				$config['filter_fields'][] = 'association';
+			}
 		}
 
 		parent::__construct($config);
@@ -77,7 +79,7 @@ class MenusModelItems extends JModelList
 		$level = $this->getUserStateFromRequest($this->context.'.filter.level', 'filter_level', 0, 'int');
 		$this->setState('filter.level', $level);
 
-		$menuType = JRequest::getVar('menutype',null);
+		$menuType = JRequest::getVar('menutype', null);
 		if ($menuType) {
 			if ($menuType != $app->getUserState($this->context.'.filter.menutype')) {
 				$app->setUserState($this->context.'.filter.menutype', $menuType);
@@ -160,28 +162,38 @@ class MenusModelItems extends JModelList
 	protected function getListQuery()
 	{
 		// Create a new query object.
-		$db = $this->getDbo();
-		$query = $db->getQuery(true);
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		$user	= JFactory::getUser();
+		$app	= JFactory::getApplication();
 
 		// Select all fields from the table.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__menu` AS a');
+		$query->from($db->quoteName('#__menu').' AS a');
 
 		// Join over the language
 		$query->select('l.title AS language_title, l.image as image');
-		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		$query->join('LEFT', $db->quoteName('#__languages').' AS l ON l.lang_code = a.language');
 
 		// Join over the users.
 		$query->select('u.name AS editor');
-		$query->join('LEFT', '`#__users` AS u ON u.id = a.checked_out');
+		$query->join('LEFT', $db->quoteName('#__users').' AS u ON u.id = a.checked_out');
 
 		//Join over components
 		$query->select('c.element AS componentname');
-		$query->join('LEFT', '`#__extensions` AS c ON c.extension_id = a.component_id');
+		$query->join('LEFT', $db->quoteName('#__extensions').' AS c ON c.extension_id = a.component_id');
 
 		// Join over the asset groups.
 		$query->select('ag.title AS access_level');
 		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+
+		// Join over the associations.
+		if ($app->get('menu_associations', 0)) {
+			$query->select('COUNT(asso2.id)>1 as association');
+			$query->join('LEFT', '#__associations AS asso ON asso.id = a.id AND asso.context='.$db->quote('com_menus.item'));
+			$query->join('LEFT', '#__associations AS asso2 ON asso2.key = asso.key');
+			$query->group('a.id');
+		}
 
 		// Exclude the root category.
 		$query->where('a.id > 1');
@@ -191,7 +203,7 @@ class MenusModelItems extends JModelList
 		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
 			$query->where('a.published = '.(int) $published);
-		} else if ($published === '') {
+		} elseif ($published === '') {
 			$query->where('(a.published IN (0, 1))');
 		}
 
@@ -199,13 +211,13 @@ class MenusModelItems extends JModelList
 		if ($search = trim($this->getState('filter.search'))) {
 			if (stripos($search, 'id:') === 0) {
 				$query->where('a.id = '.(int) substr($search, 3));
-			} else if (stripos($search, 'link:') === 0) {
+			} elseif (stripos($search, 'link:') === 0) {
 				if ($search = substr($search, 5)) {
-					$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+					$search = $db->Quote('%'.$db->escape($search, true).'%');
 					$query->where('a.link LIKE '.$search);
 				}
 			} else {
-				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+				$search = $db->Quote('%'.$db->escape($search, true).'%');
 				$query->where('('.'a.title LIKE '.$search.' OR a.alias LIKE '.$search.' OR a.note LIKE '.$search.')');
 			}
 		}
@@ -227,6 +239,13 @@ class MenusModelItems extends JModelList
 			$query->where('a.access = '.(int) $access);
 		}
 
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+		    $groups	= implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.access IN ('.$groups.')');
+		}
+
 		// Filter on the level.
 		if ($level = $this->getState('filter.level')) {
 			$query->where('a.level <= '.(int) $level);
@@ -238,7 +257,7 @@ class MenusModelItems extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.lft')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->escape($this->getState('list.ordering', 'a.lft')).' '.$db->escape($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',(string)$query)).'<hr/>';
 		return $query;

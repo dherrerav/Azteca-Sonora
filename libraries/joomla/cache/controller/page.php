@@ -1,72 +1,72 @@
 <?php
 /**
- * @version		$Id: page.php 21089 2011-04-05 22:10:12Z dextercowley $
- * @package		Joomla.Framework
- * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Cache
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Joomla! Cache page type object
  *
- * @package		Joomla.Framework
- * @subpackage	Cache
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  Cache
+ * @since       11.1
  */
 class JCacheControllerPage extends JCacheController
 {
 	/**
-	 * ID property for the cache page object.
-	 *
-	 * @var		integer
-	 * @since	1.6
+	 * @var    integer  ID property for the cache page object.
+	 * @since  11.1
 	 */
-	private $_id;
+	protected $_id;
 
 	/**
-	 * Cache group
-	 *
-	 * @var		string
-	 * @since	1.6
+	 * @var    string  Cache group
+	 * @since  11.1
 	 */
-	private $_group;
+	protected $_group;
 
 	/**
-	 * Cache lock test
-	 *
-	 * @var		object
-	 * @since	1.6
+	 * @var    object  Cache lock test
+	 * @since  11.1
 	 */
-	private $_locktest = null;
+	protected $_locktest = null;
 
 	/**
 	 * Get the cached page data
 	 *
-	 * @param	string	$id		The cache data id
-	 * @param	string	$group	The cache data group
-	 * @return	boolean	True if the cache is hit (false else)
-	 * @since	1.6
+	 * @param   string   $id          The cache data id
+	 * @param   string   $group       The cache data group
+	 * @param   boolean  $wrkarounds  True to use wrkarounds
+	 *
+	 * @return  boolean  True if the cache is hit (false else)
+	 *
+	 * @since   11.1
 	 */
-	public function get($id=false, $group='page', $wrkarounds=true)
+	public function get($id = false, $group = 'page', $wrkarounds = true)
 	{
 		// Initialise variables.
 		$data = false;
 
-		// If an id is not given generate it from the request
-		if ($id == false) {
+		// If an id is not given, generate it from the request
+		if ($id == false)
+		{
 			$id = $this->_makeId();
 		}
 
-		// If the etag matches the page id ... sent a no change header and exit : utilize browser cache
-		if (!headers_sent() && isset($_SERVER['HTTP_IF_NONE_MATCH'])){
+		// If the etag matches the page id ... set a no change header and exit : utilize browser cache
+		if (!headers_sent() && isset($_SERVER['HTTP_IF_NONE_MATCH']))
+		{
 			$etag = stripslashes($_SERVER['HTTP_IF_NONE_MATCH']);
-			if ($etag == $id) {
+			if ($etag == $id)
+			{
 				$browserCache = isset($this->options['browsercache']) ? $this->options['browsercache'] : false;
-				if ($browserCache) {
+				if ($browserCache)
+				{
 					$this->_noChange();
 				}
 			}
@@ -79,60 +79,71 @@ class JCacheControllerPage extends JCacheController
 		$this->_locktest->locked = null;
 		$this->_locktest->locklooped = null;
 
-		if ($data === false) {
+		if ($data === false)
+		{
 			$this->_locktest = $this->cache->lock($id, $group);
-			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true) {
+			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true)
+			{
 				$data = $this->cache->get($id, $group);
 			}
 		}
 
-		if ($data !== false) {
+		if ($data !== false)
+		{
 			$data = unserialize(trim($data));
-			if ($wrkarounds === true) {
+			if ($wrkarounds === true)
+			{
 				$data = JCache::getWorkarounds($data);
 			}
 
 			$this->_setEtag($id);
-			if ($this->_locktest->locked == true) {
+			if ($this->_locktest->locked == true)
+			{
 				$this->cache->unlock($id, $group);
 			}
 			return $data;
 		}
 
 		// Set id and group placeholders
-		$this->_id		= $id;
-		$this->_group	= $group;
+		$this->_id = $id;
+		$this->_group = $group;
 		return false;
 	}
 
 	/**
 	 * Stop the cache buffer and store the cached data
 	 *
-	 * @return	boolean	True if cache stored
-	 * @since	1.6
+	 * @param   boolean  $wrkarounds  True to use wrkarounds
+	 *
+	 * @return  boolean  True if cache stored
+	 *
+	 * @since   11.1
 	 */
-	public function store($wrkarounds=true)
+	public function store($wrkarounds = true)
 	{
 		// Get page data from JResponse body
 		$data = JResponse::getBody();
 
-		// Get id and group and reset them placeholders
-		$id		= $this->_id;
-		$group	= $this->_group;
-		$this->_id		= null;
-		$this->_group	= null;
+		// Get id and group and reset the placeholders
+		$id = $this->_id;
+		$group = $this->_group;
+		$this->_id = null;
+		$this->_group = null;
 
 		// Only attempt to store if page data exists
-		if ($data) {
-			$data = $wrkarounds==false ? $data : JCache::setWorkarounds($data);
+		if ($data)
+		{
+			$data = $wrkarounds == false ? $data : JCache::setWorkarounds($data);
 
-			if ($this->_locktest->locked == false) {
+			if ($this->_locktest->locked == false)
+			{
 				$this->_locktest = $this->cache->lock($id, $group);
 			}
 
 			$sucess = $this->cache->store(serialize($data), $id, $group);
 
-			if ($this->_locktest->locked == true) {
+			if ($this->_locktest->locked == true)
+			{
 				$this->cache->unlock($id, $group);
 			}
 
@@ -144,24 +155,27 @@ class JCacheControllerPage extends JCacheController
 	/**
 	 * Generate a page cache id
 	 *
-	 * @todo	TODO: Discuss whether this should be coupled to a data hash or a request hash ... perhaps hashed with a serialized request
+	 * @return  string  MD5 Hash : page cache id
 	 *
-	 * @return	string	MD5 Hash : page cache id
-	 * @since	1.6
+	 * @since   11.1
+	 * @todo    Discuss whether this should be coupled to a data hash or a request
+	 * hash ... perhaps hashed with a serialized request
 	 */
-	private function _makeId()
+	protected function _makeId()
 	{
 		//return md5(JRequest::getURI());
 		return JCache::makeId();
 	}
 
 	/**
-	 * There is no change in page data so send a not modified header and die gracefully
+	 * There is no change in page data so send an
+	 * unmodified header and die gracefully
 	 *
-	 * @return	void
-	 * @since	1.6
+	 * @return  void
+	 *
+	 * @since   11.1
 	 */
-	private function _noChange()
+	protected function _noChange()
 	{
 		$app = JFactory::getApplication();
 
@@ -173,10 +187,13 @@ class JCacheControllerPage extends JCacheController
 	/**
 	 * Set the ETag header in the response
 	 *
-	 * @return	void
-	 * @since	1.6
+	 * @param   string  $etag  The entity tag (etag) to set
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
 	 */
-	private function _setEtag($etag)
+	protected function _setEtag($etag)
 	{
 		JResponse::setHeader('ETag', $etag, true);
 	}

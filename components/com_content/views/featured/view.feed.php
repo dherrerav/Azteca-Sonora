@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: view.feed.php 20196 2011-01-09 02:40:25Z ian $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -44,7 +43,7 @@ class ContentViewFeatured extends JView
 			$row->slug = $row->alias ? ($row->id . ':' . $row->alias) : $row->id;
 
 			// url link to article
-			$link = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catid), false);
+			$link = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catid));
 
 
 			// strip html from feed item description text
@@ -58,7 +57,7 @@ class ContentViewFeatured extends JView
 			$item->link			= $link;
 			$item->description	= $description;
 			$item->date			= $row->created;
-			
+
 			$item_category		= $categories->get($row->catid);
 			$item->category		= array();
 			$item->category[]	= JText::_('JFEATURED'); // All featured articles are categorized as "Featured"
@@ -67,7 +66,7 @@ class ContentViewFeatured extends JView
 					$item->category[] = $item_category->title;
 				}
 			}
-			
+
 			$item->author		= $author;
 			if ($feedEmail == 'site') {
 				$item->authorEmail = $siteEmail;

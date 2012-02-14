@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_languages
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +12,7 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
-$canDo		= LanguagesHelper::getActions();
+$canDo = LanguagesHelper::getActions();
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
@@ -29,41 +28,55 @@ $canDo		= LanguagesHelper::getActions();
 		<fieldset class="adminform">
 			<?php if ($this->item->lang_id) : ?>
 				<legend><?php echo JText::sprintf('JGLOBAL_RECORD_NUMBER', $this->item->lang_id); ?></legend>
+			<?php else : ?>
+				<legend><?php echo JText::_('COM_LANGUAGES_VIEW_LANGUAGE_EDIT_NEW_TITLE'); ?></legend>
 			<?php endif; ?>
 
-			<?php echo $this->form->getLabel('title'); ?>
-			<?php echo $this->form->getInput('title'); ?>
+			<ul class="adminformlist">
+				<li><?php echo $this->form->getLabel('title'); ?>
+				<?php echo $this->form->getInput('title'); ?></li>
 
-			<?php echo $this->form->getLabel('title_native'); ?>
-			<?php echo $this->form->getInput('title_native'); ?>
+				<li><?php echo $this->form->getLabel('title_native'); ?>
+				<?php echo $this->form->getInput('title_native'); ?></li>
 
-			<?php echo $this->form->getLabel('sef'); ?>
-			<?php echo $this->form->getInput('sef'); ?>
+				<li><?php echo $this->form->getLabel('sef'); ?>
+				<?php echo $this->form->getInput('sef'); ?></li>
 
-			<?php echo $this->form->getLabel('image'); ?>
-			<?php echo $this->form->getInput('image'); ?>
+				<li><?php echo $this->form->getLabel('image'); ?>
+				<?php echo $this->form->getInput('image'); ?></li>
 
-			<?php echo $this->form->getLabel('lang_code'); ?>
-			<?php echo $this->form->getInput('lang_code'); ?>
+				<li><?php echo $this->form->getLabel('lang_code'); ?>
+				<?php echo $this->form->getInput('lang_code'); ?></li>
 
-			<?php if ($canDo->get('core.edit.state')) : ?>
-				<?php echo $this->form->getLabel('published'); ?>
-				<?php echo $this->form->getInput('published'); ?>
-			<?php endif; ?>
+				<?php if ($canDo->get('core.edit.state')) : ?>
+					<li><?php echo $this->form->getLabel('published'); ?>
+					<?php echo $this->form->getInput('published'); ?></li>
+				<?php endif; ?>
 
-			<?php echo $this->form->getLabel('description'); ?>
-			<?php echo $this->form->getInput('description'); ?>
+				<li><?php echo $this->form->getLabel('description'); ?>
+				<?php echo $this->form->getInput('description'); ?></li>
 
-			<?php echo $this->form->getLabel('lang_id'); ?>
-			<?php echo $this->form->getInput('lang_id'); ?>
+				<li><?php echo $this->form->getLabel('lang_id'); ?>
+				<?php echo $this->form->getInput('lang_id'); ?></li>
+			</ul>
 		</fieldset>
 	</div>
 	<div class="width-40 fltrt">
-		<?php echo JHtml::_('sliders.start','language-sliders-'.$this->item->lang_code, array('useCookie'=>1)); ?>
+		<?php echo JHtml::_('sliders.start', 'language-sliders-'.$this->item->lang_code, array('useCookie'=>1)); ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'metadata'); ?>
+		<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'metadata'); ?>
 			<fieldset class="adminform">
 				<?php foreach($this->form->getFieldset('metadata') as $field): ?>
+					<?php if (!$field->hidden): ?>
+						<?php echo $field->label; ?>
+					<?php endif; ?>
+					<?php echo $field->input; ?>
+				<?php endforeach; ?>
+			</fieldset>
+
+		<?php echo JHtml::_('sliders.panel', JText::_('COM_LANGUAGES_FIELDSET_SITE_NAME_LABEL'), 'site_name'); ?>
+			<fieldset class="adminform">
+				<?php foreach($this->form->getFieldset('site_name') as $field): ?>
 					<?php if (!$field->hidden): ?>
 						<?php echo $field->label; ?>
 					<?php endif; ?>

@@ -1,21 +1,18 @@
 <?php
 /**
- * @version		$Id: default.php 17187 2010-05-19 11:18:22Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 
-$pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="category-list <?php echo $pageClass;?>">
-
+<div class="category-list<?php echo $this->pageclass_sfx;?> clearfix">
 	<?php if ($this->params->get('show_page_heading', 1)) : ?>
 	<h1 class="componentheading">
 		<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -37,13 +34,13 @@ $pageClass = $this->params->get('pageclass_sfx');
 			<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 		<?php endif; ?>
 		<?php if ($this->params->get('show_description') && $this->category->description) : ?>
-			<?php echo JHtml::_('content.prepare', $this->category->description); ?>
+			<?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
 		<?php endif; ?>
 		<div class="clr"></div>
 	</div>
 	<?php endif; ?>
 
-	<?php if (is_array($this->children) && count($this->children) > 0 && $this->params->get('maxLevel') !=0)  : ?>
+		<?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
 	<div class="jcat-children">
 		<h3>
 			<?php echo JTEXT::_('JGLOBAL_SUBCATEGORIES'); ?>

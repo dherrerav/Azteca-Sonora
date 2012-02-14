@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: blog.php 17187 2010-05-19 11:18:22Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -15,7 +14,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 
-<div class="blog<?php echo $pageClass;?>">
+<div class="blog<?php echo $pageClass;?> clearfix">
 <?php if ($this->params->get('show_page_heading')!=0 or $this->params->get('show_category_title')): ?>
 <h1 class="componentheading">
 
@@ -24,15 +23,11 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php endif; ?>
 	<?php if ($this->params->get('show_category_title')) :?>
 
-
 	<?php	echo '<span class="subheading-category">'.$this->category->title.'</span>'; ?>
 	<?php endif; ?>
 
 </h1>
 <?php endif; ?>
-
-
-
 
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
 	<div class="category-desc clearfix">
@@ -40,12 +35,10 @@ $pageClass = $this->params->get('pageclass_sfx');
 		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_description') && $this->category->description) : ?>
-		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
+		<?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
 	<?php endif; ?>
 	</div>
 <?php endif; ?>
-
-
 
 <?php $leadingcount=0 ; ?>
 <?php if (!empty($this->lead_items)) : ?>
@@ -79,16 +72,14 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php echo 'row-'.$row ; ?> clearfix">
 	<?php endif; ?>
 	<div class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
-		<div class="contentpaneopen">
 		<?php
 			$this->item = &$item;
 			echo $this->loadTemplate('item');
 		?>
-		</div>
 	</div>
 	<?php $counter++; ?>
 	<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
-				<span class="row-separator"></span>
+				<!--span class="row-separator"></span-->
 				</div>
 
 			<?php endif; ?>
@@ -104,7 +95,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php endif; ?>
 
 
-	<?php if (is_array($this->children[$this->category->id]) && count($this->children[$this->category->id]) > 0 && $this->params->get('maxLevel') !=0) : ?>
+	<?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
 		<div class="cat-children">
 		<h3>
 <?php echo JTEXT::_('JGLOBAL_SUBCATEGORIES'); ?>

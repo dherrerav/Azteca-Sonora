@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: modules.php 20267 2011-01-11 03:44:44Z eddieajau $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -79,7 +78,12 @@ class ModulesModelModules extends JModelList
 		$module = $this->getUserStateFromRequest($this->context.'.filter.module', 'filter_module', '', 'string');
 		$this->setState('filter.module', $module);
 
-		$clientId = $this->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', 0, 'int');
+		$clientId = $this->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', 0, 'int', false);
+		$previousId = $app->getUserState($this->context.'.filter.client_id_previous', null);
+		if($previousId != $clientId || $previousId === null){
+			$this->getUserStateFromRequest($this->context.'.filter.client_id_previous', 'filter_client_id_previous', 0, 'int', true);
+			$app->setUserState($this->context.'.filter.client_id_previous', $clientId);
+		}
 		$this->setState('filter.client_id', $clientId);
 
 		$language = $this->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
@@ -133,7 +137,7 @@ class ModulesModelModules extends JModelList
 			$result = $this->_db->loadObjectList();
 			$this->translate($result);
 			$lang = JFactory::getLanguage();
-			JArrayHelper::sortObjects($result,$ordering, $this->getState('list.direction') == 'desc' ? -1 : 1, true, $lang->getLocale());
+			JArrayHelper::sortObjects($result, $ordering, $this->getState('list.direction') == 'desc' ? -1 : 1, true, $lang->getLocale());
 			$total = count($result);
 			$this->cache[$this->getStoreId('getTotal')] = $total;
 			if ($total < $limitstart) {
@@ -144,11 +148,15 @@ class ModulesModelModules extends JModelList
 		}
 		else {
 			if ($ordering == 'ordering') {
-				$query->order('position ASC');
+				$query->order('a.position ASC');
+				$ordering = 'a.ordering';
 			}
-			$query->order($this->_db->nameQuote($ordering) . ' ' . $this->getState('list.direction'));
+			if ($ordering == 'language_title') {
+				$ordering = 'l.title';
+			}
+			$query->order($this->_db->quoteName($ordering) . ' ' . $this->getState('list.direction'));
 			if ($ordering == 'position') {
-				$query->order('ordering ASC');
+				$query->order('a.ordering ASC');
 			}
 			$result = parent::_getList($query, $limitstart, $limit);
 			$this->translate($result);
@@ -176,9 +184,9 @@ class ModulesModelModules extends JModelList
 			$item->name = JText::_($item->name);
 			if (is_null($item->pages)) {
 				$item->pages = JText::_('JNONE');
-			} else if ($item->pages < 0) {
+			} elseif ($item->pages < 0) {
 				$item->pages = JText::_('COM_MODULES_ASSIGNED_VARIES_EXCEPT');
-			} else if ($item->pages > 0) {
+			} elseif ($item->pages > 0) {
 				$item->pages = JText::_('COM_MODULES_ASSIGNED_VARIES_ONLY');
 			} else {
 				$item->pages = JText::_('JALL');
@@ -202,14 +210,14 @@ class ModulesModelModules extends JModelList
 			$this->getState(
 				'list.select',
 				'a.id, a.title, a.note, a.position, a.module, a.language,' .
-				'a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.publish_up, a.publish_down'
+				'a.checked_out, a.checked_out_time, a.published+2*(e.enabled-1) as published, a.access, a.ordering, a.publish_up, a.publish_down'
 			)
 		);
-		$query->from('`#__modules` AS a');
+		$query->from($db->quoteName('#__modules').' AS a');
 
 		// Join over the language
 		$query->select('l.title AS language_title');
-		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		$query->join('LEFT', $db->quoteName('#__languages').' AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
@@ -222,12 +230,13 @@ class ModulesModelModules extends JModelList
 		// Join over the module menus
 		$query->select('MIN(mm.menuid) AS pages');
 		$query->join('LEFT', '#__modules_menu AS mm ON mm.moduleid = a.id');
-		$query->group('a.id');
 
 		// Join over the extensions
 		$query->select('e.name AS name');
 		$query->join('LEFT', '#__extensions AS e ON e.element = a.module');
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.note, a.position, a.module, a.language,a.checked_out,'.
+						'a.checked_out_time, a.published, a.access, a.ordering,l.title, uc.name, ag.title, e.name,'.
+						'l.lang_code, uc.id, ag.id, mm.moduleid, e.element, a.publish_up, a.publish_down,e.enabled');
 
 		// Filter by access level.
 		if ($access = $this->getState('filter.access')) {
@@ -239,14 +248,18 @@ class ModulesModelModules extends JModelList
 		if (is_numeric($state)) {
 			$query->where('a.published = '.(int) $state);
 		}
-		else if ($state === '') {
+		elseif ($state === '') {
 			$query->where('(a.published IN (0, 1))');
 		}
 
 		// Filter by position
 		$position = $this->getState('filter.position');
-		if ($position) {
+		if ($position && $position != 'none') {
 			$query->where('a.position = '.$db->Quote($position));
+		}
+
+		elseif ($position == 'none') {
+			$query->where('a.position = '.$db->Quote(''));
 		}
 
 		// Filter by module
@@ -270,7 +283,7 @@ class ModulesModelModules extends JModelList
 			}
 			else
 			{
-				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+				$search = $db->Quote('%'.$db->escape($search, true).'%');
 				$query->where('('.'a.title LIKE '.$search.' OR a.note LIKE '.$search.')');
 			}
 		}

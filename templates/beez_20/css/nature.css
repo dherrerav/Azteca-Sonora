@@ -10,8 +10,8 @@
 @font-face {
 	font-family: 'Titillium Maps';
 	src: url("../fonts/TitilliumMaps29L002.eot");
-	src: local('Titillium Maps'), local('TitilliumMaps'), 
-		url("../fonts/TitilliumMaps29L002.otf") format("opentype"), 
+	src: local('Titillium Maps'), local('TitilliumMaps'),
+		url("../fonts/TitilliumMaps29L002.otf") format("opentype"),
 		url("../fonts/TitilliumMaps29L002.woff") format("woff");
 }
 
@@ -604,7 +604,7 @@ ul.menu li.active  ul li.active  ul li.active  ul li.active  ul li.active a:visi
 ul#archive-items li.row0,
 ul#archive-items li.row1
 {
-	border-bottom:solid 1px #ddd 
+	border-bottom:solid 1px #ddd
 }
 
 .archive #adminForm fieldset
@@ -618,13 +618,13 @@ ul#archive-items li.row1
 
 .image-left
 {
-	
+
 		padding:2px
 }
 
 .image-right
 {
-	  
+
 		padding:2px
 }
 
@@ -687,7 +687,7 @@ a.readmore:link,
 a.readmore:visited
 {
 	color:#444;
-	background:#eee url(../images/nature/arrow1.gif) repeat-x left top;
+	background:#eee url(../images/nature/arrow1.gif) no-repeat left top;
 	border:solid 1px #ddd;
 }
 
@@ -1045,6 +1045,12 @@ dl.search-results
 dl.search-results dt.result-title
 {
 	border-top:dotted 1px #ddd
+}
+
+dl.search-results dd.result-url
+{
+	border-bottom:solid 5px #fff;
+	color:#115599;
 }
 
 dl.search-results dd.result-created
@@ -1412,3 +1418,11 @@ div.current
 }
 #close a
 {text-decoration:none}
+
+/* ########################## sample module styling  ########################### */
+
+div.sample-module {
+    border: 2px dashed #ddd;
+    padding: 10px;
+    background-color: #f5f5f5;
+}

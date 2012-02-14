@@ -1,44 +1,53 @@
 <?php
-
 /**
- * @version		$Id: helper.php 18212 2010-07-22 06:02:54Z eddieajau $
- * @package		Joomla.Framework
- * @subpackage	Cache
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  Cache
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-// No direct access.
-defined('JPATH_BASE') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Cache storage helper functions.
  *
- * @static
- * @package		Joomla.Framework
- * @subpackage	Cache
- * @since		1.6
+ * @package     Joomla.Platform
+ * @subpackage  Cache
+ * @since       11.1
  */
 class JCacheStorageHelper
 {
 	/**
-	 * @since	1.6
+	 * Cache data group
+	 *
+	 * @var    string
+	 * @since  11.1
 	 */
 	public $group = '';
 
 	/**
-	 * @since	1.6
+	 * Cached item size
+	 *
+	 * @var    string
+	 * @since  11.1
 	 */
 	public $size = 0;
 
 	/**
-	 * @since	1.6
+	 * Counter
+	 *
+	 * @var    integer
+	 * @since  11.1
 	 */
 	public $count = 0;
 
 	/**
 	 * Constructor
 	 *
-	 * @param	array	$options	options
+	 * @param   string  $group  The cache data group
+	 *
+	 * @since   11.1
 	 */
 	public function __construct($group)
 	{
@@ -48,9 +57,11 @@ class JCacheStorageHelper
 	/**
 	 * Increase cache items count.
 	 *
-	 * @param	string	$size	Cached item size
-	 * @param	string	$group	The cache data group
-	 * @since	1.6
+	 * @param   string  $size  Cached item size
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
 	 */
 	public function updateSize($size)
 	{

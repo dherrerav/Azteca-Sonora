@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 21020 2011-03-27 06:52:01Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	com_weblinks
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,7 +29,7 @@ $params = $this->state->get('params');
 	}
 </script>
 <div class="edit<?php echo $this->pageclass_sfx; ?>">
-<?php if ($this->params->def('show_page_heading', 1)) : ?>
+<?php if ($this->params->get('show_page_heading', 1)) : ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
@@ -83,6 +82,6 @@ $params = $this->state->get('params');
 
 		<input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
 		<input type="hidden" name="task" value="" />
-		<?php echo JHtml::_( 'form.token' ); ?>		
+		<?php echo JHtml::_( 'form.token' ); ?>
 	</form>
 </div>

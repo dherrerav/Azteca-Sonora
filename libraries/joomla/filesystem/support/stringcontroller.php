@@ -1,42 +1,70 @@
 <?php
 /**
- * String Stream Controller
+ * @package     Joomla.Platform
+ * @subpackage  FileSystem
  *
- * Used to control the string stream
- *
- * PHP4/5
- *
- * Created on Sep 18, 2008
- *
- * @package stringstream
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License, see LICENSE.php
- * @version SVN: $Id: stringcontroller.php 20196 2011-01-09 02:40:25Z ian $
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
+defined('JPATH_PLATFORM') or die;
 
-// No direct access
-defined('JPATH_BASE') or die();
-
-
-class JStringController {
-
-	function _getArray() {
-		static $strings = Array();
+/**
+ * String Controller
+ *
+ * @package     Joomla.Platform
+ * @subpackage  FileSystem
+ * @since       11.1
+ */
+class JStringController
+{
+	/**
+	 * Defines a variable as an array
+	 *
+	 * @return  array
+	 *
+	 * @since   11.1
+	 */
+	public function _getArray()
+	{
+		static $strings = array();
 		return $strings;
 	}
 
-	function createRef($reference, &$string) {
+	/**
+	 * Create a reference
+	 *
+	 * @param   string  $reference  The key
+	 * @param   string  &$string    The value
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
+	 */
+	public function createRef($reference, &$string)
+	{
 		$ref = &JStringController::_getArray();
-		$ref[$reference] =& $string;
+		$ref[$reference] = & $string;
 	}
 
-
-	function getRef($reference) {
+	/**
+	 * Get reference
+	 *
+	 * @param   string  $reference  The key for the reference.
+	 *
+	 * @return  mixed  False if not set, reference if it it exists
+	 *
+	 * @since   11.1
+	 */
+	public function getRef($reference)
+	{
 		$ref = &JStringController::_getArray();
-		if(isset($ref[$reference])) {
+		if (isset($ref[$reference]))
+		{
 			return $ref[$reference];
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}

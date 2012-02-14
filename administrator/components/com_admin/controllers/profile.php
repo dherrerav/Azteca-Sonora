@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: profile.php 21097 2011-04-07 15:38:03Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	com_admin
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -34,7 +33,7 @@ class AdminControllerProfile extends JControllerForm
 	 */
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return true;
+		return isset($data['id']) && $data['id'] == JFactory::getUser()->id;
 	}
 
 	/**
@@ -52,7 +51,7 @@ class AdminControllerProfile extends JControllerForm
 			// Check the passwords match.
 			if ($data['password'] != $data['password2']) {
 				$this->setMessage(JText::_('JLIB_USER_ERROR_PASSWORD_NOT_MATCH'), 'warning');
-				$this->setRedirect(JRoute::_('index.php?option=com_admin&view=profile&layout=edit', false));
+				$this->setRedirect(JRoute::_('index.php?option=com_admin&view=profile&layout=edit&id='.JFactory::getUser()->id, false));
 				return false;
 			}
 

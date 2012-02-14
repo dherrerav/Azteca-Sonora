@@ -1,14 +1,11 @@
 <?php
 /**
- * @version		$Id: tinymce.php 21097 2011-04-07 15:38:03Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // Do not allow direct access
 defined('_JEXEC') or die;
-
-jimport('joomla.plugin.plugin');
 
 /**
  * TinyMCE Editor Plugin
@@ -51,8 +48,8 @@ class plgEditorTinymce extends JPlugin
 		$app		= JFactory::getApplication();
 		$language	= JFactory::getLanguage();
 
-		$mode	= (int) $this->params->get('mode',1);
-		$theme	= array('simple','advanced','advanced');
+		$mode	= (int) $this->params->get('mode', 1);
+		$theme	= array('simple', 'advanced', 'advanced');
 		$skin	= $this->params->get('skin', '0');
 
 		switch ($skin)
@@ -73,40 +70,7 @@ class plgEditorTinymce extends JPlugin
 				$skin = "skin : \"default\",";
 		}
 
-		$compressed		= 0;
-		$cleanup_startup	= $this->params->def('cleanup_startup', 0);
-		$cleanup_save		= $this->params->def('cleanup_save', 2);
 		$entity_encoding	= $this->params->def('entity_encoding', 'raw');
-
-		if ($cleanup_startup) {
-			$cleanup_startup = 'true';
-		}
-		else {
-			$cleanup_startup = 'false';
-		}
-
-		switch ($cleanup_save)
-		{
-			case '0':
-				// Never clean up on save.
-				$cleanup = 'false';
-				break;
-
-			case '1':
-				// Clean up front end edits only.
-				if ($app->isadmin()) {
-					$cleanup = 'false';
-				}
-				else {
-					$cleanup = 'true';
-				}
-
-				break;
-
-			default:
-				// Always clean up on save
-				$cleanup = 'true';
-		}
 
 		$langMode			= $this->params->def('lang_mode', 0);
 		$langPrefix			= $this->params->def('lang_code', 'en');
@@ -140,7 +104,7 @@ class plgEditorTinymce extends JPlugin
 
 		$content_css = '';
 
-		$templates_path = JPATH_SITE.DS.'templates';
+		$templates_path = JPATH_SITE . '/templates';
 		// loading of css file for 'styles' dropdown
 		if ( $content_css_custom ) {
 			// If URL, just pass it to $content_css
@@ -152,7 +116,7 @@ class plgEditorTinymce extends JPlugin
 				$content_css = 'content_css : "'. JURI::root() .'templates/'. $template . '/css/'. $content_css_custom .'",';
 
 				// Issue warning notice if the file is not found (but pass name to $content_css anyway to avoid TinyMCE error
-				if (!file_exists($templates_path.DS.$template.DS.'css'.DS.$content_css_custom)) {
+				if (!file_exists($templates_path . '/' . $template . '/css/' . $content_css_custom)) {
 					$msg = sprintf (JText::_('PLG_TINY_ERR_CUSTOMCSSFILENOTPRESENT'), $content_css_custom);
 					JError::raiseNotice('SOME_ERROR_CODE', $msg);
 				}
@@ -163,11 +127,11 @@ class plgEditorTinymce extends JPlugin
 			if ($use_content_css) {
 				// first check templates folder for default template
 				// if no editor.css file in templates folder, check system template folder
-				if (!file_exists($templates_path.DS.$template.DS.'css'.DS.'editor.css')) {
+				if (!file_exists($templates_path . '/' . $template . '/css/editor.css')) {
 					$template = 'system';
 
 					// if no editor.css file in system folder, show alert
-					if (!file_exists($templates_path.DS.'system'.DS.'css'.DS.'editor.css')) {
+					if (!file_exists($templates_path . '/system/css/editor.css')) {
 						JError::raiseNotice('SOME_ERROR_CODE', JText::_('PLG_TINY_ERR_EDITORCSSFILENOTPRESENT'));
 					}
 					else {
@@ -233,7 +197,7 @@ class plgEditorTinymce extends JPlugin
 		}
 
 		// Initial values for buttons
-		array_push($buttons4,'cut','copy','paste');
+		array_push($buttons4, 'cut', 'copy', 'paste');
 		// array_push($buttons4,'|');
 
 		// Plugins
@@ -478,22 +442,9 @@ class plgEditorTinymce extends JPlugin
 		switch ($mode)
 		{
 			case 0: /* Simple mode*/
-				if ($compressed) {
-					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().$this->_basePath.
-							"/tiny_mce_gzip.js\"></script>\n";
-					$load .= "\t<script type=\"text/javascript\">
-					tinyMCE_GZ.init({
-					themes : \"$theme[$mode]\",
-					languages : \"". $langPrefix . "\"
-				});
-				</script>";
-				}
-				else {
-					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().$this->_basePath.
-							"/tiny_mce.js\"></script>\n";
-				}
+				$load = "\t<script type=\"text/javascript\" src=\"".
+						JURI::root().$this->_basePath.
+						"/tiny_mce.js\"></script>\n";
 
 				$return = $load .
 				"\t<script type=\"text/javascript\">
@@ -508,8 +459,6 @@ class plgEditorTinymce extends JPlugin
 					// Cleanup/Output
 					inline_styles : true,
 					gecko_spellcheck : true,
-					cleanup : $cleanup,
-					cleanup_on_startup : $cleanup_startup,
 					entity_encoding : \"$entity_encoding\",
 					$forcenewline
 					// URL
@@ -523,22 +472,9 @@ class plgEditorTinymce extends JPlugin
 				break;
 
 			case 1: /* Advanced mode*/
-				if ($compressed) {
-					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().$this->_basePath.
-							"/tiny_mce_gzip.js\"></script>\n";
-					$load .= "\t<script type=\"text/javascript\">
-						tinyMCE_GZ.init({
-						themes : \"$theme[$mode]\",
-						languages : \"". $langPrefix . "\"
-					});
-				</script>";
-				}
-				else {
-					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().$this->_basePath.
-							"/tiny_mce.js\"></script>\n";
-				}
+				$load = "\t<script type=\"text/javascript\" src=\"".
+						JURI::root().$this->_basePath.
+						"/tiny_mce.js\"></script>\n";
 
 				$return = $load .
 				"\t<script type=\"text/javascript\">
@@ -553,8 +489,6 @@ class plgEditorTinymce extends JPlugin
 					// Cleanup/Output
 					inline_styles : true,
 					gecko_spellcheck : true,
-					cleanup : $cleanup,
-					cleanup_on_startup : $cleanup_startup,
 					entity_encoding : \"$entity_encoding\",
 					extended_valid_elements : \"$elements\",
 					$forcenewline
@@ -578,23 +512,9 @@ class plgEditorTinymce extends JPlugin
 				break;
 
 			case 2: /* Extended mode*/
-				if ($compressed) {
-					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().$this->_basePath.
-							"/tiny_mce_gzip.js\"></script>\n";
-					$load .= "\t<script type=\"text/javascript\">
-				tinyMCE_GZ.init({
-					themes : \"$theme[$mode]\",
-					plugins : \"$plugins\",
-					languages : \"". $langPrefix . "\"
-				});
-				</script>";
-				}
-				else {
 				$load = "\t<script type=\"text/javascript\" src=\"".
 						JURI::root().$this->_basePath.
 						"/tiny_mce.js\"></script>\n";
-				}
 
 				$return = $load .
 				"\t<script type=\"text/javascript\">
@@ -611,8 +531,6 @@ class plgEditorTinymce extends JPlugin
 					// Cleanup/Output
 					inline_styles : true,
 					gecko_spellcheck : true,
-					cleanup : $cleanup,
-					cleanup_on_startup : $cleanup_startup,
 					entity_encoding : \"$entity_encoding\",
 					extended_valid_elements : \"$elements\",
 					$forcenewline

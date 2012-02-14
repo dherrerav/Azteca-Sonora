@@ -1,9 +1,8 @@
 <?php
 /**
- * version $Id: view.html.php 21145 2011-04-12 23:21:04Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -69,7 +68,7 @@ class ContentViewCategory extends JView
 		$user	= JFactory::getUser();
 		$groups	= $user->getAuthorisedViewLevels();
 		if (!in_array($category->access, $groups)) {
-			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
+			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
 
 		// PREPARE THE DATA
@@ -95,7 +94,7 @@ class ContentViewCategory extends JView
 
 			// Ignore content plugins on links.
 			if ($i < $numLeading + $numIntro) {
-				$item->introtext = JHtml::_('content.prepare', $item->introtext);
+				$item->introtext = JHtml::_('content.prepare', $item->introtext, '', 'com_content.category');
 
 				$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$item->params, 0));
 				$item->event->afterDisplayTitle = trim(implode("\n", $results));
@@ -107,7 +106,7 @@ class ContentViewCategory extends JView
 				$item->event->afterDisplayContent = trim(implode("\n", $results));
 			}
 		}
-		
+
 		// Check for layout override only if this is not the active menu item
 		// If it is the active menu item, then the view and category id will match
 		$active	= $app->getMenu()->getActive();
@@ -158,7 +157,7 @@ class ContentViewCategory extends JView
 		}
 
 		$children = array($category->id => $children);
-		
+
 		//Escape strings for HTML output
 		$this->pageclass_sfx = htmlspecialchars($params->get('pageclass_sfx'));
 
@@ -171,7 +170,7 @@ class ContentViewCategory extends JView
 		$this->assignRef('parent', $parent);
 		$this->assignRef('pagination', $pagination);
 		$this->assignRef('user', $user);
-		
+
 		$this->_prepareDocument();
 
 		parent::display($tpl);
@@ -223,8 +222,11 @@ class ContentViewCategory extends JView
 		if (empty($title)) {
 			$title = $app->getCfg('sitename');
 		}
-		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 1) {
 			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
+			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 
 		$this->document->setTitle($title);
@@ -233,7 +235,7 @@ class ContentViewCategory extends JView
 		{
 			$this->document->setDescription($this->category->metadesc);
 		}
-		elseif (!$this->category->metadesc && $this->params->get('menu-meta_description')) 
+		elseif (!$this->category->metadesc && $this->params->get('menu-meta_description'))
 		{
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
@@ -242,18 +244,14 @@ class ContentViewCategory extends JView
 		{
 			$this->document->setMetadata('keywords', $this->category->metakey);
 		}
-		elseif (!$this->category->metakey && $this->params->get('menu-meta_keywords')) 
+		elseif (!$this->category->metakey && $this->params->get('menu-meta_keywords'))
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}
-		
-		if ($this->params->get('robots')) 
+
+		if ($this->params->get('robots'))
 		{
 			$this->document->setMetadata('robots', $this->params->get('robots'));
-		}
-
-		if ($app->getCfg('MetaTitle') == '1') {
-			$this->document->setMetaData('title', $this->category->getMetadata()->get('page_title'));
 		}
 
 		if ($app->getCfg('MetaAuthor') == '1') {

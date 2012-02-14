@@ -1,40 +1,45 @@
 <?php
 /**
- * @version		$Id: content.php 20196 2011-01-09 02:40:25Z ian $
- * @package		Joomla.Framework
- * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ *
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
+
+defined('JPATH_PLATFORM') or die;
 
 /**
  * Utility class to fire onContentPrepare for non-article based content.
  *
- * @package		Joomla.Framework
- * @subpackage	HTML
- * @since		1.5
+ * @package     Joomla.Platform
+ * @subpackage  HTML
+ * @since       11.1
  */
 abstract class JHtmlContent
 {
 	/**
 	 * Fire onContentPrepare for content that isn't part of an article.
 	 *
-	 * @param	string	The content to be transformed.
-	 * @param	array	The content params.
-	 * @return	string	The content after transformation.
+	 * @param   string  $text     The content to be transformed.
+	 * @param   array   $params   The content params.
+	 * @param   string  $context  The context of the content to be transformed.
+	 *
+	 * @return  string   The content after transformation.
+	 *
+	 * @since   11.1
 	 */
-	public static function prepare($text, $params = null)
+	public static function prepare($text, $params = null, $context = 'text')
 	{
-		if ($params === null) {
+		if ($params === null)
+		{
 			$params = new JObject;
 		}
 		$article = new stdClass;
 		$article->text = $text;
 		JPluginHelper::importPlugin('content');
 		$dispatcher = JDispatcher::getInstance();
-		$results = $dispatcher->trigger(
-			'onContentPrepare', array ('text', &$article, &$params, 0)
-		);
+		$dispatcher->trigger('onContentPrepare', array($context, &$article, &$params, 0));
 
 		return $article->text;
 	}

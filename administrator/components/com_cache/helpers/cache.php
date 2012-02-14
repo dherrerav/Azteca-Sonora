@@ -1,7 +1,6 @@
 <?php
 /**
- * @version		$Id: cache.php 18922 2010-09-15 15:57:48Z infograf768 $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,7 +30,7 @@ class CacheHelper
 		$options[]	= JHtml::_('select.option', '1', JText::_('JADMINISTRATOR'));
 		return $options;
 	}
-	
+
 	/**
 	 * Configure the Linkbar.
 	 *
@@ -47,7 +46,7 @@ class CacheHelper
 			'index.php?option=com_checkin',
 			$vName == 'com_checkin'
 		);
-			
+
 		JSubMenuHelper::addEntry(
 			JText::_('JGLOBAL_SUBMENU_CLEAR_CACHE'),
 			'index.php?option=com_cache',

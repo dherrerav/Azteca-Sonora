@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 20196 2011-01-09 02:40:25Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_banners
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,18 +10,6 @@
 defined('_JEXEC') or die;
 JHtml::_('behavior.tooltip');
 ?>
-<script type="text/javascript">
-	window.addEvent('domready', function() {
-		document.id('jform_compressed1').addEvent('click', function(e){
-			document.id('jform_inline0').checked=false;
-			document.id('jform_inline1').checked=true;
-		});
-		document.id('jform_inline0').addEvent('click', function(e){
-			document.id('jform_compressed0').checked=true;
-			document.id('jform_compressed1').checked=false;
-		});
-	});
-</script>
 <form
 	action="<?php echo JRoute::_('index.php?option=com_banners&task=tracks.display&format=raw');?>"
 	method="post"
@@ -44,4 +31,3 @@ JHtml::_('behavior.tooltip');
 
 	</fieldset>
 </form>
-

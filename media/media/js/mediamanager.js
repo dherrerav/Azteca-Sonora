@@ -1,6 +1,5 @@
 /**
- * @version		$Id: mediamanager.js 20828 2011-02-22 04:22:21Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -33,11 +32,11 @@ var MediaManager = this.MediaManager = {
 				   	uri = this._getUriObject(this.frameurl);
 				   	current	= uri.file+'?'+uri.query;
 
-					if (current != node.data.url) {
+					if (current != 'undefined?undefined' && current != node.data.url) {
 						window.frames[target].location.href = node.data.url;
 					}
 				}.bind(this)
-			},{ text: 'Media', open: true, data: { url: 'index.php?option=com_media&view=mediaList&tmpl=component', target: 'folderframe'}});
+			},{ text: '', open: true, data: { url: 'index.php?option=com_media&view=mediaList&tmpl=component', target: 'folderframe'}});
 		this.tree.adopt('media-tree');
 	},
 
