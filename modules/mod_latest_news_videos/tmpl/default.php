@@ -8,10 +8,12 @@
 		<div class="play">
 		</div>
 		<div class="image">
-			<img src="<?= $article->image ?>" width="<?= $article->width ?>" height="<?= $article->height ?>" title="<?= replaceQuotes($article->title) ?>" />
+			<a href="<?= $article->link ?>" title="<? replaceQuotes($article->title) ?>">
+				<img src="<?= $article->image ?>" width="<?= $article->width ?>" height="<?= $article->height ?>" title="<?= replaceQuotes($article->title) ?>" />
+			</a>
 		</div>
 		<div class="text">
-			<a href="<= $article->link ?>" title="<? replaceQuotes($article->title) ?>"><?= $article->title ?></a>
+			<a href="<?= $article->link ?>" title="<? replaceQuotes($article->title) ?>"><?= $article->title ?></a>
 		</div>
 	</div>
 	<? else : ?>
@@ -19,10 +21,12 @@
 		<div class="play">
 		</div>
 		<div class="image">
-			<img src="<?= $article->image ?>" width="<?= $article->width ?>" height="<?= $article->height ?>" title="<?= replaceQuotes($article->title) ?>" />
+			<a href="<?= $article->link ?>" title="<? replaceQuotes($article->title) ?>">
+				<img src="<?= $article->image ?>" width="<?= $article->width ?>" height="<?= $article->height ?>" title="<?= replaceQuotes($article->title) ?>" />
+			</a>
 		</div>
 		<div class="text">
-			<a href="<= $article->link ?>" title="<? replaceQuotes($article->title) ?>"><?= $article->title ?></a>
+			<a href="<?= $article->link ?>" title="<? replaceQuotes($article->title) ?>"><?= $article->title ?></a>
 		</div>
 	</div>
 	<? endif ?>
