@@ -1119,18 +1119,18 @@ h4.content-most-title a:hover {
 }
 
 .body-hechos-noche div.category-image,
-.body-hechos-noche div.category-description,
+.body-hechos-noche .category-description,
 .body-hechos-meridiano div.category-image,
-.body-hechos-meridiano div.category-description,
+.body-hechos-meridiano .category-description,
 .body-info-7 div.category-image,
-.body-info-7 div.category-description {
+.body-info-7 .category-description {
 	overflow: hidden;
 	clear: both;
 }
 
-.body-hechos-noche div.category-description,
-.body-hechos-meridiano div.category-description,
-.body-info-7 div.category-description {
+.body-hechos-noche .category-description,
+.body-hechos-meridiano .category-description,
+.body-info-7 .category-description {
 	background: #fff;
 	padding: 10px;
 	border-top-left-radius: 10px;
