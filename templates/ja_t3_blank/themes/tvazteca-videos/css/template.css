@@ -1135,6 +1135,7 @@ h4.content-most-title a:hover {
 	padding: 10px;
 	border-top-left-radius: 10px;
 	margin-top: 0 !important;
+	margin-bottom: 0 !important;
 }
 
 .body-hechos-noche #ja-right,
@@ -1279,7 +1280,6 @@ h4.content-most-title a:hover {
 .category-description p {
 	color: #000;
 	font-size: 1.2em;
-	margin: 0 !important;
 }
 
 .category-modules {
