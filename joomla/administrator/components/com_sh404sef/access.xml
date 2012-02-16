@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- $Id: access.xml 1814 2011-02-21 19:39:42Z silianacom-svn $ -->
-<access component="com_sh404sef">
-	<section name="component">
-		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
-	</section>
-</access>

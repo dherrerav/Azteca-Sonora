@@ -1,1 +1,0 @@
-<?php die("Access Denied"); ?>#x#a:2:{s:6:"output";s:0:"";s:6:"result";O:8:"stdClass":3:{s:6:"status";b:0;s:13:"statusMessage";s:124:"Could not connect to analytics server (not available, or no account configured ? are cURl and SSL enabled in your phpinfo ?)";s:4:"note";s:0:"";}}
