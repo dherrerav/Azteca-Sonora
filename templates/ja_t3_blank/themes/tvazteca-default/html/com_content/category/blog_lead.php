@@ -37,7 +37,7 @@ $alt = $image->alt;
 $intro = $this->item->introtext;
 $intro = preg_replace('/<img[^>]+\>/i', '', $intro);
 ?>
-<?php if (!empty($src)) : ?>
+<?php if ($src) : ?>
 <?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
 	<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid)); ?>">
 		<img src="<?= $src ?>" alt="<?= $alt ?>" title="<?= $title ?>" />
