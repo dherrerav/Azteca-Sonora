@@ -9,7 +9,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+require_once JPATH_SITE . '/libraries/simple_html_dom.php';
 // Create a shortcut for params.
 $params = &$this->item->params;
 $canEdit = $this->user->authorise('core.edit', 'com_content.category.' . $this->item->id);
@@ -27,17 +27,20 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.category.' . $this->
 <?php echo $this->item->event->beforeDisplayContent; ?>
 
 <?php
-$intro = $this->item->introtext;
-preg_match_all('/<img[^>]+>/i', $intro, $images);
-preg_match_all('/(alt|title|src)=("[^"]*")/i',$images[0][0], $src);
-$src = $src[0][0];
+$html = new simple_html_dom();
+$html->load($this->item->introtext);
+$images = $html->find('img');
+$image = $images[0];
+$src = $image->src;
+$title = $image->title;
+$alt = $image->alt;
 $intro = preg_replace('/<img[^>]+\>/i', '', $intro);
-
+//var_dump($intro, $src, $title, $alt);
 ?>
 <?php if (!empty($src)) : ?>
 <?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
 	<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid)); ?>">
-		<img <?= $src ?> width="624">
+		<img src="<?= $src ?>" alt="<?= $alt ?>" title="<?= $title ?>" />
 	</a>
 <?php endif;?>
 <?php endif; ?>

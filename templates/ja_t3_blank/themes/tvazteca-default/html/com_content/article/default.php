@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
-
+require_once JPATH_SITE . '/libraries/simple_html_dom.php';
 // Create shortcut to parameters.
 $params = $this->item->params;
 ?>
@@ -105,19 +105,19 @@ $params = $this->item->params;
 		<?php echo $this->item->toc; ?>
 	<?php endif; ?>
 <?
-preg_match_all('/<img[^>]+>/i', $this->item->text, $images);
-preg_match_all('/(alt|title|src)=("[^"]*")/i', $images[0][0], $attributes);
-$image = $images[0][0];
-$src = $attributes[0][0];
-$title = empty($attributes[0][2]) ? '' : $attributes[0][2];
-$alt = $attributes[0][1];
+$html = new simple_html_dom();
+$html->load($this->item->text);
+$images = $html->find('img');
+$image = $images[0];
+$src = $image->src;
+$title = $image->title;
+$alt = $image->alt;
 $caption = str_replace('"', '', $title);
-$caption = str_replace('title=', '', $caption);
 $this->item->text = preg_replace('/<img[^>]+\>/i', '', $this->item->text);
 	if ($image !== null) {
 ?>
 	<div class="article-image">
-		<img <?= $src ?> <?= $alt ?> <?= $title ?> />
+		<img src="<?= $src ?>" alt="<?= $alt ?>" title="<?= $title ?>" />
 		<div class="article-image-caption">
 			<p>
 				<?= $caption ?>
