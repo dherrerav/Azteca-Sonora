@@ -28,17 +28,21 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.category.' . $this->
 <?php echo $this->item->event->beforeDisplayContent; ?>
 
 <?php
+$html = new simple_html_dom();
 $intro = $this->item->introtext;
-preg_match_all('/<img[^>]+>/i', $intro, $images);
-preg_match_all('/(alt|title|src)=("[^"]*")/i',$images[0][0], $src);
-$src = $src[0][0];
+$html->load($intro);
+$images = $html->find('img');
+$image = $images[0];
+$src = $image->src;
+$title = $image->title;
+$alt = $image->alt;
 $intro = preg_replace('/<img[^>]+\>/i', '', $intro);
 if (empty($src)) :
-	$src = 'src="templates/ja_t3_blank/local/themes/tvazteca-default/images/logo-azteca-noticias.png"';
+	$src = 'templates/ja_t3_blank/local/themes/tvazteca-default/images/logo-azteca-noticias.png';
 endif;
 ?>
 <div class="item-image">
-	<img <?= $src ?> class="item-image">
+	<img src="<?= $src ?>" class="item-image">
 </div>
 <div class="item-content">
 	<?php if ($params->get('show_title')) : ?>
