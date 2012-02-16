@@ -1,5 +1,7 @@
 <div class="mod_videoplayer" id="video-player-<?= $module->id ?>">
 	<div class="video-player-inner">
+		<div class="module-title">
+		</div>
 		<? if ($params->get('show_sections')) : ?>
 		<div class="video-sections">
 			<h3>Secciones</h3>

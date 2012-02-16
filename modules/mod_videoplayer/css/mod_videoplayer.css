@@ -3,7 +3,6 @@
 .mod_videoplayer {
 	width: 100%;
 	overflow: hidden;
-	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
@@ -23,7 +22,7 @@
 	height: 32px;
 	float: right;
 	position: absolute;
-	top: 0;
+	top: 54px;
 	left: 170px;
 }
 
@@ -161,7 +160,7 @@
 	width: 36px;
 	height: 32px;
 	position: absolute;
-	top: 0;
+	top: 54px;
 	left: 450px;
 }
 
@@ -217,4 +216,12 @@
 
 .mod_videoplayer .scrollbar .scrollbar-pane {
 	width: 100%;
+}
+
+.mod_videoplayer .module-title {
+	margin: 10px 0 0 0;
+	padding: 0;
+	height: 44px;
+	width: 100%;
+	background: transparent url(../images/video-player-module-title-bg.png) no-repeat top left;
 }
