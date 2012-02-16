@@ -28,3 +28,143 @@
 [09-Feb-2012 00:26:46] PHP  10. JPluginHelper::importPlugin() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/modelform.php:189
 [09-Feb-2012 00:26:46] PHP  11. JPluginHelper::_import() /home/samacs/applications/aztecasonora/libraries/joomla/plugin/helper.php:104
 [09-Feb-2012 00:26:46] PHP  12. plgContentPlg_VideoJS->plgContentPlg_VideoJS() /home/samacs/applications/aztecasonora/libraries/joomla/plugin/helper.php:162
+[15-Feb-2012 21:46:24] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 117
+[15-Feb-2012 21:46:25] PHP Stack trace:
+[15-Feb-2012 21:46:25] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:25] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:25] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:25] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:25] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:25] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:25] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:25] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:25] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:25] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:25] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:25] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:117
+[15-Feb-2012 21:46:25] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 119
+[15-Feb-2012 21:46:25] PHP Stack trace:
+[15-Feb-2012 21:46:25] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:25] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:25] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:25] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:25] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:25] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:25] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:25] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:25] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:25] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:25] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:25] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:119
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 117
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:117
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 119
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:119
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 117
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:117
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 119
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:119
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 117
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:117
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 119
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:119
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 117
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:117
+[15-Feb-2012 21:46:53] PHP Warning:  constant() [<a href='function.constant'>function.constant</a>]: Couldn't find constant JPATH_ in /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php on line 119
+[15-Feb-2012 21:46:53] PHP Stack trace:
+[15-Feb-2012 21:46:53] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[15-Feb-2012 21:46:53] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[15-Feb-2012 21:46:53] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[15-Feb-2012 21:46:53] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 21:46:53] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 21:46:53] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_installer/installer.php:22
+[15-Feb-2012 21:46:53] PHP   7. InstallerControllerManage->remove() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 21:46:53] PHP   8. InstallerModelManage->remove() /home/samacs/applications/aztecasonora/administrator/components/com_installer/controllers/manage.php:87
+[15-Feb-2012 21:46:53] PHP   9. JInstaller->uninstall() /home/samacs/applications/aztecasonora/administrator/components/com_installer/models/manage.php:196
+[15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
+[15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
+[15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:119

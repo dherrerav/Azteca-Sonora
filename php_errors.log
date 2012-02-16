@@ -203,3 +203,102 @@
 [09-Feb-2012 09:20:47] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:162
 [09-Feb-2012 09:20:47] PHP  14. modContentCarouselHelper::getArticles() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/mod_content_carousel.php:4
 [09-Feb-2012 09:20:47] PHP  15. array_keys() /home/samacs/applications/aztecasonora/modules/mod_content_carousel/helper.php:32
+[15-Feb-2012 23:08:10] PHP Parse error:  syntax error, unexpected ':' in /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/mod_latest_news_videos.php on line 5
+[15-Feb-2012 23:08:10] PHP Stack trace:
+[15-Feb-2012 23:08:10] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[15-Feb-2012 23:08:10] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:43
+[15-Feb-2012 23:08:10] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:187
+[15-Feb-2012 23:08:10] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 23:08:10] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 23:08:10] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:18
+[15-Feb-2012 23:08:10] PHP   7. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 23:08:10] PHP   8. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:77
+[15-Feb-2012 23:08:10] PHP   9. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[15-Feb-2012 23:08:10] PHP  10. JView->display() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:176
+[15-Feb-2012 23:08:10] PHP  11. JView->loadTemplate() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:180
+[15-Feb-2012 23:08:10] PHP  12. include() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:582
+[15-Feb-2012 23:08:10] PHP  13. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/themes/tvazteca-videos/html/com_content/category/blog.php:46
+[15-Feb-2012 23:08:24] PHP Parse error:  syntax error, unexpected ',' in /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/helper.php on line 50
+[15-Feb-2012 23:08:24] PHP Stack trace:
+[15-Feb-2012 23:08:24] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[15-Feb-2012 23:08:24] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:43
+[15-Feb-2012 23:08:24] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:187
+[15-Feb-2012 23:08:24] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 23:08:24] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 23:08:24] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:18
+[15-Feb-2012 23:08:24] PHP   7. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 23:08:24] PHP   8. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:77
+[15-Feb-2012 23:08:24] PHP   9. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[15-Feb-2012 23:08:24] PHP  10. JView->display() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:176
+[15-Feb-2012 23:08:24] PHP  11. JView->loadTemplate() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:180
+[15-Feb-2012 23:08:24] PHP  12. include() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:582
+[15-Feb-2012 23:08:24] PHP  13. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/themes/tvazteca-videos/html/com_content/category/blog.php:46
+[15-Feb-2012 23:08:24] PHP  14. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[15-Feb-2012 23:08:43] PHP Parse error:  syntax error, unexpected '{' in /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/helper.php on line 50
+[15-Feb-2012 23:08:43] PHP Stack trace:
+[15-Feb-2012 23:08:43] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[15-Feb-2012 23:08:43] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:43
+[15-Feb-2012 23:08:43] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:187
+[15-Feb-2012 23:08:43] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 23:08:43] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 23:08:43] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:18
+[15-Feb-2012 23:08:43] PHP   7. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 23:08:43] PHP   8. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:77
+[15-Feb-2012 23:08:43] PHP   9. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[15-Feb-2012 23:08:43] PHP  10. JView->display() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:176
+[15-Feb-2012 23:08:43] PHP  11. JView->loadTemplate() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:180
+[15-Feb-2012 23:08:43] PHP  12. include() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:582
+[15-Feb-2012 23:08:43] PHP  13. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/themes/tvazteca-videos/html/com_content/category/blog.php:46
+[15-Feb-2012 23:08:43] PHP  14. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[15-Feb-2012 23:09:25] PHP Warning:  require_once(/home/samacs/applications/aztecasonora/component/com_content/helpers/route.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/helper.php on line 3
+[15-Feb-2012 23:09:25] PHP Stack trace:
+[15-Feb-2012 23:09:25] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[15-Feb-2012 23:09:25] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:43
+[15-Feb-2012 23:09:25] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:187
+[15-Feb-2012 23:09:25] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 23:09:25] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 23:09:25] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:18
+[15-Feb-2012 23:09:25] PHP   7. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 23:09:25] PHP   8. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:77
+[15-Feb-2012 23:09:25] PHP   9. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[15-Feb-2012 23:09:25] PHP  10. JView->display() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:176
+[15-Feb-2012 23:09:25] PHP  11. JView->loadTemplate() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:180
+[15-Feb-2012 23:09:25] PHP  12. include() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:582
+[15-Feb-2012 23:09:25] PHP  13. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/themes/tvazteca-videos/html/com_content/category/blog.php:46
+[15-Feb-2012 23:09:25] PHP  14. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[15-Feb-2012 23:09:25] PHP  15. require_once() /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/mod_latest_news_videos.php:3
+[15-Feb-2012 23:10:03] PHP Warning:  Invalid argument supplied for foreach() in /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/tmpl/default.php on line 3
+[15-Feb-2012 23:10:03] PHP Stack trace:
+[15-Feb-2012 23:10:03] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[15-Feb-2012 23:10:03] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:43
+[15-Feb-2012 23:10:03] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:187
+[15-Feb-2012 23:10:03] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 23:10:03] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 23:10:03] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:18
+[15-Feb-2012 23:10:03] PHP   7. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 23:10:03] PHP   8. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:77
+[15-Feb-2012 23:10:03] PHP   9. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[15-Feb-2012 23:10:03] PHP  10. JView->display() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:176
+[15-Feb-2012 23:10:03] PHP  11. JView->loadTemplate() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:180
+[15-Feb-2012 23:10:03] PHP  12. include() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:582
+[15-Feb-2012 23:10:03] PHP  13. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/themes/tvazteca-videos/html/com_content/category/blog.php:46
+[15-Feb-2012 23:10:03] PHP  14. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[15-Feb-2012 23:10:03] PHP  15. require() /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/mod_latest_news_videos.php:6
+[15-Feb-2012 23:17:57] PHP Fatal error:  Call to undefined function pre_replace() in /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/helper.php on line 60
+[15-Feb-2012 23:17:57] PHP Stack trace:
+[15-Feb-2012 23:17:57] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[15-Feb-2012 23:17:57] PHP   2. JSite->dispatch() /home/samacs/applications/aztecasonora/index.php:43
+[15-Feb-2012 23:17:57] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/includes/application.php:187
+[15-Feb-2012 23:17:57] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[15-Feb-2012 23:17:57] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[15-Feb-2012 23:17:57] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/components/com_content/content.php:18
+[15-Feb-2012 23:17:57] PHP   7. ContentController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[15-Feb-2012 23:17:57] PHP   8. JController->display() /home/samacs/applications/aztecasonora/components/com_content/controller.php:77
+[15-Feb-2012 23:17:57] PHP   9. ContentViewCategory->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[15-Feb-2012 23:17:57] PHP  10. JView->display() /home/samacs/applications/aztecasonora/components/com_content/views/category/view.html.php:176
+[15-Feb-2012 23:17:57] PHP  11. JView->loadTemplate() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:180
+[15-Feb-2012 23:17:57] PHP  12. include() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/view.php:582
+[15-Feb-2012 23:17:57] PHP  13. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/themes/tvazteca-videos/html/com_content/category/blog.php:46
+[15-Feb-2012 23:17:57] PHP  14. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[15-Feb-2012 23:17:57] PHP  15. modLatestNewsVideosHelper::getArticles() /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/mod_latest_news_videos.php:4
+[15-Feb-2012 23:17:57] PHP  16. modLatestNewsVideosHelper::_removeCode() /home/samacs/applications/aztecasonora/modules/mod_latest_news_videos/helper.php:55

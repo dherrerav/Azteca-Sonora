@@ -13,7 +13,7 @@ defined('_JEXEC') or die('RESTRICTED');
 
 class WFInstaller extends JObject
 {
-    var $version = '2.0.20';
+    var $version = '2.0.21';
     /**
      * @var Boolean Profiles table exists
      */
@@ -943,7 +943,7 @@ class WFInstaller extends JObject
                 $version = $xml['version'];
                 
                 // Development version
-                if (strpos($this->version, '2.0.20') !== false || strpos($version, '2.0.20') !== false) {
+                if (strpos($this->version, '2.0.21') !== false || strpos($version, '2.0.21') !== false) {
                     return true;
                 }
                 
@@ -962,35 +962,86 @@ class WFInstaller extends JObject
      */
     function createProfilesTable()
     {
+        jimport('joomla.installer.helper');	
+			
         $mainframe = JFactory::getApplication();
         
-        $db = JFactory::getDBO();
+        $db 	= JFactory::getDBO();		
+		$driver = strtolower($db->name);
         
-        $query = "CREATE TABLE IF NOT EXISTS `#__wf_profiles` (
-        `id` int(11) NOT NULL AUTO_INCREMENT,
-        `name` varchar(255) NOT NULL,
-        `description` varchar(255) NOT NULL,
-        `users` text NOT NULL,
-        `types` varchar(255) NOT NULL,
-        `components` text NOT NULL,
-        `area` tinyint(3) NOT NULL,
-        `rows` text NOT NULL,
-        `plugins` text NOT NULL,
-        `published` tinyint(3) NOT NULL,
-        `ordering` int(11) NOT NULL,
-        `checked_out` tinyint(3) NOT NULL,
-        `checked_out_time` datetime NOT NULL,
-        `params` text NOT NULL,
-        PRIMARY KEY (`id`)
-        );";
-        $db->setQuery($query);
-        
-        if (!$db->query()) {
-            $mainframe->enqueueMessage(WFText::_('WF_INSTALL_TABLE_PROFILES_ERROR') . $db->stdErr(), 'error');
-            return false;
-        } else {
-            return true;
-        }
+		switch($driver) {
+			case 'mysqli':
+				$driver = 'mysql';
+				break;
+			case 'sqlazure':
+				$driver = 'sqlsrv';
+				break;
+		}
+		// speed up for mysql - most common
+		if ($driver == 'mysql') {
+			$query = "CREATE TABLE IF NOT EXISTS `#__wf_profiles` (
+	        `id` int(11) NOT NULL AUTO_INCREMENT,
+	        `name` varchar(255) NOT NULL,
+	        `description` varchar(255) NOT NULL,
+	        `users` text NOT NULL,
+	        `types` varchar(255) NOT NULL,
+	        `components` text NOT NULL,
+	        `area` tinyint(3) NOT NULL,
+	        `rows` text NOT NULL,
+	        `plugins` text NOT NULL,
+	        `published` tinyint(3) NOT NULL,
+	        `ordering` int(11) NOT NULL,
+	        `checked_out` tinyint(3) NOT NULL,
+	        `checked_out_time` datetime NOT NULL,
+	        `params` text NOT NULL,
+	        PRIMARY KEY (`id`)
+	        );";
+	        $db->setQuery($query);
+			
+			if ($db->query()) {
+            	return true;	
+			} else {
+				$error = $db->stdErr();
+			}
+		// sqlsrv	
+		} else {
+			$file 	= dirname(dirname(__FILE__)) . DS . 'sql' . DS . $driver . '.sql';
+			$error 	= null;
+			
+			if (is_file($file)) {
+				$buffer = file_get_contents($file);
+				
+				if ($buffer) {
+					$queries = JInstallerHelper::splitSql($buffer);
+					
+					if (count($queries)) {
+						$query = $queries[0];
+					
+						if ($query) {
+							$db->setQuery(trim($query));
+			        
+			        		if (!$db->query()) {
+			            		$mainframe->enqueueMessage(WFText::_('WF_INSTALL_TABLE_PROFILES_ERROR') . $db->stdErr(), 'error');
+			            		return false;
+			        		} else {
+			            		return true;
+			        		}
+						}  else {
+							$error = 'NO SQL QUERY';
+						}
+					} else {
+						$error = 'NO SQL QUERIES';
+					}
+				} else {
+					$error = 'SQL FILE EMPTY';
+				}
+			} else {
+				$error = 'SQL FILE MISSING';
+			}
+		}
+
+		$mainframe->enqueueMessage(WFText::_('WF_INSTALL_TABLE_PROFILES_ERROR') . !is_null($error) ? ' - ' . $error : '', 'error');
+		return false;
     }
     
     /**

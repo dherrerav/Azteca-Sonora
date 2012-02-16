@@ -2,8 +2,8 @@
 <install version="2.0" type="language" core="1">
 	<name>English(United Kingdom)</name>
 	<tag>en-GB</tag>
-	<version>2.0.20</version>
-	<creationDate>20 January 2012</creationDate>
+	<version>2.0.21</version>
+	<creationDate>15 February 2012</creationDate>
 	<author>Ryan Demmer</author>
 	<authorEmail>info@joomlacontenteditor.net</authorEmail>
 	<authorUrl>www.joomlacontenteditor.net</authorUrl>

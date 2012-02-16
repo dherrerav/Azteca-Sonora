@@ -1280,3 +1280,15 @@ h4.content-most-title a:hover {
 	color: #000;
 	font-size: 1.2em;
 }
+
+.category-modules {
+	background: #fff;
+	padding: 10px 0 10px 10px;
+}
+
+.category-modules .ja-moduletable h3 {
+	background: transparent url(../images/bullet-down-title.gif) no-repeat;
+	background-position: 282px 0;
+	width: 100%;
+	font-size: 1.8em;
+}

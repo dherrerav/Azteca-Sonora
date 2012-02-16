@@ -13,7 +13,7 @@ class WFCleanupPluginConfig
 {
 	private static $invalid_elements = array('iframe','object','param','embed','audio','video','source','script','style','applet','body','bgsound','base','basefont','frame','frameset','head','html','id','ilayer','layer','link','meta','name','title','xml');
 
-	public function getConfig(&$settings)
+	public static function getConfig(&$settings)
 	{
 		$wf 	= WFEditor::getInstance();
 		$model 	= JModel::getInstance('editor', 'WFModel');
@@ -64,7 +64,8 @@ class WFCleanupPluginConfig
 			$settings['invalid_elements'] = array();
 		}
 		
-		$settings['invalid_attributes'] = $wf->getParam('editor.invalid_attributes', 'dynsrc,lowsrc', 'dynsrc,lowsrc', 'string', true);
+		$settings['invalid_attributes'] 		= $wf->getParam('editor.invalid_attributes', 'dynsrc,lowsrc', 'dynsrc,lowsrc', 'string', true);
+		$settings['invalid_attribute_values'] 	= $wf->getParam('editor.invalid_attribute_values', '', '', 'string', true);
 	}
 }
 ?>

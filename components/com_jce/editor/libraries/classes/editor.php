@@ -31,7 +31,7 @@ class WFEditor extends JObject {
 	/**
 	 * @var varchar
 	 */
-	private $_version = '2.0.20';
+	private $_version = '2.0.21';
 
 	/**
 	 * Constructor activating the default information of the class

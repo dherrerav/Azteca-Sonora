@@ -40,9 +40,13 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php endif; ?>
 	</div>
 <?php endif; ?>
-
-
-
+<? if ($modules = JModuleHelper::getModules('category-modules')) : ?>
+<div class="category-modules">
+	<? foreach ($modules as $module) : ?>
+	<?= JModuleHelper::renderModule($module, array('style' => 'JAXhtml')) ?>
+	<? endforeach ?>
+</div>
+<? endif ?>
 <?php $leadingcount=0 ; ?>
 <?php if (!empty($this->lead_items)) : ?>
 <div class="items-leading clearfix">
