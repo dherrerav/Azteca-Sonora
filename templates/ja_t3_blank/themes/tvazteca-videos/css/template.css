@@ -1274,3 +1274,8 @@ h4.content-most-title a:hover {
 .body-info-7 .ja-moduletable.moduletable-alpha75 .news-description p {
 	margin: 20px 0 !important;
 }
+
+.category-description p {
+	color: #000;
+	font-size: 1.2em;
+}
