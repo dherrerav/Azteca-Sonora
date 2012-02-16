@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+	<item name="dashboard" title="Admin Dashboard" link="option=com_jacomment&amp;view=comment" class="adminmenu" />	
+	<item name="commentmanager" title="Manage Comments" link="#" class="adminmenu">    
+        <item name="moderate" title="Moderation" link="option=com_jacomment&amp;view=comments" class="adminmenu"/>
+    </item>
+    <item name="settings" title="Settings" link="#" class="adminmenu">	
+		<item name="general" title="General" link="option=com_jacomment&amp;view=configs&amp;group=general" class="adminmenu"/>
+		<item name="comments" title="Comments" link="option=com_jacomment&amp;view=configs&amp;group=comments" class="adminmenu"/>
+		<item name="spam_filters" title="Spam Filters" link="option=com_jacomment&amp;view=configs&amp;group=spamfilters" class="adminmenu"/>
+		<item name="blacklisting" title="Blacklisting" link="option=com_jacomment&amp;view=configs&amp;group=blacklisting" class="adminmenu"/>		
+		<item name="moderator" title="Moderator" link="option=com_jacomment&amp;view=configs&amp;group=moderator" class="adminmenu"/>
+		<item name="permissions" title="Permissions" link="option=com_jacomment&amp;view=configs&amp;group=permissions" class="adminmenu"/>
+        <item name="layout_plugins" title="Layout &amp; Plugins" link="option=com_jacomment&amp;view=configs&amp;group=layout" class="adminmenu"/>		
+	</item>		
+	<item name="im-export" title="XML Import/Export" link="#" class="adminmenu">    
+        <item name="import" title="Import" link="option=com_jacomment&amp;view=imexport&amp;group=import" class="adminmenu"/>
+        <item name="export" title="Export" link="option=com_jacomment&amp;view=imexport&amp;group=export" class="adminmenu"/>
+    </item>
+	<item name="customization" title="Email Templates and Languages" link="#" class="adminmenu">
+		<item name="email" title="Email Templates" link="option=com_jacomment&amp;view=emailtemplates" class="adminmenu" />
+		<item name="language" title="Languages" link="option=com_jacomment&amp;view=managelang" class="adminmenu"/>		
+	</item>	
+	<item name="licensesupport" title="Documentation and Support" link="option=com_jacomment&amp;view=comment&amp;layout=licenseandsupport" class="adminmenu">		
+	</item>
+</menu>

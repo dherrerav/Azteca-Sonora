@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="User Account" hidden="true">
+		<message><![CDATA[ Choose a User Account view Layout (User account home, user setting detail Layout)]]></message>
+	</view>
+</metadata>

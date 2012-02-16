@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+html { direction: rtl; }
+
+#plugin_embed a, #plugin_embed_reply a {
+	float: right;
+	margin: 0 0 5px 10px;
+}
+
+#jac-close-form {
+	background-position: left top;
+}
+
+#comment_as {
+	float: right;
+}
+
+#form1 {
+	float: left;
+}
+
+#jac-wrapper li span{
+	float: right;
+}
+
+#jac-wrapper .form-userdata span {
+	margin-right: 0;
+	margin-left: 10px;
+}
+
+#jac-new-captcha, .jac-subscribe {
+	float: right !important;
+}
+
+#jac-refresh-image {
+	float: right;
+	margin-right: -22px;
+	margin-left: 0px;
+}
+
+#jac-new-captcha img {
+	float: right;
+}
+
+.type_captcha {
+	float: right;
+	margin: 0 10px 0 0
+}
+
+#jac-wrapper #jac_image_captcha {
+	margin-left: 10px;
+	margin-right: 0px;
+}
+
+.jac-addnew a {
+	float: right;
+}
+
+.jac-user-info .jac-avatar {
+	float: right;
+	margin-right: 0;
+	margin-left: 10px;
+}
+
+.jac-user-name-3 {
+	float: right;
+}
+
+.jac-vote-comment {
+	float: left;
+}
+
+.jac-show-report-3 {
+	float:left;
+	margin:0 0 0 5px;
+}
+
+.jac-div-reply {
+	float:right;
+	margin:0 10px 10px 0;
+}
+
+.jac-pagination .jac-display-limit {
+	float:left;
+	text-align:left;
+}
+
+#jac-close-form.active {
+	background-position: left -56px;
+}
+
+#whitebox div {
+	text-align: right !important;
+}
+#jac-login-joomla-form p, #jac-login-joomla-form pre, #jac-login-joomla-form blockquote, #jac-login-joomla-form h1, #jac-login-joomla-form h2, #jac-login-joomla-form h3, #jac-login-joomla-form h4, #jac-login-joomla-form h5, #jac-login-joomla-form h6, .column ol, #jac-login-joomla-form ul {
+	margin:10px 0;	
+	padding:0;
+}

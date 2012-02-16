@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Main Component Layout">
+		<message><![CDATA[Display list of voices]]></message>
+	</layout>
+	<state>
+		<name>Main Component Layout</name>
+		<description>Display list of voices</description>
+		<advanced>
+			<param name="types" type="text" size="30" default="" label="List of Voice Types ID" description="Eg: 1,2,3,10. Empty for all voice types" />
+			<param name="forums" type="text" size="30" default="" label="List of Forums ID" description="Eg: 1,2,3,10. Empty for all forums" />
+			<param name="type_active" type="text" size="5" default="" label="Voice Type ID Actived" description="Eg: 10. Default is the first Voice type." />
+		</advanced>
+	</state>		
+</metadata>

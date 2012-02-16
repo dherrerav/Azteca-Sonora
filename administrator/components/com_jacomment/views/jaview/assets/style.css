@@ -1,0 +1,199 @@
+/*
+# ------------------------------------------------------------------------
+# JA Comments component for Joomla 1.5
+# ------------------------------------------------------------------------
+# Copyright (C) 2004-2010 JoomlArt.com. All Rights Reserved.
+# @license - PHP files are GNU/GPL V2. CSS / JS are Copyrighted Commercial,
+# bound by Proprietary License of JoomlArt. For details on licensing, 
+# Please Read Terms of Use at http://www.joomlart.com/terms_of_use.html.
+# Author: JoomlArt.com
+# Websites:  http://www.joomlart.com -  http://www.joomlancers.com
+# Redistribution, Modification or Re-licensing of this file in part of full, 
+# is bound by the License applied. 
+# ------------------------------------------------------------------------
+*/
+/* Commont form */
+fieldset {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+fieldset legend {
+	font-size: 125%;
+}
+
+/* Main content */
+#jacom-maincontent {
+	display: block;
+	float: right;
+	width: 81%;
+}
+
+li.havechild ul {
+	display: none;
+}
+
+div.ja-posted-jobs,
+div.ja-transactions {
+	float: left;
+	margin-bottom: 15px;
+	width: 49.5%;
+}
+
+div.ja-transactions {
+	float: right;
+}
+
+div.ja-new-employers,
+div.ja-new-resumes {
+	float: left;
+	margin-bottom: 15px;
+	width: 49.5%;
+}
+
+div.ja-new-resumes {
+	float: right;
+}
+
+/* Jobs filter */
+#ja-filter {
+	background: #FCFCFC;
+	border: 1px solid #CCCCCC;
+	margin: 10px 0;
+	-moz-border-radius: 9px;
+	padding: 8px;
+	text-align: right;
+	-webkit-border-radius: 9px;
+}
+
+/* Left menu */
+#jacom-mainnav {
+	border: 1px solid #CCCCCC;
+	display: block;
+	float: left;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	width: 18%;
+}
+
+#jacom-mainnav .inner {
+	padding: 0 0 10px;
+}
+
+#jacom-mainnav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#jacom-mainnav ul li {
+	margin: 0;
+	padding: 0;
+}
+
+#jacom-mainnav ul li a {
+	background: url(images/arrow.gif) no-repeat 5px 10px;
+	border-bottom: 1px solid #F0F0F0;
+	color: #666666;
+	font-weight: bold;
+	display: block;
+	padding: 7px 0 7px 18px;
+	outline: none;
+}
+
+#jacom-mainnav ul li a:hover,
+#jacom-mainnav ul li a:active,
+#jacom-mainnav ul li a:focus {
+	background: url(images/arrow.gif) no-repeat 5px 10px #F9F9F9;
+	color: #F7931D;
+	text-decoration: none;
+}
+
+#jacom-mainnav li.active a.active {
+	background: #F9F9F9;
+	color: #F7931D;
+	font-weight: bold;
+}
+
+#jacom-mainnav li.opened a {
+	background: url(images/arrow-down.gif) no-repeat 5px 11px #F9F9F9 !important;
+}
+
+#jacom-mainnav li ul {
+	border-bottom: 1px solid #F0F0F0;
+}
+
+#jacom-mainnav li li {
+	background: none;
+	padding: 0 0 0 20px;
+}
+
+#jacom-mainnav ul li.opened li a,
+#jacom-mainnav ul li li a {
+	background: url(images/bullet.gif) no-repeat 0px 10px !important;
+	border: none;
+	display: block;
+	font-weight: normal;
+	padding: 5px 0 5px 10px;
+}
+
+#jacom-mainnav ul li.opened li a:hover,
+#jacom-mainnav ul li li a:hover {
+	background: url(images/bullet-hover.gif) no-repeat 0px 10px !important;
+}
+
+#jacom-mainnav li li.active a.active {
+	background: url(images/bullet-hover.gif) no-repeat 0px 10px;
+	font-weight: normal;
+}
+
+/* Collapse menu */
+li.opened ul {
+	display: block;
+}
+
+li.closed ul {
+	display: none;
+}
+
+div.ja-showhide {
+	background: url(images/grad1.gif) repeat-x left bottom;
+	border-bottom: 1px solid #CCCCCC;
+	margin: 0;
+	padding: 8px 10px;
+	-moz-border-radius: 9px 9px 0 0;
+	-webkit-border-radius: 9px 9px 0 0;
+}
+
+div.ja-showhide a.openall {
+	background: url(images/icon-open-hide.gif) no-repeat left center;
+	border-right: 1px solid #999999;
+	color: #999999;
+	outline: none;
+	padding: 0 7px 0 15px;
+}
+
+div.ja-showhide a.closeall {
+	background: url(images/icon-close-hide.gif) no-repeat 3px center;
+	color: #999999;
+	outline: none;
+	padding: 0 0 0 20px;
+}
+
+a.opened {
+	background: url(images/icon-open.gif) no-repeat 0px center !important;
+	color: #F7931D !important;
+}
+
+a.closed {	
+	color: #F7931D !important;
+}
+
+/* Footer */
+#jacom-footer {
+	clear: both;
+	padding: 10px 0;
+	text-align: center;
+	width: 100%;
+}
+

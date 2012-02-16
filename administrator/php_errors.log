@@ -168,3 +168,25 @@
 [15-Feb-2012 21:46:53] PHP  10. JInstallerModule->uninstall() /home/samacs/applications/aztecasonora/libraries/joomla/installer/installer.php:712
 [15-Feb-2012 21:46:53] PHP  11. JInstallerModule->loadLanguage() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:734
 [15-Feb-2012 21:46:53] PHP  12. constant() /home/samacs/applications/aztecasonora/libraries/joomla/installer/adapters/module.php:119
+[16-Feb-2012 14:04:51] PHP Warning:  Invalid argument supplied for foreach() in /home/samacs/applications/aztecasonora/libraries/joomla/html/html/select.php on line 504
+[16-Feb-2012 14:04:51] PHP Stack trace:
+[16-Feb-2012 14:04:51] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[16-Feb-2012 14:04:51] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[16-Feb-2012 14:04:51] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[16-Feb-2012 14:04:51] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[16-Feb-2012 14:04:51] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[16-Feb-2012 14:04:51] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/admin.jacomment.php:105
+[16-Feb-2012 14:04:51] PHP   7. JACommentControllerConfigs->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[16-Feb-2012 14:04:51] PHP   8. JACommentController->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/controllers/configs.php:38
+[16-Feb-2012 14:04:51] PHP   9. JController->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/controller.php:24
+[16-Feb-2012 14:04:51] PHP  10. JACommentViewConfigs->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[16-Feb-2012 14:04:51] PHP  11. JAView->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/configs/view.html.php:100
+[16-Feb-2012 14:04:51] PHP  12. include() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/jaview/view.html.php:42
+[16-Feb-2012 14:04:51] PHP  13. JView->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/jaview/tmpl/main.php:16
+[16-Feb-2012 14:04:51] PHP  14. JView->loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/view.php:301
+[16-Feb-2012 14:04:51] PHP  15. include() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/view.php:742
+[16-Feb-2012 14:04:51] PHP  16. JHtml::_() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/configs/tmpl/general.php:165
+[16-Feb-2012 14:04:51] PHP  17. JHtml::call() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:103
+[16-Feb-2012 14:04:51] PHP  18. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:222
+[16-Feb-2012 14:04:51] PHP  19. JHtmlSelect::genericlist() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:0
+[16-Feb-2012 14:04:51] PHP  20. JHtmlSelect::options() /home/samacs/applications/aztecasonora/libraries/joomla/html/html/select.php:122

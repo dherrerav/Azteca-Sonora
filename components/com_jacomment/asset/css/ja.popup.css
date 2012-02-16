@@ -1,0 +1,194 @@
+/*
+# ------------------------------------------------------------------------
+# JA Comments component for Joomla 1.5
+# ------------------------------------------------------------------------
+# Copyright (C) 2004-2010 JoomlArt.com. All Rights Reserved.
+# @license - PHP files are GNU/GPL V2. CSS / JS are Copyrighted Commercial,
+# bound by Proprietary License of JoomlArt. For details on licensing, 
+# Please Read Terms of Use at http://www.joomlart.com/terms_of_use.html.
+# Author: JoomlArt.com
+# Websites:  http://www.joomlart.com -  http://www.joomlancers.com
+# Redistribution, Modification or Re-licensing of this file in part of full, 
+# is bound by the License applied. 
+# ------------------------------------------------------------------------
+*/
+/* CSS Document */
+#ja-popup-wrap {
+	height: auto !important;
+	position: relative;
+	z-index: 10001;
+}
+
+#ja-popup { position: fixed; top: 50px; z-index: 99999; left: 0; }
+
+/* Popup header ---*/
+#ja-popup-header-wrap,
+#ja-popup-footer-wrap { height: 50px; padding: 0 15px; position: relative; }
+
+#ja-popup-header {
+	background: url(../images/popup-ct.png) repeat-x left top;
+	padding-top: 15px;
+}
+
+#ja-popup-tl,
+#ja-popup-tr,
+#ja-popup-bl,
+#ja-popup-br {
+	background-image: url(../images/corner-bg.png);
+	background-repeat: no-repeat;
+	height: 50px;
+	position: absolute;
+	width: 15px;
+}
+
+#ja-popup-tl { background-position: left top; left: 0; top: 0; }
+#ja-popup-tr { background-position: right top; right: 0; top: 0; }
+
+#ja-popup-header .inner {
+	background: #f0f0f0;
+	border-bottom: 1px solid #ddd;
+	height: 35px;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+}
+
+#ja-popup-header h3.ja-popup-title {
+	color: #666;
+	float: left;
+	font-size: 125%;
+	height: 34px;
+	line-height: 34px;
+	margin: 0;
+	padding: 0 10px;
+	text-shadow: 1px 1px 0 #fff;
+}
+
+#ja-popup-header #ja-close-button {
+	background: url(../images/grad1.gif) repeat-x left bottom #fff;
+	border: 1px solid #ddd;
+	color: #666;
+	display: block;
+	float: right;
+	font-weight: bold;
+	line-height: normal;
+	margin: 5px 10px 0 0;
+	padding: 2px 10px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #fff;
+}
+
+#ja-popup-header #ja-close-button:hover { border: 1px solid #ccc; color: #069; cursor: pointer; }
+
+/* Popup Content ---*/
+#ja-popup-content-wrap {
+	background: url(../images/popup-cl.png) repeat-y left top;
+	padding: 0 15px;
+	width: 100%;
+}
+
+#ja-popup-content {
+	background: url(../images/popup-cr.png) repeat-y right top;
+	margin: 0 -15px;
+}
+#all #main{
+	height: auto !important;
+	min-height: 0;
+	padding: 0;
+}
+
+#ja-popup-content-wrap .inner { background: #fff; margin: 0 15px; overflow: hidden; }
+
+#ja-popup-wait {
+	background: transparent url(window/loading2.gif) no-repeat;
+	height: 11px;
+	position: absolute;
+	width: 43px;
+	z-index: 999;
+}
+
+/* Popup footer ---*/
+#ja-popup-footer-wrap { height: 50px; }
+
+#ja-popup-footer {
+	background: url(../images/popup-cb.png) repeat-x left bottom;
+	padding-bottom: 15px;
+}
+
+#ja-popup-footer .inner {
+	background: #f0f0f0;
+	border-top: 1px solid #ddd;
+	height: 34px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+}
+
+#ja-popup-footer .inner span {
+	background: #fcfcfc;
+	display: block;
+	float: left;
+	font-size: 92%;
+	margin: 8px 0 0 10px;
+	padding: 1px 10px;
+}
+
+#ja-popup-bl { background-position: left bottom; bottom: 0; left: 0; }
+
+#ja-popup-br { background-position: right bottom; bottom: 0; right: 0; }
+
+#ja-save-button,
+#ja-cancel-button {
+	background: url(../images/grad1.gif) repeat-x left bottom #fff;
+	border: 1px solid #ddd;
+	color: #666;
+	display: block;
+	float: right;
+	font-weight: bold;
+	line-height: normal;
+	margin: 5px 10px 0 0;
+	padding: 2px 10px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #fff;
+}
+
+#ja-save-button:hover,
+#ja-save-button:focus,
+#ja-save-button:active,
+#ja-cancel-button:hover,
+#ja-cancel-button:focus,
+#ja-cancel-button:active { border: 1px solid #ccc; color: #069; cursor: pointer; }
+
+/* Form login ---*/
+.jac-login #ja-form-login-username,
+.jac-login #ja-form-login-password { margin: 0 0 10px !important; }
+
+.jac-login label {
+	color: #666;
+	display: block;
+	float: left;
+	font-weight: bold;
+	width: 65px;
+}
+
+.jac-login .txtbox {
+	background: url(../images/input-bg.gif) repeat-x left top;
+	border: 1px solid #E0E0E0;
+	padding: 3px 5px;
+}
+
+.jac-login ul li {
+	background-position: 0px 10px !important;
+	line-height: normal;
+	margin: 0 !important;
+	padding: 0 0 0 10px !important;
+}
+
+.jac-login ul li a {
+	font-size: 92%;
+	text-decoration: none;
+	text-transform: capitalize !important;
+}
+
+/* Hide rounded div */
+#jacomment_tl, #jacomment_tm,
+#jacomment_ml, #jacomment_mr,
+#jacomment_bl, #jacomment_bm, #jacomment_br { display: none; }

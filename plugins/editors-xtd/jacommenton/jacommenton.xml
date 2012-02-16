@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="editors-xtd" method="upgrade">
+	<name>Editor Button - JAComment ON</name>
+	<creationDate>Dec 2010</creationDate>
+	<author>JoomlArt.com</author>
+	<copyright>Copyright (C), J.O.O.M Solutions Co., Ltd. All Rights Reserved.</copyright>
+	<license>license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<authorEmail>webmaster@joomlart.com</authorEmail>	
+	<authorUrl>www.joomlart.com</authorUrl>	
+	<version>1.0.0</version>	
+	<updateservers>
+	    <server type="collection">http://update.joomlart.com/service/tracking/list.xml</server>
+	</updateservers>
+	<description>Insert the {jacomment on} tag into an article.</description>
+	<files>
+		<filename plugin="jacommenton">jacommenton.php</filename>
+	</files>
+	<params />
+</install>

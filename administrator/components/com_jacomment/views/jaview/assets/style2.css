@@ -1,0 +1,175 @@
+/*
+# ------------------------------------------------------------------------
+# JA Comments component for Joomla 1.5
+# ------------------------------------------------------------------------
+# Copyright (C) 2004-2010 JoomlArt.com. All Rights Reserved.
+# @license - PHP files are GNU/GPL V2. CSS / JS are Copyrighted Commercial,
+# bound by Proprietary License of JoomlArt. For details on licensing, 
+# Please Read Terms of Use at http://www.joomlart.com/terms_of_use.html.
+# Author: JoomlArt.com
+# Websites:  http://www.joomlart.com -  http://www.joomlancers.com
+# Redistribution, Modification or Re-licensing of this file in part of full, 
+# is bound by the License applied. 
+# ------------------------------------------------------------------------
+*/
+/* Commont form */
+fieldset {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+fieldset legend {
+	font-size: 125%;
+}
+
+/* Main content */
+#jacom-maincontent {
+	display: block;
+	float: right;
+	width: 83%;
+}
+
+li.havechild ul {
+	display: none;
+}
+
+div.ja-posted-jobs,
+div.ja-transactions {
+	float: left;
+	margin-bottom: 15px;
+	width: 49.5%;
+}
+
+div.ja-transactions {
+	float: right;
+}
+
+div.ja-new-employers,
+div.ja-new-resumes {
+	float: left;
+	margin-bottom: 15px;
+	width: 49.5%;
+}
+
+div.ja-new-resumes {
+	float: right;
+}
+
+/* Jobs filter */
+#ja-filter {
+	background: #FCFCFC;
+	border: 1px solid #CCCCCC;
+	margin: 10px 0;
+	-moz-border-radius: 9px;
+	padding: 8px;
+	text-align: right;
+	-webkit-border-radius: 9px;
+}
+
+/* Left menu */
+#jacom-mainnav {
+	background: #F7F7F7;
+	border: 1px solid #CCCCCC;
+	display: block;
+	float: left;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	width: 16%;
+}
+
+#jacom-mainnav .inner {
+	padding: 10px;
+}
+
+#jacom-mainnav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#jacom-mainnav ul li {
+	margin: 0;
+	padding: 3px 0;
+}
+
+#jacom-mainnav ul li a {
+	background: url(images/bullet.gif) no-repeat 0px 5px;
+	color: #666666;
+	font-weight: bold;
+	padding: 0 0 0 7px;
+}
+
+#jacom-mainnav ul li a:hover,
+#jacom-mainnav ul li a:active,
+#jacom-mainnav ul li a:focus {
+	background: url(images/bullet-hover.gif) no-repeat 0px 5px;
+	color: #F7931D;
+}
+
+#jacom-mainnav li.active a.active {
+	background: url(images/bullet-hover.gif) no-repeat 0px 5px;
+	color: #F7931D;
+	font-weight: bold;
+}
+
+#jacom-mainnav li li {
+	background: none;
+	padding: 0 0 0 10px;
+}
+
+#jacom-mainnav ul li li a {
+	background: url(images/leaf-bg.gif) no-repeat 0px 10px;
+	border-left: 1px solid #999999;
+	display: block;
+	font-weight: normal;
+	padding: 4px 0 4px 10px;
+}
+
+#jacom-mainnav ul li li a:hover {
+	background: url(images/leaf-bg.gif) no-repeat 0px 10px;
+}
+
+#jacom-mainnav li li.active a.active {
+	background: url(images/leaf-bg.gif) no-repeat 0px 10px;
+	font-weight: normal;
+}
+
+/* Collapse menu */
+li.opened ul {
+	display: block;
+}
+
+li.closed ul {
+	display: none;
+}
+
+div.ja-showhide {
+	background: #FFFFFF;
+	border: 1px solid #DDDDDD;
+	margin-bottom: 10px;
+	-moz-border-radius: 3px;
+	padding: 5px 10px;
+	-webkit-border-radius: 3px;
+}
+
+a.openall {
+	background: url(images/icon-open.gif) no-repeat left center;
+	border-right: 1px solid #999999;
+	outline: none;
+	padding: 0 7px 0 15px;
+}
+
+a.closeall {
+	background: url(images/icon-close.gif) no-repeat 3px center;
+	outline: none;
+	padding: 0 0 0 20px;
+}
+
+/* Footer */
+#jacom-footer {
+	clear: both;
+	padding: 10px 0;
+	text-align: center;
+	width: 100%;
+}
+

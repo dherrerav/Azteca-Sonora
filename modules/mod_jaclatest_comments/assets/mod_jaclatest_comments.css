@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+/*style for module*/
+ul.jac-lasmod-main {
+	background: none;
+	list-style: none;
+}
+li.jac-has-layout{
+	background: none !important;
+	list-style: none !important;
+}
+
+li.jac-has-layout IMG{
+	float: left;
+}
+
+.jac-lasmod-author, .jac-lasmod-time, .jac-lasmod-time SPAN{
+	float: left;
+}
+.jac-lasmod-author{
+	width:50%;
+	font-weight:bold;
+}

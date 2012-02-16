@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<extension type="component" version="1.6.0" method="upgrade">
+	<name>JA Comment</name>	
+	<creationDate>Dec 2010</creationDate>
+	<copyright>Copyright (C), J.O.O.M Solutions Co., Ltd. All Rights Reserved.</copyright>
+	<license>license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<author>JoomlArt</author>
+	<authorEmail>webmaster@joomlart.com</authorEmail>
+	<authorUrl>www.joomlart.com</authorUrl>
+	<version>1.0.0</version>
+	<updateservers>
+	    <server type="collection">http://update.joomlart.com/service/tracking/list.xml</server>
+	</updateservers>
+	<description>JA Comment component version 1.0.0 for Joomla 1.6</description>
+
+	<administration>
+		<menu img="components/com_jacomment/asset/images/jacomment.png">JA Comment</menu>
+		<files folder="admin">
+			<filename>admin.jacomment.php</filename>
+			<filename>controller.php</filename>
+			<filename>toolbar.jacomment.php</filename>
+			<filename>toolbar.jacomment.html.php</filename>
+
+			<folder>asset</folder>
+			<folder>controllers</folder>
+			<folder>installer</folder>		
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>						
+		</files>
+
+		<languages folder="admin/language">
+			<language tag="en-GB">en-GB.com_jacomment.ini</language>
+		</languages>
+
+	</administration>
+	
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>jacomment.php</filename>		
+		<filename>controller.php</filename>
+
+		<folder>asset</folder>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+		<folder>themes</folder>
+		<folder>libs</folder>
+	</files>
+	
+	<languages folder="site/language">
+		<language tag="en-GB">en-GB.com_jacomment.ini</language>
+	</languages>
+	<install>
+		<sql folder="admin">
+			<file driver="mysql" charset="utf8">installer/sql/install.jacomment.sql</file>
+		</sql>
+	</install>
+
+	<installfile>install.jacomment.php</installfile>
+	
+	<jaupdater>
+        <serviceUrl>
+            http://update.joomlart.com
+        </serviceUrl>
+
+        <tables>
+            <table>#__jacomment_configs</table>
+            <table>#__jacomment_email_templates</table>
+            <table>#__jacomment_items</table>
+			<table>#__jacomment_logs</table>					
+        </tables>
+        
+        <versions folder="admin">		
+        	<version version="1.0.0">				
+            </version>                        			
+        </versions>        
+    </jaupdater>
+	
+	
+</extension>

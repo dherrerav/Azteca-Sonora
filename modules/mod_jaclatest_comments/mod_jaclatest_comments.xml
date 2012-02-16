@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension 
+	type="module" 
+	version="1.6.0" 
+	client="site" 
+	method="upgrade">
+	<name>JA Comment Latest comments</name>
+	<author>Joom Solutions</author>
+	<creationDate>December 2010</creationDate>
+	<copyright>Copyright (C), J.O.O.M Solutions Co., Ltd. All Rights Reserved.</copyright>
+	<license>license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<authorEmail>webmaster@joomlart.com</authorEmail>
+	<authorUrl>http://www.joomlart.com</authorUrl>
+	<version>1.0.0</version>
+	<description>This module displays latest comment up to user</description>
+	<updateservers>
+	    <server type="collection">http://update.joomlart.com/service/tracking/list.xml</server>
+	</updateservers>	
+	<languages folder="languages">
+		<language tag="en-GB">en-GB.mod_jaclatest_comments.ini</language>		
+	</languages>
+	
+	<files>		
+		<filename module="mod_jaclatest_comments">mod_jaclatest_comments.php</filename>
+	    <filename module="mod_jaclatest_comments">helper.php</filename>
+	    <filename module="mod_jaclatest_comments">index.html</filename>
+	    <filename module="mod_jaclatest_comments">tmpl/index.html</filename>
+	    <filename module="mod_jaclatest_comments">tmpl/default.php</filename>
+		<folder module="mod_jaclatest_comments">elements</folder>
+		<folder module="mod_jaclatest_comments">assets</folder>
+	</files>
+	<config>
+		<fields name="params" addfieldpath="/modules/mod_jaclatest_comments/elements">
+			<fieldset name="basic">
+				<field name="sort_type" type="list" default="1" label="MODULE_MODE" description="MODULE_MODE_DESC">
+						<option value="1">SHOW_LATEST_COMMENTS</option>			
+						<option value="2">SHOW_POPULAR_COMMENTS</option>
+				</field>
+				
+				<field 
+					name="group1" 
+					type="japaramhelper" 
+					function="@group">
+						<option for="type" value="com_content" hideRow="true">
+							type-com_content-content_category
+						</option>						
+						<option for="type" value="other_component" hideRow="true">
+							type-other_component-other_component
+						</option>
+				</field>
+				
+				<field name="source_config" type="japaramhelper" default="" level="2" function="@title" label="SOURCE_SETTING"/>
+				<field name="type" type="list" default="0" label="SELECT_SOURCE" description="SELECT_SOURCE_DESC">
+						<option value="com_content">com_content</option>						
+						<option value="other_component">other_component</option>
+				</field>
+																
+				<field 
+					name="type-com_content-content_category" 
+					type="category"
+					extension="com_content" 
+					default=""
+					label="SELECT_CATEGORY"
+					multiple="true"
+     				size="10"     				
+					description="SELECT_CATEGORY_DESC">						
+				</field>								
+								
+				<field name="type-other_component-other_component" type="text" default="" label="COMPONENT_NAME"  description="COMPONENT_NAME_DESC"/>
+				
+				<field name="general_config" type="japaramhelper" default="" level="2" function="@title" label="GENERAL_SETTING"/>
+				<field name="count" type="text" default="5" label="COUNT"  description="THE_NUMBER_OF_ITEMS"/>
+				<field name="showcommentcount" type="radio" default="0" label="SHOW_COMMENTS_COUNT" description="SHOW_COMMENTS_COUNT_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="show_author_info" type="list" default="1" label="SHOW_AUTHOR_INFO" description="SHOW_AUTHOR_INFO_DESC">
+					<option value="0">NOT_SHOW</option>
+					<option value="1">SHOW_REAL_NAME</option>
+					<option value="2">SHOW_USERNAME</option>
+					<option value="3">SHOW_EMAIL</option>
+				</field>
+				<field name="avatar" type="radio" default="1" label="SHOW_AVATAR" description="SHOW_AVATAR_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="avatar_size" type="text" default="32" label="AVATAR_SIZE"  description="AVATAR_SIZE_DESC"/>
+				<field name="show_vote" type="radio" default="0" label="SHOW_COMMENT_VOTE" description="SHOW_COMMENT_VOTE_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="showsmiles" type="radio" default="1" label="SHOW_SMILES" description="SHOW_SMILES_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="showbbcode" type="radio" default="1" label="SHOW_BBCODE" description="SHOW_BBCODE_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="show_date" type="list" default="0" label="SHOW_COMMENT_DATE" description="SHOW_COMMENT_DATE_DESC">
+					<option value="0">No</option>
+					<option value="1">NOMAL_DATE</option>
+					<option value="2">USE_TIME_SPAM</option>
+				</field>
+				
+				<field name="filteringspacer2" type="spacer" hr="true" />
+				<field name="showcontent" type="radio" default="1" label="SHOW_CONTENT_OF_COMMENTS" description="SHOW_CONTENT_OF_COMMENTS_DESC">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="length" type="text" size="20" default="50" label="Max characters of content" description="The number of characters to display"/>
+				
+				<field name="filteringspacer3" type="spacer" hr="true" />
+				<field name="show_content_title" type="radio" default="1" label="Show content title" description="Show title of content">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="limit_content_title" type="text" size="20" default="20" label="Limit chars for content title" description="Limit chars for content title"/>
+			</fieldset>
+			<fieldset name="advanced">				
+				<field name="cache" type="list" default="1" label="Caching" description="Select whether to cache the content of this module">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached"/>
+				<field name="filteringspacer1" type="spacer" hr="true" />
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="A suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling"/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

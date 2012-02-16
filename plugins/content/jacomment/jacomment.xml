@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.6" type="plugin" group="content">
+	<name>Content - JA Comment</name>
+	<author>JoomlArt.com</author>
+	<creationDate>Dec 2010</creationDate>
+    <copyright>Copyright (C), J.O.O.M Solutions Co., Ltd. All Rights Reserved.</copyright>
+	<license>license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<authorEmail>webmaster@joomlart.com</authorEmail>
+	<authorUrl>www.joomlart.com</authorUrl>
+	<version>1.0.0</version>
+	<description>JACOMMENT PLUGIN</description>
+	<updateservers>
+	    <server type="collection">http://update.joomlart.com/service/tracking/list.xml</server>
+	</updateservers>
+	
+	<files>
+		<filename plugin="jacomment">jacomment.php</filename>
+		<folder>elements</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_content_jacomment.ini</language>
+	</languages>
+	<config>
+		<fields 
+			name="params" 
+			addfieldpath="/plugins/content/jacomment/elements">
+			<fieldset name="basic">
+				<field 
+					name="postion_add_button" 
+					type="list" 
+					default="onContentBeforeDisplay" 
+					label="POSTION_OF_ADD_NEW_BUTTON"
+					description="POSTION_OF_ADD_NEW_BUTTON_DESC">						
+						<option value="onContentAfterDisplay">On Content after display</option>                        
+						<option value="onContentBeforeDisplay">On Content before display</option>						
+				</field>
+				<field 
+					name="catsid" 
+					type="category"
+					extension="com_content" 
+					default=""
+					label="SELECT_CATEGORY"
+					multiple="true"
+     				size="10"     				
+					description="SELECT_CATEGORY_DESC">						
+				</field>
+				<field 
+					name="menusid" 
+					type="menuitem" 
+					default=""					
+					label="SELECT_MENUS"
+					multiple="true"
+					size="20" 
+					description="SELECT_MENUS_DESC"/>
+				<field 
+					name="display_comment_link" 
+					type="radio"					
+					default="1" 
+					label="DISPLAY_COMMENT_LINK" 
+					description="DISPLAY_COMMENT_LINK_DESC">
+					<option value="0">No</option>
+            		<option value="1">Yes</option>
+            	</field>
+				<field 
+					name="display_comment_count" 
+					type="radio"
+					default="1" 					
+					label="Display comment count" 
+					description="Display comment count desc">
+					<option value="0">No</option>
+            		<option value="1">Yes</option>
+            	</field>
+			</fieldset>
+		</fields>
+	</config>		
+</install>
