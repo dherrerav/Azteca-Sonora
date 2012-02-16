@@ -1279,6 +1279,7 @@ h4.content-most-title a:hover {
 .category-description p {
 	color: #000;
 	font-size: 1.2em;
+	margin: 0 !important;
 }
 
 .category-modules {
@@ -1291,5 +1292,4 @@ h4.content-most-title a:hover {
 	background-position: 282px 0;
 	width: 100%;
 	font-size: 1.8em;
-	margin: 0 !important;
 }
