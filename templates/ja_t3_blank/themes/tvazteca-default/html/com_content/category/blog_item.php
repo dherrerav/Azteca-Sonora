@@ -9,6 +9,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
+require_once JPATH_SITE . '/libraries/simple_html_dom.php';
 
 // Create a shortcut for params.
 $params = &$this->item->params;

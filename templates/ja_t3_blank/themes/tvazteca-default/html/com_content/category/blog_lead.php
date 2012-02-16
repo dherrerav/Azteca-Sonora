@@ -34,8 +34,8 @@ $image = $images[0];
 $src = $image->src;
 $title = $image->title;
 $alt = $image->alt;
+$intro = $this->item->introtext;
 $intro = preg_replace('/<img[^>]+\>/i', '', $intro);
-//var_dump($intro, $src, $title, $alt);
 ?>
 <?php if (!empty($src)) : ?>
 <?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
