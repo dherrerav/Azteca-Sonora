@@ -322,3 +322,69 @@
 [16-Feb-2012 20:18:35] PHP  16. JHtmlContent::prepare() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:0
 [16-Feb-2012 20:18:35] PHP  17. JPluginHelper::importPlugin() /home/samacs/applications/aztecasonora/libraries/joomla/html/html/content.php:40
 [16-Feb-2012 20:18:35] PHP  18. JPluginHelper::_import() /home/samacs/applications/aztecasonora/libraries/joomla/plugin/helper.php:125
+[17-Feb-2012 12:21:31] PHP Warning:  Invalid argument supplied for foreach() in /home/samacs/applications/aztecasonora/components/com_content/models/articles.php on line 488
+[17-Feb-2012 12:21:31] PHP Stack trace:
+[17-Feb-2012 12:21:31] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[17-Feb-2012 12:21:31] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:49
+[17-Feb-2012 12:21:31] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:249
+[17-Feb-2012 12:21:31] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:414
+[17-Feb-2012 12:21:31] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:591
+[17-Feb-2012 12:21:31] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:531
+[17-Feb-2012 12:21:31] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:18
+[17-Feb-2012 12:21:31] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:779
+[17-Feb-2012 12:21:31] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:1620
+[17-Feb-2012 12:21:31] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:371
+[17-Feb-2012 12:21:31] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:39
+[17-Feb-2012 12:21:31] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:106
+[17-Feb-2012 12:21:31] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[17-Feb-2012 12:21:31] PHP  14. modVideoPlayerHelper::getVideos() /home/samacs/applications/aztecasonora/modules/mod_videoplayer/mod_videoplayer.php:4
+[17-Feb-2012 12:21:31] PHP  15. ContentModelArticles->getItems() /home/samacs/applications/aztecasonora/modules/mod_videoplayer/helper.php:78
+[17-Feb-2012 12:21:31] PHP Warning:  Invalid argument supplied for foreach() in /home/samacs/applications/aztecasonora/modules/mod_videoplayer/helper.php on line 80
+[17-Feb-2012 12:21:31] PHP Stack trace:
+[17-Feb-2012 12:21:31] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[17-Feb-2012 12:21:31] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:49
+[17-Feb-2012 12:21:31] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:249
+[17-Feb-2012 12:21:31] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:414
+[17-Feb-2012 12:21:31] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:591
+[17-Feb-2012 12:21:31] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:531
+[17-Feb-2012 12:21:31] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:18
+[17-Feb-2012 12:21:31] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:779
+[17-Feb-2012 12:21:31] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:1620
+[17-Feb-2012 12:21:31] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:371
+[17-Feb-2012 12:21:31] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:39
+[17-Feb-2012 12:21:31] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:106
+[17-Feb-2012 12:21:31] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[17-Feb-2012 12:21:31] PHP  14. modVideoPlayerHelper::getVideos() /home/samacs/applications/aztecasonora/modules/mod_videoplayer/mod_videoplayer.php:4
+[17-Feb-2012 12:21:44] PHP Warning:  Invalid argument supplied for foreach() in /home/samacs/applications/aztecasonora/components/com_content/models/articles.php on line 488
+[17-Feb-2012 12:21:44] PHP Stack trace:
+[17-Feb-2012 12:21:44] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[17-Feb-2012 12:21:44] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:49
+[17-Feb-2012 12:21:44] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:249
+[17-Feb-2012 12:21:44] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:414
+[17-Feb-2012 12:21:44] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:591
+[17-Feb-2012 12:21:44] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:531
+[17-Feb-2012 12:21:44] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:18
+[17-Feb-2012 12:21:44] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:779
+[17-Feb-2012 12:21:44] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:1620
+[17-Feb-2012 12:21:44] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:371
+[17-Feb-2012 12:21:44] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:39
+[17-Feb-2012 12:21:44] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:106
+[17-Feb-2012 12:21:44] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[17-Feb-2012 12:21:44] PHP  14. modVideoPlayerHelper::getVideos() /home/samacs/applications/aztecasonora/modules/mod_videoplayer/mod_videoplayer.php:4
+[17-Feb-2012 12:21:44] PHP  15. ContentModelArticles->getItems() /home/samacs/applications/aztecasonora/modules/mod_videoplayer/helper.php:78
+[17-Feb-2012 12:21:44] PHP Warning:  Invalid argument supplied for foreach() in /home/samacs/applications/aztecasonora/modules/mod_videoplayer/helper.php on line 80
+[17-Feb-2012 12:21:44] PHP Stack trace:
+[17-Feb-2012 12:21:44] PHP   1. {main}() /home/samacs/applications/aztecasonora/index.php:0
+[17-Feb-2012 12:21:44] PHP   2. JSite->render() /home/samacs/applications/aztecasonora/index.php:49
+[17-Feb-2012 12:21:44] PHP   3. JDocumentHTML->parse() /home/samacs/applications/aztecasonora/includes/application.php:249
+[17-Feb-2012 12:21:44] PHP   4. JDocumentHTML->_fetchTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:414
+[17-Feb-2012 12:21:44] PHP   5. JDocumentHTML->_loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:591
+[17-Feb-2012 12:21:44] PHP   6. require() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:531
+[17-Feb-2012 12:21:44] PHP   7. T3Template->render() /home/samacs/applications/aztecasonora/templates/ja_t3_blank/index.php:18
+[17-Feb-2012 12:21:44] PHP   8. T3Template->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:779
+[17-Feb-2012 12:21:44] PHP   9. JDocumentHTML->getBuffer() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/template.php:1620
+[17-Feb-2012 12:21:44] PHP  10. JDocumentRendererModules->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/html.php:371
+[17-Feb-2012 12:21:44] PHP  11. JDocumentRendererModule->render() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/modules.php:39
+[17-Feb-2012 12:21:44] PHP  12. JModuleHelper::renderModule() /home/samacs/applications/aztecasonora/libraries/joomla/document/html/renderer/module.php:106
+[17-Feb-2012 12:21:44] PHP  13. require() /home/samacs/applications/aztecasonora/plugins/system/jat3/jat3/core/joomla/modulehelper.php:188
+[17-Feb-2012 12:21:44] PHP  14. modVideoPlayerHelper::getVideos() /home/samacs/applications/aztecasonora/modules/mod_videoplayer/mod_videoplayer.php:4

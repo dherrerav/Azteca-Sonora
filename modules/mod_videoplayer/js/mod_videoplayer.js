@@ -73,7 +73,13 @@ jQuery(function($) {
 						   .appendTo(player);
 			}
 			flowplayer(new_id, siteurl + 'modules/mod_videoplayer/swf/flowplayer.swf', {
+				plugins: {
+					pseudo: {
+						url: siteurl + 'modules/mod_videoplayer/swf/flowplayer.pseudostreaming.swf'
+					}
+				},
 				clip: {
+					provider: 'pseudo',
 					url: siteurl + new_video,
 					autoPlay: autoplay
 				}
