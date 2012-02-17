@@ -190,3 +190,43 @@
 [16-Feb-2012 14:04:51] PHP  18. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:222
 [16-Feb-2012 14:04:51] PHP  19. JHtmlSelect::genericlist() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:0
 [16-Feb-2012 14:04:51] PHP  20. JHtmlSelect::options() /home/samacs/applications/aztecasonora/libraries/joomla/html/html/select.php:122
+[16-Feb-2012 16:17:18] PHP Warning:  Invalid argument supplied for foreach() in /home/samacs/applications/aztecasonora/libraries/joomla/html/html/select.php on line 504
+[16-Feb-2012 16:17:18] PHP Stack trace:
+[16-Feb-2012 16:17:18] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[16-Feb-2012 16:17:18] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[16-Feb-2012 16:17:18] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[16-Feb-2012 16:17:18] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[16-Feb-2012 16:17:18] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[16-Feb-2012 16:17:18] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/admin.jacomment.php:105
+[16-Feb-2012 16:17:18] PHP   7. JACommentControllerConfigs->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[16-Feb-2012 16:17:18] PHP   8. JACommentController->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/controllers/configs.php:38
+[16-Feb-2012 16:17:18] PHP   9. JController->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/controller.php:24
+[16-Feb-2012 16:17:18] PHP  10. JACommentViewConfigs->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[16-Feb-2012 16:17:18] PHP  11. JAView->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/configs/view.html.php:100
+[16-Feb-2012 16:17:18] PHP  12. include() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/jaview/view.html.php:42
+[16-Feb-2012 16:17:18] PHP  13. JView->display() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/jaview/tmpl/main.php:16
+[16-Feb-2012 16:17:18] PHP  14. JView->loadTemplate() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/view.php:301
+[16-Feb-2012 16:17:18] PHP  15. include() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/view.php:742
+[16-Feb-2012 16:17:18] PHP  16. JHtml::_() /home/samacs/applications/aztecasonora/administrator/components/com_jacomment/views/configs/tmpl/general.php:165
+[16-Feb-2012 16:17:18] PHP  17. JHtml::call() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:103
+[16-Feb-2012 16:17:18] PHP  18. call_user_func_array() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:222
+[16-Feb-2012 16:17:18] PHP  19. JHtmlSelect::genericlist() /home/samacs/applications/aztecasonora/libraries/joomla/html/html.php:0
+[16-Feb-2012 16:17:18] PHP  20. JHtmlSelect::options() /home/samacs/applications/aztecasonora/libraries/joomla/html/html/select.php:122
+[16-Feb-2012 20:18:45] PHP Parse error:  syntax error, unexpected ';' in /home/samacs/applications/aztecasonora/plugins/content/articlenavigation/articlenavigation.php on line 171
+[16-Feb-2012 20:18:45] PHP Stack trace:
+[16-Feb-2012 20:18:45] PHP   1. {main}() /home/samacs/applications/aztecasonora/administrator/index.php:0
+[16-Feb-2012 20:18:45] PHP   2. JAdministrator->dispatch() /home/samacs/applications/aztecasonora/administrator/index.php:47
+[16-Feb-2012 20:18:45] PHP   3. JComponentHelper::renderComponent() /home/samacs/applications/aztecasonora/administrator/includes/application.php:152
+[16-Feb-2012 20:18:45] PHP   4. JComponentHelper::executeComponent() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:357
+[16-Feb-2012 20:18:45] PHP   5. require_once() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/helper.php:388
+[16-Feb-2012 20:18:45] PHP   6. JController->execute() /home/samacs/applications/aztecasonora/administrator/components/com_plugins/plugins.php:22
+[16-Feb-2012 20:18:45] PHP   7. PluginsController->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:754
+[16-Feb-2012 20:18:45] PHP   8. JController->display() /home/samacs/applications/aztecasonora/administrator/components/com_plugins/controller.php:51
+[16-Feb-2012 20:18:45] PHP   9. PluginsViewPlugin->display() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/controller.php:715
+[16-Feb-2012 20:18:45] PHP  10. JView->get() /home/samacs/applications/aztecasonora/administrator/components/com_plugins/views/plugin/view.html.php:32
+[16-Feb-2012 20:18:45] PHP  11. PluginsModelPlugin->getForm() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/view.php:482
+[16-Feb-2012 20:18:45] PHP  12. JModelForm->loadForm() /home/samacs/applications/aztecasonora/administrator/components/com_plugins/models/plugin.php:72
+[16-Feb-2012 20:18:45] PHP  13. PluginsModelPlugin->preprocessForm() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/modelform.php:187
+[16-Feb-2012 20:18:45] PHP  14. JModelForm->preprocessForm() /home/samacs/applications/aztecasonora/administrator/components/com_plugins/models/plugin.php:271
+[16-Feb-2012 20:18:45] PHP  15. JPluginHelper::importPlugin() /home/samacs/applications/aztecasonora/libraries/joomla/application/component/modelform.php:233
+[16-Feb-2012 20:18:45] PHP  16. JPluginHelper::_import() /home/samacs/applications/aztecasonora/libraries/joomla/plugin/helper.php:125

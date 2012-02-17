@@ -407,3 +407,7 @@ a.ja-icon-video:hover span { color: #0F85D8; }
 	background-position: left bottom;
 	text-decoration: none;
 }
+
+#ja-footer-bottom {
+	background: #fff;
+}

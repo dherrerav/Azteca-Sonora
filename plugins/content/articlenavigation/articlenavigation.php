@@ -168,7 +168,7 @@ class plgContentArticlenavigation extends JPlugin
 				}
 				// Current article
 				$categoryLink = JRoute::_(ContentHelperRoute::getCategoryRoute($row->catslug));
-				$html .= '<li class="pagenav-current"><a href="' . $categoryLink . '">Más notas</a></li>';
+				$html .= '<li class="pagenav-current"><a href="' . $categoryLink . '">' . $params->get('text_to_display') . '</a></li>';
 				
 				// Next article
 				if ($row->next) {

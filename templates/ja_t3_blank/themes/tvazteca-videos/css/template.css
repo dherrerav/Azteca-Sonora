@@ -1082,7 +1082,7 @@ h4.content-most-title a:hover {
 
 .body-hechos-noche #ja-wrapper {
 	background: transparent url(../images/hechos-noche.jpg) no-repeat 0 118px;
-	background-size: 100%;
+	background-size: cover;
 }
 
 .body-hechos-meridiano #ja-wrapper {
@@ -1108,13 +1108,15 @@ h4.content-most-title a:hover {
 
 .body-hechos-noche div.category-image,
 .body-hechos-meridiano div.category-image,
-.body-info-7 div.category-image {
+.body-info-7 div.category-image,
+#bd.editoriales .category-image {
 	text-align: center;
 }
 
 .body-hechos-noche div.category-image img,
 .body-hechos-meridiano div.category-image img,
-.body-info-7 div.category-image img {
+.body-info-7 div.category-image img,
+#bd.editoriales .category-image img {
 	float: none;
 }
 
@@ -1123,14 +1125,17 @@ h4.content-most-title a:hover {
 .body-hechos-meridiano div.category-image,
 .body-hechos-meridiano .category-description,
 .body-info-7 div.category-image,
-.body-info-7 .category-description {
+.body-info-7 .category-description,
+#bd.editoriales .category-image,
+#bd.editoriales .category-description {
 	overflow: hidden;
 	clear: both;
 }
 
 .body-hechos-noche .category-description,
 .body-hechos-meridiano .category-description,
-.body-info-7 .category-description {
+.body-info-7 .category-description,
+#bd.editoriales .category-description {
 	background: #fff;
 	padding: 10px;
 	border-top-left-radius: 10px;
@@ -1251,7 +1256,8 @@ h4.content-most-title a:hover {
 
 .body-hechos-noche #ja-content-main,
 .body-hechos-meridiano #ja-content-main,
-.body-info-7 #ja-content-main {
+.body-info-7 #ja-content-main,
+#bd.editoriales #ja-content-main {
 	margin-bottom: 0;
 }
 
@@ -1299,7 +1305,18 @@ h4.content-most-title a:hover {
 .item-page-hechos-noche,
 .item-page-hechos-meridiano {
 	background: #fff;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 10px;
 }
 
+.editoriales #ja-topsl .main-inner1 {
+	border-bottom: 0;
+}
+
+body#bd.editoriales {
+	background: transparent url(../images/azteca-editorial-bg.png);
+	background-size: cover;
+}
+
+.editoriales #ja-container .main {
+	border: 0;
+}

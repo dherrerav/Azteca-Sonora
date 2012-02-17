@@ -33,7 +33,7 @@ abstract class modLatestNewsVideosHelper {
 		$articles = $model->getItems();
 		$i = 0;
 		foreach ($articles as &$article) {
-			$article->slug = $article->id . ':' . $article->catid;
+			$article->slug = $article->id . ':' . $article->alias;
 			if ($access || in_array($article->access, $authorised)) {
 				$article->link = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid));
 			} else {

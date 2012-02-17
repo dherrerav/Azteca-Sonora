@@ -33,6 +33,12 @@
 					<option value="1">Abajo</option>
 					<option value="0">Arriba</option>
 				</field>
+				<field
+					name="text_to_display"
+					type="text"
+					default="Más notas"
+					label="Text to display"
+					description="Text to display in navigation" />
 			</fieldset>
 		</fields>
 	</config>

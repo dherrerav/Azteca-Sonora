@@ -14,8 +14,8 @@
 		<block name="newshighlight" type="newshighlight" main-inner="1">news-highlighter,news-slideshow</block>
 		<block name="topsl" type="spotlight" main-inner="1">user1,user2,user3,user4,user5</block>
 		<block name="mainnews" type="mainnews" main-inner="1">news-left,news-center,news-right</block>
-		<block name="middle-news" type="middle-news" main-inner="1">tweets-ticker</block>
 		<block name="videos" type="videos" main-inner="1">video</block>
+		<block name="middle-news" type="middle-news" main-inner="1">tweets-ticker</block>
 		<block name="sections" type="sections" main-inner="1">sections-list</block>
 	</blocks>
 	<blocks name="middle" colwidth="33">

@@ -14,6 +14,14 @@
 	float: left;
 }
 
+.latest-news-videos .news-video.main {
+	margin-right: 3px;
+}
+
+.latest-news-videos .news-video {
+	margin-bottom: 3px;
+}
+
 .latest-news-videos .news-video.main,
 .latest-news-videos .news-video.main .image {
 	width: 314px;

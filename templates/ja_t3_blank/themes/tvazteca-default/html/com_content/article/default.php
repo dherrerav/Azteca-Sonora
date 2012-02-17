@@ -113,7 +113,7 @@ $src = $image->src;
 $title = $image->title;
 $alt = $image->alt;
 $caption = str_replace('"', '', $title);
-$intro = preg_replace('/<img[^>]+\>/i', '', $this->item->text);
+$this->item->introtext = preg_replace('/<img[^>]+\>/i', '', $this->item->text);
 	if ($image !== null) {
 ?>
 	<div class="article-image">
@@ -153,10 +153,11 @@ $intro = preg_replace('/<img[^>]+\>/i', '', $this->item->text);
 	<?php endif; ?>
 </div>
 <div class="article-text">
-	<?= $intro ?>
+	<?= $this->item->introtext ?>
+	<?= $this->item->fulltext ?>
 </div>
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>
 <div class="comments-container">
-	<!--<script type="text/javascript" src="http://www.tvazteca.com/karma/aztecaforos.php?size=15"></script>//-->
+	
 </div>
