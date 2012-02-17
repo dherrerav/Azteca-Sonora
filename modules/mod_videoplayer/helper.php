@@ -80,6 +80,7 @@ abstract class modVideoPlayerHelper {
 		foreach ($articles as $article) {
 			if (!preg_match(self::$_videoCode, $article->introtext . $article->fulltext, $match)) continue;
 			$source = $match[1];
+			var_dump($source);
 			$video = new stdClass();
 			$video->id = 'video_' . $article->id;
 			$video->title = $article->title;
