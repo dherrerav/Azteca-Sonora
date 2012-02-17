@@ -68,15 +68,13 @@ abstract class modVideoPlayerHelper {
 		$model->setState('filter.access', $access);
 		$model->setState('filter.category_id', $params->get('catid', array()));
 		$model->setState('filter.language', $application->getLanguageFilter());
-		$ordering = $params->get('ordering', 'a.publish_up DESC, a.title ASC');
+		$ordering = $params->get('ordering', 'a.title');
 		$model->setState('list.ordering', $ordering);
-		/*
 		if (trim($ordering) === 'rand()') {
 			$model->setState('list.direction', '');
 		} else {
-			$model->setState('list.direction', $params->get('ordering_direction'));
+			$model->setState('list.direction', $params->get('ordering_direction', 'ASC'));
 		}
-		*/
 		$articles = $model->getItems();
 		$categories = array();
 		foreach ($articles as $article) {
