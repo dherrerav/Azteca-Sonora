@@ -113,7 +113,7 @@ $src = $image->src;
 $title = $image->title;
 $alt = $image->alt;
 $caption = str_replace('"', '', $title);
-$this->item->introtext = preg_replace('/<img[^>]+\>/i', '', $this->item->text);
+$this->item->introtext = preg_replace('/<img[^>]+\>/i', '', $this->item->introtext);
 	if ($image !== null) {
 ?>
 	<div class="article-image">
