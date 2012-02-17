@@ -119,7 +119,7 @@ abstract class modVideoPlayerHelper {
 		return preg_replace(self::$_videoCode, '', $text);
 	}
 	private static function _getVideoImage($source, $width, $height) {
-		$image = strtolower(substr($source, 0, strpos($source, '.'))) . '_' . $width . 'x' . $height . '.jpg';
+		$image = substr($source, 0, strpos($source, '.')) . '_' . $width . 'x' . $height . '.jpg';
 		if (!file_exists($image)) {
 			$width -= $width % 2;
 			$height -= $height % 2;
