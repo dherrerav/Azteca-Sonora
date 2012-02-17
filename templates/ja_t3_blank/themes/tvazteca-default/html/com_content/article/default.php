@@ -113,7 +113,7 @@ $src = $image->src;
 $title = $image->title;
 $alt = $image->alt;
 $caption = str_replace('"', '', $title);
-$this->item->introtext = preg_replace('/<img[^>]+\>/i', '', $this->item->introtext);
+$this->item->text = preg_replace('/<img[^>]+\>/i', '', $this->item->text);
 	if ($image !== null) {
 ?>
 	<div class="article-image">
@@ -153,8 +153,7 @@ $this->item->introtext = preg_replace('/<img[^>]+\>/i', '', $this->item->introte
 	<?php endif; ?>
 </div>
 <div class="article-text">
-	<?= $this->item->introtext ?>
-	<?= $this->item->fulltext ?>
+	<?= $this->item->text ?>
 </div>
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>
