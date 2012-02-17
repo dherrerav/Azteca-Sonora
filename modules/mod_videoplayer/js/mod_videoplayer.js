@@ -61,6 +61,8 @@ jQuery(function($) {
 		description_holder.html(new_description);
 	}
 	function setVideo(new_id, new_video, new_preview, autoplay) {
+		console.debug(new_video);
+		console.debug(new_preview);
 		if (new_video != 'undefined') {
 			new_id = 'play-' + new_id;
 			var player = $('.mod_videoplayer .video-player .video');
