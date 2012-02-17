@@ -18,10 +18,7 @@ abstract class modLatestNewsVideosHelper {
 		$model->setState('filter.access', $access);
 		$model->setState('filter.category_id', $params->get('catids', array()));
 		$model->setState('filter.language', $application->getLanguageFilter());
-		$model->setState('list.ordering', array(
-			'a.publish_up',
-			'a.title',
-		));
+		$model->setState('list.ordering', 'a.publish_up');
 		$model->setState('list.direction', 'DESC');
 		$styleSheets = array_keys($document->_styleSheets);
 		$styleSheetFound = false;
