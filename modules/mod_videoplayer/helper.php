@@ -148,7 +148,9 @@ abstract class modVideoPlayerHelper {
 						$category->id = (int)$article->catid;
 						$category->link = JRoute::_(ContentHelperRoute::getCategoryRoute($article->catid));
 						$articles[$article->category_alias]['category'] = $category;
-						$articles[$article->category_alias]['order'] => $sort[$article->category_alias];
+						if ($sort[$article->category_alias]) {
+							$articles[$article->category_alias]['order'] = $sort[$article->category_alias];
+						}
 					}
 					$articles[$article->category_alias]['videos'][] = $video;
 					$i++;
