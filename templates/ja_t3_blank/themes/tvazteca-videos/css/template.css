@@ -1331,7 +1331,9 @@ body#bd.editoriales {
 }
 
 #bd.editoriales .main .inner,
-.body-info-7 .main .inner {
+.body-info-7 .main .inner,
+.body-hechos-meridiano .main .inner,
+.body-hechos-noche .main .inner {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
