@@ -1330,7 +1330,8 @@ body#bd.editoriales {
 	border: 0;
 }
 
-#bd.editoriales .main .inner {
-	padding-left: 0;
-	padding-right: 0;
+#bd.editoriales .main .inner,
+.body-info-7 .main .inner {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
