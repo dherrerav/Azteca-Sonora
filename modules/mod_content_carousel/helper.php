@@ -14,7 +14,7 @@ abstract class modContentCarouselHelper {
 		$applicationParams = $application->getParams();
 		$model->setState('params', $applicationParams);
 		$model->setState('list.start', 0);
-		$model->setState('list.limit', (int)$params->get('count', 5));
+		//$model->setState('list.limit', (int)$params->get('count', 5));
 		$model->setState('filter.published', 1);
 		$model->setState('list.select', 'a.fulltext, a.id, a.title, a.alias, a.title_alias, a.introtext, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by, a.publish_up, a.publish_down, a.attribs, a.metadata, a.metakey, a.metadesc, a.access, a.hits, a.featured, LENGTH(a.fulltext) AS readmore');
 		$access = !JComponentHelper::getParams('com_content')->get('show_noauth');
@@ -50,16 +50,22 @@ abstract class modContentCarouselHelper {
 			$document->addStyleSheet(JURI::base() . 'modules/mod_content_carousel/css/skins/content-carousel-' . $params->get('skin') . '.css');
 		}
 		$articles = $model->getItems();
+		$retArray = array();
+		$i = 1;
 		foreach ($articles as &$article) {
-			$article->readmore = (trim($article->fulltext) != '');
-			$article->slug = $article->id . ':' . $article->alias;
-			$article->catslug = $article->catid . ':' . $article->category_alias;
-			if ($access || in_array($article->access, $authorised)) {
-				$article->link = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid));
-			} else {
-				$article->link = JRoute::_('index.php?option=com_user&view=login');
+			if (preg_match('/{video}(.*?){\/video}/', $article->introtext)) {
+				$article->readmore = (trim($article->fulltext) != '');
+				$article->slug = $article->id . ':' . $article->alias;
+				$article->catslug = $article->catid . ':' . $article->category_alias;
+				if ($access || in_array($article->access, $authorised)) {
+					$article->link = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid));
+				} else {
+					$article->link = JRoute::_('index.php?option=com_user&view=login');
+				}
+				$article->image = self::_getImage($article);
+				$i++;
 			}
-			$article->image = self::_getImage($article);
+			if ($params->get('count', 5) == $i) break;
 		}
 		return $articles;
 	}
