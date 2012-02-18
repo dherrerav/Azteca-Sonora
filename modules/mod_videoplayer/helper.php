@@ -156,6 +156,7 @@ abstract class modVideoPlayerHelper {
 				if ($params->get('count') == $i) break;
 			}
 		}
+		self::sort_on_field($articles, 0);
 		var_dump($articles);
 		return $articles;
 		/*
@@ -393,6 +394,12 @@ abstract class modVideoPlayerHelper {
 		return $categories;
 		*/
 		return array();
+	}
+	private static function sort_on_field(&$objects, $on, $order => 'ASC') {
+		$comparer = ($order === 'DESC')
+			? 'return -strcmp(\$a->{$on}, $b->{$on});'
+			: 'return strcmp(\$a->{$on}, $b->{$on});';
+		usort($objects, create_function('$a, $b', $comparer));
 	}
 	private static function _removeCode($text) {
 		return preg_replace(self::$_videoCode, '', $text);
