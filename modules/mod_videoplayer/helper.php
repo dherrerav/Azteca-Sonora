@@ -159,10 +159,10 @@ abstract class modVideoPlayerHelper {
 			}
 		}
 		foreach ($articles as $category => $value) {
-			$cat = $value['category'];
-			$order = $value['order'];
+			$order[$category] = $value['order'];
 		}
-		array_multisort($cat, SORT_ASC, $order, SORT_ASC, $articles);
+		var_dump($order);
+		//array_multisort($cat, SORT_ASC, $order, SORT_ASC, $articles);
 		return $articles;
 		/*
 		$application =& JFactory::getApplication();
