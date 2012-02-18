@@ -105,14 +105,14 @@ abstract class modVideoPlayerHelper {
 		$model->setState('list.ordering', $ordering);
 		$model->setState('list.direction', $ordering_direction);
 		$sort = array(
-			'politica',
-			'y-usted,-¿cómo-la-ve',
-			'dogii',
-			'general',
-			'salud',
-			'ciudad',
-			'salud',
-			'deportes',
+			'politica' => 0,
+			'y-usted,-¿cómo-la-ve' => 1,
+			'dogii' => 2,
+			'general' => 3,
+			'salud' => 4,
+			'ciudad' => 5,
+			'salud' => 6,
+			'deportes' => 7,
 		);
 		foreach ($catids as $catid) {
 			$model->setState('filter.category_id', $catid);
@@ -143,12 +143,12 @@ abstract class modVideoPlayerHelper {
 					$video->category = $article->category_title;
 					$video->parent = $article->parent_title;
 					if (empty($articles[$article->category_alias])) {
-						var_dump($sort[$article->category_alias]);
 						$category = new stdClass();
 						$category->title = $article->category_title;
 						$category->id = (int)$article->catid;
 						$category->link = JRoute::_(ContentHelperRoute::getCategoryRoute($article->catid));
 						$articles[$article->category_alias]['category'] = $category;
+						$articles[$article->category_alias]['order'] => $sort[$article->category_alias];
 					}
 					$articles[$article->category_alias]['videos'][] = $video;
 					$i++;
@@ -156,8 +156,11 @@ abstract class modVideoPlayerHelper {
 				if ($params->get('count') == $i) break;
 			}
 		}
-		self::sort_on_field($articles, 0);
-		var_dump($articles);
+		foreach ($articles as $category => $value) {
+			$cat = $value['category'];
+			$order = $value['order'];
+		}
+		array_multisort($cat, SORT_ASC, $order, SORT_ASC, $articles);
 		return $articles;
 		/*
 		$application =& JFactory::getApplication();
@@ -394,12 +397,6 @@ abstract class modVideoPlayerHelper {
 		return $categories;
 		*/
 		return array();
-	}
-	private static function sort_on_field(&$objects, $on, $order = 'ASC') {
-		$comparer = ($order === 'DESC')
-			? "return -strcmp(\$a->{$on}, $b->{$on});"
-			: "return strcmp(\$a->{$on}, $b->{$on});";
-		usort($objects, create_function('$a, $b', $comparer));
 	}
 	private static function _removeCode($text) {
 		return preg_replace(self::$_videoCode, '', $text);
