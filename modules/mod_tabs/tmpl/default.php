@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die;
 $width = round(100 / count($tabs), 2);
-$id = modTabsHelper::generateRandomId(16);
+$id = modTabsHelper::generateRamdonId(16);
 ?>
 <div class="tabs" id="tabs-<?= $id ?>">
 	<ul class="tabs-navigation">
