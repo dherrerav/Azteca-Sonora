@@ -397,8 +397,8 @@ abstract class modVideoPlayerHelper {
 	}
 	private static function sort_on_field(&$objects, $on, $order = 'ASC') {
 		$comparer = ($order === 'DESC')
-			? 'return -strcmp(\$a->{$on}, $b->{$on});'
-			: 'return strcmp(\$a->{$on}, $b->{$on});';
+			? "return -strcmp(\$a->{$on}, $b->{$on});"
+			: "return strcmp(\$a->{$on}, $b->{$on});";
 		usort($objects, create_function('$a, $b', $comparer));
 	}
 	private static function _removeCode($text) {
