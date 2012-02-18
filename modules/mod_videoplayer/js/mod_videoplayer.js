@@ -4,8 +4,10 @@ jQuery(function($) {
 	var sections = $('.mod_videoplayer .video-sections ul.sections li.section, .mod_videoplayer .video-sections ul.sections li.section .title h2 a');
 	var current_section = null;
 	sections.each(function() {
-		$(this).removeClass('active');
 		$(this).click(function(e) {
+			sections.each(function() {
+				$(this).removeClass('active');
+			});
 			$(this).addClass('active');
 			e.preventDefault();
 			var videos = $(this).find('ul.section-videos li.video').clone(true, true);

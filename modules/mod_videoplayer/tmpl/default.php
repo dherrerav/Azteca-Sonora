@@ -20,11 +20,17 @@
 						<ul class="section-videos" id="section-<?= $category->id ?>-videos">
 							<? foreach ($videos as $video) : ?>
 							<li class="video">
+								<strong>
+									<? if ($video->parent) : ?>
+									<?= $video->parent ?> / 
+									<? endif ?>
+									<?= $video->category ?>
+								</strong>
 								<div class="image">
 									<img src="<?= $video->image ?>" width="<?= $params->get('image_width') ?>" height="<?= $params->get('image_height') ?>" alt="<?= str_replace('"', '&quote;', $video->title) ?>" data-preview="<?= $video->preview ?>" />
 								</div>
 								<div class="date">
-									<?= $video->date ?>
+									<?= $video->date ?>&nbsp;
 								</div>
 								<div class="duration">
 									<?= $video->time ?>

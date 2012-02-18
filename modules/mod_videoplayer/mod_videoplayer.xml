@@ -29,7 +29,7 @@
 		<fields name="params">
 			<fieldset name="basic">
 				<field
-					name="catid"
+					name="catids"
 					type="category"
 					extension="com_content"
 					multiple="true"
