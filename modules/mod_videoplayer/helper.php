@@ -143,6 +143,7 @@ abstract class modVideoPlayerHelper {
 					$video->category = $article->category_title;
 					$video->parent = $article->parent_title;
 					if (empty($articles[$article->category_alias])) {
+						var_dump($article->category_alias);
 						$category = new stdClass();
 						$category->title = $article->category_title;
 						$category->id = (int)$article->catid;
@@ -161,7 +162,6 @@ abstract class modVideoPlayerHelper {
 		foreach ($articles as $category => $value) {
 			$order[$category] = $value['order'];
 		}
-		var_dump($order);
 		array_multisort($order, SORT_ASC, $articles);
 		return $articles;
 		/*
