@@ -3,6 +3,7 @@ defined('_JEXEC') or die;
 abstract class modTabsHelper {
 	public static function getTabs(&$params) {
 		$ids = explode(',', str_replace(array(' ', '"'), array('', ''), trim($params->get('ids'))));
+		var_dump($ids);
 		$tabs = array();
 		foreach ($ids as $id) {
 			$tabs[] = self::getModule($id);
