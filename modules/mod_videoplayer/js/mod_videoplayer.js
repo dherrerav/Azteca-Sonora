@@ -44,9 +44,10 @@ jQuery(function($) {
 		var id = anchor.attr('id');
 		var video = anchor.attr('href');
 		var title = anchor.text().trim();
+		var link = anchor.data('link');
 		var description = anchor.parent().parent().parent().find('.description:first').html().trim();
 		var preview = anchor.parent().parent().parent().find('.image img').data('preview');
-		setTitle(title);
+		setTitle(title, link);
 		setDescription(description);
 		setVideo(id, video, preview, play);
 	}
