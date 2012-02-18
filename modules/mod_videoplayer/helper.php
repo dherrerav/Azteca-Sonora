@@ -102,17 +102,18 @@ abstract class modVideoPlayerHelper {
 		$ordering_direction = $params->get('ordering_direction', 'DESC');
 		// Limit featured
 		$model->setState('filter.featured', $params->get('show_front', 'show'));
+		$model->setState('filter.published', 1);
 		$model->setState('list.ordering', $ordering);
 		$model->setState('list.direction', $ordering_direction);
 		$sort = array(
-			'politica' => 0,
-			'y-usted,-¿cómo-la-ve' => 1,
-			'el-dogii' => 2,
-			'general' => 3,
-			'salud' => 4,
-			'ciudad' => 5,
-			'salud' => 6,
-			'deportes' => 7,
+			'politica' => 1,
+			'y-usted,-¿cómo-la-ve' => 2,
+			'el-dogii' => 3,
+			'general' => 4,
+			'salud' => 5,
+			'ciudad' => 6,
+			'salud' => 7,
+			'deportes' => 8,
 		);
 		foreach ($catids as $catid) {
 			$model->setState('filter.category_id', $catid);
