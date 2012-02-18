@@ -1,15 +1,19 @@
 <div class="tabs">
 	<ul class="tabs-navigation">
 		<? foreach ($tabs as $tab) : ?>
+		<? $module = $tab[2] ?>
 		<li class="tab">
-			<?= $tab[1] ?>
+			<a href="#mod-<?= $module->id ?>" title="<?= $module->title ?>">
+				<span><?= $module->title ?>
+			</a>
 		</li>
 		<? endforeach ?>
 	</ul>
 	<? foreach ($tabs as $tab) : ?>
-	<div class="tab-container">
+	<? $module = $tab[2] ?>
+	<div id="mod-<?= $module->id ?>" class="tab-container">
 		<div class="tab-content">
-			<? var_dump($tab) ?>
+			<?= JModuleHelper::renderModule($module) ?>
 		</div>
 	</div>
 	<? endforeach ?>
