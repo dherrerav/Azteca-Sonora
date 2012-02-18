@@ -28,7 +28,7 @@ $(function() {
 	var tab_contents = $('div#tabs-<?= $id ?> div.tab-container');
 	$('div#tabs-<?= $id ?> ul.tabs-navigation li a').click(function(e) {
 		e.preventDefault();
-		tab_contents.hide():
+		tab_contents.hide();
 		tab_contents.filter(this.hash).show();
 		$('div#tabs-<?= $id ?> ul.tabs-navigation li a').removeClass('selected');
 		$(this).addClass('selected');
