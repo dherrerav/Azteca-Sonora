@@ -103,6 +103,7 @@ abstract class modVideoPlayerHelper {
 		// Limit featured
 		$model->setState('filter.featured', $params->get('show_front', 'show'));
 		$model->setState('list.ordering', $ordering);
+		$model->setState('list.direction', $ordering_direction);
 		foreach ($catids as $catid) {
 			$model->setState('filter.category_id', $catid);
 			$i = 1;
