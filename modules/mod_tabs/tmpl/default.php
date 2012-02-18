@@ -1,3 +1,8 @@
+<?php
+defined('_JEXEC') or die;
+$width = round(100 / count($tabs), 2);
+var_dump($width);
+?>
 <div class="tabs">
 	<ul class="tabs-navigation">
 		<? foreach ($tabs as $tab) : ?>
