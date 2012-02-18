@@ -1337,3 +1337,8 @@ body#bd.editoriales {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
+
+.item-page .article-info li {
+	background: none;
+	padding-left: 0;
+}
