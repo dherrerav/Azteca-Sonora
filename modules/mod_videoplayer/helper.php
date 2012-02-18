@@ -144,7 +144,6 @@ abstract class modVideoPlayerHelper {
 					$video->category = $article->category_title;
 					$video->parent = $article->parent_title;
 					if (empty($articles[$article->category_alias])) {
-						var_dump($article->category_alias);
 						$category = new stdClass();
 						$category->title = $article->category_title;
 						$category->id = (int)$article->catid;
