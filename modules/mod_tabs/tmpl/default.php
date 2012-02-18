@@ -32,6 +32,6 @@ $(function() {
 		tab_contents.filter(this.hash).show();
 		$('div#tabs-<?= $id ?> ul.tabs-navigation li a').removeClass('selected');
 		$(this).addClass('selected');
-	});
+	}).filter(':first').click();
 });
 </script>
