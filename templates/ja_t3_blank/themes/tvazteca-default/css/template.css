@@ -1193,3 +1193,8 @@ h4.content-most-title a:hover {
 .body-info-7 .blog-hechos-meridiano .category-desc {
 	background: transparent url(../images/azteca-trece.png) no-repeat top left;
 }
+
+.item-page .article-info li {
+	background: none;
+	padding-left: 0;
+}
