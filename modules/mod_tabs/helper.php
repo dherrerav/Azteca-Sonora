@@ -19,7 +19,6 @@ abstract class modTabsHelper {
 		if (!($modules = $db->loadObjectList())) {
 			JError::raiseWarning(500, JText::sprintf('JLIB_APPLICATION_ERROR_MODULE_LOAD', $db->getErrorMsg()));
 		}
-		var_dump($modules);
 		$custom = substr($modules[0]->module, 0, 4) == 'mod_' ? 0 : 1;
 		$modules[0]->user = $custom;
 		array_unshift($modules, $modules[0]->title);
