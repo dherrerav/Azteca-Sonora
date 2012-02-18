@@ -9,7 +9,7 @@
 	<? foreach ($tabs as $tab) : ?>
 	<div class="tab-container">
 		<div class="tab-content">
-			<?= $tab ?>
+			<? var_dump($tab) ?>
 		</div>
 	</div>
 	<? endforeach ?>
