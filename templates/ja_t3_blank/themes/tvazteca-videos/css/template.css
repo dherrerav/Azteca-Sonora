@@ -1090,7 +1090,8 @@ h4.content-most-title a:hover {
 	background-size: 100%;
 }
 
-.body-info-7 #ja-wrapper {
+.body-info-7 #ja-wrapper,
+.body-el-dogii #ja-wrapper {
 	background: transparent url(../images/info-7.png) no-repeat 0 118px;
 	background-size: 100%;
 }
@@ -1102,20 +1103,23 @@ h4.content-most-title a:hover {
 
 .body-hechos-noche #ja-container .main,
 .body-hechos-meridiano #ja-container .main,
-.body-info-7 #ja-container .main {
+.body-info-7 #ja-container .main,
+.body-el-dogii #ja-container .main {
 	border: none;
 }
 
-.body-hechos-noche div.category-image,
-.body-hechos-meridiano div.category-image,
-.body-info-7 div.category-image,
-#bd.editoriales .category-image {
+.body-hechos-noche .category-image,
+.body-hechos-meridiano .category-image,
+.body-info-7 .category-image,
+#bd.editoriales .category-image,
+.body-el-dogii .category-image {
 	text-align: center;
 }
 
-.body-hechos-noche div.category-image img,
-.body-hechos-meridiano div.category-image img,
-.body-info-7 div.category-image img,
+.body-hechos-noche .category-image img,
+.body-hechos-meridiano .category-image img,
+.body-info-7 .category-image img,
+.body-el-dogii .category-image img,
 #bd.editoriales .category-image img {
 	float: none;
 }
@@ -1248,7 +1252,8 @@ h4.content-most-title a:hover {
 
 .body-hechos-noche #ja-main .inner,
 .body-hechos-meridiano #ja-main .inner,
-.body-info-7 #ja-main .inner {
+.body-info-7 #ja-main .inner,
+#bd.editoriales #ja-main .inner {
 	margin-right: -10px;
 	margin-left: -10px;
 	padding-bottom: 0 !important;
