@@ -107,7 +107,7 @@ abstract class modVideoPlayerHelper {
 		$sort = array(
 			'politica' => 0,
 			'y-usted,-¿cómo-la-ve' => 1,
-			'dogii' => 2,
+			'el-dogii' => 2,
 			'general' => 3,
 			'salud' => 4,
 			'ciudad' => 5,
