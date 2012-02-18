@@ -1090,9 +1090,13 @@ h4.content-most-title a:hover {
 	background-size: 100%;
 }
 
-.body-info-7 #ja-wrapper,
-.body-el-dogii #ja-wrapper {
+.body-info-7 #ja-wrapper {
 	background: transparent url(../images/info-7.png) no-repeat 0 118px;
+	background-size: 100%;
+}
+
+.body-el-dogii #ja-wrapper {
+	background: transparent url(../images/fond-dogii.jpg) no-repeat 0 118px;
 	background-size: 100%;
 }
 
