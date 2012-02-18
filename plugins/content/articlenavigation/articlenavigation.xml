@@ -36,7 +36,7 @@
 				<field
 					name="text_to_display"
 					type="text"
-					default="Más notas"
+					default="M&aacute;s notas"
 					label="Text to display"
 					description="Text to display in navigation" />
 			</fieldset>
