@@ -27,7 +27,7 @@
 					default=""
 					label="MOD_TABS_MODULE_IDS_LABEL"
 					description="MOD_TABS_MODULE_IDS_DESC" />
-			</field.set>
+			</fieldset>
 		</fields>
 	</config>
 </extension>
