@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension method="upgrade" type="module" version="1.6.0" client="site">
+	<name>mod_fj_related_plus</name>
+	<author>Mark Dexter</author>
+	<creationDate>January 2012</creationDate>
+	<copyright>(C) 2008-2012 Mark Dexter. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl.html</license>
+	<authorEmail>dextercowley@gmail.com</authorEmail>
+	<authorUrl>http://joomlacode.org/gf/project/freejoomla/wiki/</authorUrl>
+	<version>1.03</version>
+	<description>DESCFJRELATEDPLUS</description>
+	<files>
+		<filename module="mod_fj_related_plus">mod_fj_related_plus.php</filename>
+		<filename>index.html</filename>
+    	<filename>helper.php</filename>
+    	<filename>tmpl/default.php</filename>
+    	<filename>tmpl/index.html</filename>
+    	<filename>tmpl/key_word.php</filename>
+		<filename>fields/fjarticle.php</filename>
+    	<filename>fields/fjsql.php</filename>
+    	<filename>fields/index.html</filename>
+    	<folder>language</folder>
+	</files>
+	<help url="FJ_RELATED_PLUS_HELP_URL" />
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addpath="/modules/mod_fj_related_plus/fields">
+				<field name="count" type="text" default="5" label="Count" description="PARAMARTICLECOUNT" />
+				<field name="minimumMatches" type="text" default="1" label="Minimum_Matches" description="PARAMFJMINIMUMMATCHES" />		
+  				<field type="spacer" hr="true" />
+   				<field type="spacer" label="SPACERLIMITDESC" />
+				<field name="catid" type="category" extension="com_content" multiple="multiple" size="5" label="Categories" description="FJ_RELATED_PARAMCATEGORIES"/>
+			</fieldset>
+			<fieldset name="layout" >
+				<field name="ordering" type="list" default="alpha" label="Ordering" description="PARAMORDERING">
+					<option value="alpha">Title_Alphabetical</option>
+					<option value="rdate">Recently_Added_First</option>
+					<option value="date">Oldest_First</option>
+					<option value="bestmatch">Most_Matches_First</option>
+					<option value="article_order">Article_Manager_Order</option>
+					<option value="keyword_article">Keyword_Alphabetical</option>
+					<option value="random">Random</option>
+	  			</field>
+				<field name="showDate" type="list" default="none" label="Article_date" description="FJRELATEDPARAMDATE">
+					<option value="none">No_Date</option>
+					<option value="create">CREATED_DATE</option>
+					<option value="modify">MODIFIED_DATE</option>
+					<option value="published">PUBLISHED_DATE</option>
+				</field>
+				<field name="date_format" type="text" size="30" default="" label="Date_Format" description="PARAMDATEFORMAT" />
+				<field name="showMatchCount" type="radio" default="0" label="Keyword_Match_Count" description="PARAMKEYWORDCOUNT">
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field name="showMatchList" type="radio" default="0" label="Keyword_Match_List" description="PARAMKEYWORDLIST">
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field name="keywordLabel" type="text" default="" size = "30" label="Keyword_Label" description="PARAMKEYWORDLABEL" />
+				<field name="notArticleText" type="text" default="" size = "50" label="Text_If_Not_An_Article" description="PARAMNOTARTICLETEXT" />		
+				<field name="noRelatedText" type="text" default="" size = "50" label="Text_If_No_Related" description="PARAMNORELATEDTEXT" />		
+			</fieldset>
+			<fieldset name="include" >
+				<field type="spacer" label="FJSPACERINCLUDEALLDESC" />
+   				<field type="spacer" label="SPACERAUTHORDESC" />
+				<field name="matchAuthor" type="radio" default="0" label="Match_on_Author" description="PARAMAUTHORMATCH">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>		
+				<field name="matchAuthorAlias" type="radio" default="0" label="Match_on_Author_Alias" description="PARAMAUTHORALIASMATCH">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>		
+   				<field type="spacer" label="SPACERCATEGORYDESC" />
+				<field name="fjmatchCategory" type="radio" default="0" label="Match_on_Category" description="PARAMCATEGORYMATCH">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="fj_include_categories" type="category" extension="com_content" default="" multiple="multiple" size="5" 
+						label="Select_Categories" description="FJPARAMINCLUDECATEGORIES" />
+				<field name="fj_include_authors" type="sql" default="" label="Select_Authors"
+					multiple="multiple" size = "5" description="FJPARAMINCLUDEAUTHORS"
+					query="SELECT u.id AS value, u.name as fj_include_authors
+					FROM #__users as u 
+					ORDER BY fj_include_authors" />
+				<field name="fj_include_alias" type="sql" default="" label="Select_Author_Aliases"
+					multiple="multiple" size="5" description="FJPARAMINCLUDEALIAS"
+					query="SELECT DISTINCT created_by_alias AS value, created_by_alias as fj_include_alias
+					FROM #__content
+					WHERE created_by_alias > ' ' 
+					ORDER BY created_by_alias" />
+			</fieldset>
+			<fieldset name="tooltip" >			
+   				<field type="spacer" label="SPACERTOOLTIPDESC" />
+				<field name="show_tooltip" type="radio" default="1" label="Show_Intro_Text_as_Tooltip" description="FJRELATEDPARAMSHOWTOOLTIP" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="max_chars" type="text" default="250" label="TOOLTIP_MAXIMUM_LENGTH" description="FJRELATEDMAXCHARS" />		
+
+			</fieldset>
+			<fieldset name="keyword" >
+				<field name="ignore_keywords" type="textarea" rows="3" cols="30" default="" label="Keywords_to_Ignore" description="FJRELATEDIGNORE" />
+				<field name="ignore_all_keywords" type="radio" default="0" label="Ignore_All_Keywords" description="FJRELATEDPARAMIGNOREALL" >
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>		
+				</field>		
+			</fieldset>
+			<fieldset name="advanced" addpath="/modules/mod_fj_related_plus/elements">
+				<field name="fj_title_linkable" type="radio" default="1" label="Title_Linkable" description="FJRELATEDPARAMTITLELINKABLE" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="fj_menu_item_types" type="radio" default="article" label="Show_Module_on_Menu_Types" description="FJRELATEDPARAMSMENUITEMS" >
+					<option value="article">Article_Only</option>
+					<option value="any">Any</option>
+				</field>
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="owncache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field name="cache_time" type="text" default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

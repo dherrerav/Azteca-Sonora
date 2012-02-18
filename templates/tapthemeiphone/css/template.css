@@ -1367,3 +1367,10 @@ color:#999;
 .article-info dt{
 display:none;
 }
+
+#logo {
+	background: transparent url(../images/logo-azteca-noticias-mobile-iphone.png) no-repeat top left;
+	width: 168px;
+	height: 34px;
+}
+
