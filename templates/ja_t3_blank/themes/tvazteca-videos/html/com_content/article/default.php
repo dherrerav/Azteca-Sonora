@@ -70,6 +70,7 @@ $params = $this->item->params;
 		echo $this->item->event->afterDisplayTitle;
 	endif; ?>
 <?php if ($useDefList) : ?>
+<img src="images/azteca-sonora-avatar.jpg" width="50" height="50" align="left" style="margin-right: 10px; margin-bottom: 10px;" />
 <ul class="article-info clearfix">
 <?php if ($params->get('show_author') && !empty($this->item->author)) : ?>
 	<li class="createdby">
