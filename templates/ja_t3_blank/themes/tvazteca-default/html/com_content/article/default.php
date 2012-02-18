@@ -70,12 +70,12 @@ $params = $this->item->params;
 		echo $this->item->event->afterDisplayTitle;
 	endif; ?>
 <?php if ($useDefList) : ?>
+<img src="images/azteca-sonora-avatar.jpg" width="50" height="50" align="left" style="margin-right: 10px; margin-bottom: 10px;" />
 <ul class="article-info clearfix">
 <?php if ($params->get('show_author') && !empty($this->item->author)) : ?>
 	<li class="createdby">
 		<?php $author =  $this->item->author; ?>
 		<?php $author = ($this->item->created_by_alias ? $this->item->created_by_alias : $author);?>
-		<img src="images/azteca-sonora-avatar.jpg" width="50" height="50" align="left" style="margin-right: 10px; margin-bottom: 10px;" />
 		<?php if (!empty($this->item->contactid ) &&  $params->get('link_author') == true):?>
 			<?
 			JLoader::import('joomla.application.component.model');
