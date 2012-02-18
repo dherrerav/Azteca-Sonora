@@ -104,6 +104,16 @@ abstract class modVideoPlayerHelper {
 		$model->setState('filter.featured', $params->get('show_front', 'show'));
 		$model->setState('list.ordering', $ordering);
 		$model->setState('list.direction', $ordering_direction);
+		$sort = array(
+			'politica',
+			'y-usted,-¿cómo-la-ve',
+			'dogii',
+			'general',
+			'salud',
+			'ciudad',
+			'salud',
+			'deportes',
+		);
 		foreach ($catids as $catid) {
 			$model->setState('filter.category_id', $catid);
 			$i = 1;
@@ -133,6 +143,7 @@ abstract class modVideoPlayerHelper {
 					$video->category = $article->category_title;
 					$video->parent = $article->parent_title;
 					if (empty($articles[$article->category_alias])) {
+						var_dump($sort[$article->category_alias]);
 						$category = new stdClass();
 						$category->title = $article->category_title;
 						$category->id = (int)$article->catid;
@@ -145,7 +156,7 @@ abstract class modVideoPlayerHelper {
 				if ($params->get('count') == $i) break;
 			}
 		}
-		//var_dump($articles);
+		var_dump($articles);
 		return $articles;
 		/*
 		$application =& JFactory::getApplication();
