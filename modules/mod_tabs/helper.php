@@ -25,4 +25,12 @@ abstract class modTabsHelper {
 		array_unshift($modules, 'mod');
 		return $modules;
 	}
+	public static function generateRamdonId($length) {
+		$pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		$id = '';
+		for ($i = 0; $i < $length; $i++) {
+			$key .= $pattern{$rand(0, strlen($pattern) - 1)};
+		}
+		return $key;
+	}
 }
