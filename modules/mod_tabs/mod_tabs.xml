@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>Tabs</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://twitter.com/samacs</authorUrl>
+	<version>1.0</version>
+	<description><![CDATA[<h3>Tabs</h3><p>Display modules in tabs</p>]]></description>
+	<files>
+		<filename module="mod_tabs">mod_tabs.php</filename>
+		<filename>mod_tabs.xml</filename>
+		<filename>index.html</filename>
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>tmpl</folder>
+	</files>
+	<languages>
+		<language tag="es-ES">es-ES.mod_tabs.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="ids"
+					type="text"
+					default=""
+					label="MOD_TABS_MODULE_IDS_LABEL"
+					description="MOD_TABS_MODULE_IDS_DESC" />
+			</field.set>
+		</fields>
+	</config>
+</extension>
