@@ -63,11 +63,12 @@ abstract class modContentCarouselHelper {
 					$article->link = JRoute::_('index.php?option=com_user&view=login');
 				}
 				$article->image = self::_getImage($article);
+				$retArray[] = $article;
 				$i++;
 			}
 			if ($params->get('count', 5) == $i) break;
 		}
-		return $articles;
+		return $retArray;
 	}
 	protected static function _getImage(&$article) {
 		$image = '';
