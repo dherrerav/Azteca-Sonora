@@ -13,6 +13,7 @@ abstract class modTabsHelper {
 		$db =& JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('*');
+		$query->from('#__modules');
 		$query->where('id = ' . $id);
 		$db->setQuery($query);
 		if (!($modules = $db->loadObjectList())) {
