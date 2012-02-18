@@ -395,7 +395,7 @@ abstract class modVideoPlayerHelper {
 		*/
 		return array();
 	}
-	private static function sort_on_field(&$objects, $on, $order => 'ASC') {
+	private static function sort_on_field(&$objects, $on, $order = 'ASC') {
 		$comparer = ($order === 'DESC')
 			? 'return -strcmp(\$a->{$on}, $b->{$on});'
 			: 'return strcmp(\$a->{$on}, $b->{$on});';
