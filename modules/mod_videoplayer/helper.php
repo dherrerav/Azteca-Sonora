@@ -162,7 +162,7 @@ abstract class modVideoPlayerHelper {
 			$order[$category] = $value['order'];
 		}
 		var_dump($order);
-		//array_multisort($cat, SORT_ASC, $order, SORT_ASC, $articles);
+		array_multisort($order, SORT_ASC, $articles);
 		return $articles;
 		/*
 		$application =& JFactory::getApplication();
