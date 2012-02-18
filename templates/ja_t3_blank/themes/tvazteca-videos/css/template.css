@@ -1254,10 +1254,8 @@ h4.content-most-title a:hover {
 .body-hechos-meridiano #ja-main .inner,
 .body-info-7 #ja-main .inner,
 #bd.editoriales #ja-main .inner {
-	/*
-	margin-right: -10px;
-	margin-left: -10px;
-	*/
+	margin-right: 0 !important;
+	margin-left: 0 !important;
 	padding-bottom: 0 !important;
 	background: #fff;
 }
