@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/dates.php';
-$date = dateDifference('now', '2012-02-20 00:00:00');
+$date = dateDifference('now', '2012-02-28 00:00:00');
 ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
