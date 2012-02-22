@@ -69,3 +69,7 @@ div[class*='item-page'] .article-videos {
 	margin: 0;
 	padding: 5px;
 }
+
+div[class*='blog'] .article-videos {
+	display: inline-block;
+}
