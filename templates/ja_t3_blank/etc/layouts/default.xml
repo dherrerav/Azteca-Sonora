@@ -3,6 +3,10 @@
 	<!--Extra css load for this layout-->
 	<stylesheets>
 	</stylesheets>
+	<scripts>
+		<file>js/jquery.min.js</file>
+		<file>js/jquery.scrollTo.min.js</file>
+	</scripts>
 	<blocks name="top" style="xhtml">
 		<block name="absolute" type="modules" style="raw">absolute</block>
 		<block name="top-panel" type="modules" style="raw" main-inner="1">top-panel</block>

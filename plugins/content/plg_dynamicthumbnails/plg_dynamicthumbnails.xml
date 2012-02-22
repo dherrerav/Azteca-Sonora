@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="2.5" type="plugin" group="content">
+	<name>Content - Dynamic Thumbnails</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://sharkwebintelligence.com</authorUrl>
+	<version>1.0</version>
+	<description>
+	<![CDATA[
+	<h3>Dynamic Thumbnails</h3>
+	<p>Set image thumbnail from different sources:<p>
+	<ul>
+		<li>From article image</li>
+		<li>From video frame</li>
+		<li>From default image</li>
+	</ul>
+	<p>Powered by <a href="http://sharkwebintelligence.com/" title="Shark Web Intelligence">Shark Web Intelligence</a></p> 
+	]]>
+	</description>
+	<files>
+		<filename plugin="plg_dynamicthumbnails">plg_dynamicthumbnails.php</filename>
+		<filename>plg_dynamicthumbnails.xml</filename>
+		<filename>index.html</filename>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+		<folder>tmpl</folder>
+	</files>
+	<languages>
+		<language tag="es-ES">es-ES.plg_content_plg_dynamicthumbnails.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="catids"
+					type="category"
+					extension="com_content"
+					multiple="true"
+					size="10"
+					label="PLG_DYNAMICTHUMBNAILS_CATEGORY_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_CATEGORY_DESC">
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+				<field
+					name="article_image_width"
+					type="text"
+					default="636"
+					label="PLG_DYNAMICTHUMBNAILS_ARTICLE_IMAGE_WIDTH_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_ARTICLE_IMAGE_WIDTH_DESC" />
+				<field
+					name="article_image_height"
+					type="text"
+					default="333"
+					label="PLG_DYNAMICTHUMBNAILS_ARTICLE_IMAGE_HEIGHT_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_ARTICLE_IMAGE_HEIGHT_DESC" />
+				<field
+					name="article_video_width"
+					type="text"
+					default="636"
+					label="PLG_DYNAMICTHUMBNAILS_ARTICLE_VIDEO_WIDTH_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_ARTICLE_VIDEO_WIDTH_DESC" />
+				<field
+					name="article_video_height"
+					type="text"
+					default="333"
+					label="PLG_DYNAMICTHUMBNAILS_ARTICLE_VIDEO_HEIGHT_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_ARTICLE_VIDEO_HEIGHT_DESC" />
+				<field
+					name="blog_leading_width"
+					type="text"
+					default="636"
+					label="PLG_DYNAMICTHUMBNAILS_BLOG_LEADING_WIDTH_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_BLOG_LEADING_WIDTH_DESC" />
+				<field
+					name="blog_leading_height"
+					type="text"
+					default="333"
+					label="PLG_DYNAMICTHUMBNAILS_BLOG_LEADING_HEIGHT_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_BLOG_LEADING_HEIGHT_DESC" />
+				<field
+					name="blog_intro_width"
+					type="text"
+					default="196"
+					label="PLG_DYNAMICTHUMBNAILS_BLOG_INTRO_WIDTH_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_BLOG_INTRO_WIDTH_DESC" />
+				<field
+					name="blog_intro_height"
+					type="text"
+					default="122"
+					label="PLG_DYNAMICTHUMBNAILS_BLOG_INTRO_HEIGHT_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_BLOG_INTRO_HEIGHT_DESC" />
+				<field
+					name="google_analytics_account"
+					type="text"
+					default=""
+					label="PLG_DYNAMICTHUMBNAILS_GOOGLE_ANALYTICS_ACCOUNT_LABEL"
+					description="PLG_DYNAMICTHUMBNAILS_GOOGLE_ANALYTICS_ACCOUNT_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

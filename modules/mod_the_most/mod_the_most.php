@@ -10,6 +10,6 @@ defined('_JEXEC') or die('Restricted access');
 require_once dirname(__FILE__) . '/helper.php';
 
 $articles = modTheMostHelper::getArticles($params);
-$modulesclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 require JModuleHelper::getLayoutPath('mod_the_most', $params->get('layout', 'default'));

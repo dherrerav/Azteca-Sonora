@@ -5,6 +5,7 @@
 	</stylesheets>
 	<scripts>
 		<file>js/jquery.min.js</file>
+		<file>js/jquery.scrollTo.min.js</file>
 	</scripts>
 	<blocks name="top" style="xhtml">
 		<block name="topbanner" type="topbanner" main-inner="1">topbanner</block>

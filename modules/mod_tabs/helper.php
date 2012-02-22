@@ -29,8 +29,8 @@ abstract class modTabsHelper {
 		$pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 		$id = '';
 		for ($i = 0; $i < $length; $i++) {
-			$key .= $pattern{rand(0, strlen($pattern) - 1)};
+			$id .= $pattern{rand(0, strlen($pattern) - 1)};
 		}
-		return $key;
+		return $id;
 	}
 }

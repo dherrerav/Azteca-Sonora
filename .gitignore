@@ -1,3 +1,6 @@
+.buildpath
+.settings/
+.project
 /configuration.php
 /.htaccess
 /dumps/*

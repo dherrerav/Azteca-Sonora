@@ -8,6 +8,8 @@ defined('_JEXEC') or die('Restricted access');
 
 require_once JPATH_SITE . '/components/com_content/helpers/route.php';
 
+require_once JPATH_SITE . '/libraries/simple_html_dom.php';
+
 jimport('joomla.application.component.model');
 
 JModel::addIncludePath(JPATH_SITE . '/components/com_content/models', 'ContentModel');
@@ -38,7 +40,7 @@ abstract class modTheMostHelper {
 
 		$model->setState('filter.published', 1);
 
-		$model->setState('list.select', 'a.id, a.title, a.alias, a.introtext, a.catid');
+		//$model->setState('list.select', 'a.id, a.title, a.alias, a.introtext, a.catid');
 		// Access filter
 		$access = !JComponentHelper::getParams('com_content')->get('show_noauth');
 		$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
@@ -97,19 +99,20 @@ abstract class modTheMostHelper {
 			
 			$item->image = null;
 			if ($params->get('image')) {
-				preg_match_all('/<img[^>]+>/i', $item->introtext, $images);
-				$index = rand(0, count($images));
-				$image = $images[0][0];
-				if (!empty($images) && $image !== null) {
+				$html = new simple_html_dom();
+				$html->load($item->introtext);
+				$images = $html->find('img');
+				if (count($images) > 0) {
+					$image = $images[0];
 					$item->image = new stdClass();
-					preg_match_all('/(alt|title|src)=("[^"]*")/i', $image, $attributes);
 					$item->image->image = $image;
-					$item->image->src = $attributes[0][0];
-					$item->image->title = $attributes[0][2];
-					$item->image->alt = $attributes[0][1];
+					$item->image->src = $image->src;
+					$item->image->title = $image->title;
+					$item->image->alt = $image->alt;
 					$item->image->width = 'width="' . $params->get('width', 195) . '"';
 					$item->image->height = 'height="' . $params->get('height', 144) . '"';
 				}
+				
 			} else {
 				$item->introtext = preg_replace('/<img[^>]*>/', '', $item->introtext);
 			}
