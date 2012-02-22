@@ -1,13 +1,16 @@
 <?php
 defined('_JEXEC') or die;
 require_once JPATH_SITE . '/components/com_content/helpers/route.php';
+require_once JPATH_SITE . '/plugins/system/jat3/jat3/core/libs/Browser.php';
 jimport('joomla.application.component.model');
 JModel::addIncludePath(JPATH_SITE . '/components/com_content/models', 'ContentModel');
 abstract class modVideoPlayerHelper {
 	private static $_videoCode = '/{video}(.*?){\/video}/';
+	public static $browser;
 	public static function getVideos(&$params) {
 		$application =& JFactory::getApplication();
 		$document =& JFactory::getDocument();
+		self::$browser = new Browser();
 		$styleSheets = array_keys($document->_styleSheets);
 		$scripts = array_keys($document->_scripts);
 		$flowplayerFound = false;
@@ -16,6 +19,7 @@ abstract class modVideoPlayerHelper {
 		$videoPlayerSkinFound = false;
 		$scrollbarJsFound = false;
 		$scrollbarCssFound = false;
+		$ipadPluginJsFound = false;
 		for ($i = 0; $i < count($scripts); $i++) {
 			if (stripos($scripts[$i], 'flowplayer.min.js') !== false) {
 				$flowplayerFound = true;
@@ -25,6 +29,9 @@ abstract class modVideoPlayerHelper {
 			}
 			if (stripos($scripts[$i], 'jquery.scroll.min.js') !== false) {
 				$scrollbarJsFound = true;
+			}
+			if (stripos($scripts[$i], 'flowplayer.ipad.min.js') !== false) {
+				$ipadPluginJsFound = true;
 			}
 		}
 		for ($i = 0; $i < count($styleSheets); $i++) {
@@ -46,6 +53,9 @@ abstract class modVideoPlayerHelper {
 		}
 		if (!$scrollbarJsFound) {
 			$document->addScript(JURI::base() . 'modules/mod_videoplayer/js/jquery.scroll.min.js');
+		}
+		if (!$ipadPluginJsFound) {
+			$document->addScript(JURI::base() . 'modules/mod_videoplayer/js/flowplayer.ipad.min.js');
 		}
 		if (!$videoPlayerCssFound) {
 			$document->addStyleSheet(JURI::base() . 'modules/mod_videoplayer/css/mod_videoplayer.css');
@@ -106,11 +116,11 @@ abstract class modVideoPlayerHelper {
 		$model->setState('list.ordering', $ordering);
 		$model->setState('list.direction', $ordering_direction);
 		$sort = array(
-			'politica' => 1,
+			'política' => 1,
 			'y-usted,-¿cómo-la-ve' => 2,
 			'el-dogii' => 3,
 			'general' => 4,
-			'salud' => 5,
+			'seguridad' => 5,
 			'ciudad' => 6,
 			'salud' => 7,
 			'deportes' => 8,
@@ -139,6 +149,9 @@ abstract class modVideoPlayerHelper {
 					$video->mp4 = str_replace('/' . $extension . '/', '/mp4/', substr($source, 0, strpos($source, '.'))) . '.mp4';
 					$video->flv = str_replace('/' . $extension . '/', '/flv/', substr($source, 0, strpos($source, '.'))) . '.flv';
 					$video->m4v = str_replace('/' . $extension . '/', '/m4v/', substr($source, 0, strpos($source, '.'))) . '.m4v';
+					if (self::$browser->getPlatform() === Browser::PLATFORM_IPAD) {
+						$video->source = $video->m4v;
+					}
 					$video->image = self::_getVideoImage($source, (int)$params->get('image_width'), (int)$params->get('image_height'));
 					$video->preview = self::_getVideoImage($source, (int)$params->get('player_width'), (int)$params->get('player_height'));
 					$video->category = $article->category_title;
@@ -149,7 +162,7 @@ abstract class modVideoPlayerHelper {
 						$category->id = (int)$article->catid;
 						$category->link = JRoute::_(ContentHelperRoute::getCategoryRoute($article->catid));
 						$articles[$article->category_alias]['category'] = $category;
-						if ($sort[$article->category_alias]) {
+						if (isset($sort[$article->category_alias])) {
 							$articles[$article->category_alias]['order'] = $sort[$article->category_alias];
 						}
 					}

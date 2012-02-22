@@ -68,6 +68,7 @@ jQuery(function($) {
 			new_id = 'play-' + new_id;
 			var player = $('.mod_videoplayer .video-player .video');
 			player.attr({id: new_id, href: new_video});
+			console.debug(new_video);
 			if (!autoplay) {
 				player.css('background-image', 'url(' + new_preview + ')');
 				play_button = $('<img />');
@@ -76,6 +77,7 @@ jQuery(function($) {
 						   .appendTo(player);
 			}
 			flowplayer(new_id, siteurl + 'modules/mod_videoplayer/swf/flowplayer.swf', {
+				autoplay: autoplay,
 				plugins: {
 					pseudo: {
 						url: siteurl + 'modules/mod_videoplayer/swf/flowplayer.pseudostreaming.swf'
@@ -83,10 +85,13 @@ jQuery(function($) {
 				},
 				clip: {
 					provider: 'pseudo',
-					url: siteurl + new_video,
+					url: new_video,
 					autoPlay: autoplay
+				},
+				onFinish: function() {
+					this.unload();
 				}
-			});
+			}).ipad();
 		}
 	}
 });
