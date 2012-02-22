@@ -417,8 +417,13 @@ abstract class modVideoPlayerHelper {
 		return preg_replace(self::$_videoCode, '', $text);
 	}
 	private static function _getVideoImage($source, $width, $height) {
-		$image = substr($source, 0, strpos($source, '.')) . '_' . $width . 'x' . $height . '.jpg';
-		if (!file_exists($image)) {
+		//$image = substr($source, 0, strpos($source, '.')) . '_' . $width . 'x' . $height . '.jpg';
+		$image = 'images' . DS . 'previews' . DS . substr($source, 0, strpos($source, '.')) . '_' . $width . 'x' . $height . '.jpg';
+		$path = JPATH_SITE . DS . dirname($image);
+		if (file_exists($source) && !file_exists($image)) {
+			if (!file_exists($path)) {
+				mkdir($path, 0777, true);
+			}
 			$width -= $width % 2;
 			$height -= $height % 2;
 			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $source . ' -vframes 1 -s ' . $width . 'x' . $height . ' ' . JPATH_SITE . DS . $image . ' 2>&1';
