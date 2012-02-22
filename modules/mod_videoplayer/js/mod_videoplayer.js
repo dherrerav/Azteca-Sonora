@@ -77,6 +77,7 @@ jQuery(function($) {
 						   .appendTo(player);
 			}
 			flowplayer(new_id, siteurl + 'modules/mod_videoplayer/swf/flowplayer.swf', {
+				simulateiDevice: true,
 				autoplay: autoplay,
 				plugins: {
 					pseudo: {
