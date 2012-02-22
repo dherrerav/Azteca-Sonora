@@ -1,4 +1,4 @@
-<div class="article-images">
+<div class="article-images" style="width: <?= $width ?>px">
 	<div class="article-images-inner">
 		<? foreach ($images as $image) : ?>
 		<div class="article-image">

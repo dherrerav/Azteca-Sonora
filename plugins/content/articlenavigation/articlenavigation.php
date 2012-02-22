@@ -153,8 +153,7 @@ class plgContentArticlenavigation extends JPlugin
 			if ($row->prev || $row->next) {
 				$html = '
 				<div class="article-navigation-container">
-				<ul class="pagenav">'
-				;
+				<ul class="pagenav">';
 				// Previous article
 				if ($row->prev) {
 					$html .= '
