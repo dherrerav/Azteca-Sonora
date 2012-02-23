@@ -1358,6 +1358,7 @@ body#bd.editoriales {
 div[class*='item-page'] {
 	min-height: 458px;
 	background: #fff;
+	margin-left: 10px;
 }
 
 div[class*='blog'] {
