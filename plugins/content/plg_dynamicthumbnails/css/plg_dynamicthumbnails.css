@@ -2,6 +2,7 @@
 
 div[class*='item-page'] .article-videos {
 	display: inline-block;
+	margin-left: 10px;
 }
 
 .article-videos {
