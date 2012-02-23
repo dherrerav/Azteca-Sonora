@@ -67,8 +67,8 @@
 			</div>
 		</div>
 		<div class="video-player">
-			<a class="video" style="width: <?= $params->get('player_width') ?>px; height: <?= $params->get('player_height') ?>px;">
-			</a>
+			<div class="video" style="width: <?= $params->get('player_width') ?>px; height: <?= $params->get('player_height') ?>px;">
+			</div>
 			<div class="content">
 				<? if ($params->get('show_title')) : ?>
 				<div class="title">

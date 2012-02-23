@@ -1353,3 +1353,10 @@ body#bd.editoriales {
 div[class*='item-page'] {
 	min-height: 458px;
 }
+
+div[class*='blog'] {
+	
+}
+
+div[class*='blog'] .items-row .item .article-tools {
+}

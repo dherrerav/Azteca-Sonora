@@ -67,7 +67,7 @@ jQuery(function($) {
 		if (new_video != 'undefined') {
 			new_id = 'play-' + new_id;
 			var player = $('.mod_videoplayer .video-player .video');
-			player.attr({id: new_id, href: new_video});
+			player.attr({id: new_id}).css({background: 'url(' . siteurl + new_preview + ') no-repeat top left'});
 			console.debug(new_video);
 			if (!autoplay) {
 				player.css('background-image', 'url(' + new_preview + ')');
