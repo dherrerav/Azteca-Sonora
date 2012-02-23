@@ -3,6 +3,11 @@
 	overflow: hidden;
 }
 
+#breaking-news {
+	float: left;
+	width: 68% !important;
+}
+
 #news-left {
 	width: 33.5% !important;
 }
@@ -1352,6 +1357,7 @@ body#bd.editoriales {
 
 div[class*='item-page'] {
 	min-height: 458px;
+	background: #fff;
 }
 
 div[class*='blog'] {
