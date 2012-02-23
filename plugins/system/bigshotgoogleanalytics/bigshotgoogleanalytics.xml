@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.7" type="plugin" group="system">
+	<name>System - BIGSHOT Google Analytics</name>
+	<author>Jeff Henry</author>
+	<creationDate>November 2011</creationDate>
+	<copyright>Copyright (C) 2008 BIGSHOT. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>jeffh@thinkbigshot.com</authorEmail>
+	<authorUrl>thinkbigshot.com</authorUrl>
+	<version>1.7</version>
+	<description>This Plugin puts the Tracking Code for Google Analytics into your site.</description>
+	<files>
+		<filename plugin="bigshotgoogleanalytics">bigshotgoogleanalytics.php</filename>
+	</files>
+	<params>
+		<param name="web_property_id" type="text" default="" label="Web Property ID" description="This is the Web Property ID provided by Google. The format is: UA-XXXXXXX-X" />
+	</params>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="web_property_id" type="text" default="" label="Web Property ID" description="This is the Web Property ID provided by Google. The format is: UA-XXXXXXX-X" />
+			</fieldset>
+		</fields>
+	</config>
+</install>
