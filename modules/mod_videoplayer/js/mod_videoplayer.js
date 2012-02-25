@@ -109,7 +109,8 @@ jQuery(function($) {
 				clip: {
 					provider: 'pseudo',
 					url: new_video,
-					autoPlay: autoplay
+					autoPlay: autoplay,
+					eventCategory: title_holder.text()
 				},
 				onFinish: function() {
 					this.unload();
