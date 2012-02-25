@@ -82,6 +82,28 @@ jQuery(function($) {
 				plugins: {
 					pseudo: {
 						url: siteurl + 'modules/mod_videoplayer/swf/flowplayer.pseudostreaming.swf'
+					},
+					gatracker: {
+						url: siteurl + 'modules/mod_videoplayer/swf/flowplayer.analytics.swf',
+						labels: {
+							start: 'Start',
+							play: 'Play',
+							pause: 'Pause',
+							resume: 'Resume',
+							seek: 'Seek',
+							stop: 'Stop',
+							finish: 'Finish',
+							mute: 'Mute',
+							unmute: 'Unmute',
+							fullscreen: 'Full screen',
+							fullscreenexit: 'Full screen exit'
+						},
+						events: {
+							all: true
+						},
+						debug: true,
+						trackingMode: 'AS3',
+						accountId: ga_id
 					}
 				},
 				clip: {

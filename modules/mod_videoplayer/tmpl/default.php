@@ -1,3 +1,4 @@
+
 <div class="mod_videoplayer" id="video-player-<?= $module->id ?>">
 	<div class="video-player-inner">
 		<div class="module-title">
@@ -86,3 +87,6 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	var ga_id = "UA-29389882-1";
+</script>
