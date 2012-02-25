@@ -113,6 +113,12 @@
 					description="MOD_VIDEOPLAYER_SKIN_DESC">
 					<option value="azteca-black">MOD_VIDEOPLAYER_BLACK_SKIN_OPTION</option>
 				</field>
+				<field
+					name="ga_id"
+					type="text"
+					default=""
+					label="MOD_VIDEOPLAYER_GA_ID_LABEL"
+					description="MOD_VIDEOPLAYER_GA_ID_DESC" />
 			</fieldset>
 			<fieldset
 				name="advanced">
