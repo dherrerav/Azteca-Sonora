@@ -64,11 +64,11 @@ jQuery(function($) {
 		description_holder.html(new_description);
 	}
 	function setVideo(new_id, new_video, new_preview, autoplay) {
+		console.debug(ga_id);
 		if (new_video != 'undefined') {
 			new_id = 'play-' + new_id;
 			var player = $('.mod_videoplayer .video-player .video');
 			player.attr({id: new_id}).css({background: 'url(' . siteurl + new_preview + ') no-repeat top left'});
-			console.debug(new_video);
 			if (!autoplay) {
 				player.css('background-image', 'url(' + new_preview + ')');
 				play_button = $('<img />');
