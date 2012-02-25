@@ -101,7 +101,6 @@ jQuery(function($) {
 						events: {
 							all: true
 						},
-						debug: true,
 						trackingMode: 'AS3',
 						accountId: ga_id
 					}
