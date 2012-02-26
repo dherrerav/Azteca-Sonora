@@ -5,7 +5,7 @@
 
 #breaking-news {
 	float: left;
-	width: 68% !important;
+	width: 69% !important;
 }
 
 #news-left {
@@ -46,7 +46,7 @@
 }
 
 #ja-header h1.logo {
-	width: 440px;
+	width: 390px;
 	height: 80px;
 	top: -24px;
 	position:absolute;
@@ -57,7 +57,7 @@
 	display: block;
 	z-index: 2;
 	position: relative;
-	width: 440px;
+	width: 360px;
 	height: 80px;
 }
 
@@ -1366,4 +1366,91 @@ div[class*='blog'] {
 }
 
 div[class*='blog'] .items-row .item .article-tools {
+}
+
+#ja-search {
+	bottom: 0;
+	right: 0;
+	top: 10px;
+	left: 400px;
+	z-index: 999;
+}
+
+.search-button-container {
+	width: 270px;
+	height: 47px;
+}
+
+.search-button-container .search-button-inner {
+	width: 260px;
+	float: left;
+	padding: 5px;
+	background: transparent url(../images/fingbg.jpg) repeat-x top left;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+
+.search-button-container .search-button-inner .search-form {
+	
+}
+
+.search-button-container .search-button-inner .search-form .search-textbox {
+	width: 185px;
+	height: 17px;
+	border: 1px solid #c8c8c8;
+	font-family: Helvetica;
+	color: #5d5d5d;
+	font-size: 1em;
+	padding: 5px 0 0 5px;
+	background: #eee;
+	border-radius-top-left: 5px;
+	-webkit-border-radius-top-left: 5px;
+	-moz-border-radius-top-left: 5px;
+	-o-border-radius-top-left: 5px;
+	-ms-border-radius-top-left: 5px;
+	-khtml-border-radius-top-left: 5px;
+	border-radius-bottom-left: 5px;
+	-webkit-border-radius-bottom-left: 5px;
+	-moz-border-radius-bottom-left: 5px;
+	-o-border-radius-bottom-left: 5px;
+	-ms-border-radius-bottom-left: 5px;
+	-khtml-border-radius-bottom-left: 5px;
+}
+
+.search-button-container .search-button-inner .search-form .search-textbox:focus {
+	border: 1px solid #f396ca;
+	background: #fff;
+}
+
+.search-button-container .search-button-inner .search-form .search-button {
+	font-size: 11px;
+	width: 60px;
+	height: 24px;
+	background: #3c7d8b;
+	color: #fff;
+	margin: 0;
+	padding: 4px 8px 4px 8px;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-o-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-ms-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-khtml-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+	border: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	float: right;
 }

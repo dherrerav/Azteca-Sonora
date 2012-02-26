@@ -1,3 +1,4 @@
+<? $style = $this->getBlockStyle($block) ?>
 <?php $this->genBlockBegin ($block) ?>
 <?if ($this->countModules('news-left') || $this->countModules('news-center') || $this->countModules('news-right')) : ?>
 	<?if ($this->countModules('news-left')) : ?>

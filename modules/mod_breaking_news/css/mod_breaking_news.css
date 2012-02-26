@@ -1,0 +1,118 @@
+@CHARSET "UTF-8";
+
+.breaking-news {
+	
+}
+
+.breaking-news .breaking-news-articles {
+	float: left;
+	overflow: hidden;
+	border-right: 1px solid #ccc;
+	margin-right: 5px;
+	padding-right: 5px;
+}
+
+.breaking-news .breaking-news-articles .article {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+}
+
+.breaking-news .breaking-news-articles .article .heading h1,
+.breaking-news .breaking-news-articles .article .heading h2,
+.breaking-news .breaking-news-articles .article .heading h3,
+.breaking-news .breaking-news-articles .article .heading h4,
+.breaking-news .breaking-news-articles .article .heading h5,
+.breaking-news .breaking-news-articles .article .heading h6 {
+	text-transform: none;
+	border-bottom: 0;
+}
+
+.breaking-news .breaking-news-articles .article span.bullet {
+	text-decoration: none;
+	color: #fff;
+	background-color: #337b8a;
+	padding: 10px;
+	font-family: Arial;
+	margin-right: 5px;
+	font-size: 1em;
+	line-height: 1em;
+	vertical-align: top;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	display: block;
+	float: left;
+	margin-top: 5px;
+}
+
+.breaking-news .breaking-news-articles .article .heading a {
+	font-size: 1.3em;
+	color: #000;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+
+.breaking-news .breaking-news-articles .article.first .heading a {
+	font-size: 2.3em;
+	font-weight: normal;
+}
+
+.breaking-news .breaking-news-articles .article .heading a:hover {
+	text-decoration: none;
+}
+
+.breaking-news .breaking-news-articles .article .image {
+	
+}
+
+.breaking-news .breaking-news-articles .article .image a {
+	
+}
+
+.breaking-news .breaking-news-articles .article .image a img {
+	
+}
+
+.breaking-news .breaking-news-articles .article .text {
+	
+}
+
+.breaking-news .breaking-news-articles .article .text p {
+	word-wrap: break-word;
+}
+
+.breaking-news .breaking-news-articles .article .text span.date {
+	color: #337b8a;
+	font-weight: bold;
+}
+
+.breking-news .related {
+	
+}
+
+.breaking-news .related .related-articles {
+	
+}
+
+.breaking-news .related .related-articles .article {
+	background: url(../images/icon_nota.jpg) no-repeat top left;
+	text-indent: 16px;
+	border-bottom: 0;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.breaking-news .related .related-articles .article .title {
+	
+}
+
+.breaking-news .related .related-articles .article .title a {
+	font-size: 0.8em;
+	font-weight: normal;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+
+.breaking-news .related .related-articles .article .title a:hover {
+	text-decoration: none;
+	color: #069;
+}
