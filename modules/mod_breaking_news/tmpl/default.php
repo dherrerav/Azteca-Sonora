@@ -4,7 +4,6 @@ $i = 0;
 $column = 0;
 $width = round(100 / (int)$params->get('columns')) - 1.5;
 $images_per_column = explode(',', $params->get('show_images'));
-var_dump($images_per_column);
 ?>
 <div class="breaking-news">
 	<ul class="breaking-news-articles<?= $moduleclass_sfx ?> column-<?= $column ?>" style="width: <?= $width ?>%;">
