@@ -183,7 +183,7 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 				$video->source = $source;
 				$video->extension = $extension;
 				$video->format = $format;
-				$video->duration = $this->getVideoDuration(JPATH_SITE . DS . $source, true);
+				$video->duration = $this->getVideoDuration(JPATH_SITE . DS . $source);
 				$video->preview = $this->getVideoPreview($source, $width, $height);
 				$video->id = 'video-' . $extension . '-' . $article->id;
 				$videos = array(
@@ -197,7 +197,7 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 							$video = new stdClass();
 							$video->extension = $ext;
 							$video->source = $filename;
-							$video->duration = $this->getVideoDuration(JPATH_SITE . DS . $filename, true);
+							$video->duration = $this->getVideoDuration(JPATH_SITE . DS . $filename);
 							$video->width = $width;
 							$video->height = $height;
 							$video->format = $mime;
