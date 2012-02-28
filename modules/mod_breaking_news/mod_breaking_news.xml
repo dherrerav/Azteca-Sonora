@@ -173,15 +173,6 @@
 					label="MOD_BREAKING_NEWS_ARTICLES_PER_COLUMN_LABEL"
 					description="MOD_BREAKING_NEWS_ARTICLES_PER_COLUMN_DESC" />
 				<field
-					name="show_image"
-					type="radio"
-					default="1"
-					label="MOD_BREAKING_NEWS_SHOW_IMAGE_LABEL"
-					description="MOD_BREAKING_NEWS_SHOW_IMAGE_DESC">
-					<option value="1">JSHOW</option>
-					<option value="0">JHIDE</option>
-				</field>
-				<field
 					name="item_heading"
 					type="list" default="4"
 					label="MOD_BREAKING_NEWS_TITLE_HEADING_LABEL"
@@ -257,7 +248,7 @@
 				<field
 					name="show_images"
 					type="text"
-					default="1"
+					default="1, 0"
 					label="MOD_BREAKING_NEWS_SHOW_IMAGES_LABEL"
 					description="MOD_BREAKING_NEWS_SHOW_IMAGES_DESC" />
 				<field

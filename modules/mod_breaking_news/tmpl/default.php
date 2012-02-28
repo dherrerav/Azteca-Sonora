@@ -3,6 +3,8 @@ defined('_JEXEC') or die;
 $i = 0;
 $column = 0;
 $width = round(100 / (int)$params->get('columns')) - 1.5;
+$images_per_column = explode(',', $params->get('show_images'));
+var_dump($images_per_column);
 ?>
 <div class="breaking-news">
 	<ul class="breaking-news-articles<?= $moduleclass_sfx ?> column-<?= $column ?>" style="width: <?= $width ?>%;">
@@ -15,7 +17,7 @@ $width = round(100 / (int)$params->get('columns')) - 1.5;
 		<? $i = 0 ?>
 		<? endif ?>
 		<li class="article <?= $i == 0 ? 'first' : '' ?>">
-			<? if (($article->image !== null) && ($i < (int)$params->get('show_image')) && ($column === 0)) : ?>
+			<? if ($article->image !== null && $i < $images_per_column[$column]) : ?>
 			<div class="image">
 				<a href="<?= $article->link ?>" title="<?= $article_title ?>">
 					<img src="<?= $article->image->src ?>" alt="<?= $article->image->alt ?>" title="<?= $article->image->title ?>" width="<?= $params->get('image_width') ?>" height="<?= $params->get('image_height') ?>" />
