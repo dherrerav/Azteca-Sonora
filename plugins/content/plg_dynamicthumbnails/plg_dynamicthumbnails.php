@@ -36,6 +36,7 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 		$this->browser = new Browser();
 	}
 	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 0) {
+		if ($context != 'com_content.article') return;
 		$view = JRequest::getVar('view');
 		$layout = JRequest::getVar('layout');
 		$article->slug = $article->id . ':' . $article->alias;
