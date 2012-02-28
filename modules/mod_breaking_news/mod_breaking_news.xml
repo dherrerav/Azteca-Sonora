@@ -43,8 +43,14 @@
 					default="related"
 					label="MOD_BREAKING_NEWS_RELATED_KEYWORD_LABEL"
 					description="MOD_BREAKING_NEWS_RELATED_KEYWORD_DESC" />
+				<field
+					name="related_limit"
+					type="text"
+					default="5"
+					label="MOD_BREAKING_NEWS_RELATED_LIMIT_LABEL"
+					description="MOD_BREAKING_NEWS_RELATED_LIMIT_DESC" />
 			</fieldset>
-			<fieldset name="filtering">
+			<fieldset name="filtering" label="MOD_BREAKING_NEWS_FILTERING_FIELDSET_LABEL">
 				<field
 					name="show_child_category_articles"
 					type="radio"
@@ -121,7 +127,7 @@
 					label="MOD_BREAKING_NEWS_RELATIVEDATE_LABEL"
 					description="MOD_BREAKING_NEWS_RELATIVEDATE_DESC" />
 			</fieldset>
-			<fieldset name="ordering">
+			<fieldset name="ordering" label="MOD_BREAKING_NEWS_ORDERING_FIELDSET_LABEL">
 				<field
 					name="article_ordering"
 					type="list"
@@ -149,7 +155,7 @@
 					<option value="ASC">MOD_BREAKING_NEWS_OPTION_ASCENDING</option>
 				</field>
 			</fieldset>
-			<fieldset name="display">
+			<fieldset name="display" label="MOD_BREAKING_NEWS_DISPLAY_FIELDSET_LABEL">
 				<field
 					name="columns"
 					type="list"
