@@ -9,15 +9,15 @@ class JConfig {
 	public $debug = '0';
 	public $debug_lang = '0';
 	public $dbtype = 'mysql';
-	public $host = 'localhost';
-	public $user = 'aztecasonora';
-	public $password = 'pjx2f3!';
-	public $db = 'aztecasonora';
+	public $host = '';
+	public $user = '';
+	public $password = '';
+	public $db = '';
 	public $dbprefix = 'jos_';
 	public $live_site = '';
 	public $secret = 'P5qbL3auEHmN6PFF';
 	public $gzip = '1';
-	public $error_reporting = '7';
+	public $error_reporting = 'default';
 	public $helpurl = 'http://help.joomla.org/proxy/index.php?option=com_help&keyref=Help{major}{minor}:{keyref}';
 	public $ftp_host = '127.0.0.1';
 	public $ftp_port = '21';
@@ -49,9 +49,9 @@ class JConfig {
 	public $sef_suffix = '1';
 	public $unicodeslugs = '1';
 	public $feed_limit = '10';
-	public $log_path = '/home/samacs/applications/aztecasonora/logs';
-	public $tmp_path = '/home/samacs/applications/aztecasonora/tmp';
-	public $lifetime = '15';
+	public $log_path = '/home/samacs/applications/www.aztecasonora.com/logs';
+	public $tmp_path = '/home/samacs/applications/www.aztecasonora.com/tmp';
+	public $lifetime = '60';
 	public $session_handler = 'database';
 	public $MetaRights = '';
 	public $sitename_pagetitles = '1';
@@ -59,4 +59,8 @@ class JConfig {
 	public $feed_email = 'author';
 	public $cookie_domain = '';
 	public $cookie_path = '';
+	public $robots = '';
+	public $display_offline_message = '1';
+	public $offline_image = '';
+	public $captcha = '0';
 }
