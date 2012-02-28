@@ -4,6 +4,7 @@ $i = 0;
 $column = 0;
 $width = round(100 / (int)$params->get('columns')) - 1.5;
 $images_per_column = explode(',', $params->get('show_images'));
+$featured_per_column= explode(',', $params->get('featured_per_column'));
 ?>
 <div class="breaking-news">
 	<ul class="breaking-news-articles<?= $moduleclass_sfx ?> column-<?= $column ?>" style="width: <?= $width ?>%;">
@@ -15,7 +16,7 @@ $images_per_column = explode(',', $params->get('show_images'));
 		<? $column++ ?>
 		<? $i = 0 ?>
 		<? endif ?>
-		<li class="article <?= $i == 0 ? 'first' : '' ?>">
+		<li class="article <?= $i < $featured_per_column[$column] ? 'first' : '' ?>">
 			<? if ($article->image !== null && $i < $images_per_column[$column]) : ?>
 			<div class="image">
 				<a href="<?= $article->link ?>" title="<?= $article_title ?>">
