@@ -39,7 +39,7 @@ endswitch;
 				}
 			},
 			clip: {
-				eventCategory: '<?= str_replace(array('"', '\''), '&quote;', $article->title) ?>',
+				eventCategory: '<?= str_replace(array('"', '\''), '&quote;', $article->category_title . ' - ' . $article->title) ?>',
 				provider: 'pseudo',
 				url: <?= $clipUrl ?>
 			},
