@@ -241,7 +241,8 @@ class modBreakingNewsHelper {
 						if ($application->getLanguageFilter()) {
 							$query->where('a.language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
 						}
-						$db->setQuery($query);
+						$query->order('a.publish_up DESC');
+						$db->setQuery($query, 0, (int)$params->get('related_limit'));
 						$qstring = $db->getQuery();
 						$article->related = $db->loadObjectList();
 						foreach ($article->related as &$related) {
