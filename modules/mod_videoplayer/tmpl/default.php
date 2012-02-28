@@ -38,7 +38,7 @@
 								</div>
 								<div class="title">
 									<h2>
-										<a id="<?= $video->id ?>" href="<?= $video->source ?>" data-link="<?= $video->link ?>" title="<?= $video->title ?>"><?= $video->title ?></a>
+										<a id="<?= $video->id ?>" href="<?= $video->source ?>" data-category="<?= str_replace(array('"', '\''), '&quote;', $category->title) ?>" data-link="<?= $video->link ?>" title="<?= $video->title ?>"><?= $video->title ?></a>
 									</h2>
 								</div>
 								<div class="description" style="display: none;">

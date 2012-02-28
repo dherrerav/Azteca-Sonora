@@ -2,7 +2,7 @@ jQuery(function($) {
 	var title_holder = $('.mod_videoplayer .video-player .content .title h3 a');
 	var description_holder = $('.mod_videoplayer .video-player .content .description');
 	var sections = $('.mod_videoplayer .video-sections ul.sections li.section, .mod_videoplayer .video-sections ul.sections li.section .title h2 a');
-	var current_section = null;
+	var current_category = null;
 	sections.each(function() {
 		$(this).click(function(e) {
 			sections.each(function() {
@@ -49,6 +49,7 @@ jQuery(function($) {
 		var link = anchor.data('link');
 		var description = anchor.parent().parent().parent().find('.description:first').html().trim();
 		var preview = anchor.parent().parent().parent().find('.image img').data('preview');
+		current_category = anchor.data('category');
 		setTitle(title, link);
 		setDescription(description);
 		setVideo(id, video, preview, play);
@@ -85,17 +86,17 @@ jQuery(function($) {
 					gatracker: {
 						url: siteurl + 'modules/mod_videoplayer/swf/flowplayer.analytics.swf',
 						labels: {
-							start: 'Start',
-							play: 'Play',
-							pause: 'Pause',
-							resume: 'Resume',
-							seek: 'Seek',
-							stop: 'Stop',
-							finish: 'Finish',
+							start: 'Inicio',
+							play: 'Reproducir',
+							pause: 'Pausar',
+							resume: 'Resumir',
+							seek: 'Buscar',
+							stop: 'Detener',
+							finish: 'Final',
 							mute: 'Mute',
 							unmute: 'Unmute',
-							fullscreen: 'Full screen',
-							fullscreenexit: 'Full screen exit'
+							fullscreen: 'Pantalla completa',
+							fullscreenexit: 'Salir de pantalla completa'
 						},
 						events: {
 							all: true
@@ -108,7 +109,7 @@ jQuery(function($) {
 					provider: 'pseudo',
 					url: new_video,
 					autoPlay: autoplay,
-					eventCategory: title_holder.text()
+					eventCategory: current_category + ' - ' + title_holder.text()
 				},
 				onFinish: function() {
 					this.unload();
