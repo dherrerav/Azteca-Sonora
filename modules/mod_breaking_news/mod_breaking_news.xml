@@ -44,11 +44,28 @@
 					label="MOD_BREAKING_NEWS_RELATED_KEYWORD_LABEL"
 					description="MOD_BREAKING_NEWS_RELATED_KEYWORD_DESC" />
 				<field
+					name="show_related"
+					type="radio"
+					default="1"
+					label="MOD_BREAKING_NEWS_SHOW_RELATED_LABEL"
+					description="MOD_BREAKING_NEWS_SHOW_RELATED_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
 					name="related_limit"
 					type="text"
 					default="5"
 					label="MOD_BREAKING_NEWS_RELATED_LIMIT_LABEL"
 					description="MOD_BREAKING_NEWS_RELATED_LIMIT_DESC" />
+				<field
+					name="show_category_title_in"
+					type="category"
+					extension="com_content"
+					size="10"
+					multiple="true"
+					label="MOD_BREAKING_NEWS_SHOW_CATEGORY_TITLE_IN_LABEL"
+					description="MOD_BREAKING_NEWS_SHOW_CATEGORY_TITLE_IN_DESC" />
 			</fieldset>
 			<fieldset name="filtering" label="MOD_BREAKING_NEWS_FILTERING_FIELDSET_LABEL">
 				<field
