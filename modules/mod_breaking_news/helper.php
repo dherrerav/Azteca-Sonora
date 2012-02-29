@@ -162,91 +162,93 @@ class modBreakingNewsHelper {
 				$article->introtext = '';
 			}
 			$article->related = null;
-			$pattern = '/{' . $params->get('related_keyword') . '(.*?)}/';
-			if (preg_match('/{' . $params->get('related_keyword') . ' off}/', $article->fulltext)) {
-				// Do not include related articles
-			} else if (preg_match($pattern, $article->fulltext, $relatedMatch)) {
-				$article->fulltext = preg_replace($pattern, '', $article->fulltext);
-				$pattern = '/ids=("[^"]*")/';
-				$tag = $relatedMatch[1];
-				if (preg_match($pattern, $tag, $ids)) {
-					$ids = explode(',', trim(str_replace('"', '', $ids[1])));
-					$model->setState('filter.category_id', null);
-					$model->setState('filter.featured', 'show');
-					$model->setState('filter.date_filtering', 'off');
-					$model->setState('filter.article_id', $ids);
-					$article->related = $model->getItems();
-					foreach ($article->related as &$related) {
-						$related->link = JRoute::_(ContentHelperRoute::getArticleRoute($related->id . ':' . $related->alias, $related->catid));
-					}
-				}
-			} else {
-				$nullDate = $db->getNullDate();
-				$date =& JFactory::getDate();
-				$now = $date->toMySQL();
-				$query = $db->getQuery(true);
-				$query->select('metakey');
-				$query->from('#__content');
-				$query->where('id = ' . (int)$article->id);
-				$db->setQuery($query);
-				$metakey = $db->loadResult();
-				if ($metakey) {
-					$keywords = explode(',', $metakey);
-					$likes = array();
-					foreach ($keywords as $keyword) {
-						$keyword = trim($keyword);
-						if ($keyword) {
-							$likes[] = $db->escape($keyword);
-						}
-					}
-					if (count($likes)) {
-						$query->clear();
-						$query->select('a.id');
-						$query->select('a.title');
-						$query->select('DATE_FORMAT(a.created, "%Y-%m-%d") as created');
-						$query->select('a.catid');
-						$query->select('cc.access AS cat_access');
-						$query->select('cc.published AS cat_state');
-						
-						//sqlsrv changes
-						$case_when = ' CASE WHEN ';
-						$case_when .= $query->charLength('a.alias');
-						$case_when .= ' THEN ';
-						$a_id = $query->castAsChar('a.id');
-						$case_when .= $query->concatenate(array($a_id, 'a.alias'), ':');
-						$case_when .= ' ELSE ';
-						$case_when .= $a_id.' END as slug';
-						$query->select($case_when);
-						
-						$case_when = ' CASE WHEN ';
-						$case_when .= $query->charLength('cc.alias');
-						$case_when .= ' THEN ';
-						$c_id = $query->castAsChar('cc.id');
-						$case_when .= $query->concatenate(array($c_id, 'cc.alias'), ':');
-						$case_when .= ' ELSE ';
-						$case_when .= $c_id.' END as catslug';
-						$query->select($case_when);
-						$query->from('#__content AS a');
-						$query->leftJoin('#__content_frontpage AS f ON f.content_id = a.id');
-						$query->leftJoin('#__categories AS cc ON cc.id = a.catid');
-						$query->where('a.id != ' . (int) $article->id);
-						$query->where('a.state = 1');
-						$query->where('a.access IN (' . implode(',', $authorised) . ')');
-						$concat_string = $query->concatenate(array('","', ' REPLACE(a.metakey, ", ", ",")', ' ","'));
-						$query->where('('.$concat_string.' LIKE "%'.implode('%" OR '.$concat_string.' LIKE "%', $likes).'%")'); //remove single space after commas in keywords)
-						$query->where('(a.publish_up = '.$db->quote($nullDate).' OR a.publish_up <= '.$db->quote($now).')');
-						$query->where('(a.publish_down = '.$db->quote($nullDate).' OR a.publish_down >= '.$db->quote($now).')');
-						
-						// Filter by language
-						if ($application->getLanguageFilter()) {
-							$query->where('a.language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
-						}
-						$query->order('a.publish_up DESC');
-						$db->setQuery($query, 0, (int)$params->get('related_limit'));
-						$qstring = $db->getQuery();
-						$article->related = $db->loadObjectList();
+			if ($params->get('show_related')) {
+				$pattern = '/{' . $params->get('related_keyword') . '(.*?)}/';
+				if (preg_match('/{' . $params->get('related_keyword') . ' off}/', $article->fulltext)) {
+					// Do not include related articles
+				} else if (preg_match($pattern, $article->fulltext, $relatedMatch)) {
+					$article->fulltext = preg_replace($pattern, '', $article->fulltext);
+					$pattern = '/ids=("[^"]*")/';
+					$tag = $relatedMatch[1];
+					if (preg_match($pattern, $tag, $ids)) {
+						$ids = explode(',', trim(str_replace('"', '', $ids[1])));
+						$model->setState('filter.category_id', null);
+						$model->setState('filter.featured', 'show');
+						$model->setState('filter.date_filtering', 'off');
+						$model->setState('filter.article_id', $ids);
+						$article->related = $model->getItems();
 						foreach ($article->related as &$related) {
-							$related->link = JRoute::_(ContentHelperRoute::getArticleRoute($related->slug, $related->catid));
+							$related->link = JRoute::_(ContentHelperRoute::getArticleRoute($related->id . ':' . $related->alias, $related->catid));
+						}
+					}
+				} else {
+					$nullDate = $db->getNullDate();
+					$date =& JFactory::getDate();
+					$now = $date->toMySQL();
+					$query = $db->getQuery(true);
+					$query->select('metakey');
+					$query->from('#__content');
+					$query->where('id = ' . (int)$article->id);
+					$db->setQuery($query);
+					$metakey = $db->loadResult();
+					if ($metakey) {
+						$keywords = explode(',', $metakey);
+						$likes = array();
+						foreach ($keywords as $keyword) {
+							$keyword = trim($keyword);
+							if ($keyword) {
+								$likes[] = $db->escape($keyword);
+							}
+						}
+						if (count($likes)) {
+							$query->clear();
+							$query->select('a.id');
+							$query->select('a.title');
+							$query->select('DATE_FORMAT(a.created, "%Y-%m-%d") as created');
+							$query->select('a.catid');
+							$query->select('cc.access AS cat_access');
+							$query->select('cc.published AS cat_state');
+							
+							//sqlsrv changes
+							$case_when = ' CASE WHEN ';
+							$case_when .= $query->charLength('a.alias');
+							$case_when .= ' THEN ';
+							$a_id = $query->castAsChar('a.id');
+							$case_when .= $query->concatenate(array($a_id, 'a.alias'), ':');
+							$case_when .= ' ELSE ';
+							$case_when .= $a_id.' END as slug';
+							$query->select($case_when);
+							
+							$case_when = ' CASE WHEN ';
+							$case_when .= $query->charLength('cc.alias');
+							$case_when .= ' THEN ';
+							$c_id = $query->castAsChar('cc.id');
+							$case_when .= $query->concatenate(array($c_id, 'cc.alias'), ':');
+							$case_when .= ' ELSE ';
+							$case_when .= $c_id.' END as catslug';
+							$query->select($case_when);
+							$query->from('#__content AS a');
+							$query->leftJoin('#__content_frontpage AS f ON f.content_id = a.id');
+							$query->leftJoin('#__categories AS cc ON cc.id = a.catid');
+							$query->where('a.id != ' . (int) $article->id);
+							$query->where('a.state = 1');
+							$query->where('a.access IN (' . implode(',', $authorised) . ')');
+							$concat_string = $query->concatenate(array('","', ' REPLACE(a.metakey, ", ", ",")', ' ","'));
+							$query->where('('.$concat_string.' LIKE "%'.implode('%" OR '.$concat_string.' LIKE "%', $likes).'%")'); //remove single space after commas in keywords)
+							$query->where('(a.publish_up = '.$db->quote($nullDate).' OR a.publish_up <= '.$db->quote($now).')');
+							$query->where('(a.publish_down = '.$db->quote($nullDate).' OR a.publish_down >= '.$db->quote($now).')');
+							
+							// Filter by language
+							if ($application->getLanguageFilter()) {
+								$query->where('a.language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
+							}
+							$query->order('a.publish_up DESC');
+							$db->setQuery($query, 0, (int)$params->get('related_limit'));
+							$qstring = $db->getQuery();
+							$article->related = $db->loadObjectList();
+							foreach ($article->related as &$related) {
+								$related->link = JRoute::_(ContentHelperRoute::getArticleRoute($related->slug, $related->catid));
+							}
 						}
 					}
 				}
