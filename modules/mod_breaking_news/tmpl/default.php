@@ -29,6 +29,7 @@ $featured_per_column= explode(',', $params->get('featured_per_column'));
 				<? if ($i == 0) : ?>
 				<span class="bullet">>></span>
 				<? endif ?>
+				<?= $article->category_title ?>
 				<? if ($params->get('link_titles')) : ?>
 					<a href="<?= $article->link ?>" title="<?= $article_title ?>"><?= $article->title ?></a>
 				<? else : ?>
