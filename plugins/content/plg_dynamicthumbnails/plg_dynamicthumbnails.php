@@ -131,7 +131,6 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 			$height = $this->_pluginParams->get('blog_intro_height', 122);
 			$videoOutput = $this->getVideos($article, $width, $height, 'blog_intro_video');
 			$imageOutput = $this->getResizedImages($article, $width, $height, 'blog_intro_image');
-			
 		} else {
 			return;
 		}
@@ -176,8 +175,9 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 			$format = '';
 			if (isset($this->_videoFormats[$extension])) {
 				$format = $this->_videoFormats[$extension];
-				$width = $this->_pluginParams->get('article_video_width');
-				$height = $this->_pluginParams->get('article_video_height');
+				//$width = $this->_pluginParams->get('article_video_width');
+				//$height = $this->_pluginParams->get('article_video_height');
+				//exit;
 				$video = new stdClass();
 				$video->width = $width;
 				$video->height = $height;
