@@ -50,6 +50,8 @@ div[class*='item-page'] .article-videos {
 .blog .article-images .article-images-inner .article-image .text {
 	color: #222;
 	background: #ddd;
+	overflow: hidden;
+	word-wrap: break-word;
 }
 
 .blog .article-images .article-images-inner .article-image .text p {
