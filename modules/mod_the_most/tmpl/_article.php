@@ -4,7 +4,7 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <div class="content-most-article<?= $params->get('moduleclass_sfx') ?>">
 <? if ($article->image !== null) { ?>
-	<img <?= $article->image->src ?> <?= $article->image->title ?> <?= $article->image->alt ?> <?= $article->image->width ?> <?= $article->image->height ?> />
+	<img src="<?= $article->image->src ?>" title="<?= $article->image->title ?>" alt="<?= $article->image->alt ?>" <?= $article->image->width ?> <?= $article->image->height ?> />
 <? } ?>
 <? if ($params->get('item_title')) { ?>
 	<<?= $params->get('item_heading') ?> class="content-most-title<?= $params->get('moduleclass_sfx') ?>">
