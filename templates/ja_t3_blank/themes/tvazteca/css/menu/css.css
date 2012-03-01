@@ -175,7 +175,7 @@
 
 #ja-cssmenu .haschild span {
 }
-#ja-cssmenu .haschild:hover span { background:#666; }
+/*#ja-cssmenu .haschild:hover span { background:#666; }*/
 
 #ja-cssmenu a:hover { background:0!important; }
 #ja-cssmenu a:hover span { background:#666;border-radius:5px 5px 0 0;color:#fff;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0; }
