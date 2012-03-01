@@ -1,4 +1,4 @@
-<? $image = JURI::base() . $videos[0] ?>
+<? $image = JURI::base() . $videos[0][0] ?>
 <div class="article-images">
 	<div class="article-images-inner">
 		<img src="<?= $image ?>" />
