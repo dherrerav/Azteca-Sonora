@@ -55,6 +55,7 @@ abstract class modTheMostHelper {
 		// Set ordering
 		switch ($contentToShow) {
 			case 'most_read';
+				$ordering = 'a.hits';
 				$model->setState('list.ordering', 'a.hits');
 				$model->setState('list.direction', 'DESC');
 				$model->setState('filter.nDays', 1);
