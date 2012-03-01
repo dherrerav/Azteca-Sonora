@@ -1472,3 +1472,7 @@ div[class*='blog'] .items-row .item .article-tools {
 .article-tools {
 	margin-top: 0;
 }
+
+#ja-mainnav .main {
+	border-bottom: 0;
+}
