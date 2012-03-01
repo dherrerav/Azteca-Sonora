@@ -1,6 +1,8 @@
-<? $image = JURI::base() . $videos[0][0] ?>
 <div class="article-images">
 	<div class="article-images-inner">
-		<img src="<?= $image ?>" />
+		<? for ($i = 0; $i < count($videos); $i++) : ?>
+		<img src="<?= JURI::base() . $video->preview ?>" />
+		<? if ($i == 1) break; ?>
+		<? endfor ?>
 	</div>
 </div>
