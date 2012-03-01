@@ -91,7 +91,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 			<?php endif; ?>
 	<script type="text/javascript">
 	window.addEvent('ready', function() {
-		equalHeight('.row-<? $row ?> .contentheading');
+		equalHeight('.row-<?= $row ?> .contentheading');
 	});
 	</script>
 	<?php endforeach; ?>
