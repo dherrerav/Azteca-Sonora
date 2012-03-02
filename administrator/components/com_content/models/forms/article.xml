@@ -13,6 +13,15 @@
 
 		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL"
 			description="JFIELD_ALIAS_DESC" class="inputbox" size="45" />
+		
+		<field name="autotweet" type="list" label="Autotweet"
+			description="Tuitear automaticamente despues de guardar" default="0" class="radio">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		
+		<field name="tweet_title" type="text" label="Tweet title"
+			description="Titulo del tweet" class="inputbox" size="45" />
 
 		<field name="articletext" type="editor" class="inputbox"
 			label="COM_CONTENT_FIELD_ARTICLETEXT_LABEL" description="COM_CONTENT_FIELD_ARTICLETEXT_DESC"

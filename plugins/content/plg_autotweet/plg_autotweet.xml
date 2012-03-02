@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="plugin"
+	group="content"
+	version="2.5">
+	<name>Content - Autotweet</name>
+	<author>Shark Web Intelligence</author>
+	<authorUrl>http://sharkwebintelligence.com</authorUrl>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<version>1.0</version>
+	<description><![CDATA[<h3>Content Auto tweet</h3><p>Tweets content with the specified url shortener.<p>]]></description>
+	<files>
+		<filename plugin="plg_autotweet">plg_autotweet.php</filename>
+		<filename>index.html</filename>
+		<filename>plg_autotweet.xml</filename>
+	</files>
+	<languages>
+		<language tag="es-ES">es-ES.plg_content_plg_autotweet.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="url_shortener"
+					type="radio"
+					default="bitly"
+					label="PLG_AUTOTWEET_SHORTNER_LABEL"
+					description="PLG_AUTOTWEET_SHORTNER_DESC">
+					<option value="bitly">bit.ly</option>
+					<option value="tinyurl">tinyurl.com</option>
+				</field>
+				<field
+					name="max_chars"
+					type="text"
+					default="140"
+					label="PLG_AUTOTWEET_MAX_CHARS_LABEL"
+					description="PLG_AUTOTWEET_MAX_CHARS_DESC" />
+			</fieldset>
+			<fieldset name="twitter" label="tiwtter.com parameters">
+				<field
+					name="twitter_username"
+					type="text"
+					default=""
+					label="PLG_AUTOTWEET_TWITTER_USERNAME_LABEL"
+					description="PLG_AUTOTWEET_TWITTER_USERNAME_DESC" />
+				<field
+					name="twitter_token"
+					type="text"
+					default=""
+					label="PLG_AUTOTWEET_TWITTER_TOKEN_LABEL"
+					description="PLG_AUTOTWEET_TWITTER_TOKEN_DESC" />
+				<field
+					name="twitter_token_secret"
+					type="text"
+					default=""
+					label="PLG_AUTOTWEET_TWITTER_TOKEN_SECRET_LABEL"
+					description="PLG_AUTOTWEET_TWITTER_TOKEN_SECRET_DESC" />
+				<field
+					name="twitter_consumer_key"
+					type="text"
+					default=""
+					label="PLG_AUTOTWEET_TWITTER_CONSUMER_KEY_LABEL"
+					description="PLG_AUTOTWEET_TWITTER_CONSUMER_KEY_DESC" />
+				<field
+					name="twitter_consumer_secret"
+					type="text"
+					default=""
+					label="PLG_AUTOTWEET_TWITTER_CONSUMER_SECRET_LABEL"
+					description="PLG_AUTOTWEET_CONSUMER_SECRET_DESC" />
+			</fieldset>
+			<fieldset name="bitly" label="bit.ly parameters">
+				<field
+					name="bitly_username"
+					type="text"
+					default=""
+					label="PLG_AUTOTWEET_BITLY_USERNAME_LABEL"
+					description="PLG_AUTOTWEET_BITLY_USERNAME_DESC" />
+				<field
+					name="bitly_api_key"
+					type="text"
+					label="PLG_AUTOTWEET_BITLY_API_KEY_LABEL"
+					description="PLG_AUTOTWEET_BITLY_API_KEY_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

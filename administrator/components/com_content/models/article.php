@@ -10,7 +10,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modeladmin');
-
+jimport('joomla.plugin.plugin');
+require_once JPATH_SITE . '/components/com_content/helpers/route.php';
 
 require_once JPATH_COMPONENT_ADMINISTRATOR.'/helpers/content.php';
 
@@ -415,13 +416,63 @@ class ContentModelArticle extends JModelAdmin
 			if (isset($data['featured'])) {
 				$this->featured($this->getState($this->getName().'.id'), $data['featured']);
 			}
-
-
+			$autotweet = (boolean)$data['autotweet'];
+			if ($autotweet) {
+				/**
+				 * @var plgContnetPlg_AutoTweet
+				 */
+				$plugin = JPluginHelper::getPlugin('content', 'plg_autotweet');
+				var_dump($plugin);
+				$params = new JParameter($plugin->params);
+				$access = new Zend_Oauth_Token_Access();
+				$access->setToken($params->get('twitter_token'))
+					   ->setTokenSecret($params->get('twitter_token_secret'));
+				$twitter = new Zend_Service_Twitter(array(
+					'accessToken' => $access,
+					'consumerKey' => $params->get('twitter_consumer_key'),
+					'consumerSecret' => $params->get('twitter_consumer_secret')
+				));
+				$link = 'http://google.com/';
+				$shortUrl = $this->shorten($link, $params->get('bitly_username'), $params->get('bitly_api_key'));
+				$shortUrlLength = strlen($shortUrl);
+				$availableChars = $params->get('max_chars') - ($shortUrlLength + 1);
+				$tweetText = $this->truncate($data['tweet_title'], $availableChars);
+				$tweet = $tweetText . ' ' . $shortUrl;
+				$twitter->statusUpdate($tweet);
+				$output = serialize($twitter->account);
+				$filename = fopen(JPATH_SITE . DS . 'output.txt', 'w');
+				fwrite($filename, $output);
+			}
 			return true;
 		}
-
-
 		return false;
+	}
+	
+	public function truncate($text, $length = 0, $end = '...') {
+		if ($length == 0 || strlen($text) <= $length) return $text;
+		$length = $length - strlen($end);
+		$text = substr($text, 0, $length);
+		return $text . $end;
+	}
+	
+	public function shorten($url, $login, $apiKey, $format = 'txt') {
+		$connectUrl = 'http://api.bit.ly/v3/shorten?login=' . $login . '&apiKey=' . $apiKey . '&uri=' . urlencode($url) . '&format=' . $format;
+		return $this->curl_get_result($connectUrl);
+	}
+	
+	public function expand($url, $login, $apiKey, $format = 'txt') {
+		$connectUrl = 'http://api.bit.ly/v3/expand?login=' . $login . '&apiKey=' . $apiKey . '&shortUrl=' . encode($url) . '&format=' . $format;
+		return $this->curl_get_result($connectUrl);
+	}
+	
+	public function curl_get_result($url, $timeout = 5) {
+		$handler = curl_init();
+		curl_setopt($handler, CURLOPT_URL, $url);
+		curl_setopt($handler, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($handler, CURLOPT_CONNECTTIMEOUT, $timeout);
+		$data = curl_exec($handler);
+		curl_close($handler);
+		return $data;
 	}
 
 	/**
