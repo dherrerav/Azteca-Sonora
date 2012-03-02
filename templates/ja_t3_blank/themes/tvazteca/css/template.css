@@ -1476,3 +1476,7 @@ div[class*='blog'] .items-row .item .article-tools {
 #ja-mainnav .main {
 	border-bottom: 0;
 }
+
+.item-page p {
+	padding-right: 10px;
+}
