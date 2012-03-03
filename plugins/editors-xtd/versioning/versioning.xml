@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="editors-xtd">
+	<name>Button - Versioning</name>
+	<author>Michael Fatica</author>
+	<creationDate>April 2011</creationDate>
+	<copyright>Michael Fatica</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>mike@fatica.net</authorEmail>
+	<authorUrl>www.fatica.net</authorUrl>
+	<version>Version:1.995</version>
+	<description>Fatica Consulting L.L.C. - Simple Content Versioning Editor Plugin</description>
+	<files>
+		<filename plugin="versioning">versioning.php</filename>
+	</files>
+	<config>
+	<fields name="params">
+		<fieldset name="basic" label="Basic Settings">
+   	<field name="front_end"
+  		type="list"
+  		default="No"
+  		label="Display on Front End?"
+  		description="This parameter allows you to hide the versioning button on the front-end." >
+  			<option value="Yes">Yes</option>
+  			<option value="No">No</option>
+  		</field>
+   	<field name="allow_delete"
+  		type="list"
+  		default="No"
+  		label="Allow Version Deletion?"
+  		description="This parameter allows you to enable/disable the ability to delete versions." >
+  			<option value="Yes">Yes</option>
+  			<option value="No">No</option>
+  		</field>  		
+  	<field name="popup_width"
+  		type="text"
+  		default="450"
+  		label="Popup Window Width"
+  		description="This parameter allows you to set the width of the popup window." >
+  		</field>
+  	<field name="popup_height"
+  		type="text"
+  		default="370"
+  		label="Popup Window Height"
+  		description="This parameter allows you to set the height of the popup window." >
+  		</field> 
+  		</fieldset> 	
+  		</fields>	
+	</config>
+</extension>

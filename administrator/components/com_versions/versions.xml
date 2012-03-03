@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.6.0">
+	<name>Versions</name>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>April 2011</creationDate>
+	<author>Michael Fatica - Fatica Consulting L.L.C.</author>
+	<authorEmail>mike@fatica.net</authorEmail>
+	<authorUrl>http://www.fatica.net</authorUrl>
+	<copyright>Copyright 2009-2011 Michael R. Fatica</copyright>
+	<license>GPL</license>
+	<!--  The version strdding is recorded in the components table -->
+	<version>1.995</version>
+	<!-- The description is optional and defaults to the name tc -->
+	<description><![CDATA[ 
+		<h1>Simple Content Versioning - Component</h1>
+		<p>Ensure you <strong>install and publish</strong> the included editor and content plugins.</p>
+		<p>Visit <a href="http://www.fatica.net" target="_blank">www.fatica.net</a> for more information.</p>
+	]]>
+	</description>
+	<installfile>install.com_versions.php</installfile>
+	<uninstallfile>uninstall.com_versions.php</uninstallfile>
+    <files>
+    	<folder>assets</folder>
+    	<folder>views</folder>
+        <filename>versions.php</filename>
+        <filename>versions.html.php</filename>
+    </files>
+	<languages>
+		<language tag="en-GB">en-GB.com_versions.ini</language>
+		<language tag="es-ES">es-ES.com_versions.ini</language>
+		<language tag="ca-ES">ca-ES.com_versions.ini</language>
+		<language tag="fr-FR">fr-FR.com_versions.ini</language> 
+		<language tag="de-DE">de-DE.com_versions.ini</language>    		
+	</languages>
+	<administration>
+	
+	<menu link="option=com_versions&amp;task=showversions">Versions</menu>
+		<files>
+			<folder>elements</folder>
+			<folder>Text</folder>
+			<filename>admin.versions.html.php</filename>
+			<filename>admin.versions.php</filename>
+			<filename>toolbar.versions.html.php</filename>
+			<filename>toolbar.versions.php</filename>
+			</files>
+		<languages>
+   			<language tag="en-GB">en-GB.com_versions.ini</language>
+   			<language tag="es-ES">es-ES.com_versions.ini</language>
+   			<language tag="ca-ES">ca-ES.com_versions.ini</language>
+   			<language tag="fr-FR">fr-FR.com_versions.ini</language> 
+   			<language tag="de-DE">de-DE.com_versions.ini</language> 
+		</languages>
+	</administration>
+</extension>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="User Version Manager">
+		<message>
+			<![CDATA[A layout that allows article authors to view and edit their article versions.]]>
+		</message>
+	</layout>
+	<state>
+		<name>User Version Manager</name>
+		<description>A layout that allows article authors to view and edit their article versions.</description>
+		<params />
+	</state>
+</metadata>

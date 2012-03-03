@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="content">
+	<name>Content - Version</name>
+	<author>Michael Fatica</author>
+	<creationDate>March 2011</creationDate>
+	<copyright>Fatica Consulting L.L.C. 2011 All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>mike@fatica.net</authorEmail>
+	<authorUrl>http://www.fatica.net</authorUrl>
+	<version>Version:1.995</version>
+	<description>Fatica Consulting L.L.C. - Simple Content Versioning Content Plugin</description>
+	<files>
+		<filename plugin="version">version.php</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" label="Basic Settings">
+				<field name="version_limit"
+			type="text"
+			default="10"
+			label="Version limit"
+			description="This parameter limits the number of versions kept for any given document.  When the limit is reached, the oldest versions are deleted as new versions are created." />
+				<field name="admin_notify"
+			type="text"
+			default=""
+			label="Admin notify"
+			description="This parameter sends an email to the address provided when a new version is created." />  		
+			</fieldset>
+  		</fields>
+  	</config>
+</extension>
