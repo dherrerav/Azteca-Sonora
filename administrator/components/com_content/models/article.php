@@ -432,14 +432,16 @@ class ContentModelArticle extends JModelAdmin
 					'consumerKey' => $params->get('twitter_consumer_key'),
 					'consumerSecret' => $params->get('twitter_consumer_secret')
 				));
-				$link = 'http://google.com/';
+				$link = JRoute::_(ContentHelperRoute::getArticleRoute($this->getState($this->getName() . '.id'), $data['catid']));
 				$shortUrl = $this->shorten($link, $params->get('bitly_username'), $params->get('bitly_api_key'));
 				$shortUrlLength = strlen($shortUrl);
 				$availableChars = $params->get('max_chars') - ($shortUrlLength + 1);
 				$tweetText = $this->truncate($data['tweet_title'], $availableChars);
 				$tweet = $tweetText . ' ' . $shortUrl;
-				$twitter->statusUpdate($tweet);
-				$output = serialize($twitter->account);
+				//$twitter->statusUpdate($tweet);
+				$output = 'Id: ' . $this->getState($this->getName() . '.id') . '\r\n';
+				$output .= 'Alias: ' . $data['alias'] . '\r\n';
+				$output .= 'Catid: ' . $data['catid'];
 				$filename = fopen(JPATH_SITE . DS . 'output.txt', 'w');
 				fwrite($filename, $output);
 			}
