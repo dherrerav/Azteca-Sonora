@@ -376,6 +376,7 @@ class FPSSHelperSlideshow {
 				if(JFile::exists(JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php')){
 					JLoader::register('ContentHelperRoute', JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php');
 					$link = JRoute::_(ContentHelperRoute::getArticleRoute($slide->referenceID.':'.$slide->referenceAlias, $slide->referenceCategoryID.':'.$slide->referenceCategoryAlias, $slide->referenceSectionID));
+					var_dump($slide);
 				}
 				else {
 					$link = JRoute::_('index.php?option=com_content&view=article&id='.$slide->referenceID.'&catid='.$slide->referenceCategoryID);
