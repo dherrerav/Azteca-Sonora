@@ -12,3 +12,5 @@
 /t3assets/*
 /.htaccess
 /sql
+/media/com_fpss/cache/*
+/media/com_fpss/src/*
