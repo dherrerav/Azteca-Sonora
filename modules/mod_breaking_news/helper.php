@@ -257,8 +257,8 @@ class modBreakingNewsHelper {
 		return $articles;
 	}
 	private static function _getVideoImage($filename, $width, $height) {
-		var_dump($filename);
 		$image = 'images' . DS . 'previews' . DS . substr($filename, 0, strpos($filename, '.')) . '_' . $width . 'x' . $height . '.jpg';
+		var_dump($image);
 		$path = JPATH_SITE . DS . dirname($image);
 		if (file_exists($filename) && !file_exists($image)) {
 			if (!file_exists($path)) {
