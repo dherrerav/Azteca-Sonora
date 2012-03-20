@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+  <name>FPSS_CATEGORY_EDIT_FORM</name>
+  <params group="slide-resize-options">
+    <param name="imageWidth" type="text" size="4" default="500" label="FPSS_DEFAULT_RESIZE_WIDTH_PX_FOR_UPLOADED_IMAGES" description=""/>
+    <param name="imageQuality" type="text" size="4" maxlength="3" default="90" label="FPSS_DEFAULT_RESIZE_QUALITY_FOR_UPLOADED_IMAGES" description=""/>
+    <param name="thumbWidth" type="text" size="4" default="100" label="FPSS_DEFAULT_RESIZE_WIDTH_PX_FOR_UPLOADED_THUMBNAILS" description=""/>
+    <param name="thumbQuality" type="text" size="4" default="75" label="FPSS_DEFAULT_RESIZE_QUALITY_FOR_UPLOADED_THUMBNAILS" description=""/>
+    <param name="previewWidth" type="text" size="4" default="900" label="FPSS_DEFAULT_RESIZE_WIDTH_PX_FOR_UPLOADED_PREVIEW_IMAGES" description=""/>
+    <param name="previewQuality" type="text" size="4" default="90" label="FPSS_DEFAULT_RESIZE_QUALITY_FOR_UPLOADED_PREVIEW_IMAGES" description=""/>
+  </params>
+  <params group="slide-view-options">
+    <param name="title" type="radio" default="1" label="FPSS_TITLE" description="">
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="text" type="radio" default="1" label="FPSS_TEXT" description="">
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="tagline" type="radio" default="1" label="FPSS_TAGLINE" description="">
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="category" type="radio" default="1" label="FPSS_CATEGORY_IF_APPLICABLE" description="">
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="author" type="radio" default="1" label="FPSS_AUTHOR" description="">
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="readmore" type="radio" default="1" label="FPSS_READ_MORE_LINK" description="">
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="target" type="radio" default="_self" label="FPSS_READ_MORE_TARGET" description="">
+      <option value="_self">FPSS_SAME_WINDOW</option>
+      <option value="_blank">FPSS_NEW_WINDOW</option>
+    </param>
+    <param name="liveData" type="radio" default="1" label="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME" description="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME_DESC">
+      <option value="0">FPSS_NO</option>
+      <option value="1">FPSS_YES</option>
+    </param>
+  </params>
+  <fields name="params">
+    <fieldset name="slide-resize-options">
+      <field name="imageWidth" type="text" size="4" default="500" label="FPSS_DEFAULT_RESIZE_WIDTH_PX_FOR_UPLOADED_IMAGES" description=""/>
+      <field name="imageQuality" type="text" size="4" maxlength="3" default="90" label="FPSS_DEFAULT_RESIZE_QUALITY_FOR_UPLOADED_IMAGES" description=""/>
+      <field name="thumbWidth" type="text" size="4" default="100" label="FPSS_DEFAULT_RESIZE_WIDTH_PX_FOR_UPLOADED_THUMBNAILS" description=""/>
+      <field name="thumbQuality" type="text" size="4" default="75" label="FPSS_DEFAULT_RESIZE_QUALITY_FOR_UPLOADED_THUMBNAILS" description=""/>
+      <field name="previewWidth" type="text" size="4" default="900" label="FPSS_DEFAULT_RESIZE_WIDTH_PX_FOR_UPLOADED_PREVIEW_IMAGES" description=""/>
+      <field name="previewQuality" type="text" size="4" default="90" label="FPSS_DEFAULT_RESIZE_QUALITY_FOR_UPLOADED_PREVIEW_IMAGES" description=""/>
+    </fieldset>
+    <fieldset name="slide-view-options">
+      <field name="title" type="radio" default="1" label="FPSS_TITLE" description="">
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="text" type="radio" default="1" label="FPSS_TEXT" description="">
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="tagline" type="radio" default="1" label="FPSS_TAGLINE" description="">
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="category" type="radio" default="1" label="FPSS_CATEGORY_IF_APPLICABLE" description="">
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="author" type="radio" default="1" label="FPSS_AUTHOR" description="">
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="readmore" type="radio" default="1" label="FPSS_READ_MORE_LINK" description="">
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="target" type="radio" default="_self" label="FPSS_READ_MORE_TARGET" description="">
+        <option value="_self">FPSS_SAME_WINDOW</option>
+        <option value="_blank">FPSS_NEW_WINDOW</option>
+      </field>
+      <field name="liveData" type="radio" default="1" label="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME" description="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME_DESC">
+        <option value="0">FPSS_NO</option>
+        <option value="1">FPSS_YES</option>
+      </field>
+    </fieldset>
+  </fields>
+</form>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <layout title="FPSS_SLIDESHOW">
+    <message>FPSS_CREATE_A_MENU_ITEM_LINKING_DIRECTLY_TO_A_SLIDESHOW</message>
+  </layout>
+  <state>
+    <name>FPSS_SLIDESHOW</name>
+    <description>FPSS_CREATE_A_MENU_ITEM_LINKING_DIRECTLY_TO_A_SLIDESHOW</description>
+    <params addPath="/administrator/components/com_fpss/elements/">
+      <param name="language" type="language" extension="mod_fpss" label="" description="" />
+      <param name="moduleclass_sfx" type="text" default="" label="FPSS_MODULE_CLASS_SUFFIX" description="FPSS_PARAMMODULECLASSSUFFIX" />
+      <param name="" type="header" default="FPSS_SLIDESHOW_PARAMETERS" label="" description="" />
+      <param name="catid" type="category" multiple="multiple" label="FPSS_SELECT_SLIDESHOW_CATEGORIES" description="FPSS_SELECT_THE_CATEGORIES_YOU_WISH_TO_FETCH_SLIDES_FROM" />
+      <param name="featured" type="list" default="-1" label="FPSS_FEATURED_SLIDES" description="">
+        <option value="0">FPSS_HIDE</option>
+        <option value="-1">FPSS_SHOW</option>
+        <option value="1">FPSS_SHOW_ONLY_FEATURED_SLIDES</option>
+      </param>
+      <param name="template" type="template" default="Movies" label="FPSS_SELECT_SLIDESHOW_TEMPLATE" description="FPSS_THIS_MODULE_UTILIZES_ONTHEFLY_MVC_TEMPLATE_OVERRIDES_INSPIRED_BY_OUR_FLAGSHIP_COMPONENT_K2_WHAT_THIS_MEANS_IS_THAT_YOU_CAN_CREATE_A_NEW_SUBTEMPLATE_FOLDER_FOR_THIS_MODULE_WITHIN_YOUR_JOOMLA_TEMPLATES_HTMLMOD_FPSS_FOLDER_THE_MODULE_WILL_THEN_PICKUP_THE_NEW_SUBTEMPLATE_AUTOMAGICALLY_WITHOUT_YOU_EDITING_ANY_XML_FILE_OR_DOING_ANY_OTHER_NONDESIGNER_WORK_IT_ALSO_MAKES_UPDATING_FRONTPAGE_SLIDESHOW_A_BREEZE_AS_YOU_WONT_HAVE_TO_GO_INTO_THE_TROUBLE_OF_BACKING_UP_YOUR_CUSTOM_TEMPLATE_FIRST" />
+      <param name="width" type="text" default="500" size="4" label="FPSS_SLIDESHOW_WIDTH" description="FPSS_THE_WIDTH_OF_THE_SLIDESHOW_DISPLAYING_ON_YOUR_SITE" />
+      <param name="height" type="text" default="308" size="4" label="FPSS_SLIDESHOW_HEIGHT" description="FPSS_THE_HEIGHT_OF_THE_SLIDESHOW_DISPLAYING_ON_YOUR_SITE" />
+      <param name="sidebarWidth" type="text" default="240" size="4" label="FPSS_SIDEBAR_WIDTH_APPLIES_TO_CERTAIN_FPSS_TEMPLATES_ONLY" description="FPSS_WIDTH_OF_THE_SIDEBAR_IN_PIXELS_CONCERNS_THE_UNCUT_FSD_MOVIES_AND_SLEEK_TEMPLATES_BY_DEFAULT_THIS_WIDTH_WILL_BE_ADDED_TO_THE_OVERALL_WIDTH_OF_THE_SLIDESHOW_OR_OTHERWISE" />
+	    <param name="jQueryHandling" type="list" default="1.6remote" label="FPSS_MOD_JQUERY_LIBRARY_HANDLING" description="FPSS_MOD_JQUERY_LIBRARY_HANDLING_DESC">
+	      <option value="0">FPSS_MOD_DO_NOT_LOAD_THE_JQUERY_LIBRARY</option>
+	      <option value="1.5.2">FPSS_MOD_LOAD_V1_5_2_LOCAL_COPY</option>
+	      <option value="1.5remote">FPSS_MOD_LOAD_V1_5_X_LATEST_REMOTE_COPY</option>
+	      <option value="1.6.2">FPSS_MOD_LOAD_V1_6_2_LOCAL_COPY</option>
+	      <option value="1.6remote">FPSS_MOD_LOAD_V1_6_X_LATEST_REMOTE_COPY</option>
+	    </param>
+      <param name="effect" type="list" default="crossfade" label="FPSS_EFFECT" description="FPSS_CHOOSE_THE_EFFECT_OF_THE_SLIDESHOW">
+        <option value="crossfade">FPSS_CROSSFADE</option>
+        <option value="carouselHorizontal">FPSS_CAROUSEL_HORIZONTAL</option>
+        <option value="carouselVertical">FPSS_CAROUSEL_VERTICAL</option>
+      </param>
+      <param name="interval" type="text" default="6000" size="4" label="FPSS_DELAY_TIME_IN_MS" description="FPSS_THE_PAUSE_TIME_BETWEEN_SLIDES_IN_MILLISECONDS_1000_MILLISECONDS_EQUAL_1_SECOND" />
+      <param name="transitionTime" type="text" default="1000" size="4" label="FPSS_TRANSITION_TIME_IN_MS" description="FPSS_THE_EFFECT_TIME_BETWEEN_SLIDES_IN_MILLISECONDS_1000_MILLISECONDS_EQUAL_1_SECOND" />
+      <param name="autoStart" type="radio" default="1" label="FPSS_AUTOSTART_SLIDESHOW" description="FPSS_CHOOSE_WHETHER_THE_SLIDESHOW_WILL_START_OR_PAUSE_ON_PAGE_LOAD">
+        <option value="0">FPSS_NO</option>
+        <option value="1">FPSS_YES</option>
+      </param>
+      <param name="textEffect" type="radio" default="1" label="FPSS_TEXT_EFFECT" description="FPSS_ADDS_A_NICE_TRANSITION_FOR_TEXT_WHEN_SWITCHING_BETWEEN_SLIDES">
+        <option value="0">FPSS_DISABLED</option>
+        <option value="1">FPSS_ENABLED</option>
+      </param>
+      <param name="textEffectTransitionTime" type="text" default="300" size="4" label="FPSS_TEXT_TRANSITION_EFFECT_TIME" description="FPSS_APPLIES_ONLY_IF_YOUVE_ENABLED_THE_TEXT_EFFECT_OPTION_TIME_IN_MILLISECONDS_1000_IS_1_SECOND" />
+      <param name="timer" type="radio" default="1" label="FPSS_TIMER" description="FPSS_CHOOSE_WHETHER_THE_SLIDESHOW_WILL_DISPLAY_A_TIMER_FOREACH_SLIDE">
+        <option value="0">FPSS_NO</option>
+        <option value="1">FPSS_YES</option>
+      </param>
+      <param name="" type="header" default="FPSS_NAVIGATION_PARAMETERS" label="" description="" />
+      <param name="thumbnailViewportWidth" type="text" default="65" size="4" label="FPSS_THUMBNAIL_VIEWPORT_WIDTH" description="FPSS_WIDTH_OF_THE_NAVIGATION_THUMBNAIL_IN_PIXELS" />
+      <param name="thumbnailViewportHeight" type="text" default="40" size="4" label="FPSS_THUMBNAIL_VIEWPORT_HEIGHT" description="FPSS_HEIGHT_OF_THE_NAVIGATION_THUMBNAIL_IN_PIXELS" />
+      <param name="event" type="radio" default="click" label="FPSS_WEBSITE_VISITORS_CAN_SWITCH_SLIDES_MANUALLY_ON" description="FPSS_CHOOSE_HOW_SLIDES_SWITCH_WHEN_USING_THE_NAVIGATION">
+        <option value="click">FPSS_MOUSE_CLICK</option>
+        <option value="mouseover">FPSS_MOUSE_OVER</option>
+      </param>
+      <param name="lavalamp" type="radio" default="1" label="FPSS_NAVIGATION_LAVALAMP_EFFECT" description="FPSS_CHOOSE_WHETHER_TO_ENABLE_LAVALAMP_EFFECT_FOR_SLIDESHOW_NAVIGATION">
+        <option value="0">FPSS_DISABLED</option>
+        <option value="1">FPSS_ENABLED</option>
+      </param>
+	    <param name="hideNavigation" type="radio" default="0" label="FPSS_MOD_HIDE_NAVIGATION_BAR" description="FPSS_MOD_HIDE_NAVIGATION_BAR_DESC">
+	      <option value="0">FPSS_NO</option>
+	      <option value="1">FPSS_YES</option>
+	    </param>
+      <param name="" type="header" default="FPSS_CONTENT_PARAMETERS" label="" description="" />
+      <param name="title" type="list" default="" label="FPSS_TITLE" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </param>
+      <param name="text" type="list" default="" label="FPSS_TEXT" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </param>
+      <param name="tagline" type="list" default="" label="FPSS_TAGLINE" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </param>
+      <param name="author" type="list" default="" label="FPSS_AUTHOR" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </param>
+      <param name="readmore" type="list" default="" label="FPSS_READ_MORE_LINK" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </param>
+      <param name="target" type="list" default="" label="FPSS_READ_MORE_TARGET" description="">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="_self">FPSS_SAME_WINDOW</option>
+        <option value="_blank">FPSS_NEW_WINDOW</option>
+      </param>
+      <param name="category" type="list" default="" label="FPSS_CATEGORY_IF_APPLICABLE" description="FPSS_IF_APPLICABLE_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </param>
+      <param name="liveData" type="list" default="" label="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME" description="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME_DESC">
+        <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+        <option value="0">FPSS_NO</option>
+        <option value="1">FPSS_YES</option>
+      </param>
+      <param name="ordering" type="list" default="0" label="FPSS_SLIDE_ORDER" description="FPSS_THE_ORDER_IN_WHICH_SLIDES_WILL_APPEAR_ON_THE_SLIDESHOW">
+        <option value="order">FPSS_USE_COMPONENT_ORDERING</option>
+        <option value="featuredOrder">FPSS_USE_COMPONENT_FEATURED_ORDERING</option>
+        <option value="reverseId">FPSS_ORDER_BY_SLIDE_ID_DESCENDING</option>
+        <option value="id">FPSS_ORDER_BY_SLIDE_ID_ASCENDING</option>
+        <option value="title">FPSS_ALPHABETICAL</option>
+        <option value="reverseTitle">FPSS_REVERSE_ALPHABETICAL</option>
+        <option value="hits">FPSS_HITS</option>
+        <option value="random">FPSS_RANDOM</option>
+      </param>
+      <param name="limit" type="text" default="" size="4" label="FPSS_SLIDE_LIMIT" description="FPSS_THIS_OPTION_CAN_BE_VERY_USEFUL_IF_YOU_HAVE_FOR_EXAMPLE_30_SLIDES_ON_YOUR_SLIDESHOW_BUT_ONLY_WANT_TO_SHOW_10_AT_A_TIME_YOU_INPUT_10_IN_THIS_CASE_AND_ONLY_10_SLIDES_WILL_APPEAR_IF_YOU_COMBINE_THIS_OPTION_WITH_THE_RANDOM_ORDERING_OPTION_RIGHT_ABOVE_YOULL_GET_A_SMART_DISPLAY_FEATURE_FOR_YOUR_SLIDESHOW_BY_DEFAULT_THIS_OPTION_IS_EMPTY_TO_ENABLE_THE_DISPLAY_OF_ALL_SLIDES" />
+      <param name="wordLimit" type="text" default="20" size="4" label="FPSS_WORD_LIMIT_FOR_MAIN_TEXT" description="FPSS_WORD_LIMIT_ENTER_0_TO_DISABLE_IT_WHEN_THE_WORD_LIMIT_IS_ON_ALL_HTML_TAGS_IN_MAIN_TEXT_WILL_BE_STRIPPED_TO_AVOID_HTML_CODE_BREAKING" />
+      <param name="disableLinks" type="radio" default="0" label="FPSS_DISABLE_SLIDE_LINKS" description="">
+        <option value="0">FPSS_NO</option>
+        <option value="1">FPSS_YES</option>
+      </param>
+	    <param name="" type="header" default="FPSS_MOD_IMAGE_OPTIMIZATION_PARAMETERS" label="" description="" />
+	    <param name="enableSenchaSrc" type="radio" default="0" label="FPSS_MOD_SENCHASRC_IMAGE_OPTIMIZATION" description="FPSS_ENABLE_THIS_OPTION_TO_OPTIMIZE_ALL_IMAGES_OUTPUT_BY_THE_SLIDESHOW_USING_THE_TINYSRCNET_WEB_SERVICE">
+	      <option value="0">FPSS_DISABLED</option>
+	      <option value="1">FPSS_ENABLED</option>
+	    </param>
+    </params>
+    <params group="advanced">
+      <param name="fpssCssInclusionMethod" type="radio" default="0" label="FPSS_CSS_INCLUSION_METHOD" description="FPSS_IF_YOU_ENCOUNTER_A_BROKEN_SLIDESHOW_EG_SLIDES_ARE_SHOWN_ONE_BELOW_THE_OTHER_THEN_YOUR_HOSTING_COMPANY_MAY_POSE_LIMITATIONS_TO_INCLUDING_THE_FRONTPAGE_SLIDESHOW_DYNAMIC_CSS_FILES_IN_THAT_CASE_SWITCH_THIS_OPTION_TO_EMBEDDED_AND_THE_SLIDESHOW_WILL_WORK_PROPERLY">
+        <option value="0">FPSS_EXTERNAL_FILE</option>
+        <option value="1">FPSS_EMBEDDED_ON_THE_OUTPUT_OF_THE_PAGE</option>
+      </param>
+      <param name="@spacer" type="spacer" default="" label="" description="" />
+      <param name="cache" type="hidden" default="0" />
+      <param name="fpssCache" type="list" default="1" label="FPSS_CACHING" description="FPSS_SELECT_WHETHER_TO_CACHE_THE_CONTENT_OF_THIS_MODULE">
+        <option value="1">FPSS_USE_GLOBAL</option>
+        <option value="0">FPSS_NO_CACHING</option>
+      </param>
+      <param name="cache_time" type="text" default="900" label="FPSS_CACHE_TIME_IN_SECONDS" description="FPSS_THE_TIME_BEFORE_THE_MODULE_IS_RECACHED" />
+    </params>
+    <config>
+      <fields name="params">
+        <fieldset name="basic" addfieldpath="/administrator/components/com_fpss/elements/">
+          <field name="language" type="language" extension="mod_fpss" label="" description="" />
+          <field name="moduleclass_sfx" type="text" default="" label="FPSS_MODULE_CLASS_SUFFIX" description="FPSS_PARAMMODULECLASSSUFFIX" />
+          <field name="" type="header" default="FPSS_SLIDESHOW_PARAMETERS" label="" description="" />
+          <field name="catid" type="category" multiple="multiple" label="FPSS_SELECT_SLIDESHOW_CATEGORIES" description="FPSS_SELECT_THE_CATEGORIES_YOU_WISH_TO_FETCH_SLIDES_FROM" />
+          <field name="featured" type="list" default="-1" label="FPSS_FEATURED_SLIDES" description="">
+            <option value="0">FPSS_HIDE</option>
+            <option value="-1">FPSS_SHOW</option>
+            <option value="1">FPSS_SHOW_ONLY_FEATURED_SLIDES</option>
+          </field>
+          <field name="template" type="template" default="Movies" label="FPSS_SELECT_SLIDESHOW_TEMPLATE" description="FPSS_THIS_MODULE_UTILIZES_ONTHEFLY_MVC_TEMPLATE_OVERRIDES_INSPIRED_BY_OUR_FLAGSHIP_COMPONENT_K2_WHAT_THIS_MEANS_IS_THAT_YOU_CAN_CREATE_A_NEW_SUBTEMPLATE_FOLDER_FOR_THIS_MODULE_WITHIN_YOUR_JOOMLA_TEMPLATES_HTMLMOD_FPSS_FOLDER_THE_MODULE_WILL_THEN_PICKUP_THE_NEW_SUBTEMPLATE_AUTOMAGICALLY_WITHOUT_YOU_EDITING_ANY_XML_FILE_OR_DOING_ANY_OTHER_NONDESIGNER_WORK_IT_ALSO_MAKES_UPDATING_FRONTPAGE_SLIDESHOW_A_BREEZE_AS_YOU_WONT_HAVE_TO_GO_INTO_THE_TROUBLE_OF_BACKING_UP_YOUR_CUSTOM_TEMPLATE_FIRST" />
+          <field name="width" type="text" default="500" size="4" label="FPSS_SLIDESHOW_WIDTH" description="FPSS_THE_WIDTH_OF_THE_SLIDESHOW_DISPLAYING_ON_YOUR_SITE" />
+          <field name="height" type="text" default="308" size="4" label="FPSS_SLIDESHOW_HEIGHT" description="FPSS_THE_HEIGHT_OF_THE_SLIDESHOW_DISPLAYING_ON_YOUR_SITE" />
+          <field name="sidebarWidth" type="text" default="240" size="4" label="FPSS_SIDEBAR_WIDTH_APPLIES_TO_CERTAIN_FPSS_TEMPLATES_ONLY" description="FPSS_WIDTH_OF_THE_SIDEBAR_IN_PIXELS_CONCERNS_THE_UNCUT_FSD_MOVIES_AND_SLEEK_TEMPLATES_BY_DEFAULT_THIS_WIDTH_WILL_BE_ADDED_TO_THE_OVERALL_WIDTH_OF_THE_SLIDESHOW_OR_OTHERWISE" />
+			    <field name="jQueryHandling" type="list" default="1.6remote" label="FPSS_MOD_JQUERY_LIBRARY_HANDLING" description="FPSS_MOD_JQUERY_LIBRARY_HANDLING_DESC">
+			      <option value="0">FPSS_MOD_DO_NOT_LOAD_THE_JQUERY_LIBRARY</option>
+			      <option value="1.5.2">FPSS_MOD_LOAD_V1_5_2_LOCAL_COPY</option>
+			      <option value="1.5remote">FPSS_MOD_LOAD_V1_5_X_LATEST_REMOTE_COPY</option>
+			      <option value="1.6.2">FPSS_MOD_LOAD_V1_6_2_LOCAL_COPY</option>
+			      <option value="1.6remote">FPSS_MOD_LOAD_V1_6_X_LATEST_REMOTE_COPY</option>
+			    </field>
+          <field name="effect" type="list" default="crossfade" label="FPSS_EFFECT" description="FPSS_CHOOSE_THE_EFFECT_OF_THE_SLIDESHOW">
+            <option value="crossfade">FPSS_CROSSFADE</option>
+            <option value="carouselHorizontal">FPSS_CAROUSEL_HORIZONTAL</option>
+            <option value="carouselVertical">FPSS_CAROUSEL_VERTICAL</option>
+          </field>
+          <field name="interval" type="text" default="6000" size="4" label="FPSS_DELAY_TIME_IN_MS" description="FPSS_THE_PAUSE_TIME_BETWEEN_SLIDES_IN_MILLISECONDS_1000_MILLISECONDS_EQUAL_1_SECOND" />
+          <field name="transitionTime" type="text" default="1000" size="4" label="FPSS_TRANSITION_TIME_IN_MS" description="FPSS_THE_EFFECT_TIME_BETWEEN_SLIDES_IN_MILLISECONDS_1000_MILLISECONDS_EQUAL_1_SECOND" />
+          <field name="autoStart" type="radio" default="1" label="FPSS_AUTOSTART_SLIDESHOW" description="FPSS_CHOOSE_WHETHER_THE_SLIDESHOW_WILL_START_OR_PAUSE_ON_PAGE_LOAD">
+            <option value="0">FPSS_NO</option>
+            <option value="1">FPSS_YES</option>
+          </field>
+          <field name="textEffect" type="radio" default="1" label="FPSS_TEXT_EFFECT" description="FPSS_ADDS_A_NICE_TRANSITION_FOR_TEXT_WHEN_SWITCHING_BETWEEN_SLIDES">
+            <option value="0">FPSS_DISABLED</option>
+            <option value="1">FPSS_ENABLED</option>
+          </field>
+          <field name="textEffectTransitionTime" type="text" default="300" size="4" label="FPSS_TEXT_TRANSITION_EFFECT_TIME" description="FPSS_APPLIES_ONLY_IF_YOUVE_ENABLED_THE_TEXT_EFFECT_OPTION_TIME_IN_MILLISECONDS_1000_IS_1_SECOND" />
+          <field name="timer" type="radio" default="1" label="FPSS_TIMER" description="FPSS_CHOOSE_WHETHER_THE_SLIDESHOW_WILL_DISPLAY_A_TIMER_FOREACH_SLIDE">
+            <option value="0">FPSS_NO</option>
+            <option value="1">FPSS_YES</option>
+          </field>
+          <field name="" type="header" default="FPSS_NAVIGATION_PARAMETERS" label="" description="" />
+          <field name="thumbnailViewportWidth" type="text" default="65" size="4" label="FPSS_THUMBNAIL_VIEWPORT_WIDTH" description="FPSS_WIDTH_OF_THE_NAVIGATION_THUMBNAIL_IN_PIXELS" />
+          <field name="thumbnailViewportHeight" type="text" default="40" size="4" label="FPSS_THUMBNAIL_VIEWPORT_HEIGHT" description="FPSS_HEIGHT_OF_THE_NAVIGATION_THUMBNAIL_IN_PIXELS" />
+          <field name="event" type="radio" default="click" label="FPSS_WEBSITE_VISITORS_CAN_SWITCH_SLIDES_MANUALLY_ON" description="FPSS_CHOOSE_HOW_SLIDES_SWITCH_WHEN_USING_THE_NAVIGATION">
+            <option value="click">FPSS_MOUSE_CLICK</option>
+            <option value="mouseover">FPSS_MOUSE_OVER</option>
+          </field>
+          <field name="lavalamp" type="radio" default="1" label="FPSS_NAVIGATION_LAVALAMP_EFFECT" description="FPSS_CHOOSE_WHETHER_TO_ENABLE_LAVALAMP_EFFECT_FOR_SLIDESHOW_NAVIGATION">
+            <option value="0">FPSS_DISABLED</option>
+            <option value="1">FPSS_ENABLED</option>
+          </field>
+			    <field name="hideNavigation" type="radio" default="0" label="FPSS_MOD_HIDE_NAVIGATION_BAR" description="FPSS_MOD_HIDE_NAVIGATION_BAR_DESC">
+			      <option value="0">FPSS_NO</option>
+			      <option value="1">FPSS_YES</option>
+			    </field>
+          <field name="" type="header" default="FPSS_CONTENT_PARAMETERS" label="" description="" />
+          <field name="title" type="list" default="" label="FPSS_TITLE" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="0">FPSS_HIDE</option>
+            <option value="1">FPSS_SHOW</option>
+          </field>
+          <field name="text" type="list" default="" label="FPSS_TEXT" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="0">FPSS_HIDE</option>
+            <option value="1">FPSS_SHOW</option>
+          </field>
+          <field name="tagline" type="list" default="" label="FPSS_TAGLINE" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="0">FPSS_HIDE</option>
+            <option value="1">FPSS_SHOW</option>
+          </field>
+          <field name="author" type="list" default="" label="FPSS_AUTHOR" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="0">FPSS_HIDE</option>
+            <option value="1">FPSS_SHOW</option>
+          </field>
+          <field name="readmore" type="list" default="" label="FPSS_READ_MORE_LINK" description="FPSS_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="0">FPSS_HIDE</option>
+            <option value="1">FPSS_SHOW</option>
+          </field>
+          <field name="target" type="list" default="" label="FPSS_READ_MORE_TARGET" description="">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="_self">FPSS_SAME_WINDOW</option>
+            <option value="_blank">FPSS_NEW_WINDOW</option>
+          </field>
+          <field name="category" type="list" default="" label="FPSS_CATEGORY_IF_APPLICABLE" description="FPSS_IF_APPLICABLE_SHOW_OR_HIDE_THIS_ELEMENT_IN_THE_SLIDESHOW">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="0">FPSS_HIDE</option>
+            <option value="1">FPSS_SHOW</option>
+          </field>
+          <field name="liveData" type="list" default="" label="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME" description="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME_DESC">
+            <option value="">FPSS_INHERIT_FROM_COMPONENT</option>
+            <option value="0">FPSS_NO</option>
+            <option value="1">FPSS_YES</option>
+          </field>
+          <field name="ordering" type="list" default="0" label="FPSS_SLIDE_ORDER" description="FPSS_THE_ORDER_IN_WHICH_SLIDES_WILL_APPEAR_ON_THE_SLIDESHOW">
+            <option value="order">FPSS_USE_COMPONENT_ORDERING</option>
+            <option value="featuredOrder">FPSS_USE_COMPONENT_FEATURED_ORDERING</option>
+            <option value="reverseId">FPSS_ORDER_BY_SLIDE_ID_DESCENDING</option>
+            <option value="id">FPSS_ORDER_BY_SLIDE_ID_ASCENDING</option>
+            <option value="title">FPSS_ALPHABETICAL</option>
+            <option value="reverseTitle">FPSS_REVERSE_ALPHABETICAL</option>
+            <option value="hits">FPSS_HITS</option>
+            <option value="random">FPSS_RANDOM</option>
+          </field>
+          <field name="limit" type="text" default="" size="4" label="FPSS_SLIDE_LIMIT" description="FPSS_THIS_OPTION_CAN_BE_VERY_USEFUL_IF_YOU_HAVE_FOR_EXAMPLE_30_SLIDES_ON_YOUR_SLIDESHOW_BUT_ONLY_WANT_TO_SHOW_10_AT_A_TIME_YOU_INPUT_10_IN_THIS_CASE_AND_ONLY_10_SLIDES_WILL_APPEAR_IF_YOU_COMBINE_THIS_OPTION_WITH_THE_RANDOM_ORDERING_OPTION_RIGHT_ABOVE_YOULL_GET_A_SMART_DISPLAY_FEATURE_FOR_YOUR_SLIDESHOW_BY_DEFAULT_THIS_OPTION_IS_EMPTY_TO_ENABLE_THE_DISPLAY_OF_ALL_SLIDES" />
+          <field name="wordLimit" type="text" default="20" size="4" label="FPSS_WORD_LIMIT_FOR_MAIN_TEXT" description="FPSS_WORD_LIMIT_ENTER_0_TO_DISABLE_IT_WHEN_THE_WORD_LIMIT_IS_ON_ALL_HTML_TAGS_IN_MAIN_TEXT_WILL_BE_STRIPPED_TO_AVOID_HTML_CODE_BREAKING" />
+          <field name="disableLinks" type="radio" default="0" label="FPSS_DISABLE_SLIDE_LINKS" description="">
+            <option value="0">FPSS_NO</option>
+            <option value="1">FPSS_YES</option>
+          </field>
+	        <field name="" type="header" default="FPSS_MOD_IMAGE_OPTIMIZATION_PARAMETERS" label="" description="" />
+	        <field name="enableSenchaSrc" type="radio" default="0" label="FPSS_MOD_SENCHASRC_IMAGE_OPTIMIZATION" description="FPSS_ENABLE_THIS_OPTION_TO_OPTIMIZE_ALL_IMAGES_OUTPUT_BY_THE_SLIDESHOW_USING_THE_TINYSRCNET_WEB_SERVICE">
+	          <option value="0">FPSS_DISABLED</option>
+	          <option value="1">FPSS_ENABLED</option>
+	        </field>
+        </fieldset>
+        <fieldset name="advanced">
+          <field name="fpssCssInclusionMethod" type="radio" default="0" label="FPSS_CSS_INCLUSION_METHOD" description="FPSS_IF_YOU_ENCOUNTER_A_BROKEN_SLIDESHOW_EG_SLIDES_ARE_SHOWN_ONE_BELOW_THE_OTHER_THEN_YOUR_HOSTING_COMPANY_MAY_POSE_LIMITATIONS_TO_INCLUDING_THE_FRONTPAGE_SLIDESHOW_DYNAMIC_CSS_FILES_IN_THAT_CASE_SWITCH_THIS_OPTION_TO_EMBEDDED_AND_THE_SLIDESHOW_WILL_WORK_PROPERLY">
+            <option value="0">FPSS_EXTERNAL_FILE</option>
+            <option value="1">FPSS_EMBEDDED_ON_THE_OUTPUT_OF_THE_PAGE</option>
+          </field>
+          <field name="@spacer" type="spacer" default="" label="" description="" />
+          <field name="cache" type="hidden" default="0" />
+          <field name="fpssCache" type="list" default="1" label="FPSS_CACHING" description="FPSS_SELECT_WHETHER_TO_CACHE_THE_CONTENT_OF_THIS_MODULE">
+            <option value="1">FPSS_USE_GLOBAL</option>
+            <option value="0">FPSS_NO_CACHING</option>
+          </field>
+          <field name="cache_time" type="text" default="900" label="FPSS_CACHE_TIME_IN_SECONDS" description="FPSS_THE_TIME_BEFORE_THE_MODULE_IS_RECACHED" />
+        </fieldset>
+      </fields>
+    </config>
+  </state>
+</metadata>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" client="administrator" method="upgrade" version="1.5.0" position="icon">
+  <name>Frontpage Slideshow Statistics (admin)</name>
+  <author>JoomlaWorks</author>
+  <creationDate>August 23rd, 2011</creationDate>
+  <copyright>Copyright (c) 2006 - 2011 JoomlaWorks Ltd. All rights reserved.</copyright>
+  <authorEmail>contact@joomlaworks.gr</authorEmail>
+  <authorUrl>www.joomlaworks.gr</authorUrl>
+  <version>3.0.1</version>
+  <license>Commercial - This code cannot be redistributed without permission from JoomlaWorks Ltd.</license>
+  <description>FPSS_MOD_FPSS_STATS_DESCRIPTION</description>
+  <files>
+    <filename module="mod_fpss_stats">mod_fpss_stats.php</filename>
+    <folder>tmpl</folder>
+  </files>
+  <params>
+    <param name="cache" type="hidden" default="0" />
+    <param name="fpssCache" type="list" default="1" label="FPSS_CACHING" description="FPSS_SELECT_WHETHER_TO_CACHE_THE_CONTENT_OF_THIS_MODULE">
+      <option value="1">FPSS_USE_GLOBAL</option>
+      <option value="0">FPSS_NO_CACHING</option>
+    </param>
+    <param name="cache_time" type="text" default="900" label="FPSS_CACHE_TIME_IN_SECONDS" description="FPSS_THE_TIME_BEFORE_THE_MODULE_IS_RECACHED"/>
+  </params>
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+	      <field name="cache" type="hidden" default="0" />
+	      <field name="fpssCache" type="list" default="1" label="FPSS_CACHING" description="FPSS_SELECT_WHETHER_TO_CACHE_THE_CONTENT_OF_THIS_MODULE">
+	        <option value="1">FPSS_USE_GLOBAL</option>
+	        <option value="0">FPSS_NO_CACHING</option>
+	      </field>
+	      <field name="cache_time" type="text" default="900" label="FPSS_CACHE_TIME_IN_SECONDS" description="FPSS_THE_TIME_BEFORE_THE_MODULE_IS_RECACHED"/>
+	    </fieldset>
+    </fields>
+  </config>
+</install>

@@ -1,0 +1,19 @@
+/**
+ * @version		$Id: style.css 489 2011-07-06 15:27:49Z lefteris.kavadas $
+ * @package		Frontpage Slideshow
+ * @author		JoomlaWorks http://www.joomlaworks.gr
+ * @copyright	Copyright (c) 2006 - 2011 JoomlaWorks Ltd. All rights reserved.
+ * @license		Commercial - This code cannot be redistributed without permission from JoomlaWorks Ltd.
+ */
+
+.clr {clear:both;height:0;line-height:0;display:block;float:none;}
+
+#fpssModule {clear:both;margin:-1px 0 8px 0;padding:8px;position:relative;z-index:8; background:#fff; border:1px solid #E0E0E0;}
+	div#fpssModuleTitle {float:left; margin:0;padding:0;z-index:9;}
+	div#fpssModuleTitle a {display:block;clear:both;float:none;background:#f9f9f9 url(../images/fpss_logo_151x18.png) no-repeat 50% 50%;width:151px;height:18px;padding:0;margin:0;}
+	div#fpssModuleTitle a span {display:none;}
+#fpssModuleFilters {float:right; clear:right; padding-left:20px;}
+.fpssModuleFiltersLoading {background:url(../images/loading16x16.gif) 0 0 no-repeat;}
+#fpssChart { height:420px; overflow:hidden; margin-bottom:4px; }
+.fpssNote { padding:4px 0 0; font-style:italic; color:#777; }
+

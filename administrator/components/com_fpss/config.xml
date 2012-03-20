@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <params>
+    <param name="wysiwyg" type="radio" default="1" label="FPSS_ENABLE_WYSIWYG_EDITOR_IN_CUSTOM_TEXT_AREA" description="" menu="hide">
+      <option value="0">FPSS_NO</option>
+      <option value="1">FPSS_YES</option>
+    </param>
+    <param name="stats" type="radio" default="1" label="FPSS_ENABLE_STATISTICS" description="" menu="hide">
+      <option value="0">FPSS_NO</option>
+      <option value="1">FPSS_YES</option>
+    </param>
+    <param name="memoryLimit" type="text" default="" size="4" label="FPSS_MEMORY_LIMIT_ENFORCE_IN_MB" description="" menu="hide" />
+  </params>
+  <fieldset name="FPSS_SYSTEM_SETTINGS">
+    <field name="wysiwyg" type="radio" default="1" label="FPSS_ENABLE_WYSIWYG_EDITOR_IN_CUSTOM_TEXT_AREA" description="" menu="hide">
+      <option value="0">FPSS_NO</option>
+      <option value="1">FPSS_YES</option>
+    </field>
+    <field name="stats" type="radio" default="1" label="FPSS_ENABLE_STATISTICS" description="" menu="hide">
+      <option value="0">FPSS_NO</option>
+      <option value="1">FPSS_YES</option>
+    </field>
+    <field name="memoryLimit" type="text" default="" size="4" label="FPSS_MEMORY_LIMIT_ENFORCE_IN_MB" description="" menu="hide" />
+  </fieldset>
+</config>

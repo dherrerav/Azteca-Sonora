@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+  <name>FPSS_SLIDE_EDIT_FORM</name>
+  <params group="slide-view-options">
+    <param name="title" type="list" default="" label="FPSS_TITLE" description="">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="text" type="list" default="" label="FPSS_TEXT" description="">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="tagline" type="list" default="" label="FPSS_TAGLINE" description="">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="category" type="list" default="" label="FPSS_CATEGORY_IF_APPLICABLE" description="">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="author" type="list" default="" label="FPSS_AUTHOR" description="">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="readmore" type="list" default="" label="FPSS_READ_MORE_LINK" description="">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="0">FPSS_HIDE</option>
+      <option value="1">FPSS_SHOW</option>
+    </param>
+    <param name="target" type="list" default="" label="FPSS_READ_MORE_TARGET" description="">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="_self">FPSS_SAME_WINDOW</option>
+      <option value="_blank">FPSS_NEW_WINDOW</option>
+    </param>
+    <param name="liveData" type="list" default="" label="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME" description="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME_DESC">
+      <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+      <option value="0">FPSS_NO</option>
+      <option value="1">FPSS_YES</option>
+    </param>
+  </params>
+  <fields name="params">
+    <fieldset name="slide-view-options">
+      <field name="title" type="list" default="" label="FPSS_TITLE" description="">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="text" type="list" default="" label="FPSS_TEXT" description="">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="tagline" type="list" default="" label="FPSS_TAGLINE" description="">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="category" type="list" default="" label="FPSS_CATEGORY_IF_APPLICABLE" description="">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="author" type="list" default="" label="FPSS_AUTHOR" description="">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="readmore" type="list" default="" label="FPSS_READ_MORE_LINK" description="">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="0">FPSS_HIDE</option>
+        <option value="1">FPSS_SHOW</option>
+      </field>
+      <field name="target" type="list" default="" label="FPSS_READ_MORE_TARGET" description="">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="_self">FPSS_SAME_WINDOW</option>
+        <option value="_blank">FPSS_NEW_WINDOW</option>
+      </field>
+      <field name="liveData" type="list" default="" label="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME" description="FPSS_FETCH_DATA_FROM_3RD_PARTY_EXTENSION_AT_RUNTIME_DESC">
+        <option value="">FPSS_INHERIT_FROM_CATEGORY</option>
+        <option value="0">FPSS_NO</option>
+        <option value="1">FPSS_YES</option>
+      </field>
+    </fieldset>
+  </fields>
+</form>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0" method="upgrade">
+  <name>FPSS</name>
+  <author>JoomlaWorks</author>
+  <creationDate>August 23rd, 2011</creationDate>
+  <copyright>Copyright (c) 2006 - 2011 JoomlaWorks Ltd. All rights reserved.</copyright>
+  <authorEmail>contact@joomlaworks.gr</authorEmail>
+  <authorUrl>www.joomlaworks.gr</authorUrl>
+  <version>3.0.1</version>
+  <license>Commercial - This code cannot be redistributed without permission from JoomlaWorks Ltd.</license>
+  <description>FPSS_COM_FPSS_DESCRIPTION</description>
+  <installfile>install.fpss.php</installfile>
+  <uninstallfile>uninstall.fpss.php</uninstallfile>
+	<install>
+		<sql>
+			<file charset="utf8" driver="mysql">install.mysql.sql</file>
+			<file driver="mysql">install.mysql.sql</file>
+			<file charset="utf8" driver="mysqli">install.mysql.sql</file>
+			<file driver="mysqli">install.mysql.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file charset="utf8" driver="mysql">uninstall.mysql.sql</file>
+			<file driver="mysql">uninstall.mysql.sql</file>
+			<file charset="utf8" driver="mysqli">uninstall.mysql.sql</file>
+			<file driver="mysqli">uninstall.mysql.sql</file>
+		</sql>
+	</uninstall>
+  <files folder="components/com_fpss">
+    <folder>helpers</folder>
+    <folder>views</folder>
+    <filename>controller.php</filename>
+    <filename>fpss.php</filename>
+    <filename>router.php</filename>
+  </files>
+  <languages folder="language/en-GB">
+    <language tag="en-GB">en-GB.mod_fpss.ini</language>
+    <language tag="en-GB">en-GB.mod_fpss.sys.ini</language>
+  </languages>
+  <media destination="com_fpss" folder="media/com_fpss">
+    <folder>samples</folder>
+  </media>
+  <administration>
+    <menu img="components/com_fpss/images/fpss-icon.png">FPSS</menu>
+    <files folder="administrator/components/com_fpss">
+      <folder>controllers</folder>
+      <folder>css</folder>
+      <folder>elements</folder>
+      <folder>helpers</folder>
+      <folder>images</folder>
+      <folder>js</folder>
+      <folder>lib</folder>
+      <folder>models</folder>
+      <folder>tables</folder>
+      <folder>views</folder>
+      <filename>admin.fpss.php</filename>
+      <filename>config.xml</filename>
+      <filename>install.mysql.sql</filename>
+      <filename>uninstall.mysql.sql</filename>
+    </files>
+    <languages folder="administrator/language/en-GB">
+      <language tag="en-GB">en-GB.com_fpss.ini</language>
+      <language tag="en-GB">en-GB.com_fpss.sys.ini</language>
+      <language tag="en-GB">en-GB.com_fpss.menu.ini</language>
+      <language tag="en-GB">en-GB.mod_fpss_stats.ini</language>
+      <language tag="en-GB">en-GB.mod_fpss_stats.sys.ini</language>
+    </languages>
+  </administration>
+  <params>
+    <param name="wysiwyg" default="1" />
+    <param name="stats" default="1" />
+    <param name="memoryLimit" default="" />
+  </params>
+  <config>
+    <fields>
+      <fieldset>
+        <field name="wysiwyg" default="1" />
+        <field name="stats" default="1" />
+        <field name="memoryLimit" default="" />
+      </fieldset>
+    </fields>
+  </config>
+  <modules>
+    <module module="mod_fpss" client="site" />
+    <module module="mod_fpss_stats" client="administrator" />
+  </modules>
+  <joomfish>
+    <file>fpss_categories.xml</file>
+    <file>fpss_slides.xml</file>
+  </joomfish>
+</install>

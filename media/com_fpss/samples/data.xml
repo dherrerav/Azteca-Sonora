@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <category name="Demo category" published="1">
+    <slide referenceType="custom" reference="http://www.frontpageslideshow.net/" published="1">
+      <title>Frontpage Slideshow</title>
+      <text>
+        <![CDATA[Frontpage SlideShow is the most eye-catching way to display your featured articles, stories or even products in your Joomla! based website.]]>
+      </text>
+      <tagline>Eye-candy for any Joomla! based website</tagline>
+      <image type="source" src="/media/com_fpss/samples/images/knightandday.jpg" />
+      <image type="main" src="/media/com_fpss/samples/images/knightandday.jpg" />
+      <image type="thumbnail" src="/media/com_fpss/samples/images/knightandday_t.jpg" />
+      <image type="preview" src="/media/com_fpss/samples/images/knightandday.jpg" />
+    </slide>
+    <slide referenceType="custom" reference="http://www.joomlaworks.gr/fpss" published="1">
+      <title>Frontpage Slideshow is Search Engine Friendly!</title>
+      <text>
+        <![CDATA[Unlike Flash based slideshows, Frontpage Slideshow uses CSS and Javascript wizardry only. The content of the slides is laid out as html code, which means it can be crawled by search engines. The proper usage (and order) of h1, h2, p (and more) tags will make sure Google (or any other search engine) regularly indexes your latest/featured items.]]>
+      </text>
+      <tagline>…And iPhone &amp; iPad friendly too!</tagline>
+      <image type="source" src="/media/com_fpss/samples/images/theinvasion.jpg" />
+      <image type="main" src="/media/com_fpss/samples/images/theinvasion.jpg" />
+      <image type="thumbnail" src="/media/com_fpss/samples/images/theinvasion_t.jpg" />
+      <image type="preview" src="/media/com_fpss/samples/images/theinvasion.jpg" />
+    </slide>
+    <slide referenceType="com_content" referenceID="1" published="1">
+      <title>Unlimited slideshows, MVC templating</title>
+      <text>
+        <![CDATA[Create unlimited slideshows within your Joomla! site. Use the power of MVC tempting to create new slideshow templates or modify the pre-packaged ones. This slide is linked by default to an article, which is part of the default Joomla! sample data.]]>
+      </text>
+      <tagline>Powerful, yet simple to use</tagline>
+      <image type="source" src="/media/com_fpss/samples/images/ateam.jpg" />
+      <image type="main" src="/media/com_fpss/samples/images/ateam.jpg" />
+      <image type="thumbnail" src="/media/com_fpss/samples/images/ateam_t.jpg" />
+      <image type="preview" src="/media/com_fpss/samples/images/ateam.jpg" />
+    </slide>
+    <slide referenceType="com_menus" referenceID="1" published="1">
+      <title>Powers thousands of sites worldwide</title>
+      <text>
+        <![CDATA[Frontpage Slideshow is used in websites visited by millions of people everyday around the world like Linux.com, BettyConfidential.com, the World Health Organization and many more. This slide is linked by default to a menu item, which is part of the default Joomla! sample data.]]>
+      </text>
+      <tagline>From corporate sites to "big league" magazines &amp; portals</tagline>
+      <image type="source" src="/media/com_fpss/samples/images/theotherguys.jpg" />
+      <image type="main" src="/media/com_fpss/samples/images/theotherguys.jpg" />
+      <image type="thumbnail" src="/media/com_fpss/samples/images/theotherguys_t.jpg" />
+      <image type="preview" src="/media/com_fpss/samples/images/theotherguys.jpg" />
+    </slide>
+  </category>
+</data>
