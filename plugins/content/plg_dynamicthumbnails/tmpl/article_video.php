@@ -24,6 +24,7 @@ endswitch;
 <script type="text/javascript">
 	try {
 		$f('video-<?= $article->id ?>', '<?= $this->getVideoPlayer() ?>', {
+			key: '#$4a11216191dd06befb1',
 			autoplay: true,
 			<?= $this->browser->getPlatform() === Browser::PLATFORM_IPAD ? 'simulateiDevice: true,' : '' ?>
 			plugins: {
