@@ -65,6 +65,7 @@ if(!isset($fpssTemplateIncluded)){
 .fpss-template-sleek .navigation-wrapper .navigation-background {border:1px solid #fff;opacity:1.0;filter:alpha(opacity=100);}
 #fpssContainer<?php echo $mid; ?>.fpss-template-sleek .navigation-wrapper .navigation .navigation-button a span.navigation-thumbnail {display:block;width:<?php echo $thumbnailViewportWidth; ?>px;height:<?php echo $thumbnailViewportHeight; ?>px;overflow:hidden;background-position:50% 50%;position:relative;z-index:9;}
 
+#fpssContainer<?php echo $mid; ?>.fpss-template-sleek .navigation .navigation-previous {float: left;}
 #fpssContainer<?php echo $mid; ?>.fpss-template-sleek .navigation .navigation-previous a,
 #fpssContainer<?php echo $mid; ?>.fpss-template-sleek .navigation .navigation-next a {display:block;float:left;width:9px;height:<?php echo $thumbnailViewportHeight+2; ?>px;line-height:<?php echo $thumbnailViewportHeight+2; ?>px;margin:7px 2px 0;padding:0;overflow:hidden;position:relative;z-index:9;text-decoration:none;}
 #fpssContainer<?php echo $mid; ?>.fpss-template-sleek .navigation .navigation-previous a {background:url(../images/nav-prev.gif) no-repeat 50% 50%;}
