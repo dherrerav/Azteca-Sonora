@@ -17,7 +17,26 @@ $images = json_decode(isset($this->item->images) ? $this->item->images : null);
 $urls = json_decode(isset($this->item->urls) ? $this->item->urls : null);
 $canEdit	= $this->item->params->get('access-edit');
 $user		= JFactory::getUser();
-
+$application =& JFactory::getApplication();
+$html = new simple_html_dom();
+$html->load($this->item->introtext);
+$imgs = $html->find('img');
+$document =& JFactory::getDocument();
+// Google
+$document->addCustomTag('<meta itemprop="name" content="' . $this->item->title . '" />');
+$intro = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $this->item->introtext);
+$document->addCustomTag('<meta itemprop="description" content="' . trim(strip_tags($intro)) . '" />');
+// Facebook
+$document->addCustomTag('<meta proprety="og:title" content="' . $this->item->title . '" />');
+$document->addCustomTag('<meta property="og:type" content="article" />');
+$document->addCustomTag('<meta property="og:url" content="' . $this->item->readmore_link . '" />');
+$document->addCustomTag('<meta property="og:site_name" content="' . $application->getCfg('sitename') . '" />');
+$document->addCustomTag('<meta property="og:admins" content="587875269" />');
+if (count($imgs) > 0) {
+	$image = $imgs[0];
+	$document->addCustomTag('<meta itemprop="image" content="' . $image->src . '" />');
+	$document->addCustomTag('<meta property="og:image" content="' . $image->src . '" />');
+}
 ?>
 <div class="item-page<?php echo $this->pageclass_sfx?> clearfix">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
@@ -174,10 +193,23 @@ if (!empty($this->item->pagination) AND $this->item->pagination AND !$this->item
 	echo $this->item->pagination;
  endif;
 ?>
-
 	<?= $this->item->introtext ?>
+	<div id="social-sharing">
+		<div class="social-button gplus-button">
+			<g:plusone size="tall" href="<?= $this->item->readmore_link ?>"></g:plusone>
+		</div>
+		<div class="social-button fblike-button">
+			<fb:like send="true" href="<?= $this->item->readmore_link ?>" layout="box_count" width="70" show_faces="false"></fb:like>
+		</div>
+		<div class="social-button tweet-button">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?= $this->item->readmore_link ?>" data-lang="es" data-via="AztecaSonora" data-count="vertical">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+	</div>
 	<?= $this->item->fulltext ?>
-	
+	<div id="fb-comments">
+		<div class="fb-comments" data-href="<?= $this->item->readmore_link ?>" data-num-posts="10" data-width="630"></div>
+	</div>
 <?php
 if (!empty($this->item->pagination) AND $this->item->pagination AND $this->item->paginationposition AND!$this->item->paginationrelative):
 	 echo $this->item->pagination;?>

@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+#social-sharing {
+	width: 90px;
+	float: left;
+	position: relative;
+	margin-right: 10px;
+	border: 1px solid #ccc;
+}
+
+#social-sharing .social-button {
+	width: 80px;
+	margin: 5px auto;
+	text-align: center;
+}
+
+#social-sharing .social-button.gplus-button {
+}
+
+#social-sharing .social-button.fblike-button {
+	padding-left: 15px;
+}
+
+#social-sharing .social-button.tweet-button {
+}

@@ -106,6 +106,7 @@ $params = $this->item->params;
 		<?php echo $this->item->toc; ?>
 	<?php endif; ?>
 	<?= $this->item->introtext ?>
+	<hr />
 	<?= $this->item->fulltext ?>
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>

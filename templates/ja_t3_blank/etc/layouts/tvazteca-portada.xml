@@ -2,6 +2,7 @@
 <layout name="desktop">
 	<!--Extra css load for this layout-->
 	<stylesheets>
+		<file>css/social-sharing.css</file>
 	</stylesheets>
 	<scripts>
 		<file>js/jquery.min.js</file>
