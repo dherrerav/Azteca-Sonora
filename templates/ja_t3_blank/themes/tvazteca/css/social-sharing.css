@@ -26,4 +26,6 @@
 
 #fb-comments {
 	margin-top: 15px;
+	clear: both;
+	display: inline-block;
 }
