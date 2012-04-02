@@ -244,7 +244,7 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 			}
 			$width -= $width % 2;
 			$height -= $height % 2;
-			$command = 'ffmpeg -i ' . JPATH_SITE . DS . $filename . ' -vframes 1 -s ' . $width . 'x' . $height . ' ' . JPATH_SITE . DS . $image .  ' 2>&1';
+			$command = 'ffmpeg -i "' . JPATH_SITE . DS . $filename . '" -vframes 1 -s ' . $width . 'x' . $height . ' "' . JPATH_SITE . DS . $image .  '" 2>&1';
 			shell_exec($command);
 		}
 		return $image;
