@@ -124,6 +124,7 @@ abstract class modVideoPlayerHelper {
 			'ciudad' => 6,
 			'salud' => 7,
 			'deportes' => 8,
+			'cultura' => 9,
 		);
 		foreach ($catids as $catid) {
 			$model->setState('filter.category_id', $catid);
