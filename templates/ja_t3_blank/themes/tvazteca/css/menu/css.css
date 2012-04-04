@@ -182,7 +182,7 @@
 
 
 
-#ja-cssmenu li ul { background:#003366;border:none; display:block!important;text-indent:0!important;}
+#ja-cssmenu li ul { background:#003366;border:none; display:block;text-indent:0!important;}
 #ja-cssmenu li ul li { float:none;margin:0;padding:0;width:auto; }
 #ja-cssmenu li ul a { margin:0;padding:0; }
 #ja-cssmenu li ul a span { margin:0;padding:0 0 0 26px; }
@@ -200,4 +200,15 @@
 
 #ja-cssmenu li.active ul li.active a.active span.menu-title:hover {
 	color: #ff0;
+}
+
+/**
+ * Hide sub menus
+ */
+.havesubchild.no-arrow {
+	background: none !important;
+}
+
+.havesubchildsfhover.no-arrow ul {
+	display: none !important;
 }
