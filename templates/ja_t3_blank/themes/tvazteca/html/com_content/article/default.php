@@ -31,7 +31,7 @@ $document->addCustomTag('<meta proprety="og:title" content="' . $this->item->tit
 $document->addCustomTag('<meta property="og:type" content="article" />');
 $document->addCustomTag('<meta property="og:url" content="' . $this->item->readmore_link . '" />');
 $document->addCustomTag('<meta property="og:site_name" content="' . $application->getCfg('sitename') . '" />');
-$document->addCustomTag('<meta property="og:admins" content="587875269" />');
+$document->addCustomTag('<meta property="og:admins" content="587875269,114324145263104" />');
 if (count($imgs) > 0) {
 	$image = $imgs[0];
 	$document->addCustomTag('<meta itemprop="image" content="' . $image->src . '" />');
