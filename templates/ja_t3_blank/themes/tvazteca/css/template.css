@@ -61,6 +61,20 @@
 	height: 80px;
 }
 
+.tvazteca-sonora-sur #ja-header h1.logo a {
+	background: url('../images/logo-azteca-sonora-sur.png') no-repeat top left;
+	width: 400px;
+}
+
+.tvazteca-nogales #ja-header h1.logo a {
+	background: url(../images/logo-azteca-nogales) no-repeat top left;
+}
+
+.tvazteca-hermosillo #ja-header h1.logo a {
+	background: url(../images/logo-azteca-hermosillo.png) no-repeat top left;
+	width: 400px;
+}
+
 #ja-search {
 	position: relative;
 }
