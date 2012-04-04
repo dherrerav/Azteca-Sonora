@@ -5,6 +5,8 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+date_default_timezone_set('America/Hermosillo');
+
 // Set flag that this is a parent file.
 define('_JEXEC', 1);
 define('DS', DIRECTORY_SEPARATOR);

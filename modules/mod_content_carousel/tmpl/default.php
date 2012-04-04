@@ -1,7 +1,16 @@
+<?php
+Zend_Loader::loadClass('Zend_Date');
+$date = new Zend_Date();
+$weekday = $date->toString(Zend_Date::WEEKDAY);
+$day = $date->toString(Zend_Date::DAY_SHORT);
+$month = $date->toString(Zend_Date::MONTH_NAME);
+$year = $date->toString(Zend_Date::YEAR);
+$today = sprintf('%s %s de %s de %s', ucfirst($weekday), $day, $month, $year);
+?>
 <div class="content-carousel">
 	<div class="header">
 		<div class="date">
-			<p><?= date('j \d\e F \d\e Y') ?></p>
+			<p><?= $today ?></p>
 		</div>
 	</div>
 	<div class="content-carousel-control prev"></div>
