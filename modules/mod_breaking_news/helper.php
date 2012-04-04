@@ -68,6 +68,7 @@ class modBreakingNewsHelper {
 				$catids = array_unique(array_merge($catids, $additional_catids));
 			}
 		}
+		$model->setState('filter.category_id', $catids);
 		$model->setState('filter.access', $access);
 		// Filter by language
 		$model->setState('filter.language',$application->getLanguageFilter());
