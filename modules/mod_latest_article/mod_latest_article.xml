@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" version="2.5" method="upgrade">
+	<name>Last article</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://sharkwebintelligence.com/</authorUrl>
+	<creationDate>April 2012</creationDate>
+	<version>1.0</version>
+	<description><![CDATA[<h3>Último editorial</h3><p>Shows the lastest article from the selected category.</p>]]></description>
+	<files>
+		<filename module="mod_latest_article">mod_latest_article.php</filename>
+		<filename>helper.php</filename>
+		<filename>mod_latest_article.xml</filename>
+		<folder>tmpl</folder>
+		<folder>css</folder>
+		<folder>images</folder>
+	</files>
+	<languages>
+		<language tag="es-ES">es-ES.mod_latest_article.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="count"
+					type="text"
+					default="1"
+					label="Límite"
+					description="Límite de artículos" />
+				<field
+					name="catids"
+					type="category"
+					extension="com_content"
+					size="10"
+					multiple="true"
+					label="JCATEGORY"
+					description="Categoría" />
+				<field
+					name="header"
+					type="imagelist"
+					label="Cabecera"
+					description="Imágen para mostrar"
+					directory="modules/mod_latest_article/images/" />
+				<field
+					name="text_to_show"
+					type="list"
+					default="fulltext"
+					label="Texto para mostrar"
+					description="Texto para mostrar">
+					<option value="introtext">Intro text</option>
+					<option value="fulltext">Full text</option>
+					<option value="both">Ambos</option>
+				</field>
+				<field
+					name="show_image"
+					type="radio"
+					default="0"
+					label="Mostrar imágen"
+					description="Mostrar imágen">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					name="width"
+					type="text"
+					default="636"
+					label="Ancho"
+					description="Ancho de la imágen" />
+				<field
+					name="height"
+					type="text"
+					default="449"
+					label="Alto"
+					description="Alto de la imágen" />
+				<field
+					name="show_readmore"
+					type="radio"
+					default="1"
+					label="Leer más"
+					description="Mostrar leer más">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
