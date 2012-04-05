@@ -51,6 +51,8 @@ class modLatestArticleHelper {
 		$model->setState('filter.language',$application->getLanguageFilter());
 		$model->setState('list.select', 'a.title, a.introtext, a.fulltext, a.attribs, a.created, a.id, a.alias, a.catid');
 		$model->setState('list.limit', $params->get('count', 1));
+		$model->setState('list.ordering', 'a.created');
+		$model->setState('list.direction', 'DESC');
 		$model->setState('filter.published', 1);
 		$articles = $model->getItems();
 		$html = new simple_html_dom();
