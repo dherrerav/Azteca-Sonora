@@ -75,8 +75,8 @@ class plgSearchContent extends JPlugin
 				$text		= $db->Quote('%'.$db->escape($text, true).'%', false);
 				$wheres2	= array();
 				$wheres2[]	= 'a.title LIKE '.$text;
-				$wheres2[]	= 'preg_replace("/{video}(.*?){(.*?)video}/", "", a.introtext) LIKE "%'.$text.'%"';
-				$wheres2[]	= 'preg_replace("/{video}(.*?){(.*?)video}/", "", a.fulltext) LIKE '.$text;
+				$wheres2[]	= 'a.introtext LIKE '.$text;
+				$wheres2[]	= 'a.fulltext LIKE '.$text;
 				$wheres2[]	= 'a.metakey LIKE '.$text;
 				$wheres2[]	= 'a.metadesc LIKE '.$text;
 				$where		= '(' . implode(') OR (', $wheres2) . ')';
@@ -91,7 +91,7 @@ class plgSearchContent extends JPlugin
 					$word		= $db->Quote('%'.$db->escape($word, true).'%', false);
 					$wheres2	= array();
 					$wheres2[]	= 'a.title LIKE '.$word;
-					$wheres2[]	= 'preg_replace("/{video}(.*?){(.*?)video}/", "", a.introtext) LIKE "%'.$text.'%"';
+					$wheres2[]	= 'a.introtext LIKE '.$word;
 					$wheres2[]	= 'a.fulltext LIKE '.$word;
 					$wheres2[]	= 'a.metakey LIKE '.$word;
 					$wheres2[]	= 'a.metadesc LIKE '.$word;
@@ -231,7 +231,7 @@ class plgSearchContent extends JPlugin
 
 			// find an itemid for archived to use if there isn't another one
 			$item	= $app->getMenu()->getItems('link', 'index.php?option=com_content&view=archive', true);
-			$itemid = isset($item) ? '&Itemid='.$item->id : '';
+			$itemid = isset($item->id) ? '&Itemid='.$item->id : '';
 
 			if (isset($list3))
 			{
