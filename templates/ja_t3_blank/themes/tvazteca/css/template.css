@@ -1496,5 +1496,5 @@ div[class*='blog'] .items-row .item .article-tools {
 }
 
 #ja-content-main .item-page p {
-	font-size: 1.2em;
+	font-size: 1.2em !important;
 }
