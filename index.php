@@ -19,6 +19,7 @@ if (!defined('_JDEFINES')) {
 }
 
 require_once JPATH_BASE.'/includes/framework.php';
+require_once JPATH_BASE . '/includes/zend.php';
 
 // Mark afterLoad in the profiler.
 JDEBUG ? $_PROFILER->mark('afterLoad') : null;
