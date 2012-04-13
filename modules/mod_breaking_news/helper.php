@@ -35,6 +35,7 @@ class modBreakingNewsHelper {
 		}
 		$applicationParams = $application->getParams();
 		$model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
+		$model->setState('list.select', 'a.title, a.introtext, a.fulltext, a.attribs, a.created, a.id, a.alias, a.catid');
 		$model->setState('params', $applicationParams);
 		$catids = $params->get('catids');
 		// Access filter
