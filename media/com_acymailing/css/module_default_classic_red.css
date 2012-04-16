@@ -1,0 +1,22 @@
+@import url("module_default_classic_black.css");
+
+/* custom CSS for style: CLASSIC _ RED */
+
+
+
+/**********button****************/
+
+.acysubbuttons input.button, .acysubbuttons .button, .acysubbuttons button.validate, .acymailing_mootoolsbutton a:link, .acymailing_mootoolsbutton a:visited {	color:#bc1f00 !important;
+	background-color:#fff !important;
+}
+
+.acysubbuttons input.button:hover, .acysubbuttons .button:hover, .acysubbuttons button.validate:hover, .acymailing_mootoolsbutton a:hover, .acymailing_mootoolsbutton a:active {
+    color:#fff!important;
+	background-color:#bc1f00 !important;
+}
+
+
+.acymailing_module form a:hover, .acymailing_module form a:active, .acymailing_module form a:focus{
+	color:#bc1f00!important;
+	text-decoration:underline !important;
+	background-color:transparent !important;}

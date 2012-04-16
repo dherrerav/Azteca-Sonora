@@ -159,59 +159,6 @@
 	border-bottom: 0 !important;
 }
 
-#ja-footer {
-	background: url('../images/footer-background.jpg');
-	overflow: hidden;
-	min-height: 120px;
-	text-align: left;
-	text-transform: none !important;
-}
-
-#ja-footer .ja-footer-right {
-	text-align: left;
-	width: 250px;
-	float: left;
-	background: url('../images/divisor.jpg') left no-repeat;
-	padding-left: 10px;
-}
-
-#ja-footer .ja-footer-right .moduletable {
-	padding: 0;
-	margin: 0;
-	margin-bottom: 18px;
-}
-
-#ja-footer .ja-footer-right h3 {
-	text-shadow: #fff 1px 1px 0;
-	font-weight: bold;
-	color: #2d2d2d;
-	font-size: 14px;
-	text-transform: none;
-	border: 0;
-	padding: 0;
-	margin: 0;
-}
-
-#ja-footer .ja-footer-right p {
-	color: #454545;
-	text-shadow: #fff 1px 1px 0;
-	font-size: 10px;
-}
-
-#ja-footer-bottom .bottom-left,#ja-footer-bottom .bottom-right {
-	float: left;
-	width: 50%;
-}
-
-#ja-footer-bottom .bottom-right .moduletable-footer-logos .custom-footer-logos
-	{
-	float: right;
-}
-
-#ja-footer-bottom .bottom-right .moduletable-footer-logos img {
-	margin: 0 5px;
-}
-
 .items-leading img {
 	border: 1px solid #000;
 }
@@ -1497,4 +1444,186 @@ div[class*='blog'] .items-row .item .article-tools {
 
 #ja-content-main .item-page p {
 	font-size: 1.2em !important;
+}
+
+#ja-footer {
+	background: url(http://static.tvazteca.com/plantillas/maquetacion/footer2011/images/ftrbg.jpg) repeat-x top left;
+	display: inline-block;
+	padding: 0;
+	position: relative;
+	text-shadow: 0 1px 0 #cecece;
+	font-family: "Trebuchet MS", Arial;
+	color: #434343;
+	padding-bottom: 10px;
+}
+
+#ja-footer .footer.left {
+	padding-top: 15px;
+	width: 222px;
+	background: url(http://static.tvazteca.com/plantillas/maquetacion/footer2011/images/ftrleftbg.jpg) top left no-repeat;
+}
+
+#ja-footer .footer.center {
+	padding-top: 15px;
+	float: left;
+	width: 400px;
+}
+
+#ja-footer .footer.right {
+	padding-top: 15px;
+	width: 330px;
+	padding-left: 10px;
+	margin-left: 10px;
+	background: url(http://static.tvazteca.com/plantillas/maquetacion/footer2011/images/bgsep.png) top left no-repeat;
+}
+
+#ja-footer .footer.bottom {
+	float: left;
+	clear: left;
+	width: 100%;
+	background: url(http://static.tvazteca.com/plantillas/maquetacion/footer2011/images/comscore.png) no-repeat bottom right;
+}
+
+#ja-footer .ja-moduletable {
+	padding: 0 10px !important;
+}
+
+#ja-footer .ja-moduletable h3 {
+	text-transform: none;
+	border-bottom: 0;
+}
+
+#ja-footer ul.sponsors {
+
+}
+
+#ja-footer ul.sponsors li {
+	float: left;
+}
+
+#ja-footer ul.menu-channels {
+
+}
+
+#ja-footer ul.menu-channels li {
+	float: left;
+	padding-left: 40px;
+}
+
+#ja-footer ul.menu-channels li h3 {
+	font-family: "Trebuchet MS", Arial;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin: 0;
+	padding: 0;
+}
+
+#ja-footer ul.menu-channels li h3 a {
+	color: #373737;
+	text-shadow: 0 1px 0 #d0d0d0;
+}
+
+#ja-footer ul.menu-channels li h3 a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+#ja-footer .main {
+	text-align: left;
+}
+
+#ja-footer .bold {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#ja-footer .moduletable-newsletter h3 {
+	font-size: 1.1em;
+	font-weight: normal;
+}
+
+#ja-footer .moduletable-address {
+	margin-top: 10px !important;
+	font-style: normal;
+}
+
+#ja-footer .moduletable-address h3 {
+	font-size: 1.3em;
+	letter-spacing: 1px;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+#ja-footer .footer.right .moduletable-marketing {
+	padding-top: 15px !important;
+}
+
+#ja-footer .footer.right .moduletable-marketing a {
+	background: url(http://static.tvazteca.com/plantillas/maquetacion/footer2011/images/baitbg.jpg);
+	height: 22px;
+	float: left;
+	padding: 6px 15px 0 15px;
+	color: #fff;
+	text-shadow: 0 -1px 0 #2c1d5e;
+	font-weight: bold;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: 1px solid #250f64;
+	font-size: 1.3em;
+	text-transform: uppercase;
+}
+
+#ja-footer .footer.right .moduletable-marketing a:hover {
+	text-decoration: none;
+	background-position: 0 -30px;
+}
+
+#ja-footer .footer.center .moduletable-footer-menu {
+	margin: 10px 0 0 0 !important;
+}
+
+#ja-footer .footer.center .moduletable-footer-menu h3 {
+	font-size: 1.2em;
+	text-transform: uppercase;
+}
+
+#ja-footer .footer.center .moduletable-footer-menu li {
+	float: left;
+	float: left;
+	margin-right: 5px;
+}
+
+#ja-footer .footer.center .moduletable-footer-menu li a {
+	color: #373737;
+	text-shadow: 0 1px 0px #d0d0d0;
+	padding-right: 5px;
+	border-right: 1px solid #373737;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	margin-bottom: 5px;
+}
+
+#ja-footer .footer.center .moduletable-footer-menu li a:last-child {
+	border-right: 0;
+}
+
+#ja-footer .footer.bottom strong.logo-copyright {
+	font-size: 1.2em;
+}
+
+#ja-footer .footer.right ul.menu-legal {
+	margin-top: 10px;
+}
+
+#ja-footer .footer.right ul.menu-legal li {
+
+}
+
+#ja-footer .footer.right ul.menu-legal li a {
+	color: #373737;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
 }

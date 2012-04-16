@@ -10,6 +10,7 @@
 # ------------------------------------------------------------------------
 */
 ?>
+
 <?php $this->genBlockBegin ($block) ?>    
 	<?php if($this->countModules('footnav')) : ?>
 	<div class="ja-footnav">

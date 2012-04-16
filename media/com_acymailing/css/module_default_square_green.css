@@ -1,0 +1,17 @@
+@import url("module_default_square_black.css");
+
+/* custom CSS for style: SQUARE_GREEN */
+
+
+/***********button***************/
+
+.acysubbuttons input.button:hover, .acysubbuttons .button:hover, .acysubbuttons button.validate:hover, .acymailing_mootoolsbutton a:hover, .acymailing_mootoolsbutton a:active {
+    color:#9e9c07 !important;
+}
+
+
+/***********links***************/
+
+.acymailing_module form a:hover, .acymailing_module form a:active, .acymailing_module form a:focus{
+	color:#9e9c07!important;
+}

@@ -1,0 +1,104 @@
+@import url("component_default_square_black.css");
+
+/* custom CSS for style: SQUARE_BLUE */
+
+
+/*************button******************/
+
+#acyarchivelisting .button:hover, #acymodifyform .button:hover, #unsubbutton_div .button:hover {
+    color:#5a99af !important;
+}
+
+	
+/****************/
+/**list archive**/
+/****************/
+
+#acyarchivelisting .contentheading{
+	color:#39616f;
+	border-bottom:1px solid #39616f;
+}
+
+
+#acyarchivelisting .contentpane .contentdescription{
+	color:#5a99af;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry1 a:hover{
+	color:#5a99af;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry2 a:hover{
+	color:#5a99af;
+}
+
+#acyarchivelisting .sectiontableheader a:hover{
+	color:#39616f;}
+	
+	
+#acyarchivelisting .contentpane tbody .sectiontableentry1{
+	background-color:#ecf2f5;}
+#acyarchivelisting .contentpane tbody .sectiontableentry1:hover{
+	background-color:#e3e9ec;}
+
+
+#acyarchivelisting .contentpane tbody .sectiontableentry2{
+	background-color:#f4f8f9;}
+#acyarchivelisting .contentpane tbody .sectiontableentry2:hover{
+	background-color:#e3e9ec;}
+	
+/**newsletter****/
+
+#acyarchiveview .contentheading{
+	color:#5a99af;}
+
+
+/****************/
+/**lists archive**/
+/****************/
+
+#acylistslisting .componentheading{
+	color:#39616f;
+	border-bottom:1px solid #39616f;
+}
+
+#acylistslisting .list_name a{
+    color:#5a99af;
+}
+
+#acylistslisting .list_name a:hover, #acylistslisting .list_name a:focus {
+	color:#5a99af;
+}
+
+div.acymailing_list:hover{
+	background-color:#f4f8f9;}
+
+/*********************/
+/**your subscription**/
+/*********************/
+
+
+#acymodifyform legend{
+	color:#39616f;
+	border-bottom:1px solid #39616f;
+}
+
+#acyusersubscription .list_name{
+    color: #5a99af;
+}
+	
+/**********************/
+/********unsub page*****/
+/**********************/
+
+#unsubpage .unsubintro{
+	color:#5a99af;
+	border-bottom: 1px solid #5a99af;
+}
+
+#unsubpage .unsubsurveytext{
+    border-bottom: 1px solid #5a99af;
+    color: #5a99af;
+}
+
+

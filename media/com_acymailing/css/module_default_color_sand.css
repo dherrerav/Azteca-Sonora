@@ -1,0 +1,27 @@
+@import url("module_default_color_black.css");
+
+/* custom CSS for style: COLOR _ BLUE*/
+
+
+/*********inputbox**********/
+
+.acymailing_module .inputbox:hover{
+	border:1px solid #aca489!important;
+	border-bottom: 1px solid #777059!important;
+	border-right: 1px solid #777059!important;
+	}
+
+/*********buttons**********/
+
+.acymailing_mootoolsbutton a:link, .acymailing_mootoolsbutton a:visited, .acysubbuttons input.button, .acysubbuttons .button, .acysubbuttons button.validate {	color:#fff !important;
+	background-color:#777059 !important;}
+
+.acymailing_mootoolsbutton a:hover, .acymailing_mootoolsbutton a:active, .acysubbuttons input.button:hover, .acysubbuttons .button:hover, .acysubbuttons button.validate:hover {
+    color:#fff!important;
+	background-color:#aca489 !important;}
+
+
+/*********links**********/
+
+.acymailing_module form a:hover, .acymailing_module form a:active, .acymailing_module form a:focus{
+	color:#aca489!important;}

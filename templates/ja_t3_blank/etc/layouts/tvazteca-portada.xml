@@ -27,7 +27,6 @@
 	<blocks name="bottom" style="xhtml">
 		<block name="botsl" type="spotlight" main-inner="1">user6,user7,user8,user9,user10</block>
 		<block name="footnav" type="footnav" main-inner="1"></block>
-		<block name="footer" type="footer"></block>
-		<block name="footer-bottom" type="footer-bottom" main-inner="1">bottom-left,bottom-right</block>
+		<block name="footer" type="footer-march-2012" main-inner="1"></block>
 	</blocks>
 </layout>

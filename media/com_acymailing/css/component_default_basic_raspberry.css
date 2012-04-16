@@ -1,0 +1,75 @@
+@import url("component_default_basic_black.css");
+
+/* custom CSS for style: BASIC _ RASPBERRY*/
+
+/*buttons*/	
+#acymodifyform .button:hover, #unsubbutton_div .button:hover, #acyarchivelisting .button:hover {
+    color:#B90041;}
+
+/*List archive*/
+
+#acyarchivelisting .contentheading{
+	color:#59001F;
+	border-bottom:1px solid #59001F;
+}
+
+#acyarchivelisting .contentpane .contentdescription{
+	color:#b90041;
+}
+
+#acyarchivelisting .sectiontableheader a:hover{
+	color:#b90041;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry1 a:hover{
+	color:#b90041;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry2 a:hover{
+	color:#b90041;
+}
+
+
+/*newsetter */
+
+#acyarchiveview .contentheading{
+	color:#b90041;}
+	
+	
+/*Lists archive*/
+
+#acylistslisting .componentheading{
+	color:#59001F;
+	border-bottom:1px solid #59001F;
+}
+
+#acylistslisting .list_name a{
+    color:#B90041;
+}
+
+#acylistslisting .list_name a:hover, #acylistslisting .list_name a:focus {
+	color:#b90041;
+}
+
+/*Your subscription*/
+
+#acymodifyform legend{
+	color:#59001F;
+	border-bottom:1px solid #59001F;
+}
+
+#acyusersubscription .list_name{
+    color: #B90041;
+}
+
+/*Unsub page*/
+
+#unsubpage .unsubintro{
+	color:#b90041;
+	border-bottom: 1px solid #b90041;
+}
+
+#unsubpage .unsubsurveytext{
+    border-bottom: 1px solid #b90041;
+    color: #b90041;
+}

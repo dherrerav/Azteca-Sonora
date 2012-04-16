@@ -1,0 +1,55 @@
+div.acymailing_module, .acymailing_module div{
+	padding: 0 !important;
+	margin: 0 !important;
+	border-style:none !important;
+}
+
+table.acymailing_form{
+	margin:auto;
+}
+
+a.acymailing_togglemodule{
+	display : block;
+	font-size:16px;
+}
+
+.acymailing_mootoolsbutton p{
+	text-align:center;
+}
+
+.acysubbuttons{
+	text-align:center;
+}
+
+img.captchaimagemodule{
+	border:1px solid #dddddd;
+	float: left;
+}
+
+.captchakeymodule .captchafield{
+	margin-top:3px;
+	margin-left:2px;
+}
+
+.acymailing_fulldiv tr, .acymailing_fulldiv td{
+	border:0px;
+}
+
+.acymailing_module_form td {
+	padding-bottom: 5px;
+}
+
+div.acymailing_module_error {
+	color: #400;
+	background-color: #fdd;
+	padding: 1em !important;
+	margin-bottom:10px;
+}
+
+div.acymailing_module_success {
+	color: #130;
+	background-color: #dfc;
+	padding: 1em !important;
+	z-index: 10;
+	margin-bottom:10px;
+}

@@ -1,0 +1,104 @@
+@import url("component_default_classic_black.css");
+
+/* custom CSS for style: CLASSIC _ SAND*/
+
+	
+/******************button***************/
+
+#acyarchivelisting .button, #acymodifyform .button, #unsubbutton_div .button{
+	color:#777059 !important;
+}
+
+#acyarchivelisting .button:hover, #acymodifyform .button:hover, #unsubbutton_div .button:hover{
+    color:#fff!important;
+	background-color:#777059 !important;
+}
+
+
+/****************/
+/**list archive**/
+/****************/
+
+#acyarchivelisting .contentheading{
+	color:#777059;
+}
+
+#acyarchivelisting .contentpane .contentdescription{
+	color:#aca489;
+}
+
+
+#acyarchivelisting .contentpane tbody .sectiontableentry1 a:hover{
+	color:#aca489;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry2 a:hover{
+	color:#aca489;
+}
+
+#acyarchivelisting .sectiontableheader a:hover{
+	color:#aca489;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry1:hover{
+	background-color:#f2f0e8;
+}
+	
+#acyarchivelisting .contentpane tbody .sectiontableentry2:hover{
+	background-color:#f2f0e8;
+}
+
+
+/**newsletter****/
+
+#acyarchiveview .contentheading{
+	color:#aca489;}
+
+/****************/
+/**lists archive**/
+/****************/
+
+
+#acylistslisting .componentheading{
+	color:#777059;
+}
+
+#acylistslisting .list_name a{
+    color:#aca489;
+}
+
+#acylistslisting .list_name a:hover, #acylistslisting .list_name a:focus {
+	color:#aca489;
+}
+
+
+div.acymailing_list:hover{
+	background-color :#f2f0e8;}
+
+/*********************/
+/**your subscription**/
+/*********************/
+
+#acymodifyform legend{
+	color:#777059;
+}
+
+#acyusersubscription .list_name{
+    color: #aca489;
+}
+
+#acyusersubscription th{
+	background-color:#f2f0e8;}
+
+	
+/**********************/
+/********unsub page*****/
+/**********************/
+
+#unsubpage .unsubsurveytext{
+    color:#777059;
+}
+
+#unsubpage .unsubintro{
+	color:#777059;
+}

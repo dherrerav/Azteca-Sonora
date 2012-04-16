@@ -1,0 +1,112 @@
+@import url("component_default_color_black.css");
+
+/* custom CSS for style: COLOR _ RASPBERRY*/
+
+
+/********uinputbox************/
+
+#acyarchivelisting .inputbox:hover, #acyuserinfo .inputbox:hover{
+	border:1px solid #b90041!important;
+	border-bottom: 1px solid #730028!important;
+	border-right: 1px solid #730028!important;
+	}
+
+/********button************/
+
+#acyarchivelisting .contentpane tbody .button, #acymodifyform .button, #unsubbutton_div .button {
+	color:#fff !important;
+	background-color:#730028 !important;
+}
+
+#acyarchivelisting .contentpane tbody .button:hover, #acymodifyform .button:hover, #unsubbutton_div .button:hover {
+    color:#fff!important;
+	background-color:#b90041 !important;
+}
+	
+/****************/
+/**list archive**/
+/****************/
+
+#acyarchivelisting .contentheading{
+	color:#59001F;
+	border-bottom:1px solid #59001F;
+}
+
+
+#acyarchivelisting .contentpane .contentdescription{
+	color:#b90041;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry1 a:hover{
+	color:#b90041;
+}
+
+#acyarchivelisting .contentpane tbody .sectiontableentry2 a:hover{
+	color:#b90041;
+}
+
+#acyarchivelisting .sectiontableheader a:hover{
+	color:#b90041;
+}
+
+
+
+/**newsletter****/
+
+#acyarchiveview .contentheading{
+	color:#b90041;}
+	
+	
+
+/****************/
+/**lists archive**/
+/****************/
+
+
+#acylistslisting .componentheading{
+	color:#59001F;
+	border-bottom:1px solid #59001F;
+}
+
+#acylistslisting .list_name a{
+    color:#B90041;
+}
+
+#acylistslisting .list_name a:hover, #acylistslisting .list_name a:focus {
+	color:#b90041;
+}
+
+
+/*********************/
+/**your subscription**/
+/*********************/
+
+#acymodifyform legend{
+	color:#59001F;
+	border-bottom:1px solid #59001F;
+}
+
+#acyusersubscription th{
+	color:#fff;
+	background-color:#730028;}
+	
+	
+#acyusersubscription .list_name{
+    color: #B90041;
+}
+	
+/**********************/
+/********unsub page*****/
+/**********************/
+
+
+#unsubpage .unsubintro{
+	border-bottom: 1px solid #B90041;
+    color: #730028;}
+	
+#unsubpage .unsubsurveytext{
+   	border-bottom: 1px solid #B90041;
+    color: #730028;
+}
+
+
