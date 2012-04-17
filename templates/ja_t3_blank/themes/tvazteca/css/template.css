@@ -1663,3 +1663,7 @@ div[class*='blog'] .items-row .item .article-tools {
 	outline: 0;
 	border: 0;
 }
+
+#ja-footer .footer.left .moduletable-social-stats {
+	margin-top: 10px !important;
+}

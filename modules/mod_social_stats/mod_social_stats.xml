@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" method="upgrade" client="site">
+	<name>Social Stats</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul.martinez05@gmail.com</authorEmail>
+	<authorUrl>http://sharkwebintelligence.com</authorUrl>
+	<creationDate>April 2012</creationDate>
+	<version>1.0</version>
+	<description><![CDATA[
+		<h3>Social Stats</h3>
+		<p>Shows Social statistics form different user accounts.</p>
+	]]></description>
+	<files>
+		<filename module="mod_social_stats">mod_social_stats.php</filename>
+		<filename>helper.php</filename>
+		<filename>mod_social_stats.xml</filename>
+		<folder>tmpl</folder>
+		<folder>css</folder>
+		<folder>images</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.mod_social_stats.ini</language>
+		<language tag="es-ES">es-ES.mod_social_stats.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="display_text"
+					type="text"
+					label="MOD_SOCIAL_STATS_DISPLAY_TEXT_LABEL"
+					description="MOD_SOCIAL_STATS_DISPLAY_TEXT_DESC" />
+				<field
+					name="facebook_page"
+					type="text"
+					label="MOD_SOCIAL_STATS_FACEBOOK_PAGE_LABEL"
+					description="MOD_SOCIAL_STATS_FACEBOOK_PAGE_DESC" />
+				<field
+					name="twitter_username"
+					type="text"
+					label="MOD_SOCIAL_STATS_TWITTER_USERNAME_LABEL"
+					description="MOD_SOCIAL_STATS_TWITTER_USERNAME_DESC" />
+				<field
+					name="show_rss"
+					type="radio"
+					label="MOD_SOCIAL_STATS_SHOW_RSS_LABEL"
+					description="MOD_SOCIAL_STATS_SHOW_RSS_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="owncache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC" >
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
