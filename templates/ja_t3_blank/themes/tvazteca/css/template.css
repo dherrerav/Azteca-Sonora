@@ -1332,13 +1332,14 @@ div[class*='blog'] .items-row .item .article-tools {
 	bottom: 0;
 	right: 0;
 	top: 10px;
-	left: 700px;
+	left: 616px;
 	z-index: 999;
 }
 
 .search-button-container {
 	width: 270px;
 	height: 47px;
+	float: left;
 }
 
 .search-button-container .search-button-inner {
@@ -1666,4 +1667,26 @@ div[class*='blog'] .items-row .item .article-tools {
 
 #ja-footer .footer.left .moduletable-social-stats {
 	margin-top: 10px !important;
+}
+
+body.tvazteca-hermosillo #ja-wrapper {
+	background: url(../images/background-hermosillo.jpg) no-repeat;
+}
+
+body.tvazteca-sonora-sur #ja-wrapper {
+	background: url(../images/background-sonora-sur.jpg) no-repeat;
+}
+
+body.tvazteca-nogales #ja-wrapper {
+	background: url(../images/background-nogales.jpg) no-repeat;
+}
+
+ul.social-icons {
+	float: left;
+	position: relative;
+}
+
+ul.social-icons li {
+	display: inline;
+	padding-right: 10px;
 }

@@ -2,6 +2,18 @@
 defined('_JEXEC') or die;
 $document =& JFactory::getDocument();
 ?>
+<ul class="social-icons">
+	<li>
+		<a href="http://www.facebook.com/pages/Azteca-Sonora/126413310795698">
+			<img src="http://www.statictvazteca.com/plantillas/maquetacion/footer2011/images/facebook.png" alt="Facebook">
+		</a>
+	</li>
+	<li>
+		<a href="http://twitter.com/aztecasonora">
+			<img src="http://www.statictvazteca.com/plantillas/maquetacion/footer2011/images/twitter.png" alt="Twitter">
+		</a>
+	</li>
+</ul>
 <div class="search-button-container">
 	<div class="search-button-inner">
 		<form action="<?php echo JRoute::_('index.php');?>" method="post" class="search-form<?php echo $params->get('moduleclass_sfx') ?>">
