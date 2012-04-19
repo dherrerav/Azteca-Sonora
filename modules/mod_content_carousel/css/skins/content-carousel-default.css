@@ -3,6 +3,7 @@
 .content-carousel {
 	margin-top: 10px;
 	overflow: hidden;
+	background: #fff;
 }
 
 .content-carousel .header {
