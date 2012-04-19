@@ -1671,14 +1671,17 @@ div[class*='blog'] .items-row .item .article-tools {
 
 body.tvazteca-hermosillo #ja-wrapper {
 	background: url(../images/background-hermosillo.jpg) no-repeat;
+	background-size: 100%;
 }
 
 body.tvazteca-sonora-sur #ja-wrapper {
 	background: url(../images/background-sonora-sur.jpg) no-repeat;
+	background-size: 100%;
 }
 
 body.tvazteca-nogales #ja-wrapper {
 	background: url(../images/background-nogales.jpg) no-repeat;
+	background-size: 100%;
 }
 
 ul.social-icons {
@@ -1689,4 +1692,12 @@ ul.social-icons {
 ul.social-icons li {
 	display: inline;
 	padding-right: 10px;
+}
+
+body.tvazteca-hermosillo #ja-mainnews .main,
+body.tvazteca-sonora-sur #ja-mainnews .main,
+body.tvazteca-nogales #ja-mainnews .main {
+	width: 960px;
+	padding: 10px;
+	background: #fff;
 }
