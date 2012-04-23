@@ -1694,10 +1694,12 @@ ul.social-icons li {
 	padding-right: 10px;
 }
 
+body.tvazteca-hermosillo #ja-topsl .main,
+body.tvazteca-sonora-sur #ja-topsl .main,
+body.tvazteca-nogales #ja-topsl .main,
 body.tvazteca-hermosillo #ja-mainnews .main,
 body.tvazteca-sonora-sur #ja-mainnews .main,
 body.tvazteca-nogales #ja-mainnews .main {
-	width: 960px;
 	padding: 10px;
 	background: #fff;
 }
