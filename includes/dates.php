@@ -1,6 +1,7 @@
 <?php
 
 date_default_timezone_set('America/Hermosillo');
+include_once 'Zend/Date.php';
 
 function dateDifference($time1, $time2, $precission = 6) {
 	if (!is_int($time1)) {
@@ -9,11 +10,20 @@ function dateDifference($time1, $time2, $precission = 6) {
 	if (!is_int($time2)) {
 		$time2 = strtotime($time2);
 	}
+	$date1 = new Zend_Date($time1);
+	$date2 = new Zend_Date($time2);
+	$difference = $date2->sub($date1);
+	$days = $difference->toString(Zend_Date::DAY);
+	$hours = $difference->toString(Zend_Date::HOUR);
+	$minutes = $difference->toString(Zend_Date::MINUTE);
+	$seconds = $difference->toString(Zend_Date::SECOND);
+	return sprintf('%s:%s:%s:%s', $days, $hours, $minutes, $seconds);
 	if ($time1 > $time2) {
 		$ttime = $time1;
 		$time1 = $time2;
 		$time2 = $ttime;
 	}
+	
 	$intervals = array(
 		'year',
 		'month',
