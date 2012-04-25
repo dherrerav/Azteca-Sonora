@@ -37,9 +37,7 @@ class modSocialStatsHelper {
 		$client->setParameterGet('q', $query);
 		$response = $client->request(Zend_Http_Client::GET);
 		$result = Zend_Json::decode($response->getBody(), Zend_Json::TYPE_OBJECT)->data[0];
-		$client = new Zend_Http_Client('https://graph.facebook.com/' . $page_id);
-		$response = $client->request(Zend_Http_Client::GET);
-		$result->link = Zend_Json::decode($response->getBody(), Zend_Json::TYPE_OBJECT)->link;
+		$result->link = 'http://facebook.com/' . $page_id;
 		return $result;
 	}
 
