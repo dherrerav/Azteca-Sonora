@@ -1,7 +1,6 @@
 <?php
 
 date_default_timezone_set('America/Hermosillo');
-include_once 'Zend/Date.php';
 
 function dateDifference($time1, $time2, $precission = 6) {
 	if (!is_int($time1)) {

@@ -1,4 +1,5 @@
 <?php
+require_once 'libraries/Zend/Date.php';
 require_once 'includes/dates.php';
 $date = dateDifference('now', '2012-04-26 11:00:00');
 ?>
