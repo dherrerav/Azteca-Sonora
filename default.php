@@ -1,6 +1,5 @@
 <?php
 ini_set('include_path', '.:/usr/share/php:' . dirname(__FILE__) . '/libraries');
-var_dump(get_include_path());
 require_once 'Zend/Loader.php';
 require_once 'includes/dates.php';
 Zend_Loader::loadClass('Zend_Date');
