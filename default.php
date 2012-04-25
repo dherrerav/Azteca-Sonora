@@ -1,5 +1,6 @@
 <?php
-require_once 'libraries/Zend/Loader.php';
+ini_set('include_path', '.:/usr/share/php:' . dirname(__FILE__) . '/libraries/Zend');
+require_once 'Zend/Loader.php';
 Zend_Loader::loadClass('Zend_Date');
 $date = dateDifference('now', '2012-04-26 11:00:00');
 ?>
