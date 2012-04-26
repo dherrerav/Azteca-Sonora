@@ -174,7 +174,7 @@ abstract class modVideoPlayerHelper {
 			}
 		}
 		foreach ($articles as $category => $value) {
-			$order[$category] = $value['order'];
+			$order[$category] = array_key_exists('order', $value) ? $value['order'] : 0;
 		}
 		array_multisort($order, SORT_ASC, $articles);
 		return $articles;
