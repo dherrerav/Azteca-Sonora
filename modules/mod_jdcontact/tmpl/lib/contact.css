@@ -1,0 +1,57 @@
+#contactform {
+	margin:50px auto;
+	padding:20px;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+}
+#contactform .captch span{
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+#contactform .form {
+	text-align:left; 
+	font-size:18px; 
+	font-weight:normal; 
+	font-family:"Times New Roman", Times, serif; 
+	color:#666;
+}
+
+#contactform input.text,textarea.text, select.text {
+	padding:5px; 
+	margin-bottom:10px; 
+	background: url(images/input-bg.gif) top left no-repeat; 
+}
+
+#contactform #result {
+	color:#FF0000;
+	font-style: italic;
+	margin-bottom: 5px
+}
+#contactform .message {
+	padding: 5px 3px;
+}
+
+#contactform img.loading-img {
+	padding: 5px 3px;
+}
+
+#contactform textarea.text {
+	height:100px;
+}
+
+#contactform input#submit { 
+	padding: 5px 10px; 
+	background: #f2f2f2; 
+	border:1px solid #e5e5e5; 
+	font-family: Georgia, "Times New Roman", Times, serif; 
+	font-style: italic; 
+	font-size: 18px; 
+	color: #000; 
+	-moz-border-radius:15px; 
+	-webkit-border-radius:15px; 
+	border-radius:15px; 
+}
