@@ -7,7 +7,7 @@ if ($this->countModules('tweets-ticker')) :
 ?>
 <div class="tweets-ticker">
 	<div id="tweet_icon">
-		<a href="http://twitter.com/AztecaNoticias" target="_blank" title="@AztecaNoticias"></a>
+		<a href="http://twitter.com/AztecaSonora" target="_blank" title="@AztecaSonora"></a>
 	</div>
 	<div id="tweet_container">
 	</div>
