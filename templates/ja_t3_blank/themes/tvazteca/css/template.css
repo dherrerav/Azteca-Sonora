@@ -1707,3 +1707,8 @@ body.tvazteca-nogales #ja-mainnews .main {
 body.tvazteca-hermosillo #ja-topsl .main {
 	margin-bottom: 10px;
 }
+
+.hide,
+.hide * {
+	visibility: hidden;
+}
