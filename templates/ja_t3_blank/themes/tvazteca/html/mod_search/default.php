@@ -19,7 +19,7 @@ $document =& JFactory::getDocument();
 		<?php
 		//echo JRoute::_('index.php');
 		?>
-		<form action="index.php" method="post" class="search-form<?php echo $params->get('moduleclass_sfx') ?>">
+		<form action="<?= JRoute::_('index.php') ?>" method="post" class="search-form<?php echo $params->get('moduleclass_sfx') ?>">
 			<input name="searchword" id="mod-search-searchword" class="search-textbox<?= $moduleclass_sfx ?>" type="text" value=" <?= $text ?>" />
 			<input type="submit" value="<?= $button_text ?>" class="search-button" onclick="this.form.searchword.focus();" />
 			<input type="hidden" name="task" value="search" />
