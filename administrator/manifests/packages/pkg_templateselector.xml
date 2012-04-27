@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.7.0" type="package" method="upgrade">
+	<name>Template Selector</name>
+	<packagename>templateselector</packagename>
+	<author>Joomler!.net</author>
+	<authorEmail>joomlers@gmail.com</authorEmail>
+	<authorUrl>http://www.joomler.net</authorUrl>
+	<packager>Joomler!.net</packager>
+	<packagerurl>http://www.joomler.net</packagerurl>
+	<creationDate>Oct 2011</creationDate>
+	<copyright>Copyright (C) 2007 - 2011 Joomler!.net. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>1.7.1</version>
+	<description>Package Template Selector</description>
+	<files>
+		<file id="mod_templateselector" type="module" client="site">mod_templateselector.zip</file>
+		<file id="templateselector" type="plugin" group="system">plg_system_templateselector.zip</file>
+	</files>
+</extension>

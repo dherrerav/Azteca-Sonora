@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" method="upgrade" client="site">
+	<name>mod_mobile_news</name>
+	<author>Saul Martinez</author>
+	<authorEmail>
+		saul@sharkwebintelligence.com
+	</authorEmail>
+	<authorUrl>
+		http://sharkwebintelligence.com
+	</authorUrl>
+	<creationDate>
+		April 2012
+	</creationDate>
+	<version>
+		1.0
+	</version>
+	<description>
+		<![CDATA[<h3>Display mobile news</h3>]]>
+	</description>
+	<files>
+		<filename module="mod_mobile_news">mod_mobile_news.php</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="catids"
+					type="category"
+					default=""
+					multiple="true"
+					extension="com_content"
+					label="JCATEGORY"
+					description="Select category to get the articles from.">
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+				<field
+					name="show_front"
+					type="radio"
+					default="show"
+					label="MOD_BREAKING_NEWS_SHOWFEATURED_LABEL"
+					description="MOD_BREAKING_NEWS_SHOWFEATURED_DESC">
+					<option value="show">JSHOW</option>
+					<option value="hide">JHIDE</option>
+					<option value="only">MOD_BREAKING_NEWS_ONLYFEATURED_OPTION</option>
+				</field>
+				<field
+					name="limit"
+					type="text"
+					default="5"
+					label="Limit"
+					description="How many articles to show." />
+				<field
+					name="start"
+					type="text"
+					default="0"
+					label="Start"
+					description="Show from item #." />
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="owncache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC" >
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="1.6" type="plugin" group="system" method="upgrade">
+<extension version="1.7" type="plugin" group="system" method="upgrade">
 	<name>System - TapTheme</name>
 	<author>TapTheme</author>
-	<creationDate>01/26/2011</creationDate>
+	<creationDate>11/07/2011</creationDate>
 	<copyright>Copyright (c) 2010 - 2011 Pixel Praise LLC. All rights reserved.</copyright>
 	<authorEmail>support@taptheme.com</authorEmail>
 	<authorUrl>www.taptheme.com</authorUrl>
-	<version>1.6.1</version>
+	<version>1.7.2</version>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<description></description>
 	<files>

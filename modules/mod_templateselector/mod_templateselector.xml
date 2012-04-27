@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.7.0" client="site" method="upgrade">
+	<name>mod_template_selector</name>
+	<author>Joomler!.net</author>
+	<creationDate>Oct 2011</creationDate>
+	<copyright>Copyright (C) 2007 - 2011 Joomler!.net. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>joomlers@gmail.com</authorEmail>
+	<authorUrl>www.joomler.net</authorUrl>
+	<version>1.7.1</version>
+	<description>MOD_TEMPLATE_SELECTOR_XML_DESCRIPTION</description>
+	<files>
+		<filename module="mod_templateselector">mod_templateselector.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<folder>elements</folder>
+		<folder>images</folder>
+		<folder>tmpl</folder>
+	<folder>assets</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">languages/en-GB.mod_templateselector.ini</language>
+		<language tag="en-GB">languages/en-GB.mod_templateselector.sys.ini</language>
+		<language tag="ja-JP">languages/ja-JP.mod_templateselector.ini</language>
+		<language tag="ja-JP">languages/ja-JP.mod_templateselector.sys.ini</language>
+		<language tag="ja-JU">languages/ja-JU.mod_templateselector.ini</language>
+		<language tag="ja-JU">languages/ja-JU.mod_templateselector.sys.ini</language>
+	</languages>
+	<config>
+	<fields name="params">
+		<fieldset name="basic" addfieldpath="/modules/mod_templateselector/elements">
+			<field name="resetbtn" type="text" default="" label="MOD_TEMPLATE_SELECTOR_FIELD_RESETBTN_LABEL" description="MOD_TEMPLATE_SELECTOR_FIELD_RESETBTN_DESCRIPTION" />
+			<field name="switchbtn" type="text" default="" label="MOD_TEMPLATE_SELECTOR_FIELD_SWITCHBTN_LABEL" description="MOD_TEMPLATE_SELECTOR_FIELD_SWITCHBTN_DESCRIPTION" />
+			<field name="rollbtn" type="text" default="" label="MOD_TEMPLATE_SELECTOR_FIELD_ROLLBTN_LABEL" description="MOD_TEMPLATE_SELECTOR_FIELD_ROLLBTN_DESCRIPTION" />
+			<field name="templates" type="templatelist" default="" label="MOD_TEMPLATE_SELECTOR_FIELD_TEMPLATES_LABEL" description="MOD_TEMPLATE_SELECTOR_FIELD_TEMPLATES_DESCRIPTION" />
+			<field name="displaythumbnail" type="radio" default="1" label="MOD_TEMPLATE_SELECTOR_FIELD_DISPLAY_THUMBNAIL_LABEL" description="MOD_TEMPLATE_SELECTOR_FIELD_DISPLAY_THUMBNAIL_DESCRIPTION" >
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+			<field name="width" type="text" default="140" label="MOD_TEMPLATE_SELECTOR_FIELD_DISPLAY_WIDTH_LABEL" description="MOD_TEMPLATE_SELECTOR_FIELD_DISPLAY_WIDTH_DESCRIPTION" />
+			<field name="duration" type="text" default="365" label="MOD_TEMPLATE_SELECTOR_FIELD_DURATION_LABEL" description="MOD_TEMPLATE_SELECTOR_FIELD_DURATION_DESCRIPTION"></field>
+		</fieldset>
+		<fieldset name="advanced">
+			<field name="layout" type="modulelayout"
+				label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+			<field name="moduleclass_sfx" type="text"
+				label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+				description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+			<field name="owncache" type="list" default="1"
+				label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC" >
+				<option value="1">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING
+				</option>
+			</field>
+
+			<field name="cache_time" type="text" default="900"
+				label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+		</fieldset>
+	</fields>
+	</config>
+</extension>

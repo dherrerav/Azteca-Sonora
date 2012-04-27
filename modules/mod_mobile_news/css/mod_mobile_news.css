@@ -1,0 +1,38 @@
+@charset 'utf-8';
+
+.article {
+	padding: 10px;
+	text-align: left !important;
+	font-size: 1em !important;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.header {
+	margin-bottom: 10px;
+}
+
+.header h3 a {
+	color: #333;
+	display: block;
+}
+
+.article .content img {
+	border: 1px solid #333;
+}
+
+@media only screen and (max-device-width: 480px) and (max-device-width: 533px) {
+	.article .header h3 {
+		font-size: 2em;
+	}
+}
+
+@media only screen and (max-device-width: 533px) {
+	.article .header h3 {
+		font-size: 2em;
+	}
+}

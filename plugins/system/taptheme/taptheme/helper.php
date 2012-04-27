@@ -7,7 +7,7 @@ jimport( 'joomla.plugin.plugin' );
 
 class TapThemeHelper {
 	
-	static $supported_browsers = array('firefox', 'safari', 'ie6', 'ie7', 'ie8', 'opera', 'chrome', 'blackberry', 'iphone', 'ipad', 'android', 'palm');
+	static $supported_browsers = array('firefox', 'safari', 'ie6', 'ie7', 'ie8', 'ie9', 'ie10', 'opera', 'chrome', 'blackberry', 'iphone', 'ipad', 'android', 'webos');
 	
 	function getBrowserTemplate($params, $isSite) {
 		$agent	= TapThemeHelper::getAgent();
@@ -51,6 +51,10 @@ class TapThemeHelper {
 			$agent = 'firefox';
 		elseif(stripos($agent_string, 'chrome') !== false) :
 			$agent = 'chrome';
+		elseif(stripos($agent_string, 'msie 10') !== false) :
+			$agent = 'ie10';
+		elseif(stripos($agent_string, 'msie 9') !== false) :
+			$agent = 'ie9';
 		elseif(stripos($agent_string, 'msie 8') !== false) :
 			$agent = 'ie8';
 		elseif(stripos($agent_string, 'msie 7') !== false) :
@@ -63,8 +67,8 @@ class TapThemeHelper {
 			$agent = 'ipad';
 		elseif(stripos($agent_string,'blackberry') !== false) :
 			$agent = 'blackberry';
-		elseif(stripos($agent_string,'palmos') !== false) :
-			$agent = 'palm';
+		elseif(stripos($agent_string,'webos') !== false) :
+			$agent = 'webos';
 		elseif(stripos($agent_string,'android') !== false) :
 			$agent = 'android';
 		elseif(stripos($agent_string,'safari') !== false) :

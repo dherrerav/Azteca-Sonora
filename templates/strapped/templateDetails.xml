@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<install version="1.6" type="template" method="upgrade">
+	<name>Strapped</name>
+        <creationDate>2012-04-22</creationDate>
+	<author>Gary Gisclair</author>
+	<authorEmail>gary@garygisclair.com</authorEmail>
+	<authorUrl>http://www.gisclairmedia.com</authorUrl>
+	<copyright>Copyright (C) 2011 Gisclair Media, LLC</copyright>
+	<version>1.0RC3</version>
+	<description><![CDATA[
+	<p>Strapped is a mobile ready template.<p>
+	]]></description>
+	<files>
+		<filename>component.php</filename>
+		<filename>favicon.ico</filename>
+		<filename>index.php</filename>
+		<filename>params.ini</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		<folder>admin</folder>
+		<folder>css</folder>
+		<folder>html</folder>
+		<folder>language</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>php</folder>
+	</files>
+	<positions>
+		<position>above</position>
+		<position>above-article</position>
+		<position>banner</position>
+		<position>below</position>
+		<position>below-article</position>
+		<position>bottom</position>
+		<position>bottom-menu</position>
+		<position>breadcrumbs</position>
+		<position>debug</position>
+		<position>footer</position>
+		<position>left</position>
+		<position>right</position>
+		<position>search</position>
+		<position>top-menu</position>
+	</positions>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_strapped.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="templates/strapped/admin/elements">
+			<fieldset name="basic">
+				<field name="template-width" type="radio" default="0" label="Template Width" description="Choose the width of your template">
+					<option value="0">Static</option>
+					<option value="1">Fluid</option>
+				</field>
+				<field name="columnWidth" type="list" default="3" label="Column Width" description="Choose a width for your left and right columns">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</field>
+			</fieldset>
+			<fieldset name="STYLES">
+				<field name="bodyFont" type="list" default="text" label="Site Font" description="Choose a font family for your site">
+					<option value=''>Default - Template default</option>
+					<option value='Arial'>Arial sans-serif</option>
+					<option value='Baskerville'>Baskerville serif</option>
+					<option value='Cambria'>Cambria serif</option>
+					<option value='CenturyGothic'>Century Gothic sans-serif</option>
+					<option value='Consolas'>Consolas monospace</option>
+					<option value='CopperplateLight'>Copperplate Light serif</option>
+					<option value='CourierNew'>Courier New monospace</option>
+					<option value='FranklinGothic'>Franklin Gothic sans-serif</option>
+					<option value='Futura'>Futura sans-serif</option>
+					<option value='Garamond'>Garamond serif</option>
+					<option value='Geneva'>Geneva sans-serif</option>
+					<option value='Georgia'>Georgia serif</option>
+					<option value='GillSans'>Gill Sans sans-serif</option>
+					<option value='Helvetica'>Helvetica sans-serif</option>
+					<option value='Impact'>Impact sans-serif</option>
+					<option value='LucidaSans'>Lucida Sans sans-serif</option>
+					<option value='Palatino'>Palatino serif</option>
+					<option value='Tahoma'>Tahoma sans-serif</option>
+					<option value='Times'>Times serif</option>
+					<option value='TrebuchetMS'>Trebuchet MS sans-serif</option>
+					<option value='Verdana'>Verdana sans-serif</option>
+				</field>
+				<field name="headingFont" type="list" default="text" label="Heading Font" description="Choose a font family for your headings">
+					<option value=''>Default - Template default</option>
+					<option value='Arial'>Arial sans-serif</option>
+					<option value='Baskerville'>Baskerville serif</option>
+					<option value='Cambria'>Cambria serif</option>
+					<option value='CenturyGothic'>Century Gothic sans-serif</option>
+					<option value='Consolas'>Consolas monospace</option>
+					<option value='CopperplateLight'>Copperplate Light serif</option>
+					<option value='CourierNew'>Courier New monospace</option>
+					<option value='FranklinGothic'>Franklin Gothic sans-serif</option>
+					<option value='Futura'>Futura sans-serif</option>
+					<option value='Garamond'>Garamond serif</option>
+					<option value='Geneva'>Geneva sans-serif</option>
+					<option value='Georgia'>Georgia serif</option>
+					<option value='GillSans'>Gill Sans sans-serif</option>
+					<option value='Helvetica'>Helvetica sans-serif</option>
+					<option value='Impact'>Impact sans-serif</option>
+					<option value='LucidaSans'>Lucida Sans sans-serif</option>
+					<option value='Palatino'>Palatino serif</option>
+					<option value='Tahoma'>Tahoma sans-serif</option>
+					<option value='Times'>Times serif</option>
+					<option value='TrebuchetMS'>Trebuchet MS sans-serif</option>
+					<option value='Verdana'>Verdana sans-serif</option>
+				</field>
+			</fieldset>
+			<fieldset name="LOGO">
+				<field name="logo-type" type="list" default="image" label="Logo Type" description="Choose the type of logo you wish to use">
+					<option value="text">Site Title</option>
+					<option value="image">Image</option>
+				</field>
+				<field name="logo-image" type="media" label="Logo Image Upload" description="Upload your logo image" />
+				<field name="logo-tagline" type="text" default="" label="Logo Tagline" description="Insert tagline for logo." filter="string" />
+				<field name="display-tagline" type="list" default="0" label="Display tagline for text" description="Display tagline when logo is text.">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+			</fieldset>
+			<fieldset name="COLORS">
+				<field name="bodyColor" type="colorpicker" default=""
+					id="picker_bodyColor"
+					previewid="preview_bodyColor"
+					label="Custom Body Color"
+					description="Type A Hexadecimal Color(123456) for the body (Do not include the pound(#) sign)" />
+				<field name="&lt;b&gt;Header Gradient&lt;/b&gt;" type="spacer" default="Header Gradient" />
+				<field name="headerColorTop" type="colorpicker" default=""
+					id="picker_headerColorTop"
+					previewid="preview_headerColorTop"
+					label="Header Gradient Top"
+					description="Type A Hexadecimal Color(123456) for the header top gradient value (Do not include the pound(#) sign)" />
+				<field name="headerColorBottom" type="colorpicker" default=""
+					id="picker_headerColorBottom"
+					previewid="preview_headerColorBottom"
+					label="Header Gradient Bottom"
+					description="Type A Hexadecimal Color(123456) for the header bottom gradient value (Do not include the pound(#) sign)" />
+					
+				<field name="&lt;b&gt;Above Gradient&lt;/b&gt;" type="spacer" default="Above Gradient" />
+				<field name="aboveColorTop" type="colorpicker" default=""
+					id="picker_aboveColorTop"
+					previewid="preview_aboveColorTop"
+					label="Above Gradient Top"
+					description="Type A Hexadecimal Color(123456) for the above top gradient value (Do not include the pound(#) sign)" />
+				<field name="aboveColorBottom" type="colorpicker" default=""
+					id="picker_aboveColorBottom"
+					previewid="preview_aboveColorBottom"
+					label="Above Gradient Bottom"
+					description="Type A Hexadecimal Color(123456) for the above bottom gradient value (Do not include the pound(#) sign)" />
+			</fieldset>
+		</fields>
+	</config>
+</install>

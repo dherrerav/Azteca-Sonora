@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6.0" type="plugin" group="system" method="upgrade">
+	<name>plg_system_templateselector</name>
+	<author>Joomler!.net</author>
+	<authorEmail>joomlers@gmail.com</authorEmail>
+	<authorUrl>http://www.joomler.net</authorUrl>
+	<creationDate>January 2011</creationDate>
+	<copyright>Copyright (C) 2007 - 2011 Joomler!.net. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<version>1.2.1</version>
+	<description>PLG_SYSTEM_TEMPLATESELECTOR_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="templateselector">templateselector.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">languages/en-GB.plg_system_templateselector.ini</language>
+		<language tag="en-GB">languages/en-GB.plg_system_templateselector.sys.ini</language>
+		<language tag="ja-JP">languages/ja-JP.plg_system_templateselector.ini</language>
+		<language tag="ja-JP">languages/ja-JP.plg_system_templateselector.sys.ini</language>
+		<language tag="ja-JU">languages/ja-JU.plg_system_templateselector.ini</language>
+		<language tag="ja-JU">languages/ja-JU.plg_system_templateselector.sys.ini</language>
+	</languages>
+</extension>

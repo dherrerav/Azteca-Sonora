@@ -49,7 +49,6 @@ class JElementTemplate extends JElement {
 		$template = $db->loadResult();
 		$templatePath = JPATH_SITE.DS.'templates'.DS.$template.DS.'html'.DS.'mod_fpss';
 		
-		
 		if (JFolder::exists($templatePath)){
 			$templateFolders = JFolder::folders($templatePath);
 			$folders = @array_merge($templateFolders, $moduleTemplatesFolders);
