@@ -66,8 +66,8 @@ class modMobileNewsHelper {
 		// Filter by language
 		$model->setState('filter.language',$application->getLanguageFilter());
 		// Ordering
-		$model->setState('list.ordering', $params->get('ordering', 'a.ordering'));
-		$model->setState('list.direction', $params->get('ordering_direction', 'ASC'));
+		$model->setState('list.ordering', 'a.publish_up');
+		$model->setState('list.direction', 'DESC');
 		$model->setState('list.start', $params->get('start', 0));
 		$model->setState('list.limit', $params->get('limit', 5));
 		// New Parameters

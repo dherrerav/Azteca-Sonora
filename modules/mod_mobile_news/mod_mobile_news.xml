@@ -40,8 +40,8 @@
 					name="show_front"
 					type="radio"
 					default="show"
-					label="MOD_BREAKING_NEWS_SHOWFEATURED_LABEL"
-					description="MOD_BREAKING_NEWS_SHOWFEATURED_DESC">
+					label="Featured"
+					description="How to treat featured articles">
 					<option value="show">JSHOW</option>
 					<option value="hide">JHIDE</option>
 					<option value="only">MOD_BREAKING_NEWS_ONLYFEATURED_OPTION</option>
