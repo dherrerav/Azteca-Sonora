@@ -29,6 +29,7 @@
 					name="catids"
 					type="category"
 					default=""
+					size="10"
 					multiple="true"
 					extension="com_content"
 					label="JCATEGORY"
