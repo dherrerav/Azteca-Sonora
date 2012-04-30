@@ -155,9 +155,9 @@ class TemplateHelper {
 		}
 		// Output the logo. Determine whether it's text or an image, then pull in all the values set previously to display properly.
 		if ( $this->params->get('logo-type') == 'text' ) {
-		$logo = '<' . $tag . ' class="logo ' . $this->params->get('logo-type') . '" ><a href="' . $app->getCfg('live_site') . '" class="brand">' . $app->getCfg('sitename') . $tagline . '</a></' . $tag . '>';
+			$logo = '<' . $tag . ' class="logo ' . $this->params->get('logo-type') . '" ><a href="' . $app->getCfg('live_site') . '" class="brand">' . $app->getCfg('sitename') . $tagline . '</a></' . $tag . '>';
 		} else {
-		$logo = '<' . $tag . ' style="' . $tag_style . '" class="logo ' . $this->params->get('logo-type') . '" ><a href="' . $app->getCfg('live_site') . '" style="' . $link_style . '" class="brand"> ' . $app->getCfg('sitename') . $tagline . '</a></' . $tag . '>';
+			$logo = '<' . $tag . ' style="' . $tag_style . '" class="logo ' . $this->params->get('logo-type') . '" ><a href="' . $app->getCfg('live_site') . '" style="' . $link_style . '" class="brand"><span>' . $app->getCfg('sitename') . $tagline . '</span></a></' . $tag . '>';
 		}
 		return $logo;
 	}

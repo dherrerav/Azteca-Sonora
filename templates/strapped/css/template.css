@@ -26,6 +26,10 @@ body {
 	display:inline-block;
 	background-size: 100%;
 }
+
+.image > .brand > span {
+	visibility: hidden;
+}
 .navbar-fixed-top {
 	z-index:9999;
 }
