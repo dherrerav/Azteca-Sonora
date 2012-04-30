@@ -134,3 +134,16 @@ body.item-525 #below .custom {
 	padding-top: 0;
 	margin-bottom: 0;
 }
+
+@media (max-width: 767px) {
+	#content p img {
+		width: 100%;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	#content img {
+		float: left;
+		margin-right: 15px;
+	}
+}

@@ -2,6 +2,8 @@
 // No direct access
 defined('_JEXEC') or die;
 
+require_once JPATH_SITE . DS . 'plugins' . DS . 'system' . DS . 'jat3' . DS . 'jat3' . DS . 'core' . DS . 'libs' . DS . 'Browser.php';
+
 jimport('joomla.plugin.plugin');
 
 class plgContentArticlenavigation extends JPlugin
@@ -10,6 +12,15 @@ class plgContentArticlenavigation extends JPlugin
 	{
 		$view = JRequest::getCmd('view');
 		$print = JRequest::getBool('print');
+		$browser = new Browser();
+		$application =& JFactory::getApplication();
+		if ($application->getTemplate() === 'strapped') {
+			return;
+		}
+
+		if ($browser->isMobile()) {
+			return;
+		}
 
 		if ($print) {
 			return false;
