@@ -7,6 +7,7 @@ jimport('joomla.application.component.model');
 
 JModel::addIncludePath(JPATH_SITE . '/components/com_content/models', 'ContentModel');
 
+Zend_Loader::loadClass('Zend_Date');
 
 class modMobileNewsHelper {
 
@@ -94,6 +95,7 @@ class modMobileNewsHelper {
 			} else {
 				$article->categoryTitle = $show_category ? $article->category_title : '';
 			}
+			$article->date = new Zend_Date($article->publish_up);
 			$article->introtext = preg_replace('/{video}(.*?){\/video}/', '', $article->introtext);
 			$article->introtext = strip_tags($article->introtext, '<p><img>');
 		}

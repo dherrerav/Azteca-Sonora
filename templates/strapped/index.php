@@ -1,7 +1,6 @@
 <?php
 
 defined('_JEXEC') or die;
-define('DEBUG', false);
 // detecting device browser
 JLoader::register("TemplateHelper", dirname(__FILE__).'/php/template-helper.php');
 $user_agent = TemplateHelper::getBrowserAgent();
@@ -39,7 +38,7 @@ $page_title = $mydoc->getTitle();
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" >
 <head>
 <!-- Le styles -->
-<meta name="viewport" content="width=device-width, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/bootstrap.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/docs.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/prettify.css" type="text/css" media="screen" />
@@ -140,7 +139,6 @@ endif;
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container<?php echo $template_width; ?>"> 
-			<?php echo $custom_logo; ?>
 			<?php if($this->countModules('top-nav')) : ?>
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
 				<span class="icon-bar"></span> 
@@ -148,7 +146,7 @@ endif;
 				<span class="icon-bar"></span> 
 			</a> 
 			<?php endif; ?>
-			
+			<?php echo $custom_logo; ?>
 			<?php if($this->countModules('top-nav')) : ?>
 			<div class="nav-collapse">
 				<jdoc:include type="modules" name="top-nav" style="none" />
@@ -271,8 +269,5 @@ endif;
 <script type="text/javascript">
         jQuery.noConflict();
 </script>
-<? if (DEBUG) : ?>
-<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
-<? endif ?>
 </body>
 </html>

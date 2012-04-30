@@ -7,7 +7,9 @@
   $(function(){
 
     $(window).resize(function() {
-      //alert($(this).width());
+        var width = $(window).width();
+        var height = $(window).height();
+        alert(width + 'x' + height);
     }).resize();
 
     // Disable certain links in docs

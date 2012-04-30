@@ -10,10 +10,15 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	text-shadow: 0 1px 0 #fff;
+	background: #eee;
 }
 
 .header {
 	margin-bottom: 10px;
+}
+
+.header .category {
+	border-bottom: 1px solid #ccc;
 }
 
 .header h3 a {
@@ -24,10 +29,24 @@
 .article .content img {
 	border: 1px solid #333;
 }
+/*
+@media (max-width: 480px) {
+	[class*="span"].articles {
+		width: 100%;
+	}
+}
+*/
 
-@media only screen and (max-device-width: 480px) and (max-device-width: 533px) {
-	.article .header h3 {
-		font-size: 2em;
+@media (max-width: 767px) {
+	.articles.span4 {
+		width: 346px;
+		margin: 5px;
+	}
+}
+
+@media (max-width: 320px) {
+	[class*="span"].articles {
+		margin-left: 0;
 	}
 }
 

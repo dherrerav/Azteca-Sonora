@@ -18,7 +18,22 @@ if ($item->menu_image) {
 		$linktype = '<img src="'.$item->menu_image.'" alt="'.$item->title.'" /><span class="image-title">'.$item->title.'</span> ' :
 		$linktype = '<img src="'.$item->menu_image.'" alt="'.$item->title.'" />';
 }
-else { $linktype = $item->title;
+elseif (($item->deeper) && ($nav_dropdown)) { 
+	
+	$linktype = $item->title. '<b class="caret"></b>' ;
+	if ($item->level < 2) {
+	$class = 'class="'.$item->anchor_css.' dropdown-toggle" data-toggle="dropdown" ';
+	$item->flink = '#';
+	}
+	else {
+	$linktype = $item->title;
+	}
+}
+elseif (($item->deeper) && (!$nav_stacked) && (!$nav_list) && ($nav_flyout)) {
+	$linktype = $item->title. '<b class="caret"></b>' ;
+}
+else { 
+	$linktype = $item->title;
 }
 
 switch ($item->browserNav) :

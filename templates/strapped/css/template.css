@@ -1,4 +1,7 @@
 /* CSS Document */
+body {
+	padding-top:40px;
+}
 .brand > i {
 	margin-top:5px;
 	margin-right:5px;
@@ -23,7 +26,6 @@
 	z-index:9999;
 }
 #header {
-	padding:20px 0;
 	border-bottom:1px solid #ddd;
 	background-color: #fbfbfb;
 	background-image: -moz-linear-gradient(top, #ffffff, #f5f5f5);
@@ -120,58 +122,10 @@ body.item-525 #below .custom {
 	background: url(../images/resize.png); 
 }
 
-.logo .brand span {
-	display: none;
-}
-
-.navbar {
-	margin-bottom: 0;
-}
-
-#header {
-	padding: 0;
-}
-
 .masthead {
-	padding: 0;
-	margin: 0;
-}
-
-.carousel {
 	margin-bottom: 0;
 }
 
 [class*="span"].articles {
 	margin-left: 0;
-}
-
-@media only screen and (max-device-width: 480px) {
-	[class*="span"] {
-		width: 100%;
-	}
-}
-
-@media only screen and (max-device-width: 533px) {
-	[class*="span"] {
-		width: 100%;
-	}
-}
-
-// Landscape phones and down
-@media (max-width: 480px) {
-}
-
-// Landscape phone to portrait tablet
-@media (max-width: 767px) {
-	
-}
-
-// Portrait tablet to landscape and desktop
-@media (min-width: 768px) and (max-width: 979px) {
-
-}
-
-// Large desktop
-@media (min-width: 1200px) {
-
 }

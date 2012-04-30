@@ -28,7 +28,6 @@ defined('_JEXEC') or die;
         $this->showBlock ($block);
     endforeach;
     ?>
-
     <?php echo $this->showBlock ('css') ?>
 </head>
 

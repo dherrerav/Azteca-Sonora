@@ -124,8 +124,8 @@ class TemplateHelper {
 		// This does all the fun stuff that needs to happen for a good flexible logo.
 		// Checking to see if new logo was uploaded. If so then use that. If not then use logo.png within the template image folder.
 		$app = JFactory::getApplication();
-		if ( $this->params->get('logo-image') ) {
-			$image_path = $this->params->get('logo-image', '');
+		if ( $this->params->get('logo_image') ) {
+			$image_path = $this->params->get('logo_image', '');
 		} else {
 			$image_path = "templates/" . $app->getTemplate() . '/images/logo.png';
 		}
@@ -142,7 +142,7 @@ class TemplateHelper {
 		// If it's a mobile device then set the CSS style to be 100% of the mobile window and resize the logo background image to be 100% wide and automatically set height to stay in perspective.
 		if ( self::mobileDetect()->isMobile() ) {
 			$tag_style = 'width:100%;';
-			$link_style = 'background: url(\'' . $image_path . '\') no-repeat; width:' . $image_width . 'px; width:100%; height: ' . $image_height . 'px; max-height: ' . $image_height . 'px';
+			$link_style = 'background: url(\'' . $image_path . '\') no-repeat; width:' . $image_width . 'px; width:100%; max-height:' . $image_height . 'px;';
 		} else {
 			$tag_style = '';
 			$link_style = 'background: url(\'' . $image_path . '\') no-repeat; width:' . $image_width . 'px; height:' . $image_height . 'px;';
@@ -157,7 +157,7 @@ class TemplateHelper {
 		if ( $this->params->get('logo-type') == 'text' ) {
 		$logo = '<' . $tag . ' class="logo ' . $this->params->get('logo-type') . '" ><a href="' . $app->getCfg('live_site') . '" class="brand">' . $app->getCfg('sitename') . $tagline . '</a></' . $tag . '>';
 		} else {
-		$logo = '<' . $tag . ' style="' . $tag_style . '" class="logo ' . $this->params->get('logo-type') . '" ><a href="' . $app->getCfg('live_site') . '" style="' . $link_style . '" class="brand"><span>' . $app->getCfg('sitename') . $tagline . '</span></a></' . $tag . '>';
+		$logo = '<' . $tag . ' style="' . $tag_style . '" class="logo ' . $this->params->get('logo-type') . '" ><a href="' . $app->getCfg('live_site') . '" style="' . $link_style . '" class="brand"> ' . $app->getCfg('sitename') . $tagline . '</a></' . $tag . '>';
 		}
 		return $logo;
 	}
