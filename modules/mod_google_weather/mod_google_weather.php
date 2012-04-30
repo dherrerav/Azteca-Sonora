@@ -1,7 +1,7 @@
 <?php
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
-require_once dirname(__FILE__) . DS . '..' . DS . '..' . DS 'libraries/Zend/Loader.php';
+require_once dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'libraries/Zend/Loader.php';
 require_once dirname(__FILE__) . DS . 'helper.php';
 
 Zend_Loader::loadClass('Zend_Http_Client');
