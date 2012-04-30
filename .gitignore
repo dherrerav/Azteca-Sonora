@@ -14,3 +14,4 @@
 /sql
 /media/com_fpss/cache/*
 /media/com_fpss/src/*
+*.DS_Store
