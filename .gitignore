@@ -1,7 +1,7 @@
 .buildpath
 .settings/
 .project
-/configuration.php
+configuration.php
 /.htaccess
 /dumps/*
 /images/*
