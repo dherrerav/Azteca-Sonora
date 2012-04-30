@@ -9,6 +9,8 @@ body {
 .logo {
 	margin:0;
 	padding:0;
+	float: left;
+	display: inline;
 }
 .logo-tagline {
 	margin-left:10px;
@@ -19,8 +21,10 @@ body {
 }
 .image > .brand {
 	text-indent:-9999px;
-	display:block;
+	float: left;
 	padding:0;
+	display:inline-block;
+	background-size: 100%;
 }
 .navbar-fixed-top {
 	z-index:9999;
@@ -123,9 +127,6 @@ body.item-525 #below .custom {
 }
 
 .masthead {
+	padding-top: 0;
 	margin-bottom: 0;
-}
-
-[class*="span"].articles {
-	margin-left: 0;
 }

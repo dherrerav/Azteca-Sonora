@@ -6,10 +6,14 @@
 
   $(function(){
 
+    var debug = false;
+
     $(window).resize(function() {
         var width = $(window).width();
         var height = $(window).height();
-        alert(width + 'x' + height);
+        if (debug) {
+          alert(width + 'x' + height);
+        }
     }).resize();
 
     // Disable certain links in docs
