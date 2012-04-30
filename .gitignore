@@ -16,3 +16,5 @@ configuration.php
 /media/com_fpss/src/*
 *.DS_Store
 *errors.log
+configuration.php
+templates/strapped.zip
