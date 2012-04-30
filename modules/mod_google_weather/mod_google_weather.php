@@ -1,7 +1,13 @@
 <?php
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
-require_once dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'libraries/Zend/Loader.php';
+$paths = array(
+	realpath(dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'libraries'),
+	get_include_path()
+);
+
+set_include_path(implode(PATH_SEPARATOR, $paths));
+require_once 'Zend/Loader.php';
 require_once dirname(__FILE__) . DS . 'helper.php';
 
 Zend_Loader::loadClass('Zend_Http_Client');
