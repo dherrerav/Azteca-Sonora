@@ -28,7 +28,7 @@ body {
 }
 
 .image > .brand > span {
-	visibility: hidden;
+	display: none;
 }
 .navbar-fixed-top {
 	z-index:9999;
