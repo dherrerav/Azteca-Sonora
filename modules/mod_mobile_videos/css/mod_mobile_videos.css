@@ -1,5 +1,9 @@
 @charset 'utf-8';
 
+.articles.videos .article {
+	overflow: hidden;
+}
+
 .articles.videos .article .image {
 	float: left;
 	margin-right: 10px;
