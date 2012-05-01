@@ -16,6 +16,13 @@
         }
     }).resize();
 
+    $('a[href="#top"]').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({
+        scrollTop: 0,
+      }, 'slow');
+    })
+
     // Disable certain links in docs
     $('section [href^=#]').click(function (e) {
       e.preventDefault()

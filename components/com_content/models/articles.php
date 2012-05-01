@@ -453,6 +453,12 @@ class ContentModelArticles extends JModelList
 			}
 		}
 
+
+		if ($this->getState('list.filter') && $this->getState('filter.keyword')) {
+			$keyword = $db->Quote('%' . $db->escape($this->getState('filter.keyword')) . '%', false);
+			$query->where($this->getState('list.filter') . ' LIKE ' . $keyword);
+		}
+
 		// Filter by language
 		if ($this->getState('filter.language')) {
 			$query->where('a.language in ('.$db->quote(JFactory::getLanguage()->getTag()).','.$db->quote('*').')');

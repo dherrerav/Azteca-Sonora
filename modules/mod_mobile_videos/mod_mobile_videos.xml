@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.0" method="upgrade" client="site">
+	<name>mod_mobile_videos</name>
+	<author>Saul Martinez</author>
+	<authorEmail>saul@sharkwebintelligence.com</authorEmail>
+	<authorUrl>http://sharkwebintelligence.com</authorUrl>
+	<creationDate>April 2012</creationDate>
+	<version>1.0</version>
+	<description><![CDATA[<h3>Mobile videos</h3>]]></description>
+	<files>
+		<filename module="mod_mobile_videos">mod_mobile_videos.php</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="catids"
+					type="category"
+					extension="com_content"
+					multiple="true"
+					size="10"
+					default=""
+					label="JCATEGORY"
+					description="Select the categories you want to get the content from.">
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+				<field
+					name="image_width"
+					type="text"
+					default="100"
+					label="Width"
+					description="Image width" />
+				<field
+					name="image_height"
+					type="text"
+					default="67"
+					label="Height"
+					description="Image height" />
+				<field
+					name="limit"
+					type="text"
+					default="5"
+					label="Limit"
+					description="Video limit" />
+				<field
+					name="start"
+					type="text"
+					default="0"
+					label="Start"
+					description="Get videos from this position." />
+				<field
+					name="ga_id"
+					type="text"
+					default=""
+					label="Google Analytics"
+					description="Google Analytics ID" />
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

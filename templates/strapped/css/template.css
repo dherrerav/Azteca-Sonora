@@ -121,6 +121,7 @@ body.item-525 #below .custom {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 }
+
 /* Used for responsive page */
 .resize {
 	position: fixed;
@@ -136,6 +137,18 @@ body.item-525 #below .custom {
 	margin-bottom: 0;
 }
 
+.breadcrumb {
+	margin-left: 25px;
+}
+
+body > .container .footer {
+	background: #333;
+	color: #fff;
+	text-shadow: 0 1px 0 #fff;
+	padding: 35px 10px 36px 10px;
+	margin-top: 0;
+}
+
 /* Portrait Smartphones */
 @media (max-width: 480px) {
 	.navbar.navbar-fixed-top {
@@ -145,20 +158,36 @@ body.item-525 #below .custom {
 
 /* Landscape Android */
 @media (max-device-width: 533px) {
+
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+	
+	.breadcrumb {
+		margin-left: 0;
+	}
+
 	#content p img {
 		width: 100%;
 	}
 }
 
+/* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 1024px) {
+	
 	body {
 		padding-top: 100px;
 	}
 
-	#content img {
+	#content .item-page p > img {
+		float: left;
+		margin-right: 15px;
+	}
+}
+
+/* Large desktops */
+@media (min-width: 1200px) {
+	#content .item-page p > img {
 		float: left;
 		margin-right: 15px;
 	}

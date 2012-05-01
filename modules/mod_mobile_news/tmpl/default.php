@@ -1,16 +1,17 @@
 <? defined('_JEXEC') or die ?>
+<? $host = 'http://' . rtrim(JURI::base(), '/') ?>
 <div class="articles<?= $moduleclass_sfx ?>">
 <? foreach ($articles as $article) : ?>
 	<article class="article">
 		<header class="header">
+			<h3 class="title">
+				<a href="<?= $article->link ?>" title="<?= $article->title ?>">
+					<?= $article->title ?>
+				</a>
+			</h3>
 			<h3 class="category">
 				<a href="<?= $article->categoryLink ?>" title="<?= $article->category_title ?>">
 					<?= $article->category_title ?>
-				</a>
-			</h3>
-			<h3>
-				<a href="<?= $article->link ?>" title="<?= $article->title ?>">
-					<?= $article->title ?>
 				</a>
 			</h3>
 		</header>
@@ -25,8 +26,22 @@
 		<div class="content">
 			<?= $article->introtext ?>
 		</div>
-		<footer class="share">
+		<footer class="footer">
 			<div class="social-tools">
+				<ul class="unstyled">
+					<li class="share-email">
+						<a href="<?= $host . $article->link ?>">Email</a>
+					</li>
+					<li class="share-twitter">
+						<a href="<?= $host . $article->link ?>">Twitter</a>
+					</li>
+					<li class="share-facebook">
+						<a href="<?= $host . $article->link ?>">Facebook</a>
+					</li>
+					<li class="share-gplus">
+						<a href="<?= $host . $article->link ?>">Google</a>
+					</li>
+				</ul>
 			</div>
 		</footer>
 	</article>

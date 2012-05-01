@@ -211,7 +211,7 @@ endif;
 			</div>
 			<?php endif; ?>
 			<!-- Component -->
-			<div id="content" class="span<?php echo (12-$leftcolgrid-$rightcolgrid);?>">
+			<div id="main-content" class="span<?php echo (12-$leftcolgrid-$rightcolgrid);?>">
 				<?php if($this->countModules('above-content')) : ?>
 				<!-- Above Content Module Position -->	
 				<div id="above-content">
@@ -254,7 +254,7 @@ endif;
 	<!-- Footer
 	================================================== -->
 	<footer class="footer">
-		<p class="pull-right"><a href="#">Back to top</a></p>
+		<p class="pull-right"><a href="#top">Ir arriba</a></p>
 		<jdoc:include type="modules" name="footer" style="none" />	
 	</footer>
 	<jdoc:include type="modules" name="debug" />
@@ -269,5 +269,6 @@ endif;
 <script type="text/javascript">
         jQuery.noConflict();
 </script>
+<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
 </body>
 </html>

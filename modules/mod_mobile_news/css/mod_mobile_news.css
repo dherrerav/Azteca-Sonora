@@ -18,6 +18,14 @@
 }
 
 .header .category {
+	font-size: 1.2em;
+}
+
+.header .category a {
+	color: #369;
+}
+
+.header h3.title {
 	border-bottom: 1px solid #ccc;
 }
 
@@ -28,6 +36,52 @@
 
 .article .content img {
 	border: 1px solid #333;
+}
+
+.article .footer {
+	margin-top: 0;
+	padding: 5px;
+	overflow: hidden;
+}
+
+.article .footer .social-tools {
+	float: right;
+}
+
+.article .footer .social-tools li {
+	float: left;
+	margin-left: 5px;
+}
+
+.article .footer .social-tools li.share-email {
+	background: #2D2D2D;
+}
+
+.article .footer .social-tools li.share-facebook {
+	background: #335795;
+}
+
+.article .footer .social-tools li.share-twitter {
+	background: #30D8F0;
+}
+
+.article .footer .social-tools li.share-gplus {
+	background: #D34836;
+}
+
+.article .footer .social-tools li a {
+	color: #fff;
+	padding: 5px 5px;
+	display: block;
+	text-shadow: 0 1px 0 #333;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #fff;
+}
+
+.article .footer .social-tools li a:hover {
+	text-decoration: none;
+	border-color: #333;
 }
 
 /* Portrait Smartphones */
@@ -46,7 +100,7 @@
 	}
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
 	.articles {
 		width: 346px;
 		margin: 5px;
@@ -54,6 +108,12 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+	.articles {
+		margin-left: 0;
+	}
+}
+
+@media (min-width: 1200px) {
 	.articles {
 		margin-left: 0;
 	}
