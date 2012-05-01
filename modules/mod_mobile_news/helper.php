@@ -3,6 +3,8 @@ defined('_JEXEC') or die;
 
 require_once JPATH_SITE . '/components/com_content/helpers/route.php';
 
+require_once JPATH_SITE . '/libraries/simple_html_dom.php';
+
 jimport('joomla.application.component.model');
 
 JModel::addIncludePath(JPATH_SITE . '/components/com_content/models', 'ContentModel');
@@ -75,6 +77,7 @@ class modMobileNewsHelper {
 		$model->setState('filter.published', 1);
 		$articles = $model->getItems();
 		foreach ($articles as &$article) {
+			$html = new simple_html_dom($article->introtext);
 			$article->slug = $article->id . ':' . $article->alias;
 			$article->catslug = $article->catid ? $article->catid . ':' . $article->category_alias : $article->catid;
 			if ($access || in_array($article->access, $authorised)) {
@@ -89,6 +92,11 @@ class modMobileNewsHelper {
 				}
 				$article->link = JRequest::_('index.php?option=com_users&view=login&Itemid=' . $itemId);
 			}
+			$images = $html->find('img');
+			$article->image = null;
+			if (count($images)) {
+				$article->image = $images[count($images) - 1]->src;
+			}
 			if ($article->catid) {
 				$article->categoryLink = JRoute::_(ContentHelperRoute::getCategoryRoute($article->catid));
 				$article->cateogryTitle = '<a href="' . $article->categoryLink . '">' . $article->category_title . '</a>';
@@ -97,7 +105,7 @@ class modMobileNewsHelper {
 			}
 			$article->date = new Zend_Date($article->publish_up);
 			$article->introtext = preg_replace('/{video}(.*?){\/video}/', '', $article->introtext);
-			$article->introtext = strip_tags($article->introtext, '<p><img>');
+			$article->introtext = strip_tags($article->introtext, '<p>');
 		}
 		return $articles;
 	}

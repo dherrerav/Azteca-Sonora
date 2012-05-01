@@ -24,6 +24,11 @@
 			</div>
 		</div>
 		<div class="content">
+			<? if ($article->image) : ?>
+			<a href="<?= $article->link ?>" title="<?= $article->title ?>">
+				<img src="<?= $article->image ?>" alt="<?= $article->title ?>" />
+			</a>
+			<? endif ?>
 			<?= $article->introtext ?>
 		</div>
 		<footer class="footer">

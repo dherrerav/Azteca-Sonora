@@ -90,6 +90,9 @@
 		margin-left: 0;
 		width: 100%;
 	}
+	.article .content p {
+		display: none;
+	}
 }
 
 /* Landscape Android */

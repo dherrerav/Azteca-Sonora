@@ -173,14 +173,31 @@ endif;
 	</div>
 </div>
 <?php endif; ?>
-
-<?php if($this->countModules('above')) : ?>
+<?
+$above1 = $this->countModules('above1');
+$above2 = $this->countModules('above2');
+$above3 = $this->countModules('above3');
+$above4 = $this->countModules('above4');
+$showAbove = $above1 || $above2 || $above3 || $above3;
+?>
+<?php if($showAbove) : ?>
 <!-- Above Module Position
 ================================================== -->	
 <div id="above">
 	<div class="container<?php echo $template_width; ?>">
 		<div class="row<?php echo $template_width; ?>">
-			<jdoc:include type="modules" name="above" style="xhtml" />	
+			<? if ($above1) : ?>
+			<jdoc:include type="modules" name="above1" style="xhtml" />
+			<? endif ?>
+			<? if ($above2) : ?>
+			<jdoc:include type="modules" name="above2" style="xhtml" />
+			<? endif ?>
+			<? if ($above3) : ?>
+			<jdoc:include type="modules" name="above3" style="xhtml" />
+			<? endif ?>
+			<? if ($above4) : ?>
+			<jdoc:include type="modules" name="above4" style="xhtml" />
+			<? endif ?>
 		</div>
 	</div>
 </div>
