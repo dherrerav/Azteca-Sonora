@@ -154,7 +154,8 @@ $user		= JFactory::getUser();
  	endif;
 	?>
 	<!-- Item Content --> 
-	<?php echo $this->item->text; ?> 
+	<?php echo $this->item->introtext; ?>
+	<?php echo $this->item->fulltext; ?>
 	<!-- Pagination -->
 	<?php
 	if (!empty($this->item->pagination) AND $this->item->pagination AND $this->item->paginationposition AND!$this->item->paginationrelative):

@@ -8,6 +8,63 @@
 
     var debug = false;
 
+    $('.loading').hide();
+
+      $('.editable').live('dblclick', switchInput);
+      
+      $('.weather-form').submit(function(e) {
+        e.preventDefault();
+      });
+      
+      $('.instructions').hide();
+      
+      $('.weather-city-title').hover(function() {
+        $('.instructions').show();
+      }, function() {
+        $('.instructions').hide();
+      });
+      
+      function switchInput() {
+        $(this).unbind('dblclick');
+        $('.instructions').hide();
+        text = $(this).html();
+        form = $('<form class="city-form" />');
+        input = $('<input type="text" class="weather-edit" value="' + text + '" />');
+        var cancel = false;
+        input.blur(function() {
+          $(this).parent().live('dblclick', switchInput);
+          $(this).parent().html(input.val());
+          cancel = true;
+        });
+        if (cancel) {
+          return;
+        } else {
+          form.html(input);
+          form.submit(function(e) {
+            e.preventDefault();
+            $('.loading').show();
+            var location = $(this).children('.weather-edit').val();
+            $(this).parent().bind('dblclick', switchInput);
+            $(this).parent().html(location);
+            getWeather(location);
+          });
+          $(this).html(form);
+          input.select();
+        }
+      }
+      
+      function getWeather(location) {
+        console.debug(location);
+        $.post('/modules/mod_google_weather/mod_google_weather.php', {
+            location: location
+          },
+          function(response) {
+            $('.weather-module').replaceWith(response);
+            $('.loading').hide();
+          }
+        );
+      }
+
     $(window).resize(function() {
         var width = $(window).width();
         var height = $(window).height();

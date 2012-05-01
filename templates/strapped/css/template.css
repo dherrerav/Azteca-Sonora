@@ -9,8 +9,6 @@ body {
 .logo {
 	margin:0;
 	padding:0;
-	float: left;
-	display: inline;
 }
 .logo-tagline {
 	margin-left:10px;
@@ -21,16 +19,14 @@ body {
 }
 .image > .brand {
 	text-indent:-9999px;
-	float: left;
-	padding:0;
+	padding:0 !important;
+	margin: 0 !important;
 	display:inline-block;
-	background-size: 100%;
+	float: left;
+	width: 240px !important;
+	height: 40px !important;
 }
 
-.image > .brand > span {
-	display: none;
-	visibility: hidden;
-}
 .navbar-fixed-top {
 	z-index:9999;
 }
@@ -147,6 +143,22 @@ body > .container .footer {
 	text-shadow: 0 1px 0 #fff;
 	padding: 35px 10px 36px 10px;
 	margin-top: 0;
+}
+
+.weather-module {
+	padding: 0 !important;
+	width: inherit !important;
+}
+
+.weather-module form {
+	margin: 0;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.weather-module .weather-city-title {
+	color: #fff;
+	line-height: 1em;
 }
 
 /* Portrait Smartphones */

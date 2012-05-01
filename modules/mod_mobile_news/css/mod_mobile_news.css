@@ -84,10 +84,17 @@
 	border-color: #333;
 }
 
+@media (max-width: 320px) {
+	[class*="span"].articles {
+		margin-left: 0 !important;
+		width: 100%;
+	}
+}
+
 /* Portrait Smartphones */
 @media (max-width: 480px) {
 	[class*="span"].articles {
-		margin-left: 0;
+		margin-left: 0 !important;
 		width: 100%;
 	}
 	.article .content p {
@@ -96,21 +103,21 @@
 }
 
 /* Landscape Android */
-@media (max-device-width: 533px) {
+@media (max-width: 533px) {
 	[class*="span"].articles {
-		margin-left: 0;
+		margin-left: 0 !important;
 		width: 100%;
 	}
 }
 
 @media (max-width: 768px) {
 	.articles {
-		width: 346px;
-		margin: 5px;
+		width: 352px;
+		margin-left: 20px !important;
 	}
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
 	.articles {
 		margin-left: 0;
 	}

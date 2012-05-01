@@ -34,6 +34,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 	public $videoMatches = array();
 	public $youtubeMatches = array();
 	public $skin = '';
+	public $template;
 	public function plgContentPlg_VideoJS(&$subject) {
 		parent::__construct($subject);
 		$this->browser = new Browser();
@@ -49,8 +50,10 @@ class plgContentPlg_VideoJS extends JPLugin {
 		$this->articleWidth = $this->params->get('article_width', 636);
 		$this->articleHeight = $this->params->get('article_height', 333);
 		$this->skin = $this->params->get('skin', 'default');
+		$this->template = JFactory::getApplication()->getTemplate();
 	}
 	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 0) {
+		if ($this->template !== 'strapped') return;
 		$catids = $this->params->get('catids');
 		if (is_array($catids) && count($catids) == 1) {
 			if (empty($catids[0])) {

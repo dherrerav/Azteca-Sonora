@@ -28,14 +28,18 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 		'youtube' => 'flowplayer.youtube.swf',
 	);
 	public $browser = null;
+
+	public $_template = null;
 	
 	public function plgContentPlg_DynamicThumbnails(&$subject) {
 		parent::__construct($subject);
 		$this->_plugin = JPluginHelper::getPlugin('content', 'plg_dynamicthumbnails');
 		$this->_pluginParams = new JParameter($this->_plugin->params);
 		$this->browser = new Browser();
+		$this->_template = JFactory::getApplication()->getTemplate();
 	}
 	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 0) {
+		if ($this->_template === 'strapped') return;
 		if ($context != 'com_content.article') return;
 		$view = JRequest::getVar('view');
 		$layout = JRequest::getVar('layout');
@@ -83,10 +87,14 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 		$imageOutput = null;
 		$imageWidth = $this->_pluginParams->get('article_image_width');
 		$imageHeight = $this->_pluginParams->get('article_image_height');
+		$imageOutput = $this->getResizedImages($article, $imageWidth, $imageHeight, 'article_image', ($videoOutput !== null));
+		if ($this->_template === 'strapped') {
+			$article->introtext = $videoOutput . $article->introtext;
+			return;
+		}
 		$videoWidth = $this->_pluginParams->get('article_video_width');
 		$videoHeight = $this->_pluginParams->get('article_video_height');
 		$videoOutput = $this->getVideos($article, $videoWidth, $videoHeight, 'article_video');
-		$imageOutput = $this->getResizedImages($article, $imageWidth, $imageHeight, 'article_image', ($videoOutput !== null));
 		if ($videoOutput && !$imageOutput) {
 			$article->introtext = $videoOutput . $article->introtext;
 		} else if ($videoOutput && $imageOutput) {
@@ -134,7 +142,7 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 		} else {
 			return;
 		}
-		if ($videoOutput) {
+		if ($videoOutput && $this->_template !== 'strapped') {
 			$article->introtext = $videoOutput . $article->introtext;
 		} else if ($imageOutput) {
 			$article->introtext = $imageOutput . $article->introtext;
@@ -154,16 +162,18 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 			/**
 			 * @todo Resize images
 			 */
-			$layout = $this->getLayoutPath($this->_plugin, $layout);
-			$output = '';
-			if ($layout) {
-				ob_start();
-				require $layout;
-				$output = ob_get_contents();
-				ob_end_clean();
+			if ($this->_template !== 'strapped') {
+				$layout = $this->getLayoutPath($this->_plugin, $layout);
+				$output = '';
+				if ($layout) {
+					ob_start();
+					require $layout;
+					$output = ob_get_contents();
+					ob_end_clean();
+				}
+				$article->introtext = preg_replace('/\<img[^\>]*>/', '', $article->introtext);
+				return $output;
 			}
-			$article->introtext = preg_replace('/\<img[^\>]*>/', '', $article->introtext);
-			return $output;
 		}
 		return '';
 	}

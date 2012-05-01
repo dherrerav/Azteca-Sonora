@@ -46,6 +46,7 @@ $page_title = $mydoc->getTitle();
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/joomla.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/bootstrap-responsive.css" type="text/css" media="screen" />
+<link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
 
 <!-- Le touch icons -->
 <link rel="apple-touch-icon" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/icons/apple-touch-icon.png">
@@ -280,12 +281,12 @@ $showAbove = $above1 || $above2 || $above3 || $above3;
     ================================================== --> 
 <!-- Placed at the end of the document so the pages load faster --> 
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery.js"></script> 
-<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.min.js"></script> 
+<script src="http://vjs.zencdn.net/c/video.js"></script>
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/application.js"></script> 
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/prettify.js"></script> 
 <script type="text/javascript">
         jQuery.noConflict();
 </script>
-<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
 </body>
 </html>
