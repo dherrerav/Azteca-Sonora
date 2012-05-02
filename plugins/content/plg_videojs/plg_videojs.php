@@ -84,16 +84,15 @@ class plgContentPlg_VideoJS extends JPLugin {
 					}
 				}
 				if (!$styleSheetFound) {
-					$document->addStyleSheet(JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/css/video-js.css');
 					$document->addStyleSheet(JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/css/' . $this->plugin->name . '.css');
 				}
 				for ($i = 0; $i < count($scripts); $i++) {
-					if (stripos($scripts[$i], 'videojs.js') !== false) {
+					if (stripos($scripts[$i], 'flowplayer.min.js') !== false) {
 						$scriptFound = true;
 					}
 				}
 				if (!$scriptFound) {
-					$document->addScript(JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/js/video.js');
+					$document->addScript(JURI::base() . 'plugins/' . $this->plugin->type . '/' . $this->plugin->name . '/js/flowplayer/flowplayer.min.js');
 				}
 				$source = $matches[1];
 				if ($this->view === 'article' && $context === 'com_content.article') {
@@ -207,13 +206,13 @@ class plgContentPlg_VideoJS extends JPLugin {
 		if (!file_exists($source)) {
 			return null;
 		}
+		$extension = strtolower(substr(strrchr($source, '.'), 1));
+		$format = array_key_exists($extension, $this->formats) ? $this->formats[$extension] : null;
 		$video = new stdClass;
 		$video->width = $width;
 		$video->height = $height;
-		$video->source = $source;
-		$extension = strtolower(substr(strrchr($source, '.'), 1));
+		$video->source = JURI::base() . $source;
 		$video->extension = $extension;
-		$format = array_key_exists($extension, $this->formats) ? $this->formats[$extension] : null;
 		$video->format = $format;
 		$image = substr($source, 0, strpos($source, '.')) . '_' . $width . 'x' . $height . '.jpg';
 		if (!file_exists($image)) {
