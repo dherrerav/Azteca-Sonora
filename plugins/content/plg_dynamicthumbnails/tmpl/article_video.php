@@ -1,11 +1,12 @@
 <?php
-var_dump($this->browser->getPlatform(), Browser::PLATFORM_ANDROID);
+$playFullscreen = false;
 switch ($this->browser->getPlatform()) :
 	case Browser::PLATFORM_IPAD:
 	case Browser::PLATFORM_IPHONE:
 	case Browser::PLATFORM_IPOD:
 		$video = $videos['m4v'];
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
+		$playFullscreen = true;
 		/*
 		$video->width = '100%';
 		$video->height = '100%';
@@ -13,6 +14,7 @@ switch ($this->browser->getPlatform()) :
 		break;
 	case Browser::PLATFORM_ANDROID:
 		$video = $videos['flv'];
+		$playFullscreen = true;
 		/*
 		$video->width = '100%';
 		$video->height = '100%';
@@ -39,6 +41,9 @@ endswitch;
 <script type="text/javascript">
 	try {
 		$f('video-<?= $article->id ?>', '<?= $this->getVideoPlayer() ?>', {
+			play: {
+				label: 'Reproducir'
+			},
 			key: '#$4a11216191dd06befb1',
 			wmode: 'opaque',
 			<?= $this->browser->getPlatform() === Browser::PLATFORM_IPAD ? 'simulateiDevice: true,' : '' ?>
@@ -52,16 +57,32 @@ endswitch;
 						all: true
 					},
 					accountId: '<?= $this->_pluginParams->get('google_analytics_account') ?>'
+				},
+				controls: {
+					tooltips: {
+						buttons: true,
+						play: 'Reproducir'
+					}
 				}
 			},
 			clip: {
 				eventCategory: '<?= str_replace(array("\"", "\'"), "&quote;", $article->category_title . " - " . $article->title) ?>',
 				provider: 'pseudo',
-				url: <?= $clipUrl ?>
+				url: <?= $clipUrl ?>,
+				autoPlay: false,
+				autoBuffering: true
+				<? if ($playFullscreen) : ?>,
+				onResume: function() {
+					if (!this.isFullscreen()) {
+						this.toggleFullscreen();
+					}
+				}
+				<? endif ?>
 			},
 			onFinish: function() {
 				this.unload();
-			}
+			},
+			
 		})<?= $this->browser->getPlatform() === Browser::PLATFORM_IPAD ? '.ipad()' : '' ?>;
 	} catch (e) {
 		console.debug(e);
