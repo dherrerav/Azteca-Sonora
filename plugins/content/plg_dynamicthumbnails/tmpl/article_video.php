@@ -25,16 +25,13 @@ switch ($this->browser->getPlatform()) :
 			$video = $videos['flv'];
 			$video->width = $video->width . 'px';
 			$video->height = $video->height . 'px';
-			if (Browser::PLATFORM_ANDROID) {
-				$video->width = '100%';
-				$video->height = '100%';
-			}
 			$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 						'\'' . JURI::base() . $video->source . '\' : ' .
 						'\'' . JURI::base() . $videos['flv']->source . '\'';
 		}
 		break;
 endswitch;
+var_dump($video);
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
