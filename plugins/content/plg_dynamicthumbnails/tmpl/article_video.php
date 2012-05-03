@@ -31,8 +31,8 @@ var_dump($video);
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
-		<div class="video">
-			<img id="video-<?= $article->id ?>" src="<?= $video->preview ?>" width="<?= $video->width ?>" height="<?= $video->height ?>" alt="Reproducir" />
+		<div class="video" id="video-<?= $article->id ?>" style="width: 100%; height: 100%;">
+			<img src="<?= $video->preview ?>" width="<?= $video->width ?>" height="<?= $video->height ?>" alt="Reproducir" />
 		</div>
 	</div>
 </div>
