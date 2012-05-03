@@ -62,3 +62,8 @@ div[class*='item-page'] .article-videos {
 div[class*='blog'] .article-videos {
 	display: inline-block;
 }
+
+video {
+	max-width: 100%;
+	max-height: 100%;
+}

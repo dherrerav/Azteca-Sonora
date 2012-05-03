@@ -1,5 +1,4 @@
 <?php
-$playFullscreen = false;
 switch ($this->browser->getPlatform()) :
 	case Browser::PLATFORM_IPAD:
 	case Browser::PLATFORM_IPHONE:
@@ -13,22 +12,31 @@ switch ($this->browser->getPlatform()) :
 		*/
 		break;
 	case Browser::PLATFORM_ANDROID:
-		$video = $videos['flv'];
+		$video = $videos['m4v'];
 		$playFullscreen = true;
-		/*
 		$video->width = '100%';
 		$video->height = '100%';
-		*/
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
+		break;
 	default:
-		$video = $videos['flv'];
+		$video = $videos['m4v'];
 		$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 					'\'' . JURI::base() . $video->source . '\' : ' .
-					'\'' . JURI::base() . $videos['flv']->source . '\'';
+					'\'' . JURI::base() . $videos['m4v']->source . '\'';
 		break;
 endswitch;
-var_dump($video, $playFullscreen);
 ?>
+<? if ($this->browser->getPlatform() === Browser::PLATFORM_ANDROID) : ?>
+<video class="video-js vjs-default-skin" id="video-<?= $article->id ?>"
+	height="<?= $video->height ?>"
+	width="<?= $video->width ?>"
+	poster="<?= JURI::base() . $video->preview ?>"
+	controls
+	preload="auto"
+	data-setup="{}">
+	<source src="<?= JURI::base() . $video->source ?>" type="<?= $video->format ?>" />
+</video>
+<? else : ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
 		<div class="video" id="video-<?= $article->id ?>"<?= !$this->browser->isMobile() ? ' style="width: ' . $video->width . 'px; height: '. $video->height . 'px;"' : '' ?>>
@@ -68,3 +76,4 @@ try {
 		console.debug(e);
 	}
 </script>
+<? endif ?>
