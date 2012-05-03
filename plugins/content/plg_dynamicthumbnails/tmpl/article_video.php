@@ -4,11 +4,17 @@ switch ($this->browser->getPlatform()) :
 	case Browser::PLATFORM_IPAD:
 	case Browser::PLATFORM_IPHONE:
 	case Browser::PLATFORM_IPOD:
-	case Browser::PLATFORM_ANDROID:
 		$video = $videos['m4v'];
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
+		$video->width = '100%';
+		$video->height = '100%';
 		break;
+	case Browser::PLATFORM_ANDROID:
 	default:
+		if (Browser::PLATFORM_ANDROID) {
+			$video->width = '100%';
+			$video->height = '100%';
+		}
 		$video = $videos['flv'];
 		$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 					'\'' . JURI::base() . $video->source . '\' : ' .
@@ -18,7 +24,7 @@ endswitch;
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
-		<div class="video" id="video-<?= $article->id ?>" style="width: 100%; height: 100%; background: transparent url(<?= JURI::base() . $video->preview ?>) no-repeat top left;">
+		<div class="video" id="video-<?= $article->id ?>" style="width: <?= $video->width ?>; height: <?= $video->height ?>; background: transparent url(<?= JURI::base() . $video->preview ?>) no-repeat top left;">
 		</div>
 	</div>
 </div>
