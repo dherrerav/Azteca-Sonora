@@ -37,9 +37,10 @@ var_dump($video, $playFullscreen);
 	</div>
 </div>
 <script type="text/javascript">
-	try {
+try {
 		$f('video-<?= $article->id ?>', '<?= $this->getVideoPlayer() ?>', {
 			key: '#$4a11216191dd06befb1',
+			autoplay: true,
 			wmode: 'opaque',
 			<?= $this->browser->getPlatform() === Browser::PLATFORM_IPAD ? 'simulateiDevice: true,' : '' ?>
 			plugins: {
@@ -52,10 +53,10 @@ var_dump($video, $playFullscreen);
 						all: true
 					},
 					accountId: '<?= $this->_pluginParams->get('google_analytics_account') ?>'
-				},
+				}
 			},
 			clip: {
-				eventCategory: '<?= str_replace(array("\"", "\'"), "&quote;", $article->category_title . " - " . $article->title) ?>',
+				eventCategory: '<?= str_replace(array('"', '\''), '&quote;', $article->category_title . ' - ' . $article->title) ?>',
 				provider: 'pseudo',
 				url: <?= $clipUrl ?>
 			},
