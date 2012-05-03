@@ -31,7 +31,7 @@ var_dump($video, $playFullscreen);
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
-		<div class="video" id="video-<?= $article->id ?>">
+		<div class="video" id="video-<?= $article->id ?>"<?= !$this->browser->isMobile() ? ' style="width: ' . $video->width . 'px; height: '. $video->height . 'px;"' : '' ?>>
 			<img src="<?= $video->preview ?>" width="<?= $video->width ?>" height="<?= $video->height ?>" alt="Reproducir" />
 		</div>
 	</div>
