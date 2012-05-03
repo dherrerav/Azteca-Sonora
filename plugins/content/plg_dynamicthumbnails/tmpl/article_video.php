@@ -11,6 +11,7 @@ switch ($this->browser->getPlatform()) :
 		break;
 	case Browser::PLATFORM_ANDROID:
 	default:
+		var_dump($video);
 		if (Browser::PLATFORM_ANDROID) {
 			$video = $videos['flv'];
 			$video->width = $video->width . 'px';
@@ -22,7 +23,6 @@ switch ($this->browser->getPlatform()) :
 			$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 						'\'' . JURI::base() . $video->source . '\' : ' .
 						'\'' . JURI::base() . $videos['flv']->source . '\'';
-			var_dump($video);
 		} else {
 			$video = $videos['flv'];
 			$video->width = $video->width . 'px';
