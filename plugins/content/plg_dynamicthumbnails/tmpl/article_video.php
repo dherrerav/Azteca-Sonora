@@ -1,4 +1,5 @@
 <?php
+var_dump($this->browser->getPlatform());
 switch ($this->browser->getPlatform()) :
 	case Browser::PLATFORM_IPAD:
 	case Browser::PLATFORM_IPHONE:
@@ -21,9 +22,9 @@ switch ($this->browser->getPlatform()) :
 			$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 						'\'' . JURI::base() . $video->source . '\' : ' .
 						'\'' . JURI::base() . $videos['flv']->source . '\'';
+			var_dump($video);
 		} else {
 			$video = $videos['flv'];
-			var_dump($video);
 			$video->width = $video->width . 'px';
 			$video->height = $video->height . 'px';
 			$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
