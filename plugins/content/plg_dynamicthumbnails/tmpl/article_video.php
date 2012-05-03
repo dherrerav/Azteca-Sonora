@@ -1,5 +1,4 @@
 <?php
-var_dump($video);
 switch ($this->browser->getPlatform()) :
 	case Browser::PLATFORM_IPAD:
 	case Browser::PLATFORM_IPHONE:
@@ -11,16 +10,29 @@ switch ($this->browser->getPlatform()) :
 		break;
 	case Browser::PLATFORM_ANDROID:
 	default:
-		$video->width = $video->width . 'px';
-		$video->height = $video->height . 'px';
 		if (Browser::PLATFORM_ANDROID) {
-			$video->width = '100%';
-			$video->height = '100%';
+			$video = $videos['flv'];
+			$video->width = $video->width . 'px';
+			$video->height = $video->height . 'px';
+			if (Browser::PLATFORM_ANDROID) {
+				$video->width = '100%';
+				$video->height = '100%';
+			}
+			$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
+						'\'' . JURI::base() . $video->source . '\' : ' .
+						'\'' . JURI::base() . $videos['flv']->source . '\'';
+		} else {
+			$video = $videos['flv'];
+			$video->width = $video->width . 'px';
+			$video->height = $video->height . 'px';
+			if (Browser::PLATFORM_ANDROID) {
+				$video->width = '100%';
+				$video->height = '100%';
+			}
+			$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
+						'\'' . JURI::base() . $video->source . '\' : ' .
+						'\'' . JURI::base() . $videos['flv']->source . '\'';
 		}
-		$video = $videos['flv'];
-		$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
-					'\'' . JURI::base() . $video->source . '\' : ' .
-					'\'' . JURI::base() . $videos['m4v']->source . '\'';
 		break;
 endswitch;
 ?>
