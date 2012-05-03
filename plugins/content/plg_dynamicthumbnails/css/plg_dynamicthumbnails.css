@@ -5,6 +5,7 @@ div[class*='item-page'] .article-videos {
 }
 
 .article-videos {
+	
 }
 
 .article-videos .article-videos-inner {
@@ -60,12 +61,4 @@ div[class*='item-page'] .article-videos {
 
 div[class*='blog'] .article-videos {
 	display: inline-block;
-}
-
-object,
-embed,
-iframe {
-	min-width: 100% !important;
-	max-width: 100% !important;
-	width: 100% !important;
 }
