@@ -27,7 +27,7 @@ switch ($this->browser->getPlatform()) :
 					'\'' . JURI::base() . $videos['flv']->source . '\'';
 		break;
 endswitch;
-var_dump($video);
+var_dump($video, $playFullscreen);
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
@@ -58,8 +58,7 @@ var_dump($video);
 				eventCategory: '<?= str_replace(array("\"", "\'"), "&quote;", $article->category_title . " - " . $article->title) ?>',
 				provider: 'pseudo',
 				url: <?= $clipUrl ?>,
-				autoPlay: false,
-				autoBuffering: true
+				autoPlay: false
 				<? if ($playFullscreen) : ?>,
 				onResume: function() {
 					if (!this.isFullscreen()) {
