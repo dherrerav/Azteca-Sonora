@@ -23,6 +23,7 @@ switch ($this->browser->getPlatform()) :
 						'\'' . JURI::base() . $videos['flv']->source . '\'';
 		} else {
 			$video = $videos['flv'];
+			var_dump($video);
 			$video->width = $video->width . 'px';
 			$video->height = $video->height . 'px';
 			$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
@@ -31,7 +32,6 @@ switch ($this->browser->getPlatform()) :
 		}
 		break;
 endswitch;
-var_dump($video);
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
