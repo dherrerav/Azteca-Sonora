@@ -31,7 +31,7 @@ var_dump($video, $playFullscreen);
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
-		<div class="video" id="video-<?= $article->id ?>" style="width: 100%; height: 100%;">
+		<div class="video" id="video-<?= $article->id ?>">
 			<img src="<?= $video->preview ?>" width="<?= $video->width ?>" height="<?= $video->height ?>" alt="Reproducir" />
 		</div>
 	</div>
@@ -61,8 +61,7 @@ var_dump($video, $playFullscreen);
 			},
 			onFinish: function() {
 				this.unload();
-			},
-			
+			}
 		})<?= $this->browser->getPlatform() === Browser::PLATFORM_IPAD ? '.ipad()' : '' ?>;
 	} catch (e) {
 		console.debug(e);
