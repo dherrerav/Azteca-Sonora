@@ -58,13 +58,6 @@ var_dump($video, $playFullscreen);
 				eventCategory: '<?= str_replace(array("\"", "\'"), "&quote;", $article->category_title . " - " . $article->title) ?>',
 				provider: 'pseudo',
 				url: <?= $clipUrl ?>
-				<? if ($playFullscreen) : ?>,
-				onResume: function() {
-					if (!this.isFullscreen()) {
-						this.toggleFullscreen();
-					}
-				}
-				<? endif ?>
 			},
 			onFinish: function() {
 				this.unload();

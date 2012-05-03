@@ -192,8 +192,8 @@ class plgContentArticlenavigation extends JPlugin
 						</li>';
 				}
 				$html .= '
-				</div>
-				</ul>'
+				</ul>
+				</div>'
 				;
 
 				return $html;
