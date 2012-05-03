@@ -57,8 +57,7 @@ var_dump($video, $playFullscreen);
 			clip: {
 				eventCategory: '<?= str_replace(array("\"", "\'"), "&quote;", $article->category_title . " - " . $article->title) ?>',
 				provider: 'pseudo',
-				url: <?= $clipUrl ?>,
-				autoPlay: false
+				url: <?= $clipUrl ?>
 				<? if ($playFullscreen) : ?>,
 				onResume: function() {
 					if (!this.isFullscreen()) {
