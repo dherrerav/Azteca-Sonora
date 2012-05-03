@@ -15,12 +15,12 @@ switch ($this->browser->getPlatform()) :
 		$video->height = '100%';
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
 	default:
-		$video = $videos['m4v'];
+		$video = $videos['flv'];
 		$video->width = $video->width . 'px';
 		$video->height = $video->height . 'px';
 		$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 					'\'' . JURI::base() . $video->source . '\' : ' .
-					'\'' . JURI::base() . $videos['m4v']->source . '\'';
+					'\'' . JURI::base() . $videos['flv']->source . '\'';
 		break;
 endswitch;
 
