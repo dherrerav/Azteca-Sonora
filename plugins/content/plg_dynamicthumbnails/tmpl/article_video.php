@@ -27,7 +27,7 @@ switch ($this->browser->getPlatform()) :
 endswitch;
 ?>
 <? if ($this->browser->getPlatform() === Browser::PLATFORM_ANDROID) : ?>
-<video class="video-js vjs-default-skin" id="video-<?= $article->id ?>"
+<video class="video-js vjs-default-skin" id="<?= $video->id ?>"
 	height="<?= $video->height ?>"
 	width="<?= $video->width ?>"
 	poster="<?= JURI::base() . $video->preview ?>"
@@ -36,6 +36,12 @@ endswitch;
 	data-setup="{}">
 	<source src="<?= JURI::base() . $video->source ?>" type="<?= $video->format ?>" />
 </video>
+<script type="text/javascript">
+var video = document.getElementById('<?= $video->id ?>');
+video.addEventListener('click', function() {
+	video.play();
+}, false);
+</script>
 <? else : ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
