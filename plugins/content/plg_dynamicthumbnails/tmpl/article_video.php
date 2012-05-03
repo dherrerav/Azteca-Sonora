@@ -22,28 +22,23 @@ switch ($this->browser->getPlatform()) :
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
 	default:
 		$video = $videos['flv'];
-		$video->width = $video->width;
-		$video->height = $video->height;
 		$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 					'\'' . JURI::base() . $video->source . '\' : ' .
 					'\'' . JURI::base() . $videos['flv']->source . '\'';
 		break;
 endswitch;
-
+var_dump($video);
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
-		<div class="video" id="video-<?= $article->id ?>">
-			<img src="<?= $video->preview ?>" width="<?= $video->width ?>" height="<?= $video->height ?>" alt="Reproducir" />
+		<div class="video">
+			<img id="video-<?= $article->id ?>" src="<?= $video->preview ?>" width="<?= $video->width ?>" height="<?= $video->height ?>" alt="Reproducir" />
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
 	try {
 		$f('video-<?= $article->id ?>', '<?= $this->getVideoPlayer() ?>', {
-			play: {
-				label: 'Reproducir'
-			},
 			key: '#$4a11216191dd06befb1',
 			wmode: 'opaque',
 			<?= $this->browser->getPlatform() === Browser::PLATFORM_IPAD ? 'simulateiDevice: true,' : '' ?>
@@ -58,12 +53,6 @@ endswitch;
 					},
 					accountId: '<?= $this->_pluginParams->get('google_analytics_account') ?>'
 				},
-				controls: {
-					tooltips: {
-						buttons: true,
-						play: 'Reproducir'
-					}
-				}
 			},
 			clip: {
 				eventCategory: '<?= str_replace(array("\"", "\'"), "&quote;", $article->category_title . " - " . $article->title) ?>',
