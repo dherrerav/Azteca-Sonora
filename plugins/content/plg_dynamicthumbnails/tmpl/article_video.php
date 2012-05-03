@@ -11,6 +11,8 @@ switch ($this->browser->getPlatform()) :
 		break;
 	case Browser::PLATFORM_ANDROID:
 	default:
+		$video->width = $video->width . 'px';
+		$video->height = $video->height . 'px';
 		if (Browser::PLATFORM_ANDROID) {
 			$video->width = '100%';
 			$video->height = '100%';
