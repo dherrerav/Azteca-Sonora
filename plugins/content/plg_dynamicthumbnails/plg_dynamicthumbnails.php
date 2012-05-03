@@ -30,7 +30,7 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 	public $browser = null;
 
 	public $_template = null;
-	
+
 	public function plgContentPlg_DynamicThumbnails(&$subject) {
 		parent::__construct($subject);
 		$this->_plugin = JPluginHelper::getPlugin('content', 'plg_dynamicthumbnails');
@@ -39,7 +39,6 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 		$this->_template = JFactory::getApplication()->getTemplate();
 	}
 	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 0) {
-		if ($this->_template === 'strapped') return;
 		if ($context != 'com_content.article') return;
 		$view = JRequest::getVar('view');
 		$layout = JRequest::getVar('layout');
@@ -88,10 +87,6 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 		$imageWidth = $this->_pluginParams->get('article_image_width');
 		$imageHeight = $this->_pluginParams->get('article_image_height');
 		$imageOutput = $this->getResizedImages($article, $imageWidth, $imageHeight, 'article_image', ($videoOutput !== null));
-		if ($this->_template === 'strapped') {
-			$article->introtext = $videoOutput . $article->introtext;
-			return;
-		}
 		$videoWidth = $this->_pluginParams->get('article_video_width');
 		$videoHeight = $this->_pluginParams->get('article_video_height');
 		$videoOutput = $this->getVideos($article, $videoWidth, $videoHeight, 'article_video');
@@ -142,7 +137,7 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 		} else {
 			return;
 		}
-		if ($videoOutput && $this->_template !== 'strapped') {
+		if ($videoOutput) {
 			$article->introtext = $videoOutput . $article->introtext;
 		} else if ($imageOutput) {
 			$article->introtext = $imageOutput . $article->introtext;
@@ -162,18 +157,16 @@ class plgContentPlg_DynamicThumbnails extends JPlugin {
 			/**
 			 * @todo Resize images
 			 */
-			if ($this->_template !== 'strapped') {
-				$layout = $this->getLayoutPath($this->_plugin, $layout);
-				$output = '';
-				if ($layout) {
-					ob_start();
-					require $layout;
-					$output = ob_get_contents();
-					ob_end_clean();
-				}
-				$article->introtext = preg_replace('/\<img[^\>]*>/', '', $article->introtext);
-				return $output;
+			$layout = $this->getLayoutPath($this->_plugin, $layout);
+			$output = '';
+			if ($layout) {
+				ob_start();
+				require $layout;
+				$output = ob_get_contents();
+				ob_end_clean();
 			}
+			$article->introtext = preg_replace('/\<img[^\>]*>/', '', $article->introtext);
+			return $output;
 		}
 		return '';
 	}

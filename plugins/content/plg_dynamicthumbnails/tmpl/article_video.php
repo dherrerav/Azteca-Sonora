@@ -1,8 +1,10 @@
 <?php
+var_dump($video);
 switch ($this->browser->getPlatform()) :
 	case Browser::PLATFORM_IPAD:
 	case Browser::PLATFORM_IPHONE:
 	case Browser::PLATFORM_IPOD:
+	case Browser::PLATFORM_ANDROID:
 		$video = $videos['m4v'];
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
 		break;
@@ -16,8 +18,7 @@ endswitch;
 ?>
 <div class="article-videos">
 	<div class="article-videos-inner">
-		<div class="video" id="video-<?= $article->id ?>" style="width: <?= $video->width ?>px; height: <?= $video->height ?>px; background: transparent url(<?= JURI::base() . $video->preview ?>) no-repeat top left;">
-			<img class="button-play" src="<?= JURI::base() ?>plugins/content/plg_dynamicthumbnails/images/play_large.png" width="83" height="83" />
+		<div class="video" id="video-<?= $article->id ?>" style="width: 100%; height: 100%; background: transparent url(<?= JURI::base() . $video->preview ?>) no-repeat top left;">
 		</div>
 	</div>
 </div>
@@ -25,7 +26,6 @@ endswitch;
 	try {
 		$f('video-<?= $article->id ?>', '<?= $this->getVideoPlayer() ?>', {
 			key: '#$4a11216191dd06befb1',
-			autoplay: true,
 			wmode: 'opaque',
 			<?= $this->browser->getPlatform() === Browser::PLATFORM_IPAD ? 'simulateiDevice: true,' : '' ?>
 			plugins: {
@@ -41,7 +41,7 @@ endswitch;
 				}
 			},
 			clip: {
-				eventCategory: '<?= str_replace(array('"', '\''), '&quote;', $article->category_title . ' - ' . $article->title) ?>',
+				eventCategory: '<?= str_replace(array("\"", "\'"), "&quote;", $article->category_title . " - " . $article->title) ?>',
 				provider: 'pseudo',
 				url: <?= $clipUrl ?>
 			},

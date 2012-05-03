@@ -53,6 +53,7 @@ class plgContentPlg_VideoJS extends JPLugin {
 		$this->skin = $this->params->get('skin', 'default');
 	}
 	public function onContentBeforeDisplay($context, &$article, &$params, $limitstart = 0) {
+		return;
 		if ($this->template !== 'strapped') return;
 		if (preg_match($this->videoCode, $article->introtext, $matches)) {
 			$catids = $this->params->get('catids');
@@ -120,9 +121,9 @@ class plgContentPlg_VideoJS extends JPLugin {
 		static $item = 0;
 		$tempParams = $this->_processCategoryVideo();
 		if ($item < $tempParams->get('num_leading_articles', 0)) {
-			
+
 		} else if ($item < $tempParams->get('num_leading_articles', 0) + $tempParams->get('num_intro_articles', 0)) {
-			
+
 		}
 	}
 
