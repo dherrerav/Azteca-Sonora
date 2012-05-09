@@ -17,3 +17,7 @@ configuration.php
 *errors.log
 configuration.php
 templates/strapped.zip
+*.m4v
+*.flv
+*.mp4
+images/videos/*
