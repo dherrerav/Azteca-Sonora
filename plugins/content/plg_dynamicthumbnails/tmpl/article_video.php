@@ -1,8 +1,8 @@
 <?php
-switch ($this->browser->getPlatform()) :
+$platform = $this->browser->getPlatform();
+var_dump($videos);
+switch ($platform) :
 	case Browser::PLATFORM_IPAD:
-	case Browser::PLATFORM_IPHONE:
-	case Browser::PLATFORM_IPOD:
 		$video = $videos['m4v'];
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
 		$playFullscreen = true;
@@ -11,11 +11,13 @@ switch ($this->browser->getPlatform()) :
 		$video->height = '100%';
 		*/
 		break;
+	case Browser::PLATFORM_IPHONE:
+	case Browser::PLATFORM_IPOD:
 	case Browser::PLATFORM_ANDROID:
 		$video = $videos['m4v'];
 		$playFullscreen = true;
-		$video->width = '100%';
-		$video->height = '100%';
+		$video->width = $platform === Browser::PLATFORM_ANDROID ? '100%' : $video->width . 'px';
+		$video->height = $platform === Browser::PLATFORM_ANDROID ? '100%' : $video->width . 'px';
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
 		break;
 	default:
@@ -26,7 +28,9 @@ switch ($this->browser->getPlatform()) :
 		break;
 endswitch;
 ?>
-<? if ($this->browser->getPlatform() === Browser::PLATFORM_ANDROID) : ?>
+<? if ($platform === Browser::PLATFORM_ANDROID ||
+	   $platform === Browser::PLATFORM_IPOD ||
+	   $platform === Browser::PLATFORM_IPHONE) : ?>
 <video class="video-js vjs-default-skin" id="<?= $video->id ?>"
 	height="<?= $video->height ?>"
 	width="<?= $video->width ?>"
