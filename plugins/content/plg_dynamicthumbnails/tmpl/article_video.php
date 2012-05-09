@@ -21,10 +21,10 @@ switch ($platform) :
 		$clipUrl = '\'' . JURI::base() . $video->source . '\'';
 		break;
 	default:
-		$video = $videos['m4v'];
+		$video = $videos['flv'];
 		$clipUrl = 'flashembed.isSupported([9, 115]) ? ' .
 					'\'' . JURI::base() . $video->source . '\' : ' .
-					'\'' . JURI::base() . $videos['m4v']->source . '\'';
+					'\'' . JURI::base() . $videos['flv']->source . '\'';
 		break;
 endswitch;
 ?>
