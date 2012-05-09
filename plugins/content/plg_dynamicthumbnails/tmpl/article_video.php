@@ -1,6 +1,5 @@
 <?php
 $platform = $this->browser->getPlatform();
-var_dump($videos);
 switch ($platform) :
 	case Browser::PLATFORM_IPAD:
 		$video = $videos['m4v'];
