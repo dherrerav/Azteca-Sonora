@@ -2,7 +2,7 @@
 defined('_JEXEC') or die;
 $i = 0;
 $column = 0;
-$width = round(100 / (int)$params->get('columns')) - 1.5;
+$width = round(100 / (int)$params->get('columns')) - 1;
 $images_per_column = explode(',', $params->get('show_images'));
 $featured_per_column= explode(',', $params->get('featured_per_column'));
 $show_category_title_in = $params->get('show_category_title_in');
