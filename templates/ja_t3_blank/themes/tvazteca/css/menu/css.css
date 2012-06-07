@@ -203,7 +203,7 @@
 }
 
 #ja-cssmenu li.active.sfhover a {
-	color: #333;
+	color: #333 !important;
 }
 
 /**
