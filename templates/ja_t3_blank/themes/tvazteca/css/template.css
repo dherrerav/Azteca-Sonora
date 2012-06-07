@@ -1712,3 +1712,7 @@ body.tvazteca-hermosillo #ja-topsl .main {
 .hide * {
 	visibility: hidden;
 }
+
+.ja-moduletable.weather {
+	display: inline-block;
+}
