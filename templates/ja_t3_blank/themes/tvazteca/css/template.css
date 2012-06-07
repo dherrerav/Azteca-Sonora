@@ -1716,3 +1716,11 @@ body.tvazteca-hermosillo #ja-topsl .main {
 .moduletable.weather {
 	display: inline-block;
 }
+
+.no-content #ja-container .main {
+	border: none;
+}
+
+.no-content .ja-content-main {
+	margin-bottom: 0;
+}
