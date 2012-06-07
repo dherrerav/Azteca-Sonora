@@ -202,6 +202,10 @@
 	color: #ff0;
 }
 
+#ja-cssmenu li.active.sfhover a {
+	color: #333;
+}
+
 /**
  * Hide sub menus
  */
