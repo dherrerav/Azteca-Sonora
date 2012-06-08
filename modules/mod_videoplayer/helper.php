@@ -153,6 +153,17 @@ abstract class modVideoPlayerHelper {
 					if (self::$browser->getPlatform() === Browser::PLATFORM_IPAD) {
 						$video->source = $video->m4v;
 					}
+					switch (self::$browser->getPlatform()) {
+						case Browser::PLATFORM_ANDROID:
+						case Browser::PLATFORM_IPAD:
+						case Browser::PLATFORM_IPOD:
+						case Browser::PLATFORM_IPHONE:
+							$video->source = $video->m4v;
+							break;
+						default:
+							$video->source = $video->flv;
+							break;
+					}
 					$video->image = self::_getVideoImage($source, (int)$params->get('image_width'), (int)$params->get('image_height'));
 					$video->preview = self::_getVideoImage($source, (int)$params->get('player_width'), (int)$params->get('player_height'));
 					$video->category = $article->category_title;
