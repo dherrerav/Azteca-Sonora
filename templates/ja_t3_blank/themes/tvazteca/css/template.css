@@ -1692,6 +1692,7 @@ ul.social-icons {
 ul.social-icons li {
 	display: inline;
 	padding-right: 10px;
+	float: left;
 }
 
 body.tvazteca-hermosillo #ja-topsl .main,

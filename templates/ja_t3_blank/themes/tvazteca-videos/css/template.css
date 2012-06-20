@@ -1342,3 +1342,7 @@ body#bd.editoriales {
 	background: none;
 	padding-left: 0;
 }
+
+ul.social-icons li {
+	float: left;
+}
