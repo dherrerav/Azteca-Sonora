@@ -197,13 +197,13 @@ if (!empty($this->item->pagination) AND $this->item->pagination AND !$this->item
 	<?= $this->item->introtext ?>
 	<div id="social-sharing">
 		<div class="social-button gplus-button">
-			<g:plusone size="tall" href="<?= $this->item->readmore_link ?>"></g:plusone>
+			<g:plusone size="tall" href="<?= JURI::current() ?>"></g:plusone>
 		</div>
 		<div class="social-button fblike-button">
-			<fb:like send="true" href="<?= $this->item->readmore_link ?>" layout="box_count" width="70" show_faces="false"></fb:like>
+			<fb:like send="true" href="<?= JURI::current() ?>" layout="box_count" width="70" show_faces="false"></fb:like>
 		</div>
 		<div class="social-button tweet-button">
-			<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?= $this->item->readmore_link ?>" data-lang="es" data-via="AztecaSonora" data-count="vertical">Tweet</a>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?= JURI::current() ?>" data-lang="es" data-via="AztecaSonora" data-count="vertical">Tweet</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 	</div>
