@@ -30,13 +30,13 @@ $document->addCustomTag('<meta itemprop="description" content="' . trim(strip_ta
 // Facebook
 $document->addCustomTag('<meta proprety="og:title" content="' . $this->item->title . '" />');
 $document->addCustomTag('<meta property="og:type" content="article" />');
-$document->addCustomTag('<meta property="og:url" content="' . $this->item->readmore_link . '" />');
+$document->addCustomTag('<meta property="og:url" content="' . JURI::current() . '" />');
 $document->addCustomTag('<meta property="og:site_name" content="' . $application->getCfg('sitename') . '" />');
 $document->addCustomTag('<meta property="og:admins" content="587875269,114324145263104" />');
 if (count($imgs) > 0) {
 	$image = $imgs[0];
-	$document->addCustomTag('<meta itemprop="image" content="' . $image->src . '" />');
-	$document->addCustomTag('<meta property="og:image" content="' . $image->src . '" />');
+	$document->addCustomTag('<meta itemprop="image" content="' . JURI::base() . $image->src . '" />');
+	$document->addCustomTag('<meta property="og:image" content="' . JURI::base() . $image->src . '" />');
 }
 ?>
 <div class="item-page<?php echo $this->pageclass_sfx?> clearfix">
