@@ -208,9 +208,8 @@ if (!empty($this->item->pagination) AND $this->item->pagination AND !$this->item
 		</div>
 	</div>
 	<?= $this->item->fulltext ?>
-	<?= JURI::current() ?>
 	<div id="fb-comments">
-		<div class="fb-comments" data-href="<?= $this->item->readmore_link ?>" data-num-posts="10" data-width="630"></div>
+		<div class="fb-comments" data-href="<?= JURI::current() ?>" data-num-posts="10" data-width="630"></div>
 	</div>
 <?php
 if (!empty($this->item->pagination) AND $this->item->pagination AND $this->item->paginationposition AND!$this->item->paginationrelative):
