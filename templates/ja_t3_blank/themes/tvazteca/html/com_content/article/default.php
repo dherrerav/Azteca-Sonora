@@ -22,6 +22,7 @@ $html = new simple_html_dom();
 $html->load($this->item->introtext);
 $imgs = $html->find('img');
 $document =& JFactory::getDocument();
+var_dump($this->item->readmore_link);
 // Google
 $document->addCustomTag('<meta itemprop="name" content="' . $this->item->title . '" />');
 $intro = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $this->item->introtext);
