@@ -22,7 +22,7 @@ $html = new simple_html_dom();
 $html->load($this->item->introtext);
 $imgs = $html->find('img');
 $document =& JFactory::getDocument();
-var_dump(JURI::current());
+
 // Google
 $document->addCustomTag('<meta itemprop="name" content="' . $this->item->title . '" />');
 $intro = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $this->item->introtext);
@@ -208,6 +208,7 @@ if (!empty($this->item->pagination) AND $this->item->pagination AND !$this->item
 		</div>
 	</div>
 	<?= $this->item->fulltext ?>
+	<?= JURI::current() ?>
 	<div id="fb-comments">
 		<div class="fb-comments" data-href="<?= $this->item->readmore_link ?>" data-num-posts="10" data-width="630"></div>
 	</div>
