@@ -620,4 +620,4 @@
 2011-12-15	19:24:18	-	189.170.89.150	Joomla FAILURE: 	Invalid password
 2012-01-05	04:49:34	-	208.113.134.179	Joomla FAILURE: 	Invalid password
 2012-01-24	19:37:01	-	201.164.227.169	Joomla FAILURE: 	User does not exist
-2012-01-24	23:00:49	-	201.144.51.36	Joomla FAILURE: 	Contraseña inválida
+2012-01-24	23:00:49	-	201.144.51.36	Joomla FAILURE: 	Contraseña inválida2012-05-30	16:22:16	INFO	127.0.0.1	Joomla FAILURE: 	Contraseña inválida
